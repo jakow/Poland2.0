@@ -101,7 +101,6 @@ exports.parseAgenda = function(markdown) {
 				parsedAgenda.push({caption: captions[i], content: contents[i]})
 			}	
 		}
-
 			// console.log(markdown)
 			// console.log(rows)
 			// console.log(tableIndices)
