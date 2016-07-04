@@ -19,8 +19,9 @@ block content
 				div.lighter Summit
 			div.time-place.animate
 				//- TODO HTML date tag when date becomes available
-				div= currentEdition.date.dateString 
-				div= currentEdition.venue.name
+				if currentEdition
+					div= currentEdition.date.dateString 
+					div= currentEdition.venue.name
 			//- div.spaced-buttons.animate
 				//- a.white.hollow.responsive.button.uppercase(href='/speakers') Speakers
 				//- a.white.hollow.responsive.button.uppercase(href='/tickets') Tickets
