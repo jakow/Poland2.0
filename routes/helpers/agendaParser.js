@@ -86,18 +86,21 @@ exports.parseAgenda = function(markdown) {
 	}
 
 	function parse(markdown) {
-		var rows = markdown.split(/\r|\n/);
-		rows = rows.filter(rowStr => rowStr.length != 0); //weird bug with keystone adding two newlines on each enter press
-		var tableIndices = findTables(rows);
-		var tables = tableIndices.map(index => splitTableCols(rows.slice(index.start, index.end)));
-		var bodies = tables.map(table => getBody(table));
-		// var headings = tables.map(table => getHeadings(table));
-		var captions = parseCaptions(rows);
-		var contents = bodies.map(body => tableToObject(body));
 		parsedAgenda = [];
-		for (var i = 0; i < contents.length; ++i) {
-			parsedAgenda.push({caption: captions[i], content: contents[i]})
-		}	
+		if (markdown) {
+			var rows = markdown.split(/\r|\n/);
+			rows = rows.filter(rowStr => rowStr.length != 0); //weird bug with keystone adding two newlines on each enter press
+			var tableIndices = findTables(rows);
+			var tables = tableIndices.map(index => splitTableCols(rows.slice(index.start, index.end)));
+			var bodies = tables.map(table => getBody(table));
+			// var headings = tables.map(table => getHeadings(table));
+			var captions = parseCaptions(rows);
+			var contents = bodies.map(body => tableToObject(body));
+			parsedAgenda = [];
+			for (var i = 0; i < contents.length; ++i) {
+				parsedAgenda.push({caption: captions[i], content: contents[i]})
+			}	
+		}
 
 			// console.log(markdown)
 			// console.log(rows)

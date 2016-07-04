@@ -45,6 +45,7 @@ exports = module.exports = function(req, res) {
 	view.on('init', function(next) {
 		console.log(agendaParser);
 		locals.agenda = agendaParser.parseAgenda(locals.content.agenda.md);
+
 		/*
 		Agenda is in the form of: [
 		{caption, content}
