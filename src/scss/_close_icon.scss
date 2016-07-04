@@ -1,0 +1,31 @@
+ 	@mixin close-icon-color($color) {
+ 		&::before, &::after {
+ 			background: $color;
+ 		}
+ 	}
+ 	@mixin close-icon-transition($transition) {
+ 		&::before, &::after {
+ 			transition: background $transition;
+ 		}
+ 	} 
+ 	.close-icon {
+ 		display: block;
+ 		width: 2em;
+ 		height: 2em;
+ 		padding: 0.25em;
+ 		&::before, &::after {
+ 			content: '';
+ 			display: block;
+ 			position: absolute;
+ 			top: 50%;
+ 			background:$primary-color;
+ 			height: 2px;
+ 			width: 1.5em;
+
+ 		}
+ 		&::before {
+ 			transform: translateY(-0.5px) rotate(45deg);
+ 		}&::after {
+ 			transform: translateY(-0.5px) rotate(-45deg);
+ 		}
+ 	}

@@ -1,0 +1,15 @@
+//- top of page banner
+//- to animate on enter, set animatecontent to true and add class "animate" to bits of content you want to animate in
+//- Params:
+//- Image: url to the image
+//- fullheight: bool
+
+
+mixin banner(id, image, fullheight, animatecontent, border, align, contentClasses )
+	section.banner(class= fullheight ? 'full-height': null, id  = id? id : null)
+		.bg-stripes-gradient.wrapper
+			.banner-img(style="background: url('" + image + "') no-repeat center")
+			.wrapper-inner(class= border ? "border": null)
+				.container( class= (animatecontent ? "animate-content" : "") + " " + (align? align : null)+ " " + (contentClasses ? contentClasses: ""))
+					block
+

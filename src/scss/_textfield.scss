@@ -1,0 +1,233 @@
+/**
+ * MUI Textfield Component
+ */
+
+$xFormLabelLineHeight: floor($form-label-font-size * 1.25);
+
+$textarea-height: 100px;
+
+// ============================================================================
+// TEXTFIELD
+// ============================================================================
+
+
+.p20-textfield {
+
+  display: block;
+  padding-top: $xFormLabelLineHeight;
+  margin-bottom: rem-calc(18);
+  position: relative;
+
+  > label {
+    @include form-label();
+  }
+
+  > textarea {
+    padding-top: 5px;
+  }
+
+  > input,
+  > textarea {
+    //transition: border 0.2s ease-in-out;
+    display: block;
+
+    &:focus ~ label {
+      color: $input-border-focus-color;
+    }
+  }
+}
+
+.p20-textfield--float-label {
+  > label {
+    // Layout
+    position: absolute;
+    transform: translate(0px, $xFormLabelLineHeight);
+
+    // Typography
+    font-size: $input-font-size;
+    line-height: $form-label-line-height;
+    color: $input-placeholder-color;
+
+    // Overflow policy
+    text-overflow: clip;
+
+    // Cursor
+    cursor: text;  // for ie10
+    pointer-events: none;
+  }
+
+  > input,
+  > textarea {
+
+    &:focus ~ label {
+      transform: translate(0px, 0px);
+      font-size: $label-font-size;
+      line-height: $xFormLabelLineHeight;
+      text-overflow: ellipsis;
+    }
+
+    &:not(:focus) {
+      &.mui--is-not-empty,
+      &[value]:not([value=""]):not(.mui--is-empty):not(.mui--is-not-empty),
+      &:not(:empty):not(.mui--is-empty):not(.mui--is-not-empty) {
+        ~ label {
+          color: $label-color;
+          font-size: $label-font-size;
+          line-height: $xFormLabelLineHeight;
+          transform: translate(0px, 0px);
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+}
+
+.p20-textfield--wrap-label {
+  display: table;
+  width: 100%;
+  padding-top: 0px;
+
+  &:not(.p20-textfield--float-label) > label {
+    display: table-header-group;
+    position: static;
+    white-space: normal;
+    overflow-x: visible;
+  }
+}
+
+.p20-textfield > input,
+.p20-textfield > textarea {
+  @include mui-node-inserted();
+
+  display: block;
+  background-color: $input-background;
+  color: $input-color;
+  border: none;
+  border-bottom: 1px solid $input-border-color;
+  outline: none;
+  width: 100%;
+  font-size: $input-font-size;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0px;
+
+  // Bugfix for firefox-android
+  background-image: none;
+
+  &:focus {
+    border-color: $input-border-focus-color;
+    border-width: 2px;
+  }
+
+  &:disabled,
+  &:read-only {
+    cursor: $input-cursor-disabled;
+    background-color: $input-background-disabled;
+    opacity: 1;  // iOS fix for unreadable disabled content
+  }
+
+  &::placeholder {
+    color: $input-placeholder-color;
+    opacity: 1;  // Normalize firefox
+  }
+}
+
+.p20-textfield > input {
+  height: $input-height;
+
+  // Compensate for height change on focus
+  &:focus {
+    height: $input-height + 1px;
+    margin-bottom: -1px;
+  }
+}
+
+.p20-textfield > textarea {
+  min-height: $textarea-height;
+
+  // Compensate for height change on focus
+  // &[rows]:not([rows="2"]):focus {
+  //   margin-bottom: -1px;
+  // }
+}
+
+.p20-textfield > input:focus {
+  // Compensate for height change on focus
+  height: $input-height + 1px;
+  margin-bottom: -1px;
+}
+
+
+
+
+// ============================================================================
+// FORM VALIDATION
+// ============================================================================
+
+.p20-textfield > input:invalid:not(:focus),
+.p20-textfield > textarea:invalid:not(:focus),
+.p20-textfield > input:not(:focus).mui--is-invalid,
+.p20-textfield > textarea:not(:focus).mui--is-invalid {
+  &:not(:required),
+  &:required.mui--is-not-empty,
+  &:required.mui--is-empty.mui--is-dirty,
+  &:required[value]:not([value=""]):not(.mui--is-empty):not(.mui--is-not-empty),
+  &:required:not(:empty):not(.mui--is-empty):not(.mui--is-not-empty) {
+    border-color: $alert-color;
+    border-width: 2px;
+  }
+}
+
+// Treat <input>'s different from <textarea>'s
+.p20-textfield > input:invalid:not(:focus),
+.p20-textfield > input:not(:focus).mui--is-invalid {
+  &:not(:required),
+  &:required.mui--is-not-empty,
+  &:required.mui--is-empty.mui--is-dirty,
+  &:required[value]:not([value=""]):not(.mui--is-empty):not(.mui--is-not-empty),
+  &:required:not(:empty):not(.mui--is-empty):not(.mui--is-not-empty) {
+    height: $input-height + 1px;
+    margin-bottom: -1px;
+  }
+}
+
+.p20-textfield > input:invalid:not(:focus),
+.p20-textfield > textarea:invalid:not(:focus),
+.p20-textfield > input:not(:focus).mui--is-invalid,
+.p20-textfield > textarea:not(:focus).mui--is-invalid {
+  // Set label color to danger color
+  &:not(:required),
+  &:required.mui--is-not-empty,
+  &:required[value]:not([value=""]):not(.mui--is-empty):not(.mui--is-not-empty),
+  &:required:not(:empty):not(.mui--is-empty):not(.mui--is-not-empty) {
+    ~ label {
+      color: $alert-color;
+    }
+  }
+}
+
+.p20-textfield > input:not(:focus).mui--is-invalid,
+.p20-textfield > textarea:not(:focus).mui--is-invalid {
+
+}
+
+.p20-textfield:not(.p20-textfield--float-label) > input:invalid:not(:focus),
+.p20-textfield:not(.p20-textfield--float-label) > textarea:invalid:not(:focus),
+.p20-textfield:not(.p20-textfield--float-label) > input:not(:focus).mui--is-invalid,
+.p20-textfield:not(.p20-textfield--float-label) > textarea:not(:focus).mui--is-invalid {
+  // Set label color to danger color for dirty, empty fields
+  &:required.mui--is-empty.mui--is-dirty ~ label {
+    color: $alert-color;
+  }
+}
+
+.p20-textfield {
+  .is-invalid-label {
+    color: $alert-color;
+  }
+  .is-invalid-input {
+    border-bottom: 2px solid $alert-color;
+    height: $input-height + 1px;
+    margin-bottom: -1px;
+  }
+}

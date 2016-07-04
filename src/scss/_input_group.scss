@@ -1,0 +1,75 @@
+//collapsed input group. Whew.
+
+input {
+	font-size: inherit !important;
+}
+.input-group.hollow {
+	margin: 0 0 1rem 0;
+
+	.button {
+	font-size: 1em;
+	margin-bottom: 0rem;
+	}
+
+	&.rounded {
+		> :first-child {
+			border-radius: 6px 0 0 6px;
+			> * {
+				border-radius: 6px 0 0 6px;
+			}
+		}
+		> :last-child {
+			border-radius: 0 6px 6px 0;
+			> * {
+				border-radius: 0 6px 6px 0;
+			}
+		}
+	}
+
+	&.white {
+		input {
+			color: white;
+			border-color: white;
+			&:focus {
+				border-color: $medium-gray;
+			}
+		}
+	}
+	> :last-child {
+		margin-left: -2px;
+	}
+	> :first-child {
+		border-right: none;
+	}
+	.input-group-field {
+		width: 100%;
+	}
+	.input-group-field~.input-group-button { //before buttons have a negative right margin
+	}
+	.input-group-field~.input-group-button { //after buttons have a negative LEFT margin
+		z-index: 2;
+	}
+}
+
+.button.with-loading {
+	position:relative; 
+	&::before, &::after {
+		font-family: "FontAwesome";
+		position: absolute;
+		visibility: hidden; //temporarily
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: inherit;
+		margin: inherit;
+	}
+	&::before {
+		content: "\f1ce";
+		display: none;
+	}
+	&::after {
+		//display: none;
+		content: "\f00c";
+	}
+}

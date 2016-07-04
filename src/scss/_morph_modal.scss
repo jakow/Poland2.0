@@ -1,0 +1,26 @@
+.morph-modal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 300px;
+	height: 300px;
+}
+
+.morph-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	z-index: 100;
+	background: rgba(0,0,0, 0.6);
+	transition: background 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+	&.visible {
+		background: rgba(0, 0, 0, 0.6);
+	}
+}
+
+body.morph-noscroll {
+
+}

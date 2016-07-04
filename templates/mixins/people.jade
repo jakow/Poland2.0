@@ -1,0 +1,48 @@
+
+mixin pastSpeaker(speaker)
+	li.past-speaker
+		if speaker.photo.url
+			.photo
+				img(src=speaker.photo.url)
+		.name.uppercase= speaker.name
+		.position.uppercase.lighter= speaker.position
+		.presentation.lighter= speaker.presentation
+
+mixin speaker(speaker)
+	li.speaker
+		a(data-open="modal"+speaker.slug)
+			if speaker.photo.url
+				.photo
+					img(src=speaker.photo.url)
+			.name.uppercase= speaker.name
+			.position= speaker.position
+			.presentation= speaker.presentation
+
+mixin keynoteSpeaker(speaker)
+	li.keynote-speaker
+		a(data-open="modal"+speaker.slug)
+			if speaker.photo.url
+				.photo
+					img(src=speaker.photo.url)
+			.name.uppercase= speaker.name
+			.position= speaker.position
+			.presentation= speaker.presentation
+
+mixin pastTeamMember(teamMember)
+	li.past-team-member
+		if teamMember.photo
+			.photo
+				img(src=teamMember.photo.url)
+		.name= teamMember.name
+		.position= teamMember.position
+		.occupation= teamMember.occupation
+		//- .description= teamMember.description
+
+mixin teamMember(teamMember)
+	li.teamMember
+		if teamMember.photo
+			.photo
+				img(src=teamMember.photo.url)
+		.name= teamMember.name
+		.position= teamMember.position
+		.occupation= teamMember.occupation

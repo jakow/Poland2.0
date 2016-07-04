@@ -1,0 +1,24 @@
+#social-banner {
+	.bg-logo {
+		width: 100%;
+		position: relative;
+		height: 150px;
+		&::before {
+			content: '';
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			font-family: "FontAwesome";
+
+		}
+		.like-facebook::before {
+			content: '';
+		}
+		.follow-twitter::before {
+			content: '';
+		}
+		.follow-instagram::before {
+			content: '';
+		}
+	}
+}

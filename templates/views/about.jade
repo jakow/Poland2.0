@@ -1,0 +1,89 @@
+extends ../layouts/default
+include ../mixins/opengraph
+include ../mixins/banner
+block head
+	+opengraph(title, 'http://wwww.poland20.com/about', null , "What is the idea behind Poland 2.0 and who makes it happen?")
+	meta(name="description" content="What is the idea behind Poland 2.0 and who makes it happen?")
+	
+
+mixin teamMember(name, position, occupation, image, description)
+	li.people-cell(data-description=description)
+		.photo
+			img(src=image)
+		.name= name
+		.position= position
+		.occupation= occupation
+		//- .description= description
+		
+
+block content
+	+banner(null, "https://res.cloudinary.com/dg1royeho/image/upload/c_scale,q_40,w_1600,fl_progressive/v1466268315/londonaerial_mjazzh.jpg", false, false, false, "left", "lighter")
+		h1.lighter.uppercase About Poland 2.0
+		!= content.aboutPoland20.bannerText
+
+
+
+	section.container.padded
+		//- h2.uppercase.lighter.center Brief history
+		!= content.aboutPoland20.bodyText
+		
+	section.container.padded
+		h2.uppercase.lighter.center Meet the team
+		.people
+			ul.people-grid
+				each member in data.team
+					li.team-member
+							.member-wrapper
+								a(data-open="modal"+member.slug)
+									.main-info
+										.photo
+											img(src=member.photo.small)
+										.name= member.name
+										.position= member.position
+										.occupation= member.occupation
+								.contact-info
+										if member.linkedin
+											a(href=member.linkedin).linkedin.button: span.sr-only LinkedIn
+										if member.email
+										a(href="mailto:"+member.email).button.mailto.primary: span.sr-only Email
+						//- .preview-container
+						//- 	.preview
+						//- 		button(type="button").close-button
+						//- 		.row
+						//- 			.small-12.medium-6.columns(style="text-align: center")
+						//- 				.photo-full
+						//- 					img(src=member.photo.large)
+						//- 			.small-12.medium-6.columns
+						//- 				h4.name= member.name
+						//- 				h5.position= member.position
+						//- 				h6.occupation= member.occupation
+						//- 				div.bio!= member.description
+						//- 				div.contact
+						//- 					a(href='mailto:'+member.email)= member.email
+						//- 					a(href=linkedin)= member.linkedin
+			each member in data.team 
+				.large.reveal.people-reveal(id="modal"+member.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
+							//- .row
+							//- .columns.small-12.shrink.center
+							.photo-container
+								.photo-large: img(src=member.photo.large)
+							//- .columns
+
+							.info
+								h3.uppercase= member.name
+								p.lead.lighter= member.position
+								p.lighter= member.occupation
+								.description: != member.description
+							button.button.hollow.close-button.medium.secondary(data-close aria-label="Close modal" type="button")
+								span.close-icon(aria-hidden="true")
+					
+	block js
+		script(src="imagesloaded/imagesloaded.pkgd.min.js")
+		script(src="js/team-grid.js")
+
+
+
+
+
+
+

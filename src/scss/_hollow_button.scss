@@ -1,0 +1,70 @@
+.button.hollow {
+	&.secondary, &.primary {
+		border-width: 2px;
+	}	
+	transition: border-color 0.15s ease-out, color 0.15s ease-out, background-color 0.15s ease-out;
+ 	&.white {
+		border-color:white;
+		color: white;
+		&:hover {
+			color: $primary-color;
+			background-color: white;
+		}
+		&:active {
+			color: $primary-color;
+			background-color: $light-gray;
+			border-color: $light-gray;
+		}
+
+ 	}
+ 	&.primary {
+		border-color: $primary-color;
+		 &:focus {
+ 			color:white;
+ 			background-color: lighten($primary-color, 20);
+ 		}
+ 		&:hover {
+ 			color: white;
+ 			background-color: $primary-color;
+ 		}
+
+ 		&:active {
+			color: white;
+			background-color: lighten($primary-color, 10);
+		}
+ 	}
+ 	&.secondary {
+ 		//border-color: $secondary-color;
+ 		 &:focus {
+ 			color: lighten($secondary-color,20);
+ 			//background-color: lighten($secondary-color, 40);
+ 			border-color: lighten($secondary-color,15);
+ 		}
+ 		 &:hover {
+ 			color: white;
+ 			background-color: $secondary-color;
+ 			border-color: $secondary-color;
+ 		}
+ 	
+ 		&:active {
+			color: white;
+			background-color: lighten($secondary-color, 10);
+		}
+ 	}
+}
+.spaced-buttons {
+	button, a {
+	margin-left: 0.75rem;
+	}
+	a:first-child {
+		margin: 0;
+	}
+}
+
+//large when on medium screen, normal when on small screens
+.responsive.button {
+	font-size: 1rem;
+	@include breakpoint(medium) {
+			font-size: 1.5rem;
+	}
+}

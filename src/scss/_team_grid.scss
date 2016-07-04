@@ -1,0 +1,213 @@
+
+$slideY: 30px;
+.people {
+	position: relative;
+}
+.people-grid {
+	margin: 0;
+	padding: 2rem 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	flex-direction: row;
+	@include breakpoint(medium) {
+		justify-content: flex-start;
+	}
+}
+
+
+
+@mixin people-cell($colsize-lg, $colsize-md, $gutter) {
+		list-style: none;
+		text-align: center;
+		transition: background 300ms ease-in-out;
+		@include flex-grid-column(12, $gutter);
+		@include breakpoint(medium) {
+			@include flex-grid-column($colsize-md, $gutter);
+		}		
+		@include breakpoint(large) {
+			@include flex-grid-column($colsize-lg, $gutter);
+		}
+		//  &:hover {
+		// 	background: $light-gray;
+		// 	//box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+		// }
+
+		> a {
+		// padding: 0em 0em 0.5em;
+		color: inherit;
+		display: inline-block;
+		border-radius: 2px;
+		transition: background 0.2s;
+		// &:focus {
+		// 	background: #f1f1f1;
+		// }
+	}
+
+		.main-info {
+			//padding: 1em;
+		}
+		.photo {
+			img {
+			border-radius: 50%; //circles!!
+
+			
+		}
+		}
+		.photo {
+		margin-bottom: 0.5em;
+		position: relative;
+		display: inline-block;
+		padding: 0.25em;
+		border-radius: 50%; //circles!!
+		border: 2px solid $secondary-color;
+		//width: 12rem;
+		//height: 12rem;
+		transform-origin: top left;
+
+		}
+
+
+
+
+		.name {
+			font-weight: normal;
+		}
+		.occupation, .position {
+			font-size: 0.9em;
+		}
+		.occupation {
+			font-size: 0.8em;
+			text-transform: initial;
+		}
+		.lighter-text{ 
+			font-weight: 300;
+		}
+		
+		.name, .occupation, .position, .presentation {
+			margin-bottom: 0.3em;
+		}
+		text-align: center;
+		
+		
+		.details-container {
+			
+		}
+}
+
+.team-member {
+	margin-bottom: 2rem;
+
+	.member-wrapper {
+		display: inline-block;
+		position: relative;
+		height: 100%;
+		padding-bottom: 2.5rem;
+		// background: $light-gray;
+		&:hover {
+			background: $light-gray;
+		}
+		> a {
+			display: inline-block;
+		}
+	}
+
+	.main-info {
+		display: inline-block;
+		// padding: 1em;
+		 padding: 1rem 1rem 0.5rem;
+		// margin-bottom: 0.5rem;
+		// padding: 1rem;
+		> a {
+			
+			display: inline-block;
+			margin-bottom: 0.5em;
+		}
+	}
+	a {
+		color: inherit;
+	}
+	.main-info {
+		text-transform: uppercase;
+	}
+	@include people-cell(3, 4, 2rem);
+	//font-size: 0.8rem;
+	.photo img {
+			max-height: 12rem;
+	}
+	font-size: 0.9em;
+	.contact-info {
+		position: absolute;
+		bottom: 0;
+		left:50%;
+		transform: translateX(-50%);
+		a {
+			&::before {
+				width: 1em;
+				height: 1em;
+			}
+			display: inline-block;
+			// margin: 0 0.4em;
+			margin: 0;
+			// width: 2.5em;
+			// height: 2.5em;
+			padding: 0.75em;
+
+			border-radius: 0;
+		}
+	}
+
+}
+
+.past-team-member {
+	text-transform: uppercase;
+	@include people-cell(2, 3, 1rem);
+	font-size: 0.8em;
+	.photo img {
+		max-height: 9rem;
+	}
+	
+}
+.speaker, .keynote-speaker {
+	> a {
+		padding: 1em;
+		&:active, &:hover {
+			background: $light-gray;
+		}
+	}
+}
+.past-speaker {
+	text-transform: uppercase;
+	@include people-cell(3, 4, 2rem);
+	font-size: 0.9em;
+	.photo img {
+		max-height: 12rem;
+	}
+}
+
+.speaker {
+	@include people-cell(3, 4, 2rem);
+	font-size: 0.9em;
+	.photo img {
+		max-height: 12rem;
+	}
+
+
+}
+.keynote-speaker {
+	margin-bottom: 1.25rem;
+		@include people-cell(4, 6, 2rem);
+		
+		.photo img {
+			max-height: 13rem;
+			@include breakpoint(medium) {
+				max-height: 15rem;
+			}
+		}
+}
+.keynote-speaker, .speaker {
+	.presentation {
+		font-style: italic;
+	}
+}
+

@@ -1,0 +1,31 @@
+{
+  "name": "poland20",
+  "description": "Poland 2.0 Website",
+  "main": "keystone.js",
+  "authors": [
+    "Jakub Kowalczyk <j.a.kowalczyk1993@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "poland20.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation-sites": "^6.2.1",
+    "jquery": "^2.2.3",
+    "font-awesome": "^4.6.1",
+    "responsive-nav": "^1.0.39",
+    "jquery.transit": "^0.9.12",
+    "velocity": "^1.2.3",
+    "imagesloaded": "^4.1.0",
+    "Swiper": "swiper#^3.3.1"
+  },
+  "devDependencies": {
+    "motion-ui": "^1.2.2"
+  }
+}

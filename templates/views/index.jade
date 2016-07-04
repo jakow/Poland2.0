@@ -1,0 +1,143 @@
+extends ../layouts/default
+include ../mixins/opengraph
+include ../mixins/social
+include ../mixins/banner
+include ../mixins/people
+
+block head
+	+opengraph(title, 'http://wwww.poland20.com/', null , "Poland 2.0 Summit is an annual event held in Autumn at Imperial College London. Its main purpose is to discuss how innovation and new technologies impact and add value to start-ups, entrepreneurship, public policy and many other areas of public life in Poland.")
+	meta(name="description" content="An annual event focusing on how innovation and new technologies impact and add value to start-ups, entrepreneurship, public policy and life in Poland.")
+
+	
+
+
+block content
+	//- http://res.cloudinary.com/dg1royeho/image/upload/c_scale,q_40,w_1600/v1466268315/londonaerial_mjazzh.jpg
+	+banner("home-banner", "https://res.cloudinary.com/dg1royeho/image/upload/c_scale,q_auto,w_1600,fl_progressive/v1462402246/imperial_nostock_lhp5ll.jpg", true, true, true, "center", "lighter uppercase")
+			img(src='https://res.cloudinary.com/dg1royeho/image/upload/v1465242752/logo_to4xlx.svg').logo-large.animate
+			h1.animate.smaller Poland 2.0
+				div.lighter Summit
+			div.time-place.animate
+				//- TODO HTML date tag when date becomes available
+				div= currentEdition.date.dateString 
+				div= currentEdition.venue.name
+			//- div.spaced-buttons.animate
+				//- a.white.hollow.responsive.button.uppercase(href='/speakers') Speakers
+				//- a.white.hollow.responsive.button.uppercase(href='/tickets') Tickets
+				a.white.hollow.responsive.button.uppercase(href='/showcase-your-idea') Showcase your idea at Poland 2.0
+	
+		
+	.container
+		section.row.align-middle#p20-intro.divider-bottom
+			img(src="https://res.cloudinary.com/dg1royeho/image/upload/v1465242860/poland_phyjj2.svg")#poland
+			.content
+				!= content.homepageText 
+		
+		if speakers.keynote.length || speakers.regular.length
+			section.divider-bottom
+
+				
+				if speakers.keynote.length
+					h2.center.uppercase.underlined Keynote speakers
+					ul.people-grid.flex-center
+						each speaker in speakers.keynote
+							+keynoteSpeaker(speaker)
+					each speaker in speakers.keynote					
+						.large.reveal.people-reveal(id="modal"+speaker.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
+							//- .row
+							//- .columns.small-12.shrink.center
+							.photo-container
+								.photo-large: img(src=speaker.photo.secure_url)
+							//- .columns
+							.info
+								h3.uppercase= speaker.name
+								p.lead.lighter= speaker.position
+								p.lighter= speaker.presentationTopic
+								.description: != speaker.description
+							button.button.hollow.close-button.medium.secondary(data-close aria-label="Close modal" type="button")
+								span.close-icon(aria-hidden="true")
+				if speakers.regular.length
+					h2.center.uppercase.underlined Speakers
+					ul.people-grid
+						each speaker in speakers.regular
+							+speaker(speaker)
+					each speaker in speakers.regular					
+						.large.reveal.people-reveal(id="modal"+speaker.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
+							//- .row
+							//- .columns.small-12.shrink.center
+							.photo-container
+								.photo-large: img(src=speaker.photo.secure_url)
+							//- .columns
+							.info
+								h3.uppercase= speaker.name
+								p.lead.lighter= speaker.position
+								p.lighter= speaker.presentationTopic
+								.description: != speaker.description
+							button.button.hollow.close-button.medium.secondary(data-close aria-label="Close modal" type="button")
+								span.close-icon(aria-hidden="true")
+
+
+		
+		//- if content.agendaActive
+		//- 	section.divider-bottom
+		//- 		h2.underlined.uppercase.center Agenda
+		//- 		.agenda!= content.agenda.html
+
+		if content.agendaActive
+			section.divider-bottom
+				h2.underlined.uppercase.center Agenda
+				.agenda-container
+					each day in agenda
+						h3= day.caption
+
+						ul.agenda-accordion(data-accordion, data-allow-all-closed="true" data-multi-expand="true")
+							each entry in day.content
+								li.agenda-accordion-item(class="accordion-item" data-accordion-item)
+									a.agenda-accordion-title(href="#")
+										div!=entry.time
+										div!=entry.briefDescription
+										.open-close: .open-close-icon
+									.agenda-accordion-content(data-tab-content)
+										if entry.speaker
+											p Speaker(s): 
+												strong=entry.speaker
+										p!= entry.detailedDescription
+										
+
+
+		if content.testimonials
+			section.testimonials.divider-bottom
+				ul.unstyled
+					each testimonial in content.parsedTestimonials
+						li
+							blockquote.large-quote
+								p!= testimonial.quote
+								footer= testimonial.author
+					
+
+		section.padded
+			p.center.lead Join us on social media to receive updates to what is happening during Poland 2.0 Summit!
+			.row#social-banner
+				a(href='https://www.facebook.com/EEESummit/').like-facebook.button.large.rounded Like us on Facebook
+				a(href='https://twitter.com/poland20summit').follow-twitter.button.large.rounded Follow us on Twitter
+
+					//- +twitterFollow	
+		
+		//- section#sponsors.padded
+		//- 	h2.uppercase.lighter.center Sponsors
+		//- 	//- if sponsors.length
+				//- ul
+				//- 	each sponsor in sponsors
+				//- 		li 
+				//- 			a(href=sponsor.url)
+				//- 				span.sr-only=sponsor.name
+				//- 				img(src=sponsor.logo.url)
+
+
+	
+
+
+
+		block js
+
+
