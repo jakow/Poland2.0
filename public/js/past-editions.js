@@ -2,7 +2,7 @@ $(document).ready(function() {
 var swiperElems = Array.prototype.slice.call(document.querySelectorAll('.swiper-container'));
 
 var swipers = swiperElems.map(function(item) { 
-	console.log(item);
+	// console.log(item);
 	return new Swiper(item, {
 		direction: 'horizontal',
 		pagination: item.getElementsByClassName('swiper-pagination')[0],

@@ -44,7 +44,18 @@ var routes = {
 
 // Setup Route Bindings
 exports = module.exports = function(app) {
-	
+	// url redirect from www to non-www
+	// function wwwRedirect(req, res, next) {
+	//     if (req.headers.host.slice(0, 4) === 'www.') {
+	//         var newHost = req.headers.host.slice(4);
+	//         return res.redirect(301, req.protocol + '://' + newHost + req.originalUrl);
+	//     }
+	//     next();
+	// };
+
+	// app.set('trust proxy', true);
+	// app.use(wwwRedirect);
+
 	// Views
 	app.get('/', middleware.getCurrentEdition, routes.views.index);
 	app.get('/news/:category?', routes.views.news);

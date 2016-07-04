@@ -35,11 +35,11 @@ $doc.ready(function() {
 });
 
 $doc.ready(function() {
-	console.log($('.newsletter-signup').children('button'));
+	// console.log($('.newsletter-signup').children('button'));
 	$('.newsletter-signup button').click(function(ev) {
 		ev.preventDefault();
 	})
-})
+});
 // $doc.ready(function() {
 // 	console.log($('.team-member .photo'))
 // 	$('.team-member .photo').children().on('load', function() {
@@ -416,65 +416,65 @@ $doc.ready(function() {
 
 // // 	});
 // // });
-classie = {
-	add: function(element, cls) {
-		element.className += cls;
-	},
-	remove: function(element, cls) {
-		var regex = new RegExp('(?:^|\s)'+cls+'(?!\S)', 'g');
-		element.className.replace( regex , '' );
-	},
-	has: function() {
+// classie = {
+// 	add: function(element, cls) {
+// 		element.className += cls;
+// 	},
+// 	remove: function(element, cls) {
+// 		var regex = new RegExp('(?:^|\s)'+cls+'(?!\S)', 'g');
+// 		element.className.replace( regex , '' );
+// 	},
+// 	has: function() {
 
-	}
-}
+// 	}
+// }
 
-function morphingModal(sourceEl, contentEl) {
-	this.sourceEl = sourceEl;
-	this.contentEl = contentEl;
-	this.modalEl = null;
-	this.overlay = null;
-	this.sourceEl.addEventListener('click', this.handleOpen.bind(this));
-}
+// function morphingModal(sourceEl, contentEl) {
+// 	this.sourceEl = sourceEl;
+// 	this.contentEl = contentEl;
+// 	this.modalEl = null;
+// 	this.overlay = null;
+// 	this.sourceEl.addEventListener('click', this.handleOpen.bind(this));
+// }
 
-morphingModal.prototype.helloWorld = function() {
-	console.log('Hello World');
-};
+// morphingModal.prototype.helloWorld = function() {
+// 	console.log('Hello World');
+// };
 
-morphingModal.prototype.handleOpen = function() {
-	this.createOverlay();
-	this.createModal();
-	console.log('handleOpen');
-};
+// morphingModal.prototype.handleOpen = function() {
+// 	this.createOverlay();
+// 	this.createModal();
+// 	console.log('handleOpen');
+// };
 
-morphingModal.prototype.handleClose = function() {
-	this.removeModal();
-	this.removeOverlay();
-};
+// morphingModal.prototype.handleClose = function() {
+// 	this.removeModal();
+// 	this.removeOverlay();
+// };
 
-morphingModal.prototype.open =  function() {
+// morphingModal.prototype.open =  function() {
 
-};
-morphingModal.prototype.createOverlay = function() {
+// };
+// morphingModal.prototype.createOverlay = function() {
 	
-};
-morphingModal.prototype.createModal = function() {
-	var modal = this.modalEl = document.createElement('div');
-	var overlay = this.overlay = document.createElement('div');
-	classie.add(modal, 'morph-modal');
-	classie.add(overlay, 'morph-overlay');
-	body.appendChild(overlay);
-	body.appendChild(modal);
-	classie.add(overlay, 'visible');
-};
+// };
+// morphingModal.prototype.createModal = function() {
+// 	var modal = this.modalEl = document.createElement('div');
+// 	var overlay = this.overlay = document.createElement('div');
+// 	classie.add(modal, 'morph-modal');
+// 	classie.add(overlay, 'morph-overlay');
+// 	body.appendChild(overlay);
+// 	body.appendChild(modal);
+// 	classie.add(overlay, 'visible');
+// };
 
-morphingModal.prototype.destroyModal = function() {
-	this.modalEl.parent.removeChild(this.modalEl);
-};
+// morphingModal.prototype.destroyModal = function() {
+// 	this.modalEl.parent.removeChild(this.modalEl);
+// };
 
-var teamMembers = Array.prototype.slice.call(document.querySelectorAll('.team-member'));
-console.log(teamMembers);
+// var teamMembers = Array.prototype.slice.call(document.querySelectorAll('.team-member'));
+// console.log(teamMembers);
 
-var modals = teamMembers.map(function(el) {return new morphingModal(el, el.querySelectorAll('.preview-container')[0])});
-console.log(modals);
+// var modals = teamMembers.map(function(el) {return new morphingModal(el, el.querySelectorAll('.preview-container')[0])});
+// console.log(modals);
 
