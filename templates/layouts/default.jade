@@ -46,8 +46,8 @@ html
 					each link in navLinks
 						li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
 					.social-mobile
-						a(href='https://www.facebook.com/EEESummit/'): i.fa.fa-2x.fa-facebook-square
-						a(href='https://www.facebook.com/EEESummit/', target='_blank'): i.fa.fa-twitter.fa-2x
+						a(href='https://www.facebook.com/EEESummit/', title="Facebook page"): i.fa.fa-2x.fa-facebook-square
+						a(href='https://twitter.com/poland20summit/', title="Twitter page"): i.fa.fa-twitter.fa-2x
 
 			.container: .top-menu
 				a#logo-home.nav-logo(href='/'): img.logo-small(src='https://res.cloudinary.com/dg1royeho/image/upload/v1465242752/logo_to4xlx.svg')
@@ -60,8 +60,8 @@ html
 			
 
 				.social
-					a#fb-page.nav-logo.show-for-large(href='https://www.facebook.com/EEESummit/', target='_blank'): i.fa.fa-facebook-square.fa-2x
-					a.nav-logo.show-for-large(href='https://www.facebook.com/EEESummit/', target='_blank'): i.fa.fa-twitter.fa-2x
+					a#fb-page.nav-logo.show-for-large(href='https://www.facebook.com/EEESummit/', target='_blank', title="Facebook page"): i.fa.fa-facebook-square.fa-2x
+					a.nav-logo.show-for-large(href='https://twitter.com/poland20summit', title="Twitter page" target='_blank'): i.fa.fa-twitter.fa-2x
 				
 			//- Customise your site's navigation by changing the navLinks Array in ./routes/middleware.js
 			//- ... or completely change this header to suit your design.
