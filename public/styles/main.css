@@ -5918,7 +5918,6 @@ h2.underlined, h3.underlined, h4.underlined, h5.underlined, h6.underlined {
     position: absolute;
     bottom: 0;
     height: 4px;
-    border-radius: 2px;
     width: 5em;
     background: #e61b5a;
     margin-left: 50%;
