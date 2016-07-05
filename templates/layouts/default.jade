@@ -9,13 +9,18 @@ mixin menu(links)
 					+menu(link.children, dr)
 
 doctype html
-html
+html(lang="en-GB")
 
 	//- HTML HEADER
 	head
 		meta(charset="utf-8")
-		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
 		meta(http-equiv="X-UA-Compatible" content="IE=edge")
+		meta(http-equiv="Content-Language" content="en")
+		meta(name="theme-color" content="#15283c")
+		//- meta(name="msapplication-navbutton-color" content="#15283c")
+		meta(name="apple-mobile-web-app-status-bar-style" content="#15283c")
+		meta(name="msapplication-TileColor" content="#15283c")
 
 		title= title || 'Poland 2.0'
 		include ../mixins/favicons.jade
