@@ -5402,14 +5402,14 @@ input {
       border-bottom: 1px solid #f1f1f1; }
 
 .contact a.mailto {
-  color: #e61b5a;
-  margin-right: 0.25em; }
+  color: #e61b5a; }
   .contact a.mailto:hover {
     color: #ba1448; }
   .contact a.mailto:active {
     color: #8c0f36; }
   .contact a.mailto::before {
-    content: '\f003'; }
+    content: '\f003';
+    margin-right: 0.25em; }
 
 @media screen and (min-width: 45em) {
   .contact p {

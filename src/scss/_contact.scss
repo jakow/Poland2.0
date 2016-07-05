@@ -1,7 +1,7 @@
 .contact {
 	a.mailto {
 		color: $secondary-color;
-		margin-right: 0.25em;
+		
 		&:hover {
 			color: darken($secondary-color, 10);
 		}
@@ -10,6 +10,7 @@
 		}
 		&::before {
 			content: '\f003';
+			margin-right: 0.25em;
 		}
 	}
 	p {
