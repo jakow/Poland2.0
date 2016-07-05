@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
+  <title>Poland 2.0</title>
+  <meta name="description" content="Poland 2.0 conference">
+  <meta name="keywords" content="Poland conference">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <style>
+  @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+body {
+  background: #15283c;
+  color: white;
+  font-family: 'Lato', 'Helvetica Neue', 'Arial', 'sans-serif'; }
+
+.container {
+  max-width: 64rem;
+  margin: 3rem auto;
+  padding: 0 1.25rem;
+  text-align: center; }
+
+a {
+  text-decoration: none;
+  color: white; }
+h1 {
+  font-weight: 300;
+}
+h2 {
+  font-weight: bold;
+}
+
+.logo {
+  color: #220072; }
+
+#fb {
+  display: inline-block;
+  padding: 1rem;
+  border: 2px solid white;
+  border-radius: 3px;
+  font-size: 1.5rem; }
+  #fb i {
+    vertical-align: middle;
+    margin-right: 0.5rem; }
+  #fb:hover {
+    color: #ddd;
+    border-color: #ddd; }
+
+#anim-container {
+  position: relative;
+  top: 0;
+  height: 120px; }
+  #anim-container .overlaid {
+    margin-left: -60px;
+    left: 50%;
+    position: absolute; }
+
+.animated {
+  transform: scale(0);
+  animation: popout 6s cubic-bezier(0.25, 0.1, 0.2, 1.5) normal infinite; }
+  .animated:nth-child(2) {
+    animation-delay: 2s; }
+  .animated:nth-child(3) {
+    animation-delay: 4s; }
+
+#hammer {
+  animation: hammertime 6s cubic-bezier(0.4, 0, 1, 1) normal infinite 4s; }
+
+@keyframes popout {
+  0% {
+    transform: scale(0);
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.2, 1.5); }
+  6% {
+    transform: scale(1); }
+  27% {
+    transform: scale(1);
+    animation-timing-function: cubic-bezier(0.8, -0.5, 0, 1); }
+  33% {
+    transform: scale(0); }
+  100% {
+    transform: scale(0); } }
+
+@keyframes hammertime {
+  0% {
+    transform: rotate(0); }
+  9% {
+    transform: rotate(0); }
+  12% {
+    transform: rotate(45deg); }
+  15% {
+    transform: rotate(0deg); }
+  18% {
+    transform: rotate(45deg); }
+  21% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(0deg); } }
+  </style>
+</head>
+<body>
+  <div id="placeholder" class="container">
+    <div>
+      <h1 id="poland20">POLAND 2.0</h1>
+      <div id="anim-container">
+        <img src="https://res.cloudinary.com/dg1royeho/image/upload/v1467747037/poland2_ud9iri.svg" class="overlaid animated">
+        <img src="https://res.cloudinary.com/dg1royeho/image/upload/v1467746945/gears_ezudox.svg" class="overlaid animated" alt="">
+        <div class="overlaid animated">
+          <img src="https://res.cloudinary.com/dg1royeho/image/upload/v1467746940/hammer_ijytkq.svg" alt="" id="hammer">
+        </div>
+      </div>
+      <h2>Maintenance in progress.</h2>
+    </div>
+    <div>
+      <p>Poland 2.0 website is undergoing necessary maintenance. In the meantime, please visit our Facebook page!</p>
+      <a href="https://www.facebook.com/EEESummit/" id="fb"><i class="fa fa-facebook fa-lg"></i>Poland 2.0 Summit</a>
+    </div>
+  </div>
+  </body>
+  </html>
