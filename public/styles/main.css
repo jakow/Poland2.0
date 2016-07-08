@@ -4378,7 +4378,8 @@ html.is-reveal-open body {
 
 #nav-toggle {
   position: relative;
-  padding: 0.25rem 0; }
+  padding: 1rem;
+  left: 1rem; }
 
 .hamburger {
   display: block;
