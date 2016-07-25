@@ -3,7 +3,9 @@ var Types = keystone.Field.Types;
 
 
 var Sponsor = new keystone.List('Sponsor', {
-	autokey: { from: 'name', path: 'key', unique: true }
+	autokey: { from: 'name', path: 'key', unique: true },
+	sortable: true,
+	sortContext: 'Edition:sponsors'
 });
 
 

@@ -30,7 +30,7 @@
 	h1, h2 {
 		
 		line-height: 1.2;
-		letter-spacing: 1px;
+		letter-spacing: 4px;
 	}
 
 	h1.no-margin, h2.no-margin {
@@ -156,6 +156,7 @@
 #home-banner {
 	.time-place {
 		margin: 0.5rem 0;
+		letter-spacing: 2px;
 		font-size: 1rem;
 		display: inline-flex;
 		//justify-content: center;
