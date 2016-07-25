@@ -4862,7 +4862,7 @@ input {
   margin-bottom: 2rem;
   list-style: none;
   text-align: center;
-  transition: background 250ms ease-in-out;
+  transition: background 125ms ease-in-out;
   flex: 0 0 100%;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -4872,9 +4872,10 @@ input {
   .team-member .member-wrapper {
     display: inline-block;
     position: relative;
+    transition: all 125ms ease-in-out;
+    border-radius: 2px;
     height: 100%;
-    padding-bottom: 2.5rem;
-    transition: background 250ms ease-in-out; }
+    padding-bottom: 2.5rem; }
     .team-member .member-wrapper:hover {
       background: #f1f1f1; }
     .team-member .member-wrapper > a {
@@ -4905,17 +4906,21 @@ input {
     color: inherit;
     display: inline-block;
     border-radius: 2px;
-    transition: background 0.2s; }
+    transition: background 125ms; }
   .team-member .photo img {
-    border-radius: 50%; }
+    border-radius: 50%;
+    transition: all 125ms ease-in-out; }
   .team-member .photo {
+    transition: all 125ms ease-in-out;
     margin-bottom: 0.5em;
     position: relative;
     display: inline-block;
-    padding: 0.25em;
+    padding: 6px;
     border-radius: 50%;
-    border: 2px solid #e61b5a;
+    box-shadow: 0px 0px 0px 2px #e61b5a inset;
     transform-origin: top left; }
+  .team-member:hover a .photo {
+    box-shadow: 0px 0px 0px 6px #e61b5a inset; }
   .team-member .name {
     font-weight: normal; }
   .team-member .occupation, .team-member .position {
@@ -4947,7 +4952,7 @@ input {
   text-transform: uppercase;
   list-style: none;
   text-align: center;
-  transition: background 250ms ease-in-out;
+  transition: background 125ms ease-in-out;
   flex: 0 0 100%;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -4970,17 +4975,21 @@ input {
     color: inherit;
     display: inline-block;
     border-radius: 2px;
-    transition: background 0.2s; }
+    transition: background 125ms; }
   .past-team-member .photo img {
-    border-radius: 50%; }
+    border-radius: 50%;
+    transition: all 125ms ease-in-out; }
   .past-team-member .photo {
+    transition: all 125ms ease-in-out;
     margin-bottom: 0.5em;
     position: relative;
     display: inline-block;
-    padding: 0.25em;
+    padding: 6px;
     border-radius: 50%;
-    border: 2px solid #e61b5a;
+    box-shadow: 0px 0px 0px 2px #e61b5a inset;
     transform-origin: top left; }
+  .past-team-member:hover a .photo {
+    box-shadow: 0px 0px 0px 6px #e61b5a inset; }
   .past-team-member .name {
     font-weight: normal; }
   .past-team-member .occupation, .past-team-member .position {
@@ -5004,7 +5013,7 @@ input {
   text-transform: uppercase;
   list-style: none;
   text-align: center;
-  transition: background 250ms ease-in-out;
+  transition: background 125ms ease-in-out;
   flex: 0 0 100%;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -5027,17 +5036,21 @@ input {
     color: inherit;
     display: inline-block;
     border-radius: 2px;
-    transition: background 0.2s; }
+    transition: background 125ms; }
   .past-speaker .photo img {
-    border-radius: 50%; }
+    border-radius: 50%;
+    transition: all 125ms ease-in-out; }
   .past-speaker .photo {
+    transition: all 125ms ease-in-out;
     margin-bottom: 0.5em;
     position: relative;
     display: inline-block;
-    padding: 0.25em;
+    padding: 6px;
     border-radius: 50%;
-    border: 2px solid #e61b5a;
+    box-shadow: 0px 0px 0px 2px #e61b5a inset;
     transform-origin: top left; }
+  .past-speaker:hover a .photo {
+    box-shadow: 0px 0px 0px 6px #e61b5a inset; }
   .past-speaker .name {
     font-weight: normal; }
   .past-speaker .occupation, .past-speaker .position {
@@ -5055,7 +5068,7 @@ input {
 .speaker {
   list-style: none;
   text-align: center;
-  transition: background 250ms ease-in-out;
+  transition: background 125ms ease-in-out;
   flex: 0 0 100%;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -5078,17 +5091,21 @@ input {
     color: inherit;
     display: inline-block;
     border-radius: 2px;
-    transition: background 0.2s; }
+    transition: background 125ms; }
   .speaker .photo img {
-    border-radius: 50%; }
+    border-radius: 50%;
+    transition: all 125ms ease-in-out; }
   .speaker .photo {
+    transition: all 125ms ease-in-out;
     margin-bottom: 0.5em;
     position: relative;
     display: inline-block;
-    padding: 0.25em;
+    padding: 6px;
     border-radius: 50%;
-    border: 2px solid #e61b5a;
+    box-shadow: 0px 0px 0px 2px #e61b5a inset;
     transform-origin: top left; }
+  .speaker:hover a .photo {
+    box-shadow: 0px 0px 0px 6px #e61b5a inset; }
   .speaker .name {
     font-weight: normal; }
   .speaker .occupation, .speaker .position {
@@ -5107,7 +5124,7 @@ input {
   margin-bottom: 1.25rem;
   list-style: none;
   text-align: center;
-  transition: background 250ms ease-in-out;
+  transition: background 125ms ease-in-out;
   flex: 0 0 100%;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -5129,17 +5146,21 @@ input {
     color: inherit;
     display: inline-block;
     border-radius: 2px;
-    transition: background 0.2s; }
+    transition: background 125ms; }
   .keynote-speaker .photo img {
-    border-radius: 50%; }
+    border-radius: 50%;
+    transition: all 125ms ease-in-out; }
   .keynote-speaker .photo {
+    transition: all 125ms ease-in-out;
     margin-bottom: 0.5em;
     position: relative;
     display: inline-block;
-    padding: 0.25em;
+    padding: 6px;
     border-radius: 50%;
-    border: 2px solid #e61b5a;
+    box-shadow: 0px 0px 0px 2px #e61b5a inset;
     transform-origin: top left; }
+  .keynote-speaker:hover a .photo {
+    box-shadow: 0px 0px 0px 6px #e61b5a inset; }
   .keynote-speaker .name {
     font-weight: normal; }
   .keynote-speaker .occupation, .keynote-speaker .position {

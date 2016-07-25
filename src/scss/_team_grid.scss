@@ -15,12 +15,12 @@ $slideY: 30px;
 	}
 }
 
-
+$hover-time: 125ms;
 
 @mixin people-cell($colsize-lg, $colsize-md, $gutter) {
 		list-style: none;
 		text-align: center;
-		transition: background 250ms ease-in-out;
+		transition: background $hover-time ease-in-out;
 		@include flex-grid-column(12, $gutter);
 		@include breakpoint(medium) {
 			@include flex-grid-column($colsize-md, $gutter);
@@ -38,7 +38,7 @@ $slideY: 30px;
 		color: inherit;
 		display: inline-block;
 		border-radius: 2px;
-		transition: background 0.2s;
+		transition: background $hover-time;
 		// &:focus {
 		// 	background: #f1f1f1;
 		// }
@@ -50,23 +50,28 @@ $slideY: 30px;
 		.photo {
 			img {
 			border-radius: 50%; //circles!!
-
+			transition: all $hover-time ease-in-out;
 			
 		}
 		}
 		.photo {
+		transition: all $hover-time ease-in-out;
 		margin-bottom: 0.5em;
 		position: relative;
 		display: inline-block;
-		padding: 0.25em;
+		padding: 6px;
 		border-radius: 50%; //circles!!
-		border: 2px solid $secondary-color;
+		box-shadow: 0px 0px 0px 2px $secondary-color inset;
 		//width: 12rem;
 		//height: 12rem;
 		transform-origin: top left;
-
+		
 		}
-
+		&:hover a {
+			.photo {
+				box-shadow: 0px 0px 0px 6px $secondary-color inset;
+			}
+		}
 
 
 
@@ -97,16 +102,19 @@ $slideY: 30px;
 
 .team-member {
 	margin-bottom: 2rem;
-
 	.member-wrapper {
 		display: inline-block;
 		position: relative;
+		transition: all $hover-time ease-in-out;
+		border-radius:2px;
+		// border: 1px solid $medium-gray;
 		height: 100%;
 		padding-bottom: 2.5rem;
 		// background: $light-gray;
-		transition: background 250ms ease-in-out;
+		
 		&:hover {
 			background: $light-gray;
+
 		}
 		> a {
 			display: inline-block;
