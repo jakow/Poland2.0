@@ -4628,7 +4628,7 @@ input {
     font-weight: 700; }
   .banner h1, .banner h2 {
     line-height: 1.2;
-    letter-spacing: 4px; }
+    letter-spacing: 3px; }
   .banner h1.no-margin, .banner h2.no-margin {
     margin-bottom: 0rem; }
   .banner h2 {
@@ -4702,7 +4702,7 @@ input {
 
 #home-banner .time-place {
   margin: 0.5rem 0;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   font-size: 1rem;
   display: inline-flex; }
   @media screen and (min-width: 45em) {
@@ -4734,14 +4734,6 @@ input {
   @media screen and (min-width: 45em) {
     #home-banner .logo-large {
       height: 160px; } }
-
-@media screen and (device-height: 568px) and (device-width: 320px) and (orientation: portrait) {
-  .banner.full-height {
-    height: 520px; } }
-
-@media screen and (device-height: 568px) and (device-width: 320px) and (orientation: landscape) {
-  .banner.full-height {
-    height: 272px; } }
 
 #social-banner .bg-logo {
   width: 100%;
