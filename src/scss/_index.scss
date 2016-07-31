@@ -21,4 +21,15 @@
 			content: '';
 		}
 	}
-}
+
+	display: block;
+	text-align: center;
+	 a {
+		// width: 100%;
+		margin: 0 0.5rem 2rem;
+		@include breakpoint(medium) {
+			margin: 0 1.5rem 2rem;
+			width: initial;
+		}
+		}
+	}	

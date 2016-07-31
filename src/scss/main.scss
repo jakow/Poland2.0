@@ -329,19 +329,7 @@ h1.smaller {
 	}
 }
 
-#social-banner {
-	display: flex;
-	justify-content: center;
-	 a {
-		//display: block;
-		width: 100%;
-		margin: 0 0 2rem;
-		@include breakpoint(medium) {
-			margin: 0 1.5rem 1.5rem;
-			width: initial;
-		}
-		}
-	}	
+
 
 section.divider-bottom {
 	position: relative;
