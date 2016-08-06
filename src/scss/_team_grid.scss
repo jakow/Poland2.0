@@ -67,7 +67,7 @@ $hover-time: 125ms;
 		transform-origin: top left;
 		
 		}
-		&:hover a {
+		 a:hover {
 			.photo {
 				box-shadow: 0px 0px 0px 6px $secondary-color inset;
 			}

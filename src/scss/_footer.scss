@@ -95,30 +95,44 @@ footer, header {
 
 .footer .sponsor-list {
 	display: flex;
+	margin: 0 0 1rem;
 	flex-direction: row;
 	justify-content: space-around;
+	align-items: center;
 	flex-wrap: wrap;
 	list-style: none;
 	.sponsor {
-		padding: 0.5rem;
-		display: inline-block;
+		flex: 0 1 100%;
+		text-align: center;
+		padding: 1rem;
+		@include breakpoint(medium) {
+			flex: 0 1 33%;
+			
+		}
+		@include breakpoint(large) {
+			padding: 1.5rem;
+		}
+		
 		a {
-			display: block;
-			padding: 0.25rem;
+			display: inline-block;
+			// padding: 0.25rem;
+			img {
+				max-height: 240px;
+				width: 300px;
+				@include breakpoint(medium) {
+					width: initial;
+				}
+			}
+
 		}
+
 		//margin-right: 1rem;
-		img {
-			height: 3rem;
-			@include breakpoint(medium) {
-				height: 4rem;
-			}
-		}
-		&.primary img {
-			height: 4rem;
-			@include breakpoint(medium) {
-				height: 5rem;
-			}
-		}
+		// &.primary img {
+		// 	height: 4rem;
+		// 	@include breakpoint(medium) {
+		// 		height: 5rem;
+		// 	}
+		// }
 	}
 }
 
