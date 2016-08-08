@@ -4857,7 +4857,7 @@ input {
   padding: 2rem 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-cpontent: center;
   flex-direction: row; }
   @media screen and (min-width: 45em) {
     .people-grid {
@@ -4874,6 +4874,8 @@ input {
   max-width: 100%;
   text-align: center;
   font-size: 0.9em; }
+  .team-member > * {
+    max-width: 14.75rem; }
   .team-member .member-wrapper {
     display: inline-block;
     position: relative;
@@ -4938,7 +4940,7 @@ input {
   .team-member .name, .team-member .occupation, .team-member .position, .team-member .presentation {
     margin-bottom: 0.3em; }
   .team-member .photo img {
-    max-height: 12rem; }
+    max-width: 12rem; }
   .team-member .contact-info {
     position: absolute;
     bottom: 0;
@@ -5008,9 +5010,11 @@ input {
     margin-bottom: 0.3em; }
   .past-team-member .photo img {
     max-height: 9rem; }
+  .past-team-member > * {
+    max-width: 11.75rem; }
 
 .speaker > a, .keynote-speaker > a {
-  padding: 1em; }
+  padding: 1rem; }
   .speaker > a:active, .speaker > a:hover, .keynote-speaker > a:active, .keynote-speaker > a:hover {
     background: #f1f1f1; }
 
@@ -5123,7 +5127,9 @@ input {
   .speaker .name, .speaker .occupation, .speaker .position, .speaker .presentation {
     margin-bottom: 0.3em; }
   .speaker .photo img {
-    max-height: 12rem; }
+    max-width: 12rem; }
+  .speaker > * {
+    max-width: 14.75rem; }
 
 .keynote-speaker {
   margin-bottom: 1.25rem;
@@ -5177,11 +5183,15 @@ input {
     font-weight: 300; }
   .keynote-speaker .name, .keynote-speaker .occupation, .keynote-speaker .position, .keynote-speaker .presentation {
     margin-bottom: 0.3em; }
+  .keynote-speaker > * {
+    max-width: 15.75rem; }
   .keynote-speaker .photo img {
-    max-height: 13rem; }
-    @media screen and (min-width: 45em) {
-      .keynote-speaker .photo img {
-        max-height: 15rem; } }
+    max-width: 13rem; }
+  @media screen and (min-width: 45em) {
+    .keynote-speaker .photo img {
+      max-width: 15rem; }
+    .keynote-speaker > * {
+      max-width: 17.75rem; } }
 
 .keynote-speaker .presentation, .speaker .presentation {
   font-style: italic; }
