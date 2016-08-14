@@ -131,7 +131,7 @@ exports.loadSponsors = function(req, res, next) {
 					for (var i = 0; i < SponsorTypes.length; ++i) {
 						res.locals.sponsorList.push({type: SponsorTypes[i], list: result.filter(s => s.sponsorType == SponsorTypes[i])});
 					}
-					console.log(res.locals.sponsorList);
+
 					next(err);
 				});
 			}

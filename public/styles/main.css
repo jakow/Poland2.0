@@ -4492,8 +4492,7 @@ footer, header {
     .footer .sponsor-list .sponsor a {
       display: inline-block; }
     .footer .sponsor-list .sponsor img {
-      max-height: 180px;
-      width: 300px; }
+      max-height: 180px; }
       @media screen and (min-width: 45em) {
         .footer .sponsor-list .sponsor img {
           width: initial; } }
