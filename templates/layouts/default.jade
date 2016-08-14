@@ -109,11 +109,11 @@ html(lang="en-GB")
 								.columns
 									h5.uppercase.center 
 										if sponsorType.type == 'regular'
-											| Partners
+											|Partners
 										else if sponsorType.list.length > 1
-											| #{sponsorType.type.capitalize()} partners
+											|#{sponsorType.type.capitalize()} partners
 										else 
-											| #{sponsorType.type.capitalize()} partner
+											|#{sponsorType.type.capitalize()} partner
 
 									ul.sponsor-list(class=sponsorType.type)
 										each sponsor in sponsorType.list
