@@ -20,11 +20,6 @@ Speaker.add({
 });
 
 
-Speaker.schema.methods.orderGiven = function() {
-	console.log(this.order);
-	return typeof(this.order) === "number";
-}
-
 // Speaker.schema.pre('save', function(next) {
 // 	this.orderGiven() ? console.log('Order given') : console.log('Order NOT given');
 // 	if (!this.orderGiven()) {

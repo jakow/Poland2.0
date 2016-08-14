@@ -8,6 +8,10 @@
  * modules in your project's /lib directory.
  */
 
+ String.prototype.capitalize = function() {
+	return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
 var _ = require('underscore');
 var keystone = require('keystone');
 
@@ -114,6 +118,7 @@ exports.getCurrentEdition = function(req, res, next) {
 };
 
 exports.loadSponsors = function(req, res, next) {
+		let SponsorTypes = keystone.get('sponsor types');
 		q = keystone.list('Edition').model.findOne({'current':true});
 		q.exec(function(err, result) {
 			var currentEdition = result;
@@ -121,7 +126,12 @@ exports.loadSponsors = function(req, res, next) {
 				var p = keystone.list('Sponsor').model.find().where('edition', currentEdition.id);
 				p.exec(function(err,result) {
 					//console.log('Sponsors: ', result);
-					res.locals.sponsors = result;
+
+					res.locals.sponsorList = [];
+					for (var i = 0; i < SponsorTypes.length; ++i) {
+						res.locals.sponsorList.push({type: SponsorTypes[i], list: result.filter(s => s.sponsorType == SponsorTypes[i])});
+					}
+					console.log(res.locals.sponsorList);
 					next(err);
 				});
 			}

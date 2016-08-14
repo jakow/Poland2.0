@@ -104,35 +104,39 @@ footer, header {
 	.sponsor {
 		flex: 0 1 100%;
 		text-align: center;
-		padding: 1rem;
-		@include breakpoint(medium) {
-			flex: 0 1 33%;
-			
-		}
-		@include breakpoint(large) {
-			padding: 1.5rem;
-		}
-		
+		padding: 1.25rem;
 		a {
 			display: inline-block;
 			// padding: 0.25rem;
-			img {
-				max-height: 240px;
-				width: 300px;
+		}
+		img {
+				max-height: 180px;
+				
 				@include breakpoint(medium) {
 					width: initial;
+					max-width: width: 300px;
 				}
-			}
-
 		}
 
-		//margin-right: 1rem;
-		// &.primary img {
-		// 	height: 4rem;
-		// 	@include breakpoint(medium) {
-		// 		height: 5rem;
-		// 	}
-		// }
+	}
+	&.strategic .sponsor {
+		img {
+			max-height: 200px;
+			// width: 400px;
+		}
+		@include breakpoint(medium) {
+			flex: 0 1 50%;
+			img {
+				max-width: 400px;
+			}
+		}
+
+	}
+
+	&.regular .sponsor {
+		@include breakpoint(medium) {
+			flex: 0 1 33%;
+		}
 	}
 }
 

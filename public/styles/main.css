@@ -4488,21 +4488,25 @@ footer, header {
   .footer .sponsor-list .sponsor {
     flex: 0 1 100%;
     text-align: center;
-    padding: 1rem; }
-    @media screen and (min-width: 45em) {
-      .footer .sponsor-list .sponsor {
-        flex: 0 1 33%; } }
-    @media screen and (min-width: 60em) {
-      .footer .sponsor-list .sponsor {
-        padding: 1.5rem; } }
+    padding: 1.25rem; }
     .footer .sponsor-list .sponsor a {
       display: inline-block; }
-      .footer .sponsor-list .sponsor a img {
-        max-height: 240px;
-        width: 300px; }
-        @media screen and (min-width: 45em) {
-          .footer .sponsor-list .sponsor a img {
-            width: initial; } }
+    .footer .sponsor-list .sponsor img {
+      max-height: 180px;
+      width: 300px; }
+      @media screen and (min-width: 45em) {
+        .footer .sponsor-list .sponsor img {
+          width: initial; } }
+  .footer .sponsor-list.strategic .sponsor img {
+    max-height: 200px; }
+  @media screen and (min-width: 45em) {
+    .footer .sponsor-list.strategic .sponsor {
+      flex: 0 1 50%; }
+      .footer .sponsor-list.strategic .sponsor img {
+        max-width: 400px; } }
+  @media screen and (min-width: 45em) {
+    .footer .sponsor-list.regular .sponsor {
+      flex: 0 1 33%; } }
 
 .button.hollow {
   transition: border-color 0.15s ease-out, color 0.15s ease-out, background-color 0.15s ease-out; }

@@ -101,19 +101,30 @@ html(lang="en-GB")
 
 		//- FOOTER
 		footer.footer
-			if sponsors && sponsors.length
+			if sponsorList && sponsorList.length
 				.footer-section.sponsors
-					.row.container
-						.columns
-							h5.uppercase Our partners
-							ul.sponsor-list
-								each sponsor in sponsors
-									li.sponsor
-										a(href=sponsor.url title=sponsor.name)
-											span.sr-only=sponsor.name
-											img(src=sponsor.logo.secure_url alt=sponsor.name)
-							.center
-								a.hollow.button.primary.center.mailto(href="mailto:contact@poland20.com?subject=Partnership enquiry") Be our partner
+					each sponsorType in sponsorList
+						if sponsorType.list.length
+							.row.container
+								.columns
+									h5.uppercase.center 
+										if sponsorType.type == 'regular'
+											| Partners
+										else if sponsorType.list.length > 1
+											| #{sponsorType.type.capitalize()} partners
+										else 
+											| #{sponsorType.type.capitalize()} partner
+
+									ul.sponsor-list(class=sponsorType.type)
+										each sponsor in sponsorType.list
+											li.sponsor
+												a(href=sponsor.url title=sponsor.name)
+													span.sr-only=sponsor.name
+													img(src=sponsor.logo.secure_url alt=sponsor.name)
+							
+
+					.center
+						a.hollow.button.primary.center.mailto(href="mailto:contact@poland20.com?subject=Partnership enquiry") Be our partner
 			else
 				.footer-section.sponsors
 					.row.container

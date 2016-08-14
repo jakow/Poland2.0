@@ -28,13 +28,27 @@ keystone.init({
 	'user model': 'User'
 
 });
-var keystone = require('keystone');
 
+
+
+keystone.set('signin logo', '/images/logo.svg');
+
+keystone.set('sponsor types', [
+	'strategic',
+	'regular']);
 
 // Load your project's Models
 
 keystone.import('models');
 
+keystone.set('nav', {
+	//'news': ['posts', 'post-categories'],
+	'speakers': 'speakers',
+	'sponsors': 'sponsors',
+	'editions': 'editions',
+	'team-members': 'team-members',
+	'users': 'users'
+});
 // Setup common locals for your templates. The following are required for the
 // bundled templates and layouts. Any runtime locals (that should be set uniquely
 // for each request) should be added to ./routes/middleware.js
@@ -75,30 +89,21 @@ keystone.set('email locals', {
 // Be sure to update this rule to include your site's actual domain, and add
 // other rules your email templates require.
 
-keystone.set('email rules', [{
-	find: '/images/',
-	replace: (keystone.get('env') === 'production') ? 'http://www.your-server.com/images/' : 'http://localhost:3000/images/'
-}, {
-	find: '/keystone/',
-	replace: (keystone.get('env') === 'production') ? 'http://www.your-server.com/keystone/' : 'http://localhost:3000/keystone/'
-}]);
+// keystone.set('email rules', [{
+// 	find: '/images/',
+// 	replace: (keystone.get('env') === 'production') ? 'http://www.your-server.com/images/' : 'http://localhost:3000/images/'
+// }, {
+// 	find: '/keystone/',
+// 	replace: (keystone.get('env') === 'production') ? 'http://www.your-server.com/keystone/' : 'http://localhost:3000/keystone/'
+// }]);
 
 // Load your project's email test routes
 
-keystone.set('email tests', require('./routes/emails'));
+// keystone.set('email tests', require('./routes/emails'));
 
 // Configure the navigation bar in Keystone's Admin UI
 
-keystone.set('nav', {
-	//'news': ['posts', 'post-categories'],
-	'speakers': 'speakers',
-	'sponsors': 'sponsors',
-	'editions': 'editions',
-	'team-members': 'team-members',
-	'users': 'users'
-});
 
-keystone.set('signin logo', '/images/logo.svg');
 // keystone.set('wysiwyg images', true);
 // keystone.set('wysiwyg cloudinary images', true);
 // keystone.set('wysiwyg additional buttons', 'forecolor backcolor insert link');
