@@ -5982,3 +5982,45 @@ h2.underlined, h3.underlined, h4.underlined, h5.underlined, h6.underlined {
   color: #0077B5;
   border: 2px solid #0077B5;
   background: transparent; }
+
+.dark-background {
+  color: white;
+  background: #15283c; }
+
+#mc_embed_signup {
+  flex: 1 0 auto; }
+
+.newsletter-signup {
+  border: 2px solid #e61b5a;
+  border-radius: 6px;
+  margin: 1.5rem 0; }
+  .newsletter-signup .mc-field-group {
+    background: transparent;
+    color: white;
+    border: 0;
+    overflow: hidden;
+    border-bottom: 1px solid #e61b5a;
+    display: flex; }
+    .newsletter-signup .mc-field-group label {
+      padding: 0.8rem 0.5rem;
+      display: inline-block;
+      flex: 0 1 80px;
+      font-size: 0.8em; }
+    .newsletter-signup .mc-field-group input {
+      border: 0;
+      flex: 1 0 auto;
+      border-left: 1px solid #e61b5a;
+      padding: 0.8rem 0.5rem;
+      background: transparent;
+      display: inline-block; }
+      .newsletter-signup .mc-field-group input:focus {
+        outline: none; }
+    .newsletter-signup .mc-field-group:last-child {
+      border-bottom: 0; }
+  .newsletter-signup input[type="submit"].button {
+    margin: 0;
+    width: 100%;
+    background: transparent;
+    border-radius: 0; }
+    .newsletter-signup input[type="submit"].button:hover {
+      background: #e61b5a; }
