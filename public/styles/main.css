@@ -6010,6 +6010,7 @@ h2.underlined, h3.underlined, h4.underlined, h5.underlined, h6.underlined {
       border: 0;
       flex: 1 0 auto;
       border-left: 1px solid #e61b5a;
+      border-radius: 0;
       padding: 0.8rem 0.5rem;
       background: transparent;
       display: inline-block; }
