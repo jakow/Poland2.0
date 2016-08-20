@@ -25,15 +25,17 @@ html(lang="en-GB")
 
 		title= title || 'Poland 2.0'
 		include ../mixins/favicons.jade
+		link(href='responsive-nav/responsive-nav.css', rel="stylesheet")
+
 		//- main stylesheet
+
 		link(href="styles/main.css", rel="stylesheet")
 		//- link(href="/styles/site.css", rel="stylesheet")
-		link(href='responsive-nav/responsive-nav.css', rel="stylesheet")
 
 
 		//- This file provides the default styling for the KeystoneJS Content Editor
-		if user && user.canAccessKeystone
-			link(href="keystone/styles/content/editor.min.css", rel="stylesheet")
+		//- if user && user.canAccessKeystone
+		//- 	link(href="keystone/styles/content/editor.min.css", rel="stylesheet")
 
 		//- Include template-specific stylesheets by extending the css block
 		block css
@@ -47,7 +49,7 @@ html(lang="en-GB")
 
 		//- HEADER
 		header.header
-			nav#nav-mobile.container.hide-for-large.nav-collapse
+			nav#nav-mobile.container.hide-for-large.nav-collapse(style="display: none;")
 				ul.lighter
 					each link in navLinks
 						li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
@@ -196,7 +198,7 @@ html(lang="en-GB")
 				open: function(){this.isOpen = true;}, // Function: Open callback
 				close: function(){this.isOpen = false;} // Function: Close callback
 			});
-		script(src='jquery/dist/jquery.js')
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')
 		script(src='what-input/what-input.js')
 		script(src='foundation-sites/dist/foundation.js')
 		//- Include template-specific javascript files by extending the js block

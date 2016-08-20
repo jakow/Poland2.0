@@ -78,6 +78,7 @@ $dark-color: #333333;
 @import 'mui_utils';
 @import 'textfield';
 @import 'mui_select';
+@import 'mc_form';
 
 $bezier-in: cubic-bezier(0, 0, 0.23, 1);
 $bezier-out: cubic-bezier(0.4, 0, 1, 1);
@@ -414,57 +415,5 @@ $ln-color: #0077B5;
 	background: $primary-color;
 }
 
-#mc_embed_signup {
-	flex: 1 0 auto;
-}
-.newsletter-signup {
 
-	border: 2px solid $secondary-color;
-	border-radius: 6px;
-	margin: 1.5rem 0;
-	.mc-field-group {
-		background:transparent;
-		color: white;
-		border: 0;
-		overflow: hidden;
-		border-bottom: 1px solid $secondary-color;
-		display: flex;
-		label {
-			padding: 0.8rem 0.5rem;
-			display: inline-block;
-			
-			flex: 0 1 80px;
-			font-size: 0.8em;
-		}
-		input {
-			border: 0;
-			flex: 1 0 auto;
-			border-left: 1px solid $secondary-color;
-			border-radius: 0;
-			padding: 0.8rem 0.5rem;
-			background: transparent;
-			
-			display: inline-block;
-			&:focus {
-				outline: none;
-			}
-		}
-
-		&:last-child {
-			border-bottom: 0;
-		}
-		&:active {
-
-		}
-	}
-	input[type="submit"].button {
-			margin: 0;
-			width: 100%;
-			background: transparent;
-			border-radius: 0;
-			&:hover {
-				background: $secondary-color;
-			}
-		}
-}
 
