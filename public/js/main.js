@@ -95,12 +95,12 @@ $button.click(function(ev) {
         dataType    : 'json',
         contentType: "application/json; charset=utf-8",
         error       : function(err) { 
-    		console.log(err); 
+    		// console.log(err); 
     		animateError('Something went wrong. Please try again later.');
     		// alert("Could not connect to the registration server. Please try again later."); 
     	},
         success     : function(data) {
-        	console.log(data);
+        	// console.log(data);
             if (data.result == "success") {
             	animateSuccess('Done! Check your e-mail for next steps.');	
             } 
@@ -121,7 +121,7 @@ $button.click(function(ev) {
 
 		// display feedback
 		if (!email)
-			errorFeedback($email, 1, 'We need your email to send your ticket information');
+			errorFeedback($email, 1, 'Please fill in your e-mail address');
 		else 
 			errorFeedback($email, !validateEmail(email), 
 			'This is not a valid e-mail address');
