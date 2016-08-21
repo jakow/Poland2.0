@@ -61,21 +61,22 @@ $check-width: 12px;
 	input {
 		width: 100%;
 		display: block;
-		border: 1px solid $dark-color;
+		// border: 1px solid $dark-color;
+		border: 0;
 		// box-shadow: 0px 0px 0px 1px $dark-color;
-		box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1) inset;
+		box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1) inset, 0px 0px 0px 1px $dark-color;
 		border-radius: 5px;
 		padding: 0.5rem;
 		-webkit-appearance: none;
 		&:focus {
 			// box-shadow: 0px 0px 0px 2px $primary-color;
 			outline: none;
-			box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1) inset, 0px 0px 0px 1px $dark-color;
+			box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1) inset, 0px 0px 0px 2px $dark-color;
 			
 			
 		}
 		&.has-error {
-			box-shadow: 0px 0px 0px 2px $alert-color;
+			box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1) inset, 0px 0px 0px 2px $alert-color;
 			background: lighten($alert-color, 38%);
 		}
 	}
