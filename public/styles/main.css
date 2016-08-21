@@ -5838,15 +5838,15 @@ input {
       width: 100%;
       display: block;
       border: 0;
-      box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1) inset, 0px 0px 0px 1px #333333;
+      box-shadow: 0px 3px 1px 0px rgba(0, 0, 0, 0.1) inset, 0px 0px 0px 1px #333333;
       border-radius: 5px;
       padding: 0.5rem;
       -webkit-appearance: none; }
       .newsletter-signup .mc-field-group input:focus {
         outline: none;
-        box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1) inset, 0px 0px 0px 2px #333333; }
+        box-shadow: 0px 3px 1px 0px rgba(0, 0, 0, 0.1) inset, 0px 0px 0px 2px #333333; }
       .newsletter-signup .mc-field-group input.has-error {
-        box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1) inset, 0px 0px 0px 2px #ec5840;
+        box-shadow: 0px 3px 1px 0px rgba(0, 0, 0, 0.1) inset, 0px 0px 0px 2px #ec5840;
         background: #fef2f0; }
     .newsletter-signup .mc-field-group .error-container {
       position: absolute;
