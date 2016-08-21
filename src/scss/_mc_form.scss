@@ -61,15 +61,16 @@ $check-width: 12px;
 	input {
 		width: 100%;
 		display: block;
-		border: 0;
-		box-shadow: 0px 0px 0px 1px $medium-gray;
-		border-radius: 3px;
+		border: 1px solid $dark-color;
+		// box-shadow: 0px 0px 0px 1px $dark-color;
+		box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1) inset;
+		border-radius: 5px;
 		padding: 0.5rem;
-		
+		-webkit-appearance: none;
 		&:focus {
 			// box-shadow: 0px 0px 0px 2px $primary-color;
 			outline: none;
-			box-shadow: 0px 0px 0px 2px $primary-color;
+			box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1) inset, 0px 0px 0px 1px $dark-color;
 			
 			
 		}
