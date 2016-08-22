@@ -5,11 +5,11 @@
 //- fullheight: bool
 
 
-mixin banner(id, image, fullheight, animatecontent, border, align, contentClasses )
+mixin banner(id, image, fullheight, border, align, contentClasses )
 	section.banner(class= fullheight ? 'full-height': null, id  = id? id : null)
-		.bg-stripes-gradient.wrapper
+		.wrapper.bg-stripes-gradient(class=(contentClasses ? contentClasses: ""))
 			.banner-img(style="background: url('" + image + "') no-repeat center")
 			.wrapper-inner(class= border ? "border": null)
-				.container( class= (animatecontent ? "animate-content" : "") + " " + (align? align : null)+ " " + (contentClasses ? contentClasses: ""))
+				.container( class= (align? align : null))
 					block
 

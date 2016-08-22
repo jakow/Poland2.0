@@ -94,5 +94,6 @@ Edition.schema.methods.getRefs = function(ref, filters) {
 Edition.relationship({path: 'speakers', ref: 'Speaker', refPath: 'edition'});
 Edition.relationship({path: 'team-members', ref: 'TeamMember', refPath: 'edition'});
 Edition.relationship({path: 'sponsors', ref: 'Sponsor', refPath: 'edition'});
+Edition.relationship({path: 'sponsor-categories', ref: 'SponsorCategory', refPath: 'edition'});
 Edition.defaultColumns = 'current';
 Edition.register();

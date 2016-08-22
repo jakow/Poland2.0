@@ -44,7 +44,7 @@ keystone.import('models');
 keystone.set('nav', {
 	//'news': ['posts', 'post-categories'],
 	'speakers': 'speakers',
-	'sponsors': 'sponsors',
+	'sponsors': ['sponsors', 'sponsor-categories'],
 	'editions': 'editions',
 	'team-members': 'team-members',
 	'users': 'users'
