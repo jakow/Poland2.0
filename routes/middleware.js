@@ -119,7 +119,7 @@ exports.getCurrentEdition = function(req, res, next) {
 
 exports.loadSponsors = function(req, res, next) {
 		let SponsorTypes = keystone.get('sponsor types');
-		q = keystone.list('Edition').model.findOne({'current':true});
+		q = keystone.list('Edition').model.findOne({'current':true}).sort('sortOrder');
 		q.exec(function(err, result) {
 			var currentEdition = result;
 			if(currentEdition) {
