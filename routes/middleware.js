@@ -157,6 +157,7 @@ exports.loadSponsors = function(req, res, next) {
 				function(category, cb){
 					keystone.list('Sponsor').model
 						.find({category: category.id, edition: edition.id})
+						.sort({sortOrder:1})
 						.exec((err,sponsors) => {
 							category.sponsors = sponsors;
 							cb(err);
