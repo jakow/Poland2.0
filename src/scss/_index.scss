@@ -25,6 +25,7 @@
 	display: block;
 	text-align: center;
 	 a {
+	 	font-weight: 700;
 		// width: 100%;
 		margin: 0 0.5rem 2rem;
 		@include breakpoint(medium) {

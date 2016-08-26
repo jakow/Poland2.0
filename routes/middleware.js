@@ -14,6 +14,7 @@
 
 var _ = require('underscore');
 var keystone = require('keystone');
+var async = require('async');
 
 /**
 	Initialises the standard view locals
@@ -109,7 +110,7 @@ exports.initErrorHandlers = function(req, res, next) {
 
 //if you need to filter by edition, use this middleware in index.js
 exports.getCurrentEdition = function(req, res, next) {
-		var q = keystone.list('Edition').model.findOne({'current':true});
+		var q = keystone.list('Edition').model.findOne({current:true});
 		q.exec(function(err, result){
 			if(result)
 				res.locals.currentEdition = result;
@@ -118,26 +119,54 @@ exports.getCurrentEdition = function(req, res, next) {
 };
 
 exports.loadSponsors = function(req, res, next) {
-		let SponsorTypes = keystone.get('sponsor types');
-		q = keystone.list('Edition').model.findOne({'current':true}).sort('sortOrder');
-		q.exec(function(err, result) {
-			var currentEdition = result;
-			if(currentEdition) {
-				var p = keystone.list('Sponsor').model.find().where('edition', currentEdition.id);
-				p.exec(function(err,result) {
-					//console.log('Sponsors: ', result);
+		async.waterfall(
+			//get edition
+			[
+			getCurrent,
+			getSponsorCategories,
+			populateSponsorCategories, 
+			],
+			function(err, categories) {
+				res.locals.sponsorCategories = categories.filter(category => (category.sponsors.length)); //remove empty categories
+				next(err);
+			});
 
-					res.locals.sponsorList = [];
-					for (var i = 0; i < SponsorTypes.length; ++i) {
-						res.locals.sponsorList.push({type: SponsorTypes[i], list: result.filter(s => s.sponsorType == SponsorTypes[i])});
-					}
 
-					next(err);
-				});
+		function getCurrent(callback) {
+			var q = keystone.list('Edition')
+				.model.findOne({current:true})
+				.exec(callback);
+		}
+
+		function getSponsorCategories(edition, callback) {
+			if(edition) {
+				var q = keystone.list('SponsorCategory')
+					.model.find({edition: edition.id})
+					.sort({sortOrder: 1})
+					.exec((err, categories) => {
+						callback(err,categories,edition)
+					});
 			}
-			else next(err);
-			
-		});
+			else {
+				callback(err, [], edition)
+			}
+		}
+
+		function populateSponsorCategories(categories, edition, callback) {
+			async.each(categories, 
+				function(category, cb){
+					keystone.list('Sponsor').model
+						.find({category: category.id, edition: edition.id})
+						.exec((err,sponsors) => {
+							category.sponsors = sponsors;
+							cb(err);
+						});
+				}, 
+				function (err) {
+					callback(err, categories);
+				})
+		}
+
 };
 
 exports.getContent = function(req,res,next) {
@@ -146,8 +175,4 @@ exports.getContent = function(req,res,next) {
 			res.locals.content = result;
 		next(err);
 	})
-}
-
-exports.loadControls = function(req,res,next) {
-	q = keystone.list('ContentControl');
 }

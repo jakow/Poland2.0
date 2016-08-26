@@ -19,6 +19,6 @@ SponsorCategory.add({
 	edition: {type: Types.Relationship, ref: "Edition", many: true}
 });
 
-SponsorCategory.relationship({  path: 'sponsor-categories', ref: 'Sponsor', refPath: "sponsorCategory"});
+SponsorCategory.relationship({  path: 'sponsor-categories', ref: 'Sponsor', refPath: "category"});
 
 SponsorCategory.register();

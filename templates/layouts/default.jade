@@ -1,6 +1,6 @@
 include ../mixins/flash-messages
 include ../mixins/analytics
-mixin menu(links) 
+mixin menu(links)
 	ul.menu(class!=attributes.class)
 		each link in links
 			li(class=( section == link.key ? 'active' : null))
@@ -25,17 +25,13 @@ html(lang="en-GB")
 
 		title= title || 'Poland 2.0'
 		include ../mixins/favicons.jade
-		link(href='responsive-nav/responsive-nav.css', rel="stylesheet")
+		link(href='/responsive-nav/responsive-nav.css', rel="stylesheet")
 
 		//- main stylesheet
 
-		link(href="styles/main.css", rel="stylesheet")
+		link(href="/styles/main.css", rel="stylesheet")
 		//- link(href="/styles/site.css", rel="stylesheet")
 
-
-		//- This file provides the default styling for the KeystoneJS Content Editor
-		//- if user && user.canAccessKeystone
-		//- 	link(href="keystone/styles/content/editor.min.css", rel="stylesheet")
 
 		//- Include template-specific stylesheets by extending the css block
 		block css
@@ -102,29 +98,36 @@ html(lang="en-GB")
 
 
 		//- FOOTER
+
 		footer.footer
-			if sponsorList && sponsorList.length
+			if sponsorCategories && sponsorCategories.length
 				.footer-section.sponsors
-					each sponsorType in sponsorList
-						if sponsorType.list.length
+					each category in sponsorCategories
 							.row.container
 								.columns
 									h5.uppercase.center 
-										if sponsorType.type == 'regular'
+										if category.name.toLowerCase() == 'regular'
 											|Partners
-										else if sponsorType.list.length > 1
-											|#{sponsorType.type.capitalize()} partners
+										else if category.sponsors.length > 1
+											|#{category.name} partners
 										else 
-											|#{sponsorType.type.capitalize()} partner
+											|#{category.name} partner
 
-									ul.sponsor-list(class=sponsorType.type)
-										each sponsor in sponsorType.list
+									ul.sponsor-list(class=category.key)
+										each sponsor in category.sponsors
 											li.sponsor
 												a(href=sponsor.url title=sponsor.name)
 													span.sr-only=sponsor.name
 													img(src=sponsor.logo.secure_url alt=sponsor.name)
-							
+					
+					each category in sponsorCategories
 
+							style.
+								@media screen and (min-width: 45em) {
+								.#{category.key}.sponsor-list .sponsor {
+									flex: 1 0 #{100/category.perColumn}%
+								}
+								}
 					.center
 						a.hollow.button.primary.center.mailto(href="mailto:contact@poland20.com?subject=Partnership enquiry") Be our partner
 			else
@@ -158,7 +161,6 @@ html(lang="en-GB")
 						ul.uppercase.unstyled
 							each footerLink in footerLinks
 								li: a(href=footerLink.href)= footerLink.label
-						
 							ul.list-inline.uppercase
 
 					.small-12.medium-6.large-4.columns
@@ -179,30 +181,14 @@ html(lang="en-GB")
 
 		
 		//- Add scripts that are globally required by your site here.
-		//- TODO: Replace with minified, or use 'usemin'
-		script(src="js/modernizr.js")
-		script(src='responsive-nav/responsive-nav.js')
-		//-	script.
-			var nav = responsiveNav('#nav-mobile', {
-				animate: true, 
-				transition: 284, 
-				label: "Menu", 
-				insert: "before", 
-				customToggle: "#nav-toggle", 
-				closeOnNavClick: false, 
-				openPos: "relative", 
-				navClass: "nav-collapse", 
-				navActiveClass: "js-nav-active", 
-				jsClass: "js",
-				init: function(){this.isOpen = false;}, // Function: Init callback
-				open: function(){this.isOpen = true;}, // Function: Open callback
-				close: function(){this.isOpen = false;} // Function: Close callback
-			});
-		script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')
-		script(src='what-input/what-input.js')
-		script(src='foundation-sites/dist/foundation.js')
+
+		script(src="/js/modernizr.js")
+		script(src='/responsive-nav/responsive-nav.min.js')
+		script(src='/https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')
+		script(src='/what-input/what-input.min.js')
+		script(src='/foundation-sites/dist/foundation.min.js')
 		//- Include template-specific javascript files by extending the js block
-		script(src='js/main.js')
+		script(src='/js/main.js')
 	
 		block js
 

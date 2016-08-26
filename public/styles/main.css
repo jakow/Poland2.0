@@ -4790,6 +4790,7 @@ input {
     #social-banner .bg-logo .follow-instagram::before {
       content: ''; }
   #social-banner a {
+    font-weight: 700;
     margin: 0 0.5rem 2rem; }
     @media screen and (min-width: 45em) {
       #social-banner a {

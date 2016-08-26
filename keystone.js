@@ -33,10 +33,6 @@ keystone.init({
 
 keystone.set('signin logo', '/images/logo.svg');
 
-keystone.set('sponsor types', [
-	'strategic',
-	'regular']);
-
 // Load your project's Models
 
 keystone.import('models');
