@@ -1,9 +1,9 @@
 
 .people-reveal {
-	background: $primary-color;
-	color: white;
+	background: white;
+	color: $dark-color;
 	border-radius: 3px;
-	border: 2px solid $primary-color;
+	border: 1px solid $dark-color;
 	 box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	 .close-button {
 	 	font-size: 1em;

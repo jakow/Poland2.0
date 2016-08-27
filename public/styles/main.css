@@ -5229,10 +5229,10 @@ input {
   font-style: italic; }
 
 .people-reveal {
-  background: #15283c;
-  color: white;
+  background: white;
+  color: #333333;
   border-radius: 3px;
-  border: 2px solid #15283c;
+  border: 1px solid #333333;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
   .people-reveal .close-button {
     font-size: 1em;

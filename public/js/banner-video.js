@@ -20,7 +20,7 @@
                     autohide: 1,
                     modestbranding: 1,
                     vq: 'hd1080'},
-          videoId: 'g54bTIP27dw',
+          videoId:  videoId || 'Suif3ofxiCc',
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
@@ -32,8 +32,8 @@
       function onPlayerReady(event) {
         event.target.playVideo();
         player.mute();
-        $video = $('#banner-video');
-        onVideoResize()
+        // $video = $('#banner-video');
+        // onVideoResize()
       }
 
       var done = false;
@@ -46,6 +46,6 @@
       //   player.stopVideo();
       // }
 
-      function onVideoResize() {
-        $if
-      }
+      // function onVideoResize() {
+      //   $if
+      // }

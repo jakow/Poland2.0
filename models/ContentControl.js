@@ -11,6 +11,14 @@ ContentControl.add(
 	{title: {type: String, noedit: true}},
 	'Content',
 	{
+		backgroundVideo: {
+			enable: {type: Boolean},
+			id: {
+				dependsOn: {'backgroundVideo.enable': true},
+				type: String, 
+				label: "Youtube video ID (11 character alphanumeric string, e.g. dQw4w9WgXcQ)"
+			}
+		},
 		homepageText: {type: Types.Html, label: 'Homepage text', wysiwyg: true},
 		aboutPoland20: {
 			bannerText: {type: Types.Html, wysiwyg: true, label: "'About Poland 2.0' section - Banner text"},
