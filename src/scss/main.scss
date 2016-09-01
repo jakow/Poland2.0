@@ -84,10 +84,18 @@ $bezier-in: cubic-bezier(0, 0, 0.23, 1);
 $bezier-out: cubic-bezier(0.4, 0, 1, 1);
 $bezier-move: cubic-bezier(0.4, 0, 0.23, 1);
 
+
+
 .container {
 	max-width: 75rem;
 	padding: 0 1.25rem;
 	margin: 0 auto;
+	&.half {
+		max-width: 37.5rem;
+		&.left {
+			margin-right: 0;
+		}
+	}
 }
 
 h1, h2, h3, h4 {
@@ -181,9 +189,9 @@ body.noscroll {
 	padding-right: 0;
 }
 .row.padded, .container.padded, section.padded {
-	margin-bottom: 1.5rem;
-	padding-top: 1.25rem;
-	padding-bottom: 1.25rem;
+	// margin-bottom: 1.5rem;
+	padding-top: 40px;
+	padding-bottom: 50px;
 	&.top {
 		padding-bottom: 0;
 	}
@@ -212,29 +220,29 @@ body.noscroll {
 	}
 }
 
-#p20-intro {
-	//margin: 1rem 0;
-	position:relative;
-	@include breakpoint(large) {
-		font-size: 1.2rem;
-	}
-	.columns, .row, .content {
-		//padding: 1rem;
-		background: rgba(255,255,255, 0.9);
-		}
-	.content {
-		z-index: 1;
+// #p20-intro {
+// 	//margin: 1rem 0;
+// 	position:relative;
+// 	@include breakpoint(large) {
+// 		font-size: 1.2rem;
+// 	}
+// 	.columns, .row, .content {
+// 		//padding: 1rem;
+// 		background: rgba(255,255,255, 0.9);
+// 		}
+// 	.content {
+// 		z-index: 1;
 
-		padding: 4em 1em 2em;
-		border-radius: 0 0 3px 3px;
-		min-height: 400px;
-		@include breakpoint(medium) {
-			margin-left: 30%;
-			padding: 5em 2em;
-			height: initial;
-		}
-	}
-}
+// 		padding: 4em 1em 2em;
+// 		border-radius: 0 0 3px 3px;
+// 		min-height: 400px;
+// 		@include breakpoint(medium) {
+// 			margin-left: 30%;
+// 			padding: 5em 2em;
+// 			height: initial;
+// 		}
+// 	}
+// }
 
 
 .large-quote {
@@ -298,6 +306,12 @@ h1.smaller {
 	font-size: 2em;
 	@include breakpoint(medium) {
 		font-size: 2.5em;
+	}
+}
+
+h2.smaller {
+	@include breakpoint(medium) {
+		font-size: 1.75em;
 	}
 }
 .button.rounded {
@@ -410,10 +424,20 @@ $ln-color: #0077B5;
 	}
 }
 
-.dark-background {
+.dark-bg {
 	color: white;
 	background: $primary-color;
 }
+
+.gray-bg {
+	color: $dark-color;
+	background: $light-gray;
+}
+
+.button {
+	transition: background 0.11s $bezier-move;
+}
+
 
 
 

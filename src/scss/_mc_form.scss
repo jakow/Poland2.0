@@ -35,7 +35,7 @@ $input-shadow-inner: 0px 3px 1px 0px rgba(0, 0, 0, 0.1) inset;
 }
 .newsletter-signup {
 	// border: 2px solid $secondary-color;
-	margin: 2rem 0;
+	margin: 1rem 0;
 	display: block;
 	background: $light-gray;
 	// background:white;
@@ -94,9 +94,9 @@ $input-shadow-inner: 0px 3px 1px 0px rgba(0, 0, 0, 0.1) inset;
 	// add some features for when processing
 	margin: 0;
 	width: 200px;
-	height: 46px;
+	height: 52px;
 	position: relative;
-	transition: background 0.3s cubic-bezier(0.55,0,0.1,1);
+	transition: background 0.1s cubic-bezier(0.55,0,0.1,1);
 	// &.unshow {
 	// 	transform: scale(0);
 	// 	opacity: 0;
@@ -105,6 +105,7 @@ $input-shadow-inner: 0px 3px 1px 0px rgba(0, 0, 0, 0.1) inset;
 		cursor: default;
 		background: $success-color !important;
 		opacity: 1;
+		transition: background 0.5s cubic-bezier(0.55,0,0.1,1);
 		&:hover, &:focus, &:active {
 			background: $success-color !important;
 		}
@@ -112,6 +113,7 @@ $input-shadow-inner: 0px 3px 1px 0px rgba(0, 0, 0, 0.1) inset;
 	&.error {
 		cursor: default;
 		background: $alert-color !important;
+		transition: background 0.5s cubic-bezier(0.55,0,0.1,1);
 		opacity: 1;
 		&:hover, &:focus, &:active {
 			background: $alert-color !important;

@@ -34,3 +34,23 @@
 		}
 		}
 	}	
+
+.align-self-middle {
+	align-self: center;
+}
+.row.ev-info {
+	max-width: 28rem;
+	margin: 0 auto;
+	img {
+		display: inline-block;
+		margin: 1rem 0.5rem;
+		max-width: 48px;
+
+	@include breakpoint(medium) {
+		max-width: 80px;
+		
+		
+	}
+	}
+
+}

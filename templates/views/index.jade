@@ -4,6 +4,13 @@ include ../mixins/social
 include ../mixins/banner
 include ../mixins/people
 
+
+mixin formatAddress(name, address)
+	div= name
+	div= address.street1
+	div= address.street2
+	div= address.suburb+' '+address.postcode
+
 block head
 	+opengraph(title, 'http://poland20.com/', null , "Poland 2.0 Summit is an annual event held in Autumn at Imperial College London. Its main purpose is to discuss how innovation and new technologies impact and add value to start-ups, entrepreneurship, public policy and many other areas of public life in Poland.")
 	meta(name="description" content="An annual event focusing on how innovation and new technologies impact and add value to start-ups, entrepreneurship, public policy and life in Poland.")
@@ -14,7 +21,7 @@ block head
 block content
 	//- previous img: https://res.cloudinary.com/dg1royeho/image/upload/c_scale,q_auto,w_1600,fl_progressive/v1462402246/imperial_nostock_lhp5ll.jpg
 	+banner("home-banner", "https://res.cloudinary.com/dg1royeho/image/upload/c_scale,q_auto,w_1600,fl_progressive/v1462402246/imperial_nostock_lhp5ll.jpg", true, true, "center", content.backgroundVideo.enable ? "with-video" : "")
-			.banner-content.animate-content.lighter.uppercase
+			.banner-content.lighter.uppercase
 				img(src='https://res.cloudinary.com/dg1royeho/image/upload/v1465242752/logo_to4xlx.svg').logo-large.animate
 				h1.animate.smaller Poland 2.0
 					div.lighter Summit
@@ -39,16 +46,36 @@ block content
 		
 	
 		
-	.container
-		section.row.align-middle#p20-intro.divider-bottom
-			img(src="https://res.cloudinary.com/dg1royeho/image/upload/v1465242860/poland_phyjj2.svg")#poland
-			.content
-				!= content.homepageText 
+		.padded.container
+					!= content.homepageText 
+
+		section.gray-bg
+			.row(style="max-width: 100%")
+				.medium-6.small-12
+					.container.left.half.padded
+						h3.underlined.uppercase.center When
+						.row.ev-info
+							.columns.shrink
+								img(alt="Time" src="http://res.cloudinary.com/dg1royeho/image/upload/v1472719194/time_yuo9es.svg")
+							.columns.align-self-middle
+								div(style="font-size: 1.2rem")= currentEdition.date.dateString
+						h3.underlined.uppercase.center Where
+						.row.ev-info.align-middle
+							.columns.shrink
+								img(alt="Place" src="http://res.cloudinary.com/dg1royeho/image/upload/v1472716642/map-marker_q0clo7.svg")
+							.columns.align-self-middle
+									+formatAddress(currentEdition.venue.name, currentEdition.venue.location)
+
+
+				.medium-6.small-12
+					iframe(width="100%" height="436px" frameborder="0" style="border:0; margin: 0 0 -6px 0"
+  						src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD7BTpNAwhuLMiamNGEQgfiXP7SiCKIKkw&q="+currentEdition.venue.location.street1+','+currentEdition.venue.location.postcode allowfullscreen)
+
 	
 
 	//- MC signup form
 	if content.ticketRegistrationSignup	
-		section.dark-background.padded
+		section.dark-bg.padded
 			.container
 				h2.center.uppercase.underlined(style="color: white;") Reserve your tickets now!
 				.row
@@ -66,7 +93,7 @@ block content
 	
 	.container
 		if speakers.keynote.length || speakers.regular.length
-			section.divider-bottom
+			section.divider-bottom.padded
 
 				
 				if speakers.keynote.length
