@@ -35,6 +35,14 @@ block content
 					//- a.white.hollow.responsive.button.uppercase(href='/tickets') Tickets
 					//- a.white.hollow.responsive.button.uppercase(href='/showcase-your-idea') Showcase your idea at Poland 2.0
 					a.white.hollow.responsive.button.uppercase.watch-video Watch the promo video
+
+			if content.ticketsLive
+				.div
+					p.lead.uppercase.lighter Early bird ticket sales are open!
+					//- .spaced.buttons
+					a.white.responsive.button.uppercase.lighter(href=content.ticketsUrl) Get the tickets
+
+
 			if content.backgroundVideo.enable
 				.flex-video(style="height: 133%; top: 50%; transform: translateY(-50%);")
 					#banner-video

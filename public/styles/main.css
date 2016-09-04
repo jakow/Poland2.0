@@ -4291,7 +4291,7 @@ html.is-reveal-open body {
   width: 100%;
   left: 0;
   letter-spacing: 1px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
   .header .social {
     position: absolute;
     top: 50%;
@@ -4509,6 +4509,12 @@ footer, header {
     .footer .sponsor-list.regular .sponsor {
       flex: 0 1 33%; } }
 
+.button.white {
+  background-color: #fefefe;
+  color: #223049; }
+  .button.white:hover {
+    background-color: white; }
+
 .button.hollow {
   transition: border-color 0.11s ease-out, color 0.11s ease-out, background-color 0.11s ease-out; }
   .button.hollow.secondary, .button.hollow.primary {
@@ -4552,10 +4558,18 @@ footer, header {
   margin: 0; }
 
 .responsive.button {
-  font-size: 1rem; }
+  font-size: 1.25rem; }
   @media screen and (min-width: 45em) {
     .responsive.button {
       font-size: 1.5rem; } }
+
+.button.grow {
+  transition: transform 0.05s cubic-bezier(0.4, 0, 0.23, 1);
+  transform: scale(0.98); }
+  .button.grow:hover {
+    transform: scale(1); }
+  .button.grow:active {
+    transform: scale(0.98); }
 
 input {
   font-size: inherit !important; }
@@ -4626,16 +4640,13 @@ input {
   .banner .banner-content {
     z-index: 2; }
   .banner.full-height .container {
-    height: calc(100vh - 5rem);
-    min-height: 20rem; }
+    min-height: calc(100vh - 5rem); }
     @media screen and (min-width: 45em) {
       .banner.full-height .container {
-        height: calc(100vh - 6rem);
-        min-height: 30rem; } }
+        min-height: calc(100vh - 6rem); } }
     @media screen and (min-width: 64em) {
       .banner.full-height .container {
-        height: calc(100vh - 8rem);
-        min-height: 30rem; } }
+        min-height: calc(100vh - 8rem); } }
   .banner h1 {
     font-weight: 700; }
   .banner h1, .banner h2 {
@@ -4713,7 +4724,7 @@ input {
     transform: translateY(0); } }
 
 #home-banner .time-place {
-  margin: 0.5rem 0;
+  margin: 0.5rem 0 1rem;
   letter-spacing: 1px;
   font-size: 1rem;
   display: inline-flex; }
@@ -4739,9 +4750,6 @@ input {
     #home-banner .time-place div:nth-child(2) {
       margin-left: 0px;
       border-top: 1px white solid; } }
-
-#home-banner .button {
-  margin-top: 1rem; }
 
 #home-banner .logo-large {
   height: 120px;

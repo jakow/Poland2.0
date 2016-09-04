@@ -30,8 +30,11 @@ ContentControl.add(
 	'Speaker Registration',
 	{speakerRegistrationActive: Boolean},
 	'Tickets',
-	{ticketsActive: Boolean},
-	{ticketRegistrationSignup: {type: Boolean, label: 'Ticket newsletter signup active'}},
+	{
+	ticketsLive: Boolean,
+	ticketsUrl: Types.Url,
+	ticketRegistrationSignup: {type: Boolean, label: 'Ticket newsletter signup active'}
+	},
 	'Agenda',
 	{
 		agendaActive: Boolean,

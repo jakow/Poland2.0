@@ -47,6 +47,8 @@ html(lang="en-GB")
 		header.header
 			nav#nav-mobile.container.hide-for-large.nav-collapse(style="display: none;")
 				ul.lighter
+					if content.ticketsLive
+						li: a(href=content.ticketsUrl) Tickets
 					each link in navLinks
 						li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
 					.social-mobile
@@ -58,9 +60,12 @@ html(lang="en-GB")
 				a#nav-toggle.hide-for-large: i.hamburger
 				nav#nav-desktop.show-for-large
 						ul.menu.lighter
+							if content.ticketsLive
+								li: a(href=content.ticketsUrl) Tickets
 							each link in navLinks
 								li(class=( section == link.key ? 'active' : null))
 									a(href=link.href)= link.label
+
 			
 
 				.social

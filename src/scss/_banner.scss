@@ -16,15 +16,15 @@
 	
 &.full-height {
 	.container { 
-		height: calc(100vh - 5rem);
-		min-height: 20rem;
+		min-height: calc(100vh - 5rem);
+		// min-height: 20rem;
 		@include breakpoint (medium) {
-			height: calc(100vh - 6rem);
-			min-height: 30rem;
+			min-height: calc(100vh - 6rem);
+			// min-height: 30rem;
 		}	
 		@include breakpoint (xlarge) {
-			height: calc(100vh - 8rem);
-			min-height: 30rem;
+			min-height: calc(100vh - 8rem);
+			// min-height: 30rem;
 		}
 	}
 }
@@ -152,7 +152,7 @@
 
 #home-banner {
 	.time-place {
-		margin: 0.5rem 0;
+		margin: 0.5rem 0 1rem;
 		letter-spacing: 1px;
 
 		font-size: 1rem;
@@ -189,9 +189,6 @@
 			}
 		}
 	}
-	}
-	.button {
-		margin-top: 1rem;
 	}
 	.logo-large {
 		//transform: scale(0);

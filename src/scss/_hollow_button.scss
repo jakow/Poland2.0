@@ -1,3 +1,13 @@
+.button {
+	&.white {
+		background-color: $white;
+		color: $primary-color;
+		&:hover {
+			background-color: white;
+		}
+	}
+}
+
 .button.hollow {
 	&.secondary, &.primary {
 		border-width: 2px;
@@ -63,8 +73,20 @@
 
 //large when on medium screen, normal when on small screens
 .responsive.button {
-	font-size: 1rem;
+	font-size: 1.25rem;
 	@include breakpoint(medium) {
 			font-size: 1.5rem;
 	}
 }
+
+.button.grow {
+	transition: transform 0.05s cubic-bezier(0.4, 0, 0.23, 1);
+	transform: scale(0.98);
+	&:hover {
+		transform: scale(1);
+	}
+	&:active {
+		transform: scale(0.98);
+	}
+}
+
