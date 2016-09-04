@@ -4572,9 +4572,10 @@ footer, header {
     transform: scale(0.98); }
 
 .button.press-down {
-  transition: transform 0.1s cubic-bezier(0.4, 0, 0.23, 1); }
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.05s cubic-bezier(0.4, 0, 0.23, 1); }
   .button.press-down:active {
-    transform: translateY(2px); }
+    transform: scale(0.99); }
 
 input {
   font-size: inherit !important; }
