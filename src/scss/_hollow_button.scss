@@ -94,7 +94,7 @@
 	transform: translate3d(0,0,0);
 	transition: transform 0.05s cubic-bezier(0.4, 0, 0.23, 1);
 	&:active {
-		transform: scale(0.99);
+		transform: scale(0.98);
 	}
 }
 
