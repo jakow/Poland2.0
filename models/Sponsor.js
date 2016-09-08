@@ -11,6 +11,7 @@ var Sponsor = new keystone.List('Sponsor', {
 	sortContext: 'Edition:sponsors'
 });
 
+
 Sponsor.add({
 	name: {type: String, required: true},
 	singular: {type: String},
