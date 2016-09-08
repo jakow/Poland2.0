@@ -110,7 +110,11 @@ html(lang="en-GB")
 					each category in sponsorCategories
 							.row.container
 								.columns
-									h5.uppercase.center= category.name
+									h5.uppercase.center 
+										if category.sponsors.length > 1
+											|#{category.singular}
+										else 
+											|#{category.name}
 
 									ul.sponsor-list(class=category.key)
 										each sponsor in category.sponsors
