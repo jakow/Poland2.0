@@ -14,7 +14,7 @@ var Sponsor = new keystone.List('Sponsor', {
 
 Sponsor.add({
 	name: {type: String, required: true},
-	singular: {type: String, required: true},
+	singular: {type: String},
 	logo: {type: Types.CloudinaryImage, autoCleanup: true},
 	description: {type: Types.Html, wysiwyg: true},
 	url: {type: Types.Url},
