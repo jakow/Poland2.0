@@ -4922,6 +4922,7 @@ input {
     text-align: center;
     display: inline-flex;
     flex-direction: column;
+    align-items: center;
     flex: 0 1 100%; }
     @media screen and (min-width: 45em) {
       .people-grid li {

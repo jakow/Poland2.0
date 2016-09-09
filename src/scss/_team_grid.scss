@@ -13,6 +13,7 @@
 		text-align: center;
 		display: inline-flex;
 		flex-direction: column;
+		align-items: center;
 		flex: 0 1 100%; // show one per line on mobile
 		@include breakpoint(medium) {
 			//must be done by parent, but for now set to 4 per line
