@@ -14,9 +14,10 @@ mixin speaker(speaker)
 				if speaker.photo.url
 					.image
 						img(src=speaker.photo.url)
-				.header.uppercase= speaker.name
-				.position= speaker.position
-				.presentation= speaker.presentation
+				.content
+					.header.uppercase= speaker.name
+					.position= speaker.position
+					.presentation= speaker.presentation
 
 
 mixin keynoteSpeaker(speaker)
