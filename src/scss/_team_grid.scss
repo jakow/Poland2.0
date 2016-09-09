@@ -1,239 +1,158 @@
-
-$slideY: 30px;
-.people {
-	position: relative;
-}
 .people-grid {
-	margin: 0;
-	padding: 2rem 0;
-	display: flex;
-	flex-wrap: wrap;
-	justify-cpontent: center;
-	flex-direction: row;
-	@include breakpoint(medium) {
-		justify-content: flex-start;
-	}
-}
-
-$hover-time: 125ms;
-
-@mixin people-cell($colsize-lg, $colsize-md, $gutter) {
-		list-style: none;
-		text-align: center;
-		transition: background $hover-time ease-in-out;
-		@include flex-grid-column(12, $gutter);
-		@include breakpoint(medium) {
-			@include flex-grid-column($colsize-md, $gutter);
-		}		
-		@include breakpoint(large) {
-			@include flex-grid-column($colsize-lg, $gutter);
-		}
-		//  &:hover {
-		// 	background: $light-gray;
-		// 	//box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-		// }
-
-		> a {
-		// padding: 0em 0em 0.5em;
-		color: inherit;
-		display: inline-block;
-		border-radius: 2px;
-		transition: background $hover-time;
-		// &:focus {
-		// 	background: #f1f1f1;
-		// }
-	}
-
-		.main-info {
-			//padding: 1em;
-		}
-		.photo {
-			img {
-			border-radius: 50%; //circles!!
-			transition: all $hover-time ease-in-out;
-			
-		}
-		}
-		.photo {
-		transition: all $hover-time ease-in-out;
-		margin-bottom: 0.5em;
-		position: relative;
-		display: inline-block;
-		padding: 6px;
-		border-radius: 50%; //circles!!
-		box-shadow: 0px 0px 0px 2px $secondary-color inset;
-		//width: 12rem;
-		//height: 12rem;
-		transform-origin: top left;
-		
-		}
-		 a:hover {
-			.photo {
-				box-shadow: 0px 0px 0px 6px $secondary-color inset;
-			}
-		}
-
-
-
-		.name {
-			font-weight: normal;
-		}
-		.occupation, .position {
-			font-size: 0.9em;
-		}
-		.occupation {
-			font-size: 0.8em;
-			text-transform: initial;
-		}
-		.lighter-text{ 
-			font-weight: 300;
-		}
-		
-		.name, .occupation, .position, .presentation {
-			margin-bottom: 0.3em;
-		}
-		text-align: center;
-		
-		
-		.details-container {
-			
-		}
-}
-
-.team-member {
-	margin-bottom: 2rem;
-	 > * {
-		max-width: 14.75rem;
-	}
-	.member-wrapper {
-		display: inline-block;
-		position: relative;
-		transition: all $hover-time ease-in-out;
-		border-radius:2px;
-		// border: 1px solid $medium-gray;
-		height: 100%;
-		padding-bottom: 2.5rem;
-		// background: $light-gray;
-		
-		&:hover {
-			background: $light-gray;
-
-		}
-		> a {
-			display: inline-block;
-		}
-	}
-
-	.main-info {
-		display: inline-block;
-		// padding: 1em;
-		 padding: 1rem 1rem 0.5rem;
-		// margin-bottom: 0.5rem;
-		// padding: 1rem;
-		> a {
-			
-			display: inline-block;
-			margin-bottom: 0.5em;
-		}
-	}
-	a {
-		color: inherit;
-	}
-	.main-info {
-		text-transform: uppercase;
-	}
-	@include people-cell(3, 4, 2rem);
-	//font-size: 0.8rem;
-	.photo img {
-			max-width: 12rem;
-	}
-	font-size: 0.9em;
-	.contact-info {
-		position: absolute;
-		bottom: 0;
-		left:50%;
-		transform: translateX(-50%);
-		a {
-			&::before {
-				width: 1em;
-				height: 1em;
-			}
-			display: inline-block;
-			// margin: 0 0.4em;
-			margin: 0;
-			// width: 2.5em;
-			// height: 2.5em;
-			padding: 0.75em;
-
-			border-radius: 0;
-		}
-	}
-
-}
-
-.past-team-member {
-	text-transform: uppercase;
-	@include people-cell(2, 3, 1rem);
-	font-size: 0.8em;
-	.photo img {
-		max-height: 9rem;
-	}
-	> * {
-		max-width: 11.75rem;
-	}
+	// reset default list styles
+	list-style: none;
+	margin: 0 0 1rem;
 	
-}
-.speaker, .keynote-speaker {
-	> a {
-		padding: 1rem;
-		&:active, &:hover {
-			background: $light-gray;
-		}
-	}
-}
-.past-speaker {
-	text-transform: uppercase;
-	@include people-cell(3, 4, 2rem);
-	font-size: 0.9em;
-	.photo img {
-		max-height: 12rem;
-	}
-}
-
-.speaker {
-	@include people-cell(3, 4, 2rem);
-	font-size: 0.9em;
-	.photo img {
-		max-width: 12rem;
-	}
-	> * {
-		max-width: 14.75rem;
-	}
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
 
 
-}
-.keynote-speaker {
-	margin-bottom: 1.25rem;
-		@include people-cell(4, 6, 2rem);
-		> * {
-			max-width: 15.75rem;
-		}
-		.photo img {
-			max-width: 13rem;
-		}
+	li {
+		text-align: center;
+		display: inline-flex;
+		flex-direction: column;
+		flex: 0 1 100%; // show one per line on mobile
 		@include breakpoint(medium) {
-			.photo img {
-					max-width: 15rem;
-			}
-		> * {
-			max-width: 17.75rem;
+			//must be done by parent, but for now set to 4 per line
+			flex: 0 1 25%;
 		}
+		& > * {
+			flex: 1 0 auto;
 		}
+
+	// flex styling for both a flex card and a flex card link
+
+		.occupation {
+			font-size: 0.85em;
+		}
+
+
+		// margin: 0 0.5em 1em;
 		
-}
-.keynote-speaker, .speaker {
-	.presentation {
-		font-style: italic;
-	}
+
+
 }
 
+	.rounded-photo {
+		will-change: box-shadow;
+		display: inline-block;
+		border-radius: 50%;
+		margin-bottom: 0.75em;
+		transition: all 125ms $bezier-move;
+		padding: 8px;
+		box-shadow: 0px 0px 0px 3px $secondary-color inset;
+		 img {
+		 	max-height: 240px;
+			border-radius: 50%;
+
+		}
+	}
+
+
+.contact-info {
+	.button {
+		margin:0;
+	}
+}
+}
+
+	.card {
+
+		margin: 1em 0;
+		@include breakpoint(medium) {
+		margin: .875em .75em;
+		}
+		max-width: 290px;
+		// max-width: 100%;
+		position: relative;
+		background: white;
+		display: inline-flex;
+		padding: 0;
+		flex-direction: column;
+		// height: 100%; // aligns bottom with taller elements in row
+		// border: 1px solid #e4e4e4;
+		// box-shadow: 0 1px 3px 0 #D4D4D5,0 0 0 1px #D4D4D5;
+		box-shadow: 0 1px 1px 0 #D4D4D5,0 0 0 1px #D4D4D5;
+		// box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+		border-radius:.28571429rem;
+
+
+		img {
+			border-radius: .28571429rem .28571429rem 0 0;
+		}
+
+		.content {
+			border-top: 1px solid rgba(34,36,38,.1);
+			padding: 1em;
+			margin: 0;
+			// height: 100%;
+			flex: 1 0 auto;
+
+		}
+		.content:first-child {
+			border-top: none;
+		}
+
+		.extra-content {
+			border-top: 1px solid rgba(0,0,0,.05);
+			// position: static;
+			padding: 0.75em 1em;
+		}
+
+
+		.content {
+			font-size: 0.9em;
+			.header {
+				text-transform: uppercase;
+				font-weight: 700;
+				font-size: 1.2em;
+				line-height: 1.2em;
+			}
+
+		}
+
+		.extra-content {
+			line-height: 1em;
+			font-size: 1.4em;
+			@include breakpoint(medium) {
+				font-size: 1em;
+			}
+			.button {
+				margin-bottom: 0;
+			}
+		}
+
+		.extra-content {
+			text-align: right;
+			a:not(:last-child) {
+				margin-right: 0.5em;
+			}
+
+			a {
+				transition: color 0.18s $bezier-move;
+				color: $medium-gray;
+				&:hover {
+					color: $dark-gray;
+				}
+
+			}
+		}
+
+	}
+
+	// additional stuff to affix extra-content to bottom
+	.card > a {
+		display: flex;
+		flex-direction: column;
+		flex: 1 0 auto;
+	}
+
+	a.card, .card > a {
+		transition: color 0.18s $bezier-move;
+			color: $dark-color;
+			&:hover {
+				color: $dark-gray;
+			}
+	}

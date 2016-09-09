@@ -56,6 +56,7 @@ $foundation-palette: (
   warning: #ffae00,
   alert: #ec5840,
 );
+$dark-color: #262626;
 $light-gray: #f2f2f2;
 $medium-gray: #cacaca;
 $dark-gray: #8a8a8a;
@@ -234,7 +235,8 @@ $breadcrumbs-item-slash: true;
 // 11. Button
 // ----------
 
-$button-padding: 0.6em 1em;
+// $button-padding: 0.6em 1em;
+$button-padding: 0.78em 1.5em;
 $button-margin: 0 0 $global-margin 0;
 $button-fill: solid;
 $button-background: $primary-color;
@@ -329,7 +331,7 @@ $fieldset-margin: rem-calc(18 0);
 $fieldset-margin-bottom: rem-calc(18);
 $legend-padding: rem-calc(0 3);
 $form-spacing: rem-calc(16);
-$helptext-color: $black;
+$helptext-color: $dark-color;
 $helptext-font-size: rem-calc(13);
 $helptext-font-style: italic;
 $input-prefix-color: $black;

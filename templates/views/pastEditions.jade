@@ -49,14 +49,14 @@ block content
 					h4.uppercase.center Speakers
 					ul.people-grid
 						each speaker in edition.speakers
-							+pastSpeaker(speaker)
+							+speaker(speaker)
 
 			if edition.teamMembers.length
 				.container.padded
 					h4.uppercase.center The team
 					ul.people-grid
 						each teamMember in edition.teamMembers
-							+pastTeamMember(teamMember)
+							+teamMember(teamMember)
 
 	
 

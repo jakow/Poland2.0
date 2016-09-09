@@ -2,8 +2,13 @@
 .people-reveal {
 	background: white;
 	color: $dark-color;
-	border-radius: 3px;
-	border: 1px solid $dark-color;
+	
+	// border: 1px solid $dark-color;
+	@include breakpoint(medium) {
+		border-radius: 3px;
+		// border: 3px solid $dark-color;
+	}
+	border: 0;
 	 box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	 .close-button {
 	 	font-size: 1em;
@@ -82,18 +87,18 @@
 //out: cubic-bezier(0.4, 0, 1, 1)
 
 $duration-desktop-in: 0.2s;
-$duration-desktop-out: 0.2s;
-$duration-mobile: 0.4s;
+$duration-desktop-out: 0.1s;
+$duration-mobile: 0s;
 $bezier-in: cubic-bezier(0, 0, 0.23, 1);
 $bezier-out: cubic-bezier(0.4, 0, 1, 1);
 $bezier-move: cubic-bezier(0.4, 0, 0.23, 1);
 
 .slide-fade-in.mui-enter {
 	transition: transform $duration-mobile $bezier-in;
-	transform: translateY(100vh);
+	// transform: translateY(100vh);
 	@include breakpoint(medium) {
 		opacity: 0;
-		transform: translateY(15%);
+		transform: translateY(20px);
 		transition: opacity $duration-desktop-in $bezier-in, transform $duration-desktop-in $bezier-in;
 	}
 }
@@ -109,7 +114,7 @@ $bezier-move: cubic-bezier(0.4, 0, 0.23, 1);
 	transform: translateY(0);
 	@include breakpoint(medium) {
 	  opacity: 1;
-	  transform: translateY(0);
+	  // transform: translateY(20px);
 	  transition: opacity $duration-desktop-out $bezier-out, transform $duration-desktop-out $bezier-out;
   }
 }
@@ -117,31 +122,10 @@ $bezier-move: cubic-bezier(0.4, 0, 0.23, 1);
 
 .slide-fade-out.mui-leave.mui-leave-active {
 
-  	transform: translateY(100vh);
+  	// transform: translateY(100vh);
 	@include breakpoint(medium) {
 	  	opacity: 0;
-	  	transform: translateY(15%);
+	  	transform: translateY(0);
 	}
 }
 
-
-// @keyframes slide-bottom {
-// 	0% {
-// 		transform: translateY(100%)
-// 	}
-// 	100% {
-// 		transform: initial;
-// 	}
-// }
-
-// @keyframes slide-fade-bottom {
-// 	0% {
-// 		transform: translateY(20%);
-// 		opacity: 0;
-// 	}
-// 	100% {
-// 		transform: initial;
-// 		opacity: 1;
-// 	}
-
-// }

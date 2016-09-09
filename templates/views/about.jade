@@ -8,7 +8,7 @@ block head
 
 mixin teamMember(name, position, occupation, image, description)
 	li.people-cell(data-description=description)
-		.photo
+		.rounded-photo
 			img(src=image)
 		.name= name
 		.position= position
@@ -33,19 +33,21 @@ block content
 			ul.people-grid
 				each member in data.team
 					li.team-member
-							.member-wrapper
+							.card
 								a(data-open="modal"+member.slug)
-									.main-info
-										.photo
-											img(src=member.photo.small)
-										.name= member.name
+
+									
+									.image
+										img(src=member.photo.small)
+									.content
+										.header= member.name
 										.position= member.position
 										.occupation= member.occupation
-								.contact-info
+								.extra-content
 										if member.linkedin
-											a(href=member.linkedin).linkedin.button: span.sr-only LinkedIn
+											a(href=member.linkedin).linkedin.card-link: span.sr-only LinkedIn
 										if member.email
-										a(href="mailto:"+member.email).button.mailto.primary: span.sr-only Email
+										a(href="mailto:"+member.email).mailto.primary.card-link: span.sr-only Email
 						//- .preview-container
 						//- 	.preview
 						//- 		button(type="button").close-button
@@ -66,7 +68,7 @@ block content
 							//- .row
 							//- .columns.small-12.shrink.center
 							.photo-container
-								.photo-large: img(src=member.photo.large)
+								.photo-large.rounded-photo: img(src=member.photo.large)
 							//- .columns
 
 							.info

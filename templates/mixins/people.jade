@@ -1,48 +1,56 @@
-
-mixin pastSpeaker(speaker)
-	li.past-speaker
-		if speaker.photo.url
-			.photo
-				img(src=speaker.photo.url)
-		.name.uppercase= speaker.name
-		.position.uppercase.lighter= speaker.position
-		.presentation.lighter= speaker.presentation
-
 mixin speaker(speaker)
 	li.speaker
-		a(data-open="modal"+speaker.slug)
-			if speaker.photo.url
-				.photo
+		if speaker.description
+			a(data-open="modal"+speaker.slug).card
+				if speaker.photo.url
+				.image
 					img(src=speaker.photo.url)
-			.name.uppercase= speaker.name
-			.position= speaker.position
-			.presentation= speaker.presentation
+			.content 
+				.header.uppercase= speaker.name
+				.position= speaker.position
+				.presentation= speaker.presentation
+		else
+			span.card
+				if speaker.photo.url
+					.image
+						img(src=speaker.photo.url)
+				.header.uppercase= speaker.name
+				.position= speaker.position
+				.presentation= speaker.presentation
+
 
 mixin keynoteSpeaker(speaker)
-	li.keynote-speaker
-		a(data-open="modal"+speaker.slug)
-			if speaker.photo.url
-				.photo
-					img(src=speaker.photo.url)
-			.name.uppercase= speaker.name
-			.position= speaker.position
-			.presentation= speaker.presentation
+	li.keynote-speaker.speaker
+		if speaker.description
+			a(data-open="modal"+speaker.slug).card
+				if speaker.photo.url
+					.image
+						img(src=speaker.photo.url)
+				.content
+					.header.uppercase= speaker.name
+					.position= speaker.position
+					.presentation= speaker.presentation
+		else	
+			.card
+				if speaker.photo.url
+					.image
+						img(src=speaker.photo.url)
+				.content
+					.header.uppercase= speaker.name
+					.position= speaker.position
+					.presentation= speaker.presentation
 
-mixin pastTeamMember(teamMember)
-	li.past-team-member
-		if teamMember.photo
-			.photo
-				img(src=teamMember.photo.url)
-		.name= teamMember.name
-		.position= teamMember.position
-		.occupation= teamMember.occupation
+
 		//- .description= teamMember.description
 
 mixin teamMember(teamMember)
-	li.teamMember
-		if teamMember.photo
-			.photo
-				img(src=teamMember.photo.url)
-		.name= teamMember.name
-		.position= teamMember.position
-		.occupation= teamMember.occupation
+	li.team-member
+		.card
+			if teamMember.photo
+				.image
+					img(src=teamMember.photo.url)
+
+			.content
+				.header= teamMember.name
+				.position= teamMember.position
+				.occupation= teamMember.occupation
