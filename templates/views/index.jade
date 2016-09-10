@@ -105,48 +105,48 @@ block content
 
 	
 	
-		if speakers.keynote.length || speakers.regular.length
-			section.divider-bottom.padded(id="speakers" data-magellan-target="speakers")
-				.container
-				
-					if speakers.keynote.length
-						h2.center.uppercase.underlined.lighter Keynote speakers
-						ul.people-grid.flex-center
-							each speaker in speakers.keynote
-								+keynoteSpeaker(speaker)
-						each speaker in speakers.keynote					
-							.large.reveal.people-reveal(id="modal"+speaker.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
-								//- .row
-								//- .columns.small-12.shrink.center
-								.photo-container
-									.photo-large: img(src=speaker.photo.secure_url)
-								//- .columns
-								.info
-									h3.uppercase= speaker.name
-									p.lead.lighter= speaker.position
-									p.lighter= speaker.presentationTopic
-									.description: != speaker.description
-								button.button.hollow.close-button.medium.secondary(data-close aria-label="Close modal" type="button")
-									span.close-icon(aria-hidden="true")
-					if speakers.regular.length
-						h2.center.uppercase.underlined.lighter Speakers
-						ul.people-grid
-							each speaker in speakers.regular
-								+speaker(speaker)
-						each speaker in speakers.regular					
-							.large.reveal.people-reveal(id="modal"+speaker.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
-								//- .row
-								//- .columns.small-12.shrink.center
-								.photo-container
-									.photo-large: img(src=speaker.photo.secure_url)
-								//- .columns
-								.info
-									h3.uppercase= speaker.name
-									p.lead.lighter= speaker.position
-									p.lighter= speaker.presentationTopic
-									.description: != speaker.description
-								button.button.hollow.close-button.medium.secondary(data-close aria-label="Close modal" type="button")
-									span.close-icon(aria-hidden="true")
+	if speakers.keynote.length || speakers.regular.length
+		section.divider-bottom.padded(id="speakers" data-magellan-target="speakers")
+			.container
+			
+				if speakers.keynote.length
+					h2.center.uppercase.underlined.lighter Keynote speakers
+					ul.people-grid.flex-center
+						each speaker in speakers.keynote
+							+keynoteSpeaker(speaker)
+					each speaker in speakers.keynote					
+						.large.reveal.people-reveal(id="modal"+speaker.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
+							//- .row
+							//- .columns.small-12.shrink.center
+							.photo-container
+								.photo-large: img(src=speaker.photo.secure_url)
+							//- .columns
+							.info
+								h3.uppercase= speaker.name
+								p.lead.lighter= speaker.position
+								p.lighter= speaker.presentationTopic
+								.description: != speaker.description
+							button.button.hollow.close-button.medium.secondary(data-close aria-label="Close modal" type="button")
+								span.close-icon(aria-hidden="true")
+				if speakers.regular.length
+					h2.center.uppercase.underlined.lighter Speakers
+					ul.people-grid
+						each speaker in speakers.regular
+							+speaker(speaker)
+					each speaker in speakers.regular					
+						.large.reveal.people-reveal(id="modal"+speaker.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
+							//- .row
+							//- .columns.small-12.shrink.center
+							.photo-container
+								.photo-large: img(src=speaker.photo.secure_url)
+							//- .columns
+							.info
+								h3.uppercase= speaker.name
+								p.lead.lighter= speaker.position
+								p.lighter= speaker.presentationTopic
+								.description: != speaker.description
+							button.button.hollow.close-button.medium.secondary(data-close aria-label="Close modal" type="button")
+								span.close-icon(aria-hidden="true")
 
 
 
