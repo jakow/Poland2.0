@@ -7,8 +7,10 @@ mixin speaker(speaker)
 					img(src=speaker.photo.url)
 			.content 
 				.header.uppercase= speaker.name
-				.position= speaker.position
-				.presentation= speaker.presentation
+				.meta
+					div= speaker.position
+					div= speaker.company
+				.small= speaker.presentation
 		else
 			span.card
 				if speaker.photo.url
@@ -16,8 +18,10 @@ mixin speaker(speaker)
 						img(src=speaker.photo.url)
 				.content
 					.header.uppercase= speaker.name
-					.position= speaker.position
-					.presentation= speaker.presentation
+					.meta
+						div= speaker.position
+						div.strong= speaker.company
+					.small= speaker.presentation
 
 
 mixin keynoteSpeaker(speaker)
@@ -29,8 +33,10 @@ mixin keynoteSpeaker(speaker)
 						img(src=speaker.photo.url)
 				.content
 					.header.uppercase= speaker.name
-					.position= speaker.position
-					.presentation= speaker.presentation
+					.meta
+						div= speaker.position
+						div.strong= speaker.company
+					.small= speaker.presentation
 		else	
 			.card
 				if speaker.photo.url
@@ -38,8 +44,10 @@ mixin keynoteSpeaker(speaker)
 						img(src=speaker.photo.url)
 				.content
 					.header.uppercase= speaker.name
-					.position= speaker.position
-					.presentation= speaker.presentation
+					.meta
+						div= speaker.position
+						div.strong= speaker.company
+					.small= speaker.presentation
 
 
 		//- .description= teamMember.description
@@ -53,5 +61,6 @@ mixin teamMember(teamMember)
 
 			.content
 				.header= teamMember.name
-				.position= teamMember.position
-				.occupation= teamMember.occupation
+				.meta
+					.position= teamMember.position
+					.occupation= teamMember.occupation

@@ -27,8 +27,10 @@ ContentControl.add(
 		testimonials: {type: String, label: 'Testimonials -  a list of quotes in DOUBLE QUOTES delimited by SEMICOLON in the form of: "quote text", author; "quote text", author;'}
 		
 	},
-	'Speaker Registration',
-	{speakerRegistrationActive: Boolean},
+	'Speakers & Registration',
+	{speakerRegistrationActive: Boolean,
+	speakerMenuButton: Boolean,
+	speakerMenuTarget: Types.Url},
 	'Tickets',
 	{
 	ticketsLive: Boolean,

@@ -35,12 +35,17 @@ block content
 					//- a.white.hollow.responsive.button.uppercase(href='/tickets') Tickets
 					//- a.white.hollow.responsive.button.uppercase(href='/showcase-your-idea') Showcase your idea at Poland 2.0
 					a.white.hollow.responsive.button.uppercase.watch-video Watch the promo video
-
-			if content.ticketsLive
-				.div
+			
+				if content.ticketsLive
 					p.lead.uppercase.lighter Early bird ticket sales are open!
-					//- .spaced.buttons
-					a.white.responsive.button.uppercase.lighter.press-down(href=content.ticketsUrl) Get the tickets
+
+				.button-group.stacked-for-small(data-magellan data-bar-offset="48" data-animation-duration="300" data-deep-linking="true")
+					if content.ticketsLive
+						a.hollow.white.responsive.button.uppercase.lighter.press-down(href=content.ticketsUrl) Get the tickets
+					if (speakers.keynote.length || speakers.regular.length) & content.speakerMenuButton
+						a.hollow.white.responsive.button.uppercase.lighter.press-down(href="#speakers") See the speakers
+
+
 
 
 			if content.backgroundVideo.enable
@@ -61,13 +66,13 @@ block content
 			.row(style="max-width: 100%")
 				.medium-6.small-12
 					.container.left.half.padded
-						h3.underlined.uppercase.center When
+						h3.underlined.uppercase.center.lighter When
 						.row.ev-info
 							.columns.shrink
 								img(alt="Time" src="http://res.cloudinary.com/dg1royeho/image/upload/v1472719194/time_yuo9es.svg")
 							.columns.align-self-middle
 								div(style="font-size: 1.2rem")= currentEdition.date.dateString
-						h3.underlined.uppercase.center Where
+						h3.underlined.uppercase.center.lighter Where
 						.row.ev-info.align-middle
 							.columns.shrink
 								img(alt="Place" src="http://res.cloudinary.com/dg1royeho/image/upload/v1472716642/map-marker_q0clo7.svg")
@@ -85,7 +90,7 @@ block content
 	if content.ticketRegistrationSignup	
 		section.dark-bg.padded
 			.container
-				h2.center.uppercase.underlined(style="color: white;") Reserve your tickets now!
+				h2.center.uppercase.underlined.lighter(style="color: white;") Reserve your tickets now!
 				.row
 					.column.small-12.medium-6
 						p Sign up with your email address in order to secure your tickets now, before the sales begin!
@@ -99,60 +104,55 @@ block content
 						include ../mixins/mc-signup.html
 
 	
-	.container
+	
 		if speakers.keynote.length || speakers.regular.length
-			section.divider-bottom.padded
-
+			section.divider-bottom.padded(id="speakers" data-magellan-target="speakers")
+				.container
 				
-				if speakers.keynote.length
-					h2.center.uppercase.underlined Keynote speakers
-					ul.people-grid.flex-center
-						each speaker in speakers.keynote
-							+keynoteSpeaker(speaker)
-					each speaker in speakers.keynote					
-						.large.reveal.people-reveal(id="modal"+speaker.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
-							//- .row
-							//- .columns.small-12.shrink.center
-							.photo-container
-								.photo-large: img(src=speaker.photo.secure_url)
-							//- .columns
-							.info
-								h3.uppercase= speaker.name
-								p.lead.lighter= speaker.position
-								p.lighter= speaker.presentationTopic
-								.description: != speaker.description
-							button.button.hollow.close-button.medium.secondary(data-close aria-label="Close modal" type="button")
-								span.close-icon(aria-hidden="true")
-				if speakers.regular.length
-					h2.center.uppercase.underlined Speakers
-					ul.people-grid
-						each speaker in speakers.regular
-							+speaker(speaker)
-					each speaker in speakers.regular					
-						.large.reveal.people-reveal(id="modal"+speaker.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
-							//- .row
-							//- .columns.small-12.shrink.center
-							.photo-container
-								.photo-large: img(src=speaker.photo.secure_url)
-							//- .columns
-							.info
-								h3.uppercase= speaker.name
-								p.lead.lighter= speaker.position
-								p.lighter= speaker.presentationTopic
-								.description: != speaker.description
-							button.button.hollow.close-button.medium.secondary(data-close aria-label="Close modal" type="button")
-								span.close-icon(aria-hidden="true")
+					if speakers.keynote.length
+						h2.center.uppercase.underlined.lighter Keynote speakers
+						ul.people-grid.flex-center
+							each speaker in speakers.keynote
+								+keynoteSpeaker(speaker)
+						each speaker in speakers.keynote					
+							.large.reveal.people-reveal(id="modal"+speaker.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
+								//- .row
+								//- .columns.small-12.shrink.center
+								.photo-container
+									.photo-large: img(src=speaker.photo.secure_url)
+								//- .columns
+								.info
+									h3.uppercase= speaker.name
+									p.lead.lighter= speaker.position
+									p.lighter= speaker.presentationTopic
+									.description: != speaker.description
+								button.button.hollow.close-button.medium.secondary(data-close aria-label="Close modal" type="button")
+									span.close-icon(aria-hidden="true")
+					if speakers.regular.length
+						h2.center.uppercase.underlined.lighter Speakers
+						ul.people-grid
+							each speaker in speakers.regular
+								+speaker(speaker)
+						each speaker in speakers.regular					
+							.large.reveal.people-reveal(id="modal"+speaker.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
+								//- .row
+								//- .columns.small-12.shrink.center
+								.photo-container
+									.photo-large: img(src=speaker.photo.secure_url)
+								//- .columns
+								.info
+									h3.uppercase= speaker.name
+									p.lead.lighter= speaker.position
+									p.lighter= speaker.presentationTopic
+									.description: != speaker.description
+								button.button.hollow.close-button.medium.secondary(data-close aria-label="Close modal" type="button")
+									span.close-icon(aria-hidden="true")
 
 
-		
-		//- if content.agendaActive
-		//- 	section.divider-bottom
-		//- 		h2.underlined.uppercase.center Agenda
-		//- 		.agenda!= content.agenda.html
 
 		if content.agendaActive
 			section.divider-bottom
-				h2.underlined.uppercase.center Agenda
+				h2.underlined.uppercase.center.lighter Agenda
 				.agenda-container
 					each day in agenda
 						h3= day.caption

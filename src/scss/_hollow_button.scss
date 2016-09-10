@@ -14,6 +14,7 @@
 	}	
 	transition: border-color 0.11s ease-out, color 0.11s ease-out, background-color 0.11s ease-out;
  	&.white {
+ 		background-color: transparent;
 		border-color:white;
 		color: white;
 		&:hover {

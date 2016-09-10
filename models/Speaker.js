@@ -11,6 +11,7 @@ var Speaker = new keystone.List('Speaker', {
 Speaker.add({
 	name: {type: String, required: true},
 	position: {type: String},
+	company: {type: String},
 	photo: {type: Types.CloudinaryImage, autoCleanup: true },
 	publishedState: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true }, //should I use this?
 	speakerType: {type: Types.Select, options: 'keynote, regular'},

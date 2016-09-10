@@ -103,9 +103,9 @@ $bezier-move: cubic-bezier(0.4, 0, 0.23, 1);
 	}
 }
 
-h1, h2, h3, h4 {
-	font-weight: 300;
-}
+// h1, h2 {
+// 	font-weight: 300;
+// }
 
 h3.small {
 	font-size: rem-calc(18px);
@@ -442,6 +442,21 @@ $ln-color: #0077B5;
 
 .button {
 	transition: background 0.11s $bezier-move;
+}
+
+
+[data-magellan-target] {
+	&::before {
+  content:" ";
+  display:block;
+  height:4rem; /* fixed header height*/
+  margin-top:-4rem; /* negative fixed header height */
+  visibility: hidden;
+	}
+}
+
+.strong {
+	font-weight: 700;
 }
 
 

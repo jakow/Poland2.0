@@ -49,6 +49,8 @@ html(lang="en-GB")
 				ul.lighter
 					if content.ticketsLive
 						li: a(href=content.ticketsUrl) Tickets
+					if content.speakerMenuButton
+						li: a(href=content.speakerMenuTarget) Speakers
 					each link in navLinks
 						li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
 					.social-mobile
@@ -62,6 +64,8 @@ html(lang="en-GB")
 						ul.menu.lighter
 							if content.ticketsLive
 								li: a(href=content.ticketsUrl) Tickets
+							if content.speakerMenuButton
+								li: a(href=content.speakerMenuTarget) Speakers
 							each link in navLinks
 								li(class=( section == link.key ? 'active' : null))
 									a(href=link.href)= link.label
