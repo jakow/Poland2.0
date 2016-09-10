@@ -42,7 +42,7 @@ block content
 				.button-group.stacked-for-small(data-magellan data-bar-offset="48" data-animation-duration="300" data-deep-linking="true")
 					if content.ticketsLive
 						a.hollow.white.responsive.button.uppercase.lighter.press-down(href=content.ticketsUrl) Get the tickets
-					if (speakers.keynote.length || speakers.regular.length) & content.speakerMenuButton
+					if (speakers.keynote.length || speakers.regular.length) && content.speakerMenuButton
 						a.hollow.white.responsive.button.uppercase.lighter.press-down(href="#speakers") See the speakers
 
 
