@@ -84,9 +84,10 @@ $accordion-plusminus: false;
 			font-weight: bold;
 			@include breakpoint(medium) {
 				margin-bottom: 0;
-				flex: 0 0 8rem;
+				flex: 0 0 160px;
 			}
 		 }
+		 
 		 .ev {
 		 	margin-right: 1.25rem;
 		 	@include breakpoint(medium) {

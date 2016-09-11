@@ -5218,7 +5218,7 @@ a.card, .card > a {
       @media screen and (min-width: 45em) {
         .agenda-accordion .agenda-accordion-title > div:first-child {
           margin-bottom: 0;
-          flex: 0 0 8rem; } }
+          flex: 0 0 160px; } }
     .agenda-accordion .agenda-accordion-title .ev {
       margin-right: 1.25rem; }
       @media screen and (min-width: 45em) {
