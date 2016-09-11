@@ -71,11 +71,14 @@ exports.parseAgenda = function(markdown) {
 	}
 
 	function splitTableCols(rows) {
-		return rows.map(row => (row.split('|').map(str => str.trim())));
+		return rows.map(row => (row.split('|')
+			.map(str => str.trim())
+			));
 	}
 
 	function tableToObject(tableArr) {
 		return tableArr.map(row => {
+			console.log(row)
 			var obj = {};
 			obj.time = row[0];
 			obj.briefDescription = row[1];
