@@ -35,7 +35,10 @@ ContentControl.add(
 	{
 	ticketsLive: Boolean,
 	ticketsUrl: Types.Url,
-	ticketRegistrationSignup: {type: Boolean, label: 'Ticket newsletter signup active'}
+	ticketMessage: {type: String},
+	countdown: Boolean,
+	countdownDate: {type: Date, dependsOn: {countdown: true}},
+	ticketRegistrationSignup: {type: Boolean, label: 'Ticket newsletter signup active'},
 	},
 	'Agenda',
 	{

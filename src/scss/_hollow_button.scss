@@ -74,9 +74,9 @@
 
 //large when on medium screen, normal when on small screens
 .responsive.button {
-	font-size: 1.25rem;
+	font-size: 1.1rem;
 	@include breakpoint(medium) {
-			font-size: 1.5rem;
+			font-size: 1.25rem;
 	}
 }
 

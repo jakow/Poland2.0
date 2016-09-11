@@ -1,0 +1,24 @@
+mixin countdown()
+	.countdown&attributes(attributes)
+		.cd-row
+			.d 
+				.days
+				.label Days
+			.h
+				.hours
+				.label Hours
+		.cd-row
+			.m 
+				.minutes
+				.label Minutes
+			.s
+				.seconds
+				.label Seconds
+
+
+mixin countdownScript(deadline)
+	//-'18 September 2016 23:59:00'
+	script(src="/js/countdown.js")
+	script.
+		var count = new Countdown(document.getElementById('countdown'), new Date("#{deadline}"));
+		count.start();

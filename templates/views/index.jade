@@ -3,6 +3,7 @@ include ../mixins/opengraph
 include ../mixins/social
 include ../mixins/banner
 include ../mixins/people
+include ../mixins/countdown
 
 
 mixin formatAddress(name, address)
@@ -37,7 +38,9 @@ block content
 					a.white.hollow.responsive.button.uppercase.watch-video Watch the promo video
 			
 				if content.ticketsLive
-					p.lead.uppercase.lighter Early bird ticket sales are open!
+					p.lead.uppercase.lighter= content.ticketMessage
+					if content.countdown
+						+countdown()(id="countdown")
 
 				.button-group.stacked-for-small(data-magellan data-bar-offset="48" data-animation-duration="300" data-deep-linking="true")
 					if content.ticketsLive
@@ -207,8 +210,14 @@ block content
 
 		block js
 			//- script(src="js/mc.js")
-			script.
-				var videoId = "#{content.backgroundVideo.id}";
-			script(src="js/banner-video.js")
+			if content.backgroundVideo.enable
+				script.
+					var videoId = "#{content.backgroundVideo.id}";
+				script(src="/js/banner-video.js")
+			if content.countdown
+				+countdownScript(content.countdownDate)
+
+
+
 
 

@@ -1,0 +1,38 @@
+.banner .lead {
+	line-height: 1.2;
+	margin: 0.5em;
+}
+
+.countdown {
+	margin-bottom: 0.5rem;
+	
+		.cd-row {
+			@include breakpoint(medium) {
+				display: inline-block;
+			}
+			@include breakpoint(landscape) {
+			display: inline-block;
+			}
+		}
+	.d, .h, .m, .s {
+		margin: 0 6px 12px;
+		display: inline-block;
+		width: 72px;
+		// height: 72px;
+		padding: 0.5rem;
+		text-align: center;
+		// border-radius: 50%;
+		// background: rgba(38,38,38, 0.5);
+		// border: 1px solid white;
+	}
+
+
+	.days, .hours, .minutes, .seconds {
+		font-size: 2rem;
+	}
+
+	.label {
+		font-size: 0.8rem;
+
+	}
+}

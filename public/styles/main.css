@@ -4559,10 +4559,10 @@ footer, header {
   margin: 0; }
 
 .responsive.button {
-  font-size: 1.25rem; }
+  font-size: 1.1rem; }
   @media screen and (min-width: 45em) {
     .responsive.button {
-      font-size: 1.5rem; } }
+      font-size: 1.25rem; } }
 
 .button.grow {
   transition: transform 0.05s cubic-bezier(0.4, 0, 0.23, 1);
@@ -5785,6 +5785,29 @@ a.card, .card > a {
     width: 0; }
   to {
     width: 100%; } }
+
+.banner .lead {
+  line-height: 1.2;
+  margin: 0.5em; }
+
+.countdown {
+  margin-bottom: 0.5rem; }
+  @media screen and (min-width: 45em) {
+    .countdown .cd-row {
+      display: inline-block; } }
+  @media screen and (orientation: landscape) {
+    .countdown .cd-row {
+      display: inline-block; } }
+  .countdown .d, .countdown .h, .countdown .m, .countdown .s {
+    margin: 0 6px 12px;
+    display: inline-block;
+    width: 72px;
+    padding: 0.5rem;
+    text-align: center; }
+  .countdown .days, .countdown .hours, .countdown .minutes, .countdown .seconds {
+    font-size: 2rem; }
+  .countdown .label {
+    font-size: 0.8rem; }
 
 .container {
   max-width: 75rem;

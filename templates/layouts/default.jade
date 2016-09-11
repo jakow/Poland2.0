@@ -123,7 +123,7 @@ html(lang="en-GB")
 									ul.sponsor-list(class=category.key)
 										each sponsor in category.sponsors
 											li.sponsor
-												a(href=sponsor.url title=sponsor.name)
+												a(href=sponsor.url title=sponsor.name target="_blank")
 													span.sr-only=sponsor.name
 													img(src=sponsor.logo.secure_url alt=sponsor.name)
 					
