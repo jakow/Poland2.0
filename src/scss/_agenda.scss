@@ -84,8 +84,14 @@ $accordion-plusminus: false;
 			font-weight: bold;
 			@include breakpoint(medium) {
 				margin-bottom: 0;
-				flex: 0 0 7rem;
+				flex: 0 0 8rem;
 			}
+		 }
+		 .ev {
+		 	margin-right: 1.25rem;
+		 	@include breakpoint(medium) {
+		 		margin-right: none;
+		 	}
 		 }
 		 .open-close {
 			display: block;
@@ -114,7 +120,21 @@ $accordion-plusminus: false;
 		}
 	}
 	.agenda-accordion-content {
-		font-size: 1rem;
+		font-size: 0.9rem;
 		@include accordion-content;
+		p {
+			margin-bottom: 0.6em;	
+		}
+	}
+
+}
+
+.accordion-item.empty {
+	// pointer-events: none;
+	a {
+	cursor: default;
+}
+	.accordion-content {
+		display: none !important;
 	}
 }

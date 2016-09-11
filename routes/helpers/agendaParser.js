@@ -38,9 +38,11 @@ exports.parseAgenda = function(markdown) {
 
 	function getBody(tableArr) {
 		var arr = tableArr.slice(2); //discard first two rows
-		return arr.map(row => 
-			row.filter(str => str.length != 0) //remove empty strings from rows
-			).filter(row => row.length != 0); //remove empty rows; 
+		return arr
+			// .map(row => row.filter(str => str.length != 0) //remove empty strings from rows
+			// )
+			.map(row => ( row.map( cell => cell.trim() ))) // trim whitespace in cells
+			.filter(row => row.join('').length != 0); //remove empty rows; 
 	}
 	function getHeadings(tableArr) {
 		var row = tableArr[0];
@@ -73,12 +75,14 @@ exports.parseAgenda = function(markdown) {
 	function splitTableCols(rows) {
 		return rows.map(row => (row.split('|')
 			.map(str => str.trim())
+			.slice(1,row.length-1)
+
 			));
 	}
 
 	function tableToObject(tableArr) {
 		return tableArr.map(row => {
-			console.log(row)
+			// console.log(row);
 			var obj = {};
 			obj.time = row[0];
 			obj.briefDescription = row[1];
@@ -104,13 +108,13 @@ exports.parseAgenda = function(markdown) {
 				parsedAgenda.push({caption: captions[i], content: contents[i]})
 			}	
 		}
-			console.log(markdown)
+			// console.log(markdown)
 			// console.log(rows)
 			// console.log(tableIndices)
 			// console.log(tables)
-			//  console.log(bodies)
-			//  console.log(captions)
-			 console.log(contents)
+			 // console.log(bodies)
+			 // console.log(captions)
+			 // console.log(contents)
 			//  console.log(parsedAgenda)
 		return parsedAgenda;
 

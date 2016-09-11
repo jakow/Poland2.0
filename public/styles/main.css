@@ -5218,7 +5218,12 @@ a.card, .card > a {
       @media screen and (min-width: 45em) {
         .agenda-accordion .agenda-accordion-title > div:first-child {
           margin-bottom: 0;
-          flex: 0 0 7rem; } }
+          flex: 0 0 8rem; } }
+    .agenda-accordion .agenda-accordion-title .ev {
+      margin-right: 1.25rem; }
+      @media screen and (min-width: 45em) {
+        .agenda-accordion .agenda-accordion-title .ev {
+          margin-right: none; } }
     .agenda-accordion .agenda-accordion-title .open-close {
       display: block;
       position: absolute;
@@ -5241,7 +5246,7 @@ a.card, .card > a {
         .agenda-accordion .agenda-accordion-title .open-close .open-close-icon::before {
           transform: rotate(90deg); }
   .agenda-accordion .agenda-accordion-content {
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding: 1rem;
     display: none;
     border: 1px solid #f2f2f2;
@@ -5250,6 +5255,14 @@ a.card, .card > a {
     color: #223049; }
     :last-child > .agenda-accordion .agenda-accordion-content:last-child {
       border-bottom: 1px solid #f2f2f2; }
+    .agenda-accordion .agenda-accordion-content p {
+      margin-bottom: 0.6em; }
+
+.accordion-item.empty a {
+  cursor: default; }
+
+.accordion-item.empty .accordion-content {
+  display: none !important; }
 
 .contact a.mailto {
   color: #e61b5a; }

@@ -162,16 +162,24 @@ block content
 
 						ul.agenda-accordion(data-accordion, data-allow-all-closed="true" data-multi-expand="true")
 							each entry in day.content
-								li.agenda-accordion-item(class="accordion-item" data-accordion-item)
-									a.agenda-accordion-title(href="#")
-										div!=entry.time
-										div!=entry.briefDescription
-										.open-close: .open-close-icon
-									.agenda-accordion-content(data-tab-content)
-										if entry.speaker
-											p Speaker(s): 
-												strong=entry.speaker
-										p!= entry.detailedDescription
+								if entry.detailedDescription || entry.speakers
+									li.agenda-accordion-item(class="accordion-item" data-accordion-item)
+										a.agenda-accordion-title(href="#")
+											.time!=entry.time
+											.ev!=entry.briefDescription
+											.open-close: .open-close-icon
+										.agenda-accordion-content(data-tab-content)
+											if entry.speaker
+												p Speaker(s): 
+													strong!=entry.speaker
+											p!= entry.detailedDescription
+								else
+									li.agenda-accordion-item.accordion-item(data-accordion-item).empty
+										a.agenda-accordion-title
+											.time!=entry.time
+											.ev!=entry.briefDescription
+										.agenda-accordion-content.accordion-content(data-tab-content)
+
 										
 
 
