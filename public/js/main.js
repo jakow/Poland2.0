@@ -14,6 +14,8 @@ var nav = responsiveNav('#nav-mobile', {
  	close: function(){this.isOpen = false; console.log('close')} // Function: Close callback
  });
 
+$('#nav-mobile a').click(function() { nav.close()});
+
 var $doc = $(document);
 $doc.foundation();
 
