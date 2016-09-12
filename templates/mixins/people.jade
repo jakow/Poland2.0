@@ -5,23 +5,23 @@ mixin speaker(speaker)
 				if speaker.photo.url
 				.image
 					img(src=speaker.photo.url)
-			.content 
-				.header.uppercase= speaker.name
-				.meta
-					div= speaker.position
-					div= speaker.company
-				.small= speaker.presentation
+				.content 
+					.header.uppercase= speaker.name
+					.meta
+						div= speaker.position
+						div= speaker.company
+					.small= speaker.presentation
 		else
 			span.card
 				if speaker.photo.url
 					.image
 						img(src=speaker.photo.url)
-				.content
-					.header.uppercase= speaker.name
-					.meta
-						div= speaker.position
-						div.strong= speaker.company
-					.small= speaker.presentation
+					.content
+						.header.uppercase= speaker.name
+						.meta
+							div= speaker.position
+							div.strong= speaker.company
+						.small= speaker.presentation
 
 
 mixin keynoteSpeaker(speaker)
