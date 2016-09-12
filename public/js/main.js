@@ -9,9 +9,9 @@ var nav = responsiveNav('#nav-mobile', {
 	navClass: "nav-collapse", 
 	navActiveClass: "js-nav-active", 
 	jsClass: "js",
- 	init: function(){this.isOpen = false; console.log('init')}, // Function: Init callback
- 	open: function(){this.isOpen = true;console.log('open')}, // Function: Open callback
- 	close: function(){this.isOpen = false; console.log('close')} // Function: Close callback
+ 	init: function(){}, // Function: Init callback
+ 	open: function(){}, // Function: Open callback
+ 	close: function(){} // Function: Close callback
  });
 
 $('#nav-mobile a').click(function() { nav.close()});
