@@ -53,6 +53,9 @@ html(lang="en-GB")
 						li: a(href=content.speakerMenuTarget) Speakers
 					if content.agendaActive
 						li: a(href="/#agenda") Agenda
+					if sponsorCategories.length
+						//- only show if there are sponsors, hash fragment to any subpage
+						li: a(href="#partners") Partners
 					each link in navLinks
 						li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
 					.social-mobile
@@ -70,6 +73,9 @@ html(lang="en-GB")
 								li: a(href=content.speakerMenuTarget) Speakers
 							if content.agendaActive
 								li: a(href="/#agenda") Agenda
+							if sponsorCategories.length
+								//- only show if there are sponsors
+								li: a(href="#partners") Partners
 							each link in navLinks
 								li(class=( section == link.key ? 'active' : null))
 									a(href=link.href)= link.label
@@ -114,7 +120,7 @@ html(lang="en-GB")
 
 		footer.footer
 			if sponsorCategories && sponsorCategories.length
-				.footer-section.sponsors
+				.footer-section.sponsors#partners
 					each category in sponsorCategories
 							.row.container
 								.columns
