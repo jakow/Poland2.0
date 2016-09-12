@@ -461,6 +461,19 @@ $ln-color: #0077B5;
 	font-weight: 700;
 }
 
+.hash-anchor {
+	position: absolute;
+	margin-top: -3rem;
+	@include breakpoint(medium) {
+		margin-top: -4rem;
+	}
+}
+
+section, .container {
+	position: relative;
+}
+
+
 
 
 

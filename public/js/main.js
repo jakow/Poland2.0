@@ -1,3 +1,10 @@
+var $doc = $(document);
+//initialise zurb foundation
+$doc.foundation();
+
+
+//nav specific code
+var $overlay;
 var nav = responsiveNav('#nav-mobile', {
 	animate: true, 
 	transition: 284, 
@@ -9,34 +16,27 @@ var nav = responsiveNav('#nav-mobile', {
 	navClass: "nav-collapse", 
 	navActiveClass: "js-nav-active", 
 	jsClass: "js",
- 	init: function(){}, // Function: Init callback
- 	open: function(){}, // Function: Open callback
- 	close: function(){} // Function: Close callback
- });
-
-$('#nav-mobile a').click(function() { nav.close()});
-
-var $doc = $(document);
-$doc.foundation();
-
-
-$doc.ready(function() {
-	$('#banner.content').addClass('animate-content');
-	$('.team-grid').addClass('animate-content');
-	//hack to close toggle menu	
-	var navWrapper = $(nav.wrapper);
-	$('#body, footer').click(function(event) {
-		if(navWrapper.hasClass('opened')) {
+ 	init: function(){
+ 		$('#nav-mobile a').click(function() { nav.close()});
+ 		$('#nav-mobile').show(); // prevent jumping when document is not loaded
+		$('#body, footer').click(function(event) {
+		if($('#nav-mobile').hasClass('opened')) {
 			event.preventDefault();
 			nav.close();
 		}
 	})
-});
-
-$doc.ready(function() {
-	$('#nav-mobile').show();
-})
-
+ 	}, // Function: Init callback
+ 	open: function(){
+ 		$('#body').append('<div class="menu-overlay"></div>');
+ 		$overlay = $('.menu-overlay');
+ 		
+ 		setTimeout(function() {$overlay.addClass('show');}, 10);
+ 	}, // Function: Open callback
+ 	close: function(){
+ 		$overlay.removeClass('show');
+ 		setTimeout(function() {$overlay.remove(); $overlay = null;}, 284);
+ 	} // Function: Close callback
+ });
 
 
 $doc.ready(function() {
@@ -58,6 +58,7 @@ var errorFeedback = function($element, isError, errorMessage) {
 	if(isError) {
 		$err.text(errorMessage);
 		$element.addClass('has-error');
+
 	}
 	else {
 		$element.removeClass('has-error');
@@ -188,6 +189,7 @@ function animateError(errorText) {
 
 //  hash fragment change animation
 
+
 $(function() {
   $('a[href*="#"]:not([href="#"])').click(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -195,7 +197,7 @@ $(function() {
       target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
       if (target.length) {
         $('html, body').animate({
-          scrollTop: target.offset().top - ($(window).width()  < 720 ? 48 : 64)
+          scrollTop: target.offset().top
         }, 450);
         return false;
       }

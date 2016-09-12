@@ -109,7 +109,9 @@ block content
 	
 	
 	if speakers.keynote.length || speakers.regular.length
-		section.divider-bottom.padded(id="speakers")
+
+		section.divider-bottom.padded
+			.hash-anchor(id="speakers")
 			.container
 			
 				if speakers.keynote.length
@@ -154,7 +156,8 @@ block content
 
 
 		if content.agendaActive
-			section.divider-bottom#agenda
+			.hash-anchor(id="agenda")
+			section.divider-bottom
 
 				h2.underlined.uppercase.center.lighter Agenda
 				.agenda-container

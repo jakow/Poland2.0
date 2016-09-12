@@ -120,7 +120,8 @@ html(lang="en-GB")
 
 		footer.footer
 			if sponsorCategories && sponsorCategories.length
-				.footer-section.sponsors#partners
+				.footer-section.sponsors
+					.hash-anchor#partners
 					each category in sponsorCategories
 							.row.container
 								.columns
