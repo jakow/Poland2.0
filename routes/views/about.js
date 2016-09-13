@@ -27,7 +27,7 @@ exports = module.exports = function(req, res) {
 			locals.data.team.forEach((member, idx) =>
 			{
 				member.photo.small = scaleImg(member.photo.url, 400);
-				member.photo.large = scaleImg(member.photo.url, 800);
+				member.photo.large = scaleImg(member.photo.url, 400);
 			})
 			next(err);
 		});

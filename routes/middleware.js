@@ -118,6 +118,13 @@ exports.getCurrentEdition = function(req, res, next) {
 		});
 };
 
+	function scaleCloudinaryImg(photoUrl, width) {
+		if (typeof(photoUrl) === 'string')
+			return photoUrl.replace('upload/', `upload/c_scale,w_${width},fl_progressive/`);
+		else
+			return ''; //fail silently...
+	}
+
 exports.loadSponsors = function(req, res, next) {
 		async.waterfall(
 			//get edition
@@ -128,6 +135,10 @@ exports.loadSponsors = function(req, res, next) {
 			],
 			function(err, categories) {
 				res.locals.sponsorCategories = categories.filter(category => (category.sponsors.length)); //remove empty categories
+				//minify images
+				categories.forEach(category => {
+					category.sponsors.forEach(sponsor => {sponsor.logo.secure_url = scaleCloudinaryImg(sponsor.logo.secure_url, 600)});
+				});
 				next(err);
 			});
 
