@@ -1,7 +1,7 @@
 mixin speaker(speaker)
 	li.speaker
 		if speaker.description
-			a(data-open="modal"+speaker.slug).card
+			a(data-open="modal-"+speaker.slug).card
 				if speaker.photo.url
 				.image
 					img(src=speaker.photo.url)
@@ -9,7 +9,7 @@ mixin speaker(speaker)
 					.header.uppercase= speaker.name
 					.meta
 						div= speaker.position
-						div= speaker.company
+						div.strong= speaker.company
 					.small= speaker.presentation
 		else
 			span.card
@@ -27,7 +27,7 @@ mixin speaker(speaker)
 mixin keynoteSpeaker(speaker)
 	li.keynote-speaker.speaker
 		if speaker.description
-			a(data-open="modal"+speaker.slug).card
+			a(data-open="modal-"+speaker.slug).card
 				if speaker.photo.url
 					.image
 						img(src=speaker.photo.url)

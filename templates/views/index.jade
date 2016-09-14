@@ -83,8 +83,9 @@ block content
 									+formatAddress(currentEdition.venue.name, currentEdition.venue.location)
 
 
-				.medium-6.small-12
-					iframe(width="100%" height="436px" frameborder="0" style="border:0; margin: 0 0 -6px 0"
+				.medium-6.small-12(style="position: relative")
+					.g-map
+						iframe(width="100%" height="436px" frameborder="0" style="border:0; margin: 0 0 -6px 0"
   						src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD7BTpNAwhuLMiamNGEQgfiXP7SiCKIKkw&q="+currentEdition.venue.location.street1+','+currentEdition.venue.location.postcode allowfullscreen)
 
 	
@@ -120,7 +121,7 @@ block content
 						each speaker in speakers.keynote
 							+keynoteSpeaker(speaker)
 					each speaker in speakers.keynote					
-						.large.reveal.people-reveal(id="modal"+speaker.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
+						.large.reveal.people-reveal(id="modal-"+speaker.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
 							//- .row
 							//- .columns.small-12.shrink.center
 							.photo-container
@@ -139,7 +140,7 @@ block content
 						each speaker in speakers.regular
 							+speaker(speaker)
 					each speaker in speakers.regular					
-						.large.reveal.people-reveal(id="modal"+speaker.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
+						.large.reveal.people-reveal(id="modal-"+speaker.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
 							//- .row
 							//- .columns.small-12.shrink.center
 							.photo-container
