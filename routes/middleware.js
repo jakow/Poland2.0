@@ -89,7 +89,8 @@ exports.requireUser = function(req, res, next) {
 exports.initErrorHandlers = function(req, res, next) {
     
     res.err = function(err, title, message) {
-        res.status(500).render('errors/500', {
+    	// console.log(res.locals);
+        return res.status(500).render('errors/500', {
             err: err,
             errorTitle: title,
             errorMsg: message
@@ -97,7 +98,8 @@ exports.initErrorHandlers = function(req, res, next) {
     }
     
     res.notFound = function(title, message) {
-        res.status(404).render('errors/404', {
+
+        return res.status(404).render('errors/404', {
             errorTitle: title,
             errorMsg: message
         });
@@ -185,6 +187,17 @@ exports.getContent = function(req,res,next) {
 	q = keystone.list('ContentControl').model.findOne().exec(function(err,result) {
 		if (result)
 			res.locals.content = result;
+		next(err);
+	})
+}
+
+exports.getStaticPages = function (req,res, next) {
+	q = keystone.list('StaticPage').model
+	.find({showInMenu: true})
+	.select({name: 1, route: 1})
+	.exec(function(err,result) {
+		if (result)
+			res.locals.staticPages = result;
 		next(err);
 	})
 }

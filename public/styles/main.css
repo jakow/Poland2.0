@@ -4509,7 +4509,7 @@ footer, header {
     .footer .sponsor-list .sponsor a {
       display: inline-block; }
     .footer .sponsor-list .sponsor img {
-      max-height: 180px; }
+      max-height: 150px; }
       @media screen and (min-width: 45em) {
         .footer .sponsor-list .sponsor img {
           width: initial; } }
@@ -4891,8 +4891,6 @@ input {
     @media screen and (min-width: 45em) {
       .edition .description {
         margin-right: 2rem; } }
-  .edition .swiper-pagination-bullet-active {
-    background: #e61b5a; }
   .edition .swiper-container {
     width: 100%;
     height: 280px;
@@ -4904,10 +4902,15 @@ input {
     width: auto; }
     .edition .swiper-slide img {
       height: 280px; }
-  .edition .swiper-button-next {
-    background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z%27%20fill%3D%27%23e61b5a%27/%3E%3C/svg%3E"); }
-  .edition .swiper-button-prev {
-    background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23e61b5a'%2F%3E%3C%2Fsvg%3E"); }
+
+.swiper-button-next {
+  background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2027%2044%27%3E%3Cpath%20d%3D%27M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z%27%20fill%3D%27%23e61b5a%27/%3E%3C/svg%3E") !important; }
+
+.swiper-button-prev {
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23e61b5a'%2F%3E%3C%2Fsvg%3E") !important; }
+
+.swiper-pagination-bullet-active {
+  background: #e61b5a !important; }
 
 .close-icon {
   display: block;
@@ -6031,11 +6034,11 @@ section.divider-bottom {
     margin-right: 0;
     width: 100%; }
 
-h2.underlined, h3.underlined, h4.underlined, h5.underlined, h6.underlined {
-  padding-bottom: 0.5em;
+h1.underlined, h2.underlined, h3.underlined, h4.underlined, h5.underlined, h6.underlined {
+  padding-bottom: 0.5rem;
   margin-bottom: 0.8em;
   position: relative; }
-  h2.underlined::after, h3.underlined::after, h4.underlined::after, h5.underlined::after, h6.underlined::after {
+  h1.underlined::after, h2.underlined::after, h3.underlined::after, h4.underlined::after, h5.underlined::after, h6.underlined::after {
     content: '';
     display: block;
     position: absolute;
@@ -6102,3 +6105,28 @@ h2.underlined, h3.underlined, h4.underlined, h5.underlined, h6.underlined {
 
 section, .container {
   position: relative; }
+
+.g-map {
+  position: relative; }
+
+.columns.unpad {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
+@media screen and (max-width: 44.9375em) {
+  .columns.small-unpad {
+    padding-left: 0 !important;
+    padding-right: 0 !important; } }
+
+.flex-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+
+.container.pad-medium-up {
+  padding-left: 0;
+  padding-right: 0; }
+  @media screen and (min-width: 45em) {
+    .container.pad-medium-up {
+      padding-left: 1rem;
+      padding-right: 1rem; } }

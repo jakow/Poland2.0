@@ -378,9 +378,9 @@ section.divider-bottom {
 	}
 }
 
-h2, h3, h4,h5, h6 {
+h1, h2, h3, h4,h5, h6 {
 	&.underlined {
-		padding-bottom: 0.5em;
+		padding-bottom: 0.5rem;
 		margin-bottom: 0.8em;
 		position:relative;
 		&::after {
@@ -479,5 +479,32 @@ section, .container {
 
 
 
+.columns.unpad {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
 
+}
+
+.columns.small-unpad {
+	@include breakpoint(small only) {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+}
+
+
+.flex-slide {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.container.pad-medium-up {
+	padding-left: 0;
+	padding-right: 0;
+	@include breakpoint(medium) {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+}
 

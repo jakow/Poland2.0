@@ -26,8 +26,9 @@ var importRoutes = keystone.importer(__dirname);
 keystone.pre('routes', middleware.initErrorHandlers);
 keystone.pre('routes', middleware.initLocals);
 keystone.pre('routes', middleware.getContent);
+keystone.pre('routes', middleware.loadSponsors);
 keystone.pre('render', middleware.flashMessages);
-keystone.pre('render', middleware.loadSponsors);
+
 
 keystone.set('404', function(req, res, next) {
 	middleware.loadSponsors(req, res, (err) => res.notFound()); 
@@ -36,7 +37,7 @@ keystone.set('404', function(req, res, next) {
 
 keystone.set('500', function(req, res, next)
 	{
-		res.err();
+		middleware.loadSponsors(req, res, (err) => res.err()); 
 	});
 // Import Route Controllers
 var routes = {
@@ -49,17 +50,13 @@ exports = module.exports = function(app) {
 
 	// Views
 	app.get('/', middleware.getCurrentEdition, routes.views.index);
-	app.get('/news/:category?', routes.views.news);
-	app.get('/news/post/:post', routes.views.post);
+	// app.get('/news/:category?', routes.views.news);
+	// app.get('/news/post/:post', routes.views.post);
 	app.get('/gallery', routes.views.gallery);
 	app.all('/contact', middleware.getCurrentEdition, routes.views.contact);
 	app.all('/about', middleware.getCurrentEdition, routes.views.about);
 	app.all('/past-editions', routes.views.pastEditions);
-	// app.all('/legal', routes.views.legal);
-
-	// app.all('/admin', function(req,res) {
-	// 	res.redirect('/keystone');
-	// });
+	app.all('/:pageRoute', routes.views.staticPage); // dynamically registered static pages. Must be at bottom
 	
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);

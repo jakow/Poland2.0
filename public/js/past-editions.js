@@ -13,7 +13,7 @@ var swipers = swiperElems.map(function(item) {
 		autoplay: 2000,
 		speed: 200,
 		slidesPerView: 'auto',
-		loopedSlides: (function() { var slides = item.getElementsByClassName('swiper-slide'); l = slides.length; console.log(slides, l); return l;})(),
+		loopedSlides: item.getElementsByClassName('swiper-slide').length,
 		paginatonClickable: true,
 		spaceBetween: 30,
 		grabCursor: true,
