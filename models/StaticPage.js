@@ -12,6 +12,7 @@ StaticPage.add({
 	route: {type: String},
 	active: Boolean,
 	showInMenu: Boolean,
+	menuOrder: {type: Number, dependsOn: {showInMenu: true}, default: 0},
 	content: {type: Types.Html, wysiwyg: false}
 })
 

@@ -29,15 +29,29 @@ exports.initLocals = function(req, res, next) {
 	var locals = res.locals;
 	locals.navLinks = [
 		{ label: 'About PL2.0',		key: 'about',		href: '/about'},
-		//{ label: 'Programme',		key: 'programme',		href: '/programme' },
-		//{ label: 'Speakers',		key: 'speakers',		href: '/speakers' },
-			//{ label: 'Tickets',		key: 'tickets',		href: '/tickets' },
-			{ label: 'Past Editions',		key: 'past-editions',		href: '/past-editions' },
+		{ label: 'Past Editions',		key: 'past-editions',		href: '/past-editions' },
 		
 		
 		];
 
 	q = keystone.list('ContentControl').model.findOne().exec(function(err, result) {
+		var content = result;
+		var additional = [];
+		//add tickets link if live
+		if (content.ticketsLive)
+			additional.push({label:'Tickets', key: 'tickets', href: content.ticketsUrl});
+		//add speaker menu if live
+		if (content.speakerMenuButton)
+			additional.push({label:'Speakers', key: 'speakers', href: content.speakerMenuTarget});
+		// add agenda link if active
+		if (content.agendaActive)
+			additional.push({label:'Agenda', key: 'agenda', href: '/#agenda'});
+		//if sponsor categories are not empty, add them
+		if (res.locals.sponsorCategories.length)
+			additional.push({label: 'Partners', key: 'partners', href: '#partners'});
+
+		locals.navLinks = additional.concat(locals.navLinks);
+		
 		locals.footerLinks = [
 		{label: 'Contact', key: 'contact', href: '/contact'},
 		// {label: 'Terms & Conditions', key: 'legal', href: '/legal#terms-and-conditions'},
@@ -194,10 +208,24 @@ exports.getContent = function(req,res,next) {
 exports.getStaticPages = function (req,res, next) {
 	q = keystone.list('StaticPage').model
 	.find({showInMenu: true})
-	.select({name: 1, route: 1})
+	.select({name: 1, route: 1, showInMenu: 1, menuOrder: 1})
 	.exec(function(err,result) {
-		if (result)
+		if (result) {
+
 			res.locals.staticPages = result;
+
+
+			//insert menu items into navLinks
+			var navLinks = res.locals.navLinks;
+			var menuItems = result.filter(page => (page.showInMenu)).sort((a,b) => (Math.sign(a.menuOrder - b.menuOrder)));
+			console.log(menuItems);
+			for(var i = 0; i < menuItems.length; ++i) {
+				navLinks.splice(menuItems[i].menuOrder, //splice starting at menu order
+					0, // do not delete anything
+					{ label: menuItems[i].name,		key: menuItems[i].slug,		href: `/${menuItems[i].route}`});
+			}
+		}
 		next(err);
+
 	})
 }
