@@ -12,7 +12,7 @@ exports = module.exports = function(req, res) {
 			'speakers': 'Speaker',
 			'teamMembers': 'TeamMember',
 			'sponsors': 'Sponsor'
-		}
+		};
 		var schema = schemas[ref];
 		// let propName = ref;
 		return function(callback) {
@@ -21,7 +21,7 @@ exports = module.exports = function(req, res) {
 					edition[ref] = results;
 					callback(err);
 				});
-		}
+		};
 	}
 
 	function getRefs(edition, callback) {
@@ -34,7 +34,7 @@ exports = module.exports = function(req, res) {
 			getEachRef(edition, 'teamMembers', {}, 'sortOrder'),
 			getEachRef(edition, 'sponsors', {}, '')
 			], callback
-			)
+			);
 	}
 
 	function scaleImageHeight(photoUrl, height) {
@@ -62,11 +62,10 @@ exports = module.exports = function(req, res) {
 						// console.log(edition.sponsors);
 						// console.log(edition.teamMembers);
 						if(edition.photos.length)
-							edition.photos.forEach((photo) => { photo.url = scaleImageHeight(photo.secure_url, 400)});
+							edition.photos.forEach((photo) => { photo.url = scaleImageHeight(photo.secure_url, 400);});
 					});
-					
-
-					next()});
+					next();
+				});
 			}
 			else {
 				locals.editions = [];
@@ -77,4 +76,4 @@ exports = module.exports = function(req, res) {
 
 	view.render('pastEditions');
 
-}
+};

@@ -5,7 +5,6 @@ exports = module.exports = function(req, res) {
 	
 	var view = new keystone.View(req, res);
 	var locals = res.locals;
-	var edition = locals.currentEdition;
 	// Set locals
 	locals.title = 'Contact - Poland 2.0 Summit';
 	locals.section = 'contact';
@@ -14,15 +13,6 @@ exports = module.exports = function(req, res) {
 	locals.formData = req.body || {};
 	locals.validationErrors = {};
 	locals.enquirySubmitted = false;
-
-	// view.on('init', function(next) {
-	// 	edition.getRefs('TeamMember').exec(function(err, result) {
-	// 		edition.projectLeader = result.filter(teamMember =>  teamMember.position.toLowerCase() == "project leader")
-	// 		//edition.projectLeader = result.filter(teamMember =>  teamMember.position.toLowerCase() == "project leader")
-	// 	})
-	// })
-	
-	
 	
 	// On POST requests, add the Enquiry item to the database
 	view.on('post', { action: 'contact' }, function(next) {

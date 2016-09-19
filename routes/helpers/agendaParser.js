@@ -1,7 +1,7 @@
 String.prototype.toCamelCase = function() {
    return this.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
-    if (+match === 0) return ""; // or if (/\s+/.test(match)) for white spaces
-    return index == 0 ? match.toLowerCase() : match.toUpperCase();
+    if (+match === 0) return ''; // or if (/\s+/.test(match)) for white spaces
+    return index === 0 ? match.toLowerCase() : match.toUpperCase();
   });
 };
 // var agenda =
@@ -42,13 +42,13 @@ exports.parseAgenda = function(markdown) {
 			// .map(row => row.filter(str => str.length != 0) //remove empty strings from rows
 			// )
 			.map(row => ( row.map( cell => cell.trim() ))) // trim whitespace in cells
-			.filter(row => row.join('').length != 0); //remove empty rows; 
+			.filter(row => row.join('').length !== 0); //remove empty rows; 
 	}
-	function getHeadings(tableArr) {
-		var row = tableArr[0];
-		return row.filter(str => str.length != 0).map(str => str.toCamelCase()) //remove empty strings from rows
+	// function getHeadings(tableArr) {
+	// 	var row = tableArr[0];
+	// 	return row.filter(str => str.length !== 0).map(str => str.toCamelCase()); //remove empty strings from rows
 
-	}
+	// }
 	function parseCaptions(rows) {
 		var titles = [];
 		rows.forEach(row => {
@@ -60,7 +60,7 @@ exports.parseAgenda = function(markdown) {
 	}
 
 	function findTables(rows) {
-		tables= []; //tables is an array of objects
+		var tables= []; //tables is an array of objects
 		for (var i = 0; i < rows.length; ++i) {
 			if (rows[i].startsWith('|')) {
 				var table = {start: i, end: i};
@@ -93,10 +93,10 @@ exports.parseAgenda = function(markdown) {
 	}
 
 	function parse(markdown) {
-		parsedAgenda = [];
+		var parsedAgenda = [];
 		if (markdown) {
 			var rows = markdown.split(/\r|\n/);
-			rows = rows.filter(rowStr => rowStr.length != 0); //weird bug with keystone adding two newlines on each enter press
+			rows = rows.filter(rowStr => rowStr.length !== 0); //weird bug with keystone adding two newlines on each enter press
 			var tableIndices = findTables(rows);
 			var tables = tableIndices.map(index => splitTableCols(rows.slice(index.start, index.end)));
 			var bodies = tables.map(table => getBody(table));
@@ -105,7 +105,7 @@ exports.parseAgenda = function(markdown) {
 			var contents = bodies.map(body => tableToObject(body));
 			parsedAgenda = [];
 			for (var i = 0; i < contents.length; ++i) {
-				parsedAgenda.push({caption: captions[i], content: contents[i]})
+				parsedAgenda.push({caption: captions[i], content: contents[i]});
 			}	
 		}
 			// console.log(markdown)
@@ -120,8 +120,6 @@ exports.parseAgenda = function(markdown) {
 
 	}
 	return parse(markdown);
-}
-
-// exports.parseAgenda(agenda);
+};
 
 

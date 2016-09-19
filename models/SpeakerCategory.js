@@ -15,9 +15,9 @@ var SpeakerCategory = new keystone.List('SpeakerCategory', {
 SpeakerCategory.add({
 	name: { type: String, required: true },
 	singular: {type: String},
-	perColumn: {type: Number, label: "Speaker cards per column"},
-	maxWidth: {type: Number, label: "Maximum card width (px, em, rem)"},
-	edition: {type: Types.Relationship, ref: "Edition", many: true}
+	perColumn: {type: Number, label: 'Speaker cards per column'},
+	maxWidth: {type: Number, label: 'Maximum card width (px, em, rem)'},
+	edition: {type: Types.Relationship, ref: 'Edition', many: true}
 });
 
 

@@ -10,7 +10,7 @@
 
  String.prototype.capitalize = function() {
 	return this.charAt(0).toUpperCase() + this.slice(1);
-}
+};
 
 var _ = require('underscore');
 var keystone = require('keystone');
@@ -30,11 +30,9 @@ exports.initLocals = function(req, res, next) {
 	locals.navLinks = [
 		{ label: 'About PL2.0',		key: 'about',		href: '/about'},
 		{ label: 'Past Editions',		key: 'past-editions',		href: '/past-editions' },
-		
-		
 		];
 
-	q = keystone.list('ContentControl').model.findOne().exec(function(err, result) {
+	keystone.list('ContentControl').model.findOne().exec(function(err, result) {
 		var content = result;
 		var additional = [];
 		//add tickets link if live
@@ -59,7 +57,7 @@ exports.initLocals = function(req, res, next) {
 		{label: 'Bylaw for Poland 2.0', key: 'bylaw', href: result.bylawLink}
 	];
 		next(err);
-	})
+	});
 //	locals.user = req.user;
 	
 };
@@ -109,7 +107,7 @@ exports.initErrorHandlers = function(req, res, next) {
             errorTitle: title,
             errorMsg: message
         });
-    }
+    };
     
     res.notFound = function(title, message) {
 
@@ -117,7 +115,7 @@ exports.initErrorHandlers = function(req, res, next) {
             errorTitle: title,
             errorMsg: message
         });
-    }
+    };
     
     next();
     
@@ -142,40 +140,24 @@ exports.getCurrentEdition = function(req, res, next) {
 	}
 
 exports.loadSponsors = function(req, res, next) {
-		async.waterfall(
-			//get edition
-			[
-			getCurrent,
-			getSponsorCategories,
-			populateSponsorCategories, 
-			],
-			function(err, categories) {
-				res.locals.sponsorCategories = categories.filter(category => (category.sponsors.length)); //remove empty categories
-				//minify images
-				categories.forEach(category => {
-					category.sponsors.forEach(sponsor => {sponsor.logo.secure_url = scaleCloudinaryImg(sponsor.logo.secure_url, 600)});
-				});
-				next(err);
-			});
-
-
+		// define the steps to load sponsors of all sponsor categories  of current editions
 		function getCurrent(callback) {
-			var q = keystone.list('Edition')
+			keystone.list('Edition')
 				.model.findOne({current:true})
 				.exec(callback);
 		}
 
 		function getSponsorCategories(edition, callback) {
 			if(edition) {
-				var q = keystone.list('SponsorCategory')
+				keystone.list('SponsorCategory')
 					.model.find({edition: edition.id})
 					.sort({sortOrder: 1})
 					.exec((err, categories) => {
-						callback(err,categories,edition)
+						callback(err,categories,edition);
 					});
 			}
 			else {
-				callback(err, [], edition)
+				callback(null, [], edition);
 			}
 		}
 
@@ -192,33 +174,45 @@ exports.loadSponsors = function(req, res, next) {
 				}, 
 				function (err) {
 					callback(err, categories);
-				})
+				});
 		}
+		//execute a "waterfall" of the above functions
+		async.waterfall(
+			[
+			getCurrent,
+			getSponsorCategories,
+			populateSponsorCategories, 
+			],
+			//after the above are finished, the function below is called
+			function(err, categories) {
+				res.locals.sponsorCategories = categories.filter(category => (category.sponsors.length)); //remove empty categories
+				//minify images
+				categories.forEach(category => {
+					category.sponsors.forEach(sponsor => {sponsor.logo.secure_url = scaleCloudinaryImg(sponsor.logo.secure_url, 600);});
+				});
+				next(err);
+			});
 
 };
 
 exports.getContent = function(req,res,next) {
-	q = keystone.list('ContentControl').model.findOne().exec(function(err,result) {
+	keystone.list('ContentControl').model.findOne().exec(function(err,result) {
 		if (result)
 			res.locals.content = result;
 		next(err);
-	})
-}
+	});
+};
 
 exports.getStaticPages = function (req,res, next) {
-	q = keystone.list('StaticPage').model
+	keystone.list('StaticPage').model
 	.find({showInMenu: true})
 	.select({name: 1, route: 1, showInMenu: 1, menuOrder: 1})
 	.exec(function(err,result) {
 		if (result) {
-
 			res.locals.staticPages = result;
-
-
 			//insert menu items into navLinks
 			var navLinks = res.locals.navLinks;
 			var menuItems = result.filter(page => (page.showInMenu)).sort((a,b) => (Math.sign(a.menuOrder - b.menuOrder)));
-			console.log(menuItems);
 			for(var i = 0; i < menuItems.length; ++i) {
 				navLinks.splice(menuItems[i].menuOrder, //splice starting at menu order
 					0, // do not delete anything
@@ -227,5 +221,5 @@ exports.getStaticPages = function (req,res, next) {
 		}
 		next(err);
 
-	})
-}
+	});
+};

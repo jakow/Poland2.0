@@ -14,6 +14,6 @@ StaticPage.add({
 	showInMenu: Boolean,
 	menuOrder: {type: Number, dependsOn: {showInMenu: true}, default: 0},
 	content: {type: Types.Html, wysiwyg: false}
-})
+});
 
 StaticPage.register();

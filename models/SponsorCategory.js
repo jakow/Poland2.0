@@ -15,11 +15,11 @@ var SponsorCategory = new keystone.List('SponsorCategory', {
 SponsorCategory.add({
 	name: { type: String, required: true },
 	singular: {type: String},
-	perColumn: {type: Number, label: "Sponsor logos per column"},
-	showName: {type: Boolean, label: "Show sponsor category name in sponsor list. For example 'Strategic' sponsor category dislays as 'Strategic Partners'", default: true},
-	edition: {type: Types.Relationship, ref: "Edition", many: true}
+	perColumn: {type: Number, label: 'Sponsor logos per column'},
+	showName: {type: Boolean, label: 'Show sponsor category name in sponsor list', default: true},
+	edition: {type: Types.Relationship, ref: 'Edition', many: true}
 });
 
-SponsorCategory.relationship({  path: 'sponsor-categories', ref: 'Sponsor', refPath: "category"});
+SponsorCategory.relationship({  path: 'sponsor-categories', ref: 'Sponsor', refPath: 'category'});
 
 SponsorCategory.register();

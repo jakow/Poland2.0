@@ -15,7 +15,6 @@ TeamMember.add({
 	occupation: {type: String},
 	photo: {type: Types.CloudinaryImage, width: 400, height: 400},
 	description: {type: Types.Html, wysiwyg: true},
-	edition: {type: Date},
 	email: {type: Types.Email},
 	linkedin: {type: Types.Url},
 	//related to edition

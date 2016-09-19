@@ -1,5 +1,4 @@
 var keystone = require('keystone');
-var cloudinary = require('cloudinary');
 var agendaParser = require('../helpers/agendaParser');
 exports = module.exports = function(req, res) {
 	
@@ -7,14 +6,11 @@ exports = module.exports = function(req, res) {
 	var locals = res.locals;
 	var venue = locals.currentEdition.venue;
 	var date = locals.currentEdition.date;
-	var venueString = venue.name
+	var venueString = venue.name;
 	var dateString = date.dateString;
 	locals.title = `Poland 2.0 Summit${(dateString || venueString) ? ' - ' : ''}
 		${venueString}${venueString && dateString ? ', ' : ''}${date.dateString}`;
-
 	locals.speakers = {regular: [], keynote: []};
-	var regulars = locals.speakers.regular;
-	var keynotes = locals.speakers.keynote;
 	locals.section = 'home';
 	function scaleImg(photoUrl, width) {
 		if (typeof(photoUrl) === 'string')
@@ -26,16 +22,16 @@ exports = module.exports = function(req, res) {
 
 	//console.log(locals.sponsors);
 	view.on('init', function(next) {
-		var q = keystone.list('Speaker').model.find({edition: locals.currentEdition}).sort('sortOrder');
+		var q = keystone.list('Speaker').model.find({edition: locals.currentEdition.id}).sort('sortOrder');
 		q.exec(function(err,result) {
 			var regulars, keynotes;
 			if (result.length) {
 				//console.log(result);
-				regulars = result.filter(speaker => speaker.speakerType == 'regular');
-				keynotes = result.filter(speaker => speaker.speakerType == 'keynote');
-				regulars.forEach(speaker => {speaker.photo.url = scaleImg(speaker.photo.url, 350)});
+				regulars = result.filter(speaker => speaker.speakerType === 'regular');
+				keynotes = result.filter(speaker => speaker.speakerType === 'keynote');
+				regulars.forEach(speaker => {speaker.photo.url = scaleImg(speaker.photo.url, 350);});
 				//console.log(regulars);
-				keynotes.forEach(speaker => {speaker.photo.url = scaleImg(speaker.photo.url, 350)});
+				keynotes.forEach(speaker => {speaker.photo.url = scaleImg(speaker.photo.url, 350);});
 				locals.speakers.regular = regulars;
 				locals.speakers.keynote = keynotes;
 			}
@@ -55,10 +51,9 @@ exports = module.exports = function(req, res) {
 		[
 		{time, briefDescription, detailedDescription, speaker}]
 
-		Speakers can be multiple
 		*/
 		next();
-	})
+	});
 
 
 

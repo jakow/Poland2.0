@@ -31,14 +31,18 @@ keystone.pre('routes', middleware.getStaticPages);
 keystone.pre('render', middleware.flashMessages);
 
 
-keystone.set('404', function(req, res, next) {
-	middleware.loadSponsors(req, res, (err) => res.notFound()); 
+keystone.set('404', function(req, res) {
+	middleware.loadSponsors(req, res, 
+		// a hack to invoke not found
+		() => res.notFound()); 
 	// fixes missing sponsors in footer 
 });
 
-keystone.set('500', function(req, res, next)
+keystone.set('500', function(req, res)
 	{
-		middleware.loadSponsors(req, res, (err) => res.err()); 
+		middleware.loadSponsors(req, res,
+			// a hack to invoke an err
+			(err) => res.err(err)); 
 	});
 // Import Route Controllers
 var routes = {

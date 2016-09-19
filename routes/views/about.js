@@ -11,7 +11,7 @@ exports = module.exports = function(req, res) {
 	locals.title = 'About Poland 2.0 - Poland 2.0 Summit';
 	locals.data = {
 		team: []
-	}
+	};
 	function scaleImg(photoUrl, width) {
 		if (typeof(photoUrl) === 'string')
 			return photoUrl.replace('upload/', `upload/c_scale,w_${width},fl_progressive/`);
@@ -24,11 +24,11 @@ exports = module.exports = function(req, res) {
 		var q = keystone.list('TeamMember').model.find({edition: currentEdition}).sort('sortOrder'); //current edition - see middleware
 		q.exec(function(err, result) {
 			locals.data.team = result;
-			locals.data.team.forEach((member, idx) =>
+			locals.data.team.forEach(member =>
 			{
 				member.photo.small = scaleImg(member.photo.url, 400);
 				member.photo.large = scaleImg(member.photo.url, 400);
-			})
+			});
 			next(err);
 		});
 	});

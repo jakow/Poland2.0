@@ -28,8 +28,8 @@ exports = module.exports = function(req, res) {
 					keystone.get('name');
 					next();
 			}
-		})
-	})
+		});
+	});
 
 	view.render('staticPage');
-}
+};

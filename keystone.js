@@ -1,7 +1,7 @@
 
 // Simulate config options from your production environment by
 // customising the .env file in your project's root folder.
-if (process.env.NODE_ENV == 'development')
+if (process.env.NODE_ENV === 'development')
 	require('dotenv').load();
 
 // Require keystone
@@ -64,20 +64,20 @@ keystone.set('routes', require('./routes'));
 // Setup common locals for your emails. The following are required by Keystone's
 // default email templates, you may remove them if you're using your own.
 
-keystone.set('email locals', {
-	logo_src: '/images/logo-email.gif',
-	logo_width: 194,
-	logo_height: 76,
-	theme: {
-		email_bg: '#f9f9f9',
-		link_color: '#112233',
-		buttons: {
-			color: '#fff',
-			background_color: '#112233',
-			border_color: '##112233'
-		}
-	}
-});
+// keystone.set('email locals', {
+// 	logo_src: '/images/logo-email.gif',
+// 	logo_width: 194,
+// 	logo_height: 76,
+// 	theme: {
+// 		email_bg: '#f9f9f9',
+// 		link_color: '#112233',
+// 		buttons: {
+// 			color: '#fff',
+// 			background_color: '#112233',
+// 			border_color: '##112233'
+// 		}
+// 	}
+// });
 
 // Setup replacement rules for emails, to automate the handling of differences
 // between development a production.
@@ -117,7 +117,7 @@ keystone.set('cloudinary config', process.env.CLOUDINARY_URL );
 
 //openshift deployment
 if(process.env.OPENSHIFT_NODEJS_PORT) {
-	console.log('Setting node port')
+	console.log('Setting node port');
 	keystone.set('port', process.env.OPENSHIFT_NODEJS_PORT);
 }
 if(process.env.OPENSHIFT_NODEJS_IP) {
@@ -130,15 +130,15 @@ if (process.env.OPENSHIFT_MONGODB_DB_URL) {
 }
 
 if(process.env.OPENSHIFT_SECRET_TOKEN) {
-	console.log('setting SECRET tokeng');
-	keystone.set('cookie secret', process.env.OPENSHIFT_SECRET_TOKEN)
+	console.log('setting SECRET token');
+	keystone.set('cookie secret', process.env.OPENSHIFT_SECRET_TOKEN);
 }
 
 if(process.env.NODE_ENV === 'production')
-	keystone.set('session store', 'connect-mongo')
+	keystone.set('session store', 'connect-mongo');
 // Start Keystone to connect to your database and initialise the web server
 
-console.log(process.env.MONGO_URI)
+console.log(process.env.MONGO_URI);
 // console.log('NODE_ENV='+process.env.NODE_ENV)
 keystone.start();
 

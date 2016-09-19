@@ -16,13 +16,13 @@ ContentControl.add(
 			id: {
 				dependsOn: {'backgroundVideo.enable': true},
 				type: String, 
-				label: "Youtube video ID (11 character alphanumeric string, e.g. dQw4w9WgXcQ)"
+				label: 'Youtube video ID (11 character alphanumeric string, e.g. dQw4w9WgXcQ)'
 			}
 		},
 		homepageText: {type: Types.Html, label: 'Homepage intro section', wysiwyg: true},
 		aboutPoland20: {
-			bannerText: {type: Types.Html, wysiwyg: true, label: "'About Poland 2.0' section - Banner text"},
-			bodyText: {type: Types.Html, wysiwyg: true, label: "'About Poland 2.0' section - Body text"}
+			bannerText: {type: Types.Html, wysiwyg: true, label: '"About Poland 2.0" section - Banner text'},
+			bodyText: {type: Types.Html, wysiwyg: true, label: '"About Poland 2.0" section - Body text'}
 		},
 		testimonials: {type: String, label: 'Testimonials -  a list of quotes in DOUBLE QUOTES delimited by SEMICOLON in the form of: "quote text", author; "quote text", author;'}
 		
@@ -70,15 +70,15 @@ ContentControl.schema.virtual('parsedTestimonials').get(function() {
 	if (quotes)
 		return quotes.filter(quote => ('' !== quote)).map((quote) => {
 			var spl = quote.split(',');
-			var q = quote.match(/"([^"\\]*(?:\\.[^"\\]*)*)"/) //extract text between quotes
+			var q = quote.match(/"([^"\\]*(?:\\.[^"\\]*)*)"/); //extract text between quotes
 			console.log(q);
 			//quote could be wrapped in quotes, so split them
 			return {quote: q[0], 
-				author: spl[spl.length-1]}
+				author: spl[spl.length-1]};
 		});
 	else
 		return [];
-})
+});
 ContentControl.register();
 
 

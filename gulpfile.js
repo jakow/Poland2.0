@@ -34,7 +34,7 @@ var paths = {
 // gulp lint
 gulp.task('lint', function(){
 	gulp.src(paths.src)
-		.pipe(jshint())
+		.pipe(jshint({esversion:6}))
 		.pipe(jshint.reporter(jshintReporter));
 });
 
