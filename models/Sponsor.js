@@ -5,9 +5,9 @@ var Types = keystone.Field.Types;
 
 var Sponsor = new keystone.List('Sponsor', {
 	autokey: { from: 'name', path: 'key', unique: true },
-	// map: {name: 'name'},
+	map: {name: 'name'},
 	sortable: true,
-	defaultSort: 'name',
+	editable: true,
 	sortContext: 'Edition:sponsors'
 });
 

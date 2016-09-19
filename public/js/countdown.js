@@ -21,7 +21,7 @@ function Countdown(element, deadline) {
 	this.interval = null;
 	this.current = {secs: 0, mins: 0, hrs: 0, days: 0};
 	this.next = {secs: 0, mins: 0, hrs: 0, days: 0};
-
+	// this.setCounter(this.current);
 
 
 }
@@ -44,7 +44,7 @@ Countdown.prototype.start = function () {
 		this.updateCounter();
 		this.interval = setInterval(this.updateCounter.bind(this), 1000);
 	}
-	else this.setCounter(0);
+	else this.setCounter({secs: 0, mins: 0, hrs: 0, days:0});
 }
 Countdown.prototype.updateCounter = function() {
 		var next = this.next = this.getRemaining();
@@ -63,10 +63,10 @@ Countdown.prototype.updateCounter = function() {
 	}
 
 Countdown.prototype.setCounter = function(value) {
-	this.elements['secs'].innerHTML = value.secs;
-	this.elements['mins'].innerHTML = value.mins;
-	this.elements['hrs'].innerHTML = value.hrs;
-	this.elements['days'].innerHTML = value.days;
+	this.elements['secs'].innerHTML = value.secs < 10 ? "0"+ value.secs : value.secs;
+	this.elements['mins'].innerHTML = value.mins < 10 ? "0"+ value.mins : value.mins;
+	this.elements['hrs'].innerHTML = value.hrs < 10 ? "0"+ value.hrs : value.hrs;
+	this.elements['days'].innerHTML = value.days < 10 ? "0"+ value.days : value.days;
 
 
 }

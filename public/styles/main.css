@@ -4746,7 +4746,7 @@ input {
     transform: translateY(0); } }
 
 #home-banner .time-place {
-  margin: 0.5rem 0 1rem;
+  margin: 0.5rem 0 2rem;
   letter-spacing: 1px;
   font-size: 1rem;
   display: inline-flex; }

@@ -2,10 +2,12 @@ var keystone = require('keystone');
 var Types = keystone.Field.Types;
 
 var Speaker = new keystone.List('Speaker', {
+	autokey: { path: 'slug', from: 'name', unique: true },
+	map: { name: 'name' },
 	sortable: true,
-	sortContext: 'Edition:speakers',
-	defaultSort: 'name',
-	autokey: { path: 'slug', from: 'name', unique: true }
+	editable: true,
+	sortContext: 'Edition:speakers'
+
 });
 
 Speaker.add({
@@ -21,15 +23,6 @@ Speaker.add({
 });
 
 
-// Speaker.schema.pre('save', function(next) {
-// 	this.orderGiven() ? console.log('Order given') : console.log('Order NOT given');
-// 	if (!this.orderGiven()) {
-// 		this.order = 100;
-// 	}
-// 	next();
-// });
-
 
 Speaker.defaultColumns = 'name, speakerType, edition';
-Speaker.defaultSort = 'edition';
 Speaker.register();

@@ -3,7 +3,7 @@ var Types = keystone.Field.Types;
 
 var TeamMember = new keystone.List('TeamMember', {
 		map: { name: 'name' },
-	autokey: { path: 'slug', from: 'title', unique: true },
+	autokey: { path: 'slug', from: 'name', unique: true },
 	editable: true,
 	sortable: true,
 	sortContext: 'Edition:team-members'
