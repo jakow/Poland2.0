@@ -126,7 +126,12 @@ html(lang="en-GB")
 							style.
 								@media screen and (min-width: 45em) {
 								.#{category.key}.sponsor-list .sponsor {
-									flex: 1 0 #{100/category.perColumn}%
+									flex: 1 0 #{100/category.perColumn}%;
+								}
+
+								.#{category.key}.sponsor-list img {
+									#{category.imageAdjust.maxWidth ? "max-width: " + category.imageAdjust.maxWidth + ';' : null}
+									#{category.imageAdjust.maxHeight ? "max-height: " + category.imageAdjust.maxHeight +';' : null}
 								}
 								}
 					.center

@@ -17,6 +17,10 @@ SponsorCategory.add({
 	singular: {type: String},
 	perColumn: {type: Number, label: 'Sponsor logos per column'},
 	showName: {type: Boolean, label: 'Show sponsor category name in sponsor list', default: true},
+	imageAdjust: {
+		maxHeight: {type: String, label: 'Max height (px, em, rem, %)'},
+		maxWidth: {type: String, label: 'Max height (px, em, rem, %)'}
+	},
 	edition: {type: Types.Relationship, ref: 'Edition', many: true}
 });
 

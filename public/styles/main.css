@@ -4513,16 +4513,6 @@ footer, header {
       @media screen and (min-width: 45em) {
         .footer .sponsor-list .sponsor img {
           width: initial; } }
-  .footer .sponsor-list.strategic .sponsor img {
-    max-height: 200px; }
-  @media screen and (min-width: 45em) {
-    .footer .sponsor-list.strategic .sponsor {
-      flex: 0 1 50%; }
-      .footer .sponsor-list.strategic .sponsor img {
-        max-width: 400px; } }
-  @media screen and (min-width: 45em) {
-    .footer .sponsor-list.regular .sponsor {
-      flex: 0 1 33%; } }
 
 .button.white {
   background-color: #fefefe;

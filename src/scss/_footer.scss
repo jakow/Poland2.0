@@ -121,24 +121,24 @@ footer, header {
 		}
 
 	}
-	&.strategic .sponsor {
-		img {
-			max-height: 200px;
-			// width: 400px;
-		}
-		@include breakpoint(medium) {
-			flex: 0 1 50%;
-			img {
-				max-width: 400px;
-			}
-		}
+	// &.strategic .sponsor {
+	// 	img {
+	// 		max-height: 200px;
+	// 		// width: 400px;
+	// 	}
+	// 	@include breakpoint(medium) {
+	// 		flex: 0 1 50%;
+	// 		img {
+	// 			max-width: 400px;
+	// 		}
+	// 	}
 
-	}
+	// }
 
-	&.regular .sponsor {
-		@include breakpoint(medium) {
-			flex: 0 1 33%;
-		}
-	}
+	// &.regular .sponsor {
+	// 	@include breakpoint(medium) {
+	// 		flex: 0 1 33%;
+	// 	}
+	// }
 }
 
