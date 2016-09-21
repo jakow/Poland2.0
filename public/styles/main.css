@@ -4494,7 +4494,7 @@ footer, header {
   padding: var(--space) var(--space) 0;
   width: 100%; }
 
-.footer .sponsor-list {
+.sponsor-list {
   display: flex;
   margin: 0 0 1rem;
   flex-direction: row;
@@ -4502,16 +4502,16 @@ footer, header {
   align-items: center;
   flex-wrap: wrap;
   list-style: none; }
-  .footer .sponsor-list .sponsor {
+  .sponsor-list .sponsor {
     flex: 0 1 100%;
     text-align: center;
     padding: 1.25rem; }
-    .footer .sponsor-list .sponsor a {
+    .sponsor-list .sponsor a {
       display: inline-block; }
-    .footer .sponsor-list .sponsor img {
+    .sponsor-list .sponsor img {
       max-height: 150px; }
       @media screen and (min-width: 45em) {
-        .footer .sponsor-list .sponsor img {
+        .sponsor-list .sponsor img {
           width: initial; } }
 
 .button.white {
