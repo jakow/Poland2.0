@@ -58,8 +58,12 @@ Countdown.prototype.updateCounter = function() {
 
 				this.elements[key].innerHTML = current[key] < 10 ? "0"+ current[key]: current[key];
 		}
-		if (current.raw == 0)
+		if (current.raw <= 0) {
 			clearInterval(this.interval);
+			this.setCounter({secs: 0, mins: 0, hrs: 0, days:0});
+		}
+
+		}
 	}
 
 Countdown.prototype.setCounter = function(value) {

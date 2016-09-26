@@ -128,8 +128,9 @@ block content
 								.photo-large: img(src=speaker.photo.url)
 							//- .columns
 							.info
-								h3.uppercase= speaker.name
-								p.lead.lighter= speaker.position
+								h3.uppercase.bold= speaker.name
+								p.lead= speaker.position
+								p.lead= speaker.company
 								p.lighter= speaker.presentationTopic
 								.description: != speaker.description
 							button.button.hollow.close-button.medium.secondary(data-close aria-label="Close modal" type="button")
@@ -147,8 +148,9 @@ block content
 								.photo-large: img(src=speaker.photo.url)
 							//- .columns
 							.info
-								h3.uppercase= speaker.name
-								p.lead.lighter= speaker.position
+								h3.uppercase.bold= speaker.name
+								p.lead= speaker.position
+								p.lead= speaker.company
 								p.lighter= speaker.presentationTopic
 								.description: != speaker.description
 							button.button.hollow.close-button.medium.secondary(data-close aria-label="Close modal" type="button")
