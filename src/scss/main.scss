@@ -88,6 +88,7 @@ $bezier-move: cubic-bezier(0.4, 0, 0.23, 1);
 @import 'mc_form';
 
 @import 'countdown';
+@import 'item';
 
 
 
@@ -409,6 +410,7 @@ h1, h2, h3, h4,h5, h6 {
 
 .mailto {
 	&::before {
+		padding-right: 0.2em;
 		content: '\f0e0';
 		font-family: 'FontAwesome';
 	}
@@ -506,5 +508,10 @@ section, .container {
 		padding-left: 1rem;
 		padding-right: 1rem;
 	}
+}
+
+// IE SVG fix
+img[src*='.svg'] {
+	// width: 100%;
 }
 
