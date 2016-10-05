@@ -7,6 +7,7 @@ exports = module.exports = function(req, res) {
 	var pageRoute = req.params.pageRoute;
 	console.log('route: ', pageRoute);
 	var locals = res.locals;
+	
 
 
 	locals.pageContent = '';
@@ -26,7 +27,8 @@ exports = module.exports = function(req, res) {
 				locals.title = result.name ? 
 					(result.name + ' - ' + keystone.get('name')) : 
 					keystone.get('name');
-					next();
+				locals.section = result.route;
+				next();
 			}
 		});
 	});

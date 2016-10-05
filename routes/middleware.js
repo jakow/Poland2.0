@@ -216,7 +216,7 @@ exports.getStaticPages = function (req,res, next) {
 			for(var i = 0; i < menuItems.length; ++i) {
 				navLinks.splice(menuItems[i].menuOrder, //splice starting at menu order
 					0, // do not delete anything
-					{ label: menuItems[i].name,		key: menuItems[i].slug,		href: `/${menuItems[i].route}`});
+					{ label: menuItems[i].name,		key: menuItems[i].route,		href: `/${menuItems[i].route}`});
 			}
 		}
 		next(err);
