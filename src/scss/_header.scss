@@ -91,7 +91,7 @@ header.header {
 	}
 }
 .nav-collapse {
-	font-size: 1.25rem;
+	font-size: 1.1rem;
 	li {
 		padding: 0.5rem;
 		text-align: center;
@@ -100,9 +100,9 @@ header.header {
 
 #nav-desktop {
 	//font-size: 1.1rem;
-	font-size: 1.15rem;
+	font-size: 1rem;
 	@include breakpoint(large) {
-		font-size: 1.25rem;
+		font-size: 1rem;
 	}
 	width: 100%;
 	.menu {

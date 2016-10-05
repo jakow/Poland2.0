@@ -4349,17 +4349,17 @@ header.header {
   color: #e61b5a; }
 
 .nav-collapse {
-  font-size: 1.25rem; }
+  font-size: 1.1rem; }
   .nav-collapse li {
     padding: 0.5rem;
     text-align: center; }
 
 #nav-desktop {
-  font-size: 1.15rem;
+  font-size: 1rem;
   width: 100%; }
   @media screen and (min-width: 60em) {
     #nav-desktop {
-      font-size: 1.25rem; } }
+      font-size: 1rem; } }
   #nav-desktop .menu {
     display: flex;
     justify-content: center; }
