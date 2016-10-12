@@ -185,6 +185,7 @@ exports.loadSponsors = function(req, res, next) {
 			],
 			//after the above are finished, the function below is called
 			function(err, categories) {
+				console.log(res.locals);
 				res.locals.sponsorCategories = categories.filter(category => (category.sponsors.length)); //remove empty categories
 				//minify images
 				categories.forEach(category => {
