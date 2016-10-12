@@ -141,6 +141,7 @@ exports.getCurrentEdition = function(req, res, next) {
 
 exports.loadSponsors = function(req, res, next) {
 		// define the steps to load sponsors of all sponsor categories  of current editions
+		var locals = res.locals;
 		function getCurrent(callback) {
 			keystone.list('Edition')
 				.model.findOne({current:true})
@@ -185,10 +186,11 @@ exports.loadSponsors = function(req, res, next) {
 			],
 			//after the above are finished, the function below is called
 			function(err, categories) {
-				console.log(res.locals);
-				res.locals.sponsorCategories = categories.filter(category => (category.sponsors.length)); //remove empty categories
+
+				if(!locals) throw new Error('Locals were undefined...');
+				locals.sponsorCategories = categories.filter(category => (category.sponsors.length)); //remove empty categories
 				//minify images
-				categories.forEach(category => {
+				locals.sposnorCategories.forEach(category => {
 					category.sponsors.forEach(sponsor => {sponsor.logo.secure_url = scaleCloudinaryImg(sponsor.logo.secure_url, 600);});
 				});
 				next(err);
