@@ -111,7 +111,7 @@ block content
 	
 	if speakers.keynote.length || speakers.regular.length
 
-		section.divider-bottom.padded
+		section.padded
 			.hash-anchor(id="speakers")
 			.container
 			
@@ -160,13 +160,13 @@ block content
 
 		if content.agendaActive
 			.hash-anchor(id="agenda")
-			section.divider-bottom
+			section.padded(style="background: #223049")
 
-				h2.underlined.uppercase.center.lighter Agenda
+				h2.underlined.uppercase.center.lighter(style="color:white") Agenda
 				.agenda-container
 					each day in agenda
 						.container
-							h3= day.caption
+							h3(style="color:white")= day.caption
 						ul.agenda-accordion(data-accordion, data-allow-all-closed="true" data-multi-expand="true")
 							each entry in day.content
 								if entry.detailedDescription || entry.speakers

@@ -5185,69 +5185,12 @@ a.card, .card > a {
   .morph-overlay.visible {
     background: rgba(0, 0, 0, 0.6); }
 
-.agenda {
-  max-width: 50rem;
-  margin: 0 auto; }
-  .agenda table {
-    width: 100%;
-    margin-bottom: 1rem;
-    border-radius: 2px;
-    color: #223049; }
-    .agenda table thead,
-    .agenda table tbody,
-    .agenda table tfoot {
-      border: 1px solid #f1f1f1;
-      background-color: #fefefe; }
-    .agenda table caption {
-      font-weight: bold;
-      padding: 0.5rem 0.625rem 0.625rem; }
-    .agenda table thead,
-    .agenda table tfoot {
-      background: #f8f8f8;
-      color: #0a0a0a; }
-      .agenda table thead tr,
-      .agenda table tfoot tr {
-        background: transparent; }
-      .agenda table thead th,
-      .agenda table thead td,
-      .agenda table tfoot th,
-      .agenda table tfoot td {
-        padding: 0.5rem 0.625rem 0.625rem;
-        font-weight: bold;
-        text-align: left; }
-    .agenda table tbody tr:nth-child(odd) {
-      background-color: #f1f1f1; }
-    .agenda table tbody th,
-    .agenda table tbody td {
-      padding: 0.5rem 0.625rem 0.625rem; }
-    @media screen and (max-width: 44.9375em) {
-      .agenda table thead th:first-child {
-        display: block; }
-      .agenda table thead th {
-        display: none; }
-      .agenda table tfoot {
-        display: none; }
-      .agenda table tr,
-      .agenda table th,
-      .agenda table td {
-        display: block; }
-      .agenda table td {
-        border-top: 0; } }
-    .agenda table thead {
-      display: none; }
-    .agenda table tbody {
-      border: none; }
-    .agenda table td:first-child {
-      font-weight: bold; }
-    @media screen and (min-width: 45em) {
-      .agenda table td:first-child {
-        width: 10em; } }
-
 .agenda-container {
   max-width: 50rem;
   margin: 0 auto; }
 
 .agenda-accordion {
+  margin-bottom: 1.5em;
   list-style-type: none;
   background: #fefefe;
   margin-left: 0; }
@@ -5255,11 +5198,12 @@ a.card, .card > a {
     position: relative; }
     .agenda-accordion .agenda-accordion-item:active {
       background: #f2f2f2; }
-    .agenda-accordion .agenda-accordion-item:hover .agenda-accordion-title, .agenda-accordion .agenda-accordion-item:active .agenda-accordion-title {
-      color: #e61b5a; }
     .agenda-accordion .agenda-accordion-item.is-active .open-close-icon {
       transform: rotate(45deg); }
+    .agenda-accordion .agenda-accordion-item:not(:last-child) .agenda-accordion-title {
+      border-bottom: 0 !important; }
   .agenda-accordion .agenda-accordion-title {
+    ransition: background 0.15s cubic-bezier(0.4, 0, 0.23, 1);
     display: block;
     padding: 1.25rem 1rem;
     line-height: 1;
@@ -5268,6 +5212,7 @@ a.card, .card > a {
     position: relative;
     border: 1px solid #f2f2f2;
     border-bottom: 0;
+    border-radius: 0 !important;
     color: inherit;
     display: flex;
     flex-direction: column;

@@ -1,42 +1,4 @@
-.agenda {
-	max-width: 50rem;
-	margin: 0 auto;
-	table{
-		@include table(odd);
-		@include breakpoint(small only) {
-			@include table-stack(true);	
-		}
-			thead {
-			display: none;
-		}
 
-		tbody {border: none; }
-		color: $primary-color;
-		
-	
-		// // td {
-		// // 	padding: 3rem 0;
-		// // }
-		// tr {
-			
-		// 	&:not(:last-child) {
-		// 		border-bottom: 1px solid $medium-gray;
-		// 	}
-		// }
-		// td:not(:last-child) {
-		// 	border-right: 1px solid $medium-gray;
-		// }
-		td:first-child {
-			font-weight: bold;
-
-		}
-		@include breakpoint(medium) {
-			td:first-child {
-				width: 10em;
-			}
-		}
-	}
-}
 
 $accordion-plusminus: false;
 .agenda-container {
@@ -44,7 +6,7 @@ $accordion-plusminus: false;
 	margin: 0 auto;
 }
 .agenda-accordion {
-	
+	margin-bottom: 1.5em;
 	@include accordion-container;
 	// border: 0;
 	.agenda-accordion-item {
@@ -57,7 +19,8 @@ $accordion-plusminus: false;
 		}
 		&:hover, &:active {
 			.agenda-accordion-title {
-			color: $secondary-color;
+			// color: $secondary-color;
+			// background: $medium-gray;
 		}
 		}
 		&.is-active {
@@ -67,11 +30,15 @@ $accordion-plusminus: false;
 			 // box-shadow: 0px 0px 0px 1px $primary-color;
 			// z-index: 2;
 		}
-
+		&:not(:last-child)  .agenda-accordion-title {
+			border-bottom: 0 !important;
+		}
 		
 	}
 	.agenda-accordion-title {
+		ransition: background 0.15s cubic-bezier(0.4, 0, 0.23, 1);
 		@include accordion-title;
+		border-radius: 0 !important;
 		 color: inherit;
 		 display: flex;
 		 flex-direction: column;
@@ -119,6 +86,9 @@ $accordion-plusminus: false;
 				}
 			}
 		}
+
+		// override borders because they're ugly
+
 	}
 	.agenda-accordion-content {
 		font-size: 0.9rem;
