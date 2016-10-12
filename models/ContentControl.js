@@ -47,6 +47,12 @@ ContentControl.add(
 			type: Types.Markdown, 
 			label: 'Agenda text - use Markdown', 
 			default: '[instructions - do not remove]: <> (Use markdown tables in the form of: | time | brief description | detailed description | speaker |. The description of markdown tables can be found here: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#tables)'
+		},
+		displayLegend: {type:Boolean, label: 'Display location legend for agenda'},
+		legend: {
+			type: Types.Markdown,
+			label: 'Location legend',
+			default: '[instructions - do not remove]: <> (Use markdown tables in the form of: | Abbreviation | Full name and address |. The description of markdown tables can be found here: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#tables)'
 		}
 	},
 	'Legal',

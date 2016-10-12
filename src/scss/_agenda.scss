@@ -6,7 +6,7 @@ $accordion-plusminus: false;
 	margin: 0 auto;
 }
 .agenda-accordion {
-	margin-bottom: 1.5em;
+	margin-bottom: 2em;
 	@include accordion-container;
 	// border: 0;
 	.agenda-accordion-item {
@@ -46,21 +46,39 @@ $accordion-plusminus: false;
 		 	flex-direction: row;
 		 }
 		 font-size: 0.85rem;
-		 > div:first-child {
-			margin-bottom: 1em;
+		 .time {
 			font-weight: bold;
 			@include breakpoint(medium) {
 				margin-bottom: 0;
 				flex: 0 0 160px;
 			}
 		 }
-		 
-		 .ev {
+		> .ev {
 		 	margin-right: 1.25rem;
+		 	flex: 1;
 		 	@include breakpoint(medium) {
 		 		margin-right: none;
 		 	}
 		 }
+ 		> .location {
+			@include breakpoint(medium) {
+			flex: 0 0 80px;
+		}
+			color: $dark-gray;
+		}
+
+		 //add some spacing in mobile
+		 > :not(:last-child) {
+		 	margin-bottom: 1em;
+		 	@include breakpoint(medium) {
+				margin-bottom: 0;
+			}
+		}
+
+
+
+		 
+
 		 .open-close {
 			display: block;
 			position: absolute;
@@ -108,4 +126,10 @@ $accordion-plusminus: false;
 	.accordion-content {
 		display: none !important;
 	}
+}
+
+.agenda-legend-container {
+		td:first-child {
+			width: 100px;
+		}
 }

@@ -172,20 +172,24 @@ block content
 								if entry.detailedDescription || entry.speakers
 									li.agenda-accordion-item(class="accordion-item" data-accordion-item)
 										a.agenda-accordion-title(href="#")
-											.time!=entry.time
+											.time=entry.time
 											.ev!=entry.briefDescription
+											.location #{entry.location.length ? `(${entry.location})` : ''}
 											.open-close: .open-close-icon
 										.agenda-accordion-content(data-tab-content)
-											if entry.speaker
-												p Speaker(s): 
-													strong!=entry.speaker
 											p!= entry.detailedDescription
 								else
 									li.agenda-accordion-item.accordion-item(data-accordion-item).empty
 										a.agenda-accordion-title
 											.time!=entry.time
 											.ev!=entry.briefDescription
+											.location #{entry.location.length ? `(${entry.location})` : ''}
 										.agenda-accordion-content.accordion-content(data-tab-content)
+
+					if content.displayLegend
+						.container
+							h3(style="color:white") Location legend
+						div.agenda-legend-container!= content.legend.html
 
 										
 

@@ -6,7 +6,7 @@ String.prototype.toCamelCase = function() {
 };
 // var agenda =
 // `### Day 1
-// |  time | brief description | detailed description | speaker | 
+// |  time | brief description | detailed description | location | 
 // |---|---|
 // |  9:00-9:30   | Conference registration start | Lorem ipsum dolor | Jon Bon Jovi 
 // |  10:00-11:30 | Conference registration end | sit amet consectetur adipiscing | Tommy Lee Jones
@@ -87,7 +87,7 @@ exports.parseAgenda = function(markdown) {
 			obj.time = row[0];
 			obj.briefDescription = row[1];
 			obj.detailedDescription = row[2];
-			obj.speaker = row[3];
+			obj.location = row[3];
 			return obj;
 		});
 	}
@@ -112,8 +112,8 @@ exports.parseAgenda = function(markdown) {
 			// console.log(rows)
 			// console.log(tableIndices)
 			// console.log(tables)
-			 // console.log(bodies)
-			 // console.log(captions)
+			//  console.log(bodies)
+			//  console.log(captions)
 			 // console.log(contents)
 			//  console.log(parsedAgenda)
 		return parsedAgenda;

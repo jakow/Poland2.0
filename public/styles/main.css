@@ -5190,7 +5190,7 @@ a.card, .card > a {
   margin: 0 auto; }
 
 .agenda-accordion {
-  margin-bottom: 1.5em;
+  margin-bottom: 2em;
   list-style-type: none;
   background: #fefefe;
   margin-left: 0; }
@@ -5225,18 +5225,28 @@ a.card, .card > a {
     @media screen and (min-width: 45em) {
       .agenda-accordion .agenda-accordion-title {
         flex-direction: row; } }
-    .agenda-accordion .agenda-accordion-title > div:first-child {
-      margin-bottom: 1em;
+    .agenda-accordion .agenda-accordion-title .time {
       font-weight: bold; }
       @media screen and (min-width: 45em) {
-        .agenda-accordion .agenda-accordion-title > div:first-child {
+        .agenda-accordion .agenda-accordion-title .time {
           margin-bottom: 0;
           flex: 0 0 160px; } }
-    .agenda-accordion .agenda-accordion-title .ev {
-      margin-right: 1.25rem; }
+    .agenda-accordion .agenda-accordion-title > .ev {
+      margin-right: 1.25rem;
+      flex: 1; }
       @media screen and (min-width: 45em) {
-        .agenda-accordion .agenda-accordion-title .ev {
+        .agenda-accordion .agenda-accordion-title > .ev {
           margin-right: none; } }
+    .agenda-accordion .agenda-accordion-title > .location {
+      color: #8a8a8a; }
+      @media screen and (min-width: 45em) {
+        .agenda-accordion .agenda-accordion-title > .location {
+          flex: 0 0 80px; } }
+    .agenda-accordion .agenda-accordion-title > :not(:last-child) {
+      margin-bottom: 1em; }
+      @media screen and (min-width: 45em) {
+        .agenda-accordion .agenda-accordion-title > :not(:last-child) {
+          margin-bottom: 0; } }
     .agenda-accordion .agenda-accordion-title .open-close {
       display: block;
       position: absolute;
@@ -5276,6 +5286,9 @@ a.card, .card > a {
 
 .accordion-item.empty .accordion-content {
   display: none !important; }
+
+.agenda-legend-container td:first-child {
+  width: 100px; }
 
 .contact a.mailto {
   color: #e61b5a; }
