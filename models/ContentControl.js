@@ -23,8 +23,9 @@ ContentControl.add(
 		aboutPoland20: {
 			bannerText: {type: Types.Html, wysiwyg: true, label: '"About Poland 2.0" section - Banner text'},
 			bodyText: {type: Types.Html, wysiwyg: true, label: '"About Poland 2.0" section - Body text'}
-		},
-		testimonials: {type: String, label: 'Testimonials -  a list of quotes in DOUBLE QUOTES delimited by SEMICOLON in the form of: "quote text", author; "quote text", author;'}
+		}
+		// ,
+		// testimonials: {type: String, label: 'Testimonials -  a list of quotes in DOUBLE QUOTES delimited by SEMICOLON in the form of: "quote text", author; "quote text", author;'}
 		
 	},
 	'Speakers & Registration',
@@ -51,15 +52,8 @@ ContentControl.add(
 		displayLegend: {type:Boolean, label: 'Display location legend for agenda'},
 		legend: {
 			type: Types.Markdown,
-			label: 'Location legend',
-			default: '[instructions - do not remove]: <> (Use markdown tables in the form of: | Abbreviation | Full name and address |. The description of markdown tables can be found here: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#tables)'
+			label: 'Location legend'
 		}
-	},
-	'Legal',
-	{
-		privacyPolicy: {type: Types.Html, wysiwyg: true},
-		termsAndConditions: {type: Types.Html, wysiwyg: true},
-		bylawLink: {type: Types.Url, label: 'Link to "Bylaw for Poland 2.0 Document"'}
 	},
 	'Technical',
 	{
@@ -67,24 +61,24 @@ ContentControl.add(
 	}	
 	);
 
-ContentControl.schema.virtual('parsedTestimonials').get(function() {
-	//quotes must be array of strings...
-	console.log(this.testimonials);
-	if (!this.testimonials) return [];
-	var quotes = this.testimonials.split(';');
-	console.log('quotes: ', quotes);
-	if (quotes)
-		return quotes.filter(quote => ('' !== quote)).map((quote) => {
-			var spl = quote.split(',');
-			var q = quote.match(/"([^"\\]*(?:\\.[^"\\]*)*)"/); //extract text between quotes
-			console.log(q);
-			//quote could be wrapped in quotes, so split them
-			return {quote: q[0], 
-				author: spl[spl.length-1]};
-		});
-	else
-		return [];
-});
+// ContentControl.schema.virtual('parsedTestimonials').get(function() {
+// 	//quotes must be array of strings...
+// 	console.log(this.testimonials);
+// 	if (!this.testimonials) return [];
+// 	var quotes = this.testimonials.split(';');
+// 	console.log('quotes: ', quotes);
+// 	if (quotes)
+// 		return quotes.filter(quote => ('' !== quote)).map((quote) => {
+// 			var spl = quote.split(',');
+// 			var q = quote.match(/"([^"\\]*(?:\\.[^"\\]*)*)"/); //extract text between quotes
+// 			console.log(q);
+// 			//quote could be wrapped in quotes, so split them
+// 			return {quote: q[0], 
+// 				author: spl[spl.length-1]};
+// 		});
+// 	else
+// 		return [];
+// });
 ContentControl.register();
 
 

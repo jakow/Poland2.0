@@ -186,11 +186,10 @@ exports.loadSponsors = function(req, res, next) {
 			],
 			//after the above are finished, the function below is called
 			function(err, categories) {
-
-				if(!locals) throw new Error('Locals were undefined...');
-				locals.sponsorCategories = categories.filter(category => (category.sponsors.length)); //remove empty categories
+				console.log(res)
+				res.locals.sponsorCategories = categories.filter(category => (category.sponsors.length)); //remove empty categories
 				//minify images
-				locals.sponsorCategories.forEach(category => {
+				res.locals.sponsorCategories.forEach(category => {
 					category.sponsors.forEach(sponsor => {sponsor.logo.secure_url = scaleCloudinaryImg(sponsor.logo.secure_url, 600);});
 				});
 				next(err);
