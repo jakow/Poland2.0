@@ -174,7 +174,7 @@ block content
 										a.agenda-accordion-title(href="#")
 											.time=entry.time
 											.ev!=entry.briefDescription
-											.location= entry.location.length ? '('+entry.location+')' : ''
+											.location= entry.location && entry.location.length ? '('+entry.location+')' : ''
 											.open-close: .open-close-icon
 										.agenda-accordion-content(data-tab-content)
 											p!= entry.detailedDescription
@@ -183,7 +183,7 @@ block content
 										a.agenda-accordion-title
 											.time!=entry.time
 											.ev!=entry.briefDescription
-											.location= entry.location.length ? '('+entry.location+')' : ''
+											.location= entry.location && entry.location.length ? '('+entry.location+')' : ''
 										.agenda-accordion-content.accordion-content(data-tab-content)
 
 					if content.displayLegend
