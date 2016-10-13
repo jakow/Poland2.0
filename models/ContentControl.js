@@ -32,6 +32,10 @@ ContentControl.add(
 	{speakerRegistrationActive: Boolean,
 	speakerMenuButton: Boolean,
 	speakerMenuTarget: Types.Url},
+	'Sponsors',
+	{
+		showSponsors: Boolean
+	},
 	'Tickets',
 	{
 	ticketsLive: Boolean,

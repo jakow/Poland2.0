@@ -28,7 +28,9 @@ exports.initLocals = function(req, res, next) {
 		{ label: 'Past Editions',		key: 'past-editions',		href: '/past-editions' },
 		];
 
-	keystone.list('ContentControl').model.findOne().exec(function(err, result) {
+	keystone.list('ContentControl').model.findOne()
+	.select({ticketsLive: 1, speakerMenuButton:1, agendaActive:1, })
+	.exec(function(err, result) {
 		var content = result;
 		var additional = [];
 		//add tickets link if live
@@ -41,7 +43,7 @@ exports.initLocals = function(req, res, next) {
 		if (content.agendaActive)
 			additional.push({label:'Agenda', key: 'agenda', href: '/#agenda'});
 		//if sponsor categories are not empty, add them
-		if (res.locals.sponsorCategories.length)
+		if (content.showSponsors)
 			additional.push({label: 'Partners', key: 'partners', href: '#partners'});
 
 		locals.navLinks = additional.concat(locals.navLinks);
