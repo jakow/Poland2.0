@@ -64,7 +64,6 @@ Countdown.prototype.updateCounter = function() {
 		}
 
 		}
-	}
 
 Countdown.prototype.setCounter = function(value) {
 	this.elements['secs'].innerHTML = value.secs < 10 ? "0"+ value.secs : value.secs;

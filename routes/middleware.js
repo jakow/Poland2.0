@@ -29,31 +29,36 @@ exports.initLocals = function(req, res, next) {
 		];
 
 	keystone.list('ContentControl').model.findOne()
-	.select({ticketsLive: 1, speakerMenuButton:1, agendaActive:1, })
+	// .select({ticketsLive: 1, speakerMenuButton:1, agendaActive:1, showSponsors:1 })
 	.exec(function(err, result) {
 		var content = result;
 		var additional = [];
-		//add tickets link if live
-		if (content.ticketsLive)
-			additional.push({label:'Tickets', key: 'tickets', href: content.ticketsUrl});
-		//add speaker menu if live
-		if (content.speakerMenuButton)
-			additional.push({label:'Speakers', key: 'speakers', href: content.speakerMenuTarget});
-		// add agenda link if active
-		if (content.agendaActive)
-			additional.push({label:'Agenda', key: 'agenda', href: '/#agenda'});
-		//if sponsor categories are not empty, add them
-		if (content.showSponsors)
-			additional.push({label: 'Partners', key: 'partners', href: '#partners'});
+		if (content) {
+			//add tickets link if live
+			if (content.ticketsLive)
+				additional.push({label:'Tickets', key: 'tickets', href: content.ticketsUrl});
+			//add speaker menu if live
+			if (content.speakerMenuButton)
+				additional.push({label:'Speakers', key: 'speakers', href: content.speakerMenuTarget});
+			// add agenda link if active
+			if (content.agendaActive)
+				additional.push({label:'Agenda', key: 'agenda', href: '/#agenda'});
+			//if sponsor categories are not empty, add them
+			if (content.showSponsors)
+				additional.push({label: 'Partners', key: 'partners', href: '#partners'});
 
-		locals.navLinks = additional.concat(locals.navLinks);
-		
+			locals.navLinks = additional.concat(locals.navLinks);
+		}
 		locals.footerLinks = [
 		{label: 'Contact', key: 'contact', href: '/contact'},
 		// {label: 'Terms & Conditions', key: 'legal', href: '/legal#terms-and-conditions'},
 		// {label: 'Privacy Policy', key: 'legal', href: '/legal#privacy-policy'},
 		{label: 'Bylaw for Poland 2.0', key: 'bylaw', href: result.bylawLink}
-	];
+
+		];
+
+		locals.content = result;
+
 		next(err);
 	});
 //	locals.user = req.user;
@@ -184,7 +189,7 @@ exports.loadSponsors = function(req, res, next) {
 			],
 			//after the above are finished, the function below is called
 			function(err, categories) {
-				console.log(res)
+				if(!res.locals) res.locals = {}; // what an awful hack
 				res.locals.sponsorCategories = categories.filter(category => (category.sponsors.length)); //remove empty categories
 				//minify images
 				res.locals.sponsorCategories.forEach(category => {
@@ -195,14 +200,6 @@ exports.loadSponsors = function(req, res, next) {
 				next(err);
 			});
 
-};
-
-exports.getContent = function(req,res,next) {
-	keystone.list('ContentControl').model.findOne().exec(function(err,result) {
-		if (result)
-			res.locals.content = result;
-		next(err);
-	});
 };
 
 exports.getStaticPages = function (req,res, next) {
