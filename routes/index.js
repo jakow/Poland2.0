@@ -57,7 +57,6 @@ exports = module.exports = function(app) {
 	app.get('/', middleware.getCurrentEdition, routes.views.index);
 	// app.get('/news/:category?', routes.views.news);
 	// app.get('/news/post/:post', routes.views.post);
-	app.get('/gallery', routes.views.gallery);
 	app.all('/contact', middleware.getCurrentEdition, routes.views.contact);
 	app.all('/about', middleware.getCurrentEdition, routes.views.about);
 	app.all('/past-editions', routes.views.pastEditions);

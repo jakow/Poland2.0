@@ -186,7 +186,9 @@ exports.loadSponsors = function(req, res, next) {
 				res.locals.sponsorCategories = categories.filter(category => (category.sponsors.length)); //remove empty categories
 				//minify images
 				res.locals.sponsorCategories.forEach(category => {
-					category.sponsors.forEach(sponsor => {sponsor.logo.secure_url = scaleCloudinaryImg(sponsor.logo.secure_url, 600);});
+					category.sponsors.forEach(sponsor => {
+						sponsor.logo.secure_url = scaleCloudinaryImg(sponsor.logo.secure_url, 600);
+					});
 				});
 				next(err);
 			});

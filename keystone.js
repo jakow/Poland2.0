@@ -138,7 +138,7 @@ if(process.env.NODE_ENV === 'production')
 	keystone.set('session store', 'connect-mongo');
 // Start Keystone to connect to your database and initialise the web server
 
-console.log(process.env.MONGO_URI);
+// console.log(process.env.MONGO_URI);
 // console.log('NODE_ENV='+process.env.NODE_ENV)
 keystone.start();
 
