@@ -87,16 +87,16 @@ exports.flashMessages = function(req, res, next) {
 	Prevents people from accessing protected pages when they're not signed in
  */
 
-exports.requireUser = function(req, res, next) {
+// exports.requireUser = function(req, res, next) {
 	
-	if (!req.user) {
-		req.flash('error', 'Please sign in to access this page.');
-		res.redirect('/keystone/signin');
-	} else {
-		next();
-	}
+// 	if (!req.user) {
+// 		req.flash('error', 'Please sign in to access this page.');
+// 		res.redirect('/keystone/signin');
+// 	} else {
+// 		next();
+// 	}
 	
-};
+// };
 
 exports.initErrorHandlers = function(req, res, next) {
     
@@ -144,7 +144,7 @@ exports.loadSponsors = function(req, res, next) {
 		console.log(res);
 		function getCurrent(callback) {
 			keystone.list('Edition')
-				.model.findOne({current:true})
+				.model.findOne({current:true}).select({id: 1})
 				.exec(callback);
 		}
 
