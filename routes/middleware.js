@@ -141,7 +141,7 @@ exports.getCurrentEdition = function(req, res, next) {
 
 exports.loadSponsors = function(req, res, next) {
 		// define the steps to load sponsors of all sponsor categories  of current editions
-		var locals = res.locals;
+		console.log(res);
 		function getCurrent(callback) {
 			keystone.list('Edition')
 				.model.findOne({current:true})
