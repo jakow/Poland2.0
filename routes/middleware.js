@@ -8,10 +8,6 @@
  * modules in your project's /lib directory.
  */
 
- String.prototype.capitalize = function() {
-	return this.charAt(0).toUpperCase() + this.slice(1);
-};
-
 var _ = require('underscore');
 var keystone = require('keystone');
 var async = require('async');
