@@ -20,17 +20,17 @@ exports = module.exports = function(req, res) {
 			return ''; // fail silently
 	}
 
-	//console.log(locals.sponsors);
+
 	view.on('init', function(next) {
 		var q = keystone.list('Speaker').model.find({edition: locals.currentEdition.id}).sort('sortOrder');
 		q.exec(function(err,result) {
 			var regulars, keynotes;
 			if (result.length) {
-				//console.log(result);
+
 				regulars = result.filter(speaker => speaker.speakerType === 'regular');
 				keynotes = result.filter(speaker => speaker.speakerType === 'keynote');
 				regulars.forEach(speaker => {speaker.photo.url = scaleImg(speaker.photo.url, 350);});
-				//console.log(regulars);
+
 				keynotes.forEach(speaker => {speaker.photo.url = scaleImg(speaker.photo.url, 350);});
 				locals.speakers.regular = regulars;
 				locals.speakers.keynote = keynotes;

@@ -69,7 +69,7 @@ exports.initLocals = function(req, res, next) {
 exports.initErrorHandlers = function(req, res, next) {
     
     res.err = function(err, title, message) {
-    	// console.log(res.locals);
+
         return res.status(500).render('errors/500', {
             err: err,
             errorTitle: title,
@@ -109,7 +109,7 @@ exports.getCurrentEdition = function(req, res, next) {
 
 exports.loadSponsors = function(req, res, next) {
 		// define the steps to load sponsors of all sponsor categories  of current editions
-		console.log(res);
+
 		function getCurrent(callback) {
 			keystone.list('Edition')
 				.model.findOne({current:true}).select({id: 1})

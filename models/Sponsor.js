@@ -17,6 +17,11 @@ Sponsor.add({
 	logo: {type: Types.CloudinaryImage, autoCleanup: true},
 	description: {type: Types.Html, wysiwyg: true},
 	url: {type: Types.Url},
+
+	imageAdjust: {
+		width: {type: String, label: 'Width (px, %, em,rem)'},
+		height: {type: String, label: 'Height (px, %, em,rem)'}
+	},
 	//related to edition
 	edition: {type: Types.Relationship, ref: 'Edition'},
 	//and to a sponsor category
