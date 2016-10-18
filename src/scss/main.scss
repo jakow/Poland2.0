@@ -476,6 +476,7 @@ section, .container {
 
 .g-map {
 	position: relative;
+	margin-bottom: -6px;
 }
 
 
@@ -507,6 +508,31 @@ section, .container {
 		padding-left: 1rem;
 		padding-right: 1rem;
 	}
+}
+
+.v-mid {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.v-bot {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+.ven-card {
+	background: white;
+	padding-top: 8px;
+	overflow: hidden;
+	border-radius: 2px;
+	margin-bottom: 1rem;
+}
+.ven-nfo { // venue info
+	height: 100px;
+	font-size: 0.9em;
+	color: $dark-gray;
+	padding: 6px 10px 1rem;
+	border-bottom: 1px solid $light-gray;
 }
 
 // IE SVG fix
