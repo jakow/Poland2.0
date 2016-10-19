@@ -163,51 +163,49 @@ block content
 											.ev!=entry.briefDescription
 											.location= entry.location && entry.location.length ? '('+entry.location+')' : ''
 										.agenda-accordion-content.accordion-content(data-tab-content)
-
-					if content.displayLegend
-						.container
-							h3(style="color:white") Locations
-						div.agenda-legend-container!= content.legend.html
-
-				h2.center.uppercase.lighter.underlined(style="color:white;") Venues
-				.row(style="max-width: 100%;")
-					.columns.medium-3.small-12
-						.ven-card
-							.lead.uppercase.center Friday's venue
-							.v-bot.ven-nfo
-								div Union Building
-								div Beit Quadrangle
-								div Prince Consort Rd
-								div London SW7 2BB, United Kingdom
-							.g-map.
-								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2518.3779137170604!2d-0.17805089605796492!3d51.50024970596765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x69d050f55be596d5!2sUnion+Concert+Hall!5e0!3m2!1sen!2spl!4v1476740385724" width="100%" height="270" frameborder="0" style="border:0" allowfullscreen></iframe>
-					.columns.medium-3.small-12
-						.ven-card
-							.lead.uppercase.center Friday's social
-							.v-bot.ven-nfo
-								div Smollensky's
-								div 105 Strand
-								div London WC2R 0AA, United Kingdom
-							.g-map.
-								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.1849828334375!2d-0.12189551713735923!3d51.51031433825318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ca32de4c37%3A0xc843d0fd4490314b!2sSmollensky&#39;s!5e0!3m2!1sen!2spl!4v1476735966747" width="100%" height="270" frameborder="0" style="border:0" allowfullscreen></iframe>
-					.columns.medium-3.small-12
-						.ven-card
-							.lead.uppercase.center Saturday's venue
-							.v-bot.ven-nfo
-								div Sir Alexander Fleming Building
-								div Prince Consort Rd
-								div London SW7 2BB, United Kingdom
-							.g-map.
-								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.8450453491337!2d-0.1784836843328941!3d51.4977109796336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876055ccaed341f%3A0x4327fb85b374d5e3!2sSir+Alexander+Fleming+Building!5e0!3m2!1sen!2spl!4v1476741585096" width="100%" height="270" frameborder="0" style="border:0" allowfullscreen></iframe>
-					.columns.medium-3.small-12
-						.ven-card
-							.lead.uppercase.center The ball
-							.v-bot.ven-nfo
-								div Porchester Hall
-								div Porchester Rd
-								div London W2 5HS, United Kingdom
-							.g-map.
-								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5377.554342389855!2d-0.1913252094126599!3d51.51744999052579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487610007f46a997%3A0x45ab0200aeb87a5a!2sPorchester+Hall!5e0!3m2!1sen!2spl!4v1476742329109" width="100%" height="270" frameborder="0" style="border:0" allowfullscreen></iframe>
+				
+				if content.showVenues	
+					.hash-anchor(id="venue")
+					section.padded-bottom(style="background: #223049")
+					h2.center.uppercase.lighter.underlined(style="color:white;") Venues
+					.row(style="max-width: 100%;")
+						.columns.medium-3.small-12
+							.ven-card
+								.lead.uppercase.center Friday's venue
+								.v-bot.ven-nfo
+									div Union Building
+									div Beit Quadrangle
+									div Prince Consort Rd
+									div London SW7 2BB, United Kingdom
+								.g-map.
+									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2518.3779137170604!2d-0.17805089605796492!3d51.50024970596765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x69d050f55be596d5!2sUnion+Concert+Hall!5e0!3m2!1sen!2spl!4v1476740385724" width="100%" height="270" frameborder="0" style="border:0" allowfullscreen></iframe>
+						.columns.medium-3.small-12
+							.ven-card
+								.lead.uppercase.center Friday's social
+								.v-bot.ven-nfo
+									div Smollensky's
+									div 105 Strand
+									div London WC2R 0AA, United Kingdom
+								.g-map.
+									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.1849828334375!2d-0.12189551713735923!3d51.51031433825318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604ca32de4c37%3A0xc843d0fd4490314b!2sSmollensky&#39;s!5e0!3m2!1sen!2spl!4v1476735966747" width="100%" height="270" frameborder="0" style="border:0" allowfullscreen></iframe>
+						.columns.medium-3.small-12
+							.ven-card
+								.lead.uppercase.center Saturday's venue
+								.v-bot.ven-nfo
+									div Sir Alexander Fleming Building
+									div Prince Consort Rd
+									div London SW7 2BB, United Kingdom
+								.g-map.
+									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.8450453491337!2d-0.1784836843328941!3d51.4977109796336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876055ccaed341f%3A0x4327fb85b374d5e3!2sSir+Alexander+Fleming+Building!5e0!3m2!1sen!2spl!4v1476741585096" width="100%" height="270" frameborder="0" style="border:0" allowfullscreen></iframe>
+						.columns.medium-3.small-12
+							.ven-card
+								.lead.uppercase.center The ball
+								.v-bot.ven-nfo
+									div Porchester Hall
+									div Porchester Rd
+									div London W2 5HS, United Kingdom
+								.g-map.
+									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5377.554342389855!2d-0.1913252094126599!3d51.51744999052579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487610007f46a997%3A0x45ab0200aeb87a5a!2sPorchester+Hall!5e0!3m2!1sen!2spl!4v1476742329109" width="100%" height="270" frameborder="0" style="border:0" allowfullscreen></iframe>
 
 
 										

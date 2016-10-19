@@ -38,19 +38,20 @@ ContentControl.add(
 	},
 	'Tickets',
 	{
-	ticketsLive: Boolean,
-	ticketsUrl: Types.Url,
-	ticketMessage: {type: String},
-	countdown: Boolean,
-	countdownDate: {type: String, dependsOn: {countdown: true}},
-	ticketRegistrationSignup: {type: Boolean, label: 'Ticket newsletter signup active'},
+		ticketsLive: Boolean,
+		ticketsUrl: Types.Url,
+		ticketMessage: {type: String},
+		countdown: Boolean,
+		countdownDate: {type: String, dependsOn: {countdown: true}},
+		ticketRegistrationSignup: {type: Boolean, label: 'Ticket newsletter signup active'},
 	},
 	'Agenda',
 	{
 		agendaActive: Boolean,
+		showVenues: {type: Boolean, dependsOn: {agendaActive: true}},
 		agenda: {
 			type: Types.Markdown, 
-			label: 'Agenda text - use Markdown', 
+			label: 'Agenda - use Markdown', 
 			default: '[instructions - do not remove]: <> (Use markdown tables in the form of: | time | brief description | detailed description | speaker |. The description of markdown tables can be found here: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#tables)'
 		},
 		displayLegend: {type:Boolean, label: 'Display location legend for agenda'},

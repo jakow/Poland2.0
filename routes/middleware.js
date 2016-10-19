@@ -44,6 +44,8 @@ exports.initLocals = function(req, res, next) {
 			if (content.agendaActive)
 				additional.push({label:'Agenda', key: 'agenda', href: '/#agenda'});
 			//if sponsor categories are not empty, add them
+			if (content.showVenues)
+				additional.push({label: 'Venue', key: 'venue', href: '/#venue'});
 			if (content.showSponsors)
 				additional.push({label: 'Partners', key: 'partners', href: '#partners'});
 
