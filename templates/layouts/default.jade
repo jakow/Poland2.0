@@ -1,5 +1,7 @@
 include ../mixins/flash-messages
 include ../mixins/analytics
+include ../mixins/partner-modal
+
 mixin menu(links)
 	ul.menu(class!=attributes.class)
 		each link in links
@@ -8,8 +10,9 @@ mixin menu(links)
 				if link.children
 					+menu(link.children, dr)
 
-mixin imgAdjust(imgSrc, imgAlt, imageAdjust)
+mixin img-adjust(imgSrc, imgAlt, imageAdjust)
 	img(src=imgSrc alt=imgAlt style=(imageAdjust.height ? "max-height:"+ imageAdjust.height+";" : "")+(imageAdjust.width? "max-width:" + imageAdjust.width+";": ""))
+
 
 
 doctype html
@@ -113,9 +116,17 @@ html(lang="en-GB")
 									ul.sponsor-list(class=category.key)
 										each sponsor in category.sponsors
 											li.sponsor
-												a(href=sponsor.url title=sponsor.name target="_blank")
-													span.sr-only=sponsor.name
-													+imgAdjust(sponsor.logo.secure_url, sponsor.name, sponsor.imageAdjust)
+												if sponsor.description
+													a(data-open="modal-"+sponsor.id)
+														span.sr-only=sponsor.name
+														+img-adjust(sponsor.logo.secure_url, sponsor.name, sponsor.imageAdjust)
+												else
+													a(href=sponsor.url title=sponsor.name target="_blank")
+														span.sr-only=sponsor.name
+														+img-adjust(sponsor.logo.secure_url, sponsor.name, sponsor.imageAdjust)
+									each sponsor in category.sponsors
+										if sponsor.description
+											+partner-modal("modal-"+sponsor.id, sponsor)
 					
 					each category in sponsorCategories
 

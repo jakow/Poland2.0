@@ -215,6 +215,11 @@ $doc.ready(function() {
 	$mapContainer.mouseleave(function() { $map.css("pointer-events", "none"); });
 });
 
+$('[id^="modal"] .close-button').click(function() {
+	//why does this not work normally?
+	$(this).parent().foundation('close');
+	});
+
 
 
 

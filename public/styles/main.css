@@ -5075,68 +5075,68 @@ a.card, .card > a {
   a.card:hover, .card > a:hover {
     color: #5f5f5f; }
 
-.people-reveal {
+.modal {
   background: white;
   color: #262626;
   border: 0;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
   @media screen and (min-width: 45em) {
-    .people-reveal {
+    .modal {
       border-radius: 3px; } }
-  .people-reveal .close-button {
+  .modal .close-button {
     font-size: 1em;
     height: 2.5em;
     width: 2.5em;
     padding: 0em;
     border-radius: 50%; }
-    .people-reveal .close-button .close-icon {
+    .modal .close-button .close-icon {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%); }
-      .people-reveal .close-button .close-icon::before, .people-reveal .close-button .close-icon::after {
+      .modal .close-button .close-icon::before, .modal .close-button .close-icon::after {
         background: #e61b5a; }
-      .people-reveal .close-button .close-icon::before, .people-reveal .close-button .close-icon::after {
+      .modal .close-button .close-icon::before, .modal .close-button .close-icon::after {
         transition: background ease-in-out 0.15s; }
-    .people-reveal .close-button:hover .close-icon::before, .people-reveal .close-button:hover .close-icon::after {
+    .modal .close-button:hover .close-icon::before, .modal .close-button:hover .close-icon::after {
       background: white; }
-  .people-reveal .photo-container {
+  .modal .photo-container {
     margin: 0 0 1.5em;
     position: relative;
     text-align: center; }
     @media screen and (orientation: landscape) {
-      .people-reveal .photo-container {
+      .modal .photo-container {
         margin: 0 1.5em 1.5em 0;
         float: left; } }
     @media screen and (min-width: 45em) {
-      .people-reveal .photo-container {
+      .modal .photo-container {
         margin: 0 1.5em 1.5em 0;
         float: left;
         text-align: left; } }
-  .people-reveal .photo-large {
+  .modal .photo-large {
     display: inline-block;
     padding: 0.25em;
     border-radius: 50%;
     border: 2px solid #e61b5a; }
-    .people-reveal .photo-large img {
+    .modal .photo-large img {
       max-height: 12rem;
       border-radius: 50%; }
       @media screen and (min-width: 45em) {
-        .people-reveal .photo-large img {
+        .modal .photo-large img {
           max-height: 18rem; } }
-  .people-reveal .info {
+  .modal .info {
     text-align: center;
     clear: both; }
     @media screen and (orientation: landscape) {
-      .people-reveal .info {
+      .modal .info {
         clear: none; } }
     @media screen and (min-width: 45em) {
-      .people-reveal .info {
+      .modal .info {
         clear: none;
         text-align: left; } }
-    .people-reveal .info > * {
+    .modal .info > * {
       margin-bottom: 0.5rem; }
-    .people-reveal .info .description {
+    .modal .info .description {
       text-align: left; }
 
 .slide-fade-in.mui-enter {
@@ -5974,7 +5974,7 @@ body.noscroll {
   .row.padded.top, .container.padded.top, section.padded.top {
     padding-bottom: 0; }
   .row.padded.bottom, .container.padded.bottom, section.padded.bottom {
-    padding-bottom: 0; }
+    padding-top: 0; }
 
 #poland {
   position: absolute;
@@ -6206,6 +6206,7 @@ section, .container {
 .ven-nfo {
   height: 100px;
   font-size: 0.9em;
+  flex: 0 0 25%;
   color: #5f5f5f;
   padding: 6px 10px 1rem;
   border-bottom: 1px solid #f2f2f2; }
