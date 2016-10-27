@@ -6210,3 +6210,19 @@ section, .container {
   color: #5f5f5f;
   padding: 6px 10px 1rem;
   border-bottom: 1px solid #f2f2f2; }
+
+.secondary-arrow-top {
+  position: relative;
+  z-index: 20; }
+  .secondary-arrow-top::before {
+    content: '';
+    width: 48px;
+    height: 40px;
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 24px solid transparent;
+    border-right: 24px solid transparent;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid #e61b5a; }

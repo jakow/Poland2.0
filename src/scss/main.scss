@@ -540,3 +540,26 @@ section, .container {
 img[src*='.svg'] {
 	// width: 100%;
 }
+
+@mixin arrow-top($color, $width, $height) {
+	position: relative;
+	z-index: 20;
+	&::before {
+		content: '';
+		width: $width;
+		height: $height;
+		position: absolute;
+		top: -1*$height;
+		left: 50%;
+		transform: translateX(-50%);
+		border-left: $width/2 solid transparent;
+		border-right: $width/2 solid transparent;
+		border-top: $height/2 solid transparent;
+		border-bottom: $height/2 solid $color;
+	}
+}
+
+.secondary-arrow-top {
+	@include arrow-top($secondary-color, 48px, 40px);
+}
+

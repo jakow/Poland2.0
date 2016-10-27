@@ -63,7 +63,11 @@ ContentControl.add(
 	'Technical',
 	{
 		gaTrackingID: {type: String, label: 'Google Analytics Tracking ID'}
-	}	
+	},
+	'Legal',
+	{
+	bylawLink: {type: Types.Url, label: 'Link to "Bylaw for Poland 2.0 Document"'}
+	}
 	);
 
 // ContentControl.schema.virtual('parsedTestimonials').get(function() {

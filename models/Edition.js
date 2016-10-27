@@ -91,6 +91,7 @@ Edition.schema.methods.getRefs = function(ref, filters) {
 };
 
 
+
 Edition.relationship({path: 'speakers', ref: 'Speaker', refPath: 'edition'});
 Edition.relationship({path: 'team-members', ref: 'TeamMember', refPath: 'edition'});
 Edition.relationship({path: 'sponsors', ref: 'Sponsor', refPath: 'edition'});
