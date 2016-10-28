@@ -64,7 +64,7 @@ block content
 						//- 					a(href='mailto:'+member.email)= member.email
 						//- 					a(href=linkedin)= member.linkedin
 			each member in data.team 
-				.large.reveal.people-reveal(id="modal"+member.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
+				.large.reveal.modal(id="modal"+member.slug, data-reveal, data-animation-in="slide-fade-in" data-animation-out="slide-fade-out")
 							//- .row
 							//- .columns.small-12.shrink.center
 							.photo-container
