@@ -1,18 +1,32 @@
-import * as Keystone from 'keystone';
-const Types = Keystone.Field.Types;
+import * as keystone from 'keystone';
+import mongoose from 'mongoose';
+const Types = keystone.Field.Types;
+function timeValidate(message = 'Invalid time entered') {
+  return {
+    message,
+    validator: (v: string) => /[0-9]{1,2}:[0-9]{2}\s*(am|pm)?/.test(v),
+  };
+}
 
-const AgendaEntry = new Keystone.List('AgendaEntry', {
+interface AgendaEntryDocument extends mongoose.Document {
+  name: string;
+  description: string;
+  image: keystone.Schema.CloudinaryImage;
+  time: {
+    start: string;
+    end: string;
+  };
+  speakers: keystone.Schema.Relationship;
+  agendaDay: keystone.Schema.Relationship;
+  venue: keystone.Schema.Relationship;
+}
+
+const AgendaEntry = new keystone.List<AgendaEntryDocument>('AgendaEntry', {
   map: { name: 'name' },
   autokey: { from: 'year', path: 'slug', unique: true },
   defaultSort: 'time.start',
 });
 
-function timeValidate(message = 'Invalid time entered') {
-  return {
-    message,
-    validator: (v) => /[0-9]{1,2}:[0-9]{2}\s*(am|pm)?/.test(v),
-  };
-}
 
 AgendaEntry.add({
   name: {type: String, required: true},
@@ -30,4 +44,4 @@ AgendaEntry.add({
 AgendaEntry.defaultColumns = 'name, time.start, time.end';
 AgendaEntry.register();
 
-module.exports = AgendaEntry;
+export default AgendaEntry;

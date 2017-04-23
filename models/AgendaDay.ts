@@ -1,16 +1,15 @@
-import * as Keystone from 'keystone';
+import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
-const Types = Keystone.Field.Types;
+const Types = keystone.Field.Types;
 
 interface AgendaDayDocument extends mongoose.Document {
   date: Date;
   description: string;
-  venue: Keystone.Relationship;
-  edition: Keystone.Relationship;
-  image: Keystone.Cloudinary.Image;
+  edition: keystone.Schema.Relationship;
+  image: keystone.Schema.CloudinaryImage;
 }
 
-const AgendaDay = new Keystone.List<AgendaDayDocument>('AgendaDay', {
+const AgendaDay = new keystone.List<AgendaDayDocument>('AgendaDay', {
 	// map: { name: 'name' },
   autokey: { from: 'name', path: 'slug', unique: true },
   defaultSort: 'date',
@@ -29,3 +28,5 @@ AgendaDay.relationship({path: 'agenda-entries', ref: 'AgendaEntry', refPath: 'ag
 
 
 AgendaDay.register();
+
+export default AgendaDay;

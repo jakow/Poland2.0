@@ -1,24 +1,31 @@
 {
     "compilerOptions": {
         "lib": ["es2015", "es2016", "es2017"],
-        "outDir": "./dist/",
+        "outDir": "./build/",
         "sourceMap": true,
         "noImplicitAny": true,
         "module": "commonjs",
         "moduleResolution": "node",
         "target": "es6",
         "allowSyntheticDefaultImports": true,
+        "allowJs": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "noFallthroughCasesInSwitch": true,
         "typeRoots": ["./node_modules/@types"]
     },
     "include": [
-        "src/**/*",
-        "test/**/*"
+    //   "./@types/**/*"
+      "models/**/*"
     ],
     "files": [
-      "./@types/**/*",
-      "src/index.ts"
+      "./@types/keystone/index.d.ts",
+      "./@types/keystone-utils/index.d.ts",
+      "./@types/mongoose/index.d.ts",
+      "./index.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "test"
     ]
 }
