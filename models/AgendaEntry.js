@@ -4,13 +4,13 @@ const Types = keystone.Field.Types;
 const AgendaEntry = new keystone.List('AgendaEntry', {
 	map: { name: 'name' },
 	autokey: { from: 'year', path: 'slug', unique: true },
-	defaultSort: 'date'
+	defaultSort: 'time.start'
 });
 
 function timeValidate(message = 'Invalid time entered') {
 		return {
 			message,
-			validator: (v) => /[0-9]{1,2}:[0-9]{2}\s?(am|pm)?/.test(v)
+			validator: (v) => /[0-9]{1,2}:[0-9]{2}\s*(am|pm)?/.test(v)
 		}
 }
 
@@ -29,6 +29,5 @@ AgendaEntry.add({
 
 AgendaEntry.defaultColumns = 'name, time.start, time.end';
 AgendaEntry.register();
-
 
 module.exports = AgendaEntry;

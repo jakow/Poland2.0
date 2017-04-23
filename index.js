@@ -2,7 +2,7 @@ if (process.env.NODE_ENV === 'development')
 	require('dotenv').load();
 
 const keystone = require('keystone');
-// custom mongoose instance updated for high node versions
+// custom mongoose instance updated for high node versions and for higher performance bluebird promise library
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 keystone.init({
@@ -10,7 +10,7 @@ keystone.init({
 	'name': 'Poland 2.0',
 	'brand': 'Poland 2.0',
 	'static': ['public'],
-	'favicon': 'public/favicon.ico',
+	// 'favicon': 'public/favicon.ico',
 	'views': 'templates/views',
 	// 'view engine': 'handlebars',
 	'auto update': true,

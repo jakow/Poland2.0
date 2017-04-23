@@ -17,7 +17,6 @@ AgendaDay.add({
   venue: {type: Types.Relationship, ref: 'Venue'}
 });
 
-
 AgendaDay.relationship({path: 'agenda-entries', ref: 'AgendaEntry', refPath: 'agendaDay'});
 
 AgendaDay.register();
