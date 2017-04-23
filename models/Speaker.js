@@ -1,7 +1,7 @@
-var keystone = require('keystone');
-var Types = keystone.Field.Types;
+const keystone = require('keystone');
+const Types = keystone.Field.Types;
 
-var Speaker = new keystone.List('Speaker', {
+const Speaker = new keystone.List('Speaker', {
 	autokey: { path: 'slug', from: 'name', unique: true },
 	map: { name: 'name' },
 	sortable: true,

@@ -1,7 +1,7 @@
-var keystone = require('keystone');
-var Types = keystone.Field.Types;
+const keystone = require('keystone');
+const Types = keystone.Field.Types;
 
-var StaticPage = new keystone.List('StaticPage', {
+const StaticPage = new keystone.List('StaticPage', {
 	map: { name: 'name' },
 	autokey: { from: 'name', path: 'slug', unique: true },
 	defaultSort: '-name'

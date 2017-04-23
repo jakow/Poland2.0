@@ -8,6 +8,7 @@
  * modules in your project's /lib directory.
  */
 
+// TODO replace async lib spaghhetti with ES7 async/await
 var _ = require('underscore');
 var keystone = require('keystone');
 var async = require('async');

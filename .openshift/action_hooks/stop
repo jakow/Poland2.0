@@ -1,3 +1,0 @@
-echo "Starting maintenance web server."
-nohup python ${OPENSHIFT_RUNTIME_DIR}/maintenance/maintenance.py > /tmp/nohup.out 2>&1&
-echo $! > ${OPENSHIFT_RUN_DIR}/maintenance.pid

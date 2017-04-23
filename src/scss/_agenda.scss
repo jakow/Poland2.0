@@ -15,7 +15,7 @@ $accordion-plusminus: false;
 		// background: white;
 		&:active {
 			background: $light-gray;
-			
+
 		}
 		&:hover, &:active {
 			.agenda-accordion-title {
@@ -33,10 +33,10 @@ $accordion-plusminus: false;
 		&:not(:last-child)  .agenda-accordion-title {
 			border-bottom: 0 !important;
 		}
-		
+
 	}
 	.agenda-accordion-title {
-		ransition: background 0.15s cubic-bezier(0.4, 0, 0.23, 1);
+		transition: background 0.15s cubic-bezier(0.4, 0, 0.23, 1);
 		@include accordion-title;
 		border-radius: 0 !important;
 		 color: inherit;
@@ -77,7 +77,7 @@ $accordion-plusminus: false;
 
 
 
-		 
+
 
 		 .open-close {
 			display: block;
@@ -98,7 +98,7 @@ $accordion-plusminus: false;
 					height: 2px;
 					background: $primary-color;
 					top: calc(50% - 1px);
-				} 
+				}
 				&::before {
 					transform: rotate(90deg);
 				}
@@ -112,7 +112,7 @@ $accordion-plusminus: false;
 		font-size: 0.9rem;
 		@include accordion-content;
 		p {
-			margin-bottom: 0.6em;	
+			margin-bottom: 0.6em;
 		}
 	}
 

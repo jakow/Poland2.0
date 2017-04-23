@@ -1,4 +1,0 @@
-echo "pulling Bower components"
-HOME=$HOME/app-root/runtime
-cd ~/repo
-./node_modules/.bin/bower install

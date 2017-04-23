@@ -1,12 +1,12 @@
-var keystone = require('keystone');
-var Types = keystone.Field.Types;
+const keystone = require('keystone');
+const Types = keystone.Field.Types;
 
 /**
  * SpeakerCategory Model
  * ==================
  */
 
-var SpeakerCategory = new keystone.List('SpeakerCategory', {
+const SpeakerCategory = new keystone.List('SpeakerCategory', {
 	autokey: { from: 'name', path: 'key', unique: true },
 	sortable: true,
 	sortContext: 'Edition:sponsor-categories'

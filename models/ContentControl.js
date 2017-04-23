@@ -1,6 +1,6 @@
-var keystone = require('keystone');
-var Types = keystone.Field.Types;
-var ContentControl = new keystone.List('ContentControl', {
+const keystone = require('keystone');
+const Types = keystone.Field.Types;
+const ContentControl = new keystone.List('ContentControl', {
 		map: { name: 'title' },
 		autokey: { path: 'slug', from: 'title' },
 		nocreate: true,
@@ -15,7 +15,7 @@ ContentControl.add(
 			enable: {type: Boolean},
 			id: {
 				dependsOn: {'backgroundVideo.enable': true},
-				type: String, 
+				type: String,
 				label: 'Youtube video ID (11 character alphanumeric string, e.g. dQw4w9WgXcQ)'
 			}
 		},
@@ -26,7 +26,7 @@ ContentControl.add(
 		}
 		// ,
 		// testimonials: {type: String, label: 'Testimonials -  a list of quotes in DOUBLE QUOTES delimited by SEMICOLON in the form of: "quote text", author; "quote text", author;'}
-		
+
 	},
 	'Speakers & Registration',
 	{speakerRegistrationActive: Boolean,
@@ -45,20 +45,10 @@ ContentControl.add(
 		countdownDate: {type: String, dependsOn: {countdown: true}},
 		ticketRegistrationSignup: {type: Boolean, label: 'Ticket newsletter signup active'},
 	},
-	'Agenda',
+	'Agenda & Venues',
 	{
 		agendaActive: Boolean,
-		showVenues: {type: Boolean, dependsOn: {agendaActive: true}},
-		agenda: {
-			type: Types.Markdown, 
-			label: 'Agenda - use Markdown', 
-			default: '[instructions - do not remove]: <> (Use markdown tables in the form of: | time | brief description | detailed description | speaker |. The description of markdown tables can be found here: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#tables)'
-		},
-		displayLegend: {type:Boolean, label: 'Display location legend for agenda'},
-		legend: {
-			type: Types.Markdown,
-			label: 'Location legend'
-		}
+		showVenues: Boolean,
 	},
 	'Technical',
 	{
@@ -69,25 +59,7 @@ ContentControl.add(
 	bylawLink: {type: Types.Url, label: 'Link to "Bylaw for Poland 2.0 Document"'}
 	}
 	);
-
-// ContentControl.schema.virtual('parsedTestimonials').get(function() {
-// 	//quotes must be array of strings...
-// 	console.log(this.testimonials);
-// 	if (!this.testimonials) return [];
-// 	var quotes = this.testimonials.split(';');
-// 	console.log('quotes: ', quotes);
-// 	if (quotes)
-// 		return quotes.filter(quote => ('' !== quote)).map((quote) => {
-// 			var spl = quote.split(',');
-// 			var q = quote.match(/"([^"\\]*(?:\\.[^"\\]*)*)"/); //extract text between quotes
-// 			console.log(q);
-// 			//quote could be wrapped in quotes, so split them
-// 			return {quote: q[0], 
-// 				author: spl[spl.length-1]};
-// 		});
-// 	else
-// 		return [];
-// });
+	
 ContentControl.register();
 
 

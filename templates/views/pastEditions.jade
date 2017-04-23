@@ -20,12 +20,12 @@ block content
 				li.caption Go to edition:
 				each edition in editions
 					li
-						a.button.hollow.secondary(href="##{edition.slug}")= edition.fullName
+						a.button.hollow.secondary(href="##{edition.slug}")= edition.name
 
 	each edition, index in editions
 		.edition(id="#{edition.slug}" data-magellan-target="#{edition.slug}" )
 			.container.edition-info
-				h2= edition.fullName
+				h2= edition.name
 
 				if edition.date.dateString || edition.venue.name
 					h3.small
