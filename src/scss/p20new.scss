@@ -1,0 +1,17 @@
+// in this sheet I gather ideas for the next design;
+$black: #262626;
+$dark-color: #263238;
+$alert-color: #FF6259;
+
+
+//button border should be colored on hover
+//button presses pushes the butotn further in z-axis, just like real life buttons
+body {
+	line-height: 1.43;
+	font-size: 14px;
+	color: #262626; // base black
+}
+.p20-new {
+	padding: 7px 21px; // fontsize*0.5 fontsize * 1.5 = 0.5em 1.5em;
+	font-size: 14px; 
+}
