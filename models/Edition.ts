@@ -1,9 +1,9 @@
 import * as keystone from 'keystone';
-import mongoose from 'mongoose';
+import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
-import moment from 'moment';
+import * as moment from 'moment';
 
-interface EditionDocument extends mongoose.Document {
+export interface EditionDocument extends mongoose.Document {
   year: number;
   name: string;
   current: boolean;

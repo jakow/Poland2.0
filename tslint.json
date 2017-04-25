@@ -11,8 +11,10 @@
       "no-namespace": false,
       "no-unused-variable": [true],
       "quotemark": ["single"],
-      "no-console": [true, "log", "error"],
-      "object-literal-sort-keys": false
+      "no-console": [true, "log"],
+      "object-literal-sort-keys": false,
+      "no-var-requires": false,
+      "only-arrow-functions": [true, "allow-declarations", "allow-named-functions"]
     },
     "rulesDirectory": []
 }

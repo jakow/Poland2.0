@@ -1,5 +1,5 @@
 import * as keystone from 'keystone';
-import mongoose from 'mongoose';
+import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
 
 interface SpeakerDocument extends mongoose.Document {

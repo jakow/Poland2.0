@@ -7,7 +7,7 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "target": "es6",
-        "allowSyntheticDefaultImports": true,
+        "allowSyntheticDefaultImports": false,
         "allowJs": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
@@ -16,16 +16,19 @@
     },
     "include": [
     //   "./@types/**/*"
-      "models/**/*"
+      "models/**/*",
+      "./**/*"
     ],
     "files": [
       "./@types/keystone/index.d.ts",
       "./@types/keystone-utils/index.d.ts",
       "./@types/mongoose/index.d.ts",
+      "./config.ts",
       "./index.ts"
     ],
     "exclude": [
         "node_modules",
-        "test"
+        "test",
+        "client"
     ]
 }

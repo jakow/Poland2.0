@@ -4,15 +4,14 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 const config = {
-  target: 'node', node: {__filename: false, __dirname: false},
-  externals: nodeExternals(),
-  entry: './src/index.ts',
+  target: 'browser',
+  entry: './main.ts',
   output: {
     libraryTarget: 'commonjs2',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '..', 'build', 'client'),
     filename: 'index.js'
   },
-  resolve: { extensions: ['.ts', '.tsx', '.js'] },
+  resolve: { extensions: ['.ts', '.tsx', '.js', '.jsx'] },
   devtool: 'source-map',
   module: {
   rules: [
@@ -20,20 +19,10 @@ const config = {
         test: /\.tsx?$/,
         use: ['ts-loader']
       },
-      // {
-      //   test: /\.(hbs|html|png|svg|woff|ttf|jpe?g)$/,
-      //   use: [
-      //     {
-      //     loader:'file-loader',
-      //     options: { name: '[path][name].[ext]', context: 'src'},
-      //     // query: {}
-      //     }
-      //   ]
-      // },
       {
         test: /\.s?css$/,
         use: [
-
+            ['style-loader', 'css-loader', 'sass-loader']
         ]
       }
   ],

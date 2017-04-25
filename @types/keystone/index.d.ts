@@ -1,10 +1,141 @@
 /* tslint:disable:max-classes-per-file */
 declare module 'keystone' {
-  import mongoose from 'mongoose';
-  import KeystoneUtils from 'keystone-utils';
-  
-  export interface Options { 
+  import * as mongoose from 'mongoose';
+  import * as express from 'express';
+  import * as expressSession from 'express-session';
+  import * as KeystoneUtils from 'keystone-utils';
+  import * as http from 'http';
+  export interface ProjectOptions {
+    name: string;
+    brand: string;
+    'module root': string;
+    'frame guard': string | boolean;
+    nav:  NavOptions;
+    'csv field delimiter': string;
+    app: Express.Application
+    mongoose: mongoose.Mongoose;
   }
+
+  export interface NavOptions {
+    [route: string]: string | string[];
+  }
+  type Path = string;
+
+
+  export interface WebServerOptions {
+    'env': string;
+    port: number;
+    host: string;
+    views: string;
+    'view engine': string;
+    'custom engine': Function;
+    'view cache': boolean;
+    locals: {};
+    static: string | string[];
+    'static options': {};
+    'less': string | string[];
+    'less options': {};
+    'sass': string | string[];
+    'sass options': {};
+    favicon: string;
+    compress: boolean;
+    logger: string;
+    'logger options': {};
+    'trust proxy': boolean;
+  }
+  
+
+  export interface HTTPSWebServerOptions {
+    ssl: boolean | string;
+    'ssl key': Path;
+    'ssl cert': Path;
+    'ssl ca': Path;
+    'ssl port': number;
+    'ssl host': string;
+  }
+
+  export interface SocketWebServerOptions {
+      'unix socket': string;
+  }
+
+  export interface DBOptions {
+    mongo: string;
+    'model prefix': string;
+    auth: boolean | express.RequestHandler;
+    'user model': string;
+    'cookie secret': string;
+    // TODO: this is kind of wrong but will delve into that later
+    'session store': string | ((e: expressSession.SessionOptions) => expressSession.BaseMemoryStore);
+    'session store options': {};
+    'back url': string;
+    'signin url': string;
+    'signin redirect': string;
+    'signin logo': Path;
+    'signout url': string;
+    'signout redirect': string;
+  }
+
+  export interface AdminUiOptions {
+    'wysiwyg images': boolean;
+    'wysiwyg cloudinary images': boolean;
+    'wysiwyg additional buttons': string;
+    'wysiwyg additional plugins': string;
+    'wysiwyg additional options': {};
+    'wysiwyg override toolbar': boolean;
+    'wysiwyg menubar': boolean;
+    'wysiwyg importcss': boolean;
+    'wysiwyg skin': boolean;
+  }
+
+  export interface GoogleAnalyticsOptions {
+    'ga property': string;
+    'ga domain': string;
+  }
+
+  export interface GoogleMapsOptions {
+    'google api key': string;
+    'google server api key': string;
+    'default region': string;
+  }
+
+  export interface S3ConfigOptions {
+    's3 config': {
+      bucket: string;
+      key: string;
+      secret: string;
+      'default headers': {[key: string]: string}
+    }
+  }
+  
+  interface CloudinaryConfig {
+      cloud_name: string;
+      api_key: string;
+      api_secret: string;
+  }
+  export interface CloudinaryOptions {
+    'cloudinary config': string | CloudinaryConfig;
+    'cloudinary prefix': string;
+    'cloudinary folders': boolean;
+    'cloudinary secure': boolean;
+  }
+
+  export interface RouteOptions {
+    '404': express.RequestHandler;
+    '500': express.RequestHandler;
+    'routes': ((app: express.Application) => void) | express.Router;
+  }
+
+  export type Options = ProjectOptions & 
+  WebServerOptions & 
+  HTTPSWebServerOptions & 
+  SocketWebServerOptions & 
+  DBOptions &
+  GoogleAnalyticsOptions & 
+  GoogleMapsOptions & 
+  S3ConfigOptions &
+  CloudinaryOptions &
+  RouteOptions;
+
   
   export module Schema {
     export type Relationship = mongoose.Schema.Types.ObjectId | mongoose.Schema.Types.ObjectId[];
@@ -154,7 +285,8 @@ declare module 'keystone' {
     
   }
   
-  module List {
+
+  export module List {
     export interface PaginationOptions {
       page: number;
       erPage: number;
@@ -192,15 +324,105 @@ declare module 'keystone' {
       refPath: string;
     }
   }
+
+/**
+ * Helper to simplify view logic in a Keystone application
+ *
+ * @api public
+ */
+  export class View {
+    constructor(req: Express.Request, res: Express.Response);
+    
+    /**
+     * Adds a method (or array of methods) to be executed in parallel
+     * to the `init`, `action` or `render` queue.
+     * 
+     * @param action type of action or a function that determines whether the callback is added to the queue
+     * @param cb the callback that will be executed.
+     */
+    on(action: string | (() => boolean) | {}, cb: express.NextFunction ): void;
+    on(action: string | (() => boolean), cond: {}, cb: express.NextFunction): void;
+     /**
+     * Queues a mongoose query for execution before the view is rendered.
+     * The results of the query are set in `locals[key]`.
+     *
+     * Keys can be nested paths, containing objects will be created as required.
+     *
+     * The third argument `then` can be a method to call after the query is completed
+     * like function(err, results, callback), or a `populatedRelated` definition
+     * (string or array).
+     *
+     * Examples:
+     *
+     * view.query('books', keystone.list('Book').model.find());
+     *
+     *     an array of books from the database will be added to locals.books. You can
+     *     also nest properties on the locals variable.
+     *
+     * view.query(
+     *     'admin.books',
+     *      keystone.list('Book').model.find().where('user', 'Admin')
+     * );
+     *
+     *     locals.admin.books will be the result of the query
+     *     views.query().then is always called if it is available
+     *
+     * view.query('books', keystone.list('Book').model.find())
+     *     .then(function (err, results, next) {
+     *         if (err) return next(err);
+     *         console.log(results);
+     *         next();
+     *     });
+     *
+     * @api public
+     * @param key 
+     * @param query 
+     * @param options 
+     */
+    query<T, DocType extends mongoose.Document>(key: string, query: mongoose.DocumentQuery<T, DocType>, options?: View.QueryOptions): void;
+
+    render(renderFn: string | express.ErrorRequestHandler, locals?: {} | (() => {}), callback?: (err: Error, html: string) => void): void;
+  }
+
+  export module View {
+    export interface QueryOptions {
+
+    }
+  }
+
+  export interface StartupEvents {
+    onHttpServerCreated?: () => void;
+    onHttpsServerCreated?: () => void;
+    onSocketServerCreated?: () => void;
+    onStart?: () => void;
+    onMount?: () => void;
+  }
   
+  /**
+   * Get a list registered for this 
+   * @param name The name of the list to use
+   */
   export function list<T extends mongoose.Document>(name: string): List<T>;
-  export function set<T>(key: string, value: T): void;
-  export function get<T>(key: string): T;
-  export function init(options: Options): void;
+  /**
+   * Set keystone options. See 
+   * @param key Option name
+   * @param value Option value
+   */
+  export function set<K extends keyof Options>(key: K, value: Options[K]): void;
+  export function get<K extends keyof Options>(key: K): Options[K];
+  export function init(options: Partial<Options>): void;
+  export function pre(action: string, middleware: express.RequestHandler): void;
+  export function importer(dir: string): (path: string) => {[name: string]: express.RequestHandler | express.ErrorRequestHandler};
   // export function import(what: string): void;
-  export function start(): void;
-  export const utils: KeystoneUtils;
+  export function start(events?: StartupEvents): void;
+  export function connect(...modules: Array<mongoose.Mongoose | express.Application>): void;
+  export const utils: typeof KeystoneUtils;
   export const content: {editable: {}}; // TODO typings for content
-  export const  security: {crsf: {}}; // TODO typings for securitfunction readonly List: typeof Keystone.List;
-  
+  export const security: {crsf: {}}; // TODO typings for securitfunction readonly List: typeof Keystone.List;
+
+  /* servers may be null until keystone is started, so make that clear to the client.
+   */
+  export let httpServer: http.Server | null;
+  export let httpsServer: http.Server | null;
+
 }

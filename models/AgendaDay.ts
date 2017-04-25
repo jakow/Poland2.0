@@ -2,7 +2,7 @@ import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
 
-interface AgendaDayDocument extends mongoose.Document {
+export interface AgendaDayDocument extends mongoose.Document {
   date: Date;
   description: string;
   edition: keystone.Schema.Relationship;

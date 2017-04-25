@@ -1,7 +1,15 @@
 import * as keystone from 'keystone';
+import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
 
-const Sponsor = new keystone.List('Sponsor', {
+export interface SponsorDocument extends mongoose.Document {
+  name: string;
+  logo: keystone.Schema.CloudinaryImage;
+  description: string;
+  url: string;
+}
+
+const Sponsor = new keystone.List<SponsorDocument>('Sponsor', {
   autokey: { from: 'name', path: 'key', unique: true },
   map: {name: 'name'},
   sortable: true,
