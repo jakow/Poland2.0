@@ -1,0 +1,19 @@
+
+doctype html
+html(lang=lang || "en").no-js
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="x-ua-compatible" content="ie=edge")
+    meta(name="description" content="#{meta.description}")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title= title || "Poland 2.0 Summit"
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css")
+    block style
+
+    block head
+  body
+    include ../../components/nav/nav
+    block content
+    include ../../components/footer/footer
+
+  

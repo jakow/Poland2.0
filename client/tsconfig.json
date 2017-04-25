@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "lib": ["es2015", "es2016", "es2017"],
+        "outDir": "../build/public",
+        "sourceMap": false,
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "target": "es5",
+        "allowSyntheticDefaultImports": false,
+        "allowJs": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noFallthroughCasesInSwitch": true
+    },
+    "include": [
+      "components/**/*"
+    ],
+    "files": [
+      "./index.ts"
+    ],
+    "exclude": [
+        "build",
+        "node_modules",
+        "typings/browser.d.ts",
+        "typings/browser"
+    ]
+}
