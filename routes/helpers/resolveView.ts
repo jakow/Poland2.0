@@ -20,7 +20,6 @@ function splitExtension(path: string): string {
  * @param filter the predicate that the file must meet to be listed.
  */
 function traverseViewsDir(directory: string, filter: (fname: string) => boolean = () => true): void {
-  console.info(`reading directory ${resolve(directory)}`);
   const contents = readdirSync(directory);
   // full file names
   const files = contents

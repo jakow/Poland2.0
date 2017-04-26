@@ -28,11 +28,13 @@ keystone.init({
 });
 
 keystone.set('locals', {
-  _: require('underscore'),
   editable: keystone.content.editable,
-  env: keystone.get('env'),
+  env: config.environment,
   utils: keystone.utils,
+  trackingId: config.trackingId,
 });
+
+console.info('Environment', keystone.get('env'));
 
 if (config.environment === 'production') {
   keystone.set('session store', 'connect-mongo');
@@ -44,7 +46,7 @@ keystone.set('nav', {
   agenda: ['agenda-days', 'agenda-entries', 'venues'],
   content: ['static-pages', 'content-controls'],
   editions: 'editions',
-  people: ['speakers', 'team-members'],
+  people: ['speaker-categories', 'speakers', 'team-members'],
   sponsors: ['sponsors', 'sponsor-categories'],
   users: 'users',
 });

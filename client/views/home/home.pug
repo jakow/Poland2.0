@@ -2,5 +2,13 @@ extends ../../layout/default/default
 
 block content
   p Hello world!
-  p= currentEdition
-  p= JSON.stringify(currentEdition)
+  div
+    p Current edition ID #{currentEdition._id}
+    each category in speakerCategories
+      h1= category.displayName
+      each speaker in category.speakers
+        img(src=speaker.photo.url)
+        h2=speaker.name
+
+    //- p= JSON.stringify(speakers)
+    p=Object.keys(locals)

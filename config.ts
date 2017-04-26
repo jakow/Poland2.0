@@ -30,12 +30,10 @@ export const cookieSecret: string =  process.env.OPENSHIFT_SECRET_TOKEN || proce
 
 export const cloudinaryUrl: string =  process.env.CLOUDINARY_URL || null;
 
+export const trackingId: string = process.env.TRACKING_ID || null;
+
 export const staticDir = isBuild ? path.join('..', 'public') : 'public';
 
-
-// export const viewsDir = isBuild ? path.join('..', 'client', 'views') : path.join('client', 'views');
 export const viewsDir = path.resolve('client', 'views');
 
-console.info('viewsDir', path.resolve(viewsDir));
 export const viewEngine = 'pug';
-// console.info('viewsDir', path.resolve(viewsDir));

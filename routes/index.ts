@@ -26,6 +26,7 @@ import * as views from './views';
 
 // Common Middleware
 keystone.pre('routes', middleware.getCurrentEdition);
+keystone.pre('routes', middleware.getContentControl);
 // keystone.pre('routes', middleware.initLocals);
 // keystone.pre('routes', middleware.loadSponsors);
 // keystone.pre('routes', middleware.getStaticPages);

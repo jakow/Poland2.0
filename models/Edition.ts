@@ -16,6 +16,7 @@ export interface EditionDocument extends mongoose.Document {
     start: Date;
     end: Date;
     provisional: boolean;
+    provisionalDate: string;
   };
   mainPhoto: keystone.Schema.CloudinaryImage;
   photos: keystone.Schema.CloudinaryImage[];
@@ -38,9 +39,10 @@ Edition.add({
   location: {type: Types.Location},
   },
   date: {
-    start: {type: Date, label: 'Start date (required)'},
-    end: {type: Date, label: 'End date (optional)'}, // TODO: validate that start is earlier than end
-  provisional: {type: Boolean, label: 'Provisional date - only month will be shown on homepage. Fill start date only'},
+    start: {type: Date, label: 'Start date'},
+    end: {type: Date, label: 'End date'},
+    useProvisional: {type: Boolean, label: 'Use provisional date'},
+    provisionalDate: {type: String, label: 'Provisional date',  dependsOn: {'date.useProvisional': true }},
   },
   mainPhoto: {type: Types.CloudinaryImage},
   photos: {type: Types.CloudinaryImages},

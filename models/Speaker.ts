@@ -2,13 +2,14 @@ import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
 
-interface SpeakerDocument extends mongoose.Document {
+export interface SpeakerDocument extends mongoose.Document {
   name: string;
   speakerCategory: keystone.Schema.Relationship;
   position: string;
   company: string;
   photo: keystone.Schema.CloudinaryImage;
   description: string;
+  edition: keystone.Schema.Relationship;
 }
 
 const Speaker = new keystone.List<SpeakerDocument>('Speaker', {
@@ -25,10 +26,10 @@ Speaker.add({
   company: {type: String},
   photo: {type: Types.CloudinaryImage, autoCleanup: true },
   description: {type: Types.Html, wysiwyg: true, height: 150},
-  edition: {type: Types.Relationship, ref: 'Edition'},
+  edition: {type: Types.Relationship, ref: 'Edition', many: true},
 });
 
-Speaker.defaultColumns = 'name, speakerType, edition';
+Speaker.defaultColumns = 'name, speakerCategory, edition';
 
 Speaker.register();
 

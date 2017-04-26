@@ -1,13 +1,22 @@
-
-
-// TODO replace async lib  with async/await
 import {list} from 'keystone';
 import {EditionDocument} from '../models/Edition';
-import {Request, Response, NextFunction} from 'express';
+import {RequestHandler, Request, Response, NextFunction} from 'express';
+import {environment} from '../config';
+
 export async function getCurrentEdition(req: Request, res: Response, next: NextFunction) {
   try {
-    const currentEdition = await list<EditionDocument>('Edition').model.findOne({current: true});
+    const currentEdition = await list<EditionDocument>('Edition').model.findOne({current: true}).exec();
     res.locals.currentEdition = currentEdition;
+    next();
+  } catch (e) {
+    next(e);
+  }
+}
+
+export async function getContentControl(req: Request, res: Response, next: NextFunction) {
+  try {
+    const contentControl = await list('ContentControl').model.findOne().exec();
+    res.locals.contentControl = contentControl;
     next();
   } catch (e) {
     next(e);

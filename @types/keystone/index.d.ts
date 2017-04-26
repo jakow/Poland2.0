@@ -138,7 +138,7 @@ declare module 'keystone' {
 
   
   export module Schema {
-    export type Relationship = mongoose.Schema.Types.ObjectId | mongoose.Schema.Types.ObjectId[];
+    export type Relationship = string | string[]; // single objectId or array of ObjectId
     export interface CloudinaryImage {
       public_id: string;
       version: number;

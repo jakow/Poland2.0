@@ -29,7 +29,7 @@ TeamMember.add({
   email: {type: Types.Email},
   linkedin: {type: Types.Url},
   // related to edition
-  edition: {type: Types.Relationship, ref: 'Edition'},
+  edition: {type: Types.Relationship, ref: 'Edition', many: true},
 });
 
 TeamMember.defaultColumns = 'name, position, edition';

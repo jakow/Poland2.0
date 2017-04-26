@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
 
 
-interface SpeakerCategoryDocument extends mongoose.Document {
+export interface SpeakerCategoryDocument extends mongoose.Document {
   name: string;
   displayName: string;
   edition: keystone.Schema.Relationship;
@@ -18,10 +18,11 @@ const SpeakerCategory = new keystone.List<SpeakerCategoryDocument>('SpeakerCateg
 SpeakerCategory.add({
   name: { type: String, required: true },
   displayName: {type: String, required: true, initial: true},
-  // perColumn: {type: Number, label: 'Speaker cards per column'},
-  // maxWidth: {type: Number, label: 'Maximum card width (px, em, rem)'},
   edition: {type: Types.Relationship, ref: 'Edition', many: true},
 });
+
+
+SpeakerCategory.relationship({path: 'speakers', ref: 'Speaker', refPath: 'speakerCategory'});
 
 SpeakerCategory.register();
 
