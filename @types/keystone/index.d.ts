@@ -21,7 +21,6 @@ declare module 'keystone' {
   }
   type Path = string;
 
-
   export interface WebServerOptions {
     'env': string;
     port: number;
@@ -43,7 +42,6 @@ declare module 'keystone' {
     'logger options': {};
     'trust proxy': boolean;
   }
-  
 
   export interface HTTPSWebServerOptions {
     ssl: boolean | string;
@@ -106,7 +104,7 @@ declare module 'keystone' {
       'default headers': {[key: string]: string}
     }
   }
-  
+
   interface CloudinaryConfig {
       cloud_name: string;
       api_key: string;
@@ -125,18 +123,18 @@ declare module 'keystone' {
     'routes': ((app: express.Application) => void) | express.Router;
   }
 
-  export type Options = ProjectOptions & 
-  WebServerOptions & 
-  HTTPSWebServerOptions & 
-  SocketWebServerOptions & 
+  export type Options = ProjectOptions &
+  WebServerOptions &
+  HTTPSWebServerOptions &
+  SocketWebServerOptions &
   DBOptions &
-  GoogleAnalyticsOptions & 
-  GoogleMapsOptions & 
+  GoogleAnalyticsOptions &
+  GoogleMapsOptions &
   S3ConfigOptions &
   CloudinaryOptions &
   RouteOptions;
 
-  
+
   export module Schema {
     export type Relationship = string | string[]; // single objectId or array of ObjectId
     export interface CloudinaryImage {
@@ -164,7 +162,7 @@ declare module 'keystone' {
         thumbnail(width: number, height: number, options: CloudinaryOptions): string;
       }
     }
-    
+
     export interface CloudinaryOptions {
       transformation: string;
     }
@@ -180,52 +178,55 @@ declare module 'keystone' {
       geo: LngLat; // longitude, latitude
       _: {
         googleLookup(region: string, update: 'overwrite' | boolean, callback: (err: string, location: {}, result: {}) => void  ): void;
-        
+
       }
     }
     export type LngLat = [number, number];
   }
-  
+
   export class Field  {
+    /**
+     * The extended Types
+     */
     public static Types: {
-      AzureFile:        Field.FieldType;
-      Boolean:          Field.FieldType;
-      CloudinaryImage:  Field.FieldType;
-      CloudinaryImages: Field.FieldType;
-      Code:             Field.FieldType;
-      Color:            Field.FieldType;
-      Date:             Field.FieldType;
-      DateArray:        Field.FieldType;
-      Datetime:         Field.FieldType;
-      Email:            Field.FieldType;
-      Embedly:          Field.FieldType;
-      File:             Field.FieldType;
-      GeoPoint:         Field.FieldType;
-      Html:             Field.FieldType;
-      Key:              Field.FieldType;
-      LocalFile:        Field.FieldType;
-      LocalFiles:       Field.FieldType;
-      Location:         Field.FieldType;
-      Markdown:         Field.FieldType;
-      Money:            Field.FieldType;
-      Name:             Field.FieldType;
-      Number:           Field.FieldType;
-      Url:              Field.FieldType;
-      NumberArray:      Field.FieldType;
-      Password:         Field.FieldType;
-      Relationship:     Field.FieldType;
-      S3File:           Field.FieldType;
-      Select:           Field.FieldType;
-      Text:             Field.FieldType;
-      TextArray:        Field.FieldType;
-      Textarea:         Field.FieldType;
+      AzureFile: Field.ExtendedType;
+      Boolean: Field.ExtendedType;
+      CloudinaryImage: Field.ExtendedType;
+      CloudinaryImages: Field.ExtendedType;
+      Code: Field.ExtendedType;
+      Color: Field.ExtendedType;
+      Date: Field.ExtendedType;
+      DateArray: Field.ExtendedType;
+      Datetime: Field.ExtendedType;
+      Email: Field.ExtendedType;
+      Embedly: Field.ExtendedType;
+      File: Field.ExtendedType;
+      GeoPoint: Field.ExtendedType;
+      Html: Field.ExtendedType;
+      Key: Field.ExtendedType;
+      LocalFile: Field.ExtendedType;
+      LocalFiles: Field.ExtendedType;
+      Location: Field.ExtendedType;
+      Markdown: Field.ExtendedType;
+      Money: Field.ExtendedType;
+      Name: Field.ExtendedType;
+      Number: Field.ExtendedType;
+      Url: Field.ExtendedType;
+      NumberArray: Field.ExtendedType;
+      Password: Field.ExtendedType;
+      Relationship: Field.ExtendedType;
+      S3File: Field.ExtendedType;
+      Select: Field.ExtendedType;
+      Text: Field.ExtendedType;
+      TextArray: Field.ExtendedType;
+      Textarea: Field.ExtendedType;
     };
-    
+
   }
-  
-  export module Field {
+
+  export namespace Field {
     export interface Options {
-      type: List.ModelType;
+      type: List.FieldType;
       required?: boolean;
       initial?: boolean;
       default?: any;
@@ -236,17 +237,25 @@ declare module 'keystone' {
       dependsOn?: {[fieldName: string]: any | any[]};
       [opt: string]: any;
     }
-    
-    export interface FieldType {
-      updateItem: (item: any, data: any, callback: () => void) => void;
+
+    export interface ExtendedType {
+      // updateItem: (item: any, data: any, callback: () => void) => void;
     }
   }
-  
-  export class List<T extends mongoose.Document> {
-    constructor(name: string, opt?: List.Options<T>);
-    public model: mongoose.Model<T>;
+
+  /** Has both the fields of the list type and methods of a mongoose document
+   * IMPORTANT:
+   */
+  type ModelDocument<T> = T & mongoose.Document;
+
+  export class List<T> {
+    /**
+     * Get a Mongoose model instance for this List. WARNING: the mongoose
+     * query results (results from `find()`, `findOne()`) are frozen and
+     * cannot have properties added to them
+     */
+    public model: mongoose.Model<ModelDocument<T>>;
     public schema: mongoose.Schema;
-    
     public readonly label: string;
     public readonly singular: string;
     public readonly plural: string;
@@ -259,32 +268,32 @@ declare module 'keystone' {
     public searchFields: string;
     public defaultSort: string;
     public defaultColumns: string;
+    constructor(name: string, opt?: List.Options<T>);
     // main methods from documentation
-    /**
-    * 
+   /**
+    * Add fields to this schema. 
     * @param fields An object containing the fields of this model, each is an
     * instance of @type {(FieldType|Field.Options)}
     */
-    public add(...fields: Array<List.FieldMap | string>): void;
-    
-    /**
+    public add(...fields: Array<List.AddedField<T> | string>): void;
+
+   /**
     * @param rel the object containing the ref, path and refPath for the definition
     * of this relationship.
     */
     public relationship(rel: List.RelationshipOptions): void;
-    /**
-    * 
+   /**
+    *
     */
     public register(): void;
-    /**
+   /**
     * @param options that dictate the current `page`, results `perPage` and `maxPages'
     * @return a paginated mongoose document query that can be chained with subsequent
     * query operations.
     */
-    public paginate(options: List.PaginationOptions): mongoose.DocumentQuery<T[], T>;
-    
+    public paginate(options: List.PaginationOptions): mongoose.DocumentQuery<ModelDocument<T>[], ModelDocument<T>>;
+
   }
-  
 
   export module List {
     export interface PaginationOptions {
@@ -292,20 +301,27 @@ declare module 'keystone' {
       erPage: number;
       maxPages: number;
     }
-    export type ModelType = Field.FieldType | StringConstructor | NumberConstructor | DateConstructor | BooleanConstructor;
-    
-    export interface FieldMap {
-      [key: string]: ModelType | Field.Options | FieldMap; // handle nested types
+    export type FieldType = Field.ExtendedType | StringConstructor | NumberConstructor | DateConstructor | BooleanConstructor;
+
+    type AddedField<T> = {
+        [key in keyof T]: FieldType | Field.Options | AddedField<T[keyof T]>;
     }
-    export interface Options<T extends mongoose.Document> {
+
+    export interface Options<K> {
       drilldown?: string;
-      inherits?: List<T>;
+      /**
+       * NOTE: It is not possible to support correct inheritance scheme (i.e.), where `inherits` property
+       * satisfies the inheritance without having a type wildcard `?` for List as in Java. That is,
+       * the correct property would look like: inherits?: List<? super T>, where T is the list being created
+       */
+      inherits?: List<K>;
       sortable?: boolean;
       sortContext?: string;
       searchFields?: string; // space delimited field names
       defaultSort?: string;
       defaultColumns?: string;
-      track?: boolean | {createdAt?: boolean | string, createdBy?: boolean | string, updatedAt?: boolean | string, updatedBy?: boolean | string}
+      track?: boolean | {createdAt?: boolean | string, createdBy?: boolean | string, 
+        updatedAt?: boolean | string, updatedBy?: boolean | string}
       label?: string;
       path?: string;
       map?: {name: string};
@@ -332,17 +348,17 @@ declare module 'keystone' {
  */
   export class View {
     constructor(req: Express.Request, res: Express.Response);
-    
+
     /**
      * Adds a method (or array of methods) to be executed in parallel
      * to the `init`, `action` or `render` queue.
-     * 
+     *
      * @param action type of action or a function that determines whether the callback is added to the queue
      * @param cb the callback that will be executed.
      */
     on(action: string | (() => boolean) | {}, cb: express.NextFunction ): void;
     on(action: string | (() => boolean), cond: {}, cb: express.NextFunction): void;
-     /**
+    /**
      * Queues a mongoose query for execution before the view is rendered.
      * The results of the query are set in `locals[key]`.
      *
@@ -375,16 +391,16 @@ declare module 'keystone' {
      *     });
      *
      * @api public
-     * @param key 
-     * @param query 
-     * @param options 
+     * @param key
+     * @param query
+     * @param options
      */
     query<T, DocType extends mongoose.Document>(key: string, query: mongoose.DocumentQuery<T, DocType>, options?: View.QueryOptions): void;
 
     render(renderFn: string | express.ErrorRequestHandler, locals?: {} | (() => {}), callback?: (err: Error, html: string) => void): void;
   }
 
-  export module View {
+  export namespace View {
     export interface QueryOptions {
 
     }
@@ -397,14 +413,14 @@ declare module 'keystone' {
     onStart?: () => void;
     onMount?: () => void;
   }
-  
+
   /**
-   * Get a list registered for this 
+   * Get a list registered for this
    * @param name The name of the list to use
    */
-  export function list<T extends mongoose.Document>(name: string): List<T>;
+  export function list<T>(name: string): List<T>;
   /**
-   * Set keystone options. See 
+   * Set keystone options. See
    * @param key Option name
    * @param value Option value
    */
@@ -412,7 +428,8 @@ declare module 'keystone' {
   export function get<K extends keyof Options>(key: K): Options[K];
   export function init(options: Partial<Options>): void;
   export function pre(action: string, middleware: express.RequestHandler): void;
-  export function importer(dir: string): (path: string) => {[name: string]: express.RequestHandler | express.ErrorRequestHandler};
+  export function importer(dir: string): (path: string)
+    => {[name: string]: express.RequestHandler | express.ErrorRequestHandler};
   // export function import(what: string): void;
   export function start(events?: StartupEvents): void;
   export function connect(...modules: Array<mongoose.Mongoose | express.Application>): void;

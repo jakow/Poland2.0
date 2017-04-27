@@ -1,7 +1,16 @@
 import * as keystone from 'keystone';
 const Types = keystone.Field.Types;
 
-const StaticPage = new keystone.List('StaticPage', {
+export interface StaticPage {
+  name: string;
+  route: string;
+  active: boolean;
+  showInMenu: boolean;
+  menuOrder: number;
+  content: string;
+}
+
+const StaticPage = new keystone.List<StaticPage>('StaticPage', {
   map: { name: 'name' },
   autokey: { from: 'name', path: 'slug', unique: true },
   defaultSort: '-name',

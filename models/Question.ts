@@ -2,13 +2,15 @@ import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
 
-export interface QuestionDocument extends mongoose.Document {
+export interface Question {
   text: string;
   name: string;
   event: keystone.Schema.Relationship;
 }
 
-const Question = new keystone.List<QuestionDocument>('Question');
+export type QuestionDocument = keystone.ModelDocument<Question>;
+
+const Question = new keystone.List<Question>('Question');
 
 Question.add({
   text: {type: String, required: true},

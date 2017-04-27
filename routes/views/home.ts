@@ -1,8 +1,8 @@
 import * as express from 'express';
 import * as keystone from 'keystone';
+
 import {EditionDocument} from '../../models/Edition';
-import {SpeakerCategoryDocument} from '../../models/SpeakerCategory';
-import {SpeakerDocument} from '../../models/Speaker';
+import {SpeakerCategory} from '../../models/SpeakerCategory';
 import resolveView from '../helpers/resolveView';
 import getSpeakersByCategory from '../helpers/getSpeakersByCategory';
 

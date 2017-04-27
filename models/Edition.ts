@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
 import * as moment from 'moment';
 
-export interface EditionDocument extends mongoose.Document {
+export interface Edition {
   year: number;
   name: string;
   current: boolean;
@@ -15,14 +15,18 @@ export interface EditionDocument extends mongoose.Document {
   date: {
     start: Date;
     end: Date;
-    provisional: boolean;
+    useProvisional: boolean;
     provisionalDate: string;
   };
   mainPhoto: keystone.Schema.CloudinaryImage;
   photos: keystone.Schema.CloudinaryImage[];
 }
 
-const Edition = new keystone.List<EditionDocument>('Edition', {
+export type EditionDocument = keystone.ModelDocument<Edition>;
+
+
+
+const Edition = new keystone.List<Edition>('Edition', {
   map: { name: 'name' },
   autokey: { from: 'year', path: 'slug', unique: true },
   defaultSort: '-year',

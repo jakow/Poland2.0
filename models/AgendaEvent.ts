@@ -1,6 +1,7 @@
 import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
+
 function timeValidate(message = 'Invalid time entered') {
   return {
     message,
@@ -8,7 +9,7 @@ function timeValidate(message = 'Invalid time entered') {
   };
 }
 
-export interface AgendaEventDocument extends mongoose.Document {
+export interface AgendaEvent {
   name: string;
   description: string;
   image: keystone.Schema.CloudinaryImage;
@@ -21,12 +22,13 @@ export interface AgendaEventDocument extends mongoose.Document {
   venue: keystone.Schema.Relationship;
 }
 
-const AgendaEvent = new keystone.List<AgendaEventDocument>('AgendaEntry', {
+export type AgendaEventDocument = keystone.ModelDocument<AgendaEvent>;
+
+const AgendaEvent = new keystone.List<AgendaEvent>('AgendaEntry', {
   map: { name: 'name' },
   autokey: { from: 'year', path: 'slug', unique: true },
   defaultSort: 'time.start',
 });
-
 
 AgendaEvent.add({
   name: {type: String, required: true},

@@ -2,7 +2,7 @@ import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
 
-interface TeamMemberDocument extends mongoose.Document {
+interface TeamMember {
   name: string;
   position: string;
   occupation: string;
@@ -13,7 +13,7 @@ interface TeamMemberDocument extends mongoose.Document {
   edition: keystone.Schema.Relationship;
 }
 
-const TeamMember = new keystone.List<TeamMemberDocument>('TeamMember', {
+const TeamMember = new keystone.List<TeamMember>('TeamMember', {
     map: { name: 'name' },
   autokey: { path: 'slug', from: 'name', unique: true },
   sortable: true,

@@ -1,15 +1,20 @@
 import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
-
-export interface AgendaDayDocument extends mongoose.Document {
+import {AgendaEventDocument} from './AgendaEvent';
+export interface AgendaDay {
+  name: string;
   date: Date;
   description: string;
+  venue: keystone.Schema.Relationship;
   edition: keystone.Schema.Relationship;
   image: keystone.Schema.CloudinaryImage;
+  // the data that eventually is populated by reversePopulate
+  events?: AgendaEventDocument[];
 }
 
-const AgendaDay = new keystone.List<AgendaDayDocument>('AgendaDay', {
+
+const AgendaDay = new keystone.List<AgendaDay>('AgendaDay', {
 	// map: { name: 'name' },
   autokey: { from: 'name', path: 'slug', unique: true },
   defaultSort: 'date',
@@ -24,8 +29,7 @@ AgendaDay.add({
   venue: {type: Types.Relationship, ref: 'Venue'},
 });
 
-AgendaDay.relationship({path: 'agenda-entries', ref: 'AgendaEntry', refPath: 'agendaDay'});
-
+AgendaDay.relationship({path: 'agenda-events', ref: 'AgendaEvent', refPath: 'agendaDay'});
 
 AgendaDay.register();
 

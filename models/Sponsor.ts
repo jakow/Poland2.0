@@ -2,14 +2,20 @@ import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
 
-export interface SponsorDocument extends mongoose.Document {
+export interface Sponsor  {
   name: string;
   logo: keystone.Schema.CloudinaryImage;
   description: string;
   url: string;
+  imageAdjust: {
+    width: number;
+    height: number;
+  };
+  edition: keystone.Schema.Relationship;
+  category: keystone.Schema.Relationship;
 }
 
-const Sponsor = new keystone.List<SponsorDocument>('Sponsor', {
+const Sponsor = new keystone.List<Sponsor>('Sponsor', {
   autokey: { from: 'name', path: 'key', unique: true },
   map: {name: 'name'},
   sortable: true,
@@ -22,7 +28,6 @@ Sponsor.add({
   logo: {type: Types.CloudinaryImage, autoCleanup: true},
   description: {type: Types.Html, wysiwyg: true},
   url: {type: Types.Url},
-
   imageAdjust: {
     width: {type: String, label: 'Width (px, %, em,rem)'},
     height: {type: String, label: 'Height (px, %, em,rem)'},

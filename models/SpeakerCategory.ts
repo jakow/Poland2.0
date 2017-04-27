@@ -3,13 +3,17 @@ import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
 
 
-export interface SpeakerCategoryDocument extends mongoose.Document {
+export interface SpeakerCategory {
   name: string;
   displayName: string;
   edition: keystone.Schema.Relationship;
 }
 
-const SpeakerCategory = new keystone.List<SpeakerCategoryDocument>('SpeakerCategory', {
+
+export interface SpeakerCategoryDocument extends mongoose.Document, SpeakerCategory {}
+
+
+const SpeakerCategory = new keystone.List<SpeakerCategory>('SpeakerCategory', {
   autokey: { from: 'name', path: 'key', unique: true },
   sortable: true,
   sortContext: 'Edition:sponsor-categories',

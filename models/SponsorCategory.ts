@@ -5,8 +5,21 @@ const Types = keystone.Field.Types;
  * SponsorCategory Model
  * ==================
  */
+export interface SponsorCategory {
+  name: string;
+  singular: string;
+  perColumn: number;
+  showName: boolean;
+  imageAdjust: {
+    maxHeight: string;
+    maxWidth: string;
+  };
+  edition: keystone.Schema.Relationship;
+}
 
-const SponsorCategory = new keystone.List('SponsorCategory', {
+
+
+const SponsorCategory = new keystone.List<SponsorCategory>('SponsorCategory', {
   autokey: { from: 'name', path: 'key', unique: true },
   sortable: true,
   sortContext: 'Edition:sponsor-categories',

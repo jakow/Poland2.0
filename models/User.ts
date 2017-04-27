@@ -2,14 +2,14 @@ import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
 
-interface UserDocument extends mongoose.Document {
+export interface User {
   name: string;
   email: string;
   password: string;
   isAdmin: boolean;
 }
 
-const User = new keystone.List<UserDocument>('User');
+const User = new keystone.List('User');
 
 User.add({
   name: { type: Types.Name, required: true, index: true },

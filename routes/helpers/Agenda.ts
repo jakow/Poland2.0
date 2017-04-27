@@ -1,6 +1,10 @@
+import {AgendaEventDocument} from '../../models/AgendaEvent';
+
 export interface AgendaDay {
   date: Date;
+  events: AgendaEventDocument[];
 }
-export class Agenda {
-  public readonly days: AgendaDay[];
+
+export interface Agenda {
+  days: AgendaDay[];
 }

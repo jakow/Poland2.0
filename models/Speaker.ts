@@ -2,7 +2,7 @@ import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
 
-export interface SpeakerDocument extends mongoose.Document {
+export interface Speaker  {
   name: string;
   speakerCategory: keystone.Schema.Relationship;
   position: string;
@@ -12,7 +12,9 @@ export interface SpeakerDocument extends mongoose.Document {
   edition: keystone.Schema.Relationship;
 }
 
-const Speaker = new keystone.List<SpeakerDocument>('Speaker', {
+export type SpeakerDocument = keystone.ModelDocument<Speaker>;
+
+const Speaker = new keystone.List<Speaker>('Speaker', {
   autokey: { path: 'slug', from: 'name', unique: true },
   map: { name: 'name' },
   sortable: true,

@@ -1,3 +1,4 @@
+include ../../mixins/printLocalsSchema
 doctype html
 html(lang=lang || "en").no-js
   head
@@ -23,6 +24,9 @@ html(lang=lang || "en").no-js
         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
         ga('create', '#{trackingId}', 'auto');
         ga('send', 'pageview');
+        
+    if env === 'development'
+      +printLocalsSchema(locals)
 
 
 
