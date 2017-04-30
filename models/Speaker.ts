@@ -9,7 +9,7 @@ export interface Speaker  {
   company: string;
   photo: keystone.Schema.CloudinaryImage;
   description: string;
-  edition: keystone.Schema.Relationship;
+  edition: keystone.Schema.Relationship[];
 }
 
 export type SpeakerDocument = keystone.ModelDocument<Speaker>;
@@ -36,6 +36,3 @@ Speaker.defaultColumns = 'name, speakerCategory, edition';
 Speaker.register();
 
 export default Speaker;
-
-
-

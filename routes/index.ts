@@ -31,7 +31,7 @@ keystone.pre('routes', middleware.getContentControl);
 // keystone.pre('routes', middleware.loadSponsors);
 // keystone.pre('routes', middleware.getStaticPages);
 
-// TODO: set up 404 and 505 routes
+// TODO: set up 404 and 500 routes
 // keystone.set('404', (req, res) => {
 //   // middleware.loadSponsors(req, res);
 // });

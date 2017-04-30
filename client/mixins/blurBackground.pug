@@ -3,7 +3,6 @@ mixin blurBackground(radius):
     <defs>
       <filter id="backdrop-filter-blur" x="0" y="0" width="100%" height="100%">
         <!-- can't use xlink:href="#image": no support in FF -->
-        <feImage x="0" y="0" width="300" height="300" xlink:href="http://unsplash.it/300/300?image=34"/>
         <!-- blur image -->
         <feGaussianBlur stdDeviation="3" />
         <!-- improve blur at the edges -->
@@ -22,5 +21,4 @@ mixin blurBackground(radius):
           <feMergeNode in="SourceGraphic" />
         </feMerge>
       </filter>
-      <image id="image" xlink:href="http://unsplash.it/300/300?image=34" x="0" y="0" height="300" width="300"></image>
     </defs>

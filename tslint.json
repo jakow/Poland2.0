@@ -11,7 +11,7 @@
       "no-namespace": false,
       "no-unused-variable": [true],
       "quotemark": ["single"],
-      "no-console": [true, "log"],
+      "no-console": [false],
       "object-literal-sort-keys": false,
       "no-var-requires": false,
       "only-arrow-functions": [true, "allow-declarations", "allow-named-functions"]

@@ -10,9 +10,9 @@ declare module 'keystone' {
     brand: string;
     'module root': string;
     'frame guard': string | boolean;
-    nav:  NavOptions;
+    nav: NavOptions;
     'csv field delimiter': string;
-    app: Express.Application
+    app: Express.Application;
     mongoose: mongoose.Mongoose;
   }
 
@@ -102,7 +102,7 @@ declare module 'keystone' {
       key: string;
       secret: string;
       'default headers': {[key: string]: string}
-    }
+    };
   }
 
   interface CloudinaryConfig {
@@ -134,9 +134,8 @@ declare module 'keystone' {
   CloudinaryOptions &
   RouteOptions;
 
-
-  export module Schema {
-    export type Relationship = string | string[]; // single objectId or array of ObjectId
+  export namespace Schema {
+    export type Relationship = mongoose.Types.ObjectId;
     export interface CloudinaryImage {
       public_id: string;
       version: number;
@@ -160,7 +159,7 @@ declare module 'keystone' {
         pad(width: number, height: number, options?: CloudinaryOptions): string;
         lpad(width: number, height: number, options?: CloudinaryOptions): string;
         thumbnail(width: number, height: number, options?: CloudinaryOptions): string;
-      }
+      };
     }
 
     export interface CloudinaryOptions {
@@ -177,9 +176,12 @@ declare module 'keystone' {
       country: string;
       geo: LngLat; // longitude, latitude
       _: {
-        googleLookup(region: string, update: 'overwrite' | boolean, callback: (err: string, location: {}, result: {}) => void  ): void;
-
-      }
+        googleLookup(
+          region: string, update: 'overwrite' |
+          boolean,
+          callback: (err: string, location: {}, result: {}) => void
+        ): void;
+      };
     }
     export type LngLat = [number, number];
   }
@@ -246,7 +248,17 @@ declare module 'keystone' {
   /** Has both the fields of the list type and methods of a mongoose document
    * IMPORTANT:
    */
-  type ModelDocument<T> = T & mongoose.Document;
+  interface HasId {
+    id: string;
+  }
+
+  type ModelDocument<T> = T & mongoose.Document & HasId;
+
+  export type Lean<T> =  T & LeanDocument;
+
+  interface LeanDocument {
+    _id: string;
+  }
 
   export class List<T> {
     /**
@@ -272,7 +284,7 @@ declare module 'keystone' {
     // main methods from documentation
    /**
     * Add fields to this schema. Also supports fields grouped by string headers by passing `header, {}` as arguments
-    instead of a single argument
+    * instead of a single argument
     * @param fields An object containing the fields to add to this model defining their type and optional properties
     */
     public add(fields: List.AddedFields<T>): void;
@@ -291,21 +303,22 @@ declare module 'keystone' {
     * @return a paginated mongoose document query that can be chained with subsequent
     * query operations.
     */
-    public paginate(options: List.PaginationOptions): mongoose.DocumentQuery<ModelDocument<T>[], ModelDocument<T>>;
+    public paginate(options: List.PaginationOptions): mongoose.DocumentQuery<Array<ModelDocument<T>>, ModelDocument<T>>;
 
   }
 
-  export module List {
+  export namespace List {
     export interface PaginationOptions {
       page: number;
       erPage: number;
       maxPages: number;
     }
-    export type FieldType = Field.ExtendedType | StringConstructor | NumberConstructor | DateConstructor | BooleanConstructor;
+    export type FieldType = Field.ExtendedType |
+    StringConstructor | NumberConstructor | DateConstructor | BooleanConstructor;
 
     type AddedFields<T> = {
         [key in keyof T]: FieldType | Field.Options | AddedFields<T[keyof T]>;
-    }
+    };
 
     export interface Options<K> {
       drilldown?: string;
@@ -320,15 +333,15 @@ declare module 'keystone' {
       searchFields?: string; // space delimited field names
       defaultSort?: string;
       defaultColumns?: string;
-      track?: boolean | {createdAt?: boolean | string, createdBy?: boolean | string, 
-        updatedAt?: boolean | string, updatedBy?: boolean | string}
+      track?: boolean | {createdAt?: boolean | string, createdBy?: boolean | string,
+        updatedAt?: boolean | string, updatedBy?: boolean | string};
       label?: string;
       path?: string;
       map?: {name: string};
       singular?: string;
       plural?: string;
       schema?: {};
-      autokey?: {from: string, path: string, unique?: boolean, fixed?: boolean},
+      autokey?: {from: string, path: string, unique?: boolean, fixed?: boolean};
       noedit?: boolean;
       nocreate?: boolean;
       nodelete?: boolean;
@@ -356,8 +369,8 @@ declare module 'keystone' {
      * @param action type of action or a function that determines whether the callback is added to the queue
      * @param cb the callback that will be executed.
      */
-    on(action: string | (() => boolean) | {}, cb: express.NextFunction ): void;
-    on(action: string | (() => boolean), cond: {}, cb: express.NextFunction): void;
+    public on(action: string | (() => boolean) | {}, cb: express.NextFunction ): void;
+    public on(action: string | (() => boolean), cond: {}, cb: express.NextFunction): void;
     /**
      * Queues a mongoose query for execution before the view is rendered.
      * The results of the query are set in `locals[key]`.
@@ -395,9 +408,12 @@ declare module 'keystone' {
      * @param query
      * @param options
      */
-    query<T, DocType extends mongoose.Document>(key: string, query: mongoose.DocumentQuery<T, DocType>, options?: View.QueryOptions): void;
+    public query<T, DocType extends mongoose.Document>(
+      key: string, query: mongoose.DocumentQuery<T, DocType>, options?: View.QueryOptions): void;
 
-    render(renderFn: string | express.ErrorRequestHandler, locals?: {} | (() => {}), callback?: (err: Error, html: string) => void): void;
+    public render(
+      renderFn: string | express.ErrorRequestHandler,
+      locals?: {} | (() => {}), callback?: (err: Error, html: string) => void): void;
   }
 
   export namespace View {

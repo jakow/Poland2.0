@@ -24,8 +24,6 @@ export interface Edition {
 
 export type EditionDocument = keystone.ModelDocument<Edition>;
 
-
-
 const Edition = new keystone.List<Edition>('Edition', {
   map: { name: 'name' },
   autokey: { from: 'year', path: 'slug', unique: true },
@@ -90,4 +88,3 @@ Edition.defaultColumns = 'name, year, current';
 Edition.register();
 
 export default Edition;
-

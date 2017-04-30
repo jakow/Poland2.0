@@ -1,1 +1,16 @@
 extends ../../layout/default/default
+
+block content
+  div
+    each edition in editions
+      h2= edition.name
+      p= edition._id
+      h3 Speakers
+      ul
+        each speaker in edition.speakers
+          li= speaker.name
+      h3 Team Members
+      ul
+        each teamMember in edition.teamMembers
+          li= teamMember.name
+      

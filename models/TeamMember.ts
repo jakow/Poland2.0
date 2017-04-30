@@ -10,8 +10,10 @@ export interface TeamMember {
   description: string;
   email: string;
   linkedin: string;
-  edition: keystone.Schema.Relationship;
+  edition: keystone.Schema.Relationship[];
 }
+
+export interface TeamMemberDocument extends keystone.ModelDocument<TeamMember> {}
 
 const TeamMember = new keystone.List<TeamMember>('TeamMember', {
     map: { name: 'name' },

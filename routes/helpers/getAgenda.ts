@@ -9,7 +9,6 @@ export interface Agenda {
   edition?: Edition;
 }
 
-
 export default async function getAgenda(edition?: string | EditionDocument): Promise<Agenda> {
   const filter = !!edition ? {edition} : {};
   const agendaDays = await list<AgendaDay>('AgendaDay').model.find(filter).exec();
