@@ -24,7 +24,7 @@ export interface AgendaEvent {
 
 export type AgendaEventDocument = keystone.ModelDocument<AgendaEvent>;
 
-const AgendaEvent = new keystone.List<AgendaEvent>('AgendaEntry', {
+const AgendaEvent = new keystone.List<AgendaEvent>('AgendaEvent', {
   map: { name: 'name' },
   autokey: { from: 'year', path: 'slug', unique: true },
   defaultSort: 'time.start',
@@ -32,7 +32,7 @@ const AgendaEvent = new keystone.List<AgendaEvent>('AgendaEntry', {
 
 AgendaEvent.add({
   name: {type: String, required: true},
-  description: {type: String},
+  description: {type: Types.Textarea},
   image: {type: Types.CloudinaryImage},
   time: {
     start: {type: String, validate: timeValidate('Invalid start time')},

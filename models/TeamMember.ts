@@ -2,7 +2,7 @@ import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
 
-interface TeamMember {
+export interface TeamMember {
   name: string;
   position: string;
   occupation: string;

@@ -1,7 +1,7 @@
 import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
-import {AgendaEventDocument} from './AgendaEvent';
+import {AgendaEvent} from './AgendaEvent';
 export interface AgendaDay {
   name: string;
   date: Date;
@@ -9,8 +9,8 @@ export interface AgendaDay {
   venue: keystone.Schema.Relationship;
   edition: keystone.Schema.Relationship;
   image: keystone.Schema.CloudinaryImage;
-  // the data that eventually is populated by reversePopulate
-  events?: AgendaEventDocument[];
+  // the data that eventually is populated by reverse population
+  events?: AgendaEvent[];
 }
 
 

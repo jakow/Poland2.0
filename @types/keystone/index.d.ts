@@ -151,15 +151,15 @@ declare module 'keystone' {
       _: {
         tag(options: CloudinaryOptions): string;
         src(options: CloudinaryOptions): string;
-        scale(width: number, height: number, options: CloudinaryOptions): string;
-        fit(width: number, height: number, options: CloudinaryOptions): string;
-        lfit(width: number, height: number, options: CloudinaryOptions): string;
-        limit(width: number, height: number, options: CloudinaryOptions): string;
-        fill(width: number, height: number, options: CloudinaryOptions): string;
-        crop(width: number, height: number, options: CloudinaryOptions): string;
-        pad(width: number, height: number, options: CloudinaryOptions): string;
-        lpad(width: number, height: number, options: CloudinaryOptions): string;
-        thumbnail(width: number, height: number, options: CloudinaryOptions): string;
+        scale(width: number, height: number, options?: CloudinaryOptions): string;
+        fit(width: number, height: number, options?: CloudinaryOptions): string;
+        lfit(width: number, height: number, options?: CloudinaryOptions): string;
+        limit(width: number, height: number, options?: CloudinaryOptions): string;
+        fill(width: number, height: number, options?: CloudinaryOptions): string;
+        crop(width: number, height: number, options?: CloudinaryOptions): string;
+        pad(width: number, height: number, options?: CloudinaryOptions): string;
+        lpad(width: number, height: number, options?: CloudinaryOptions): string;
+        thumbnail(width: number, height: number, options?: CloudinaryOptions): string;
       }
     }
 
@@ -252,7 +252,7 @@ declare module 'keystone' {
     /**
      * Get a Mongoose model instance for this List. WARNING: the mongoose
      * query results (results from `find()`, `findOne()`) are frozen and
-     * cannot have properties added to them
+     * cannot have properties added to them.
      */
     public model: mongoose.Model<ModelDocument<T>>;
     public schema: mongoose.Schema;
@@ -271,12 +271,12 @@ declare module 'keystone' {
     constructor(name: string, opt?: List.Options<T>);
     // main methods from documentation
    /**
-    * Add fields to this schema. 
-    * @param fields An object containing the fields of this model, each is an
-    * instance of @type {(FieldType|Field.Options)}
+    * Add fields to this schema. Also supports fields grouped by string headers by passing `header, {}` as arguments
+    instead of a single argument
+    * @param fields An object containing the fields to add to this model defining their type and optional properties
     */
-    public add(...fields: Array<List.AddedField<T> | string>): void;
-
+    public add(fields: List.AddedFields<T>): void;
+    public add(...fields: Array<Partial<List.AddedFields<T>> | string>): void;
    /**
     * @param rel the object containing the ref, path and refPath for the definition
     * of this relationship.
@@ -303,8 +303,8 @@ declare module 'keystone' {
     }
     export type FieldType = Field.ExtendedType | StringConstructor | NumberConstructor | DateConstructor | BooleanConstructor;
 
-    type AddedField<T> = {
-        [key in keyof T]: FieldType | Field.Options | AddedField<T[keyof T]>;
+    type AddedFields<T> = {
+        [key in keyof T]: FieldType | Field.Options | AddedFields<T[keyof T]>;
     }
 
     export interface Options<K> {

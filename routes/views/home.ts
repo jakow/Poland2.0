@@ -1,18 +1,16 @@
-import * as express from 'express';
-import * as keystone from 'keystone';
+import {RequestHandler} from 'express';
+import {View} from 'keystone';
 
 import {EditionDocument} from '../../models/Edition';
 import {SpeakerCategory} from '../../models/SpeakerCategory';
 import resolveView from '../helpers/resolveView';
 import getSpeakersByCategory from '../helpers/getSpeakersByCategory';
+import getAgenda from '../helpers/getAgenda';
 
-
-
-export const home: express.RequestHandler = async (req, res, next) => {
-  const view = new keystone.View(req, res);
+export const home: RequestHandler = async (req, res, next) => {
+  const view = new View(req, res);
   const currentEdition = res.locals.currentEdition as EditionDocument;
-
   res.locals.speakerCategories = await getSpeakersByCategory(currentEdition._id);
-  res.locals.agenda = null; // TODO
+  res.locals.agenda = await getAgenda(currentEdition._id);
   view.render(resolveView('home'));
 };

@@ -12,7 +12,7 @@ const config = {
     path: path.resolve(__dirname, 'build'),
     filename: 'index.js'
   },
-  resolve: { extensions: ['.ts', '.tsx', '.js'] },
+  resolve: { extensions: ['.ts', '.tsx', '.js', '.jsx'] },
   devtool: 'source-map',
   module: {
   rules: [
@@ -20,8 +20,11 @@ const config = {
         test: /\.(t|j)sx?$/,
         use: ['ts-loader']
       },
+      {
+        test: /.s?css$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      }
   ],
-
 },
 };
 

@@ -25,7 +25,7 @@ html(lang=lang || "en").no-js
         ga('create', '#{trackingId}', 'auto');
         ga('send', 'pageview');
         
-    if env === 'development'
+    if env === 'development' && displayLocals === true
       +printLocalsSchema(locals)
 
 

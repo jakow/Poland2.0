@@ -31,7 +31,7 @@ keystone.pre('routes', middleware.getContentControl);
 // keystone.pre('routes', middleware.loadSponsors);
 // keystone.pre('routes', middleware.getStaticPages);
 
-
+// TODO: set up 404 and 505 routes
 // keystone.set('404', (req, res) => {
 //   // middleware.loadSponsors(req, res);
 // });
@@ -42,6 +42,8 @@ keystone.pre('routes', middleware.getContentControl);
 const router = express.Router();
   // Views
 router.get('/', views.home);
+router.get('/about', views.about);
+router.get('/past-editions', views.pastEditions);
 // app.get('/:pageRoute', routes.views.staticPage); // dynamically registered static pages. Must be at bottom
 
   // NOTE: To protect a route so that only admins can see it, use the requireUser middleware:

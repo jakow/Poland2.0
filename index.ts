@@ -32,6 +32,7 @@ keystone.set('locals', {
   env: config.environment,
   utils: keystone.utils,
   trackingId: config.trackingId,
+  displayLocals: true,
 });
 
 console.info('Environment', keystone.get('env'));
@@ -43,7 +44,7 @@ if (config.environment === 'production') {
 import './models';
 
 keystone.set('nav', {
-  agenda: ['agenda-days', 'agenda-entries', 'venues'],
+  agenda: ['agenda-days', 'agenda-events', 'venues'],
   content: ['static-pages', 'content-controls'],
   editions: 'editions',
   people: ['speaker-categories', 'speakers', 'team-members'],

@@ -1,12 +1,11 @@
   // get current speaker categories
 import {SpeakerDocument} from '../../models/Speaker';
-import {SpeakerCategoryDocument} from '../../models/SpeakerCategory';
+import {SpeakerCategory, SpeakerCategoryDocument} from '../../models/SpeakerCategory';
 import {EditionDocument} from '../../models/Edition';
 import {list} from 'keystone';
 import {keyBy} from 'lodash';
-interface SpeakerCategory {
-  _id: string;
-  displayName: string;
+
+interface SpeakerCategoryWithSpeakers extends SpeakerCategory {
   speakers: SpeakerDocument[];
 }
 
@@ -14,8 +13,9 @@ export default async function getSpeakersByCategory(edition?: EditionDocument | 
   const filter = !!edition ? {edition} : {};
   const speakerCategories = (await list<SpeakerCategoryDocument>('SpeakerCategory')
     // if editionId is null will give all editions
-    .model.find(filter).lean().exec()) as SpeakerCategory[];
+    .model.find(filter).lean().exec()) as SpeakerCategoryWithSpeakers[];
 
+  // init arrays
   speakerCategories.forEach( (c) => c.speakers = []);
   // rather than querying each speaker category for each speaker
   // we do a reverse populate of the speakerCategory document
