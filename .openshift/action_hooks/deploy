@@ -2,3 +2,4 @@ echo "pulling Bower components"
 HOME=$HOME/app-root/runtime
 cd ~/repo
 ./node_modules/.bin/bower install
+./node_modules/.bin/gulp sass

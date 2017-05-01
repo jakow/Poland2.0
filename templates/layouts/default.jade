@@ -75,7 +75,7 @@ html(lang="en-GB")
 						a(href='https://twitter.com/poland20summit/', title="Twitter page"): i.fa.fa-twitter.fa-2x
 
 			.container: .top-menu
-				a#logo-home.nav-logo(href='/'): img.logo-small(src='https://res.cloudinary.com/dg1royeho/image/upload/v1465242752/logo_to4xlx.svg')
+				a#logo-home.nav-logo(href='/'): img.logo-small(src='http://res.cloudinary.com/dg1royeho/image/upload/v1493558160/logo_sah1hc.svg')
 				a#nav-toggle.hide-for-large: i.hamburger
 				nav#nav-desktop.show-for-large
 						ul.menu.lighter
@@ -186,7 +186,7 @@ html(lang="en-GB")
 						//- 		button.secondary.hollow.button.uppercase.input-group-button.with-loading: span.with-loading-content Sign Up
 
 					
-						p.center: img(src='http://res.cloudinary.com/dg1royeho/image/upload/v1467054098/zkm3wlxjs5zspcbr8ptf.svg')
+						p.center: img(src='http://res.cloudinary.com/dg1royeho/image/upload/v1493558160/logo_sah1hc.svg' style="width: 96px")
 						p.center © Poland 2.0 Summit 2016
 
 						p.center Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a>. Created by <a href="http://github.com/jakow" target="_blank">Jakub Kowalczyk</a>.
@@ -197,11 +197,11 @@ html(lang="en-GB")
 		
 		//- Add scripts that are globally required by your site here.
 
-		script(src="/js/modernizr.js")
+	  script(src="/js/modernizr.js")
 		script(src='/responsive-nav/responsive-nav.min.js')
 		script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')
-		script(src='/what-input/what-input.min.js')
-		script(src='/foundation-sites/dist/foundation.min.js')
+		script(src='/what-input/dist/what-input.min.js')
+		script(src='/foundation-sites/dist/js/foundation.min.js')
 		//- Include template-specific javascript files by extending the js block
 		script(src='/js/main.js')
 	
@@ -210,4 +210,3 @@ html(lang="en-GB")
 
 		if 'production' == process.env.NODE_ENV
 			+ganalytics
-

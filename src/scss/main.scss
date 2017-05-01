@@ -1,3 +1,5 @@
+@charset 'utf-8';
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,600i&subset=latin-ext');
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
 @import 'settings';
 @import 'foundation';
@@ -5,10 +7,8 @@ $fa-font-path: '/font-awesome/fonts';
 @import 'font-awesome';
 //@import 'patterns';
 
-
 // @include foundation-everything(true); // will minify on usage basis
 
-@charset 'utf-8';
 //@import 'motion';
 
 @include foundation-global-styles;
@@ -147,7 +147,7 @@ body {
 	background: white;
 }
 html {
-	
+
 }
 
 .sr-only {
@@ -259,7 +259,7 @@ body.noscroll {
 	border: 0;
 	p {
 		text-align:center;
-		
+
 		line-height: 1.5em;
 		font-style: italic;
 		margin-bottom: 0;
@@ -368,9 +368,9 @@ section.divider-bottom {
 		height: 1px;
 		width: 70%;
 		background: $medium-gray;
-		
+
 	}
-	
+
 	&.divider-fw {
 		margin-left: 0;
 		margin-right: 0;
@@ -379,6 +379,7 @@ section.divider-bottom {
 }
 
 h1, h2, h3, h4,h5, h6 {
+	font-weight: 500;
 	&.underlined {
 		padding-bottom: 0.5rem;
 		margin-bottom: 0.8em;
@@ -391,7 +392,7 @@ h1, h2, h3, h4,h5, h6 {
 			height: 4px;
 			// border-radius: 2px;
 			width: 5em;
-			background: #e61b5a;
+			background: $secondary-color;
 			margin-left: 50%;
 			transform: translateX(-50%);
 			opacity: 1;
@@ -562,4 +563,3 @@ img[src*='.svg'] {
 .secondary-arrow-top {
 	@include arrow-top($secondary-color, 48px, 40px);
 }
-
