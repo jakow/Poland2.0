@@ -14,7 +14,7 @@ keystone.init({
   'brand': 'Poland 2.0',
   'name': 'Poland 2.0',
   'mongoose': mongoose,
-  'static': [config.staticDir],
+  'static': config.staticDirs,
   'user model': 'User',
   'host': config.host,
   'port': config.port,
@@ -22,7 +22,7 @@ keystone.init({
   'cookie secret': config.cookieSecret,
   'cloudinary config': config.cloudinaryUrl,
   'cloudinary secure': true,
-  'favicon': path.join(config.staticDir, 'images/favicons/favicon.ico'),
+  'favicon': path.join(config.publicDir, 'images/favicons/favicon.ico'),
   'signin logo': '../images/logo.svg',
   'compress': true,
 });

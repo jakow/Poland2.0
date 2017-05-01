@@ -1,0 +1,66 @@
+$body-font: 'Source Sans Pro', 'Helvetica Neue', 'Segoe UI', sans-serif;
+
+$sgl-extras: true;
+// $sgl-debug-mode: true;
+@import "~sassy-gridlover/sassy-gridlover/sassy-gridlover"; // what
+$sgl-base-font-size: 16;
+$sgl-base-line-height: 1.5;
+
+$sgl-base-unit: "rem";
+
+/// Scale factor.
+/// Any of: $MINOR_SECOND, $MAJOR_SECOND, $MINOR_THIRD, $MAJOR_THIRD, $PERFECT_FOURTH, $AUGMENTED_FOURTH, $PERFECT_FIFTH, 
+// $MINOR_SIXTH, $GOLDEN_SECTION, $MAJOR_SIXTH, $MINOR_SEVENTH, $MAJOR_SEVENTH, $OCTAVE, $MAJOR_TENTH, $MAJOR_ELEVENTH, 
+// $MAJOR_TWELFTH, $DOUBLE_OCTAVE
+///
+$sgl-scale-factor: $PERFECT_FOURTH;
+
+$vertical-baseline: sgl-rem-calc($sgl-base-font-size * $sgl-base-line-height);
+
+body {
+  text-rendering: optimizeLegibility;
+  // -webkit-font-smoothing: antialiased;
+  @include sgl-body();
+  font-family: $body-font;
+}
+
+
+h1 {
+  @include sgl-heading(3);
+}
+
+h2 {
+  @include sgl-heading(2);
+}
+
+h3 {
+  @include sgl-heading(1);
+}
+
+h4, h5, h6 {
+  @include sgl-heading(0);
+}
+
+h1, h2, h3 {
+  margin: $vertical-baseline 0;
+}
+
+p,
+ul,
+ol,
+pre,
+table,
+blockquote {
+    @include sgl-margins();
+}
+
+
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote,
+body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl,
+dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4,
+h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li,
+mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small,
+span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead,
+time, tr, tt, u, ul, var, video {
+  vertical-align: baseline;
+}

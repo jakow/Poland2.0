@@ -16,14 +16,20 @@
     "bluebird": "^3.5.0",
     "connect-mongo": "^1.1.0",
     "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.0",
     "dotenv": "^1.1.0",
     "keystone": "^4.0.0-beta.1",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "mongoose": "^4.9.5",
+    "node-sass": "^4.5.2",
     "normalize.css": "^6.0.0",
     "pug": "^2.0.0-beta.12",
+    "sass-loader": "^6.0.3",
+    "sassline": "^2.1.2",
+    "sassy-gridlover": "^4.0.0",
     "socket.io": "^1.7.3",
+    "style-loader": "^0.16.1",
     "ts-loader": "^2.0.3",
     "typescript": "^2.2.2",
     "webpack": "^2.4.1",
@@ -47,7 +53,9 @@
     "start": "node build/index.js",
     "start:dev": "ts-node index.ts",
     "build": "webpack",
-    "test": "mocha $(find test -name '*.js')"
+    "test": "mocha $(find test -name '*.js')",
+    "watch:server": "webpack --config @config/server.config.js -w",
+    "watch:client": "webpack --config @config/client.config.js -w"
   },
   "main": "keystone.js"
 }

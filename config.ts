@@ -32,7 +32,12 @@ export const cloudinaryUrl: string =  process.env.CLOUDINARY_URL || null;
 
 export const trackingId: string = process.env.TRACKING_ID || null;
 
-export const staticDir = isBuild ? path.join('..', 'public') : 'public';
+export const publicDir = isBuild ? path.join('..', 'public') : 'public';
+export const staticDirs: string[] = [
+  publicDir,
+  isBuild ? path.join('client') : path.join('build', 'client'),
+];
+
 
 export const viewsDir = path.resolve('client', 'views');
 
