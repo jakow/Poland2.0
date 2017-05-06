@@ -62,7 +62,8 @@
     "build:client": "cross-env NODE_ENV=production webpack --config @config/client.config.js -p",
     "test": "mocha $(find test -name '*.js')",
     "watch:server": "webpack --config @config/server.config.js -w",
-    "watch:client": "webpack-dev-server --config @config/client.config.js -w"
+    "watch:client": "webpack-dev-server --config @config/client.config.js -w",
+    "clean": "rm -rf build/"
   },
   "main": "keystone.js"
 }
