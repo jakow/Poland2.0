@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
+const isProduction = process.env.NODE_ENV === 'production';
 const sassPaths = [
   './node_modules/sassline/sass'
 ].map( (p) => path.resolve(p));
@@ -15,7 +16,16 @@ const config = {
     filename: 'index.js'
   },
   resolve: { extensions: ['.ts', '.tsx', '.js', '.jsx'] },
-  devtool: 'source-map',
+  devtool: isProduction ? 'cheap-module-source-map' : 'cheap-module-eval-source-map',
+  devServer: {
+    compress: true,
+    port: 8000,
+    proxy: {
+      '/': {
+        target: 'http://localhost:3000'
+      }
+    }
+  },
   module: {
   rules: [
       {
@@ -31,7 +41,13 @@ const config = {
       },
       {
         test: /\.s?css$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: [
+          'style-loader', 
+          {loader:'css-loader', options: {importLoaders: 1}},
+          {loader: 'postcss-loader', options: {
+            plugins: [require('autoprefixer')]
+          }}, 
+          'sass-loader']
       }
   ],
 

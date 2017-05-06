@@ -70,6 +70,3 @@ function showNext(ev?: UIEvent) {
   // remove the shown images from the shown array
   scrollTriggeredImages.splice(0, toBeShown.length);
 }
-
-// await for image to be loaded
-

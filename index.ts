@@ -1,4 +1,4 @@
-import * as dotenv from 'dotenv';
+import 'source-map-support/register';
 import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
 import * as Promise from 'bluebird';

@@ -1,5 +1,9 @@
 include ../../mixins/printLocalsSchema
 include ../../components/nav/nav
+
+<!--[if lt IE 9]>
+Your browser is really outdated. <a href="http://outdatedbrowser.com/en">Click here to 
+<![endif]-->
 doctype html
 html(lang=lang || "en").no-js
   head
@@ -11,15 +15,15 @@ html(lang=lang || "en").no-js
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css")
     link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
     link(rel="stylesheet", href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css")
-    if env === 'production'
-      link(rel="stylesheet", href="client/main.scss")
     block style
-    
-    //- client bundle
-    if env === 'development'
-      script(src='/index.js' defer)
     if env === 'production'
-      script(src='/index.js' defer)
+      link(rel="stylesheet", href="/main.css")
+  
+    block scripts
+    //- client bundle
+    script(src='/index.js' defer)
+
+    //- Any extra stuff in head
     block head
 
   body
@@ -39,18 +43,21 @@ html(lang=lang || "en").no-js
     include ../../components/footer/footer
 
 
-    if env === 'production'
-      script.
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-        ga('create', '#{trackingId}', 'auto');
-        ga('send', 'pageview');
+      if env === 'production'
+        //- include an outdated browser warning
+        script.
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', '#{trackingId}', 'auto');
+          ga('send', 'pageview');
         
     //- if env === 'development' && displayLocals === true
     //-   +printLocalsSchema(locals)
 
+
+include ../../vendor/outdated-browser
 
 
   

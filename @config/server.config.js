@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const config = {
   target: 'node', node: {__filename: false, __dirname: false},
   externals: [nodeExternals()],
@@ -13,7 +15,7 @@ const config = {
     filename: 'index.js'
   },
   resolve: { extensions: ['.ts', '.tsx', '.js', '.jsx'] },
-  devtool: 'source-map',
+  devtool: isProduction ? 'source-map' : 'eval-source-map',
   module: {
   rules: [
       {
