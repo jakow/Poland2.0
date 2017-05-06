@@ -1,3 +1,8 @@
-// body {
-//   hyphens: auto; 
-// }
+body {
+  hyphens: auto; 
+}
+
+
+body > .container {
+  position: relative;
+}

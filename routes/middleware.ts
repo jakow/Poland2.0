@@ -1,5 +1,6 @@
 import {list} from 'keystone';
 import {EditionDocument} from '../models/Edition';
+import {StaticPage} from '../models/StaticPage';
 import {RequestHandler, Request, Response, NextFunction} from 'express';
 import {environment} from '../config';
 
@@ -23,21 +24,42 @@ export async function getContentControl(req: Request, res: Response, next: NextF
   }
 }
 
+interface NavItem {
+  name: string; // display name
+  route: string; // where it goes
+  key: string; // what is the route key
+}
+
 /**
  * Initialises the standard view locals
  * The included layout depends on the navLinks array to generate
  * the navigation in the header, you may wish to change this array
  * or replace it with your own templates / logic.
  */
-
-// exports.initLocals = function(req, res, next) {
-// };
-
+export async function initLocals(req: Request, res: Response, next: NextFunction) {
+  let staticPages;
+  try {
+    staticPages = await list<StaticPage>('StaticPage').model
+      .find({active: true, showInMenu: true})
+      .select({name: true, route: true})
+      .exec();
+  } catch (e) {
+    next(e);
+  }
+  const nav: NavItem[] = [
+    {name: 'About', route: '/about', key: 'about'},
+    {name: 'Past editions', route: '/past-editions', key: 'past-editions'},
+  ];
+  const staticRoutes: NavItem[] = staticPages.map( (p) => ({
+    name: p.name, route: p.route, key: p.route.replace(/\//g, ''),
+  }));
+  res.locals.nav = [...nav, ...staticRoutes];
+  next();
+}
 
 // exports.initErrorHandlers = function(req, res, next) {
 
 // };
-
 
 // exports.getCurrentEdition = function(req, res, next) {
 //     var q = keystone.list('Edition').model.findOne({current:true});
@@ -52,23 +74,15 @@ export async function getContentControl(req: Request, res: Response, next: NextF
 
 // };
 
-// exports.getStaticPages = function (req,res, next) {
-//   keystone.list('StaticPage').model
-//   .find({showInMenu: true})
-//   .select({name: 1, route: 1, showInMenu: 1, menuOrder: 1})
-//   .exec(function(err,result) {
-//     if (result) {
-//       res.locals.staticPages = result;
-//       //insert menu items into navLinks
-//       var navLinks = res.locals.navLinks;
-//       var menuItems = result.filter(page => (page.showInMenu)).sort((a,b) => (Math.sign(a.menuOrder - b.menuOrder)));
-//       for(var i = 0; i < menuItems.length; ++i) {
-//         navLinks.splice(menuItems[i].menuOrder, //splice starting at menu order
-//           0, // do not delete anything
-//           { label: menuItems[i].name,		key: menuItems[i].route,		href: `/${menuItems[i].route}`});
-//       }
-//     }
-//     next(err);
-
-//   });
-// };
+export async function getStaticPage(req: Request, res: Response, next: NextFunction) {
+  let staticPage;
+  console.log(req.route);
+  try {
+  staticPage = await list('StaticPage').model
+  .findOne({showInMenu: true, active: true, route: req.route})
+  .select({name: 1, route: 1, showInMenu: 1, menuOrder: 1})
+  .exec();
+  } catch (e) {
+    // TODO: throw 404
+  }
+}

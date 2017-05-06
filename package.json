@@ -13,6 +13,7 @@
     "@types/node": "^7.0.13",
     "@types/pug": "^2.0.4",
     "@types/socket.io": "^1.4.29",
+    "animejs": "^2.0.2",
     "bluebird": "^3.5.0",
     "connect-mongo": "^1.1.0",
     "copy-webpack-plugin": "^4.0.1",

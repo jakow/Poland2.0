@@ -1,0 +1,87 @@
+.button {
+  padding: 0 $vertical-baseline;
+  // font-size: sgl-heading(-1);
+  -webkit-appearance: none;
+  height: 2 * $vertical-baseline;
+  
+  border-radius: 2 * $base-font-size;
+  display: inline-block;
+  // margin: (0.125 * $vertical-baseline) 0 (0.125* $vertical-baseline) + $vertical-baseline;
+  margin: 0 0 $vertical-baseline;
+  line-height: 2 * $vertical-baseline;
+  font-weight: 300;
+  
+  position: relative;
+  vertical-align: middle;
+  touch-action: manipulation;
+  white-space: nowrap;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@mixin button-style($color: $primaryColor, $fontColor: #FFFFFF) {
+  background-color: $color;
+  color: $fontColor;
+}
+
+@mixin hollow-button-style($color: $primaryColor, $hoverColor: white) {
+  border: 2px solid $color;
+  color: $color;
+  &:hover {
+    background-color: $color;
+    color: $hoverColor;
+  }
+}
+
+.button.primary {
+  @include button-style($primaryColor, white);
+  box-shadow: 0px 1px 9px 0px rgba(1, 1, 1, 0.33);
+}
+
+@mixin circular-button {
+  width: 2 * $vertical-baseline;
+  padding: 0;
+}
+
+.button.circular {
+  @include circular-button;
+  &::before {
+    content: ' ';
+    position: absolute;
+  }
+  text-align: center;
+  .material-icons {
+    // line-height: 1;
+    font-size: 1.5 * $vertical-baseline;
+    padding: 0.25 * $vertical-baseline;
+  }
+  .lnr {
+    line-height: 2 * $vertical-baseline;
+    font-size: $vertical-baseline;
+  }
+}
+
+.button.menu {
+  @include button-style($dark-color, white);
+   i.menu-icon::before, i.menu-icon::after {
+     content: '';
+   }
+    &:hover {
+      i.menu-icon, i.menu-icon::before, i.menu-icon::after {
+      background-color: white;
+      }
+    }
+  i.menu-icon, i.menu-icon::before, i.menu-icon::after {
+    display: block;
+    height: 1px;
+    position: relative;
+    background-color: $dark-color;
+    width: $vertical-baseline;
+    top: 50%;
+    left: 50%;
+
+  }
+
+  
+}

@@ -1,10 +1,13 @@
 $body-font: 'Source Sans Pro', 'Helvetica Neue', 'Segoe UI', sans-serif;
+$base-font-size: 14px;
+$baseline-height: 1.5;
 
 $sgl-extras: true;
 // $sgl-debug-mode: true;
 @import "~sassy-gridlover/sassy-gridlover/sassy-gridlover"; // what
-$sgl-base-font-size: 16;
-$sgl-base-line-height: 1.5;
+$vertical-baseline: sgl-rem-calc($base-font-size * $baseline-height);
+$sgl-base-font-size: $base-font-size;
+$sgl-base-line-height: $baseline-height;
 
 $sgl-base-unit: "rem";
 
@@ -15,13 +18,14 @@ $sgl-base-unit: "rem";
 ///
 $sgl-scale-factor: $PERFECT_FOURTH;
 
-$vertical-baseline: sgl-rem-calc($sgl-base-font-size * $sgl-base-line-height);
+
 
 body {
   text-rendering: optimizeLegibility;
   // -webkit-font-smoothing: antialiased;
   @include sgl-body();
   font-family: $body-font;
+  color: $dark-color;
 }
 
 
@@ -43,6 +47,10 @@ h4, h5, h6 {
 
 h1, h2, h3 {
   margin: $vertical-baseline 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
 }
 
 p,

@@ -36,11 +36,6 @@ const config = {
   ],
 
 },
-// plugins: [
-//   new CopyWebpackPlugin([
-//     {from: 'src/views', to: 'views'}
-//   ])
-// ]
 };
 
 

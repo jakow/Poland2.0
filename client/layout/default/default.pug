@@ -1,39 +1,43 @@
 include ../../mixins/printLocalsSchema
+include ../../components/nav/nav
 doctype html
 html(lang=lang || "en").no-js
   head
     meta(charset="utf-8")
     meta(http-equiv="x-ua-compatible" content="ie=edge")
-    meta(name="description" content="#{meta.description}")
+    meta(name="description" content=meta ? meta.description: '')
     meta(name="viewport" content="width=device-width, initial-scale=1")
     title= title || "Poland 2.0 Summit"
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css")
-
+    link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    link(rel="stylesheet", href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css")
     if env === 'production'
       link(rel="stylesheet", href="client/main.scss")
     block style
     
     //- client bundle
     if env === 'development'
-      script(src='/index.js')
+      script(src='/index.js' defer)
     if env === 'production'
-      script(src='/index.js')
+      script(src='/index.js' defer)
     block head
 
   body
-    .baseline-grid
-      .guide
-      .guide
-      .guide
-      .guide
-      .guide
-      .guide
-      .guide
-      .guide
-      .guide
-    include ../../components/nav/nav
-    block content
+    //- .baseline-grid
+    //-   .guide
+    //-   .guide
+    //-   .guide
+    //-   .guide
+    //-   .guide
+    //-   .guide
+    //-   .guide
+    //-   .guide
+    //-   .guide
+    include ../../components/header/header
+    .container
+      block content
     include ../../components/footer/footer
+
 
     if env === 'production'
       script.
@@ -44,8 +48,8 @@ html(lang=lang || "en").no-js
         ga('create', '#{trackingId}', 'auto');
         ga('send', 'pageview');
         
-    if env === 'development' && displayLocals === true
-      +printLocalsSchema(locals)
+    //- if env === 'development' && displayLocals === true
+    //-   +printLocalsSchema(locals)
 
 
 

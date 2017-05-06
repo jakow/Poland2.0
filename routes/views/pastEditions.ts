@@ -23,7 +23,8 @@ interface HasEdition extends Document {
 }
 
 export const pastEditions: RequestHandler = async (req, res, next) => {
-  // TODO: some eror handling in routes
+  res.locals.route = 'past-editions';
+  // TODO: some eror handling on DB requests
   const view = new View(req , res);
   const currentEditon = res.locals.edition as EditionDocument; // always available as a local
   const editions = (await list<Edition>('Edition').model
