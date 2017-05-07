@@ -36,6 +36,7 @@
     "sassy-gridlover": "^4.0.0",
     "socket.io": "^1.7.3",
     "source-map-support": "^0.4.15",
+    "spinthatshit": "^1.0.3",
     "style-loader": "^0.16.1",
     "ts-loader": "^2.0.3",
     "typescript": "^2.2.2",
@@ -67,7 +68,7 @@
     "dev:client": "webpack-dev-server --config @config/client.config.js -w",
     "build:server": "cross-env NODE_ENV=production webpack --config @config/server.config.js -p --progress",
     "build:client": "cross-env NODE_ENV=production webpack --config @config/client.config.js -p --progress",
-    "build": "concurrently 'yarn build:server' 'yarn build:client'",
+    "build": "concurrently \"yarn build:server\" \"yarn build:client\"",
     "test": "mocha $(find test -name '*.js')",
     "watch:server": "webpack --config @config/server.config.js -w",
     "clean": "rimraf build/"

@@ -1,5 +1,6 @@
 // The maps to define ratios
 // use the map as (numerator: denominator[])
+@import "~spinthatshit/src/loaders";
 
 $predef-ratios: (
   1 : (1,),
@@ -7,46 +8,84 @@ $predef-ratios: (
   5 : (4,),
   16 : (9,),
 );
-
-$transition: 0.3s ease-in;
+$lazy-img-transition-duration: 0.3s;
+$lazy-img-transition: $lazy-img-transition-duration ease-in;
 $blur: 5px;
+$spinner-size: 48px;
 
 .lazy-img {
   background: $dark-color;
   position: relative;
   overflow: hidden;
+  
   .preview, .original {
     position: absolute;
-    // left: 0 - 2*$blur;
-    // top: 0 - 2*$blur;
-    // width: calc(100% + #{4*$blur});
+    left: 0 - 2*$blur;
+    top: 0 - 2*$blur;
+    width: calc(100% + #{4*$blur});
     // If we can accept the edges bluring with the background color then
     // the image can have the correct
-    left: 0;
-    top: 0;
-    width: 100%;
+    // left: 0;
+    // top: 0;
+    // width: 100%;
     will-change: opacity; // prepare the browser for opacity anim
     opacity: 0;
     visibility: hidden;
-    &.loaded {
-      transition: opacity $transition;
+    z-index: 2;
+  }
+   // .preview image is the blurry placeholder that first appears on the page
+   // .original image is the high-res larger image
+  .preview {
+    z-index: 1;
+    filter: blur(6px);
+  }
+
+  &.preview-loaded {
+    .preview {
+      transition: opacity $lazy-img-transition;
       opacity: 1;
       visibility: visible;
     }
   }
-   //- Preview image is the blurry placeholder that first appears on the page
-  .preview {
-    z-index: 2;
-    filter: blur(6px);
-  }
 
-  .original {
-    z-index: 3;
-    &.loaded {
+  &.loaded {
+    .original {
+      transition: opacity $lazy-img-transition;
       opacity: 1;
+      visibility: visible;
+    }
+    .preview {
+      transition: visibility 0 linear ($lazy-img-transition-duration*1.1);
+      visibility: hidden;
+    }
+    .spinner-container {
+      opacity: 0;
+
     }
   }
+  // optional spinner
+  .spinner-container {
+    width: $spinner-size;
+    height: $spinner-size;
+    z-index: 3;
+    opacity: 1;
+    transition: opacity ($lazy-img-transition-duration / 2) ease-out;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .spinner {
+    @include loader02($size: $spinner-size, $duration: 1s, $align: middle, $color: $primary-color);
+  }
+
+  noscript .original {
+    z-index: 4;
+    opacity: 1;
+  }
 }
+
 
 @each $numerator, $denominators in $predef-ratios {
   @each $denominator in $denominators {

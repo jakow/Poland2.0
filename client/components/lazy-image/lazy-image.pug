@@ -26,6 +26,7 @@ mixin lazyImage(source, placeholder, aspectRatio='1:1', method='scroll')
     //- If the user has disabled javascript, show the original image as loaded straight away
     //- with degraded UX.
     noscript: img(src=source).original.loaded&attributes(attributes)
+    .spinner-container: .spinner
 
 mixin lazyBackgroundImage(source, placeholder, aspectRatio='16:9', method='immediate')
   img(src=source)

@@ -23,13 +23,13 @@ class LazyImage {
 
   public showPreview() {
     this.imgLoaded(this.previewSrc).then(() => {
-      this.preview.classList.add('loaded');
+      this.container.classList.add('preview-loaded');
     });
   }
 
   public async showOriginal() {
-    const img = await this.imgLoaded(this.originalSrc, this.original);
-    img.classList.add('loaded');
+    await this.imgLoaded(this.originalSrc, this.original);
+    this.container.classList.add('loaded');
   }
 
   private imgLoaded(src: string, element?: HTMLImageElement) {
@@ -64,8 +64,8 @@ export function init() {
 
 function showNext(ev?: UIEvent) {
   const threshold = window.scrollY + window.innerHeight;
-  // because the array is sorted w.r.t. y position then we can just count the images
-  // that are above the threshold and unshift them from array;
+  // because the array is sorted w.r.t. y position then we can just select the images
+  // that are above the threshold and splice them from array;
   const toBeShown = takeWhile(scrollTriggeredImages, (img) => img.yPosition < threshold);
   toBeShown.forEach((img) => img.showOriginal());
   // remove the shown images from the shown array

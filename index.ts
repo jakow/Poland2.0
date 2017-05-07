@@ -8,6 +8,7 @@ import routes from './routes';
 import {initSockets} from './routes/sockets';
 (mongoose as any).Promise = Promise;
 
+
 keystone.init({
   'auth': true,
   // 'auto update': true, // think about alternative update format
