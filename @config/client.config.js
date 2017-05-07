@@ -13,12 +13,12 @@ const config = {
   entry: './client/main.ts',
   output: {
     path: path.resolve(__dirname, '..', 'build', 'client'),
-    filename: 'index.js'
+    filename: 'index.js',
   },
   resolve: { extensions: ['.ts', '.tsx', '.js', '.jsx'] },
-  devtool: isProduction ? 'cheap-module-source-map' : 'cheap-module-eval-source-map',
+  devtool: isProduction? 'cheap-module-source-map' : 'source-map',
   devServer: {
-    compress: true,
+    compress: false,
     port: 8000,
     proxy: {
       '/': {

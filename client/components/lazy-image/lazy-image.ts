@@ -45,8 +45,8 @@ class LazyImage {
 }
 }
 
-export let lazyImages: LazyImage[] = [];
-export let scrollTriggeredImages: LazyImage[];
+const lazyImages: LazyImage[] = [];
+let scrollTriggeredImages: LazyImage[];
 
 let onScroll: (ev: UIEvent) => void;
 export function init() {
@@ -59,6 +59,7 @@ export function init() {
   onScroll = throttle(showNext, 400);
   document.addEventListener('scroll', onScroll);
   showNext();
+  return lazyImages;
 }
 
 function showNext(ev?: UIEvent) {
