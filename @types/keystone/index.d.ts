@@ -10,6 +10,8 @@ declare module 'keystone' {
     brand: string;
     'module root': string;
     'frame guard': string | boolean;
+    'auto update': boolean;
+    'updates': string;
     nav: NavOptions;
     'csv field delimiter': string;
     app: Express.Application;

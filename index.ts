@@ -8,10 +8,12 @@ import routes from './routes';
 import {initSockets} from './routes/sockets';
 (mongoose as any).Promise = Promise;
 
+console.log(path.resolve(config.rootDir, 'updates'));
 
 keystone.init({
   'auth': true,
-  // 'auto update': true, // think about alternative update format
+  'auto update': true,
+  'updates': path.resolve(config.rootDir, 'updates'),
   'brand': 'Poland 2.0',
   'name': 'Poland 2.0',
   'mongoose': mongoose,
