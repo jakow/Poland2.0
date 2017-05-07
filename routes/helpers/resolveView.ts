@@ -1,7 +1,7 @@
 import {viewsDir, viewEngine, rootDir} from '../../config';
 import {statSync, readdirSync} from 'fs';
 import {join, basename, extname, relative, resolve} from 'path';
-console.info('resolveView dirname: ');
+
 class RouteNotFoundError extends Error {
   constructor(routeName: string) {
     super(`Route ${routeName} was not found`);

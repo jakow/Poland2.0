@@ -1,0 +1,7 @@
+// Angled edge mixin which supports at most two edges
+// By convention top and left edges are done with ::before pseudoelement
+// and bottom and right with an ::after pseudolement
+// TODO: think of a way to override this to have a right and bottom edge
+@mixin angled-edge($position, $angle) {
+  
+}

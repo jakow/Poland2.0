@@ -11,13 +11,8 @@ export const rootDir: string = '.';
 
 // console.info('rootDir', path.resolve(rootDir));
 
-if (environment === 'development') {
-  const loaded = !!dotenv.config({path: path.join(rootDir, '.env'), silent: true});
-  if (!loaded) {
-    console.error('.env missing in the development environment');
-    process.exit(1);
-  }
-}
+const loaded = !!dotenv.config({path: path.join(rootDir, '.env'), silent: true});
+console.info('.env missing. Relying on preset environment variables.');
 
 export const port: number =  process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
