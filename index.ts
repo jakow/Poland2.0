@@ -6,9 +6,8 @@ import * as path from 'path';
 import * as config from './config';
 import routes from './routes';
 import {initSockets} from './routes/sockets';
+import createAssetStore from './routes/helpers/assets';
 (mongoose as any).Promise = Promise;
-
-console.log(path.resolve(config.rootDir, 'updates'));
 
 keystone.init({
   'auth': true,
@@ -28,6 +27,7 @@ keystone.init({
   'favicon': path.join(config.publicDir, 'images/favicons/favicon.ico'),
   'signin logo': '../images/logo.svg',
   'compress': true,
+  'logger': config.environment === 'production' ? 'tiny' : 'dev',
 });
 
 keystone.set('locals', {
@@ -36,14 +36,18 @@ keystone.set('locals', {
   utils: keystone.utils,
   trackingId: config.trackingId,
   displayLocals: true,
+  assets: createAssetStore(),
 });
 
-console.info('Environment', keystone.get('env'));
+console.info(`Running in ${config.environment} mode`);
 
 if (config.environment === 'production') {
   keystone.set('session store', 'connect-mongo');
+  // TODO: set Cache-Control on all assets, including JS and CSS since they are busted
+  // keystone.set('static options', {});
 }
 
+// have to do this here after mongo is initialised
 import './models';
 
 keystone.set('nav', {

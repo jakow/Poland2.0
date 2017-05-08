@@ -5,7 +5,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const ContextReplacementPlugin = webpack.ContextReplacementPlugin;
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 const nodeExternals = require('webpack-node-externals');
-
+const AssetsPlugin = require('assets-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 
 const cssLoaders = [
@@ -16,12 +16,16 @@ const cssLoaders = [
   'sass-loader',
 ];
 
+// root build directory for the SERVER. Client is in /client/
+const buildDir = path.resolve(__dirname, '..', 'build');
+
 const config = {
   target: 'web',
   entry: './client/main.ts',
   output: {
-    path: path.resolve(__dirname, '..', 'build', 'client'),
-    filename: 'index.js',
+    path: path.join(buildDir, 'client'),
+    filename: isProduction ? '[name]-[hash:12].js' : '[name].js',
+    publicPath: '/',
   },
   resolve: { extensions: ['.ts', '.tsx', '.js', '.jsx'] },
   devtool: isProduction? 'source-map' : 'eval-source-map',
@@ -59,11 +63,17 @@ const config = {
     // currently empty
     // and production only plugins
     ... isProduction ? [
-      new webpack.DefinePlugin({'process.env': {'NODE_ENV': JSON.stringify('production')}}),
-      new ExtractTextPlugin("main.css"),
+      new webpack.DefinePlugin({
+        'process.env': {'NODE_ENV': JSON.stringify('production')}
+      }),
+      new ExtractTextPlugin("[name]-[contenthash:12].css"),
       new UglifyJsPlugin({sourceMap: true}),
       // full disclosure - some cool hack for getting rid of locales when minifiying moment.js
-      new ContextReplacementPlugin(/moment[\/\\]locale$/, /en|pl/)
+      new ContextReplacementPlugin(/moment[\/\\]locale$/, /en|pl/),
+      new AssetsPlugin({
+        path: buildDir,
+        filename: 'assets.json',
+      }),
     ] : []
   ]
 };
