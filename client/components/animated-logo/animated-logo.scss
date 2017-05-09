@@ -1,0 +1,27 @@
+$element-count: 36;
+$logo-anim-delay: 10ms;
+$logo-anim-duration: 100ms;
+.animated-logo {
+  [class^="tr"] {
+    transition: opacity $logo-anim-duration ease-in-out;
+    opacity: 0;
+  }
+    
+    @for $i from 1 through $element-count {
+      .tr#{$i} {
+        transition-delay: ($element-count - $i) * $logo-anim-delay;
+      }
+      &.show {
+      .tr#{$i} {
+        transition-delay: ($i - 1) * $logo-anim-delay;
+      }
+
+    }
+  }
+
+  &.show {
+    [class^="tr"] {
+      opacity: 1;
+    }
+  }
+}

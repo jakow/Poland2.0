@@ -7,4 +7,9 @@ console.log(`The date is ${moment(Date.now()).format('DD MMMM YY')}`);
 
 document.addEventListener('DOMContentLoaded', () => {
   const images = lazyImages.init();
+  document.querySelector('#show-logo').addEventListener('click', () => {
+    document.querySelector('.animated-logo').classList.toggle('show');
+  });
 });
+
+

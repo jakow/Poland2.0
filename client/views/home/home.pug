@@ -1,17 +1,21 @@
 extends ../../layout/default/default
 
 include ../../components/lazy-image/lazy-image
-
+include ../../components/animated-logo/animated-logo
 block content
   p Hello world!
   div
-    p Current edition ID #{currentEdition._id}
-    each category in speakerCategories
-      h1= category.displayName
-      each speaker in category.speakers
-        //- img(src=speaker.photo.url, style="height: 25rem")
-        h2=speaker.name
-    
+    if currentEdition
+      p Current edition ID #{currentEdition.id}
+    //- Always guard against missing data!
+    if speakerCategories
+      each category in speakerCategories
+        h1= category.displayName
+        each speaker in category.speakers
+          //- img(src=speaker.photo.url, style="height: 25rem")
+          h2=speaker.name
+    +animated-logo
+    button.button#show-logo Show logo
     ul
       li One
       li Two

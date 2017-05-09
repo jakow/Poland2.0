@@ -30,16 +30,13 @@ export default function createAssetStore() {
       }
       // get from assets map
       const basename = path.basename(asset);
-      console.log('resolving asset: ' + asset);
       const ext = path.extname(basename).slice(1);
       const filename = basename.slice(0, -(ext.length + 1));
-      console.info(filename);
       if (!assetStore.hasOwnProperty(filename)) {
         // lets the asset fetching fail with 404
         return asset;
       } else {
         return assetStore[filename][ext];
       }
-
   };
 }

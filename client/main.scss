@@ -11,12 +11,13 @@
 @import 'components/footer/footer';
 @import 'components/lazy-image/lazy-image';
 @import 'components/speaker-card/speaker-card';
+@import 'components/animated-logo/animated-logo';
 // @import 'vendor/icons';
 html, body {
   // margin: $vertical-baseline;
   margin: 0;
   height: 100%;
-  background: $dark-color;
+  background: $color-dark;
 }
 
 .container {

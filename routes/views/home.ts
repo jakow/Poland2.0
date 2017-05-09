@@ -11,7 +11,9 @@ export const home: RequestHandler = async (req, res, next) => {
   res.locals.route = 'home';
   const view = new View(req, res);
   const currentEdition = res.locals.currentEdition as EditionDocument;
-  res.locals.speakerCategories = await getSpeakersByCategory(currentEdition._id);
-  res.locals.agenda = await getAgenda(currentEdition._id);
+  if (currentEdition != null) {
+    res.locals.speakerCategories = await getSpeakersByCategory(currentEdition.id);
+    res.locals.agenda = await getAgenda(currentEdition.id);
+  }
   view.render(resolveView('home'));
 };

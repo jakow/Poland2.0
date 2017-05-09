@@ -7,7 +7,10 @@ export const about: RequestHandler = async (req, res, next) => {
   res.locals.route = 'about';
   const view = new View(req, res);
   const currentEdition = res.locals.currentEdition as EditionDocument;
-  const team = await list<TeamMember>('TeamMember').model.find({edition: currentEdition}).exec();
+  let team;
+  if (currentEdition != null) {
+    team = await list<TeamMember>('TeamMember').model.find({edition: currentEdition}).exec();
+  }
   res.locals.team = team;
   view.render(resolveView('about'));
 };

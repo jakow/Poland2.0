@@ -14,7 +14,7 @@ $blur: 5px;
 $spinner-size: 48px;
 
 .lazy-img {
-  background: $dark-color;
+  background: $color-dark;
   position: relative;
   overflow: hidden;
   
@@ -69,20 +69,20 @@ $spinner-size: 48px;
     height: $spinner-size;
     z-index: 3;
     opacity: 1;
-    transition: opacity ($lazy-img-transition-duration / 2) ease-out;
+    transition: all ($lazy-img-transition-duration / 2) ease-out;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: calc(50% - #{$spinner-size / 2});
+    left: calc(50% - #{$spinner-size / 2});
   }
 
   .spinner {
-    @include loader02($size: $spinner-size, $duration: 1s, $align: middle, $color: $primary-color);
+    @include loader02($size: $spinner-size, $duration: 1s, $align: middle, $color: $color-primary);
   }
 
   noscript .original {
     z-index: 4;
     opacity: 1;
+    visibility: visible;
   }
 }
 

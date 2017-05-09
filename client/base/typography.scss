@@ -25,7 +25,7 @@ body {
   // -webkit-font-smoothing: antialiased;
   @include sgl-body();
   font-family: $body-font;
-  color: $dark-color;
+  color: $color-dark;
 }
 
 
