@@ -25,6 +25,7 @@ StaticPage.add({
   content: {type: Types.Html, wysiwyg: false},
 });
 
+StaticPage.defaultColumns = 'name, route, active';
 StaticPage.register();
 
 export default StaticPage;

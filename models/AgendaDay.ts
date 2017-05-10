@@ -2,6 +2,7 @@ import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
 import {AgendaEvent} from './AgendaEvent';
+
 export interface AgendaDay {
   name: string;
   date: Date;

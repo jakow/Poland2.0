@@ -5,7 +5,7 @@ import * as Promise from 'bluebird';
 import * as path from 'path';
 import * as config from './config';
 import routes from './routes';
-import {initSockets} from './routes/sockets';
+
 import createAssetStore from './routes/helpers/assets';
 (mongoose as any).Promise = Promise;
 
@@ -47,8 +47,9 @@ if (config.environment === 'production') {
   // keystone.set('static options', {});
 }
 
-// have to do this here after mongo is initialised
+// have to do this here after mongo and cloudinary are initialised. Kind of hacky.
 import './models';
+import {initSockets} from './routes/sockets';
 
 keystone.set('nav', {
   agenda: ['agenda-days', 'agenda-events', 'venues'],

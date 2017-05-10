@@ -1,5 +1,6 @@
 import * as keystone from 'keystone';
 const Types = keystone.Field.Types;
+
 const ContentControl = new keystone.List('ContentControl', {
   map: { name: 'title' },
   autokey: { path: 'slug', from: 'title' },

@@ -306,7 +306,6 @@ declare module 'keystone' {
     * query operations.
     */
     public paginate(options: List.PaginationOptions): mongoose.DocumentQuery<Array<ModelDocument<T>>, ModelDocument<T>>;
-
   }
 
   export namespace List {

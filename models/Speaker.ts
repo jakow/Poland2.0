@@ -32,7 +32,6 @@ Speaker.add({
 });
 
 Speaker.defaultColumns = 'name, speakerCategory, edition';
-
 Speaker.register();
 
 export default Speaker;

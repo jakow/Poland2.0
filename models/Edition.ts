@@ -20,6 +20,7 @@ export interface Edition {
   };
   mainPhoto: keystone.Schema.CloudinaryImage;
   photos: keystone.Schema.CloudinaryImage[];
+  dateString?: string;
 }
 
 export type EditionDocument = keystone.ModelDocument<Edition>;
@@ -50,7 +51,6 @@ Edition.add({
   photos: {type: Types.CloudinaryImages},
 });
 
-
 Edition.schema.virtual('dateString').get(function() {
 	// NOTE the use of en dash instead of hyphen in dates
  const start = moment(this.date.start);
@@ -65,10 +65,7 @@ Edition.schema.virtual('dateString').get(function() {
 	 // contracted months are printed
   return `${start.format('D MMM')}–${end.format('D MMM YYYY')}`;
  }
-
-
 });
-
 
 Edition.schema.methods.getRefs = function(ref: string, filters = {}) {
   if ( !(typeof ref === 'string') ) {
@@ -76,8 +73,6 @@ Edition.schema.methods.getRefs = function(ref: string, filters = {}) {
   }
   return keystone.list(ref).model.find({...filters, edition: this.id});
 };
-
-
 
 Edition.relationship({path: 'speakers', ref: 'Speaker', refPath: 'edition'});
 Edition.relationship({path: 'team-members', ref: 'TeamMember', refPath: 'edition'});

@@ -23,7 +23,6 @@ SpeakerCategory.add({
 });
 
 SpeakerCategory.relationship({path: 'speakers', ref: 'Speaker', refPath: 'speakerCategory'});
-
 SpeakerCategory.register();
 
 export default SpeakerCategory;

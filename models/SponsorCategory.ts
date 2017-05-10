@@ -38,7 +38,6 @@ SponsorCategory.add({
 });
 
 SponsorCategory.relationship({  path: 'sponsor-categories', ref: 'Sponsor', refPath: 'category'});
-
 SponsorCategory.register();
 
 export default SponsorCategory;

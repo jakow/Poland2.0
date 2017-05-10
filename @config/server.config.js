@@ -16,6 +16,7 @@ const config = {
   },
   resolve: { extensions: ['.ts', '.tsx', '.js', '.jsx'] },
   devtool: isProduction ? 'source-map' : 'eval-source-map',
+  // devtool: 'source-map' ,
   module: {
   rules: [
       {

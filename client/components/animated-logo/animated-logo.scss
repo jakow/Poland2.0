@@ -1,9 +1,9 @@
 $element-count: 36;
-$logo-anim-delay: 10ms;
-$logo-anim-duration: 100ms;
+$logo-anim-delay: 12ms;
+$logo-anim-duration: 120ms;
 .animated-logo {
   [class^="tr"] {
-    transition: opacity $logo-anim-duration ease-in-out;
+    transition: opacity $logo-anim-duration ease-in;
     opacity: 0;
   }
     
