@@ -41,10 +41,11 @@ class LazyImage {
   }
   /**
    * The Lazy Image module will automatically bootstrap images that exist in the document.
-   * If images are added dynamically, then register() will add them to the 
+   * If images are added dynamically, then register() will add them to the queue
    */
   public register() {
-    //
+    // TODO: implementation
+    throw new Error("not implemented");
   }
 
   private imgLoaded(src: string, element?: HTMLImageElement) {
@@ -67,7 +68,7 @@ export function init() {
   }
   scrollTriggeredQueue = lazyImages.filter( (img) => img.method === 'scroll')
     .sort((a, b) => a.yPosition - b.yPosition); // sort ascending by Y position
-  onScroll = throttle(showNextOnScroll, 400);
+  onScroll = throttle(showNextOnScroll, 500);
   document.addEventListener('scroll', onScroll);
   showNextOnScroll();
   return lazyImages;

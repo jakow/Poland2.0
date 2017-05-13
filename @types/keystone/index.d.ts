@@ -1,4 +1,10 @@
 /* tslint:disable:max-classes-per-file */
+declare namespace Express {
+  interface Request {
+    user?: any;
+  }
+}
+
 declare module 'keystone' {
   import * as mongoose from 'mongoose';
   import * as express from 'express';
@@ -14,7 +20,7 @@ declare module 'keystone' {
     'updates': string;
     nav: NavOptions;
     'csv field delimiter': string;
-    app: Express.Application;
+    app: express.Express;
     mongoose: mongoose.Mongoose;
   }
 
@@ -149,22 +155,20 @@ declare module 'keystone' {
       height: number;
       secure_url: string;
       exists: boolean;
-      _: {
-        tag(options: CloudinaryOptions): string;
-        src(options: CloudinaryOptions): string;
-        scale(width: number, height: number, options?: CloudinaryOptions): string;
-        fit(width: number, height: number, options?: CloudinaryOptions): string;
-        lfit(width: number, height: number, options?: CloudinaryOptions): string;
-        limit(width: number, height: number, options?: CloudinaryOptions): string;
-        fill(width: number, height: number, options?: CloudinaryOptions): string;
-        crop(width: number, height: number, options?: CloudinaryOptions): string;
-        pad(width: number, height: number, options?: CloudinaryOptions): string;
-        lpad(width: number, height: number, options?: CloudinaryOptions): string;
-        thumbnail(width: number, height: number, options?: CloudinaryOptions): string;
-      };
+      tag(options: ImageOptions): string;
+      src(options: ImageOptions): string;
+      scale(width: number, height: number, options?: ImageOptions): string;
+      fit(width: number, height: number, options?: ImageOptions): string;
+      lfit(width: number, height: number, options?: ImageOptions): string;
+      limit(width: number, height: number, options?: ImageOptions): string;
+      fill(width: number, height: number, options?: ImageOptions): string;
+      crop(width: number, height: number, options?: ImageOptions): string;
+      pad(width: number, height: number, options?: ImageOptions): string;
+      lpad(width: number, height: number, options?: ImageOptions): string;
+      thumbnail(width: number, height: number, options?: ImageOptions): string;
     }
 
-    export interface CloudinaryOptions {
+    export interface ImageOptions {
       transformation: string;
     }
     export interface Location {
@@ -448,6 +452,7 @@ declare module 'keystone' {
   export function importer(dir: string): (path: string)
     => {[name: string]: express.RequestHandler | express.ErrorRequestHandler};
   // export function import(what: string): void;
+  export function initExpressApp(app: express.Express): void;
   export function start(events?: StartupEvents): void;
   export function connect(...modules: Array<mongoose.Mongoose | express.Application>): void;
   export const utils: typeof KeystoneUtils;
@@ -459,4 +464,8 @@ declare module 'keystone' {
   export let httpServer: http.Server | null;
   export let httpsServer: http.Server | null;
 
+
+
 }
+
+

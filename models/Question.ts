@@ -6,7 +6,8 @@ const Types = keystone.Field.Types;
 export interface Question {
   text: string;
   askedBy: string;
-  event: keystone.Schema.Relationship;
+  forEvent: keystone.Schema.Relationship;
+  toPerson: keystone.Schema.Relationship;
   accepted: boolean;
   archived: boolean;
 }
@@ -17,12 +18,13 @@ export const Question = new keystone.List<Question>('Question');
 
 Question.add({
   askedBy: {type: String},
-  text: {type: String, required: true, initial: true},
-  event: {type: Types.Relationship, ref: 'AgendaEvent', description: 'Agenda event in question'},
-
+  text: {type: String, required: [true, 'Question text is required'], initial: true},
+  forEvent: {type: Types.Relationship, ref: 'AgendaEvent', description: 'Agenda event in question (optional)'},
+  toPerson: {type: Types.Relationship, ref: 'Speaker',
+  description: 'Person to whom the question is directed (optional)'},
 }, 'Admin', {
-  accepted: Boolean,
-  archived: Boolean,
+  accepted: {type: Boolean, default: false},
+  archived: {type: Boolean, default: false},
 });
 
 type Hook = (doc: QuestionDocument) => void;

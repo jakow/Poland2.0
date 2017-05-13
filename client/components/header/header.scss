@@ -1,5 +1,10 @@
+$header-background: #FFF;
+$header-shadow: 0 1px 2px 0 rgba(1, 1, 1, 0.05);
+$header-border: 1px solid rgba(1, 1, 1, 0.12);
 $header-height: 5*$base-font-size;
 $logo-height: 4*$base-font-size;
+
+
 header.header {
   z-index: 100;
   display: flex;
@@ -25,8 +30,7 @@ header.header {
   }
 
   // theme
-  background: white;
-  box-shadow: $header-shadow;
+
 
 }
 
@@ -39,3 +43,10 @@ header.header .button {
   margin-bottom: 0;
 }
 
+
+
+header.header {
+  background: $header-background;
+  box-shadow: $header-shadow;
+  border-bottom: $header-border;
+}

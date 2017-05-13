@@ -1,12 +1,15 @@
 import {list} from 'keystone';
-import {EditionDocument} from '../models/Edition';
+import {Edition, EditionDocument} from '../models/Edition';
+import {Sponsor} from '../models/Sponsor';
+import {SponsorCategory} from '../models/SponsorCategory';
 import {StaticPage} from '../models/StaticPage';
 import {RequestHandler, Request, Response, NextFunction} from 'express';
 import {environment} from '../config';
+import reversePopulate from './helpers/reversePopulate';
 
 export async function getCurrentEdition(req: Request, res: Response, next: NextFunction) {
   try {
-    const currentEdition = await list<EditionDocument>('Edition').model.findOne({current: true}).exec();
+    const currentEdition = await list<Edition>('Edition').model.findOne({current: true}).exec();
     res.locals.currentEdition = currentEdition;
     next();
   } catch (e) {
@@ -18,6 +21,22 @@ export async function getContentControl(req: Request, res: Response, next: NextF
   try {
     const contentControl = await list('ContentControl').model.findOne().exec();
     res.locals.contentControl = contentControl;
+    next();
+  } catch (e) {
+    next(e);
+  }
+}
+
+export async function getSponsorsByCategory(req: Request, res: Response, next: NextFunction) {
+  const currentEdition = res.locals.currentEdition as EditionDocument;
+  try {
+    const sponsors = await list<Sponsor>('Sponsor')
+      .model.find({edition: currentEdition, category: { $ne: null }}).exec();
+    const sponsorCategories = await list<SponsorCategory>('SponsorCategory')
+      .model.find({edition: currentEdition}).exec();
+    const sponsorsByCategory = reversePopulate(sponsorCategories, 'sponsors', sponsors, 'category');
+    res.locals.sponsorCategories = sponsorsByCategory;
+    res.locals.sponsors = sponsors;
     next();
   } catch (e) {
     next(e);
@@ -57,22 +76,14 @@ export async function initLocals(req: Request, res: Response, next: NextFunction
   next();
 }
 
-// exports.initErrorHandlers = function(req, res, next) {
 
-// };
-
-// exports.getCurrentEdition = function(req, res, next) {
-//     var q = keystone.list('Edition').model.findOne({current:true});
-//     q.exec(function(err, result){
-//       if(result)
-//         res.locals.currentEdition = result;
-//       next(err);
-//     });
-// };
-
-// exports.loadSponsors = function(req, res, next) {
-
-// };
+export async function requireUser(req: Request, res: Response, next: NextFunction) {
+  if (req.user) {
+    res.redirect('/keystone/signin');
+  } else {
+    next();
+  }
+}
 
 export async function getStaticPage(req: Request, res: Response, next: NextFunction) {
   let staticPage;

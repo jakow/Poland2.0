@@ -34,8 +34,12 @@ export const mongo: string =  process.env.OPENSHIFT_MONGODB_DB_URL || process.en
 
 export const cookieSecret: string =  process.env.OPENSHIFT_SECRET_TOKEN || process.env.COOKIE_SECRET;
 
-export const cloudinaryUrl: string =  process.env.CLOUDINARY_URL || null;
+export const cloudinaryUrl: string =  process.env.CLOUDINARY_URL;
 
-export const trackingId: string = process.env.TRACKING_ID || null;
+export const googleMapsServerKey: string = process.env.GOOGLE_SERVER_KEY;
+
+export const googleMapsBrowserKey: string = process.env.GOOGLE_BROWSER_KEY;
+
+export const trackingId: string = process.env.TRACKING_ID;
 
 export const viewEngine = 'pug';

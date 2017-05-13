@@ -11,10 +11,11 @@ exports = module.exports = function(done) {
     
     Promise.all(
         [
-        new User.model({name: { first: 'Admin', last: 'User' },
+        new User.model({
+            name: 'Admin User', 
+            isAdmin: true,
             email: 'admin@poland20.com',
             password: 'admin', 
-            canAccessKeystone: true
         }).save(),
         new ContentControl.model({}).save()
     ]).then(done);

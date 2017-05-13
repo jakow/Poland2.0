@@ -1,13 +1,19 @@
 import 'source-map-support/register';
+import * as express from 'express';
 import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
 import * as Promise from 'bluebird';
+import * as helmet from 'helmet';
 import * as path from 'path';
 import * as config from './config';
 import routes from './routes';
-
+import * as linkedData from './routes/helpers/linkedData';
+import {initSockets} from './routes/sockets';
+import imageHelpers from './routes/helpers/cloudinary';
 import createAssetStore from './routes/helpers/assets';
 (mongoose as any).Promise = Promise;
+
+const app = express();
 
 keystone.init({
   'auth': true,
@@ -15,42 +21,58 @@ keystone.init({
   'updates': path.resolve(config.rootDir, 'updates'),
   'brand': 'Poland 2.0',
   'name': 'Poland 2.0',
-  'mongoose': mongoose,
+  'favicon': path.join(config.publicDir, 'images/favicons/favicon.ico'),
+  'signin logo': '../images/logo.svg',
   'static': config.staticDirs,
   'user model': 'User',
   'host': config.host,
   'port': config.port,
+  'compress': true,
   'mongo': config.mongo,
+  'mongoose': mongoose,
+  'logger': config.environment === 'production' ? 'tiny' : 'dev',
+  'view engine': config.viewEngine,
+  'views':  config.viewsDir,
+  'routes': routes,
   'cookie secret': config.cookieSecret,
   'cloudinary config': config.cloudinaryUrl,
   'cloudinary secure': true,
-  'favicon': path.join(config.publicDir, 'images/favicons/favicon.ico'),
-  'signin logo': '../images/logo.svg',
-  'compress': true,
-  'logger': config.environment === 'production' ? 'tiny' : 'dev',
+  'google server api key': config.googleMapsServerKey,
+  'google api key': config.googleMapsBrowserKey,
+  'default region': 'gb',
 });
 
+
+
+if (config.environment === 'production') {
+  // external, mongo-based session store. Built in store apparently leaks memory so needs to be replaced.
+  keystone.set('session store', 'connect-mongo');
+  // TODO: set Cache-Control on all assets, including JS and CSS since they are cache-busted
+  keystone.set('static options', {
+    cacheControl: true,
+    maxAge: '30 days',
+  });
+  // security options
+  app.use(helmet({
+    dnsPrefetchControl: false,
+    hidePoweredBy: false,
+}));
+}
+
+// Locals variables added for each rendered Pug template
 keystone.set('locals', {
-  editable: keystone.content.editable,
+  linkedData,
   env: config.environment,
   utils: keystone.utils,
   trackingId: config.trackingId,
-  displayLocals: true,
   assets: createAssetStore(),
+  imgTransform: imageHelpers(keystone.get('cloudinary config') as keystone.CloudinaryConfig),
 });
-
-console.info(`Running in ${config.environment} mode`);
-
-if (config.environment === 'production') {
-  keystone.set('session store', 'connect-mongo');
-  // TODO: set Cache-Control on all assets, including JS and CSS since they are busted
-  // keystone.set('static options', {});
-}
 
 // have to do this here after mongo and cloudinary are initialised. Kind of hacky.
 import './models';
-import {initSockets} from './routes/sockets';
 
+// navigation in admin UI.
 keystone.set('nav', {
   agenda: ['agenda-days', 'agenda-events', 'venues'],
   content: ['static-pages', 'content-controls'],
@@ -60,9 +82,8 @@ keystone.set('nav', {
   users: 'users',
 });
 
-keystone.set('view engine', config.viewEngine);
-keystone.set('views',  config.viewsDir);
-keystone.set('routes', routes);
+keystone.initExpressApp(app);
+
 keystone.start({
   onHttpServerCreated() {
     initSockets(keystone.httpServer);

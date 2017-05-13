@@ -22,13 +22,14 @@ import * as keystone from 'keystone';
 import * as express from 'express';
 import * as middleware from './middleware';
 import * as views from './views';
+import * as api from './api';
 // const importRoutes = keystone.importer(__dirname);
 
 // Common Middleware
 keystone.pre('routes', middleware.getCurrentEdition);
 keystone.pre('routes', middleware.getContentControl);
+keystone.pre('routes', middleware.getSponsorsByCategory);
 keystone.pre('routes', middleware.initLocals);
-// keystone.pre('routes', middleware.loadSponsors);
 // keystone.pre('routes', middleware.getStaticPages);
 
 // TODO: set up 404 and 500 routes
@@ -44,8 +45,14 @@ const router = express.Router();
 router.get('/', views.home);
 router.get('/about', views.about);
 router.get('/past-editions', views.pastEditions);
-// app.get('/:pageRoute', routes.views.staticPage); // dynamically registered static pages. Must be at bottom
 
-  // NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
-  // app.get('/protected', middleware.requireUser, routes.views.protected);
+// API
+router.use('/api/questions', api.questions);
+router.use('/api/speakers', api.speakers);
+
+// Static pages defined from Keystone admin
+// app.get('/:pageRoute', views.staticPage); // dynamically registered static pages. Must be at bottom
+
+// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
+// app.get('/protected', middleware.requireUser, routes.views.protected);
 export default router;

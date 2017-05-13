@@ -6,27 +6,32 @@
 //- alt - the alternative text for this image
 
 mixin lazyImage(source, placeholder, aspectRatio='1:1', method='scroll')
-  div.lazy-img(data-src=source, data-method=method)
-    -
-      const predefRatios = ['16:9', '5:4', '4:3', '1:1'];
-      const ratio = aspectRatio.split(':')
-      if (isNaN(parseInt(ratio[0])) || isNaN(parseInt(ratio[1])))
-        throw new Error('Lazy image instatiation error, invalid ratio given')
-    //- also permit the use of simple string like 'square'
-    if predefRatios.includes(aspectRatio)
-      if ratio[0] == 'square'
-        .ratio-1-to-1
+  div.lazy-img-container(style=attributes.style, class=attributes.class)
+    div.lazy-img(data-src=source, data-method=method)
+      -
+        const predefRatios = ['16:9', '5:4', '4:3', '1:1'];
+        const ratio = aspectRatio.split(':')
+        if (isNaN(parseInt(ratio[0])) || isNaN(parseInt(ratio[1])))
+          throw new Error('Lazy image instatiation error, invalid ratio given')
+      //- also permit the use of simple string like 'square'
+      if predefRatios.includes(aspectRatio)
+        if ratio[0] == 'square'
+          .ratio-1-to-1
+        else
+          div(class=`ratio-${ratio[0]}-to-${ratio[1]}`)
       else
-        div(class=`ratio-${ratio[0]}-to-${ratio[1]}`)
-    else
-      - const ratioPercent = ratio[1]/ratio[0]*100;
-      div(style=`padding-bottom: ${ratioPercent}%`)
-    img(src=placeholder, role="presentation" aria-hidden="true").preview
-    img.original&attributes(attributes)
-    //- If the user has disabled javascript, show the original image as loaded straight away
-    //- with degraded UX.
-    noscript: img(src=source).original.loaded&attributes(attributes)
-    .spinner-container: .spinner
+        - const ratioPercent = ratio[1]/ratio[0]*100;
+        div(style=`padding-bottom: ${ratioPercent}%`)
+      img(src=placeholder, role="presentation" aria-hidden="true").preview
+      img.original(alt=attributes.alt)
+      //- If the user has disabled javascript, show the original image as loaded straight away
+      //- with degraded UX.
+      noscript: img(src=source).original.loaded
+      .spinner-container: .spinner
 
-mixin lazyBackgroundImage(source, placeholder, aspectRatio='16:9', method='immediate')
-  img(src=source)
+//- mixin lazyBackgroundImage(source, placeholder, aspectRatio='16:9', method='immediate')
+//-   img(src=source)
+
+mixin lazyCloudinaryImage(image, aspectRatio='1:1', method='scroll')
+  //- - console.log(Object.keys(image));
+  +lazyImage( image.secure_url, imgTransform.limit(image.secure_url, 48, 48), aspectRatio, method)&attributes(attributes)

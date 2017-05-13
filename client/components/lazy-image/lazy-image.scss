@@ -11,7 +11,7 @@ $predef-ratios: (
 $lazy-img-transition-duration: 0.3s;
 $lazy-img-transition: $lazy-img-transition-duration ease-in;
 $blur: 5px;
-$spinner-size: 48px;
+$spinner-size: 36px;
 
 .lazy-img {
   background: $color-dark;
@@ -55,7 +55,9 @@ $spinner-size: 48px;
       visibility: visible;
     }
     .preview {
-      transition: visibility 0 linear ($lazy-img-transition-duration*1.1);
+      // hide after original in view - mostly for ARIA purposes rather than visual presentation
+      // because preview is covered by original anyway
+      transition: visibility 0s linear $lazy-img-transition-duration;
       visibility: hidden;
     }
     .spinner-container {
@@ -76,7 +78,7 @@ $spinner-size: 48px;
   }
 
   .spinner {
-    @include loader02($size: $spinner-size, $duration: 1s, $align: middle, $color: $color-primary);
+    @include loader02($size: $spinner-size, $duration: 1s, $align: middle, $color: $color-primary, $border-size: 6px);
   }
 
   noscript .original {
@@ -90,6 +92,7 @@ $spinner-size: 48px;
 @each $numerator, $denominators in $predef-ratios {
   @each $denominator in $denominators {
     .lazy-img .ratio-#{$numerator}-to-#{$denominator} {
+      // display: inline-block;
       padding-bottom: percentage($denominator/$numerator);
     }
   }

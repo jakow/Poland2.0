@@ -9,6 +9,8 @@ export interface User {
   isAdmin: boolean;
 }
 
+export type UserDocument = keystone.ModelDocument<User>;
+
 const User = new keystone.List('User');
 
 User.add({
