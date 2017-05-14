@@ -3,6 +3,7 @@
 // and bottom and right with an ::after pseudolement
 // TODO: think of a way to override this to have a right and bottom edge
 // TODO: add math library and replace with trigonometry
+@import "~mathsass/dist/math";
 
 $default-angled-edge-elems: (
   top: before,
@@ -60,9 +61,17 @@ $default-angled-edge-elems: (
   }
 }
 
+/*
+* Use this mixin to give an angle edge a margin so that it does not cover the div above/below it
+*/
+@mixin angled-edge-margin($position, $angle) {
+  margin-#{$position}: abs(tan($angle)) * 100%; 
+}
 
-.bottom-30-deg {
+
+.angle-test {
   background: linear-gradient(90deg, lightblue, turquoise);
   @include angled-edge(top, -5deg);
   @include angled-edge(bottom, -5deg);
+  @include angled-edge-margin(bottom, -5deg);
 }

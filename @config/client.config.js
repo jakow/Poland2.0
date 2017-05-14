@@ -30,6 +30,7 @@ const config = {
   resolve: { extensions: ['.ts', '.tsx', '.js', '.jsx'] },
   devtool: isProduction? 'source-map' : 'eval-source-map',
   devServer: {
+    
     compress: true,
     port: 8000,
     proxy: {

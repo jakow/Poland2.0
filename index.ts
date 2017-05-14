@@ -66,7 +66,7 @@ keystone.set('locals', {
   utils: keystone.utils,
   trackingId: config.trackingId,
   assets: createAssetStore(),
-  imgTransform: imageHelpers(keystone.get('cloudinary config') as keystone.CloudinaryConfig),
+  imgTransform: imageHelpers(),
 });
 
 // have to do this here after mongo and cloudinary are initialised. Kind of hacky.

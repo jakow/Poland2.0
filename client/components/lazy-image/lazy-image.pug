@@ -5,7 +5,7 @@
 //- image aspect ratio
 //- alt - the alternative text for this image
 
-mixin lazyImage(source, placeholder, aspectRatio='1:1', method='scroll')
+mixin lazy-image(source, placeholder, aspectRatio='1:1', method='scroll')
   div.lazy-img-container(style=attributes.style, class=attributes.class)
     div.lazy-img(data-src=source, data-method=method)
       -
@@ -32,6 +32,11 @@ mixin lazyImage(source, placeholder, aspectRatio='1:1', method='scroll')
 //- mixin lazyBackgroundImage(source, placeholder, aspectRatio='16:9', method='immediate')
 //-   img(src=source)
 
-mixin lazyCloudinaryImage(image, aspectRatio='1:1', method='scroll')
-  //- - console.log(Object.keys(image));
-  +lazyImage( image.secure_url, imgTransform.limit(image.secure_url, 48, 48), aspectRatio, method)&attributes(attributes)
+mixin lazy-cl-image(image, targetSize=0, aspectRatio='1:1', method='scroll')
+  //- Target size is used to apply cloudinary crop of the image
+  //- -
+  //-   const targetWidth = targetSize;
+  //-   const [num, denom] = aspectRatio.split(':').map(x => parseInt(x));
+  //-   const targetHeight = targetWidth * num / denom;
+  +lazy-image( (targetSize != 0) ? imgTransform.limit(image.secure_url, targetSize) : image.secure_url, 
+  imgTransform.limit(image.secure_url, 32, 32), aspectRatio, method)&attributes(attributes)

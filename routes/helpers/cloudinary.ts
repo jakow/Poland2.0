@@ -18,9 +18,13 @@ export interface TransformationOptions {
 }
 
 export type TransformationFunction =
-  (img: string, width: number, height: number, options?: TransformationOptions) => string;
+  (img: string, width?: number, height?: number, options?: TransformationOptions) => string;
 
-export default function imageHelpers(config: CloudinaryConfig) {
+/**
+ * Define the image helpers by creating a function for each of defined transformations in sizeTransformations
+ * IMPORTANT: Assumes that cloudinary.config() was called
+ */
+export default function imageHelpers() {
   // cloudinary.config(config);
 
   const functions: {[name: string]: TransformationFunction} = {};

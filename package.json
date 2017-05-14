@@ -31,6 +31,7 @@
     "http-status-codes": "^1.1.6",
     "keystone": "^4.0.0-beta.1",
     "lodash": "^4.17.4",
+    "mathsass": "^0.10.0",
     "moment": "^2.18.1",
     "mongoose": "^4.9.5",
     "node-sass": "^4.5.2",
