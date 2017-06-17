@@ -5,11 +5,12 @@ let lastScrollPos = 0;
  */
 export function preventScroll(prevent: boolean = true) {
   if (prevent) {
-    lastScrollPos = document.body.scrollTop;
+    lastScrollPos = window.scrollY;
     document.body.style.top = `-${lastScrollPos}px`;
     document.body.classList.add('prevent-scroll');
   } else {
     document.body.classList.remove('prevent-scroll');
-    requestAnimationFrame(() => document.body.scrollTop = lastScrollPos);
+    window.scrollTo(0, lastScrollPos);
+    setTimeout(() => window.scrollTo(0, lastScrollPos));
   }
 }

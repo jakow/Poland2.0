@@ -29,6 +29,7 @@ export default class Menu {
     this.button.addEventListener('click', this.toggle);
     // immediately close (some glitch)
     this.overlay.style.visibility = 'hidden';
+    this.nav.style.display = 'none';
     anime({
       targets: this.overlay,
       scale: 0,
@@ -54,6 +55,7 @@ export default class Menu {
 
   private open() {
     preventScroll(true);
+    this.nav.style.display = 'block';
     document.body.classList.add('mobile-menu-open');
     this.button.setAttribute('aria-expanded', 'true');
     this.nav.classList.add('open');
@@ -102,6 +104,9 @@ export default class Menu {
 
   private onAnimationFinished = () => {
     this.isAnimating = false;
+    if (!this.openState) {
+      this.nav.style.display = 'none';
+    }
   }
 
   private startAnimation(openNotClose: boolean) {
