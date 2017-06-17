@@ -21,8 +21,9 @@ $susy: (
   ),
 );
 
-$tablet: min-width 768px;
 $mobile-only: max-width 767px;
+$tablet: min-width 768px;
+$desktop: min-width 1024px;
 
 $site-width: 1200px;
 $site-padding: 1.25rem;
@@ -74,5 +75,6 @@ main {
 
 .prevent-scroll {
   overflow: hidden;
+  position: relative;
 }
 

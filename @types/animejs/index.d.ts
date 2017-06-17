@@ -12,6 +12,9 @@ declare module 'animejs' {
     export interface Animation {
       finished: Promise<{}>;
       add(props: AnimeProps): anime.Animation;
+      play(): void;
+      pause(): void;
+      reverse(): void;
     }
   }
   function anime(props: anime.AnimeProps): anime.Animation;

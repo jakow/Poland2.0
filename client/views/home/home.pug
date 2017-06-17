@@ -27,9 +27,9 @@ block content
     +banner-column('image')
       //- A slider with images
       +banner-slider
-        +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497537104/ffoopf3pdr6xxft5pfel.jpg',1000))
-        +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497536456/tprdqpldylorpccqpmg0.jpg', 1000))
-        +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497445653/DSC_0270n_rlkqba.jpg', 1000))
+        //- +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497537104/ffoopf3pdr6xxft5pfel.jpg',1000))
+        //- +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497536456/tprdqpldylorpccqpmg0.jpg', 1000))
+        //- +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497445653/DSC_0270n_rlkqba.jpg', 1000))
 
 
 
@@ -40,13 +40,13 @@ block content
       p Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque vitae dolor arcu. Ut condimentum mollis ante at elementum. Quisque facilisis malesuada velit ac tempus. Curabitur egestas feugiat orci, id hendrerit ipsum scelerisque vel. Sed eu nulla fringilla, viverra ipsum eu, blandit tellus. Vestibulum massa enim, convallis sit amet vestibulum lacinia, venenatis vel diam. Suspendisse iaculis ut eros id vestibulum. Phasellus neque nisl, luctus sit amet arcu id, tempus consequat ipsum. Pellentesque ac pharetra erat. Sed finibus at tellus malesuada pulvinar. Proin quis enim a quam auctor convallis non at risus. Vivamus porttitor mauris purus, non placerat dui ornare id. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras orci quam, lobortis varius tristique sed, dapibus non sem.
 
   //- Always guard against missing data!
-  if speakerCategories
-    each category in speakerCategories
-      h1= category.displayName
-      each speaker in category.speakers
-        //- img(src=speaker.photo.url, style="height: 25rem")
-        h2=speaker.name
-        +lazy-cl-image(speaker.photo,  400, '1:1', 'scroll')(style="max-width: 240px" alt=`Photo of ${speaker.name}`)
+  //- if speakerCategories
+  //-   each category in speakerCategories
+  //-     h1= category.displayName
+  //-     each speaker in category.speakers
+  //-       //- img(src=speaker.photo.url, style="height: 25rem")
+  //-       h2=speaker.name
+  //-       +lazy-cl-image(speaker.photo,  400, '1:1', 'scroll')(style="max-width: 240px" alt=`Photo of ${speaker.name}`)
 
   div(style="width: 240px")
     +lazy-image(
