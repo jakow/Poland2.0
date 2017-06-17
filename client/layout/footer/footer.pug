@@ -1,0 +1,16 @@
+mixin footer
+  footer.site-footer
+    .site-footer__container
+      .site-footer__bg(style="background-image: url('http://res.cloudinary.com/dg1royeho/image/upload/v1497445653/DSC_0270n_rlkqba.jpg')")
+      .site-footer__fg
+        .site-footer__social
+          a(href=contentControl.facebookUrl title="Facebook").site-footer__social-link.facebook
+          a(href=contentControl.linkedinUrl title="LinkedIn").site-footer__social-link.linkedin
+          a(href=contentControl.twitterUrl title="Twitter").site-footer__social-link.twitter
+          a(href=contentControl.snapchatUrl title="Snapchat").site-footer__social-link.snapchat
+        .site-footer__separator
+        .site-footer__links
+          a(href=contentControl.bylawLink) Bylaw for Poland 2.0
+          a(href="/contact") Contact
+        .site-footer__copyright
+          small © #{moment().year()} Poland 2.0 Summit  

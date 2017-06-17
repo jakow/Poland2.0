@@ -3,6 +3,7 @@ const Types = keystone.Field.Types;
 
 export interface ContentControl {
   title: string;
+  description: string;
   speakerRegistrationActive: boolean;
   speakerMenuButton: boolean;
   showSponsors: boolean;
@@ -19,6 +20,7 @@ export interface ContentControl {
   facebookUrl: string;
   twitterUrl: string;
   linkedinUrl: string;
+  snapchatUrl: string;
   gaTrackingID: string;
   bylawLink: string;
   // SEO
@@ -37,6 +39,7 @@ ContentControl.add(
 {title: {type: String, noedit: true}},
 'Content',
 {
+  description: {type: Types.Html, wysiwyg: false},
 	// ,
 	// testimonials: {type: String, label: 'Testimonials -  a list of quotes in DOUBLE QUOTES delimited
   // by SEMICOLON in the form of: "quote text", author; "quote text", author;'}
@@ -72,6 +75,7 @@ ContentControl.add(
   facebookUrl: {type: Types.Url, label: 'Facebook URL'},
   twitterUrl: {type: Types.Url, label: 'Twitter URL'},
   linkedinUrl: {type: Types.Url, label: 'LinkedIn URL'},
+  snapchatUrl: {type: Types.Url, label: 'Snapchat URL'},
   gaTrackingID: {type: String, label: 'Google Analytics Tracking ID'},
 },
 'Legal',

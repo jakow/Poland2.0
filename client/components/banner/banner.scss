@@ -1,0 +1,125 @@
+@import '~cssgram/source/scss/cssgram';
+
+.banner {
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  @include breakpoint ($tablet) {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+.banner__col {
+  background: white;
+  flex: 1 0 50%;
+  position: relative;
+}
+
+.banner__col-content {
+  padding: 0 1rem;
+  @include breakpoint($tablet) {
+    padding: $vertical-baseline 0 $vertical-baseline 2*$vertical-baseline;
+  }
+}
+
+.banner__col--edge-right {
+  @include breakpoint ($mobile-only) {
+    @include angled-edge(bottom, -5deg);
+  }
+  @include breakpoint ($tablet) {
+    @include angled-edge(right, -10deg);
+  }
+
+}
+
+.banner__col--image {
+  min-height: 9*$vertical-baseline; 
+  @include breakpoint($tablet) {
+    min-height: 0;
+  }
+}
+
+.banner__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  background-clip: content-box;
+  background-position: center center;
+
+}
+
+.banner__image-filter {
+  @extend %walden;
+}
+
+.banner__dateplace {
+  display: flex;
+  flex-direction: column;
+  @include breakpoint($tablet) {
+    flex-direction: row;
+  }
+}
+
+/*
+* Responsive separator that converts from vertical to horizontal on mobile
+* and respects
+*/
+.banner__separator {
+  position: relative;
+  padding: $vertical-baseline/2 0;
+  @include breakpoint($tablet) {
+    padding: 0 $vertical-baseline/2;
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    top: $vertical-baseline/2;
+    // horizontal center
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $color-gray-medium;
+    width: 30%;
+    height: 1px;
+    @include breakpoint($tablet) {
+      content: '';
+      position: absolute;
+      height: $vertical-baseline;
+      top: 0;
+      transform: initial;
+      width: 1px;
+      left: initial;
+
+    }
+  }
+}
+
+.banner__nav {
+  margin-bottom: $vertical-baseline;
+  a.banner__nav-link {
+    // font-weight: 600;
+    @include sgl-heading(1);
+    margin-top: 0;
+    display: inline-block;
+
+  }
+}
+
+.banner__slider  {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: $color-primary;
+}

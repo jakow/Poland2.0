@@ -1,31 +1,78 @@
+// @import '~include-media/dist/include-media';
+@import '~breakpoint-sass/stylesheets/breakpoint';
+@import '~susy/sass/susy';
+@import '~swiper/dist/css/swiper';
+
+$susy: (
+  columns: 12,
+  gutters: 0.5,
+  gutter-position: inside,
+  math: fluid,
+  output: float,
+  container: auto,
+  debug: (
+    image: show,
+    color: blue,
+    output: overlay,
+    toggle: top right,
+  ),
+  use-custom: (
+    breakpoint: true,
+  ),
+);
+
+$tablet: min-width 768px;
+$mobile-only: max-width 767px;
+
+$site-width: 1200px;
+$site-padding: 1.25rem;
+
 @import 'theme/colors';
 @import 'theme/dimensions';
 @import 'theme/theme';
+
 @import 'base/typography';
 @import 'base/baseline-grid';
+
 @import 'mixins/angled-edge';
-@import 'components/header/header';
-@import 'components/footer/footer';
+@import 'mixins/parallax';
+
+@import 'layout/header/header';
+@import 'layout/footer/footer';
+@import 'layout/nav/nav';
+@import 'layout/menu/menu';
+@import 'layout/loader/loader';
+@import 'layout/footer/footer';
 @import 'components/button/button';
-@import 'components/nav/nav';
-@import 'components/menu/menu';
-@import 'components/footer/footer';
+@import 'components/banner/banner';
 @import 'components/lazy-image/lazy-image';
 @import 'components/speaker-card/speaker-card';
 @import 'components/animated-logo/animated-logo';
-// @import 'vendor/icons';
+@import 'components/responsive-video/responsive-video';
+
+@import 'views/home/home';
+
 html, body {
-  // margin: $vertical-baseline;
   margin: 0;
   height: 100%;
   background: $color-dark;
 }
 
-.container {
+main {
   background: white;
+}
+
+.container {
+  max-width: 1024px;
+  padding: 0 $site-padding;
+  margin: 0 auto;
 }
 
 * {
   box-sizing: border-box;
+}
+
+.prevent-scroll {
+  overflow: hidden;
 }
 

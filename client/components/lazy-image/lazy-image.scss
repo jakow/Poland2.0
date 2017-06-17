@@ -11,7 +11,7 @@ $predef-ratios: (
 $lazy-img-transition-duration: 0.3s;
 $lazy-img-transition: $lazy-img-transition-duration ease-in;
 $blur: 5px;
-$spinner-size: 36px;
+$spinner-size: 32px;
 
 .lazy-img {
   background: $color-dark;
@@ -78,7 +78,7 @@ $spinner-size: 36px;
   }
 
   .spinner {
-    @include loader02($size: $spinner-size, $duration: 1s, $align: middle, $color: $color-primary, $border-size: 6px);
+    @include loader02($size: $spinner-size, $duration: 1s, $align: middle, $color: $color-gray-medium, $border-size: 5px);
   }
 
   noscript .original {

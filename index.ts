@@ -42,12 +42,9 @@ keystone.init({
   'default region': 'gb',
 });
 
-
-
 if (config.environment === 'production') {
   // external, mongo-based session store. Built in store apparently leaks memory so needs to be replaced.
   keystone.set('session store', 'connect-mongo');
-  // TODO: set Cache-Control on all assets, including JS and CSS since they are cache-busted
   keystone.set('static options', {
     cacheControl: true,
     maxAge: '30 days',
@@ -67,6 +64,8 @@ keystone.set('locals', {
   trackingId: config.trackingId,
   assets: createAssetStore(),
   imgTransform: imageHelpers(),
+  sanitize: require('sanitize-html'),
+  moment: require('moment'),
 });
 
 // have to do this here after mongo and cloudinary are initialised. Kind of hacky.

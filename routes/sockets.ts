@@ -1,26 +1,45 @@
 import * as SocketIO from 'socket.io';
-import * as keystone from 'keystone';
+import {LeanDocument} from 'keystone';
 import {Server, IncomingMessage} from 'http';
-import {registerHook} from '../models/Question';
-import {QuestionDocument} from '../models/Question';
+import {Question} from '../models/Question';
+import {hooks} from './api/questions';
+import {authenticateToken} from './api/auth';
 
-export let io: SocketIO.Server;
+/**
+ * This is the realtime question API built with Socket.io which sends realtime updates to
+ * connected clients as updates to questions database are made.
+ */
+hooks.on('update', handleQuestionUpdate);
+
+let io: SocketIO.Server;
 
 export function initSockets(server: Server) {
-  // io = SocketIO(server);
+  io = SocketIO(server);
   // bootstrap onto the question model
-  // io.on('connection', handleConnection);
+  io.on('connection', handleConnection);
+  return io;
 
 }
 
-export function handleUpdate(doc: QuestionDocument) {
-  console.log(doc);
-  io.emit('updated document', {doc, isNew: doc.isNew});
+export function handleQuestionUpdate(prevState: LeanDocument<Question>, nextState: LeanDocument<Question>) {
+  console.log('Question update');
+  if (nextState.archived || !nextState.accepted) {
+    io.to('client').emit('remove question', nextState._id);
+  } else {
+    io.to('client').emit('question', nextState);
+  }
+
+  io.to('admin').emit('question', nextState);
 }
 
-export function handleConnection(socket: SocketIO.Socket) {
+export async function handleConnection(socket: SocketIO.Socket) {
   const request = socket.client.request as IncomingMessage;
-  console.log(request.headers);
+  const isAdmin = await authenticateToken(request);
+  if (isAdmin) {
+    socket.join('admin');
+  } else {
+    socket.join('client');
+  }
   console.log('connected!');
   io.emit('welcome message', {msg: 'hello world!'});
 }

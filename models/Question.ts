@@ -9,6 +9,7 @@ export interface Question {
   forEvent: keystone.Schema.Relationship;
   toPerson: keystone.Schema.Relationship;
   accepted: boolean;
+  dateAccepted: Date;
   archived: boolean;
 }
 
@@ -24,6 +25,7 @@ Question.add({
   description: 'Person to whom the question is directed (optional)'},
 }, 'Admin', {
   accepted: {type: Boolean, default: false},
+  dateAccepted: Date,
   archived: {type: Boolean, default: false},
 });
 
@@ -32,13 +34,19 @@ type Hook = (doc: QuestionDocument) => void;
 const saveHooks = new Set<Hook>();
 const removeHooks = new Set<Hook>();
 
-
 /**
  * Keystone does not register new hooks after register was called, so the hooks
  * are proxied via own methods registerHook and unregisterHook registered at runtime
  */
 Question.schema.pre('save', function(next) { // tslint:disable-line
   const doc = this as QuestionDocument;
+  if (doc.accepted) {
+    if (doc.dateAccepted === null) {
+      doc.dateAccepted = new Date();
+    }
+  } else {
+    doc.dateAccepted = null;
+  }
   saveHooks.forEach((hook) => hook(doc));
   next();
 });

@@ -21,7 +21,10 @@ const buildDir = path.resolve(__dirname, '..', 'build');
 
 const config = {
   target: 'web',
-  entry: './client/main.ts',
+  entry: {
+    main: './client/main.ts',
+    home: './client/views/home/home.ts'
+  },
   output: {
     path: path.join(buildDir, 'client'),
     filename: isProduction ? '[name]-[hash:12].js' : '[name].js',
@@ -35,7 +38,7 @@ const config = {
     port: 8000,
     proxy: {
       '/': {
-        target: 'http://localhost:3000'
+        target: 'http://localhost:4000'
       }
     }
   },

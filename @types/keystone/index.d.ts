@@ -192,11 +192,11 @@ declare module 'keystone' {
     export type LngLat = [number, number];
   }
 
-  export class Field  {
+  export namespace Field  {
     /**
      * The extended Types
      */
-    public static Types: {
+    const Types: {
       AzureFile: Field.ExtendedType;
       Boolean: Field.ExtendedType;
       CloudinaryImage: Field.ExtendedType;
@@ -260,10 +260,14 @@ declare module 'keystone' {
 
   type ModelDocument<T> = T & mongoose.Document & HasId;
 
-  export type Lean<T> =  T & LeanDocument;
+  /**
+   * The result of calling toObject() on a mongoose document of type T
+   */
+  export type LeanDocument<T> =  T & Lean;
 
-  interface LeanDocument {
+  interface Lean {
     _id: string;
+    __v: number;
   }
 
   export class List<T> {
@@ -315,7 +319,7 @@ declare module 'keystone' {
   export namespace List {
     export interface PaginationOptions {
       page: number;
-      erPage: number;
+      perPage: number;
       maxPages: number;
     }
     export type FieldType = Field.ExtendedType |
@@ -464,6 +468,9 @@ declare module 'keystone' {
   export let httpServer: http.Server | null;
   export let httpsServer: http.Server | null;
 
+export namespace session {
+  function signin(credentials: {email: string, password: string},  cb: (user: any) => void): void;
+}
 
 
 }

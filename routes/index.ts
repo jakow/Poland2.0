@@ -20,6 +20,7 @@
 
 import * as keystone from 'keystone';
 import * as express from 'express';
+import * as cors from 'cors';
 import * as middleware from './middleware';
 import * as views from './views';
 import * as api from './api';
@@ -46,9 +47,10 @@ router.get('/', views.home);
 router.get('/about', views.about);
 router.get('/past-editions', views.pastEditions);
 
-// API
-router.use('/api/questions', api.questions);
-router.use('/api/speakers', api.speakers);
+const allowCors = cors();
+
+router.use('/api/questions',  allowCors, api.questions);
+router.use('/api/speakers', allowCors, api.speakers);
 
 // Static pages defined from Keystone admin
 // app.get('/:pageRoute', views.staticPage); // dynamically registered static pages. Must be at bottom

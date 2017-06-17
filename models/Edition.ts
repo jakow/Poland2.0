@@ -21,6 +21,7 @@ export interface Edition {
   mainPhoto: keystone.Schema.CloudinaryImage;
   photos: keystone.Schema.CloudinaryImage[];
   dateString?: string;
+  isoString?: string;
 }
 
 export type EditionDocument = keystone.ModelDocument<Edition>;
@@ -53,18 +54,40 @@ Edition.add({
 
 Edition.schema.virtual('dateString').get(function() {
 	// NOTE the use of en dash instead of hyphen in dates
+
  const start = moment(this.date.start);
  const end = moment(this.date.end);
  if (this.date.provisional) {
-	 // only the month and date printed
+	 // provisional date - only the month and date printed
   return start.format('MMMM YYYY');
  } else if (end.month() === start.month()) {
-	 // only day of the month range printed
-  return `${start.date()}–${end.format('D MMMM YYYY')}`;
+   // one day only
+   if (start.date() === end.date()) {
+      return `${start.format('D MMMM YYYY')}`;
+   } else {
+    // multiple days in a single month
+    return `${start.date()}–${end.format('D MMMM YYYY')}`;
+   }
  } else {
-	 // contracted months are printed
+	 // contracted months are printed - assume that the year is the same.
   return `${start.format('D MMM')}–${end.format('D MMM YYYY')}`;
  }
+});
+
+/**
+ * ISO 8601 format for the conference dates
+ */
+Edition.schema.virtual('isoString').get(function() {
+  const edition = this as Edition;
+  const start = moment(edition.date.start);
+  const end = moment(edition.date.end);
+  if (this.date.provisional) {
+    return start.format(`YYYY-MM`);
+  } else if (start.isSame(end, 'day')) {
+    return start.format(`YYYY-MM-DD`);
+  } else {
+    return `${start.format('YYYY-MM-DD')}/${end.format('YYYY-MM-DD')}`;
+  }
 });
 
 Edition.schema.methods.getRefs = function(ref: string, filters = {}) {

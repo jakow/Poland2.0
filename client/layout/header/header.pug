@@ -1,0 +1,29 @@
+include ../nav/nav
+mixin header(navOptions)
+  //- mobile menu here
+  nav(id="mobile-menu" role="navigation" aria-label="Mobile navigation")
+  //- main header
+  header.site-header
+    .site-header__container
+      .site-header__section.left
+        //- mobile only menu button
+        a(href="#" title="Open menu" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu").site-header__menu-button.site-header__button
+          span.site-header__menu-icon
+        //- Logo with home link
+        a(href="/" title="Poland 2.0 Home").site-header__brand
+          img(src="images/logo.svg", alt="Poland 2.0")
+          span Poland 2.0 Summit
+
+      .site-header__section.right
+        //- desktop navigation
+        nav(role="navigation" aria-label="Desktop navigation").site-nav
+          ul
+            +nav-item('/about') About PL2.0
+            +nav-item('/#speakers') Speakers
+
+
+mixin nav-item(href)
+  - const active = false;
+  li: a(href=href): span.site-nav__title(class=active ? 'active' : '')
+    block
+

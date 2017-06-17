@@ -1,0 +1,194 @@
+$header-background: #FFF;
+$header-shadow: 0 1px 2px 0 rgba(1, 1, 1, 0.05);
+$header-border: 1px solid rgba(1, 1, 1, 0.12);
+$header-height: 3*$vertical-baseline;
+$logo-height: 2*$vertical-baseline;
+$logo-margin: 0.5*$vertical-baseline;
+
+.site-header {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+// given a fixed header, add container padding
+main {
+  padding-top: $header-height;
+}
+
+// styling
+.site-header {
+  background: $header-background;
+  box-shadow: $header-shadow;
+  border-bottom: $header-border;
+}
+
+.site-header__container {
+  max-width: $site-width;
+  margin: 0 auto;
+  padding: 0 $site-padding;
+  display: flex;
+  height: $header-height;
+  flex-direction: row;
+  // flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+a.site-header__brand {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  text-decoration: none;
+  color: $color-dark;
+  position: absolute;
+  // centered on mobile
+  top: 0;
+  left: 50%;
+  // to make it easily clickable on mobile
+  padding: 0 $site-padding;
+
+  transform: translateX(-50%);
+  @include breakpoint($tablet) {
+    // on the left on large devices
+    position: static;
+    transform: initial;
+    // remove padding on desktops
+    padding: 0;
+  }
+  img {
+    display: inline-block;
+    margin: $logo-margin 0;
+    height: $logo-height;
+  }
+  span {
+    display: none;
+    @include breakpoint($tablet) {
+      
+      display: inline-block;
+      @include sgl-heading(1);
+      margin: $vertical-baseline 0;
+      margin-left: 12px;
+    }
+    font-weight: 300;
+  }
+}
+
+.site-header__section {
+  height: $header-height;
+}
+
+.site-nav {
+  display: none;
+  @include breakpoint($tablet) {
+    display: block;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+  }
+
+  a {
+    display: inline-block;
+    font-weight: 300;
+    text-decoration: none;
+    color: $color-dark;
+    @include sgl-heading(0);
+    margin: $vertical-baseline/2 8px;
+    padding: $vertical-baseline/2 8px;
+
+    .site-nav__title {
+    position: relative;
+    // animated underline
+    &::before {
+      $hover-transition: 125ms cubic-bezier(0.77, 0, 0.175, 1);
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      background-color: $color-dark;
+      width: 100%;
+      height: 1px;
+      max-width: 0%;
+      transition: max-width $hover-transition;
+    }
+
+  }
+    &:hover {
+      .site-nav__title::before {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+
+@mixin menu-icon($width: 28px, $height: 19px, $thickness: 1px) {
+  display: block;
+  position: relative;
+  width: $width;
+  height: $thickness;
+  margin: ($height/2 - $thickness/2) 0;
+  background-color: $color-dark;
+  &::before, &::after {
+    content: '';
+    position: absolute; 
+    height: $thickness;
+    transform-origin: left;
+    height: $thickness;
+    width: 100%;
+    background-color: $color-dark;
+  }
+  // top bar
+  &::before {
+    top: -$height/2+$thickness/2;
+  }
+  // bottom bar
+  &::after {
+    transform: scaleX(0.75);
+    bottom: -$height/2 + $thickness/2;
+  }
+}
+
+//pad the buttons to make them easily clickable
+.site-header__section {
+  .site-header__button {
+    position: relative;
+    padding-left: $site-padding;
+    padding-right: $site-padding;
+  }
+  &.left {
+    .site-header__button {
+      left: -$site-padding;
+    }
+  }
+  &.right {
+  .site-header__button {
+      left: $site-padding;
+    }
+  }
+}
+
+.site-header__menu-button {
+  $button-width: 28px;
+  $button-height: 19px;
+
+  // width: 28px;
+  padding: calc(4.5rem / 2 - #{$button-height/2}) 0;
+  display: inline-block;
+  position: relative;
+  @include breakpoint($tablet) {
+    display: none;
+  }
+  .site-header__menu-icon {
+    // left: -$button-width/2;
+    @include menu-icon;
+}
+}
+
+
+
+

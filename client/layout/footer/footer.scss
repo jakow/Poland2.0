@@ -1,0 +1,119 @@
+$separator-width: 4 * 48px + 3 * 16px;
+$separator-width: 180px;
+
+// make footer stay on bottom
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+.site-footer__container {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.site-footer__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    filter: grayscale(100%) contrast(7%) brightness(200%);
+    z-index: 0;
+
+}
+
+.site-footer__fg {
+  z-index: 1;
+  padding: 2*$vertical-baseline $vertical-baseline;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.site-footer__separator {
+  // position: relative;
+  height: 1px;
+  width: $separator-width;
+  // left: 50%;
+  // transform: translateX(-50%);
+  margin: $vertical-baseline 0;
+  background-color: $color-gray-medium;
+}
+
+.site-footer__social {
+  display: flex;
+  justify-content: center;
+
+  .site-footer__social-link {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    // background-size: 100%;
+    background-size: auto 24px; // i.e. auto width with 24px height
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: white;
+    // filter: grayscale(1);
+    // transition: filter 120ms ease-in-out;
+    // &:hover {
+    //   filter: grayscale(0);
+    // }
+    &:not(:first-child) {
+      margin-left: 16px;
+    }
+    &.facebook {
+      background-image: url('/images/icons/facebook.svg');
+    }
+    &.linkedin {
+      background-image: url('/images/icons/linkedin.svg');
+    }
+    &.twitter {
+      background-image: url('/images/icons/twitter.svg');
+    }
+    &.snapchat {
+      background-image: url('/images/icons/snapchat.svg');
+  
+    }
+  }
+}
+
+.site-footer__links {
+  a {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    color: $color-dark;
+    border-bottom: 1px solid transparent;
+    @include sgl-heading(0);
+    margin-top: 0;
+    margin-bottom: $vertical-baseline;
+    margin-left: 12px;
+    margin-right: 12px;
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      width: 100%;
+      height: 1px;
+      background-color: transparent;
+    }
+    &:hover {
+      &::before {
+        background-color: $color-dark;
+      }
+    }
+  }
+}
+
+// make the footer sticky!
+

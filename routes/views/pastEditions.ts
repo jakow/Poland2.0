@@ -1,11 +1,11 @@
 import {RequestHandler} from 'express';
-import {list, View, Lean, Schema} from 'keystone';
+import {list, View, LeanDocument, Schema} from 'keystone';
 import resolveView from '../helpers/resolveView';
 import {Edition, EditionDocument} from '../../models/Edition';
 import {Speaker, SpeakerDocument} from '../../models/Speaker';
 import {TeamMember, TeamMemberDocument} from '../../models/TeamMember';
 import {Document} from 'mongoose';
-interface PastEdition extends Lean<Edition> {
+interface PastEdition extends LeanDocument<Edition> {
   speakers?: Speaker[];
   teamMembers?: TeamMember[];
 }
@@ -28,7 +28,7 @@ export const pastEditions: RequestHandler = async (req, res, next) => {
   const view = new View(req , res);
   const currentEditon = res.locals.edition as EditionDocument; // always available as a local
   const editions = (await list<Edition>('Edition').model
-    .find({current: false}).lean().exec()) as Array<Lean<PastEdition>>;
+    .find({current: false}).lean().exec()) as Array<LeanDocument<PastEdition>>;
 
   const teamMembersDocs = await list<TeamMember>('TeamMember').model.find()
     .where('edition').ne(currentEditon)
@@ -48,7 +48,7 @@ export const pastEditions: RequestHandler = async (req, res, next) => {
   view.render(resolveView('pastEditions'));
 };
 
-function group<T extends HasEdition>(children: T[], parents: Array<Lean<Edition>>) {
+function group<T extends HasEdition>(children: T[], parents: Array<LeanDocument<Edition>>) {
   const map: {[key: string]: T[]} = {};
   for (const parent of parents) {
     map[parent._id] = [];

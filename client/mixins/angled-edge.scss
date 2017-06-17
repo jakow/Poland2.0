@@ -14,10 +14,11 @@ $default-angled-edge-elems: (
 
 @mixin angled-edge($position, $angle, $pseudo-element: map-get($default-angled-edge-elems, $position)) {
   position: relative;
+  transform: translate(0,0);
   z-index: 2;
-  &::before, &::after {
+  &::#{$pseudo-element} {
     content: '';
-    z-index: 1;
+    z-index: -1;
     background: inherit;
     position: absolute;
     display: block;
@@ -29,11 +30,10 @@ $default-angled-edge-elems: (
     // right: 0;
 
   }
-
   @if $position == bottom {
     &::#{$pseudo-element} {
+      top: 0;
       transform: skewY($angle);
-      // height: 8.7%; // of the div's width
       @if $angle > 0deg {
         transform-origin: top left;
       } @else {
@@ -53,16 +53,24 @@ $default-angled-edge-elems: (
   }
 
   @if $position == left {
-    // TODO: left edge
+    // TODO
   }
 
   @if $position == right {
-    // TODO: right edge
+    &::#{$pseudo-element} {
+    top: 0;
+      transform: skewX($angle);
+      @if $angle > 0deg {
+        transform-origin: top right;
+      } @else {
+        transform-origin: bottom right;
+      }
+    }
   }
 }
 
 /*
-* Use this mixin to give an angle edge a margin so that it does not cover the div above/below it
+* Use this mixin to give an angle edge a margin so that it does not cover the div above/below/left/right of it
 */
 @mixin angled-edge-margin($position, $angle) {
   margin-#{$position}: abs(tan($angle)) * 100%; 

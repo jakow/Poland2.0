@@ -25,7 +25,7 @@ if (!loaded) {
   console.info('.env missing. Relying on preset environment variables.');
 }
 
-export const port: number =  process.env.OPENSHIFT_NODEJS_PORT || 3000;
+export const port: number =  process.env.OPENSHIFT_NODEJS_PORT || 4000;
 
 export const host: string = process.env.OPENSHIFT_NODEJS_IP || 'localhost';
 
