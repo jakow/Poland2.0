@@ -58,10 +58,10 @@ export default class Menu {
     } else {
       this.open();
     }
-    this.openState = !this.openState;
   }
 
   public open() {
+    this.openState = true;
     preventScroll(true);
     this.nav.style.visibility = 'visible';
     document.body.classList.add('mobile-menu-open');
@@ -75,6 +75,7 @@ export default class Menu {
   }
 
   public close() {
+    this.openState = false;
     // prevent scroll is removed on animation finished to prevent a reflow mid animation
     document.body.classList.remove('mobile-menu-open');
     this.button.setAttribute('aria-expanded', 'false');

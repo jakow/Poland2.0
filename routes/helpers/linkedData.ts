@@ -33,7 +33,6 @@ export function event(edition: Edition, speakers: Speaker[], sponsors: Sponsor[]
   };
 }
 
-
 function sponsorOrganization(sponsor: Sponsor) {
   return {
     '@type': 'Organization',
