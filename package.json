@@ -96,7 +96,7 @@
     "yarn": ">=0.23.2"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=production pm2 start build/index.js --name=\"app\"",
+    "start": "cross-env NODE_ENV=production node build/index.js",
     "stop": "pm2 stop app",
     "dev": "concurrently \"yarn dev:server\" \"yarn dev:client\"",
     "dev:server": "nodemon --watch \"**/*.ts\" --ignore \"client/**/*\" --exec \"ts-node\" index.ts",
