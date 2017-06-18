@@ -14,9 +14,8 @@ export interface AgendaDay {
   events?: AgendaEvent[];
 }
 
-
 const AgendaDay = new keystone.List<AgendaDay>('AgendaDay', {
-	// map: { name: 'name' },
+  // map: { name: 'name' },
   autokey: { from: 'name', path: 'slug', unique: true },
   defaultSort: 'date',
 });

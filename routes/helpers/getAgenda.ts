@@ -9,7 +9,8 @@ export interface Agenda {
   edition?: Edition;
 }
 
-export default async function getAgenda(edition?: string | EditionDocument): Promise<Agenda> {
+export default async function getAgenda(edition?: EditionDocument): Promise<Agenda> {
+  // if agenda for given edition is required, then use current edition as model filter
   const filter = !!edition ? {edition} : {};
   const agendaDays = await list<AgendaDay>('AgendaDay').model.find(filter).exec();
   // Should sort by start time.
@@ -32,7 +33,7 @@ export default async function getAgenda(edition?: string | EditionDocument): Pro
     // also may choose to maintain a reference to the edition
     // the below spread check makes sure that `edition` is an Edition document, not an ObjectId
     // and attaches the edition object to the agenda. Not sure if needed later on but oh well.
-    ...(typeof edition === 'object' && edition.hasOwnProperty('name')) && edition,
+    edition,
   };
   return agenda;
 }

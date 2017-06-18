@@ -40,8 +40,8 @@ ContentControl.add(
 'Content',
 {
   description: {type: Types.Html, wysiwyg: false},
-	// ,
-	// testimonials: {type: String, label: 'Testimonials -  a list of quotes in DOUBLE QUOTES delimited
+  // ,
+  // testimonials: {type: String, label: 'Testimonials -  a list of quotes in DOUBLE QUOTES delimited
   // by SEMICOLON in the form of: "quote text", author; "quote text", author;'}
 },
 'Speakers & Registration',

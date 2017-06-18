@@ -53,12 +53,12 @@ Edition.add({
 });
 
 Edition.schema.virtual('dateString').get(function() {
-	// NOTE the use of en dash instead of hyphen in dates
+// NOTE the use of en dash instead of hyphen in dates
 
  const start = moment(this.date.start);
  const end = moment(this.date.end);
  if (this.date.provisional) {
-	 // provisional date - only the month and date printed
+// provisional date - only the month and date printed
   return start.format('MMMM YYYY');
  } else if (end.month() === start.month()) {
    // one day only
@@ -69,7 +69,7 @@ Edition.schema.virtual('dateString').get(function() {
     return `${start.date()}–${end.format('D MMMM YYYY')}`;
    }
  } else {
-	 // contracted months are printed - assume that the year is the same.
+// contracted months are printed - assume that the year is the same.
   return `${start.format('D MMM')}–${end.format('D MMM YYYY')}`;
  }
 });

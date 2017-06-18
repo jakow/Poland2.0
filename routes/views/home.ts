@@ -27,7 +27,7 @@ export const home: RequestHandler = async (req, res, next) => {
     }
     const speakersByCategory = reversePopulate(speakerCategories, 'speakers', speakers, 'speakerCategory');
     res.locals.speakerCategories = speakersByCategory;
-    res.locals.agenda = await getAgenda(currentEdition.id);
+    res.locals.agenda = await getAgenda(currentEdition);
   }
   view.render(resolveView('home'));
 };

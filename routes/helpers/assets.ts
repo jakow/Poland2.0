@@ -16,7 +16,7 @@ export default function createAssetStore() {
   let assetStore: AssetStore = null;
   if (config.environment === 'production') {
     try {
-      assetStore = require(path.resolve(config.buildDir, 'assets.json'));
+      assetStore = JSON.parse(fs.readFileSync(path.resolve(config.buildDir, 'assets.json'), 'utf8'));
     } catch (e) {
       throw new Error("Asset file unreadable");
     }
