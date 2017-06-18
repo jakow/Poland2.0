@@ -17,9 +17,10 @@ block content
         header.mobile-align-center
           h1 Poland 2.0 Summit
           p.subtitle.for-h1.banner__dateplace
-            time.banner__date(datetime=currentEdition.isoString)=`${currentEdition.dateString}` 
-            span.banner__separator
-            span.banner__place=`${currentEdition.venue.name}`
+            if (currentEdition)
+              time.banner__date(datetime=currentEdition.isoString)=`${currentEdition.dateString}` 
+              span.banner__separator
+              span.banner__place=`${currentEdition.venue.name}`
         | !{contentControl.description}
         .banner__nav
           a.banner__nav-link(href="#") What's on?

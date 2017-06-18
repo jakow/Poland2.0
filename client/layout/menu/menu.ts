@@ -31,7 +31,8 @@ export default class Menu {
       if (window.innerWidth > 768) {
         this.close();
       } else if (this.openState) {
-        this.open(); // reopen menu to adjust for size change
+        // reposition overlay
+        anime(this.getAnimationProps(true, true));
       }
     }, 200));
     this.button.addEventListener('click', this.toggle.bind(this));
@@ -126,23 +127,23 @@ export default class Menu {
     this.overlayAnimation.finished.then(this.onAnimationFinished);
   }
 
-  private getAnimationProps(openNotClose: boolean) {
+  private getAnimationProps(openNotClose: boolean, immediate: boolean = false) {
     if (openNotClose) {
       return {
         targets: this.overlay,
         translateX: {
           value: this.translateX,
-          duration: 300,
+          duration: immediate ? 1 : 300,
           easing: 'easeInOutQuart',
         },
         translateY: {
           value: this.translateY,
-          duration: 400,
+          duration: immediate ? 1 : 300,
           easing: 'easeInOutQuart',
         },
         scale: {
           value: 1,
-          duration: 450,
+          duration: immediate ? 1 : 450,
           easing: 'easeInOutSine',
         },
         // direction:
@@ -152,19 +153,19 @@ export default class Menu {
         targets: this.overlay,
         translateX: {
           value: 0,
-          duration: 400,
-          delay: 50,
+          duration: immediate ? 1 : 400,
+          delay: immediate ? 0 : 50 ,
           easing: 'easeInOutQuart',
         },
         translateY: {
           value: 0,
-          duration: 300,
-          delay: 150,
+          duration: immediate ? 1 : 300,
+          delay: immediate ? 0 : 150,
           easing: 'easeInOutQuart',
         },
         scale: {
           value: 0,
-          duration: 450,
+          duration: immediate ? 1 : 450,
           easing: 'easeInOutCubic',
         },
       };
