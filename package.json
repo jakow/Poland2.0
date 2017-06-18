@@ -103,7 +103,7 @@
     "dev:client": "webpack-dev-server --config @config/client.config.js -w",
     "build:server": "cross-env NODE_ENV=production webpack --config @config/server.config.js -p",
     "build:client": "cross-env NODE_ENV=production webpack --config @config/client.config.js -p",
-    "build": "yarn run clean && concurrently \"yarn build:server\" \"yarn build:client\"",
+    "build": "npm run clean && concurrently \"npm run build:server\" \"npm run build:client\"",
     "test": "mocha -r ts-node/register test/**/*.ts",
     "watch:server": "webpack --config @config/server.config.js -w",
     "clean": "rimraf build/"
