@@ -25,11 +25,19 @@ export default class Menu {
     this.overlay = this.nav.querySelector('.mobile-menu__overlay') as HTMLElement;
     // recalculate overlay dimensions
     this.calculateDimensions();
-    window.addEventListener('resize', debounce(this.calculateDimensions, 200));
-    this.button.addEventListener('click', this.toggle);
-    // immediately close (some glitch)
+    // on a resize, recalculate dimensions and make sure it closes properly if viewport becomes larger
+    window.addEventListener('resize', debounce(() => {
+      this.calculateDimensions();
+      if (window.innerWidth > 768) {
+        this.close();
+      } else if (this.openState) {
+        this.open(); // reopen menu to adjust for size change
+      }
+    }, 200));
+    this.button.addEventListener('click', this.toggle.bind(this));
+    // immediately close the menu (some glitch with animejs occurs on first open otherwise)
     this.overlay.style.visibility = 'hidden';
-    this.nav.style.display = 'none';
+    this.nav.style.visibility = 'hidden';
     anime({
       targets: this.overlay,
       scale: 0,
@@ -44,7 +52,7 @@ export default class Menu {
     return this.openState;
   }
 
-  public toggle = () => {
+  public toggle() {
     if (this.openState) {
       this.close();
     } else {
@@ -53,9 +61,9 @@ export default class Menu {
     this.openState = !this.openState;
   }
 
-  private open() {
+  public open() {
     preventScroll(true);
-    this.nav.style.display = 'block';
+    this.nav.style.visibility = 'visible';
     document.body.classList.add('mobile-menu-open');
     this.button.setAttribute('aria-expanded', 'true');
     this.nav.classList.add('open');
@@ -66,8 +74,8 @@ export default class Menu {
     }
   }
 
-  private close() {
-    preventScroll(false);
+  public close() {
+    // prevent scroll is removed on animation finished to prevent a reflow mid animation
     document.body.classList.remove('mobile-menu-open');
     this.button.setAttribute('aria-expanded', 'false');
     this.nav.classList.remove('open');
@@ -105,7 +113,8 @@ export default class Menu {
   private onAnimationFinished = () => {
     this.isAnimating = false;
     if (!this.openState) {
-      this.nav.style.display = 'none';
+      this.nav.style.visibility = 'hidden';
+      preventScroll(false);
     }
   }
 
