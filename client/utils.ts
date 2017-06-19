@@ -1,15 +1,16 @@
-let lastScrollPos = 0;
 /**
  * Prevent scrolling of non-fixed elements in body.
  * @param prevent True to prevent, false to allow scrolling again
  */
+let lastScrollPos = 0;
 export function preventScroll(prevent: boolean = true) {
+  const siteContainer = document.querySelector('.site-container') as HTMLElement;
   if (prevent) {
     lastScrollPos = window.scrollY;
-    document.body.style.top = `-${lastScrollPos}px`;
-    document.body.classList.add('prevent-scroll');
+    siteContainer.style.top = `-${lastScrollPos}px`;
+    siteContainer.classList.add('prevent-scroll');
   } else {
-    document.body.classList.remove('prevent-scroll');
+    siteContainer.classList.remove('prevent-scroll');
     window.scrollTo(0, lastScrollPos);
     setTimeout(() => window.scrollTo(0, lastScrollPos));
   }

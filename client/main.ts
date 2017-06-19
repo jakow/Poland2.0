@@ -4,8 +4,7 @@ import Loader from './layout/loader/loader';
 import * as lazyImages from './components/lazy-image/lazy-image';
 import Menu from './layout/menu/menu';
 import './sockets';
-console.log('Hello world from client!');
-console.log(`The date is ${moment(Date.now()).format('DD MMMM YY')}`);
+import {debounce} from 'lodash';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -20,11 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // }, 300);
 
   loader.hide();
-  const images = lazyImages.init();
-  const logo = document.querySelector('#show-logo');
-  if (logo) {
-    logo.addEventListener('click', () => {
-    document.querySelector('.animated-logo').classList.toggle('show');
-  });
-  }
+  lazyImages.init();
 });
+
+window.addEventListener('scroll', debounce(() => console.log(window.scrollY), 500));

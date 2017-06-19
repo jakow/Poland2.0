@@ -11,6 +11,8 @@ $logo-margin: 0.5*$vertical-baseline;
   top: 0;
   left: 0;
   right: 0;
+  // transform: translate3d(0px,0px,0px);
+  // transform: translateZ(0);
 }
 
 // given a fixed header, add container padding

@@ -21,11 +21,7 @@
   top: calc(50% - 500px);
   left: calc(50% - 500px);
   transform: translateX(0) translateY(0) scale(0);
-  
-  // a circle that will ripple appropriately
   border-radius: 50%;
-  // for playing around with the effect, comment out 
-  // transition: transform 250ms ease-in-out;
   background-color: transparentize($color-dark, 0.1);
-  // background-color: transparentize(white, 0.1);
+  -webkit-overflow-scrolling: touch;
 }

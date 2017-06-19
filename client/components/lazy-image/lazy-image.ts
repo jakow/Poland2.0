@@ -8,7 +8,7 @@ class LazyImage {
   public readonly method: string;
   public readonly previewSrc: string;
   public readonly originalSrc: string;
-  public readonly yPosition: number;
+  // public readonly yPosition: number;
   private preview: HTMLImageElement;
   private original: HTMLImageElement;
 
@@ -22,11 +22,15 @@ class LazyImage {
     }
     this.previewSrc = this.preview.src;
     this.originalSrc = this.container.dataset.src;
-    this.yPosition = this.container.getBoundingClientRect().top;
+    // this.yPosition = this.container.offsetTop;
     this.showPreview();
     if (this.method === 'immediate') {
       this.showOriginal();
     }
+ }
+
+ public get yPosition() {
+   return this.container.offsetTop;
  }
 
   public showPreview() {
@@ -67,7 +71,14 @@ export function init() {
     lazyImages.push(new LazyImage(container));
   }
   scrollTriggeredQueue = lazyImages.filter( (img) => img.method === 'scroll')
-    .sort((a, b) => a.yPosition - b.yPosition); // sort ascending by Y position
+  // sort ascending by Y position. The initial sort happens before images are loaded
+  // but should be a good indication of the actual dom position.
+    .sort((a, b) => a.yPosition - b.yPosition);
+  /* The scroll event is expensive because it always reads the current offsetTop of elements
+   * rather than doing it once for each iamge. This is because dom elements may expand in which case
+   * the images may not need to be loaded anymore. Because it is computationally heavy it is really
+   * important that the event is throttled.
+   */
   onScroll = throttle(showNextOnScroll, 500);
   document.addEventListener('scroll', onScroll);
   showNextOnScroll();

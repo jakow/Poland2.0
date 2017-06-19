@@ -2,7 +2,7 @@ $separator-width: 4 * 48px + 3 * 16px;
 $separator-width: 180px;
 
 // make footer stay on bottom
-body {
+.site-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;

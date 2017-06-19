@@ -36,9 +36,10 @@ html(lang=contentControl.language || "en-GB")
   body
     +loader
     +header
-    main
-      block content
-    +footer
+    .site-container
+      main
+        block content
+      +footer
 
     if env === 'production'
       //- include an outdated browser warning

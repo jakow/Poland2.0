@@ -20,21 +20,14 @@ export default class Menu {
   constructor() {
     // grab elements from DOM
     this.button = document.querySelector('.site-header__menu-button') as HTMLElement;
-    this.button.addEventListener('click', this.toggle);
     this.nav = document.getElementById('mobile-menu');
     this.overlay = this.nav.querySelector('.mobile-menu__overlay') as HTMLElement;
-    // recalculate overlay dimensions
-    this.calculateDimensions();
-    // on a resize, recalculate dimensions and make sure it closes properly if viewport becomes larger
+    // if viewport becomes wide enough, close the menu
     window.addEventListener('resize', debounce(() => {
-      this.calculateDimensions();
       if (window.innerWidth > 768) {
         this.close();
-      } else if (this.openState) {
-        // reposition overlay
-        anime(this.getAnimationProps(true, true));
       }
-    }, 200));
+    }, 400));
     this.button.addEventListener('click', this.toggle.bind(this));
     // immediately close the menu (some glitch with animejs occurs on first open otherwise)
     this.overlay.style.visibility = 'hidden';
@@ -55,13 +48,16 @@ export default class Menu {
 
   public toggle() {
     if (this.openState) {
+      console.log('close');
       this.close();
     } else {
+      console.log('open');
       this.open();
     }
   }
 
   public open() {
+    this.calculateDimensions();
     this.openState = true;
     preventScroll(true);
     this.nav.style.visibility = 'visible';
@@ -76,6 +72,7 @@ export default class Menu {
   }
 
   public close() {
+    this.calculateDimensions();
     this.openState = false;
     // prevent scroll is removed on animation finished to prevent a reflow mid animation
     document.body.classList.remove('mobile-menu-open');
@@ -94,7 +91,9 @@ export default class Menu {
     // rarely will change (especially on mobile)
     const windowCenterY = window.innerHeight / 2;
     const windowCenterX = window.innerWidth / 2;
-    const radius = Math.hypot(windowCenterX, windowCenterY);
+    // 1.25 multiplier adds some margin to account for changing
+    // viewport height on ihpone
+    const radius = Math.hypot(windowCenterX, windowCenterY) * 1.25;
     const diameter = `${2 * radius}px`;
     // make the overlay fit the screen
     this.overlay.style.width = diameter;

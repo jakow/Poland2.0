@@ -39,9 +39,10 @@
   box-shadow: 0px 1px 9px 0px rgba(1, 1, 1, 0.33);
 }
 
-@mixin circular-button {
-  width: 2 * $vertical-baseline;
-  padding: 0;
+@mixin circular-button($size: 2*$vertical-baseline) {
+  width: 2 * $size;
+  height: 2 * $size;
+  border-radius: 50%;
 }
 
 .button.circular {
@@ -51,37 +52,14 @@
     position: absolute;
   }
   text-align: center;
-  .material-icons {
-    // line-height: 1;
-    font-size: 1.5 * $vertical-baseline;
-    padding: 0.25 * $vertical-baseline;
-  }
-  .lnr {
-    line-height: 2 * $vertical-baseline;
-    font-size: $vertical-baseline;
-  }
+  // .material-icons {
+  //   // line-height: 1;
+  //   font-size: 1.5 * $vertical-baseline;
+  //   padding: 0.25 * $vertical-baseline;
+  // }
+  // .lnr {
+  //   line-height: 2 * $vertical-baseline;
+  //   font-size: $vertical-baseline;
+  // }
 }
 
-.button.menu {
-  @include button-style($color-dark, white);
-   i.menu-icon::before, i.menu-icon::after {
-     content: '';
-   }
-    &:hover {
-      i.menu-icon, i.menu-icon::before, i.menu-icon::after {
-      background-color: white;
-      }
-    }
-  i.menu-icon, i.menu-icon::before, i.menu-icon::after {
-    display: block;
-    height: 1px;
-    position: relative;
-    background-color: $color-dark;
-    width: $vertical-baseline;
-    top: 50%;
-    left: 50%;
-
-  }
-
-  
-}
