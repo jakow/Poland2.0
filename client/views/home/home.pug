@@ -21,10 +21,11 @@ block content
               time.banner__date(datetime=currentEdition.isoString)=`${currentEdition.dateString}` 
               span.banner__separator
               span.banner__place=`${currentEdition.venue.name}`
-        | !{contentControl.description}
-        .banner__nav
-          a.banner__nav-link(href="#") What's on?
-          
+        | !{contentControl.description} 
+        .banner__whats-on  
+          p What's on?
+          a.button.button--circular.button--primary.button--icon.button--arrow-down(href="#" title="Explore the website")
+            
     +banner-column('image')
       //- A slider with images
       +banner-slider

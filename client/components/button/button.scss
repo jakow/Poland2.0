@@ -2,14 +2,14 @@
   padding: 0 $vertical-baseline;
   // font-size: sgl-heading(-1);
   -webkit-appearance: none;
-  height: 2 * $vertical-baseline;
-  
-  border-radius: 2 * $base-font-size;
+  // height: 1.5 * $vertical-baseline;
+  border-radius: 3px;
   display: inline-block;
   // margin: (0.125 * $vertical-baseline) 0 (0.125* $vertical-baseline) + $vertical-baseline;
-  margin: 0 0 $vertical-baseline;
-  line-height: 2 * $vertical-baseline;
+  padding: 0.5*$vertical-baseline $vertical-baseline;
+  margin: 0.5*$vertical-baseline 0;
   font-weight: 300;
+  
   
   position: relative;
   vertical-align: middle;
@@ -20,9 +20,16 @@
   cursor: pointer;
 }
 
+a.button:hover {
+  text-decoration: none;
+}
+
 @mixin button-style($color: $color-primary, $fontColor: #FFFFFF) {
   background-color: $color;
   color: $fontColor;
+  &:hover {
+    background-color: darken($color, 5%);
+  }
 }
 
 @mixin hollow-button-style($color: $color-primary, $hoverColor: white) {
@@ -34,24 +41,29 @@
   }
 }
 
-.button.primary {
+.button.button--primary {
   @include button-style($primaryColor, white);
-  box-shadow: 0px 1px 9px 0px rgba(1, 1, 1, 0.33);
+  box-shadow: 0px 2px 7px 0px rgba(1, 1, 1, 0.18);
 }
 
+$circular-button-size: (
+  'regular': $vertical-baseline,
+);
+
 @mixin circular-button($size: 2*$vertical-baseline) {
-  width: 2 * $size;
-  height: 2 * $size;
+  width: $size;
+  height: $size;
+  padding : 0;
   border-radius: 50%;
 }
 
-.button.circular {
+.button.button--circular {
   @include circular-button;
-  &::before {
-    content: ' ';
-    position: absolute;
-  }
-  text-align: center;
+  // &::before {
+  //   content: ' ';
+  //   position: absolute;
+  // }
+  // text-align: center;
   // .material-icons {
   //   // line-height: 1;
   //   font-size: 1.5 * $vertical-baseline;
@@ -61,5 +73,15 @@
   //   line-height: 2 * $vertical-baseline;
   //   font-size: $vertical-baseline;
   // }
+}
+
+.button--icon {
+  background-position: center center;
+  background-size: auto $vertical-baseline;
+  background-repeat: no-repeat;
+
+}
+.button.button--arrow-down {
+	background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0, 0, 32, 32"><g stroke="#FFF" fill="none"><path vector-effect="non-scaling-stroke" d="M16.5 2.5v28M26.5 20.5l-10 10-10-10"/></g></svg>');
 }
 

@@ -101,14 +101,25 @@
   }
 }
 
-.banner__nav {
-  margin-bottom: $vertical-baseline;
-  a.banner__nav-link {
-    // font-weight: 600;
-    @include sgl-heading(1);
-    margin-top: 0;
-    display: inline-block;
+// .banner__nav {
+//   margin-bottom: $vertical-baseline;
+//   a.banner__nav-link {
+//     // font-weight: 600;
+//     @include sgl-heading(1);
+//     margin-top: 0;
+//     display: inline-block;
 
+//   }
+// }
+
+.banner__whats-on {
+  text-align: center;
+  .button, p {
+    margin-bottom: 0.75rem;
+  }
+  p {
+    font-weight: 600;
+    text-transform: uppercase;
   }
 }
 

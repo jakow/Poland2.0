@@ -28,6 +28,14 @@ export const home: RequestHandler = async (req, res, next) => {
     const speakersByCategory = reversePopulate(speakerCategories, 'speakers', speakers, 'speakerCategory');
     res.locals.speakerCategories = speakersByCategory;
     res.locals.agenda = await getAgenda(currentEdition);
+
+    // set page title
+    // if !currentEdition || !currentEdition.dateString
+    if (!currentEdition || !currentEdition.dateString || !currentEdition.venue.name) {
+      res.locals.title = 'Poland 2.0 Summit';
+    } else {
+    res.locals.title = `${currentEdition.name} | ${currentEdition.dateString}, ${currentEdition.venue.name}`;
+    }
   }
   view.render(resolveView('home'));
 };

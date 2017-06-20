@@ -6,6 +6,7 @@ import {StaticPage} from '../models/StaticPage';
 import {RequestHandler, Request, Response, NextFunction} from 'express';
 import {environment} from '../config';
 import reversePopulate from './helpers/reversePopulate';
+import resolveView from './helpers/resolveView';
 
 export async function getCurrentEdition(req: Request, res: Response, next: NextFunction) {
   try {
@@ -67,15 +68,16 @@ export async function initLocals(req: Request, res: Response, next: NextFunction
   }
   const nav: NavItem[] = [
     {name: 'About', route: '/about', key: 'about'},
+    {name: 'Speakers', route: '/#speakers', key: 'speakers'},
     {name: 'Past editions', route: '/past-editions', key: 'past-editions'},
+    {name: 'Sponsors', route: '/#sponsors', key: 'sponsors'},
   ];
-  const staticRoutes: NavItem[] = staticPages.map( (p) => ({
+  const staticPageRoutes: NavItem[] = staticPages.map( (p) => ({
     name: p.name, route: p.route, key: p.route.replace(/\//g, ''),
   }));
-  res.locals.nav = [...nav, ...staticRoutes];
+  res.locals.navLinks = [...nav, ...staticPageRoutes];
   next();
 }
-
 
 export async function requireUser(req: Request, res: Response, next: NextFunction) {
   if (req.user) {
@@ -86,14 +88,19 @@ export async function requireUser(req: Request, res: Response, next: NextFunctio
 }
 
 export async function getStaticPage(req: Request, res: Response, next: NextFunction) {
-  let staticPage;
-  console.log(req.route);
+  const route = req.params.staticRoute;
   try {
-  staticPage = await list('StaticPage').model
-  .findOne({showInMenu: true, active: true, route: req.route})
-  .select({name: 1, route: 1, showInMenu: 1, menuOrder: 1})
-  .exec();
-  } catch (e) {
-    // TODO: throw 404
+    const staticPage = await list<StaticPage>('StaticPage').model
+    .findOne({route, showInMenu: true, active: true})
+    .exec();
+    if (staticPage == null) {
+      throw new Error(`${route} not found`);
+    }
+    res.locals.staticContent = staticPage.content;
+    console.log(staticPage);
+    res.locals.route = route;
+    res.render(resolveView('staticPage'));
+} catch (e) {
+    next(); // will fall through to a not found
   }
 }

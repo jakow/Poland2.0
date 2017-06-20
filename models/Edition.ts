@@ -57,6 +57,10 @@ Edition.schema.virtual('dateString').get(function() {
 
  const start = moment(this.date.start);
  const end = moment(this.date.end);
+ // start date must always be filled
+ if (start == null) {
+   return '';
+ }
  if (this.date.provisional) {
 // provisional date - only the month and date printed
   return start.format('MMMM YYYY');

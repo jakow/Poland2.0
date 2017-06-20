@@ -1,13 +1,25 @@
-import * as anime from 'animejs';
+import anime = require('animejs');
 import {debounce} from 'lodash';
 import {preventScroll} from '../../utils';
 
+const TABLET_BREAKPOINT = 768;
+const MENU_ITEM_DURATION = 100; // ms
+const MENU_ITEM_DELAY = 100;
+const MENU_ITEM_TRANSLATE_AMOUNT = -10; // px
+
+type AnimationType = boolean;
+const OPEN: AnimationType = true;
+const CLOSE: AnimationType = false;
+
 export default class Menu {
+  private static delayFunc: anime.PropFunction = (el, i: number, l) => MENU_ITEM_DELAY * i;
   // dom elements
   private openState: boolean;
   private button: HTMLElement;
-  private nav: HTMLElement;
+  private overlayContainer: HTMLElement;
   private overlay: HTMLElement;
+  private nav: HTMLElement;
+  private menuItems: NodeList;
   // dimensions
   // private windowCenterX: number;
   // private windowCenterY: number;
@@ -15,31 +27,27 @@ export default class Menu {
   private translateY: number;
   // animation state
   private isAnimating: boolean;
-  private overlayAnimation: anime.Animation;
-  private animationProps: anime.AnimeProps;
+  private animation: anime.AnimationTimeline;
   constructor() {
     // grab elements from DOM
     this.button = document.querySelector('.site-header__menu-button') as HTMLElement;
-    this.nav = document.getElementById('mobile-menu');
-    this.overlay = this.nav.querySelector('.mobile-menu__overlay') as HTMLElement;
+    this.overlayContainer = document.getElementById('mobile-menu');
+    this.overlay = document.querySelector('.mobile-menu__overlay') as HTMLElement;
+    this.nav = document.querySelector('.mobile-menu') as HTMLElement;
+    this.menuItems = this.nav.querySelectorAll('li');
     // if viewport becomes wide enough, close the menu
-    window.addEventListener('resize', debounce(() => {
-      if (window.innerWidth > 768) {
-        this.close();
+    window.addEventListener('resize', debounce(this.onWindowResize, 400));
+    // click listener
+    this.button.addEventListener('click', () => {
+      if (!this.isAnimating) {
+        this.toggle();
       }
-    }, 400));
-    this.button.addEventListener('click', this.toggle.bind(this));
-    // immediately close the menu (some glitch with animejs occurs on first open otherwise)
-    this.overlay.style.visibility = 'hidden';
-    this.nav.style.visibility = 'hidden';
-    anime({
-      targets: this.overlay,
-      scale: 0,
-      translateX: 0,
-      translateY: 0,
-      duration: 1,
     });
-    setTimeout(() => this.overlay.style.visibility = 'visible', 1);
+    // immediately close the menu (some glitch with animejs occurs on first open otherwise)
+    this.overlayContainer.style.display = 'none';
+    anime(this.getOverlayAnimationProps(false, true));
+    anime(this.getMenuItemAnimationProps(false, true));
+    setTimeout(() => this.overlay.style.display = 'visible', 1);
   }
 
   public get isOpen() {
@@ -59,15 +67,15 @@ export default class Menu {
   public open() {
     this.calculateDimensions();
     this.openState = true;
-    preventScroll(true);
-    this.nav.style.visibility = 'visible';
+    // this.nav.classList.add('.site-nav--visible');
     document.body.classList.add('mobile-menu-open');
     this.button.setAttribute('aria-expanded', 'true');
-    this.nav.classList.add('open');
+    preventScroll(true);
+    this.overlayContainer.style.display = 'block';
     if (this.isAnimating) {
-      this.overlayAnimation.reverse();
+      this.animation.reverse();
     } else {
-      this.startAnimation(true);
+      this.startAnimation(OPEN);
     }
   }
 
@@ -77,11 +85,10 @@ export default class Menu {
     // prevent scroll is removed on animation finished to prevent a reflow mid animation
     document.body.classList.remove('mobile-menu-open');
     this.button.setAttribute('aria-expanded', 'false');
-    this.nav.classList.remove('open');
     if (this.isAnimating) {
-      this.overlayAnimation.reverse();
+      this.animation.reverse();
     } else {
-      this.startAnimation(false);
+      this.startAnimation(CLOSE);
     }
   }
 
@@ -114,19 +121,34 @@ export default class Menu {
   private onAnimationFinished = () => {
     this.isAnimating = false;
     if (!this.openState) {
-      this.nav.style.visibility = 'hidden';
+      this.overlayContainer.style.display = 'none';
+      // this.nav.classList.remove('.site-nav--visible');
       preventScroll(false);
     }
   }
 
-  private startAnimation(openNotClose: boolean) {
-    this.isAnimating = true;
-    this.animationProps = this.getAnimationProps(openNotClose);
-    this.overlayAnimation = anime(this.animationProps);
-    this.overlayAnimation.finished.then(this.onAnimationFinished);
+  private onWindowResize = () => {
+    this.calculateDimensions();
+    if (window.innerWidth >= TABLET_BREAKPOINT) {
+      this.close();
+    } else if (this.openState) {
+      anime(this.getOverlayAnimationProps(OPEN, true));
+    }
   }
 
-  private getAnimationProps(openNotClose: boolean, immediate: boolean = false) {
+  private startAnimation(type: AnimationType) {
+    this.isAnimating = true;
+    const overlayAnimationProps = this.getOverlayAnimationProps(type);
+    const menuItemAnimationProps = this.getMenuItemAnimationProps(type);
+    this.animation = anime.timeline();
+    if (type === OPEN) {
+      this.animation.add(overlayAnimationProps).add({...menuItemAnimationProps, complete: this.onAnimationFinished});
+    } else {
+      this.animation.add(menuItemAnimationProps).add({...overlayAnimationProps, complete: this.onAnimationFinished});
+    }
+  }
+
+  private getOverlayAnimationProps(openNotClose: boolean, immediate: boolean = false) {
     if (openNotClose) {
       return {
         targets: this.overlay,
@@ -167,6 +189,28 @@ export default class Menu {
           duration: immediate ? 1 : 450,
           easing: 'easeInOutCubic',
         },
+      };
+    }
+  }
+
+  private getMenuItemAnimationProps(openNotClose: boolean, immediate: boolean = false) {
+    if (openNotClose) {
+      return {
+        targets: this.menuItems,
+        opacity: 1,
+        translateY: 0,
+        duration: immediate ? 1 : MENU_ITEM_DURATION,
+        delay: immediate ? 0 : Menu.delayFunc,
+        easing: 'easeInQuart',
+      };
+    } else {
+      return {
+        targets: this.menuItems,
+        opacity: 0,
+        translateY: MENU_ITEM_TRANSLATE_AMOUNT,
+        duration: immediate ? 1 : MENU_ITEM_DURATION,
+        delay: immediate ? 0 : Menu.delayFunc,
+        easing: 'easeOutQuart',
       };
     }
   }

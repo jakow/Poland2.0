@@ -53,7 +53,7 @@ router.use('/api/questions',  allowCors, api.questions);
 router.use('/api/speakers', allowCors, api.speakers);
 
 // Static pages defined from Keystone admin
-// app.get('/:pageRoute', views.staticPage); // dynamically registered static pages. Must be at bottom
+router.get('/:staticRoute', middleware.getStaticPage); // dynamically registered static pages. Must be at bottom!
 
 // NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 // app.get('/protected', middleware.requireUser, routes.views.protected);

@@ -1,12 +1,13 @@
+$menu-item-transition: cubic-bezier(0.55, 0.055, 0.675, 0.19) 150ms;
+
 .mobile-menu {
   position: fixed;
-  top: 0;
+  top: $header-height;
   bottom: 0;
   left: 0;
   right: 0;
   // logo and the menu button are z-index 1000
   // menu is placed just below it
-  z-index: 999;
   @include breakpoint($tablet) {
     display: none !important;
   }
@@ -22,6 +23,25 @@
   left: calc(50% - 500px);
   transform: translateX(0) translateY(0) scale(0);
   border-radius: 50%;
-  background-color: transparentize($color-dark, 0.1);
+  background-color: transparentize($color-dark, 0.05);
   -webkit-overflow-scrolling: touch;
+}
+
+
+.mobile-menu {
+  overflow-y: scroll;
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    margin: 0 0 $vertical-baseline;
+    padding: 0;
+  }
+  a {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    @include sgl-heading(1);
+  }
 }
