@@ -11,6 +11,7 @@ function timeValidate(message = 'Invalid time entered') {
 
 export interface AgendaEvent {
   name: string;
+  type: string;
   description: string;
   image: keystone.Schema.CloudinaryImage;
   time: {
@@ -26,17 +27,18 @@ export type AgendaEventDocument = keystone.ModelDocument<AgendaEvent>;
 
 const AgendaEvent = new keystone.List<AgendaEvent>('AgendaEvent', {
   map: { name: 'name' },
-  autokey: { from: 'year', path: 'slug', unique: true },
+  autokey: { from: 'name', path: 'slug', unique: true },
   defaultSort: 'time.start',
 });
 
 AgendaEvent.add({
   name: {type: String, required: true},
+  type: String,
   description: {type: Types.Textarea},
   image: {type: Types.CloudinaryImage},
   time: {
-    start: {type: String, validate: timeValidate('Invalid start time')},
-    end: {type: String, validate: timeValidate('Invalid end time')},
+    start: {type: String, label: 'Start time', validate: timeValidate('Invalid start time')},
+    end: {type: String, label: 'End time', validate: timeValidate('Invalid end time')},
   },
   speakers: {type: Types.Relationship, ref: 'Speaker', many: true},
   agendaDay: {type: Types.Relationship, ref: 'AgendaDay'},

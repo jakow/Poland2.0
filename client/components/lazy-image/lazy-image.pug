@@ -24,10 +24,10 @@ mixin lazy-image(source, placeholder, aspectRatio='1:1', method='scroll')
         div(style=`padding-bottom: ${ratioPercent}%`)
       img(src=placeholder, role="presentation" aria-hidden="true").preview
       img.original(alt=attributes.alt)
+      .spinner
       //- If the user has disabled javascript, show the original image as loaded straight away
       //- with degraded UX.
       noscript: img(src=source).original.loaded
-      .spinner-container: .spinner
 
 //- mixin lazyBackgroundImage(source, placeholder, aspectRatio='16:9', method='immediate')
 //-   img(src=source)
@@ -39,4 +39,4 @@ mixin lazy-cl-image(image, targetSize=0, aspectRatio='1:1', method='scroll')
   //-   const [num, denom] = aspectRatio.split(':').map(x => parseInt(x));
   //-   const targetHeight = targetWidth * num / denom;
   +lazy-image( (targetSize != 0) ? imgTransform.limit(image.secure_url, targetSize) : image.secure_url, 
-  imgTransform.limit(image.secure_url, 32, 32), aspectRatio, method)&attributes(attributes)
+  imgTransform.limit(image.secure_url, 32), aspectRatio, method)&attributes(attributes)

@@ -43,8 +43,8 @@ Edition.add({
   location: {type: Types.Location},
   },
   date: {
-    start: {type: Date, label: 'Start date'},
-    end: {type: Date, label: 'End date'},
+    start: {type: Date, label: 'Start date (UTC)', utc: true},
+    end: {type: Date, label: 'End date (UTC)', utc: true},
     useProvisional: {type: Boolean, label: 'Use provisional date'},
     provisionalDate: {type: String, label: 'Provisional date',  dependsOn: {'date.useProvisional': true }},
   },

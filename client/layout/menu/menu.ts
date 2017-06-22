@@ -1,10 +1,9 @@
 import anime = require('animejs');
 import {debounce} from 'lodash';
-import {preventScroll} from '../../utils';
 
 const TABLET_BREAKPOINT = 768;
-const MENU_ITEM_DURATION = 100; // ms
-const MENU_ITEM_DELAY = 100;
+const MENU_ITEM_DURATION = 125; // ms
+const MENU_ITEM_DELAY = 50;
 const MENU_ITEM_TRANSLATE_AMOUNT = -10; // px
 
 type AnimationType = boolean;
@@ -16,13 +15,11 @@ export default class Menu {
   // dom elements
   private openState: boolean;
   private button: HTMLElement;
-  private overlayContainer: HTMLElement;
+  private container: HTMLElement;
   private overlay: HTMLElement;
   private nav: HTMLElement;
   private menuItems: NodeList;
   // dimensions
-  // private windowCenterX: number;
-  // private windowCenterY: number;
   private translateX: number;
   private translateY: number;
   // animation state
@@ -31,20 +28,21 @@ export default class Menu {
   constructor() {
     // grab elements from DOM
     this.button = document.querySelector('.site-header__menu-button') as HTMLElement;
-    this.overlayContainer = document.getElementById('mobile-menu');
+    this.container = document.getElementById('mobile-menu');
     this.overlay = document.querySelector('.mobile-menu__overlay') as HTMLElement;
     this.nav = document.querySelector('.mobile-menu') as HTMLElement;
     this.menuItems = this.nav.querySelectorAll('li');
     // if viewport becomes wide enough, close the menu
     window.addEventListener('resize', debounce(this.onWindowResize, 400));
     // click listener
-    this.button.addEventListener('click', () => {
+    this.button.addEventListener('click', (e) => {
+      e.preventDefault();
       if (!this.isAnimating) {
         this.toggle();
       }
     });
     // immediately close the menu (some glitch with animejs occurs on first open otherwise)
-    this.overlayContainer.style.display = 'none';
+    this.container.style.display = 'none';
     anime(this.getOverlayAnimationProps(false, true));
     anime(this.getMenuItemAnimationProps(false, true));
     setTimeout(() => this.overlay.style.display = 'visible', 1);
@@ -65,14 +63,14 @@ export default class Menu {
   }
 
   public open() {
-    this.calculateDimensions();
+    // preventScroll(true);
     this.openState = true;
     // this.nav.classList.add('.site-nav--visible');
     document.body.classList.add('mobile-menu-open');
     this.button.setAttribute('aria-expanded', 'true');
-    preventScroll(true);
-    this.overlayContainer.style.display = 'block';
+    this.container.style.display = 'block';
     if (this.isAnimating) {
+      // TODO: currently no way to stop animation mid way
       this.animation.reverse();
     } else {
       this.startAnimation(OPEN);
@@ -80,9 +78,9 @@ export default class Menu {
   }
 
   public close() {
-    this.calculateDimensions();
+    this.overlay.classList.remove('mobile-menu__overlay--attached');
+    // preventScroll(false);
     this.openState = false;
-    // prevent scroll is removed on animation finished to prevent a reflow mid animation
     document.body.classList.remove('mobile-menu-open');
     this.button.setAttribute('aria-expanded', 'false');
     if (this.isAnimating) {
@@ -120,24 +118,26 @@ export default class Menu {
 
   private onAnimationFinished = () => {
     this.isAnimating = false;
-    if (!this.openState) {
-      this.overlayContainer.style.display = 'none';
-      // this.nav.classList.remove('.site-nav--visible');
-      preventScroll(false);
+    if (this.openState) {
+      this.overlay.classList.add('mobile-menu__overlay--attached');
+    } else {
+      this.container.style.display = 'none';
     }
   }
 
   private onWindowResize = () => {
-    this.calculateDimensions();
     if (window.innerWidth >= TABLET_BREAKPOINT) {
       this.close();
     } else if (this.openState) {
-      anime(this.getOverlayAnimationProps(OPEN, true));
+      // resize the overlay to avoid glitches when orientation changes
+      this.calculateDimensions();
+      anime(this.getOverlayAnimationProps(true, true));
     }
   }
 
   private startAnimation(type: AnimationType) {
     this.isAnimating = true;
+    this.calculateDimensions();
     const overlayAnimationProps = this.getOverlayAnimationProps(type);
     const menuItemAnimationProps = this.getMenuItemAnimationProps(type);
     this.animation = anime.timeline();

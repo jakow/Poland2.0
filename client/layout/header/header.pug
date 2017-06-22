@@ -5,14 +5,14 @@ mixin header(navOptions)
   //- main header
   header.site-header
     .site-header__container
+      +menu(id="mobile-menu")
       .site-header__section.left
         //- mobile only menu button
         a(href="#" title="Open menu" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu").site-header__menu-button.site-header__button
           +menu-icon
-        +menu(id="mobile-menu")
         //- Logo with home link
         a(href="/" title="Poland 2.0 Home").site-header__brand
-          img(src="images/logo.svg", alt="Poland 2.0")
+          img(src="images/logo.svg", alt="Poland 2.0 logo")
           span Poland 2.0 Summit
 
       .site-header__section.right

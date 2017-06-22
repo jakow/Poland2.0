@@ -17,11 +17,9 @@ export default async function getAgenda(edition?: EditionDocument): Promise<Agen
   const agendaEvents = await list<AgendaEvent>('AgendaEvent').model
     .find({agendaDay: {$in: agendaDays}})
     .sort({'time.start': -1})
-    .populate('speakers')
-    .populate('venue')
+    .populate('speakers venue')
     .exec();
-  // assume that lodash groupBy is 'stable', i.e. preserves sort order:
-  const grouped = groupBy(agendaEvents, 'agendaDay');
+  // assume that lodash groupBy is 'stable', i.e. preserves sort order
 
   // convert e
   const days = agendaDays.map( (d) => d.toObject() as AgendaDay);

@@ -70,14 +70,14 @@ function postalAddress(location: Schema.Location) {
 }
 
 function offers(contentControl: ContentControl) {
-  const {ticketPrices, ticketCurrency, ticketUrl} = contentControl;
-  const prices = ticketPrices ? ticketPrices.replace(/\s/g, '').split(',') : [];
+  const {ticketsPrices, ticketsCurrency, ticketsUrl} = contentControl;
+  const prices = ticketsPrices ? ticketsPrices.replace(/\s/g, '').split(',') : [];
   return prices.map( (price) => (
     {
       '@type': 'Offer',
       'price': price,
-      'priceCurrency': ticketCurrency,
-      'url': ticketUrl,
+      'priceCurrency': ticketsCurrency,
+      'url': ticketsUrl,
     }
   ));
 }
@@ -94,4 +94,3 @@ function performer(speaker: Speaker) {
     'image': speaker.photo.secure_url,
   };
 }
-

@@ -1,7 +1,8 @@
 mixin footer
   footer.site-footer
     .site-footer__container
-      .site-footer__bg(style="background-image: url('http://res.cloudinary.com/dg1royeho/image/upload/v1497445653/DSC_0270n_rlkqba.jpg')")
+      //- .site-footer__bg(style="background-image: url('http://res.cloudinary.com/dg1royeho/image/upload/v1497445653/DSC_0270n_rlkqba.jpg')")
+      .site-footer__bg(style="background-image: url('https://res.cloudinary.com/dg1royeho/image/upload/c_scale,w_1366/v1498041997/footer-img2_afjcgn.jpg')")
       .site-footer__fg
         .site-footer__social
           a(href=contentControl.facebookUrl title="Facebook").site-footer__social-link.facebook
@@ -10,7 +11,7 @@ mixin footer
           a(href=contentControl.snapchatUrl title="Snapchat").site-footer__social-link.snapchat
         .site-footer__separator
         .site-footer__links
-          a(href=contentControl.bylawLink) Bylaw for Poland 2.0
+          a(href=contentControl.bylawLink) By-law for Poland 2.0
           a(href="/contact") Contact
         .site-footer__copyright
           small © #{moment().year()} Poland 2.0

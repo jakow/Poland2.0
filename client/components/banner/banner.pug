@@ -16,10 +16,14 @@ mixin banner-slider
       block
     .swiper-pagination  
 
-mixin slider-lazy-banner-image(src)
+mixin banner-slider-image(src)
   //- .banner__image.swiper-lazy(data-background=src)&attributes(attributes)
   .banner__image(style=`background-image: url(${src})`)&attributes(attributes)
 
+mixin banner-slider-lazy-image(src)
+  .banner__image.swiper-lazy(data-background=src)&attributes(attributes)
+    .swiper-lazy-preloader
+
 mixin banner-slider-image-slide(src)
   .banner__slide.swiper-slide.banner__image-filter
-    +slider-lazy-banner-image(imgTransform.limit(src, 1000))
+    +banner-slider-lazy-image(src)&attributes(attributes)

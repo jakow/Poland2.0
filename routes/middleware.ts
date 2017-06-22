@@ -1,5 +1,6 @@
 import {list} from 'keystone';
 import {Edition, EditionDocument} from '../models/Edition';
+import {ContentControl} from '../models/ContentControl';
 import {Sponsor} from '../models/Sponsor';
 import {SponsorCategory} from '../models/SponsorCategory';
 import {StaticPage} from '../models/StaticPage';
@@ -58,6 +59,7 @@ interface NavItem {
  */
 export async function initLocals(req: Request, res: Response, next: NextFunction) {
   let staticPages;
+  const contentControl = res.locals.contentControl as ContentControl;
   try {
     staticPages = await list<StaticPage>('StaticPage').model
       .find({active: true, showInMenu: true})
@@ -68,9 +70,10 @@ export async function initLocals(req: Request, res: Response, next: NextFunction
   }
   const nav: NavItem[] = [
     {name: 'About', route: '/about', key: 'about'},
-    {name: 'Speakers', route: '/#speakers', key: 'speakers'},
+    ...contentControl.showSpeakers ? [{name: 'Speakers', route: '/#speakers', key: 'speakers'}] : [],
+    ...contentControl.showAgenda ? [{name: 'Agenda', route: '/#agenda', key: 'speakers'}] : [],
     {name: 'Past editions', route: '/past-editions', key: 'past-editions'},
-    {name: 'Sponsors', route: '/#sponsors', key: 'sponsors'},
+    ...contentControl.showSponsors ? [{name: 'Sponsors', route: '/#sponsors', key: 'sponsors'}] : [],
   ];
   const staticPageRoutes: NavItem[] = staticPages.map( (p) => ({
     name: p.name, route: p.route, key: p.route.replace(/\//g, ''),
@@ -97,7 +100,6 @@ export async function getStaticPage(req: Request, res: Response, next: NextFunct
       throw new Error(`${route} not found`);
     }
     res.locals.staticContent = staticPage.content;
-    console.log(staticPage);
     res.locals.route = route;
     res.render(resolveView('staticPage'));
 } catch (e) {

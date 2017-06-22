@@ -5,9 +5,10 @@ $header-height: 3*$vertical-baseline;
 $logo-height: 2*$vertical-baseline;
 $logo-margin: 0.5*$vertical-baseline;
 $menu-open-duration: 500ms;
+$icon-transition-duration: 200ms;
+$icon-transition: $icon-transition-duration cubic-bezier(0.77, 0, 0.175, 1);
 
 @mixin menu-icon($width: 28px, $height: 20px, $thickness: 1px, $color: $color-dark) {
-  $icon-transition: 200ms cubic-bezier(0.77, 0, 0.175, 1);
   $bar-margin: ($height - 3 * $thickness)/2;
   display: block;
   .menu-icon__bar {
@@ -48,6 +49,9 @@ $menu-open-duration: 500ms;
   top: 0;
   left: 0;
   right: 0;
+  background: $header-background;
+  box-shadow: $header-shadow;
+  border-bottom: $header-border;
   // transform: translate3d(0px,0px,0px);
   // transform: translateZ(0);
 }
@@ -58,13 +62,9 @@ main {
 }
 
 // styling
-.site-header {
-  background: $header-background;
-  box-shadow: $header-shadow;
-  border-bottom: $header-border;
-}
 
 .site-header__container {
+
   max-width: $site-width;
   margin: 0 auto;
   padding: 0 $site-padding;
@@ -218,7 +218,7 @@ a.site-header__brand {
     @include menu-icon;
     // when menu closes
     .menu-icon__bar {
-      transition-delay: $menu-open-duration + 0ms, 0ms;
+      transition-delay: 0ms, $icon-transition-duration+ 100ms;
     }
     // when menu opens
     .mobile-menu-open & {
@@ -231,12 +231,41 @@ a.site-header__brand {
         }
         &:nth-child(2) {
           transform: scaleX(0);
-        }
+      }
         &:nth-child(3) {
           transform: translateX(#{($width - $height)/2}) rotate(-45deg);
         }
       } 
     }
+  }
+}
+
+// .headroom {
+//   transition: translateY 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
+//   // transform: translateY(#{-$header-height});
+//   transform: translateY(0);
+//   .mobile-menu-open & {
+//     transform: initial;
+//   }
+//   @include breakpoint($tablet) {
+//     transform: initial;
+//   }
+// }
+// .headroom--unpinned {
+//   transition: translateY 300ms cubic-bezier(0.895, 0.03, 0.685, 0.22);
+//   transform: translateY(#{-$header-height});
+// }
+.headroom {
+  transition: transform 300ms cubic-bezier(0.165, 0.84, 0.44, 1)
+}
+.headroom--unpinned {
+  transition: transform 300ms cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  transform: translateY(-100%);
+  @include breakpoint($tablet) {
+    transform: initial;
+  }
+  .mobile-menu-open & {
+    transform: initial;
   }
 }
 

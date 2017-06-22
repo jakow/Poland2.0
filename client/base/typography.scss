@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,700&subset=latin-ext');
-@import url(http://weloveiconfonts.com/api/?family=entypo);
+// @import url(http://weloveiconfonts.com/api/?family=entypo);
 
 $body-font: 'Source Sans Pro', 'Helvetica Neue', 'Segoe UI', sans-serif;
 $base-font-size: 16px;
@@ -30,8 +30,9 @@ body {
   color: $color-dark;
   // default font is light
   font-weight: 300;
-  // for thicker rendering of Source Sans Pro light
+  // for thicker rendering of Source Sans Pro Light
   -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-text-size-adjust: 100%;
 }
 
 
@@ -53,7 +54,6 @@ h4, h5, h6 {
 
 h1, h2, h3 {
   margin: $vertical-baseline 0;
-  
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -67,6 +67,8 @@ pre,
 table,
 blockquote {
     @include sgl-margins();
+    hyphens: auto;
+    overflow-wrap: break-word;
 }
 
 
@@ -79,6 +81,7 @@ blockquote {
 // time, tr, tt, u, ul, var, video
 * {
   vertical-align: baseline;
+
 }
 
 // design specific styling 
@@ -111,14 +114,29 @@ small {
   position: relative;
   &::after {
     display: inline-block;
-    padding-left: $vertical-baseline/4;
-    font-family: 'entypo'
+    padding-left: $base-font-size/4;
+    // font-family: 'entypo';
+    font-family: 'Linearicons-Free'
   }
   &.chevron-right {
     &::after {
-      transform: translateY(4%);
-      content: '\e762';
+      // transform: translateY(4%);
+      // content: '\e762';
+      content: '\e876';
+      font-size: 0.6em;
     }
+  }
+}
+
+.icon-left {
+  &::before {
+    display: inline-block;
+    font-family: 'Linearicons-Free';
+    padding-right: $base-font-size/4;
+  }
+  &.icon-map::before {
+    content: '\e834';
+    font-size: 0.9em;
   }
 }
 
@@ -175,3 +193,10 @@ a.fat-link {
 
 }
 
+.center {
+  text-align: center;
+}
+
+.lnr {
+  line-height: inherit;
+}

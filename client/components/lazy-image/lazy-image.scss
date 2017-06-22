@@ -17,12 +17,13 @@ $spinner-size: 32px;
   background: $color-dark;
   position: relative;
   overflow: hidden;
-  
+  // will have clip border radius
+  z-index: 0;
   .preview, .original {
     position: absolute;
-    left: 0 - 2*$blur;
-    top: 0 - 2*$blur;
-    width: calc(100% + #{4*$blur});
+    left: 0 - 1*$blur;
+    top: 0 - 1*$blur;
+    width: calc(100% + #{2*$blur});
     // If we can accept the edges bluring with the background color then
     // the image can have the correct
     // left: 0;
@@ -37,7 +38,11 @@ $spinner-size: 32px;
    // .original image is the high-res larger image
   .preview {
     z-index: 1;
-    filter: blur(6px);
+    filter: blur($blur);
+  }
+
+  .original {
+    z-index: 3;
   }
 
   &.preview-loaded {
@@ -66,19 +71,22 @@ $spinner-size: 32px;
     }
   }
   // optional spinner
-  .spinner-container {
-    width: $spinner-size;
-    height: $spinner-size;
-    z-index: 3;
-    opacity: 1;
-    transition: all ($lazy-img-transition-duration / 2) ease-out;
-    position: absolute;
-    top: calc(50% - #{$spinner-size / 2});
-    left: calc(50% - #{$spinner-size / 2});
-  }
-
   .spinner {
     @include loader02($size: $spinner-size, $duration: 1s, $align: middle, $color: $color-gray-medium, $border-size: 5px);
+    opacity: 1;
+    transition: visibility 0ms linear;
+    position: absolute;
+    margin-left: -$spinner-size/2;
+    margin-top: -$spinner-size/2;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+
+  }
+
+  &.loaded .spinner {
+    transition-delay: $lazy-img-transition-duration;
+    visibility: hidden;
   }
 
   noscript .original {

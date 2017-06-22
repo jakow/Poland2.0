@@ -20,8 +20,7 @@ Venue.add({
 });
 
 // Events in this venue
-Venue.relationship({path: 'agenda-entries', ref: 'AgendaEntry', refPath: 'agendaDay'});
-Venue.defaultColumns = 'name, location';
+Venue.relationship({path: 'agenda-events', ref: 'AgendaEvent', refPath: 'venue'});
 Venue.register();
 
 export default Venue;

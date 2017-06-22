@@ -8,6 +8,7 @@ import * as path from 'path';
 import * as config from './config';
 import routes from './routes';
 import * as linkedData from './routes/helpers/linkedData';
+import * as routeUtils from './routes/helpers/routeUtils';
 import {initSockets} from './routes/sockets';
 import imageHelpers from './routes/helpers/cloudinary';
 import createAssetStore from './routes/helpers/assets';
@@ -66,6 +67,7 @@ keystone.set('locals', {
   imgTransform: imageHelpers(),
   sanitize: require('sanitize-html'),
   moment: require('moment'),
+  ...routeUtils,
 });
 
 // have to do this here after mongo and cloudinary are initialised. Kind of hacky.

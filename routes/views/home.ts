@@ -7,6 +7,7 @@ import {Speaker} from '../../models/Speaker';
 import resolveView from '../helpers/resolveView';
 import reversePopulate from '../helpers/reversePopulate';
 import getAgenda from '../helpers/getAgenda';
+import * as moment from 'moment';
 
 export const home: RequestHandler = async (req, res, next) => {
   res.locals.route = 'home';
@@ -31,11 +32,17 @@ export const home: RequestHandler = async (req, res, next) => {
 
     // set page title
     // if !currentEdition || !currentEdition.dateString
-    if (!currentEdition || !currentEdition.dateString || !currentEdition.venue.name) {
+    if (!currentEdition.dateString || !currentEdition.venue.name) {
       res.locals.title = 'Poland 2.0 Summit';
     } else {
     res.locals.title = `${currentEdition.name} | ${currentEdition.dateString}, ${currentEdition.venue.name}`;
     }
   }
+
+  res.locals.setTime = setTime;
   view.render(resolveView('home'));
 };
+
+function setTime(date: moment.Moment, time: moment.Moment): moment.Moment {
+  return date.set({hour: time.hour(), minute: time.minute(), seconds: time.second() });
+}

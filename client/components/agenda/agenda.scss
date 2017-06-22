@@ -1,0 +1,278 @@
+$timeline-thickness: 4px;
+$timeline-offset: 16px;
+$agenda-event-top-padding: $vertical-baseline;
+$agenda-event-left-padding: 2*$vertical-baseline;
+$agenda-event-right-padding: $vertical-baseline;
+$map-height: 10*$vertical-baseline;
+$ornament-width: 18px;
+$ornament-height: $ornament-width/2/0.866;
+#agenda {
+  padding: $vertical-baseline 0;
+  background-color: $color-gray-light;
+  h2 {
+    text-align: center;
+  }
+}
+.agenda {
+  position: relative;
+  margin-bottom: $vertical-baseline;
+}
+.agenda__timeline {
+
+  position: absolute;
+  top: $ornament-width/2;
+  bottom: $ornament-width/2;
+  left: calc(#{$timeline-offset} - #{$timeline-thickness/2});
+  width: $timeline-thickness;
+  background-color: $color-primary;
+  z-index: 2;
+  // the arrow on the bottom of the timeline
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -$ornament-width/2;
+    width: 0;
+    height: 0;
+    // a triangle
+    left: -$ornament-width/2 + 1px;
+    border-left: $ornament-height solid transparent;
+    border-right: $ornament-height solid transparent;
+    border-top: $ornament-width solid $color-primary;
+  }
+
+}
+
+.agenda-days {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.agenda-day {
+  margin-bottom: $vertical-baseline;
+
+}
+
+.agenda-day__description {
+  margin: 0 0 $vertical-baseline;
+  padding: 0 $agenda-event-right-padding 0 $agenda-event-left-padding;
+  // the circular ornament on the timeline
+  &::before {
+    content: '';
+    position: absolute;
+    width: $ornament-width;
+    height: $ornament-width;
+    background-color: $color-primary;
+    border-radius: 50%;
+    top: calc(#{0.5*$vertical-baseline} - #{0.5*$ornament-width});
+    // top: 0;
+    left: $ornament-width/2 - $timeline-thickness/2;
+  }
+}
+.agenda-day__events {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0 0 $vertical-baseline;
+  // margin-top: $vertical-baseline;
+  margin-bottom: $vertical-baseline;
+}
+.agenda-event {
+  // margin: 0 $vertical-baseline $vertical-baseline;
+  position: relative;
+  margin-bottom: $vertical-baseline;
+  background-color: white;
+  padding: $agenda-event-top-padding $agenda-event-right-padding 0 $agenda-event-left-padding;
+
+  border: 1px solid rgba(1, 1, 1, 0.12);
+  box-shadow: 0 1px 2px 0 rgba(1, 1, 1, 0.05);
+
+  header {
+    margin-bottom: $vertical-baseline;
+  }
+  time {
+    font-weight: 600;
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    left: $timeline-offset;
+    top: calc(#{1.5*$vertical-baseline} - #{$timeline-thickness/2});
+    height: $timeline-thickness;
+    background: $color-primary;
+    width: 16px;
+  }
+}
+
+.agenda-event__name {
+  @include sgl-heading(1);
+  margin-top: 0;
+  margin-bottom: $vertical-baseline;
+  font-weight: 600;
+}
+.agenda-event__time-and-type {
+  display: flex;
+  color: $color-gray-medium;
+}
+
+.agenda-event__type {
+  margin-left: 12px;
+  font-weight: 400;
+}
+
+.agenda-event__summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @include breakpoint($mobile-landscape) {
+    flex-direction: row;
+  }
+}
+
+a.agenda-event__permalink {
+  position: absolute;
+  top: $agenda-event-top-padding;
+  right: $agenda-event-right-padding;
+  overflow: hidden;
+
+  color: $color-gray-medium;
+  > * {
+    display: inline-block;
+  }
+  .agenda-event__permalink-icon {
+    background: white;
+    z-index: 1;
+    // promote to transform layer to achieve clipping
+    transform: translateX(0);
+    @include sgl-heading(1);
+    margin: 0;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  .agenda-event__permalink-caption {
+    transition: transform 150ms ease-in-out;
+    transform: translateX(calc(100% + 24px));
+    z-index: 0;
+  }
+
+  &:hover {
+    // never visible on mobile
+    @include breakpoint($tablet) {
+      .agenda-event__permalink-caption {
+        transform: translateX(0);
+      }
+    }
+  }
+
+
+}
+
+
+.agenda-event__speaker-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1 1 0;
+  align-items: flex-start;
+
+  li {
+    //
+    display: flex;
+    align-items: center;
+    margin-bottom: $vertical-baseline;
+    // Two ava
+    flex: 0 1 100%;
+    @include breakpoint($tablet) {
+      flex-basis: 50%;
+      padding-right: 12px;
+    }
+    @include breakpoint($desktop) {
+      flex-basis: 1/3*100%;
+    }
+  }
+
+  // only thumbnails which overlap on mobile
+  &.agenda-event__speaker-list--avatars-only {
+    li:not(:first-child) {
+      margin-left: -24px;
+      @include breakpoint($mobile-landscape) {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+$avatar-size: 3*$vertical-baseline;
+// $avatar-margin: 0.5*$vertical-baseline 0;
+$avatar-margin: 0;
+.agenda-event__speaker-avatar {
+  flex: none;
+  display: inline-block;
+  margin: $avatar-margin;
+  width: $avatar-size;
+  height: $avatar-size;
+  vertical-align: middle;
+  border: 3px solid white;
+  border-radius: 50%;
+  z-index: 1;
+  .lazy-img {
+    background-color: white;
+    border-radius: 50%;
+  }
+}
+
+.agenda-event__speaker-name {
+  display: inline-block;
+  // margin-left: 10px;
+  @include sgl-heading(1);
+  margin: 0 0 0 10px;
+  // margin-bottom: $vertical-baseline;
+
+}
+
+$location-pin-size: $vertical-baseline;
+$location-pin-size-tablet: 2*$vertical-baseline;
+.agenda-event__venue {
+  @include breakpoint($mobile-landscape) {
+    flex: 0 1 33%;
+  }
+  &:empty {
+    display: none;
+  }
+
+  margin-bottom: $vertical-baseline;
+  
+  // map marker icon on the left 
+	background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCwgMCwgMzIsIDMyIj48ZyBmaWxsLW9wYWNpdHk9Ii4zOCI+PHBhdGggZD0iTTE1Ljk5OSAzMGEuNy43IDAgMCAxLS41NTEtLjI2N2MtLjA3OS0uMTAzLTEuOTg1LTIuNTQtMy45MTUtNi4xMzktMS4xMzctMi4xMTktMi4wNDQtNC4xOTktMi42OTUtNi4xODNDOC4wMTYgMTQuOTA5IDcuNiAxMi41NSA3LjYgMTAuNCA3LjYgNS43NjkgMTEuMzY5IDIgMTYgMnM4LjQgMy43NjkgOC40IDguNGMwIDIuMTUtLjQxNyA0LjUwOC0xLjIzOCA3LjAxMS0uNjUxIDEuOTg0LTEuNTU4IDQuMDY0LTIuNjk1IDYuMTgzLTEuOTMyIDMuNTk5LTMuODM2IDYuMDM2LTMuOTE1IDYuMTM5YS43LjcgMCAwIDEtLjU1MS4yNjd6bTAtMjYuNmMtMy44NiAwLTcgMy4xNC03IDcgMCA0LjU1NiAyLjA0OCA5LjMzIDMuNzY3IDEyLjUzMWE0OC4wOTMgNDguMDkzIDAgMCAwIDMuMjMzIDUuMTk0IDQ4LjE5OCA0OC4xOTggMCAwIDAgMy4yNDUtNS4yMTZjMS43MTItMy4xOTYgMy43NTUtNy45NjIgMy43NTUtMTIuNTA5IDAtMy44Ni0zLjE0MS03LTctN3oiLz48cGF0aCBkPSJNMTYgMTYuMDQ3YTQuMjA1IDQuMjA1IDAgMCAxLTQuMi00LjJjMC0yLjMxNiAxLjg4NC00LjIgNC4yLTQuMiAyLjMxNiAwIDQuMiAxLjg4NCA0LjIgNC4yIDAgMi4zMTUtMS44ODQgNC4yLTQuMiA0LjJ6bTAtN2EyLjgwMyAyLjgwMyAwIDAgMC0yLjggMi44YzAgMS41NDQgMS4yNTYgMi44IDIuOCAyLjggMS41NDQgMCAyLjgtMS4yNTYgMi44LTIuOCAwLTEuNTQ0LTEuMjU2LTIuOC0yLjgtMi44eiIvPjwvZz48L3N2Zz4=');
+  background-repeat: no-repeat;
+  background-position: top left;
+  padding-left: $location-pin-size;
+  background-size: auto $location-pin-size;
+
+  @include breakpoint($tablet) {
+    padding-left: $location-pin-size-tablet + 1/8*$vertical-baseline;
+    background-size: auto $location-pin-size-tablet;
+    min-height: $location-pin-size-tablet;
+  }
+}
+
+
+.agenda-event__details {
+  max-height: 0;
+   &.agenda-event__details--expanded {
+     max-height: 100%;
+   }
+}
+
+.agenda-event__map {
+  // get rid of the container padding
+  margin-left: -$agenda-event-left-padding;
+  width: calc(100% + #{$agenda-event-left-padding + $agenda-event-right-padding});
+
+  height: $map-height;
+}
+

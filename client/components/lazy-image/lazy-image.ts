@@ -80,7 +80,7 @@ export function init() {
    * important that the event is throttled.
    */
   onScroll = throttle(showNextOnScroll, 500);
-  document.addEventListener('scroll', onScroll);
+  window.addEventListener('scroll', onScroll);
   showNextOnScroll();
   return lazyImages;
 }
@@ -90,9 +90,12 @@ export function init() {
  * @param ev The UI event that triggers the loading. Currently unused.
  */
 function showNextOnScroll(ev?: UIEvent) {
-  const threshold = window.scrollY + window.innerHeight;
+  const threshold = document.body.scrollTop + window.innerHeight;
   // because the array is sorted w.r.t. y position then we can just select the images
   // that are above the threshold and splice them from array;
+  // console.log('threshold', threshold);
+  // console.log(scrollTriggeredQueue.map((e) => e.yPosition));
+  // console.log(`[lazy image] Images left: ${scrollTriggeredQueue.length}`);
   const toBeShown = takeWhile(scrollTriggeredQueue, (img) => img.yPosition < threshold);
   toBeShown.forEach((img) => img.showOriginal());
   // remove the shown images from the shown array

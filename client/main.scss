@@ -22,6 +22,7 @@ $susy: (
 );
 
 $mobile-only: max-width 767px;
+$mobile-landscape: min-width 512px;
 $tablet: min-width 768px;
 $desktop: min-width 1024px;
 
@@ -48,6 +49,7 @@ $site-padding: 1.25rem;
 @import 'components/banner/banner';
 @import 'components/lazy-image/lazy-image';
 @import 'components/speaker-card/speaker-card';
+@import 'components/agenda/agenda';
 @import 'components/animated-logo/animated-logo';
 @import 'components/responsive-video/responsive-video';
 
@@ -55,8 +57,14 @@ $site-padding: 1.25rem;
 
 html, body {
   margin: 0;
+  padding: 0;
   height: 100%;
+  max-width: 100%; // prevent horizontal overflows
   background: $color-dark;
+}
+
+body {
+  scroll-behavior: smooth;
 }
 
 main {
@@ -72,11 +80,3 @@ main {
 * {
   box-sizing: border-box;
 }
-
-.prevent-scroll {
-  position: fixed;
-  // overflow: hidden;
-  width: 100%;
-  height: 100%;
-}
-

@@ -3,6 +3,7 @@ extends ../../layout/default/default
 include ../../components/lazy-image/lazy-image
 include ../../components/animated-logo/animated-logo
 include ../../components/banner/banner
+include ../../components/agenda/agenda
 block append scripts
   script(src=assets("/home.js"))
 block head
@@ -11,7 +12,7 @@ block content
   //- .baseline-grid
   //-   - for(let i = 0; i < 40; ++i)
   //-     .guide
-  +banner
+  +banner#banner
     +banner-column('edge-right')
       .banner__col-content
         header.mobile-align-center
@@ -29,17 +30,25 @@ block content
     +banner-column('image')
       //- A slider with images
       +banner-slider
-        +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497537104/ffoopf3pdr6xxft5pfel.jpg',1000))
-        +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497536456/tprdqpldylorpccqpmg0.jpg', 1000))
-        +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497445653/DSC_0270n_rlkqba.jpg', 1000))
+        if currentEdition
+          each photo in currentEdition.photos
+            - const imgSrc = imgTransform.limit(photo.secure_url, 900)
+            +banner-slider-image-slide(imgSrc)(data-src=imgSrc)
+        //- 3 generic photos
+        //- else 
+        //-   +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497537104/ffoopf3pdr6xxft5pfel.jpg',900))
+        //-   +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497536456/tprdqpldylorpccqpmg0.jpg', 900))
+        //-   +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497445653/DSC_0270n_rlkqba.jpg', 900))
 
-  div(style="background: #fafafa")
-    .container.container--padded
-      p Youtube video will go here with testimonials
-      p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in arcu dictum, faucibus eros non, dapibus dolor. Nunc facilisis ac lorem vitae blandit. Etiam eleifend nec lacus molestie semper. Vestibulum non nisl pulvinar, viverra turpis id, egestas lorem. Nunc congue nunc ante, tristique rhoncus tortor mollis id. Nam id tempus neque, a cursus leo. Integer porta vestibulum nunc, vel lobortis nulla malesuada at.
+  section#testimonials.section--dark-background
+    .container
+      h2.center(style="color: white") Watch the promo video
+      if contentControl
+      .promo-video.responsive-video
+        iframe(src="https://www.youtube.com/embed/63glh6e8SSI" frameborder="0" allowfullscreen)
 
   //- Always guard against missing data!
-  //- if speakerCategories
+  //- if contentControl.showSpeakers && speakerCategories
   //-   each category in speakerCategories
   //-     h1= category.displayName
   //-     each speaker in category.speakers
@@ -47,11 +56,17 @@ block content
   //-       h2=speaker.name
   //-       +lazy-cl-image(speaker.photo,  400, '1:1', 'scroll')(style="max-width: 240px" alt=`Photo of ${speaker.name}`)
 
-  div(style="width: 240px")
-    +lazy-image(
-      'https://unsplash.it/500/500?random',
-      'https://placehold.it/500x500',
-      '1:1', 'scroll')(alt='This is an image')
+  if contentControl.showAgenda && agenda
+    section#agenda
+      .container
+        +agenda(agenda)
+  
+
+  //- div(style="width: 240px")
+  //-   +lazy-image(
+  //-     'https://unsplash.it/500/500?random',
+  //-     'https://placehold.it/500x500',
+  //-     '1:1', 'scroll')(alt='This is an image')
 
         
 

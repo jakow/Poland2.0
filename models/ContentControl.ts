@@ -3,19 +3,27 @@ const Types = keystone.Field.Types;
 
 export interface ContentControl {
   title: string;
+  // Content & promo
   description: string;
-  speakerRegistrationActive: boolean;
-  speakerMenuButton: boolean;
+  testimonials: string;
+  video: boolean;
+  // Speakers
+  showSpeakers: boolean;
+  // Sponsors
   showSponsors: boolean;
+  // Tickets
   ticketsLive: boolean;
-  ticketUrl: string;
-  ticketMessage: string;
+  ticketsUrl: string;
+  ticketsMessage: string;
+  ticketsPrices: string;
+  ticketsCurrency: string;
 
   countdown: boolean;
   countdownDate: string;
-  ticketRegistrationSignup: boolean;
-  agendaActive: boolean;
+  ticketNewsletterSignup: boolean;
+  showAgenda: boolean;
   showVenues: boolean;
+
   language: string;
   facebookUrl: string;
   twitterUrl: string;
@@ -24,8 +32,7 @@ export interface ContentControl {
   gaTrackingID: string;
   bylawLink: string;
   // SEO
-  ticketPrices: string;
-  ticketCurrency: string;
+
 }
 
 const ContentControl = new keystone.List<ContentControl>('ContentControl', {
@@ -37,17 +44,17 @@ const ContentControl = new keystone.List<ContentControl>('ContentControl', {
 
 ContentControl.add(
 {title: {type: String, noedit: true}},
-'Content',
+'Content & Promo',
 {
   description: {type: Types.Html, wysiwyg: false},
-  // ,
-  // testimonials: {type: String, label: 'Testimonials -  a list of quotes in DOUBLE QUOTES delimited
-  // by SEMICOLON in the form of: "quote text", author; "quote text", author;'}
+  testimonials: {type: String, label:
+    `Testimonials - in the form of: "quote text", author; "another quote text", another author;`},
+  ticketNewsletterSignup: {type: Boolean, label: 'Ticket newsletter signup'},
+  video: Boolean,
 },
 'Speakers & Registration',
 {
-  speakerRegistrationActive: Boolean,
-  speakerMenuButton: Boolean,
+  showSpeakers: Boolean,
 },
 'Sponsors',
 {
@@ -56,17 +63,16 @@ ContentControl.add(
 'Tickets',
 {
   ticketsLive: Boolean,
-  ticketUrl: Types.Url,
-  ticketMessage: String,
-  ticketPrices: {type: String, label: 'Ticket prices (comma separated)' },
-  ticketCurrency: String,
+  ticketsUrl: Types.Url,
+  ticketsMessage: String,
+  ticketsPrices: {type: String, label: 'Ticket prices (comma separated)' },
+  ticketsCurrency: String,
   countdown: Boolean,
-  countdownDate: {type: String, dependsOn: {countdown: true}},
-  ticketRegistrationSignup: {type: Boolean, label: 'Ticket newsletter signup active'},
+  countdownDate: {type: Date, label: 'Countdown date (UTC)', utc: true, dependsOn: {countdown: true}},
 },
 'Agenda & Venues',
 {
-  agendaActive: Boolean,
+  showAgenda: Boolean,
   showVenues: Boolean,
 },
 'SEO & Technical',
@@ -80,7 +86,7 @@ ContentControl.add(
 },
 'Legal',
 {
-  bylawLink: {type: Types.Url, label: 'Link to "Bylaw for Poland 2.0 Document"'},
+  bylawLink: {type: Types.Url, label: 'Link to the By-law Document'},
 },
 );
 
