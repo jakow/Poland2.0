@@ -31,7 +31,7 @@ const config = {
     publicPath: '/',
   },
   resolve: { extensions: ['.ts', '.tsx', '.js', '.jsx'] },
-  devtool: isProduction? 'source-map' : 'eval-source-map',
+  devtool: isProduction ? /*'source-map'*/ false : 'eval-source-map',
   devServer: {
     compress: true,
     port: 8000,

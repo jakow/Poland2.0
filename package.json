@@ -98,16 +98,17 @@
     "yarn": ">=0.23.2"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=production node build/index.js",
+    "start": "cross-env NODE_ENV=production pm2 start build/index.js --name app",
     "stop": "pm2 stop app",
     "dev": "concurrently \"yarn dev:server\" \"yarn dev:client\"",
     "dev:server": "nodemon --watch \"**/*.ts\" --ignore \"client/**/*\" --exec \"ts-node\" index.ts 0.0.0.0 4000",
     "dev:client": "webpack-dev-server --config @config/client.config.js -w --host 0.0.0.0",
-    "build:server": "cross-env NODE_ENV=production webpack --config @config/server.config.js -p --profile --progress --verbose",
-    "build:client": "cross-env NODE_ENV=production webpack --config @config/client.config.js -p --profile --progress --verbose",
-    "build": "npm run clean && npm run build:server && npm run build:client",
+    "build:server": "cross-env NODE_ENV=production webpack --config @config/server.config.js -p --profile --progress",
+    "build:client": "cross-env NODE_ENV=production webpack --config @config/client.config.js -p --profile --progress",
+    "build": "yarn run clean && yarn build:server && yarn build:client",
     "test": "mocha -r ts-node/register test/**/*.ts",
-    "clean": "rimraf build/"
+    "clean": "rimraf build/*",
+    "deploy:staging": "tools/deploy-staging.sh"
   },
   "main": "keystone.js"
 }
