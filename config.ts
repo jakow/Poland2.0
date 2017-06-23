@@ -18,6 +18,8 @@ export const staticDirs: string[] = [
   isBuild ? path.join('client') : path.join('build', 'client'),
 ];
 
+console.log(process.env);
+
 export const viewsDir = path.resolve('client', 'views');
 
 const loaded = !!dotenv.config({path: path.join(rootDir, '.env'), silent: true});
