@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+import * as serveStatic from 'serve-static';
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -9,14 +10,27 @@ const isBuild = path.basename(__dirname) === 'build';
 
 export const rootDir = '.';
 
+export const publicDir = path.resolve(rootDir, 'public');
+
 export const buildDir = path.resolve(rootDir, 'build');
 
-export const publicDir = isBuild ? path.join('..', 'public') : 'public';
+export const clientDir = path.join(buildDir, 'client');
+// path alias for static folder
+export const staticRoot = '/static';
+// path alias for client bundle build output
+export const clientRoot = '/static/client';
 
-export const staticDirs: string[] = [
-  publicDir,
-  isBuild ? path.join('client') : path.join('build', 'client'),
-];
+export const staticOptions = {
+  cacheControl: true,
+  maxAge: '30 days',
+};
+// export const staticDirs = {
+//   public: publicDir,
+//   client: isBuild ? path.join('client') : path.join('build', 'client'),
+// };
+
+// export const staticDirs = {
+// }
 
 export const viewsDir = path.resolve('client', 'views');
 

@@ -22,12 +22,12 @@ html(lang=contentControl.language || "en-GB")
       link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
       link(rel="stylesheet", href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css")
       if env === 'production'
-        link(rel="stylesheet", href=assets("/main.css"))
-  
+        link(rel="stylesheet", href=assets("main.css"))
+          
     block scripts
       include ../../vendor/outdated-browser
       //- client bundle
-      script(src=assets('/main.js'))
+      script(src=assets('main.js'))
 
     //- Any extra stuff in head - opengraph, meta etc
     block head

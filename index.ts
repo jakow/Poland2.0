@@ -5,6 +5,7 @@ import * as mongoose from 'mongoose';
 import * as Promise from 'bluebird';
 import * as helmet from 'helmet';
 import * as path from 'path';
+import * as serveStatic from 'serve-static';
 import * as config from './config';
 import routes from './routes';
 import * as linkedData from './routes/helpers/linkedData';
@@ -24,7 +25,6 @@ keystone.init({
   'name': 'Poland 2.0',
   'favicon': path.join(config.publicDir, 'images/favicons/favicon.ico'),
   'signin logo': '../images/logo.svg',
-  'static': config.staticDirs,
   'user model': 'User',
   'host': config.host,
   'port': config.port,
@@ -43,17 +43,15 @@ keystone.init({
   'default region': 'gb',
 });
 
+app.use(config.staticRoot, serveStatic(config.publicDir, config.staticOptions));
 if (config.environment === 'production') {
+  app.use(config.clientRoot, serveStatic(config.clientDir, config.staticOptions));
   // external, mongo-based session store. Built in store apparently leaks memory so needs to be replaced.
   keystone.set('session store', 'connect-mongo');
-  keystone.set('static options', {
-    cacheControl: true,
-    maxAge: '30 days',
-  });
   // security options
   app.use(helmet({
     dnsPrefetchControl: false,
-    hidePoweredBy: false,
+    hidePoweredBy: true,
 }));
 }
 

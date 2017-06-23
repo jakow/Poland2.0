@@ -28,7 +28,7 @@ const config = {
   output: {
     path: path.join(buildDir, 'client'),
     filename: isProduction ? '[name]-[hash:12].js' : '[name].js',
-    publicPath: '/',
+    publicPath: '/static/client/',
   },
   resolve: { extensions: ['.ts', '.tsx', '.js', '.jsx'] },
   devtool: isProduction ? /*'source-map'*/ false : 'eval-source-map',

@@ -22,11 +22,13 @@ export default function createAssetStore() {
     }
   }
 
+  const assetRoot = config.clientRoot;
+
   return (asset: string): string => {
 
       if (assetStore === null) {
         // keep the asset string as-is because we are not in production.
-        return asset;
+        return `${config.clientRoot}/${asset}`;
       }
       // get from assets map
       const basename = path.basename(asset);
