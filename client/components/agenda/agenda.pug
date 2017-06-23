@@ -20,15 +20,15 @@ mixin agenda(agenda)
 
 
 mixin agenda-event(event, dayMoment)
-  - const startTime = moment.utc(event.time.start, 'H:mm');
-  - const startDate = setTime(dayMoment, startTime).toISOString();
-  - const endTime = moment.utc(event.time.end, 'H:mm');
-  - const endDate = setTime(dayMoment, endTime).toISOString();
+  - const startDate = moment.utc(event.time.start);
+  - const startTime = startDate.format('H:mm');
+  - const endDate = moment.utc(event.time.end);
+  - const endTime = endDate.format('H:mm');
   li.agenda-event(id=`event-${event.slug}`)
     header
       //- div=JSON.stringify(event)
       .agenda-event__time-and-type
-        time(datetime=`${startDate}/${endDate}`)=`${event.time.start}–${event.time.end}`
+        time(datetime=`${startDate.toISOString()}/${endDate.toISOString()}`)=`${startTime}–${endTime}`
         .agenda-event__type=event.type
       h4.agenda-event__name=event.name
 

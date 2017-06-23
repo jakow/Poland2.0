@@ -37,8 +37,8 @@ AgendaEvent.add({
   description: {type: Types.Textarea},
   image: {type: Types.CloudinaryImage},
   time: {
-    start: {type: String, label: 'Start time', validate: timeValidate('Invalid start time')},
-    end: {type: String, label: 'End time', validate: timeValidate('Invalid end time')},
+    start: {type: Date, utc: true, label: 'Start time'},
+    end: {type: Date, utc: true, label: 'End time'},
   },
   speakers: {type: Types.Relationship, ref: 'Speaker', many: true},
   agendaDay: {type: Types.Relationship, ref: 'AgendaDay'},

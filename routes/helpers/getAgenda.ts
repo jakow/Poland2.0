@@ -12,11 +12,13 @@ export interface Agenda {
 export default async function getAgenda(edition?: EditionDocument): Promise<Agenda> {
   // if agenda for given edition is required, then use current edition as model filter
   const filter = !!edition ? {edition} : {};
-  const agendaDays = await list<AgendaDay>('AgendaDay').model.find(filter).exec();
+  const agendaDays = await list<AgendaDay>('AgendaDay').model
+    .find(filter)
+    .sort({date: 'ascending'}).exec();
   // Should sort by start time.
   const agendaEvents = await list<AgendaEvent>('AgendaEvent').model
     .find({agendaDay: {$in: agendaDays}})
-    .sort({'time.start': -1})
+    .sort({'time.start': 'ascending'})
     .populate('speakers venue')
     .exec();
   // assume that lodash groupBy is 'stable', i.e. preserves sort order
@@ -25,6 +27,7 @@ export default async function getAgenda(edition?: EditionDocument): Promise<Agen
   const days = agendaDays.map( (d) => d.toObject() as AgendaDay);
   days.forEach( (d) => {
     d.events = agendaEvents.map( (e) => e.toObject() as AgendaEvent);
+      // .sort( (a, b) => Number(a.time.start) - Number(b.time.start));
   });
   const agenda: Agenda = {
     days,
