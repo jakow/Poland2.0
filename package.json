@@ -99,7 +99,7 @@
   },
   "scripts": {
     "start": "cross-env NODE_ENV=production pm2 start build/index.js --name app",
-    "stop": "pm2 stop app",
+    "stop": "pm2 stop app && pm2 delete app",
     "dev": "concurrently \"yarn dev:server\" \"yarn dev:client\"",
     "dev:server": "nodemon --watch \"**/*.ts\" --ignore \"client/**/*\" --exec \"ts-node\" index.ts 0.0.0.0 4000",
     "dev:client": "webpack-dev-server --config @config/client.config.js -w --host 0.0.0.0",
