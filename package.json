@@ -103,8 +103,8 @@
     "dev": "concurrently \"yarn dev:server\" \"yarn dev:client\"",
     "dev:server": "nodemon --watch \"**/*.ts\" --ignore \"client/**/*\" --exec \"ts-node\" index.ts 0.0.0.0 4000",
     "dev:client": "webpack-dev-server --config @config/client.config.js -w --host 0.0.0.0",
-    "build:server": "cross-env NODE_ENV=production webpack --config @config/server.config.js -p --profile --verbose",
-    "build:client": "cross-env NODE_ENV=production webpack --config @config/client.config.js -p --profile --verbose",
+    "build:server": "cross-env NODE_ENV=production webpack --config @config/server.config.js -p --profile --progress --verbose",
+    "build:client": "cross-env NODE_ENV=production webpack --config @config/client.config.js -p --profile --progress --verbose",
     "build": "npm run clean && npm run build:server && npm run build:client",
     "test": "mocha -r ts-node/register test/**/*.ts",
     "clean": "rimraf build/"
