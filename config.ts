@@ -22,7 +22,8 @@ export const clientRoot = '/static/client';
 
 export const staticOptions = {
   cacheControl: true,
-  maxAge: '30 days',
+  // thanks to cache busting the resources are cacheable with no penalty
+  maxAge: '180 days',
 };
 // export const staticDirs = {
 //   public: publicDir,

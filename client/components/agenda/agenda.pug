@@ -28,7 +28,12 @@ mixin agenda-event(event, dayMoment)
     header
       //- div=JSON.stringify(event)
       .agenda-event__time-and-type
-        time(datetime=`${startDate.toISOString()}/${endDate.toISOString()}`)=`${startTime}–${endTime}`
+        //- time(datetime=`${startDate.toISOString()}/${endDate.toISOString()}`)=`${startTime}–${endTime}`
+        .agenda-event__time.
+          <time datetime=#{startDate.toISOString()})>#{startTime}</time>
+          <span>–</span>
+          <time datetime=#{endDate.toISOString()}>#{endTime}</time>
+        //- ${endDate.toISOString()}`)=`${startTime}–${endTime}`
         .agenda-event__type=event.type
       h4.agenda-event__name=event.name
 

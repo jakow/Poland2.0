@@ -1,6 +1,6 @@
 mixin menu
   .mobile-menu__overlay            
-  nav(role="navigation" aria-label="Mobile navigation").mobile-menu&attributes(attributes)
+  nav(aria-label="Mobile navigation").mobile-menu&attributes(attributes)
     ul
       each link in navLinks
         +menu-item(link.route, link.key)=link.name

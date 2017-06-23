@@ -90,9 +90,7 @@ $ornament-height: $ornament-width/2/0.866;
   header {
     margin-bottom: $vertical-baseline;
   }
-  time {
-    font-weight: 600;
-  }
+
   &::before {
     content: '';
     position: absolute;
@@ -113,6 +111,9 @@ $ornament-height: $ornament-width/2/0.866;
 .agenda-event__time-and-type {
   display: flex;
   color: $color-gray-medium;
+}
+.agenda-event__time {
+  font-weight: 600;
 }
 
 .agenda-event__type {

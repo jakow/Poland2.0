@@ -5,7 +5,7 @@ include ../../components/animated-logo/animated-logo
 include ../../components/banner/banner
 include ../../components/agenda/agenda
 block append scripts
-  script(src=assets("/home.js"))
+  script(src=assets("/home.js") defer)
 block head
   if (currentEdition)
     script(type="application/ld+json")!=JSON.stringify(linkedData.event(currentEdition, speakers, sponsors, contentControl))

@@ -19,7 +19,7 @@ html(lang=contentControl.language || "en-GB")
 
     block style
       link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css")
-      link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+      //- link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
       link(rel="stylesheet", href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css")
       if env === 'production'
         link(rel="stylesheet", href=assets("main.css"))
@@ -27,7 +27,7 @@ html(lang=contentControl.language || "en-GB")
     block scripts
       include ../../vendor/outdated-browser
       //- client bundle
-      script(src=assets('main.js'))
+      script(src=assets('main.js') defer)
 
     //- Any extra stuff in head - opengraph, meta etc
     block head

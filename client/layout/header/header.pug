@@ -17,7 +17,7 @@ mixin header(navOptions)
 
       .site-header__section.right
         //- desktop navigation
-        nav(role="navigation" aria-label="Desktop navigation").site-nav
+        nav(aria-label="Desktop navigation").site-nav
           ul
             each link in navLinks
               +nav-item(link.route, link.key)=link.name
