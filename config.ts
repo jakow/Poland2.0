@@ -18,7 +18,7 @@ export const staticDirs: string[] = [
   isBuild ? path.join('client') : path.join('build', 'client'),
 ];
 
-console.log(process.env);
+console.log(process.env.env);
 
 export const viewsDir = path.resolve('client', 'views');
 
