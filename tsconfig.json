@@ -8,11 +8,14 @@
         "moduleResolution": "node",
         "target": "es5",
         "allowSyntheticDefaultImports": false,
+        "allowUnreachableCode": false,
         "allowJs": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "noFallthroughCasesInSwitch": true,
-        "typeRoots": ["./node_modules/@types"]
+        "typeRoots": ["./node_modules/@types"],
+        "diagnostics": true,
+        "downlevelIteration": true
     },
     "include": [
       "**/*"

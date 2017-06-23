@@ -49,7 +49,7 @@ const config = {
       use: [{
         loader: 'ts-loader',
         options: {
-          configFileName: '../tsconfig.json'
+          configFileName: '../tsconfig.json',
         }
       }
       ],
@@ -81,7 +81,5 @@ const config = {
     ] : []
   ]
 };
-
-console.info(`Serving config dev server on localhost:${config.devServer.port}`);
 
 module.exports = config;
