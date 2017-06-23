@@ -29,7 +29,7 @@ export const port: number =  process.env.OPENSHIFT_NODEJS_PORT || process.env.ST
 
 export const host: string = process.env.OPENSHIFT_NODEJS_IP || 'localhost';
 
-export const mongo: string =  process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URI ||
+export const mongo: string = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URI ||
   'mongodb://localhost/poland-20';
 
 export const cookieSecret: string =  process.env.OPENSHIFT_SECRET_TOKEN || process.env.COOKIE_SECRET;
