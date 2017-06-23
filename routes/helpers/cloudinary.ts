@@ -29,7 +29,7 @@ export default function imageHelpers() {
   const functions: {[name: string]: TransformationFunction} = {};
   sizeTransformations.forEach( (t) => {
     functions[t] = (img, width, height, options) => cloudinary.url(basename(img), {
-      secure: true, width, height, crop: t
+      width, height, crop: t, secure: true,
     });
   });
   return functions;

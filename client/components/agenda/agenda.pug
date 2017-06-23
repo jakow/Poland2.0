@@ -61,18 +61,19 @@ mixin venue(venue)
       div=venue.name
     else
       div
-        | #{venue.location.name}
+        | #{venue.location.name}<br>
         if venue.location.street1
-          | <br>#{venue.location.street1}
+          | #{venue.location.street1}<br>
         if venue.location.street2
-          | <br>#{venue.location.street2}
-        if venue.location.suburb
-          | <br>#{venue.location.suburb}
+          | #{venue.location.street2}<br>
+        
           
         //- if venue.location.state
         //-   | <br>#{venue.location.state}
-        if venue.location.postcode
-          | &nbsp;#{venue.location.postcode}
+        if venue.location.suburb && venue.location.postcode
+          | #{venue.location.suburb}&nbsp;#{venue.location.postcode}<br>
+        else 
+          | #{venue.location.suburb}
       div 
         a(href=googleMapUrl(venue.location) target="_blank").agenda-event__venue-show-map-link.icon-left.icon-map Show on a map
 

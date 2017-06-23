@@ -34,7 +34,8 @@ block content
     +banner-column('image')
       //- A slider with images
       +banner-slider
-        if currentEdition
+        //- check if photos are uploaded
+        if currentEdition && currentEdition.photos && currentEdition.photos.length > 0
           each photo in currentEdition.photos
             - const imgSrc = imgTransform.limit(photo.secure_url, 900)
             +banner-slider-image-slide(imgSrc)(data-src=imgSrc)

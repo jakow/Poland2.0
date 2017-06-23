@@ -24,7 +24,7 @@ keystone.init({
   'brand': 'Poland 2.0',
   'name': 'Poland 2.0',
   'favicon': path.join(config.publicDir, 'images/favicons/favicon.ico'),
-  'signin logo': '../images/logo.svg',
+  'signin logo': '../static/images/logo.svg',
   'user model': 'User',
   'host': config.host,
   'port': config.port,
