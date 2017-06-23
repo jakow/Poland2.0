@@ -28,7 +28,9 @@ export default function imageHelpers() {
   // cloudinary.config(config);
   const functions: {[name: string]: TransformationFunction} = {};
   sizeTransformations.forEach( (t) => {
-    functions[t] = (img, width, height, options) => cloudinary.url(basename(img), {width, height, crop: t});
+    functions[t] = (img, width, height, options) => cloudinary.url(basename(img), {
+      secure: true, width, height, crop: t
+    });
   });
   return functions;
 }
