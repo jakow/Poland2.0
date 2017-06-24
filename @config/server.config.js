@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -23,10 +22,8 @@ const config = {
         test: /\.(t|j)sx?$/,
         use: ['ts-loader']
       }
-  ],
-},
+    ],
+  },
 };
-
-
 
 module.exports = config;

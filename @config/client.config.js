@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const ContextReplacementPlugin = webpack.ContextReplacementPlugin;
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
@@ -31,7 +30,7 @@ const config = {
     publicPath: '/static/client/',
   },
   resolve: { extensions: ['.ts', '.tsx', '.js', '.jsx'] },
-  devtool: isProduction ? /*'source-map'*/ false : 'eval-source-map',
+  devtool: isProduction ? 'source-map' : 'eval-source-map',
   devServer: {
     compress: true,
     port: 8000,
