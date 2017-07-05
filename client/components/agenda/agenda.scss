@@ -131,6 +131,7 @@ $border-style: 1px solid rgba(1, 1, 1, 0.12);
 }
 
 .agenda-event__summary {
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -330,23 +331,41 @@ $location-pin-size-tablet: 1.5*$vertical-baseline;
   color: $color-primary;
 }
 
-.agenda-event__details-expand-button {
+.agenda-event__expand-details {
   // z-index: 0;
-  // display: block;
+  display: flex;
+  justify-content: center;
+  height: 2*$vertical-baseline;
+  // centered
   // position: absolute;
   // top: 0;
   // left: 0;
   // bottom: 0;
   // right: 0;
-  // padding: $vertical-baseline 0;
-  // margin-top: -$vertical-baseline;
-  font-weight: 600;
-  .details-expand-chevron {
-  height: 3*$vertical-baseline;
-  // width: 4*$vertical-baseline;
-  width: 2*$vertical-baseline;
-  background-image: url("/static/images/chevron-down.svg");
-  background-repeat: no-repeat;
-  background-position: left center;
+  font-weight: 400;
+  color: $color-primary;
+  text-decoration: none !important;
+  .agenda-event__expand-text {
+    display: inline-block;
+    @include sgl-heading(-1);
+    // margin: 0 0 0 4px;
+    margin: 0;
+    .less {
+      display: none;
+    }
   }
+  padding: 0 $agenda-event-right-padding 0 $agenda-event-left-padding;
+  // margin-top: -$vertical-baseline;
+  .agenda-event__expand-chevron {
+    display: block;
+    height: $vertical-baseline;
+    // margin-bottom: $vertical-baseline;
+    // width: 4*$vertical-baseline;
+    width: 1.25*$vertical-baseline;
+    background-image: url("/static/images/chevron-down.svg");
+    background-size: auto 0.8rem;
+    background-repeat: no-repeat;
+    background-position: left center;
+  }
+
 }

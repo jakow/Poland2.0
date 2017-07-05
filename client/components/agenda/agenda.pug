@@ -58,6 +58,11 @@ mixin agenda-event(event, dayMoment)
         .agenda-event__map(data-url=googleMapsEmbedUrl(event.venue.location))
           //- iframe(width="100%" height="100%" frameborder="0" style="border:0" src=googleMapsEmbedUrl(event.venue.location) allowfullscreen)
           .agenda-event__map-loader
+    a(href="#").agenda-event__expand-details
+      span.agenda-event__expand-chevron
+      span.agenda-event__expand-text 
+        span.more Show details
+        span.less Hide details
     +event-permalink(event.slug)
 
 mixin speaker-avatar(speaker)
