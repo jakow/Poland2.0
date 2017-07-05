@@ -1,6 +1,5 @@
 // The maps to define ratios
 // use the map as (numerator: denominator[])
-@import "~spinthatshit/src/loaders";
 
 $predef-ratios: (
   1 : (1,),
@@ -11,7 +10,7 @@ $predef-ratios: (
 $lazy-img-transition-duration: 0.3s;
 $lazy-img-transition: $lazy-img-transition-duration ease-in;
 $blur: 5px;
-$spinner-size: 32px;
+
 
 .lazy-img {
   background: $color-dark;
@@ -70,19 +69,7 @@ $spinner-size: 32px;
 
     }
   }
-  // optional spinner
-  .spinner {
-    @include loader02($size: $spinner-size, $duration: 1s, $align: middle, $color: $color-gray-medium, $border-size: 5px);
-    opacity: 1;
-    transition: visibility 0ms linear;
-    position: absolute;
-    margin-left: -$spinner-size/2;
-    margin-top: -$spinner-size/2;
-    top: 50%;
-    left: 50%;
-    z-index: 2;
 
-  }
 
   &.loaded .spinner {
     transition-delay: $lazy-img-transition-duration;

@@ -37,7 +37,7 @@ Edition.add({
     default: () => new Date().getFullYear()},
   name: {type: String, required: true, initial: true},
   current: {type: Boolean, initial: true},
-  description: {type: Types.Html, wysiwyg: true},
+  description: Types.Html,
   venue: {
   name: { type: String },
   location: {type: Types.Location},

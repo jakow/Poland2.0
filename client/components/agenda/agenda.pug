@@ -52,10 +52,12 @@ mixin agenda-event(event, dayMoment)
         //- | #{event.venue.name} <br> #{event.venue.location}
     //- a(href="#" role="button" title="Show details").agenda-event__details-expand-button
     //-   span Show details
-    .agenda-event__details
-      .agenda-event__description=event.description
-      .agenda-event__map(data-url=googleMapsEmbedUrl(event.venue.location))
-        iframe(width="100%" height="100%" frameborder="0" style="border:0" src=googleMapsEmbedUrl(event.venue.location) allowfullscreen)
+    .agenda-event__details-container
+      .agenda-event__details
+        .agenda-event__description=event.description
+        .agenda-event__map(data-url=googleMapsEmbedUrl(event.venue.location))
+          //- iframe(width="100%" height="100%" frameborder="0" style="border:0" src=googleMapsEmbedUrl(event.venue.location) allowfullscreen)
+          .agenda-event__map-loader
     +event-permalink(event.slug)
 
 mixin speaker-avatar(speaker)
@@ -85,10 +87,13 @@ mixin venue(venue)
           | #{venue.location.suburb}
       div 
         a(href=googleMapsUrl(venue.location) target="_blank").agenda-event__venue-show-map-link
-          span.lnr.lnr-map 
-          span Show on a map
+          //- i.ion-map.left-icon 
+          i.lnr.lnr-map.left-icon
+          span Open a map
 
 mixin event-permalink(slug)
   a(href=`/#event-${slug}` title="Link to this event").agenda-event__permalink
     span.agenda-event__permalink-caption Link to this event 
     span.agenda-event__permalink-icon.lnr.lnr-link
+    //- i.agenda-event__permalink-icon.fa.fa-link
+    //- i.agenda-event__permalink-icon.ion-ios-link

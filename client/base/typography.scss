@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,700&subset=latin-ext');
-@import url(http://weloveiconfonts.com/api/?family=entypo);
+// @import url('https://cdn.jsdelivr.net/font-entypo/0.1/dev/entypo.css');
+// @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
 
 $body-font: 'Source Sans Pro', 'Helvetica Neue', 'Segoe UI', sans-serif;
 $base-font-size: 16px;
@@ -110,21 +112,18 @@ small {
   }
 }
 
-.icon-right {
-  position: relative;
-  &::after {
-    display: inline-block;
-    padding-left: $base-font-size/4;
-    font-family: 'entypo';
-  }
-  &.chevron-right {
-    &::after {
-      // transform: translateY(4%);
-      content: '\e762';
-      // content: '\e876';
-      // font-size: 0.6em;
-    }
-  }
+// entypo icon resets
+[class^="icon-"], [class*=" icon-"] {
+  width: initial;
+  margin: 0 !important;
+}
+
+.right-icon {
+  margin-left: $base-font-size/4;
+}
+
+.left-icon {
+  margin-right: $base-font-size/4;
 }
 
 [class*="entypo-"]:before {
@@ -137,6 +136,10 @@ small {
     font-family: 'entypo';
     padding-right: $base-font-size/4;
   }
+}
+
+[class*="ion-chevron"]:before {
+  font-size: 0.75em;
 }
 
 a {
@@ -198,4 +201,5 @@ a.fat-link {
 
 .lnr {
   line-height: inherit;
+  display: inline-block;
 }

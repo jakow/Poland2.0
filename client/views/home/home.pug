@@ -52,8 +52,9 @@ block content
     .container
       h2.center(style="color: white") Watch the promo video
       if contentControl
-      .promo-video.responsive-video
+      .promo-video.responsive-video.responsive-video--with-loader
         iframe(src="https://www.youtube.com/embed/63glh6e8SSI" frameborder="0" allowfullscreen)
+        .spinner
 
   //- Always guard against missing data!
   //- if contentControl.showSpeakers && speakerCategories
