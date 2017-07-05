@@ -4,8 +4,11 @@ include ../../components/lazy-image/lazy-image
 include ../../components/animated-logo/animated-logo
 include ../../components/banner/banner
 include ../../components/agenda/agenda
+include ../../mixins/googleMapKey
+
 block append scripts
-  script(src=assets("/home.js") defer)
+  script(src=assets("/home.js"))
+  +googleMapKey
 block head
   if (currentEdition)
     script(type="application/ld+json")!=JSON.stringify(linkedData.event(currentEdition, speakers, sponsors, contentControl))

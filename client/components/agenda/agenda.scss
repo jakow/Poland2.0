@@ -3,9 +3,10 @@ $timeline-offset: 16px;
 $agenda-event-top-padding: $vertical-baseline;
 $agenda-event-left-padding: 2*$vertical-baseline;
 $agenda-event-right-padding: $vertical-baseline;
-$map-height: 10*$vertical-baseline;
+$map-height: 14*$vertical-baseline;
 $ornament-width: 18px;
 $ornament-height: $ornament-width/2/0.866;
+$border-style: 1px solid rgba(1, 1, 1, 0.12);
 #agenda {
   padding: $vertical-baseline 0;
   background-color: $color-gray-light;
@@ -45,7 +46,7 @@ $ornament-height: $ornament-width/2/0.866;
 .agenda-days {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 0 $vertical-baseline;
 }
 
 .agenda-day {
@@ -54,6 +55,7 @@ $ornament-height: $ornament-width/2/0.866;
 }
 
 .agenda-day__description {
+  position: relative;
   margin: 0 0 $vertical-baseline;
   padding: 0 $agenda-event-right-padding 0 $agenda-event-left-padding;
   // the circular ornament on the timeline
@@ -69,11 +71,11 @@ $ornament-height: $ornament-width/2/0.866;
     left: $ornament-width/2 - $timeline-thickness/2;
   }
 }
+
 .agenda-day__events {
-  display: flex;
-  flex-direction: column;
   list-style: none;
-  padding: 0 0 $vertical-baseline;
+  padding: 0;
+  // padding: 0 0 $vertical-baseline;
   // margin-top: $vertical-baseline;
   margin-bottom: $vertical-baseline;
 }
@@ -82,13 +84,20 @@ $ornament-height: $ornament-width/2/0.866;
   position: relative;
   margin-bottom: $vertical-baseline;
   background-color: white;
-  padding: $agenda-event-top-padding $agenda-event-right-padding 0 $agenda-event-left-padding;
+  // padding: $agenda-event-top-padding $agenda-event-right-padding 0 $agenda-event-left-padding;
 
-  border: 1px solid rgba(1, 1, 1, 0.12);
+  border: $border-style;
   box-shadow: 0 1px 2px 0 rgba(1, 1, 1, 0.05);
 
   header {
-    margin-bottom: $vertical-baseline;
+    margin: $vertical-baseline 0;
+  }
+
+  // fit the padding 
+  > header, > div {
+    // margin-bottom: $vertical-baseline;
+    padding-right: $agenda-event-right-padding;
+    padding-left: $agenda-event-left-padding;
   }
 
   &::before {
@@ -129,6 +138,8 @@ $ornament-height: $ornament-width/2/0.866;
     flex-direction: row;
   }
 }
+
+
 
 a.agenda-event__permalink {
   position: absolute;
@@ -230,13 +241,13 @@ $avatar-margin: 0;
   display: inline-block;
   // margin-left: 10px;
   @include sgl-heading(1);
-  margin: 0 0 0 10px;
+  margin: 0 0 0 12px;
   // margin-bottom: $vertical-baseline;
 
 }
 
-$location-pin-size: $vertical-baseline;
-$location-pin-size-tablet: 2*$vertical-baseline;
+$location-pin-size: 0.75* $vertical-baseline;
+$location-pin-size-tablet: 1.5*$vertical-baseline;
 .agenda-event__venue {
   @include breakpoint($mobile-landscape) {
     flex: 0 1 33%;
@@ -250,30 +261,70 @@ $location-pin-size-tablet: 2*$vertical-baseline;
   // map marker icon on the left 
 	background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCwgMCwgMzIsIDMyIj48ZyBmaWxsLW9wYWNpdHk9Ii4zOCI+PHBhdGggZD0iTTE1Ljk5OSAzMGEuNy43IDAgMCAxLS41NTEtLjI2N2MtLjA3OS0uMTAzLTEuOTg1LTIuNTQtMy45MTUtNi4xMzktMS4xMzctMi4xMTktMi4wNDQtNC4xOTktMi42OTUtNi4xODNDOC4wMTYgMTQuOTA5IDcuNiAxMi41NSA3LjYgMTAuNCA3LjYgNS43NjkgMTEuMzY5IDIgMTYgMnM4LjQgMy43NjkgOC40IDguNGMwIDIuMTUtLjQxNyA0LjUwOC0xLjIzOCA3LjAxMS0uNjUxIDEuOTg0LTEuNTU4IDQuMDY0LTIuNjk1IDYuMTgzLTEuOTMyIDMuNTk5LTMuODM2IDYuMDM2LTMuOTE1IDYuMTM5YS43LjcgMCAwIDEtLjU1MS4yNjd6bTAtMjYuNmMtMy44NiAwLTcgMy4xNC03IDcgMCA0LjU1NiAyLjA0OCA5LjMzIDMuNzY3IDEyLjUzMWE0OC4wOTMgNDguMDkzIDAgMCAwIDMuMjMzIDUuMTk0IDQ4LjE5OCA0OC4xOTggMCAwIDAgMy4yNDUtNS4yMTZjMS43MTItMy4xOTYgMy43NTUtNy45NjIgMy43NTUtMTIuNTA5IDAtMy44Ni0zLjE0MS03LTctN3oiLz48cGF0aCBkPSJNMTYgMTYuMDQ3YTQuMjA1IDQuMjA1IDAgMCAxLTQuMi00LjJjMC0yLjMxNiAxLjg4NC00LjIgNC4yLTQuMiAyLjMxNiAwIDQuMiAxLjg4NCA0LjIgNC4yIDAgMi4zMTUtMS44ODQgNC4yLTQuMiA0LjJ6bTAtN2EyLjgwMyAyLjgwMyAwIDAgMC0yLjggMi44YzAgMS41NDQgMS4yNTYgMi44IDIuOCAyLjggMS41NDQgMCAyLjgtMS4yNTYgMi44LTIuOCAwLTEuNTQ0LTEuMjU2LTIuOC0yLjgtMi44eiIvPjwvZz48L3N2Zz4=');
   background-repeat: no-repeat;
-  background-position: top left;
-  padding-left: $location-pin-size;
-  background-size: auto $location-pin-size;
+  // background-position: top 0 left;
+  // padding-left: $location-pin-size;
+  // background-size: auto $location-pin-size;
 
-  @include breakpoint($tablet) {
-    padding-left: $location-pin-size-tablet + 1/8*$vertical-baseline;
+  // @include breakpoint($tablet) {
+    background-position: top 0.25*$vertical-baseline left;
+    padding-left: $location-pin-size-tablet + 0.25*$vertical-baseline;
     background-size: auto $location-pin-size-tablet;
-    min-height: $location-pin-size-tablet;
-  }
+    min-height: 2*$vertical-baseline;
+  // }
 }
 
 
 .agenda-event__details {
-  max-height: 0;
+  // max-height: 0;
+  // overflow: hidden;
+  // padding-top: $vertical-baseline;
+  display: flex;
+  flex-direction: column;
+  @include breakpoint($tablet) {
+    flex-direction: row;
+  }
+  > * {
+    flex: 1 0;
+  }
+  transition: max-height 350ms cubic-bezier(0.77, 0, 0.175, 1);
+  border-top: $border-style;
    &.agenda-event__details--expanded {
-     max-height: 100%;
+     max-height: 1000px;
    }
+}
+
+.agenda-event__description {
+  margin: $vertical-baseline 0;
 }
 
 .agenda-event__map {
   // get rid of the container padding
-  margin-left: -$agenda-event-left-padding;
-  width: calc(100% + #{$agenda-event-left-padding + $agenda-event-right-padding});
+  margin: 0 #{-$agenda-event-right-padding} 0 #{-$agenda-event-left-padding};
+  @include breakpoint($tablet) {
+    margin-left: 0;
+  }
+  // width: calc(100% + #{$agenda-event-right-padding});
 
   height: $map-height;
 }
 
+.agenda-event__details-expand-button {
+  // z-index: 0;
+  // display: block;
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+  // bottom: 0;
+  // right: 0;
+  // padding: $vertical-baseline 0;
+  // margin-top: -$vertical-baseline;
+  font-weight: 600;
+  .details-expand-chevron {
+  height: 3*$vertical-baseline;
+  // width: 4*$vertical-baseline;
+  width: 2*$vertical-baseline;
+  background-image: url("/static/images/chevron-down.svg");
+  background-repeat: no-repeat;
+  background-position: left center;
+  }
+}

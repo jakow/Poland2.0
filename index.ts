@@ -57,6 +57,7 @@ if (config.environment === 'production') {
 
 // Locals variables added for each rendered Pug template
 keystone.set('locals', {
+  config, // templates have access to config data
   linkedData,
   env: config.environment,
   utils: keystone.utils,

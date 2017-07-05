@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,700&subset=latin-ext');
-// @import url(http://weloveiconfonts.com/api/?family=entypo);
+@import url(http://weloveiconfonts.com/api/?family=entypo);
 
 $body-font: 'Source Sans Pro', 'Helvetica Neue', 'Segoe UI', sans-serif;
 $base-font-size: 16px;
@@ -115,28 +115,27 @@ small {
   &::after {
     display: inline-block;
     padding-left: $base-font-size/4;
-    // font-family: 'entypo';
-    font-family: 'Linearicons-Free'
+    font-family: 'entypo';
   }
   &.chevron-right {
     &::after {
       // transform: translateY(4%);
-      // content: '\e762';
-      content: '\e876';
-      font-size: 0.6em;
+      content: '\e762';
+      // content: '\e876';
+      // font-size: 0.6em;
     }
   }
 }
 
-.icon-left {
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+}
+
+.icon {
   &::before {
     display: inline-block;
-    font-family: 'Linearicons-Free';
+    font-family: 'entypo';
     padding-right: $base-font-size/4;
-  }
-  &.icon-map::before {
-    content: '\e834';
-    font-size: 0.9em;
   }
 }
 

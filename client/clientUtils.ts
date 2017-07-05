@@ -1,18 +1,11 @@
 import jump from 'jump.js';
-/**
- * Prevent scrolling of non-fixed elements in body.
- * @param prevent True to prevent, false to allow scrolling again
- * deprecated: use overflow: auto;
- */
-// let lastScrollPos = 0;
-export function preventScroll(prevent: boolean = true) {
-  // const container = document.querySelector('.site-container');
-  // if (prevent) {
-  //   container.classList.add('prevent-scroll');
-  // } else {
-  //   container.classList.remove('prevent-scroll');
-  // }
-}
+
+export const Breakpoint = {
+  MOBILE_LANDSCAPE: 512,
+  TABLET: 768,
+  DESKTOP: 1024,
+};
+
 const HEADER_HEIGHT = 4.5 * 16;
 export const JUMP_OPTIONS = {
   duration: (distance: number) => Math.min(Math.abs(distance), 1000),
@@ -48,8 +41,15 @@ export function addHashScroll(anchor: HTMLAnchorElement, callback?: () => void) 
       if (target != null) {
         anchor.addEventListener('click', (e) => {
           e.preventDefault();
+          // add the link to history so it can be copied from the top bar
           history.pushState(null, null, anchor.hash);
-          jump(target, {...JUMP_OPTIONS});
+          // if scrolling DOWN on MOBILE then the top bar will hide if scrolling down so we can
+          // disregard the bar height
+          const isMobile = window.innerWidth < Breakpoint.TABLET;
+          const scrollingDown = target.getBoundingClientRect().top > 0;
+          const offset = isMobile && scrollingDown ? 0 : -HEADER_HEIGHT;
+          const options = {...JUMP_OPTIONS, offset };
+          jump(target, options);
           if (callback) {
             callback();
           }
@@ -70,10 +70,12 @@ export function initHashNavigation() {
     }
   }
   window.addEventListener('popstate', (e) => {
-  console.log('popstate', e);
-  const target = document.querySelector(window.location.hash);
+  const target = document.querySelector(window.location.hash) as HTMLElement;
   if (target) {
-    jump(target, JUMP_OPTIONS);
+    const isMobile = window.innerWidth < Breakpoint.TABLET;
+    const scrollingDown = target.getBoundingClientRect().top > 0;
+    const offset = isMobile && scrollingDown ? 0 : -HEADER_HEIGHT;
+    jump(target, {...JUMP_OPTIONS, offset});
   }
 });
 }

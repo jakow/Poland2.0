@@ -13,9 +13,10 @@ mixin agenda(agenda)
             h3!=ordinalSuperscripts(moment(day.date).format('dddd, Do MMMM'))
             if day.description
               div=day.description
-          ol.agenda-day__events
-            each event in day.events
-              +agenda-event(event, dayMoment)
+          if day.events.length > 0    
+            ol.agenda-day__events
+              each event in day.events
+                +agenda-event(event, dayMoment)
 
 
 
@@ -45,13 +46,16 @@ mixin agenda-event(event, dayMoment)
               +speaker-avatar(speaker)
               span.agenda-event__speaker-name=speaker.name
               
+      
       if event.venue          
         +venue(event.venue)
         //- | #{event.venue.name} <br> #{event.venue.location}
+    //- a(href="#" role="button" title="Show details").agenda-event__details-expand-button
+    //-   span Show details
     .agenda-event__details
-      .agenda-event__description
-      .agenda-event__map
-    //- a(href="#").agenda-event__expand--button
+      .agenda-event__description=event.description
+      .agenda-event__map(data-url=googleMapsEmbedUrl(event.venue.location))
+        iframe(width="100%" height="100%" frameborder="0" style="border:0" src=googleMapsEmbedUrl(event.venue.location) allowfullscreen)
     +event-permalink(event.slug)
 
 mixin speaker-avatar(speaker)
@@ -80,7 +84,9 @@ mixin venue(venue)
         else 
           | #{venue.location.suburb}
       div 
-        a(href=googleMapUrl(venue.location) target="_blank").agenda-event__venue-show-map-link.icon-left.icon-map Show on a map
+        a(href=googleMapsUrl(venue.location) target="_blank").agenda-event__venue-show-map-link
+          span.lnr.lnr-map 
+          span Show on a map
 
 mixin event-permalink(slug)
   a(href=`/#event-${slug}` title="Link to this event").agenda-event__permalink

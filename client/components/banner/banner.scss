@@ -61,6 +61,7 @@
 }
 
 .banner__dateplace {
+  color: $color-gray-dark;
   display: flex;
   flex-direction: column;
   @include breakpoint($tablet) {

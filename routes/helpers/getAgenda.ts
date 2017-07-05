@@ -1,5 +1,5 @@
 import {AgendaEvent, AgendaEventDocument} from '../../models/AgendaEvent';
-import {AgendaDay} from '../../models/AgendaDay';
+import {AgendaDay, AgendaDayDocument} from '../../models/AgendaDay';
 import {EditionDocument, Edition} from '../../models/Edition';
 import {list} from 'keystone';
 import {groupBy} from 'lodash';
@@ -21,12 +21,12 @@ export default async function getAgenda(edition?: EditionDocument): Promise<Agen
     .sort({'time.start': 'ascending'})
     .populate('speakers venue')
     .exec();
-  // assume that lodash groupBy is 'stable', i.e. preserves sort order
 
-  // convert e
-  const days = agendaDays.map( (d) => d.toObject() as AgendaDay);
-  days.forEach( (d) => {
-    d.events = agendaEvents.map( (e) => e.toObject() as AgendaEvent);
+  const days = agendaDays.map( (d) => d.toObject() as AgendaDayDocument);
+  days.forEach((day) => {
+    day.events = agendaEvents
+      .map((ev) => ev.toObject() as AgendaEvent)
+      .filter((ev) => ev.agendaDay.toString() === day._id.toString());
       // .sort( (a, b) => Number(a.time.start) - Number(b.time.start));
   });
   const agenda: Agenda = {
