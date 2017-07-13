@@ -51,11 +51,11 @@ mixin agenda-event(event, dayMoment)
         +venue(event.venue)
     a(href="#" title="Toggle details").agenda-event__expand-details
       span.agenda-event__expand-chevron
-      span.agenda-event__expand-text Details
+      span.agenda-event__expand-text more
     .agenda-event__details-container
       .agenda-event__details
         .agenda-event__description=event.description
-        .agenda-event__map(data-url=googleMapsEmbedUrl(event.venue.location))
+        .agenda-event__map(data-url=googleMapsEmbedUrl(event.venue.location), data-location=JSON.stringify(event.venue.location))
           //- iframe(width="100%" height="100%" frameborder="0" style="border:0" src=googleMapsEmbedUrl(event.venue.location) allowfullscreen)
           .spinner
 
@@ -84,11 +84,11 @@ mixin venue(venue)
           | #{venue.location.suburb}&nbsp;#{venue.location.postcode}<br>
         else 
           | #{venue.location.suburb}
-      //- div 
-      //-   a(href=googleMapsUrl(venue.location) target="_blank").agenda-event__venue-show-map-link
-      //-     //- i.ion-map.left-icon 
-      //-     i.lnr.lnr-map.left-icon
-      //-     span Open a map
+      div 
+        a(href=googleMapsUrl(venue.location) target="_blank").agenda-event__venue-show-map-link
+          //- i.ion-map.left-icon 
+          i.lnr.lnr-map.left-icon
+          span Open a map
 
 mixin event-permalink(slug)
   a(href=`/#event-${slug}` title="Link to this event").agenda-event__permalink

@@ -7,18 +7,19 @@ import {} from '@types/googlemaps';
 let apiLoaded = false;
 let scriptAppended = false;
 const mapsResolves: Array<(maps: typeof google.maps) => void> = [];
+(window as any).initMap = () => {
+  apiLoaded = true;
+  mapsResolves.forEach((resolve) => resolve(google.maps));
+  const map = new google.maps.Map(document.querySelector('.agenda-event__map'));
+};
 export default function googleMapsApiAsync() {
-  (window as any).initMap = () => {
-    apiLoaded = true;
-    mapsResolves.forEach((resolve) => resolve(google.maps));
-  };
   if (apiLoaded) {
     return Promise.resolve(google.maps);
   }
   if (!scriptAppended) {
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${(window as any).GMAP_KEY}&callback=initMap`;
     script.async = true;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${(window as any).GMAP_KEY}&callback=initMap`;
     document.head.appendChild(script);
     scriptAppended = true;
   }

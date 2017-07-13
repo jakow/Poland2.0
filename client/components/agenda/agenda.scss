@@ -1,12 +1,16 @@
 $timeline-thickness: 4px;
-$timeline-offset: 16px;
+// $timeline-offset: 1rem;
+$timeline-offset: 0rem;
+$timeline-offset-tablet: 1rem;
 $agenda-event-top-padding: $vertical-baseline;
-$agenda-event-left-padding: 2*$vertical-baseline;
+$agenda-event-left-padding: $vertical-baseline;
 $agenda-event-right-padding: $vertical-baseline;
 $map-height: 14*$vertical-baseline;
 $ornament-width: 18px;
 $ornament-height: $ornament-width/2/0.866;
 $border-style: 1px solid rgba(1, 1, 1, 0.12);
+$height-transition-duration: 350ms;
+
 #agenda {
   padding: $vertical-baseline 0;
   background-color: $color-gray-light;
@@ -24,6 +28,9 @@ $border-style: 1px solid rgba(1, 1, 1, 0.12);
   top: $ornament-width/2;
   bottom: $ornament-width/2;
   left: calc(#{$timeline-offset} - #{$timeline-thickness/2});
+  @include breakpoint($tablet) {
+    left: calc(#{$timeline-offset-tablet} - #{$timeline-thickness/2});
+  }
   width: $timeline-thickness;
   background-color: $color-primary;
   z-index: 2;
@@ -56,8 +63,12 @@ $border-style: 1px solid rgba(1, 1, 1, 0.12);
 
 .agenda-day__description {
   position: relative;
-  margin: 0 0 $vertical-baseline;
-  padding: 0 $agenda-event-right-padding 0 $agenda-event-left-padding;
+  margin: 0 0 $vertical-baseline $timeline-offset;
+  
+  padding: 0 $agenda-event-right-padding 0 $agenda-event-right-padding;
+  @include breakpoint($tablet) {
+    margin-left: $timeline-offset-tablet;
+  }
   // the circular ornament on the timeline
   &::before {
     content: '';
@@ -66,9 +77,12 @@ $border-style: 1px solid rgba(1, 1, 1, 0.12);
     height: $ornament-width;
     background-color: $color-primary;
     border-radius: 50%;
+    margin-left: $timeline-offset;
     top: calc(#{0.5*$vertical-baseline} - #{0.5*$ornament-width});
     // top: 0;
-    left: $ornament-width/2 - $timeline-thickness/2;
+    // left: $ornament-width/2 - $timeline-thickness/2;
+    left: -$ornament-width/2;
+    // left: 0;
   }
 }
 
@@ -101,13 +115,20 @@ $border-style: 1px solid rgba(1, 1, 1, 0.12);
   > header, > div {
     // margin-bottom: $vertical-baseline;
     padding-right: $agenda-event-right-padding;
-    padding-left: $agenda-event-left-padding;
+    padding-left: $timeline-offset + $agenda-event-left-padding;
+    @include breakpoint($tablet) {
+      padding-left: $timeline-offset-tablet + $agenda-event-left-padding;
+
+    }
   }
 
   &::before {
     content: '';
     position: absolute;
     left: $timeline-offset;
+    @include breakpoint($tablet) {
+      left: $timeline-offset-tablet;
+    }
     top: calc(#{1.5*$vertical-baseline} - #{$timeline-thickness/2});
     height: $timeline-thickness;
     background: $color-primary;
@@ -145,14 +166,12 @@ $border-style: 1px solid rgba(1, 1, 1, 0.12);
 }
 
 
-
 a.agenda-event__permalink {
   z-index: 1;
   position: absolute;
   top: $agenda-event-top-padding;
   right: $agenda-event-right-padding;
   overflow: hidden;
-
   color: $color-gray-medium;
   > * {
     display: inline-block;
@@ -283,26 +302,17 @@ $location-pin-size-tablet: 1.5*$vertical-baseline;
 .agenda-event__details-container {
   overflow: hidden;
   height: 0;
+  will-change: height;
   border-top: 1px solid transparent;
-  transition: border 400ms ease-in-out;
-
-  .agenda-event__details {
-    transition: visibility 0ms linear 400ms;
-    visibility: hidden;
-  }
+  transition: border 350ms ease-in-out;
   .agenda-event--expanded & {
     border-top: $border-style;
     // height: auto;
-    .agenda-event__details {
-      transition-delay: 0;
-      visibility: visible;
-    }
+
   }
 }
 
 .agenda-event__details {
-  // padding-top: $vertical-baseline;
-  height: auto;
   display: flex;
   flex-direction: column;
   @include breakpoint($tablet) {
@@ -311,14 +321,23 @@ $location-pin-size-tablet: 1.5*$vertical-baseline;
   > * {
     flex: 1 0;
   }
+  transition: visibility 0ms linear;
+  transition-delay: 350ms;
+  visibility: hidden;
+  .agenda-event--expanded & {
+    transition-delay: 0ms;
+    visibility: visible;
+  }
 }
 
 .agenda-event__description {
-  margin: $vertical-baseline 0;
+  padding: $vertical-baseline 0;
 }
+
 
 .agenda-event__map {
   position: relative;
+  background-color: rgb(229, 227, 223);
   // get rid of the container padding
   margin: 0 #{-$agenda-event-right-padding} 0 #{-$agenda-event-left-padding};
   @include breakpoint($tablet) {
@@ -358,20 +377,22 @@ $location-pin-size-tablet: 1.5*$vertical-baseline;
     }
   }
   // margin-top: -$vertical-baseline;
-  .agenda-event__expand-chevron {
-    // position: absolute;
-    // right: $agenda-event-right-padding;
-    // top: $agenda-event-top-padding;
-    display: block;
-    height: $vertical-baseline;
-    // margin-bottom: $vertical-baseline;
-    // width: 4*$vertical-baseline;
-    width: $vertical-baseline;
-    background-image: url("/static/images/chevron-down.svg");
-    background-size: auto 0.8rem;
-    background-repeat: no-repeat;
-    background-position: left center;
-    
-  }
 
+
+}
+
+.agenda-event__expand-chevron {
+  display: block;
+  height: $vertical-baseline;
+
+  width: $vertical-baseline;
+  background-image: url("/static/images/chevron-down.svg");
+  background-size: auto 0.8rem;
+  background-repeat: no-repeat;
+  background-position: left center;
+  transition: transform $height-transition-duration*2/3 ease-in-out;
+  .agenda-event--expanded & {
+    transform: rotate(-180deg);
+  }
+  
 }

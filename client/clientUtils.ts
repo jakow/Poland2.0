@@ -6,7 +6,7 @@ export const Breakpoint = {
   DESKTOP: 1024,
 };
 
-const HEADER_HEIGHT = 4.5 * 16;
+export const HEADER_HEIGHT = 4.5 * 16;
 export const JUMP_OPTIONS = {
   duration: (distance: number) => Math.min(Math.abs(distance), 1000),
   offset: -HEADER_HEIGHT,
@@ -24,6 +24,12 @@ export function animatedHashAnchors(callback?: () => void) {
     const anchor = anchors[i];
     addHashScroll(anchor, callback);
   }
+}
+
+export function headerAwareTargetOffset(target: Element) {
+    const isMobile = window.innerWidth < Breakpoint.TABLET;
+    const scrollingDown = target.getBoundingClientRect().top > 0;
+    return isMobile && scrollingDown ? 0 : -HEADER_HEIGHT;
 }
 
 /**
@@ -45,10 +51,8 @@ export function addHashScroll(anchor: HTMLAnchorElement, callback?: () => void) 
           history.pushState(null, null, anchor.hash);
           // if scrolling DOWN on MOBILE then the top bar will hide if scrolling down so we can
           // disregard the bar height
-          const isMobile = window.innerWidth < Breakpoint.TABLET;
-          const scrollingDown = target.getBoundingClientRect().top > 0;
-          const offset = isMobile && scrollingDown ? 0 : -HEADER_HEIGHT;
-          const options = {...JUMP_OPTIONS, offset };
+
+          const options = {...JUMP_OPTIONS, offset: headerAwareTargetOffset(target) };
           jump(target, options);
           if (callback) {
             callback();

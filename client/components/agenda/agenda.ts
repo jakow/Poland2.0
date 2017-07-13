@@ -1,9 +1,12 @@
 // module level variables for determining the state of google api
 import googleMapsApiAsync from '../../mixins/googleMapsApiAsync';
 import anime = require('animejs');
+import jump from 'jump.js';
 import {debounce} from 'lodash';
+import {HEADER_HEIGHT, headerAwareTargetOffset} from '../../clientUtils';
 
 const TRANSITION_DURATION = 350; // ms
+const SCROLL_DURATION = 500; // ms
 const BUTTON_SELECTOR = '.agenda-event__expand-details';
 const DETAILS_CONTAINER_SELECTOR = '.agenda-event__details-container';
 const DETAILS_SELECTOR = '.agenda-event__details';
@@ -47,24 +50,40 @@ export default class Agenda {
   private async expand(el: HTMLElement) {
     const detailsContainer = el.querySelector(DETAILS_CONTAINER_SELECTOR) as HTMLElement;
     const height = this.detailsHeight(detailsContainer);
-    const mapEl = el.querySelector(MAP_SELECTOR);
-    anime({
-      targets: detailsContainer,
-      height,
-      easing: 'easeInOutSine',
-      duration: TRANSITION_DURATION,
-    });
+    const mapEl = el.querySelector(MAP_SELECTOR) as HTMLElement;
+    // add a map if not already added
     if (!el.dataset.hasMap) {
       el.dataset.hasMap = 'true';
       // el.dataset
       // initialise a google map on the element
       // first, wait for the Google Maps API to load
       const maps = await googleMapsApiAsync();
+      const address = JSON.parse(mapEl.dataset.location) as ServerSideAddress;
+      const position = new maps.LatLng(address.geo[1], address.geo[0]);
       const map = new maps.Map(mapEl, {
-        center: new maps.LatLng(-25.363, 131.044),
+        center: position,
         scrollwheel: false,
+        mapTypeId: maps.MapTypeId.ROADMAP,
+        zoomControl: true,
+        zoom: 18,
+      });
+      const marker = new maps.Marker({
+        map,
+        position,
       });
     }
+    // animate height of the element
+    anime({
+      targets: detailsContainer,
+      height,
+      easing: 'easeInOutSine',
+      duration: TRANSITION_DURATION,
+    });
+    const button = el.querySelector(BUTTON_SELECTOR);
+    jump(el, {
+      offset: headerAwareTargetOffset(el),
+      duration: SCROLL_DURATION,
+    });
   }
 
   private close(el: HTMLElement) {
@@ -75,7 +94,11 @@ export default class Agenda {
       easing: 'easeInOutSine',
       duration: TRANSITION_DURATION,
     });
-    console.log('close');
+    // scroll to top
+    jump(el, {
+      offset: headerAwareTargetOffset(el),
+      duration: SCROLL_DURATION,
+    })
   }
 
   private detailsHeight(containerEl: HTMLElement) {
@@ -84,18 +107,30 @@ export default class Agenda {
     return bottom - top;
   }
 
-  private adjustHeight() {
-    const items = document.querySelectorAll(EXPANDED_CLASS);
+  private adjustHeight = () => {
+    const items = document.getElementsByClassName(EXPANDED_CLASS);
     const length = items.length;
     for (let i = 0; i < length; ++i) {
       const item = items[i];
       const detailsContainer = item.querySelector(DETAILS_CONTAINER_SELECTOR) as HTMLElement;
       const height = this.detailsHeight(detailsContainer);
       anime({
-        targets: item,
+        targets: detailsContainer,
         height,
         duration: 1,
       });
     }
   }
+}
+
+interface ServerSideAddress {
+  country: string;
+  name: string;
+  number: number;
+  postcode: string;
+  state: string;
+  street1: string;
+  street2: string;
+  suburb: string;
+  geo: number[];
 }
