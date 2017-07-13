@@ -88,6 +88,10 @@ $border-style: 1px solid rgba(1, 1, 1, 0.12);
 
   border: $border-style;
   box-shadow: 0 1px 2px 0 rgba(1, 1, 1, 0.05);
+  transition: box-shadow 200ms ease-in-out;
+  &:hover {
+    box-shadow: 0 1px 12px 1px rgba(0, 0, 0, 0.18);
+  }
 
   header {
     margin: $vertical-baseline 0;
@@ -143,6 +147,7 @@ $border-style: 1px solid rgba(1, 1, 1, 0.12);
 
 
 a.agenda-event__permalink {
+  z-index: 1;
   position: absolute;
   top: $agenda-event-top-padding;
   right: $agenda-event-right-padding;
@@ -285,7 +290,7 @@ $location-pin-size-tablet: 1.5*$vertical-baseline;
     transition: visibility 0ms linear 400ms;
     visibility: hidden;
   }
-  &.agenda-event__details-container--expanded {
+  .agenda-event--expanded & {
     border-top: $border-style;
     // height: auto;
     .agenda-event__details {
@@ -306,10 +311,6 @@ $location-pin-size-tablet: 1.5*$vertical-baseline;
   > * {
     flex: 1 0;
   }
-
-   &.agenda-event__details--expanded {
-     max-height: 1000px;
-   }
 }
 
 .agenda-event__description {
@@ -317,6 +318,7 @@ $location-pin-size-tablet: 1.5*$vertical-baseline;
 }
 
 .agenda-event__map {
+  position: relative;
   // get rid of the container padding
   margin: 0 #{-$agenda-event-right-padding} 0 #{-$agenda-event-left-padding};
   @include breakpoint($tablet) {
@@ -332,10 +334,11 @@ $location-pin-size-tablet: 1.5*$vertical-baseline;
 }
 
 .agenda-event__expand-details {
-  // z-index: 0;
+  z-index: 0;
+
   display: flex;
   justify-content: center;
-  height: 2*$vertical-baseline;
+  // height: 2*$vertical-baseline;
   // centered
   // position: absolute;
   // top: 0;
@@ -344,28 +347,31 @@ $location-pin-size-tablet: 1.5*$vertical-baseline;
   // right: 0;
   font-weight: 400;
   color: $color-primary;
+  padding: 0 $agenda-event-right-padding $vertical-baseline $agenda-event-left-padding;
   text-decoration: none !important;
   .agenda-event__expand-text {
     display: inline-block;
     @include sgl-heading(-1);
-    // margin: 0 0 0 4px;
-    margin: 0;
+    margin: 0 0 0 4px;
     .less {
       display: none;
     }
   }
-  padding: 0 $agenda-event-right-padding 0 $agenda-event-left-padding;
   // margin-top: -$vertical-baseline;
   .agenda-event__expand-chevron {
+    // position: absolute;
+    // right: $agenda-event-right-padding;
+    // top: $agenda-event-top-padding;
     display: block;
     height: $vertical-baseline;
     // margin-bottom: $vertical-baseline;
     // width: 4*$vertical-baseline;
-    width: 1.25*$vertical-baseline;
+    width: $vertical-baseline;
     background-image: url("/static/images/chevron-down.svg");
     background-size: auto 0.8rem;
     background-repeat: no-repeat;
     background-position: left center;
+    
   }
 
 }

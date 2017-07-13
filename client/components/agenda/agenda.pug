@@ -26,6 +26,7 @@ mixin agenda-event(event, dayMoment)
   - const endDate = moment.utc(event.time.end);
   - const endTime = endDate.format('H:mm');
   li.agenda-event(id=`event-${event.slug}`)
+    +event-permalink(event.slug)
     header
       //- div=JSON.stringify(event)
       .agenda-event__time-and-type
@@ -37,7 +38,6 @@ mixin agenda-event(event, dayMoment)
         //- ${endDate.toISOString()}`)=`${startTime}–${endTime}`
         .agenda-event__type=event.type
       h4.agenda-event__name=event.name
-
     .agenda-event__summary
       if event.speakers
         ul.agenda-event__speaker-list
@@ -49,21 +49,15 @@ mixin agenda-event(event, dayMoment)
       
       if event.venue          
         +venue(event.venue)
-        //- | #{event.venue.name} <br> #{event.venue.location}
-    //- a(href="#" role="button" title="Show details").agenda-event__details-expand-button
-    //-   span Show details
+    a(href="#" title="Toggle details").agenda-event__expand-details
+      span.agenda-event__expand-chevron
+      span.agenda-event__expand-text Details
     .agenda-event__details-container
       .agenda-event__details
         .agenda-event__description=event.description
         .agenda-event__map(data-url=googleMapsEmbedUrl(event.venue.location))
           //- iframe(width="100%" height="100%" frameborder="0" style="border:0" src=googleMapsEmbedUrl(event.venue.location) allowfullscreen)
-          .agenda-event__map-loader
-    a(href="#").agenda-event__expand-details
-      span.agenda-event__expand-chevron
-      span.agenda-event__expand-text 
-        span.more Show details
-        span.less Hide details
-    +event-permalink(event.slug)
+          .spinner
 
 mixin speaker-avatar(speaker)
   +lazy-image(
@@ -90,11 +84,11 @@ mixin venue(venue)
           | #{venue.location.suburb}&nbsp;#{venue.location.postcode}<br>
         else 
           | #{venue.location.suburb}
-      div 
-        a(href=googleMapsUrl(venue.location) target="_blank").agenda-event__venue-show-map-link
-          //- i.ion-map.left-icon 
-          i.lnr.lnr-map.left-icon
-          span Open a map
+      //- div 
+      //-   a(href=googleMapsUrl(venue.location) target="_blank").agenda-event__venue-show-map-link
+      //-     //- i.ion-map.left-icon 
+      //-     i.lnr.lnr-map.left-icon
+      //-     span Open a map
 
 mixin event-permalink(slug)
   a(href=`/#event-${slug}` title="Link to this event").agenda-event__permalink

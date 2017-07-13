@@ -14,7 +14,8 @@
         "experimentalDecorators": true,
         "noFallthroughCasesInSwitch": true,
         "typeRoots": ["./node_modules/@types"],
-        "diagnostics": true
+        "diagnostics": true,
+        "downlevelIteration": true
     },
     "include": [
       "**/*"

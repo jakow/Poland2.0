@@ -54,10 +54,8 @@ export default class Menu {
 
   public toggle() {
     if (this.openState) {
-      console.log('close');
       this.close();
     } else {
-      console.log('open');
       this.open();
     }
   }

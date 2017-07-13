@@ -1,3 +1,7 @@
+/*
+ * Obtain a handle to google maps API using async-await
+ * Assumes that a global GMAP_KEY exists in the document
+ */
 import {} from '@types/googlemaps';
 
 let apiLoaded = false;

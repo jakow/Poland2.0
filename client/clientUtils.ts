@@ -62,7 +62,8 @@ export function addHashScroll(anchor: HTMLAnchorElement, callback?: () => void) 
 }
 
 export function initHashNavigation() {
-  if (location.hash) {
+  // initial jump to the hash
+  if (location.hash && location.hash.length > 1) {
     // jump(document.querySelector(location.hash), {offset: -HEADER_HEIGHT, durat});
     const target = document.querySelector(location.hash) as HTMLElement;
     if (target) {
@@ -70,15 +71,18 @@ export function initHashNavigation() {
     }
   }
   window.addEventListener('popstate', (e) => {
-  const target = document.querySelector(window.location.hash) as HTMLElement;
-  if (target) {
-    const isMobile = window.innerWidth < Breakpoint.TABLET;
-    const scrollingDown = target.getBoundingClientRect().top > 0;
-    const offset = isMobile && scrollingDown ? 0 : -HEADER_HEIGHT;
-    jump(target, {...JUMP_OPTIONS, offset});
-  }
-});
+    e.preventDefault();
+    const hash = window.location.hash;
+    if (hash.length === 1) {
+      // do not jump to '#' target, it is invalid
+      return;
+    }
+    const target = document.querySelector(hash) as HTMLElement;
+    if (target) {
+      const isMobile = window.innerWidth < Breakpoint.TABLET;
+      const scrollingDown = target.getBoundingClientRect().top > 0;
+      const offset = isMobile && scrollingDown ? 0 : -HEADER_HEIGHT;
+      jump(target, {...JUMP_OPTIONS, offset});
+    }
+  });
 }
-
-
-
