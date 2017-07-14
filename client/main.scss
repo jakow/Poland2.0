@@ -40,21 +40,24 @@ $site-padding: 1rem;
 @import 'mixins/angled-edge';
 @import 'mixins/parallax';
 
+// global layouts
 @import 'layout/header/header';
 @import 'layout/footer/footer';
 @import 'layout/nav/nav';
 @import 'layout/menu/menu';
 @import 'layout/loader/loader';
 @import 'layout/footer/footer';
-@import 'components/button/button';
 @import 'components/banner/banner';
 @import 'components/spinner/spinner';
 @import 'components/lazy-image/lazy-image';
 @import 'components/card/card';
-@import 'components/speakers/speakers';
+@import 'components/button/button';
+@import 'components/form/form';
 @import 'components/agenda/agenda';
 @import 'components/animated-logo/animated-logo';
 @import 'components/responsive-video/responsive-video';
+// page layouts
+@import 'layout/speakers/speakers';
 
 @import 'views/home/home';
 

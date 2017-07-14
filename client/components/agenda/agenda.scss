@@ -19,6 +19,13 @@ $height-transition-duration: 350ms;
   position: relative;
   margin-bottom: $vertical-baseline;
 }
+.agenda__heading {
+  z-index: 2;
+  text-align: center;
+  @include breakpoint($tablet) {
+    // margin-bottom: -4*$vertical-baseline;
+  }
+}
 .agenda__timeline {
 
   position: absolute;
@@ -55,6 +62,9 @@ $height-transition-duration: 350ms;
 
 .agenda-day {
   margin-bottom: $vertical-baseline;
+  h3 {
+    margin-top: 0;
+  }
 
 }
 

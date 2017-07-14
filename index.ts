@@ -21,7 +21,7 @@ keystone.init({
   'auth': true,
   'auto update': true,
   'updates': path.resolve(config.rootDir, 'updates'),
-  'brand': 'Poland 2.0',
+  'brand': 'Poland 2.0 Summit',
   'name': 'Poland 2.0',
   'favicon': path.join(config.publicDir, 'images/favicons/favicon.ico'),
   'signin logo': '../static/images/logo.svg',

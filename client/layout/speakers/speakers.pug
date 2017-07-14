@@ -1,14 +1,14 @@
-include ../card/card
+include ../../components/card/card
 
 mixin speakers(speakerCategories)
   section#speakers
     .speakers-bg#speakers-bg-image
-    .speakers-bg#speakers-bg-gradient
+      .speakers-bg#speakers-bg-gradient
     .container
       .center
-        h2.fat-heading.center Speakers
+        h2.bold.fat-heading.heading-stripe Speakers
       each category in speakerCategories 
-        h3=category.name
+        h3.fat-heading.center=category.displayName
         ul.speaker-list
           each speaker in category.speakers
             li

@@ -37,6 +37,14 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
+input, textarea, select, button {
+  line-height: $vertical-baseline;
+  font-size: $base-font-size;
+  font-family: $body-font;
+  color: $color-dark;
+  font-weight: 300;
+}
+
 
 h1 {
   @include sgl-heading(3);
@@ -103,6 +111,11 @@ small {
     margin-bottom: $vertical-baseline;
   }
 }
+
+// ::selection {
+//   background-color: $color-primary;
+//   color: white;
+// }
 
 // utility classes for responsive typography
 
@@ -198,6 +211,7 @@ a.fat-link {
 
 .center {
   text-align: center;
+  justify-content: center;
 }
 
 .lnr {
@@ -205,12 +219,23 @@ a.fat-link {
   display: inline-block;
 }
 
-$underline-height: 7px;
-h2.fat-heading {
-  @include sgl-heading(3);
+.bold {
   font-weight: 600;
-  display: inline-block;
+}
+
+@for $i from 1 to 6 {
+ h#{$i}.fat-heading {
+    @include sgl-heading(4 + 1 - $i);
+ }
+
+}
+
+
+$underline-height: 7px;
+.heading-stripe {
   position: relative;
+  display: inline-block;
+  vertical-align: top;
   &::before {
     content: '';
     width: 100%;

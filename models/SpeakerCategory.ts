@@ -6,6 +6,7 @@ export interface SpeakerCategory {
   name: string;
   displayName: string;
   edition: keystone.Schema.Relationship;
+  moreToCome: boolean;
 }
 
 export interface SpeakerCategoryDocument extends mongoose.Document, SpeakerCategory {}
@@ -20,6 +21,7 @@ SpeakerCategory.add({
   name: { type: String, required: true },
   displayName: {type: String, required: true, initial: true},
   edition: {type: Types.Relationship, ref: 'Edition', many: true},
+  moreToCome: {type: Boolean, label: 'More speakers to come?'},
 });
 
 SpeakerCategory.relationship({path: 'speakers', ref: 'Speaker', refPath: 'speakerCategory'});

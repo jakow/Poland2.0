@@ -2,20 +2,24 @@
   background-color: $color-gray-light; 
   position: relative;
   padding: $vertical-baseline 0;
+  h3 {
+    margin-top: 0;
+  }
 
 }
-
 .speakers-bg {
   position: absolute;
-  bottom: 0;
   width: 100%;
-  padding-top: 66.7%;
+  bottom: 0;
 }
+
 #speakers-bg-gradient {
   background: linear-gradient(180deg, #{$color-gray-light}, #{transparentize($color-gray-light, 0.85)});
+  padding-top: 66.7%;
 }
 #speakers-bg-image, {
-
+  overflow: hidden;
+  top: 0;
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-position: bottom;

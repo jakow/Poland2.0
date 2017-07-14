@@ -1,5 +1,5 @@
 import {RequestHandler} from 'express';
-import {View, list} from 'keystone';
+import {View, list, get} from 'keystone';
 
 import {EditionDocument} from '../../models/Edition';
 import {SpeakerCategory} from '../../models/SpeakerCategory';
@@ -32,10 +32,14 @@ export const home: RequestHandler = async (req, res, next) => {
 
     // set page title
     // if !currentEdition || !currentEdition.dateString
-    if (!currentEdition.dateString || !currentEdition.venue.name) {
-      res.locals.title = 'Poland 2.0 Summit';
+    if (!currentEdition) {
+      res.locals.title = get('brand');
+    }
+    if (!currentEdition.caption) {
+      res.locals.title = currentEdition.name;
     } else {
-    res.locals.title = `${currentEdition.name} | ${currentEdition.dateString}, ${currentEdition.venue.name}`;
+    // res.locals.title = `${currentEdition.name} | ${currentEdition.dateString}, ${currentEdition.venue.name}`;
+    res.locals.title = `${currentEdition.name} — ${currentEdition.caption}`;
     }
   }
 

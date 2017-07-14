@@ -4,8 +4,9 @@ include ../../components/lazy-image/lazy-image
 include ../../components/animated-logo/animated-logo
 include ../../components/banner/banner
 include ../../components/agenda/agenda
-include ../../components/speakers/speakers
-include ../../mixins/googleMapKey
+include ../../layout/speakers/speakers
+include ../../mixins/google-map-key
+include ../../layout/contact-form/contact-form
 
 block append scripts
   script(src=assets("/home.js"))
@@ -81,6 +82,9 @@ block content
   //-     'https://placehold.it/500x500',
   //-     '1:1', 'scroll')(alt='This is an image')
 
-        
+  section#contact(style="background: #112233; padding: 1.5rem 0;")
+    .container
+      +contact-form#contact-form1
+
 
     //- p= JSON.stringify(speakers)

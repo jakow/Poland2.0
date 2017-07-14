@@ -1,8 +1,8 @@
 include ../../components/lazy-image/lazy-image
 
 mixin agenda(agenda)
-  .center
-    h2.fat-heading.center Agenda
+  .agenda__heading
+    h2.bold.fat-heading.heading-stripe Agenda
   .agenda
     .agenda__timeline
     ol.agenda-days
@@ -11,6 +11,7 @@ mixin agenda(agenda)
         - const dayMoment = moment.utc(day.date);
         li.agenda-day
           header.agenda-day__description
+            //- ordinalSuperscripts => add superscript to numbers like '19th'
             h3!=ordinalSuperscripts(moment(day.date).format('dddd, Do MMMM'))
             if day.description
               div=day.description

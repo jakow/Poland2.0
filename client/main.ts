@@ -6,6 +6,7 @@ import jump from 'jump.js';
 import Loader from './layout/loader/loader';
 import Menu from './layout/menu/menu';
 import * as lazyImages from './components/lazy-image/lazy-image';
+import initForms from './components/form/form';
 import './main.scss';
 import {animatedHashAnchors, initHashNavigation, JUMP_OPTIONS} from './clientUtils';
 
@@ -34,4 +35,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   animatedHashAnchors(() => { if (menu.isOpen) { menu.close(); }});
   initHashNavigation();
+  initForms();
 });

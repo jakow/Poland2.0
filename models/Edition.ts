@@ -8,6 +8,7 @@ export interface Edition {
   name: string;
   current: boolean;
   description: string;
+  caption: string;
   venue: {
     name: string;
     location: keystone.Schema.Location;
@@ -38,9 +39,10 @@ Edition.add({
   name: {type: String, required: true, initial: true},
   current: {type: Boolean, initial: true},
   description: Types.Html,
+  caption: String,
   venue: {
-  name: { type: String },
-  location: {type: Types.Location},
+    name: { type: String },
+    location: {type: Types.Location},
   },
   date: {
     start: {type: Date, label: 'Start date (UTC)', utc: true},
