@@ -1,0 +1,58 @@
+#speakers {
+  background-color: $color-gray-light; 
+  position: relative;
+  padding: $vertical-baseline 0;
+
+}
+
+.speakers-bg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-top: 66.7%;
+}
+#speakers-bg-gradient {
+  background: linear-gradient(180deg, #{$color-gray-light}, #{transparentize($color-gray-light, 0.85)});
+}
+#speakers-bg-image, {
+
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: url(https://res.cloudinary.com/dg1royeho/image/upload/v1500036070/DSC_0361n_desaturated_mhcrqh.jpg);
+}
+ul.speaker-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  margin: 0 0 $vertical-baseline;
+  padding: 0;
+  align-items: stretch;
+
+  li {
+    flex: 1 0 auto;
+    margin-bottom: $vertical-baseline;
+    display: flex;
+    justify-content: center;
+    > * {
+      flex: none;
+    }
+  }
+}
+
+.speaker-card {
+  margin: 0 4px;
+  @include breakpoint($tablet) {
+    margin: 0 12px;
+  }
+}
+
+.speaker-card__content {
+  text-align: center;
+}
+.speaker-card__name {
+  @include sgl-heading(1);
+  font-weight: 400;
+  margin: 0;
+}

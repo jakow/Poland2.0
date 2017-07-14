@@ -4,6 +4,7 @@ include ../../components/lazy-image/lazy-image
 include ../../components/animated-logo/animated-logo
 include ../../components/banner/banner
 include ../../components/agenda/agenda
+include ../../components/speakers/speakers
 include ../../mixins/googleMapKey
 
 block append scripts
@@ -64,6 +65,9 @@ block content
   //-       //- img(src=speaker.photo.url, style="height: 25rem")
   //-       h2=speaker.name
   //-       +lazy-cl-image(speaker.photo,  400, '1:1', 'scroll')(style="max-width: 240px" alt=`Photo of ${speaker.name}`)
+  
+  if contentControl.showSpeakers && speakerCategories
+    +speakers(speakerCategories)
 
   if contentControl.showAgenda && agenda
     section#agenda

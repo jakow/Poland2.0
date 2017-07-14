@@ -3,8 +3,8 @@ $timeline-thickness: 4px;
 $timeline-offset: 0rem;
 $timeline-offset-tablet: 1rem;
 $agenda-event-top-padding: $vertical-baseline;
-$agenda-event-left-padding: $vertical-baseline;
-$agenda-event-right-padding: $vertical-baseline;
+$agenda-event-left-padding: 1.25rem;
+$agenda-event-right-padding: 1.25rem;
 $map-height: 14*$vertical-baseline;
 $ornament-width: 18px;
 $ornament-height: $ornament-width/2/0.866;
@@ -14,9 +14,6 @@ $height-transition-duration: 350ms;
 #agenda {
   padding: $vertical-baseline 0;
   background-color: $color-gray-light;
-  h2 {
-    text-align: center;
-  }
 }
 .agenda {
   position: relative;
@@ -132,7 +129,7 @@ $height-transition-duration: 350ms;
     top: calc(#{1.5*$vertical-baseline} - #{$timeline-thickness/2});
     height: $timeline-thickness;
     background: $color-primary;
-    width: 16px;
+    width: 12px;
   }
 }
 

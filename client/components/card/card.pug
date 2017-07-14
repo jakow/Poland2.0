@@ -1,0 +1,8 @@
+include ../lazy-image/lazy-image
+
+mixin card(img, imgPlaceholder, imgRatio = '1:1')
+  .card(class=attributes.class)
+    .card__image
+      +lazy-image(img, imgPlaceholder, imgRatio)(alt=attributes.alt)
+    .card__content
+      block

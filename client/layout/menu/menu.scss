@@ -17,11 +17,19 @@ $menu-item-transition: cubic-bezier(0.55, 0.055, 0.675, 0.19) 150ms;
     overflow: scroll;
     height: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     list-style: none;
     margin: 0 0 $vertical-baseline;
     padding: $vertical-baseline 0;
+  }
+  li {
+    text-align: center;
+    flex: 1 0 100%;
+    @include breakpoint($landscape) {
+      flex: 1 0 50%;
+    }
   }
   a {
     display: inline-block;

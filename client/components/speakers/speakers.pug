@@ -1,0 +1,29 @@
+include ../card/card
+
+mixin speakers(speakerCategories)
+  section#speakers
+    .speakers-bg#speakers-bg-image
+    .speakers-bg#speakers-bg-gradient
+    .container
+      .center
+        h2.fat-heading.center Speakers
+      each category in speakerCategories 
+        h3=category.name
+        ul.speaker-list
+          each speaker in category.speakers
+            li
+              +speakerCard(speaker)
+
+
+
+mixin speakerCard(speaker)
+  
+    - const largeImg = imgTransform.limit(speaker.photo.secure_url, 400);
+    - const smallImg = imgTransform.limit(speaker.photo.secure_url, 32);
+    +card(largeImg, smallImg)(alt=`Photo of ${speaker.name}`).speaker-card
+      .speaker-card__content 
+        .speaker-card__name=speaker.name
+        .speaker-card__position=speaker.position
+        if speaker.company
+          .speaker-card__organization=speaker.company
+          

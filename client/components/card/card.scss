@@ -1,0 +1,33 @@
+$card-border-style: 1px solid rgba(1, 1, 1, 0.12);
+$card-shadow-style: 0 1px 2px 0 rgba(1, 1, 1, 0.05);
+$small-mobile: (orientation portrait) (max-width 400px);
+
+.card {
+  display: flex;
+  flex-direction: column;
+  @include breakpoint($small-mobile) {
+    width: 9*$vertical-baseline;
+  }
+  width: 6*$vertical-baseline;
+  @include breakpoint($mobile-landscape) {
+    width: 8* $vertical-baseline;
+  }
+  @include breakpoint($tablet) {
+    width: 10 * $vertical-baseline;
+  }
+  overflow: hidden;
+
+
+  // styling
+  border: $card-border-style;
+  box-shadow: $card-shadow-style;
+  background-color: white;
+}
+
+.card__image {
+  border-bottom: $card-border-style;
+}
+
+.card__content {
+  padding: $vertical-baseline 1rem;
+}

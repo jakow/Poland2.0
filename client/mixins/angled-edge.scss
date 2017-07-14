@@ -17,6 +17,7 @@ $default-angled-edge-elems: (
   transform: translate(0,0);
   z-index: 2;
   &::#{$pseudo-element} {
+
     content: '';
     z-index: -1;
     background: inherit;
@@ -24,6 +25,7 @@ $default-angled-edge-elems: (
     display: block;
     width: 100%;
     height: 100%;
+    backface-visibility: hidden;
     // top: 0;
     // bottom: 0;
     // left: 0;

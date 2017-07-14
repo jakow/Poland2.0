@@ -50,27 +50,10 @@ export default class Agenda {
   private async expand(el: HTMLElement) {
     const detailsContainer = el.querySelector(DETAILS_CONTAINER_SELECTOR) as HTMLElement;
     const height = this.detailsHeight(detailsContainer);
-    const mapEl = el.querySelector(MAP_SELECTOR) as HTMLElement;
+
     // add a map if not already added
     if (!el.dataset.hasMap) {
-      el.dataset.hasMap = 'true';
-      // el.dataset
-      // initialise a google map on the element
-      // first, wait for the Google Maps API to load
-      const maps = await googleMapsApiAsync();
-      const address = JSON.parse(mapEl.dataset.location) as ServerSideAddress;
-      const position = new maps.LatLng(address.geo[1], address.geo[0]);
-      const map = new maps.Map(mapEl, {
-        center: position,
-        scrollwheel: false,
-        mapTypeId: maps.MapTypeId.ROADMAP,
-        zoomControl: true,
-        zoom: 18,
-      });
-      const marker = new maps.Marker({
-        map,
-        position,
-      });
+      this.addMap(el);
     }
     // animate height of the element
     anime({
@@ -79,7 +62,7 @@ export default class Agenda {
       easing: 'easeInOutSine',
       duration: TRANSITION_DURATION,
     });
-    const button = el.querySelector(BUTTON_SELECTOR);
+
     jump(el, {
       offset: headerAwareTargetOffset(el),
       duration: SCROLL_DURATION,
@@ -98,7 +81,36 @@ export default class Agenda {
     jump(el, {
       offset: headerAwareTargetOffset(el),
       duration: SCROLL_DURATION,
-    })
+    });
+  }
+
+  private async addMap(el: HTMLElement) {
+    // el.dataset
+    // initialise a google map on the element
+    // first, wait for the Google Maps API to load
+    try {
+      const mapEl = el.querySelector(MAP_SELECTOR) as HTMLElement;
+      const maps = await googleMapsApiAsync();
+      const address = JSON.parse(mapEl.dataset.location) as ServerSideAddress;
+      const position = new maps.LatLng(address.geo[1], address.geo[0]);
+      const map = new maps.Map(mapEl, {
+        center: position,
+        scrollwheel: false,
+        mapTypeId: maps.MapTypeId.ROADMAP,
+        zoomControl: true,
+        zoom: 17,
+      });
+      const marker = new maps.Marker({
+        map,
+        position,
+      });
+      el.dataset.hasMap = 'true';
+    } catch (e) {
+      // show a toast or sth
+      // map will remain in loading state, maybe add an 'X'
+      console.error('Failed to show map');
+      // and retry next time
+    }
   }
 
   private detailsHeight(containerEl: HTMLElement) {

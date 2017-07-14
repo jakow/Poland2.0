@@ -89,9 +89,7 @@ export default class Menu {
   }
 
   private calculateDimensions = () => {
-    console.log('[menu] calculate dimensions');
-    // grab dimensions only once to improve performance since this
-    // rarely will change (especially on mobile)
+    // console.log('[menu] calculate dimensions');
     const windowCenterY = window.innerHeight / 2;
     const windowCenterX = window.innerWidth / 2;
     // 1.25 multiplier adds some margin to account for changing
