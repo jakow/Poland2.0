@@ -27,10 +27,28 @@ fieldset {
   &:first-child {
     border-top: none;
   }
+  .button {
+    width: 100%;
+    @include breakpoint($tablet) {
+      width: initial;
+    }
+    border-radius: 0;
+    margin: 0;
+    // margin: -1px;
+  }
+
+  .button.button--primary {
+    // use box shadow to hide lines!
+    box-shadow: 0px 0px 0px 1px $color-primary;
+    &:hover {
+      box-shadow: 0px 0px 0px 1px darken($color-primary, 5%);
+    }
+  }
 }
 
 .form-field {
-  // height: $field-height;
+  flex: 1 0 100%;
+  position: relative;
   background: white;
   p {
     margin: 0.75rem 1.5rem;
@@ -101,44 +119,11 @@ fieldset {
     }
   }
 
-}
-
-
-
-
-
-.form-row {
   background: white;
-  .button {
-    width: 100%;
-    @include breakpoint($tablet) {
-      width: initial;
-    }
-    border-radius: 0;
-    margin: 0;
-    // margin: -1px;
-  }
-  .button.button--primary {
-    // border: 1px solid $color-primary;
-    // use box shadow to hide lines!
-    box-shadow: 0px 0px 0px 1px $color-primary;
-    &:hover {
-      box-shadow: 0px 0px 0px 1px darken($color-primary, 5%);
-    }
-    
-    // margin: 0;
-    // box-shadow: none;
-  }
-}
-
-
-.form-field {
-  flex: 1 0 100%;
-  position: relative;
   border-top: $form-border-style;
   &:first-child {
-      border-top: none;
-    }
+    border-top: none;
+  }
   @include breakpoint($tablet) {
     border-top: none;
     border-left: $form-border-style;

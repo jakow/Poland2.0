@@ -9,7 +9,9 @@ mixin contact-form
         +form-field(id, 'company', 'company', 'text')(size=6)
         +form-field(id, 'phone', 'phone (incl. country code)', 'tel')(size=6)
       .form-row
-        +form-field(id, 'your-question', 'your question', 'textarea')(size=12)
+        +form-field(id, 'subject', 'subject', 'text')(size=12)
+      .form-row
+        +form-field(id, 'question', 'your question', 'textarea')(size=12)
       .form-row.form-row--right-aligned
         .form-field.form-field--shrink
           p Fields marked with &lsquo;*&rsquo;	 are required.
