@@ -108,7 +108,7 @@ $height-transition-duration: 350ms;
   // padding: $agenda-event-top-padding $agenda-event-right-padding 0 $agenda-event-left-padding;
 
   border: $border-style;
-  box-shadow: 0 1px 2px 0 rgba(1, 1, 1, 0.05);
+  box-shadow: $feather-shadow;
   transition: box-shadow 200ms ease-in-out;
   &:hover {
     box-shadow: 0 1px 12px 1px rgba(0, 0, 0, 0.18);

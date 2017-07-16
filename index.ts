@@ -23,7 +23,7 @@ keystone.init({
   'updates': path.resolve(config.rootDir, 'updates'),
   'brand': 'Poland 2.0 Summit',
   'name': 'Poland 2.0',
-  'favicon': path.join(config.publicDir, 'images/favicons/favicon.ico'),
+  'favicon': path.join(config.staticDir, 'images/favicons/favicon.ico'),
   'signin logo': '../static/images/logo.svg',
   'user model': 'User',
   'host': config.host,
@@ -43,7 +43,7 @@ keystone.init({
   'default region': 'gb',
 });
 
-app.use(config.staticRoot, serveStatic(config.publicDir, config.staticOptions));
+app.use(config.staticRoot, serveStatic(config.staticDir, config.staticOptions));
 if (config.environment === 'production') {
   app.use(config.clientRoot, serveStatic(config.clientDir, config.staticOptions));
   // external, mongo-based session store. Built in store apparently leaks memory so needs to be replaced.

@@ -6,13 +6,24 @@ const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 const nodeExternals = require('webpack-node-externals');
 const AssetsPlugin = require('assets-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
+console.log(path.resolve());
+
+const postcssPlugins = (loader) => ([
+  require('autoprefixer')(),
+  require('postcss-assets')(),
+]);
 
 const cssLoaders = [
-  'css-loader',
-  {loader: 'postcss-loader', options: {
-    plugins: () => [require('autoprefixer')]
-  }}, 
-  'sass-loader',
+  // {loader:'style-loader', options: {sourceMap: true}},
+  {loader:'css-loader', options: {sourceMap: true}},
+  {
+    loader:'postcss-loader',  
+    options: {
+      sourceMap: true, 
+      plugins: postcssPlugins,
+    },
+  },
+  {loader:'sass-loader', options: {sourceMap: true}},
 ];
 
 // root build directory for the SERVER. Client is in /client/
@@ -55,17 +66,14 @@ const config = {
     },
     {
       test: /\.s?css$/,
-      use: isProduction ? ExtractTextPlugin.extract({fallback:'style-loader', use: cssLoaders}) : 
-        ['style-loader', ...cssLoaders],
+      use: isProduction ? 
+        ExtractTextPlugin.extract({fallback:'style-loader', use: cssLoaders, sourceMap: true}) : 
+        [{loader:'style-loader', options: {sourceMap: true}}, ...cssLoaders],
     }
     ],
     
   },
-  plugins: [
-    // core plugins which are always used
-    // currently empty
-    // and production only plugins
-    ... isProduction ? [
+  plugins: isProduction ? [
       new webpack.DefinePlugin({
         'process.env': {'NODE_ENV': JSON.stringify('production')}
       }),
@@ -78,7 +86,6 @@ const config = {
         filename: 'assets.json',
       }),
     ] : []
-  ]
 };
 
 module.exports = config;

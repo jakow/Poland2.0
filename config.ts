@@ -10,7 +10,7 @@ const isBuild = path.basename(__dirname) === 'build';
 
 export const rootDir = '.';
 
-export const publicDir = path.resolve(rootDir, 'public');
+export const staticDir = path.resolve(rootDir, 'static');
 
 export const buildDir = path.resolve(rootDir, 'build');
 

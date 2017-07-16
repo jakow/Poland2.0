@@ -9,12 +9,14 @@ mixin contact-form
         +form-field(id, 'company', 'company', 'text')(size=6)
         +form-field(id, 'phone', 'phone (incl. country code)', 'tel')(size=6)
       .form-row
-        +form-field(id, 'subject', 'subject', 'text')(size=12)
+        +form-field(id, 'subject', 'subject', 'select')(size=12)
+          option(value='lorem') Lorem
+          option(value='ipsum') Ipsum
       .form-row
         +form-field(id, 'question', 'your question', 'textarea')(size=12)
       .form-row.form-row--right-aligned
         .form-field.form-field--shrink
-          p Fields marked with &lsquo;*&rsquo;	 are required.
+          p(style='color: #999') Fields marked with &lsquo;*&rsquo;	 are required.
         .form-field.form-field--shrink
           +form-button(id)='Submit'
 
@@ -22,9 +24,13 @@ mixin form-field(formId, fieldId, label, type='text', required=false)
   .form-field(class=`form-field--size-${attributes.size}`)
     //- hyphenate the labelId
     - const labelId = `${formId}-${fieldId.replace(/\s/g, '-')}`;
-    .form-field__label-bg
     if type == 'textarea'
+      .form-field__label-bg
       textarea(id=labelId, required=required, rows=5)
+    else if type == 'select'
+      .form-field__select-wrapper
+        select(id=labelId, required=required)
+          block
     else
       input(id=labelId, type=type, required=required)
     label(for=labelId)!=label + (required ? '*' : '')

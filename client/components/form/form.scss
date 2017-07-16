@@ -4,29 +4,31 @@ $field-padding-side: 1rem;
 $field-padding: 1.5*$vertical-baseline $field-padding-side 0.5*$vertical-baseline; 
 $label-top: 0.35*$vertical-baseline;
 $label-bottom: 0.15*$vertical-baseline;
-$label-left: 0.5*$field-padding-side;
+$label-left: $field-padding-side;
 form {
   padding: 0;
 }
 
-fieldset {
+.form fieldset {
   border: $form-border-style;
+  box-shadow: $feather-shadow;
   padding: 0;
   background: white;
+  margin: 0 0 $vertical-baseline 0;
 }
 
 .form-row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  &.form-row--right-aligned {
-    justify-content: flex-end;
- }
-
   border-top: $form-border-style;
   &:first-child {
     border-top: none;
   }
+
+  &.form-row--right-aligned {
+    justify-content: flex-end;
+ }
   .button {
     width: 100%;
     @include breakpoint($tablet) {
@@ -50,17 +52,35 @@ fieldset {
   flex: 1 0 100%;
   position: relative;
   background: white;
+
+  border-top: $form-border-style;
+  &:first-child {
+    border-top: none;
+  }
+
+  @include breakpoint($tablet) {
+    border-top: none;
+    border-left: $form-border-style;
+    &:first-child {
+      border-left: none;
+    }
+  }
+
   p {
+    color: $color-gray-medium;
+    font-weight: 400;
     margin: 0.75rem 1.5rem;
   }
   input, select {
     @include sgl-heading(1);
+    height: $field-height;
   }
+
   input, textarea, select, button {
     outline-offset: 0px;
     position: relative;
     &:focus {
-      z-index: 2;
+      z-index: 3;
       & + label {
         z-index: 3;
       }
@@ -68,49 +88,40 @@ fieldset {
   }
 
   input, textarea, select {
+    z-index: 2;
+    background: transparent;
     display: block;
     width: 100%;
     margin: 0;
     border: none;
     padding: $field-padding;
+  }
+  // textarea height is whatever it needs to be
 
-  }
-  .form-field__label-bg {
-    z-index: 1;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    padding: $label-top $label-left 0.15*$vertical-baseline;
-    margin: 0 0.5*$field-padding-side;
-    height: $vertical-baseline+ $label-top + $label-bottom;
-    background: transparentize(white, 0.05);
-    @supports (backdrop-filter: blur(3px) saturate(150%)) {
-      background: transparentize(white, 0.2);
-      backdrop-filter: blur(3px) saturate(150%);
-    }
-  }
+
 
   label {
-    z-index: 2;
+    z-index: 1;
     position: absolute;
     display: inline-block;
     top: $label-top;
-    left: 0.5*$vertical-baseline;
+    left: $label-left;
     color: $color-gray-medium;
     font-weight: 400;
     transition: transform 250ms cubic-bezier(0.77, 0, 0.175, 1);
     transform-origin: top left;
-    $label-translate-amount: 0.5rem;
-    transform: scale(1.3125) translateY(#{$label-translate-amount});
-
   }
+  // make the labels large on textarea and inputs
 
   button {
     display: inline-block;
   }
   
   input, textarea {
+    + label {
+      $label-translate-amount: 0.5rem;
+      transform: scale(1.3125) translateY(#{$label-translate-amount});
+    }
     &:focus + label {
       transform: initial;
     }
@@ -119,18 +130,16 @@ fieldset {
     }
   }
 
-  background: white;
-  border-top: $form-border-style;
-  &:first-child {
-    border-top: none;
+  // Design-specific tweaks to select dropdown
+
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    position: relative;
   }
-  @include breakpoint($tablet) {
-    border-top: none;
-    border-left: $form-border-style;
-    &:first-child {
-      border-left: none;
-    }
-  }
+
   &.form-field--shrink {
     @include breakpoint($tablet) {
       flex: 0 1 auto;
@@ -146,5 +155,30 @@ fieldset {
   }
 }
 
+.form-field__select-wrapper {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: $field-padding-side;
+    height: $field-height;
+    width: 6px;
+    background: inline('static/images/dots-vertical.svg') center/6px 27px no-repeat;
+  }
+}
 
-
+.form-field__label-bg {
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: $label-top $label-left 0.15*$vertical-baseline;
+  margin: 0 0.5*$field-padding-side;
+  height: $vertical-baseline+ $label-top + $label-bottom;
+  background: transparentize(white, 0.05);
+  @supports (backdrop-filter: blur(3px) saturate(150%)) {
+    background: transparentize(white, 0.2);
+    backdrop-filter: blur(3px) saturate(150%);
+  }
+}
