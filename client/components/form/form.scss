@@ -1,4 +1,5 @@
 $form-border-style: $color-gray-medium 1px solid;
+// $form-border-style: rgba(0,0,0,0.2) 1px solid;
 $field-height: 3*$vertical-baseline;
 $field-padding-side: 1rem;
 $field-padding: 1.5*$vertical-baseline $field-padding-side 0.5*$vertical-baseline; 
@@ -21,6 +22,7 @@ form {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  background-color: white;
   border-top: $form-border-style;
   &:first-child {
     border-top: none;
@@ -95,6 +97,9 @@ form {
     margin: 0;
     border: none;
     padding: $field-padding;
+    &[required] + label::after {
+      content: '*';
+    }
   }
   // textarea height is whatever it needs to be
 
@@ -155,16 +160,14 @@ form {
   }
 }
 
-.form-field__select-wrapper {
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: $field-padding-side;
-    height: $field-height;
-    width: 6px;
-    background: inline('static/images/dots-vertical.svg') center/6px 27px no-repeat;
-  }
+.form-field__select-dots {
+  z-index: 0;
+  position: absolute;
+  right: $field-padding-side;
+  height: $field-height;
+  width: 6px;
+  width: 6px;
+  background: inline('static/images/dots-vertical.svg') center/6px 27px no-repeat;
 }
 
 .form-field__label-bg {

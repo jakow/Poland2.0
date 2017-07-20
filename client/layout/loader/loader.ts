@@ -1,7 +1,6 @@
 import ProgressBar from './progress-bar';
-import anime = require('animejs');
+import anime from 'animejs';
 const BREAKPOINT = 768;
-
 
 const animationParams = {
   progressTiming: 300,

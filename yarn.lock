@@ -8230,6 +8230,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "~1.0.0"
     spdx-expression-parse "~1.0.0"
 
+"validate.js@https://github.com/ansman/validate.js.git":
+  version "0.11.1"
+  resolved "https://github.com/ansman/validate.js.git#07f64ec81e8dd71d1553c20d750fbb3b7ed40018"
+
 vary@^1, vary@~1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.1.tgz#67535ebb694c1d52257457984665323f587e8d37"

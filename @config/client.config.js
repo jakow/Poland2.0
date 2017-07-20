@@ -59,7 +59,7 @@ const config = {
       use: [{
         loader: 'ts-loader',
         options: {
-          configFileName: '../tsconfig.json',
+          configFileName: '@config/tsconfig.client.json',
         }
       }
       ],
@@ -67,25 +67,30 @@ const config = {
     {
       test: /\.s?css$/,
       use: isProduction ? 
-        ExtractTextPlugin.extract({fallback:'style-loader', use: cssLoaders, sourceMap: true}) : 
+        ExtractTextPlugin.extract({fallback: 'style-loader', use: cssLoaders}) : 
         [{loader:'style-loader', options: {sourceMap: true}}, ...cssLoaders],
     }
     ],
     
   },
-  plugins: isProduction ? [
-      new webpack.DefinePlugin({
-        'process.env': {'NODE_ENV': JSON.stringify('production')}
-      }),
-      new ExtractTextPlugin("[name]-[contenthash:12].css"),
-      new UglifyJsPlugin({sourceMap: true}),
-      // full disclosure - some cool hack for getting rid of locales when minifiying moment.js
+  plugins: [...isProduction ? [
+        new webpack.DefinePlugin({
+          'process.env': {'NODE_ENV': JSON.stringify('production')}
+        }),
+        new ExtractTextPlugin("[name]-[contenthash:12].css"),
+        new UglifyJsPlugin({sourceMap: true}),
+        new AssetsPlugin({
+          path: buildDir,
+          filename: 'assets.json',
+        }),
+      ] : [],
+      // some cool hack for getting rid of unused locales when minifiying moment.js
       new ContextReplacementPlugin(/moment[\/\\]locale$/, /en|pl/),
-      new AssetsPlugin({
-        path: buildDir,
-        filename: 'assets.json',
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'commons',
+        minChunks: 2,
       }),
-    ] : []
+    ],
 };
 
 module.exports = config;

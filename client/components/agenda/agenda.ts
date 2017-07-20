@@ -1,6 +1,6 @@
 // module level variables for determining the state of google api
 import googleMapsApiAsync from '../../mixins/googleMapsApiAsync';
-import anime = require('animejs');
+import anime from 'animejs';
 import jump from 'jump.js';
 import {debounce} from 'lodash';
 import {HEADER_HEIGHT, headerAwareTargetOffset} from '../../clientUtils';
@@ -62,9 +62,9 @@ export default class Agenda {
       easing: 'easeInOutSine',
       duration: TRANSITION_DURATION,
     });
-
-    jump(el, {
-      offset: headerAwareTargetOffset(el),
+    const detailsButton = el.querySelector(BUTTON_SELECTOR);
+    jump(detailsButton, {
+      offset: headerAwareTargetOffset(detailsButton),
       duration: SCROLL_DURATION,
     });
   }

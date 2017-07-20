@@ -1,7 +1,7 @@
 @import "~spinthatshit/src/loaders";
 $spinner-size: 32px;
 .spinner {
-  @include loader02($size: $spinner-size, $duration: 1s, $align: middle, $color: $color-gray-medium, $border-size: 5px);
+  @include loader02($size: $spinner-size, $duration: 1s, $align: middle, $color: $color-gray-medium, $border-size: 3px);
   opacity: 1;
   transition: visibility 0ms linear;
   position: absolute;

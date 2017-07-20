@@ -17,10 +17,13 @@ html(lang=contentControl.language || "en-GB")
     //- add favicons
     +favicons 
 
+    //- Any extra stuff in head - opengraph, meta etc
+    block head
+
     block style
       link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css")
       //- link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
-      link(rel="stylesheet", href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css")
+      //- link(rel="stylesheet", href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css")
       //- link(rel="stylesheet", href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css")
       if env === 'production'
         link(rel="stylesheet", href=assets("main.css"))
@@ -28,10 +31,11 @@ html(lang=contentControl.language || "en-GB")
     block scripts
       include ../../vendor/outdated-browser
       //- client bundle
+      //- vendor/commons bundles
+      script(src=assets('commons.js'))
+      //- scripts used on all pages
       script(src=assets('main.js'))
 
-    //- Any extra stuff in head - opengraph, meta etc
-    block head
 
 
   body
@@ -51,9 +55,6 @@ html(lang=contentControl.language || "en-GB")
         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
         ga('create', '#{trackingId}', 'auto');
         ga('send', 'pageview');
-      
-    //- if env === 'development' && displayLocals === true
-    //-   +printLocalsSchema(locals)
 
 
 

@@ -1,6 +1,5 @@
-import anime = require('animejs');
+import anime from 'animejs';
 import {throttle} from 'lodash';
-
 
 interface Options {
   color: string;

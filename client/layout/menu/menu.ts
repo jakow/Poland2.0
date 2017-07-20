@@ -1,4 +1,4 @@
-import anime = require('animejs');
+import anime from 'animejs';
 import {debounce} from 'lodash';
 
 const TABLET_BREAKPOINT = 768;

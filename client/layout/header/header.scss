@@ -205,7 +205,7 @@ a.site-header__brand {
   $button-height: 20px;
 
   // width: 28px;
-  padding: calc(4.5rem / 2 - #{$button-height/2}) 0;
+  padding: calc(#{$header-height / 2} - #{$button-height/2}) 0;
   display: inline-block;
   position: relative;
   @include breakpoint($tablet) {
@@ -240,21 +240,6 @@ a.site-header__brand {
   }
 }
 
-// .headroom {
-//   transition: translateY 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
-//   // transform: translateY(#{-$header-height});
-//   transform: translateY(0);
-//   .mobile-menu-open & {
-//     transform: initial;
-//   }
-//   @include breakpoint($tablet) {
-//     transform: initial;
-//   }
-// }
-// .headroom--unpinned {
-//   transition: translateY 300ms cubic-bezier(0.895, 0.03, 0.685, 0.22);
-//   transform: translateY(#{-$header-height});
-// }
 .headroom {
   transition: transform 400ms cubic-bezier(0.165, 0.84, 0.44, 1)
 }
@@ -268,5 +253,3 @@ a.site-header__brand {
     transform: initial;
   }
 }
-
-

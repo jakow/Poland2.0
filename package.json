@@ -30,7 +30,8 @@
     "serve-static": "^1.12.3",
     "socket.io": "^1.7.3",
     "socket.io-client": "^2.0.1",
-    "striptags": "^3.0.1"
+    "striptags": "^3.0.1",
+    "validate.js": "https://github.com/ansman/validate.js.git"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.2",
@@ -103,9 +104,9 @@
     "start": "cross-env NODE_ENV=production pm2 start build/index.js --name app",
     "stop": "pm2 stop app && pm2 delete app",
     "dev": "concurrently \"yarn dev:server\" \"yarn dev:client\"",
-    "dev:server": "nodemon --watch \"**/*.ts\" --ignore \"client/**/*\" --exec \"ts-node\" index.ts 0.0.0.0 4000",
+    "dev:server": "nodemon --watch \"**/*.ts\" --ignore \"client/**/*\" --exec \"ts-node\" --project @config/tsconfig.server.json index.ts",
     "dev:client": "webpack-dev-server --config @config/client.config.js -w --host 0.0.0.0",
-    "build:server": "cross-env NODE_ENV=production webpack --config @config/server.config.js -p --profile --progress",
+    "build:server": "cross-env NODE_ENV=production tsc --project @config/tsconfig.server.json",
     "build:client": "cross-env NODE_ENV=production webpack --config @config/client.config.js -p --profile --progress",
     "build": "yarn run clean && yarn build:server && yarn build:client",
     "test": "mocha -r ts-node/register test/**/*.ts",

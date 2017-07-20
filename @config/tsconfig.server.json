@@ -1,29 +1,29 @@
 {
     "compilerOptions": {
         "lib": ["es2015", "es2016", "es2017", "dom"],
-        "outDir": "./build/",
+        "outDir": "../build",
         "sourceMap": true,
         "noImplicitAny": true,
         "module": "commonjs",
         "moduleResolution": "node",
         "target": "es5",
-        "allowSyntheticDefaultImports": false,
+        "allowSyntheticDefaultImports": true,
         "allowUnreachableCode": false,
         "allowJs": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "noFallthroughCasesInSwitch": true,
-        "typeRoots": ["./node_modules/@types"],
+        "noFallthroughCasesInSwitch": false,
+        "typeRoots": ["../node_modules/@types"],
         "diagnostics": true,
         "downlevelIteration": true
     },
     "include": [
-      "**/*"
-
+      "../**/*"
     ],
     "exclude": [
-        "node_modules",
-        "client",
-        "test"
+        "../node_modules",
+        "../client",
+        "../test",
+        "../@config"
     ]
 }

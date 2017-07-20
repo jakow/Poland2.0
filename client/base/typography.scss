@@ -9,7 +9,7 @@ $baseline-height: 1.5;
 
 $sgl-extras: true;
 // $sgl-debug-mode: true;
-@import "~sassy-gridlover/sassy-gridlover/sassy-gridlover"; // what
+@import "~sassy-gridlover/sassy-gridlover/sassy-gridlover"; // what kind of name is this
 $vertical-baseline: sgl-rem-calc($base-font-size * $baseline-height);
 $sgl-base-font-size: $base-font-size;
 $sgl-base-line-height: $baseline-height;
@@ -223,6 +223,12 @@ a.fat-link {
   font-weight: 600;
 }
 
+// invert text colors
+.dark-bg {
+  color: white;
+}
+
+
 @for $i from 1 to 6 {
  h#{$i}.fat-heading {
     @include sgl-heading(4 + 1 - $i);
@@ -232,6 +238,7 @@ a.fat-link {
 
 
 $underline-height: 7px;
+
 .heading-stripe {
   position: relative;
   display: inline-block;

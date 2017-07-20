@@ -1,24 +1,25 @@
 mixin contact-form
   - const id = attributes.id;
   form(method='post' action='/contact' id=id).contact-form.form
-    fieldset
-      .form-row
-        +form-field(id, 'name', 'name', 'text', true)(size=6)
-        +form-field(id, 'name', 'e-mail', 'email', true)(size=6)
-      .form-row
-        +form-field(id, 'company', 'company', 'text')(size=6)
-        +form-field(id, 'phone', 'phone (incl. country code)', 'tel')(size=6)
-      .form-row
-        +form-field(id, 'subject', 'subject', 'select')(size=12)
-          option(value='lorem') Lorem
-          option(value='ipsum') Ipsum
-      .form-row
-        +form-field(id, 'question', 'your question', 'textarea')(size=12)
-      .form-row.form-row--right-aligned
-        .form-field.form-field--shrink
-          p(style='color: #999') Fields marked with &lsquo;*&rsquo;	 are required.
-        .form-field.form-field--shrink
-          +form-button(id)='Submit'
+    .form-row
+      +form-field(id, 'name', 'name', 'text', true)(size=6)
+      +form-field(id, 'email', 'e-mail', 'email', true)(size=6)
+    .form-row
+      +form-field(id, 'company', 'company', 'text')(size=6)
+      +form-field(id, 'phone', 'phone', 'tel')(size=6)
+    .form-row
+      +form-field(id, 'subject', 'subject', 'select', true)(size=12)
+        option(value='' disabled selected) Please select&hellip;
+        option Lorem
+        option Ipsum
+        option Other
+    .form-row
+      +form-field(id, 'question', 'your question', 'textarea', true)(size=12)
+    .form-row.form-row--right-aligned
+      .form-field.form-field--shrink
+        p(style='color: #999') Fields marked with &lsquo;*&rsquo; are required.
+      .form-field.form-field--shrink
+        +form-button(id)='Submit'
 
 mixin form-field(formId, fieldId, label, type='text', required=false)
   .form-field(class=`form-field--size-${attributes.size}`)
@@ -26,14 +27,14 @@ mixin form-field(formId, fieldId, label, type='text', required=false)
     - const labelId = `${formId}-${fieldId.replace(/\s/g, '-')}`;
     if type == 'textarea'
       .form-field__label-bg
-      textarea(id=labelId, required=required, rows=5)
+      textarea(id=labelId, name=fieldId required=required, rows=5)
     else if type == 'select'
-      .form-field__select-wrapper
-        select(id=labelId, required=required)
+        .form-field__select-dots
+        select(id=labelId, name=fieldId, required=required)
           block
     else
-      input(id=labelId, type=type, required=required)
-    label(for=labelId)!=label + (required ? '*' : '')
+      input(id=labelId, type=type, name=fieldId, required=required, pattern=attributes.pattern)
+    label(for=labelId)=label
 
 mixin form-button(formId, text)
 

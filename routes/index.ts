@@ -46,6 +46,7 @@ const router = express.Router();
 router.get('/', views.home);
 router.get('/about', views.about);
 router.get('/past-editions', views.pastEditions);
+router.all('/contact', views.contact);
 
 const allowCors = cors();
 
