@@ -165,10 +165,11 @@ export default class Form {
     const errorContainer = el.querySelector('.form-field__error-container') as HTMLElement;
     errorContainer.innerText = '';
   }
-  
+
   /**
-   * 
-   * @param fields 
+   * Extract JSON data from the fields
+   * @param fields HTML form controls to extract data from
+   * @return JSON data from the fields
    */
   private extractData(fields: FieldElement[]) {
     const data: {[name: string]: any} = {};
@@ -190,6 +191,7 @@ export default class Form {
    * Get HTML field elements (input, select, textarea) in this form.
    * Inputs of type 'submit' are ignored
    * @param validatedOnly set true to return only those fields that are in the validation schema
+   * @return HTML field elements in the form
    */
   private getFields(validatedOnly: boolean = false) {
     const controls = Array.from(this.form.elements) as FieldElement[];
