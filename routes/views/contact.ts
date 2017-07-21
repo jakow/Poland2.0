@@ -26,25 +26,32 @@ interface ContactFormData {
 
 const contactFormFields: Array<keyof ContactFormData> = ['name', 'email', 'phone', 'company', 'subject', 'question'];
 
-const constraints = {
+const contactFormConstraints = {
   name: {
     presence: true,
     length: {
       minimum: 1,
+      message: '^needs to have at least 1 character',
     },
   },
   email: {
     presence: true,
-    email: true,
+    email: {
+      message: '^This is not a valid e-mail',
+    },
   },
-  phone: {
-    phone: true,
+  subject: {
+    presence: true,
+    length: {
+      minimum: 1,
+      message: '^Please choose a subject',
+    },
   },
   question: {
     presence: true,
     length: {
       minimum: 3,
-      tooShort: 'needs to have %{count} words or more',
+      tooShort: '^needs to have %{count} words or more',
       // count words
       tokenizer: (value: string) => value.split(/\s+/g),
     },
@@ -57,8 +64,9 @@ export const contact: RequestHandler = (req, res, next) => {
   if (method === 'GET') {
     view.render(resolveView('contact'));
   } else if (method === 'POST') {
+    console.log(req.body);
     const formData =  pick(req.body, contactFormFields) as ContactFormData;
-    const validation = validate(formData, constraints);
+    const validation = validate(formData, contactFormConstraints);
     const isAjax = req.params.ajax;
     res.send({formData, validation});
   } else {

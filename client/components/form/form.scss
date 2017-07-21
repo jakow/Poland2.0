@@ -56,13 +56,13 @@ form {
   position: relative;
   background: white;
 
-  border-bottom: $form-border-style;
-  &:last-child {
-    border-bottom: none;
+  border-top: $form-border-style;
+  &:first-child {
+    border-top: none;
   }
 
   @include breakpoint($tablet) {
-    border-bottom: none;
+    border-top: none;
     border-right: $form-border-style;
     &:last-child {
       border-right: none;
@@ -81,10 +81,15 @@ form {
     transform: scaleX(0);
     transform-origin: left;
     background-color: $color-error;
+    z-index: 5;
   }
 
   &.form-field--error::after {
     transform: scaleX(1);
+  }
+
+  &.form-field__button {
+    overflow: hidden;
   }
 
   /* Styling of the form field containers */
@@ -118,7 +123,7 @@ form {
     margin: 0;
     border: none;
     padding: $field-padding;
-    &[required] + label::after {
+    &[required] + label .form-field__field-name::after {
       content: '*';
     }
     // error 
@@ -135,8 +140,8 @@ form {
     left: $label-left;
     color: $color-gray-medium;
     font-weight: 400;
-    transition: transform 250ms cubic-bezier(0.77, 0, 0.175, 1);
-    transform-origin: top left;
+    // transition: transform 250ms cubic-bezier(0.77, 0, 0.175, 1);
+    // transform-origin: top left;
   }
   // make the labels large on textarea and inputs
 
@@ -144,18 +149,21 @@ form {
     display: inline-block;
   }
   
-  input, textarea {
-    + label {
-      $label-translate-amount: 0.5rem;
-      transform: scale(1.3125) translateY(#{$label-translate-amount});
-    }
-    &:focus + label {
-      transform: initial;
-    }
-    &.input-not-empty + label {
-      transform: initial;
-    }
-  }
+  // input, textarea {
+  //   + label {
+  //     $label-translate-amount: 0.5rem;
+  //     transform: scale(1.3125) translateY(#{$label-translate-amount});
+  //   }
+  //   &:focus + label {
+  //     transform: initial;
+  //   }
+  //   &.input-not-empty + label {
+  //     transform: initial;
+  //   }
+  //   .form-field--error & {
+  //     transform: initial;
+  //   }
+  // }
 
   // Design-specific tweaks to select dropdown
 

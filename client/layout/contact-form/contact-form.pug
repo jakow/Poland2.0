@@ -2,23 +2,23 @@ mixin contact-form
   - const id = attributes.id;
   form(method='post' action='/contact' id=id).contact-form.form
     .form-row
-      +form-field(id, 'name', 'name', 'text', true)(size=6)
-      +form-field(id, 'email', 'e-mail', 'email', true)(size=6)
+      +form-field(id, 'name', 'Name', 'text', true)(size=6)
+      +form-field(id, 'email', 'E-mail', 'email', true)(size=6)
     .form-row
-      +form-field(id, 'company', 'company', 'text')(size=6)
-      +form-field(id, 'phone', 'phone', 'tel')(size=6)
+      +form-field(id, 'company', 'Company', 'text')(size=6)
+      +form-field(id, 'phone', 'Phone', 'tel')(size=6)
     .form-row
-      +form-field(id, 'subject', 'subject', 'select', true)(size=12)
+      +form-field(id, 'subject', 'Subject', 'select', true)(size=12)
         option(value='' disabled selected) Please select&hellip;
         option Lorem
         option Ipsum
         option Other
     .form-row
-      +form-field(id, 'question', 'your question', 'textarea', true)(size=12)
+      +form-field(id, 'question', 'Your question', 'textarea', true)(size=12)
     .form-row.form-row--right-aligned
       .form-field.form-field--shrink
         p(style='color: #999') Fields marked with &lsquo;*&rsquo; are required.
-      .form-field.form-field--shrink
+      .form-field.form-field--shrink.form-field__button
         +form-button(id)='Submit'
 
 mixin form-field(formId, fieldId, label, type='text', required=false)
@@ -34,7 +34,10 @@ mixin form-field(formId, fieldId, label, type='text', required=false)
           block
     else
       input(id=labelId, type=type, name=fieldId, required=required, pattern=attributes.pattern)
-    label(for=labelId)=label
+    label(for=labelId)
+      span.form-field__field-name=label
+      span &nbsp;
+      span.form-field__error-container
 
 mixin form-button(formId, text)
 
