@@ -39,7 +39,7 @@ a.button:hover {
 }
 
 .button.button--primary {
-  @include button-style($primaryColor, white);
+  @include button-style($color-primary, white);
 }
 
 $circular-button-size: (

@@ -16,9 +16,6 @@ export const contactFormConstraints = {
     presence: true,
     email: true,
   },
-  phone: {
-    phone: true,
-  },
   subject: {
     presence: true,
   },
@@ -34,8 +31,7 @@ export const contactFormConstraints = {
 };
 
 export default class ContactForm extends Form {
-  constructor(private form: HTMLFormElement) {
+  constructor(form: HTMLFormElement) {
     super(form, contactFormConstraints);
-
   }
 }

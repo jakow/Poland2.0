@@ -31,7 +31,9 @@
     "socket.io": "^1.7.3",
     "socket.io-client": "^2.0.1",
     "striptags": "^3.0.1",
-    "validate.js": "https://github.com/ansman/validate.js.git"
+    "validate.js": "https://github.com/ansman/validate.js.git",
+    "vue": "^2.4.2",
+    "vue-class-component": "^5.0.2"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.2",
