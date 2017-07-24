@@ -1,0 +1,20 @@
+include ../../components/lazy-image/lazy-image
+mixin sponsors(sponsorCategories)
+  div.center
+    h2.bold.heading-stripe Partners
+  each category in sponsorCategories
+    .sponsor-category
+      h2=(category.sponsors.length > 1) ? category.name : category.singular
+      ul.sponsor-category__list(class=`sponsor-category__list--${category.perColumn}-col`)
+        each sponsor in category.sponsors
+          li
+            +sponsor(sponsor, category.imageAdjust.width)
+
+
+  
+mixin sponsor(sponsor, width=`${5/4*12}rem`, ratio='5:4')
+  .sponsor
+      //- the assumption is that the logos are svgs so do not require placeholders
+      //- still we load them lazily
+      +lazy-image(sponsor.logo.secure_url, null, ratio)(style=`max-width: ${width}` alt=sponsor.name).sponsor__logo
+      span.sr-only=sponsor.name

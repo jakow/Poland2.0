@@ -7,6 +7,7 @@ include ../../components/agenda/agenda
 include ../../layout/speakers/speakers
 include ../../mixins/google-map-key
 include ../../layout/contact-form/contact-form
+include ../../layout/sponsors/sponsors
 
 block append scripts
   script(src=assets("/home.js"))
@@ -87,5 +88,8 @@ block content
       h2.center How can we help?
       +contact-form#contact-form
 
+  section#sponsors
+    .container
+      +sponsors(sponsorCategories)
 
     //- p= JSON.stringify(speakers)

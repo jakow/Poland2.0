@@ -1,5 +1,10 @@
 $bar-displacement: 20px;
 $bar-anim-duration: 800ms;
+
+.no-js .loader {
+  display: none;
+}
+
 .loader {
   position: fixed;
   top: 0;

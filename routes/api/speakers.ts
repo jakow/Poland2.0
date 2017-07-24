@@ -4,12 +4,10 @@ import {Speaker, SpeakerDocument} from '../../models/Speaker';
 import {Edition} from '../../models/Edition';
 import {INTERNAL_SERVER_ERROR} from 'http-status-codes';
 
-
-
 export const speakers = Router();
 
 /**
- * Get all speakers. Only speakers for current edition are sent. 
+ * Get all speakers. Only speakers for current edition are sent.
  */
 async function getAll(req: Request, res: Response) {
   const currentEdition = res.locals.currentEdition as Edition;

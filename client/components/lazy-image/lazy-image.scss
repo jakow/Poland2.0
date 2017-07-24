@@ -13,21 +13,21 @@ $blur: 5px;
 
 
 .lazy-img {
-  background: $color-dark;
+  // background: $color-dark;
   position: relative;
   overflow: hidden;
   // will have clip border radius
   z-index: 0;
   .preview, .original {
     position: absolute;
-    left: 0 - 1*$blur;
-    top: 0 - 1*$blur;
-    width: calc(100% + #{2*$blur});
+    // left: 0 - 1*$blur;
+    // top: 0 - 1*$blur;
+    // width: calc(100% + #{2*$blur});
     // If we can accept the edges bluring with the background color then
     // the image can have the correct
-    // left: 0;
-    // top: 0;
-    // width: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
     will-change: opacity; // prepare the browser for opacity anim
     opacity: 0;
     visibility: hidden;

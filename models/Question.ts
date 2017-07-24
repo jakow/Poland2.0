@@ -8,6 +8,7 @@ export interface Question {
   askedBy: string;
   forEvent: keystone.Schema.Relationship;
   toPerson: keystone.Schema.Relationship;
+  dateCreated: Date;
   accepted: boolean;
   dateAccepted: Date;
   archived: boolean;
@@ -15,7 +16,11 @@ export interface Question {
 
 export type QuestionDocument = keystone.ModelDocument<Question>;
 
-export const Question = new keystone.List<Question>('Question');
+export const Question = new keystone.List<Question>('Question',
+{
+  autokey: { path: 'slug', from: 'name', unique: true },
+  defaultSort: 'dateAccepted',
+});
 
 Question.add({
   askedBy: {type: String},
@@ -24,8 +29,9 @@ Question.add({
   toPerson: {type: Types.Relationship, ref: 'Speaker',
   description: 'Person to whom the question is directed (optional)'},
 }, 'Admin', {
+  dateCreated: {type: Date, utc: true},
   accepted: {type: Boolean, default: false},
-  dateAccepted: Date,
+  dateAccepted: {type: Date, utc: true},
   archived: {type: Boolean, default: false},
 });
 
@@ -40,6 +46,10 @@ const removeHooks = new Set<Hook>();
  */
 Question.schema.pre('save', function(next) { // tslint:disable-line
   const doc = this as QuestionDocument;
+  if (!doc.dateCreated) {
+    doc.dateCreated = new Date();
+  }
+
   if (doc.accepted) {
     if (doc.dateAccepted === null) {
       doc.dateAccepted = new Date();
@@ -47,7 +57,6 @@ Question.schema.pre('save', function(next) { // tslint:disable-line
   } else {
     doc.dateAccepted = null;
   }
-  saveHooks.forEach((hook) => hook(doc));
   next();
 });
 
@@ -59,21 +68,3 @@ Question.defaultColumns = 'text|50%, event';
 Question.register();
 
 export default Question;
-
-export function registerHook(method: 'save' | 'remove', hook: Hook) {
-  let hookType;
-  if (method === 'save') {
-    hookType = saveHooks;
-  } else if (method === 'remove') {
-    hookType = removeHooks;
-  } else {
-    throw new Error('Invalid question save hook type');
-  }
-  hookType.add(hook);
-}
-
-export function unregisterHook(hook: Hook) {
-  if (saveHooks.has(hook)) {
-    saveHooks.delete(hook);
-  }
-}

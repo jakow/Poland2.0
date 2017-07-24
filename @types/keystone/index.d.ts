@@ -197,42 +197,39 @@ declare module 'keystone' {
      * The extended Types
      */
     const Types: {
-      AzureFile: Field.ExtendedType;
-      Boolean: Field.ExtendedType;
-      CloudinaryImage: Field.ExtendedType;
-      CloudinaryImages: Field.ExtendedType;
-      Code: Field.ExtendedType;
-      Color: Field.ExtendedType;
-      Date: Field.ExtendedType;
-      DateArray: Field.ExtendedType;
-      Datetime: Field.ExtendedType;
-      Email: Field.ExtendedType;
-      Embedly: Field.ExtendedType;
-      File: Field.ExtendedType;
-      GeoPoint: Field.ExtendedType;
-      Html: Field.ExtendedType;
-      Key: Field.ExtendedType;
-      LocalFile: Field.ExtendedType;
-      LocalFiles: Field.ExtendedType;
-      Location: Field.ExtendedType;
-      Markdown: Field.ExtendedType;
-      Money: Field.ExtendedType;
-      Name: Field.ExtendedType;
-      Number: Field.ExtendedType;
-      Url: Field.ExtendedType;
-      NumberArray: Field.ExtendedType;
-      Password: Field.ExtendedType;
-      Relationship: Field.ExtendedType;
-      S3File: Field.ExtendedType;
-      Select: Field.ExtendedType;
-      Text: Field.ExtendedType;
-      TextArray: Field.ExtendedType;
-      Textarea: Field.ExtendedType;
+      AzureFile: Field.KeystoneType;
+      Boolean: Field.KeystoneType;
+      CloudinaryImage: Field.KeystoneType;
+      CloudinaryImages: Field.KeystoneType;
+      Code: Field.KeystoneType;
+      Color: Field.KeystoneType;
+      Date: Field.KeystoneType;
+      DateArray: Field.KeystoneType;
+      Datetime: Field.KeystoneType;
+      Email: Field.KeystoneType;
+      Embedly: Field.KeystoneType;
+      File: Field.KeystoneType;
+      GeoPoint: Field.KeystoneType;
+      Html: Field.KeystoneType;
+      Key: Field.KeystoneType;
+      LocalFile: Field.KeystoneType;
+      LocalFiles: Field.KeystoneType;
+      Location: Field.KeystoneType;
+      Markdown: Field.KeystoneType;
+      Money: Field.KeystoneType;
+      Name: Field.KeystoneType;
+      Number: Field.KeystoneType;
+      Url: Field.KeystoneType;
+      NumberArray: Field.KeystoneType;
+      Password: Field.KeystoneType;
+      Relationship: Field.KeystoneType;
+      S3File: Field.KeystoneType;
+      Select: Field.KeystoneType;
+      Text: Field.KeystoneType;
+      TextArray: Field.KeystoneType;
+      Textarea: Field.KeystoneType;
     };
 
-  }
-
-  export namespace Field {
     export interface Options {
       type: List.FieldType;
       required?: boolean;
@@ -246,26 +243,32 @@ declare module 'keystone' {
       [opt: string]: any;
     }
 
-    export interface ExtendedType {
+    export interface KeystoneType {
       // updateItem: (item: any, data: any, callback: () => void) => void;
     }
+
+    // export interface Password extends Type {
+    //   compare(candidate: string, callback: (err: Error, result: boolean) => void): void;
+    // }
   }
 
   /** Has both the fields of the list type and methods of a mongoose document
    * IMPORTANT:
    */
-  interface HasId {
+  type KeystoneDocument = {
     id: string;
+    _: any;
   }
 
-  type ModelDocument<T> = T & mongoose.Document & HasId;
+
+  type ModelDocument<T> = T & mongoose.Document & KeystoneDocument;
 
   /**
    * The result of calling toObject() on a mongoose document of type T
    */
-  export type LeanDocument<T> =  T & Lean;
+  export type RawDocument<T> =  T & Raw;
 
-  interface Lean {
+  interface Raw {
     _id: string;
     __v: number;
   }
@@ -322,7 +325,7 @@ declare module 'keystone' {
       perPage: number;
       maxPages: number;
     }
-    export type FieldType = Field.ExtendedType |
+    export type FieldType = Field.KeystoneType |
     StringConstructor | NumberConstructor | DateConstructor | BooleanConstructor;
 
     type AddedFields<T> = {
@@ -469,7 +472,7 @@ declare module 'keystone' {
   export let httpsServer: http.Server | null;
 
 export namespace session {
-  function signin(credentials: {email: string, password: string},  cb: (user: any) => void): void;
+  function signin(credentials: {email: string, password: string}, req: Request, res: Response, cb: (user: any) => void): void;
 }
 
 

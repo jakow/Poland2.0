@@ -11,6 +11,7 @@ import './main.scss';
 import {animatedHashAnchors, initHashNavigation, JUMP_OPTIONS} from './clientUtils';
 
 document.addEventListener('DOMContentLoaded', () => {
+  document.documentElement.classList.remove('no-js');
   // a bespoke loader for poland 2.0 site
   const loader = new Loader(document.querySelector('.loader') as HTMLElement);
   loader.hide(); // for now
@@ -35,5 +36,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   animatedHashAnchors(() => { if (menu.isOpen) { menu.close(); }});
   initHashNavigation();
-  initForms();
 });

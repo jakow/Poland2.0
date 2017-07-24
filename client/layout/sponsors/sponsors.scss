@@ -1,0 +1,45 @@
+.sponsor-category {
+  h2, h3 {
+    text-align: center;
+  }
+}
+
+.sponsor-category__list {
+  list-style: none;
+  margin: 0 0 $vertical-baseline;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  li {
+    display: flex;
+    justify-content: center;
+    flex: 0 1 100%;
+  }
+}
+@include breakpoint($tablet) {
+  @for $i from 2 to 6 {
+    .sponsor-category__list--#{$i}-col {
+      li {
+
+        flex: 0 1 #{100% / $i};
+      }
+    }
+  }
+}
+
+.sponsor {
+  flex: 1;
+  padding: 0 0 $vertical-baseline;
+  @include breakpoint($tablet) {
+    padding: 0 1rem $vertical-baseline;
+  }
+}
+
+.sponsor__logo {
+  // center the logo horizontally
+  margin: 0 auto;
+}
+
+

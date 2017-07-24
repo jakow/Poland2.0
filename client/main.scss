@@ -46,6 +46,7 @@ $site-padding: 1rem;
 @import 'layout/menu/menu';
 @import 'layout/loader/loader';
 @import 'layout/footer/footer';
+@import 'layout/sponsors/sponsors';
 @import 'components/banner/banner';
 @import 'components/spinner/spinner';
 @import 'components/lazy-image/lazy-image';
@@ -81,4 +82,23 @@ main {
 
 * {
   box-sizing: border-box;
+}
+
+.no-js-warning {
+  padding: $vertical-baseline;
+  color: white;
+  background: $color-error;
+  font-weight: 400;
+  * > {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 16px;
+  height: 4px;
+  left: -99999999px;
+  overflow: hidden;
 }

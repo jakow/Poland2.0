@@ -104,7 +104,7 @@
     "start": "cross-env NODE_ENV=production pm2 start build/index.js --name app",
     "stop": "pm2 stop app && pm2 delete app",
     "dev": "concurrently \"yarn dev:server\" \"yarn dev:client\"",
-    "dev:server": "nodemon --watch \"**/*.ts\" --ignore \"client/**/*\" --exec \"ts-node\" --project @config/tsconfig.server.json index.ts",
+    "dev:server": "nodemon --watch \"**/*.ts\" --ignore \"client/**/*\" --exec \"ts-node --project @config/tsconfig.server.json\" index.ts",
     "dev:client": "webpack-dev-server --config @config/client.config.js -w --host 0.0.0.0",
     "build:server": "cross-env NODE_ENV=production tsc --project @config/tsconfig.server.json",
     "build:client": "cross-env NODE_ENV=production webpack --config @config/client.config.js -p --profile --progress",

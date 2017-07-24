@@ -11,6 +11,7 @@ import routes from './routes';
 import * as linkedData from './routes/helpers/linkedData';
 import * as routeUtils from './routes/helpers/routeUtils';
 import {initSockets} from './routes/sockets';
+import * as auth from './routes/api/auth';
 import imageHelpers from './routes/helpers/cloudinary';
 import createAssetStore from './routes/helpers/assets';
 (mongoose as any).Promise = Promise;
@@ -42,6 +43,8 @@ keystone.init({
   'google api key': config.googleMapsBrowserKey,
   'default region': 'gb',
 });
+
+app.use(auth.initialize());
 
 app.use(config.staticRoot, serveStatic(config.staticDir, config.staticOptions));
 if (config.environment === 'production') {

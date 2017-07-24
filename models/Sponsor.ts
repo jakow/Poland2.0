@@ -22,7 +22,6 @@ const Sponsor = new keystone.List<Sponsor>('Sponsor', {
   sortContext: 'Edition:sponsors',
 });
 
-
 Sponsor.add({
   name: {type: String, required: true},
   logo: {type: Types.CloudinaryImage, autoCleanup: true},
@@ -33,7 +32,7 @@ Sponsor.add({
     height: {type: String, label: 'Height (px, %, em,rem)'},
   },
   // related to edition
-  edition: {type: Types.Relationship, ref: 'Edition'},
+  edition: {type: Types.Relationship, ref: 'Edition', many: true},
   // and to a sponsor category
   category: {type: Types.Relationship, ref: 'SponsorCategory'},
 });

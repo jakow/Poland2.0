@@ -19,7 +19,7 @@
  */
 
 import * as keystone from 'keystone';
-import * as express from 'express';
+import {Router} from 'express';
 import * as cors from 'cors';
 import * as middleware from './middleware';
 import * as views from './views';
@@ -41,7 +41,7 @@ keystone.pre('routes', middleware.initLocals);
 //  // TODO 500 handler
 // });
 
-const router = express.Router();
+const router = Router();
   // Views
 router.get('/', views.home);
 router.get('/about', views.about);
@@ -49,7 +49,7 @@ router.get('/past-editions', views.pastEditions);
 router.all('/contact', views.contact);
 
 const allowCors = cors();
-
+router.use('/api', allowCors, api.login);
 router.use('/api/questions',  allowCors, api.questions);
 router.use('/api/speakers', allowCors, api.speakers);
 

@@ -17,8 +17,6 @@ export interface SponsorCategory {
   edition: keystone.Schema.Relationship;
 }
 
-
-
 const SponsorCategory = new keystone.List<SponsorCategory>('SponsorCategory', {
   autokey: { from: 'name', path: 'key', unique: true },
   sortable: true,
@@ -31,8 +29,8 @@ SponsorCategory.add({
   perColumn: {type: Number, label: 'Sponsor logos per column'},
   showName: {type: Boolean, label: 'Show sponsor category name in sponsor list', default: true},
   imageAdjust: {
-    maxHeight: {type: String, label: 'Max height (px, em, rem, %)'},
-    maxWidth: {type: String, label: 'Max width (px, em, rem, %)'},
+    height: {type: String, label: 'Max height (px, em, rem, %)'},
+    width: {type: String, label: 'Max width (px, em, rem, %)'},
   },
   edition: {type: Types.Relationship, ref: 'Edition', many: true},
 });

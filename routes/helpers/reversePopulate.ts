@@ -19,12 +19,10 @@ export default function reversePopulate<Parent extends Document, Child extends D
   populatedParents.forEach((p) => p[parentKey] = []);
   const parentMap = keyBy(populatedParents, '_id');
   for (const ch of children) {
-    let childRefs = ch[childKey];
-    // also need to handle many to many relationships
-    if (!Array.isArray(childRefs)) {
-      childRefs = [childRefs];
-    }
-    for (const ref of childRefs) {
+    const childRef = ch[childKey];
+    // also need to handle single relationships
+    const refArray = Array.isArray(childRef) ? childRef : [childRef];
+    for (const ref of refArray) {
       if (ref in parentMap) {
         parentMap[ref][parentKey].push(ch);
       }

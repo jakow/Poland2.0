@@ -7,7 +7,7 @@ include ../../vendor/outdated-browser
 include ../../mixins/favicons
 
 doctype html
-html(lang=contentControl.language || "en-GB")
+html(lang=contentControl.language || "en-GB").no-js
   head
     meta(charset="utf-8")
     meta(http-equiv="x-ua-compatible" content="ie=edge")
@@ -42,6 +42,11 @@ html(lang=contentControl.language || "en-GB")
     +loader
     +header
     .site-container
+      .container
+        noscript.no-js-warning
+          p.
+            This site requires JavaScript for best user experience. Because you have disabled
+            JavaScript, your experience may be limited.
       main
         block content
       +footer
