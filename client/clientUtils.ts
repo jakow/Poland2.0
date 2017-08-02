@@ -77,7 +77,7 @@ export function initHashNavigation() {
   window.addEventListener('popstate', (e) => {
     e.preventDefault();
     const hash = window.location.hash;
-    if (hash.length === 1) {
+    if (hash.length <= 1) {
       // do not jump to '#' target, it is invalid
       return;
     }

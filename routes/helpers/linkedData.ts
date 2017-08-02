@@ -5,6 +5,7 @@ import {SpeakerCategory} from '../../models/SpeakerCategory';
 import {Sponsor} from '../../models/Sponsor';
 import {ContentControl} from '../../models/ContentControl';
 import {flatMap} from 'lodash';
+import {canonicalUrl, logoUrl} from '../../config';
 const stripTags: any = require('striptags');
 
 /**

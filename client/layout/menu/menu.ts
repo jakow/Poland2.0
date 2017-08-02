@@ -6,9 +6,10 @@ const MENU_ITEM_DURATION = 125; // ms
 const MENU_ITEM_DELAY = 50;
 const MENU_ITEM_TRANSLATE_AMOUNT = -10; // px
 
-type AnimationType = boolean;
-const OPEN: AnimationType = true;
-const CLOSE: AnimationType = false;
+enum AnimationType {
+ OPEN,
+ CLOSE,
+}
 
 export default class Menu {
   private static delayFunc: anime.PropFunction = (el, i: number, l) => MENU_ITEM_DELAY * i;
@@ -43,8 +44,8 @@ export default class Menu {
     });
     // immediately close the menu (some glitch with animejs occurs on first open otherwise)
     this.container.style.display = 'none';
-    anime(this.getOverlayAnimationProps(false, true));
-    anime(this.getMenuItemAnimationProps(false, true));
+    anime(this.getOverlayAnimationProps(AnimationType.CLOSE, true));
+    anime(this.getMenuItemAnimationProps(AnimationType.CLOSE, true));
     setTimeout(() => this.overlay.style.display = 'visible', 1);
   }
 
@@ -66,12 +67,14 @@ export default class Menu {
     // this.nav.classList.add('.site-nav--visible');
     document.body.classList.add('mobile-menu-open');
     this.button.setAttribute('aria-expanded', 'true');
+    this.button.setAttribute('aria-label', 'Close menu');
+    this.button.title =  'Close menu';
     this.container.style.display = 'block';
     if (this.isAnimating) {
       // TODO: currently no way to stop animation mid way
       this.animation.reverse();
     } else {
-      this.startAnimation(OPEN);
+      this.startAnimation(AnimationType.OPEN);
     }
   }
 
@@ -79,12 +82,14 @@ export default class Menu {
     this.overlay.classList.remove('mobile-menu__overlay--attached');
     // preventScroll(false);
     this.openState = false;
-    document.body.classList.remove('mobile-menu-open');
+    this.button.setAttribute('aria-label', 'Open menu');
     this.button.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('mobile-menu-open');
+    this.button.title =  'Close menu';
     if (this.isAnimating) {
       this.animation.reverse();
     } else {
-      this.startAnimation(CLOSE);
+      this.startAnimation(AnimationType.CLOSE);
     }
   }
 
@@ -127,7 +132,7 @@ export default class Menu {
     } else if (this.openState) {
       // resize the overlay to avoid glitches when orientation changes
       this.calculateDimensions();
-      anime(this.getOverlayAnimationProps(true, true));
+      anime(this.getOverlayAnimationProps(AnimationType.OPEN, true));
     }
   }
 
@@ -137,15 +142,15 @@ export default class Menu {
     const overlayAnimationProps = this.getOverlayAnimationProps(type);
     const menuItemAnimationProps = this.getMenuItemAnimationProps(type);
     this.animation = anime.timeline();
-    if (type === OPEN) {
+    if (type === AnimationType.OPEN) {
       this.animation.add(overlayAnimationProps).add({...menuItemAnimationProps, complete: this.onAnimationFinished});
     } else {
       this.animation.add(menuItemAnimationProps).add({...overlayAnimationProps, complete: this.onAnimationFinished});
     }
   }
 
-  private getOverlayAnimationProps(openNotClose: boolean, immediate: boolean = false) {
-    if (openNotClose) {
+  private getOverlayAnimationProps(type: AnimationType, immediate: boolean = false) {
+    if (type === AnimationType.OPEN) {
       return {
         targets: this.overlay,
         translateX: {
@@ -189,8 +194,8 @@ export default class Menu {
     }
   }
 
-  private getMenuItemAnimationProps(openNotClose: boolean, immediate: boolean = false) {
-    if (openNotClose) {
+  private getMenuItemAnimationProps(type: AnimationType, immediate: boolean = false) {
+    if (type === AnimationType.OPEN) {
       return {
         targets: this.menuItems,
         opacity: 1,

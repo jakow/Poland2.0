@@ -11,3 +11,4 @@ export * from './StaticPage';
 export * from './TeamMember';
 export * from './User';
 export * from './Venue';
+export * from './Enquiry';

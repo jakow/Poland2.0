@@ -30,13 +30,12 @@ $blur: 5px;
     width: 100%;
     will-change: opacity; // prepare the browser for opacity anim
     opacity: 0;
-    visibility: hidden;
-    z-index: 2;
+    z-index: 1;
+    transition: opacity $lazy-img-transition;
   }
    // .preview image is the blurry placeholder that first appears on the page
    // .original image is the high-res larger image
   .preview {
-    z-index: 1;
     filter: blur($blur);
   }
 
@@ -44,19 +43,19 @@ $blur: 5px;
     z-index: 3;
   }
 
+  .spinner-container {
+    z-index: 2;
+  }
+
   &.preview-loaded {
     .preview {
-      transition: opacity $lazy-img-transition;
       opacity: 1;
-      visibility: visible;
     }
   }
 
   &.loaded {
     .original {
-      transition: opacity $lazy-img-transition;
       opacity: 1;
-      visibility: visible;
     }
     .preview {
       // hide after original in view - mostly for ARIA purposes rather than visual presentation
@@ -66,7 +65,6 @@ $blur: 5px;
     }
     .spinner-container {
       opacity: 0;
-
     }
   }
 

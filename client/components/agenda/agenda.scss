@@ -201,7 +201,7 @@ a.agenda-event__permalink {
     z-index: 0;
   }
 
-  &:hover {
+  &:hover, &:focus {
     // never visible on mobile
     @include breakpoint($tablet) {
       .agenda-event__permalink-caption {
@@ -209,8 +209,6 @@ a.agenda-event__permalink {
       }
     }
   }
-
-
 }
 
 

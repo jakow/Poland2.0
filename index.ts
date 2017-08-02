@@ -1,4 +1,5 @@
 import 'source-map-support/register';
+import 'isomorphic-fetch';
 import * as express from 'express';
 import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
@@ -46,16 +47,21 @@ keystone.init({
 
 app.use(auth.initialize());
 
-app.use(config.staticRoot, serveStatic(config.staticDir, config.staticOptions));
+
+// serve static files through node in development,
+// otherwise delegate static files to nginx for performance reasons
+if (config.environment === 'development') {
+  app.use(config.staticRoot, serveStatic(config.staticDir, config.staticOptions));
+}
+
 if (config.environment === 'production') {
-  app.use(config.clientRoot, serveStatic(config.clientDir, config.staticOptions));
   // external, mongo-based session store. Built in store apparently leaks memory so needs to be replaced.
   keystone.set('session store', 'connect-mongo');
   // security options
   app.use(helmet({
     dnsPrefetchControl: false,
     hidePoweredBy: true,
-}));
+  }));
 }
 
 // Locals variables added for each rendered Pug template

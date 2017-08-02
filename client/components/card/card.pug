@@ -1,8 +1,18 @@
 include ../lazy-image/lazy-image
 
-mixin card(img, imgPlaceholder, imgRatio = '1:1')
-  .card(class=attributes.class)
-    .card__image
-      +lazy-image(img, imgPlaceholder, imgRatio)(alt=attributes.alt)
-    .card__content
+mixin card
+  .card&attributes(attributes)
       block
+
+
+mixin card-image(src, placeholder, imgRatio = '1:1')
+    .card__image
+      +lazy-image(src, placeholder, imgRatio)&attributes(attributes)
+
+mixin card-content
+  .card__content&attributes(attributes)
+    block
+
+mixin card-footer
+  footer&attributes(attributes)
+    block

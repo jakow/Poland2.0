@@ -16,13 +16,18 @@
     display: flex;
     justify-content: center;
     flex: 0 1 100%;
+    margin-bottom: 2*$vertical-baseline;
+  }
+  .sponsor__link {
+    display: block;
+    width: 100%;
   }
 }
+
 @include breakpoint($tablet) {
   @for $i from 2 to 6 {
     .sponsor-category__list--#{$i}-col {
       li {
-
         flex: 0 1 #{100% / $i};
       }
     }
@@ -31,10 +36,12 @@
 
 .sponsor {
   flex: 1;
-  padding: 0 0 $vertical-baseline;
-  @include breakpoint($tablet) {
-    padding: 0 1rem $vertical-baseline;
-  }
+  text-align: center;
+  // padding: 0 0 $vertical-baseline;
+  // @include breakpoint($tablet) {
+  //   padding: 0 1rem $vertical-baseline;
+  // }
+  padding: 0 1.5rem;
 }
 
 .sponsor__logo {

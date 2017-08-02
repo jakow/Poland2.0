@@ -27,7 +27,7 @@ $tablet: min-width 768px;
 $landscape: orientation landscape;
 $desktop: min-width 1024px;
 
-$site-width: 1200px;
+$site-width: 1024px;
 $site-padding: 1rem;
 
 @import 'theme/dimensions';
@@ -40,13 +40,6 @@ $site-padding: 1rem;
 @import 'mixins/parallax';
 
 // global layouts
-@import 'layout/header/header';
-@import 'layout/footer/footer';
-@import 'layout/nav/nav';
-@import 'layout/menu/menu';
-@import 'layout/loader/loader';
-@import 'layout/footer/footer';
-@import 'layout/sponsors/sponsors';
 @import 'components/banner/banner';
 @import 'components/spinner/spinner';
 @import 'components/lazy-image/lazy-image';
@@ -54,12 +47,22 @@ $site-padding: 1rem;
 @import 'components/button/button';
 @import 'components/form/form';
 @import 'components/agenda/agenda';
+@import 'components/modal/modal';
 @import 'components/animated-logo/animated-logo';
 @import 'components/responsive-video/responsive-video';
+@import 'layout/header/header';
+@import 'layout/footer/footer';
+@import 'layout/nav/nav';
+@import 'layout/menu/menu';
+@import 'layout/loader/loader';
+@import 'layout/footer/footer';
+@import 'layout/sponsors/sponsors';
+@import 'layout/contact-form/contact-form';
 // page layouts
 @import 'layout/speakers/speakers';
 
 @import 'views/home/home';
+@import 'views/about/about';
 
 html, body {
   margin: 0;
@@ -102,3 +105,15 @@ main {
   left: -99999999px;
   overflow: hidden;
 }
+
+
+// RESETS
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+:active {
+  outline: none;
+}
+

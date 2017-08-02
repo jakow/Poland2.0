@@ -1,5 +1,5 @@
 // dec
-declare module 'namespace.js'{
+declare module 'validate.js'{
 interface ValidateJS {
   (attributes: any, constraints: any, options?: any): any;
   async(attributes: any, constraints: any, options?: any): Promise<any>;

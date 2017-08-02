@@ -27,7 +27,7 @@ Speaker.add({
   position: {type: String},
   company: {type: String},
   photo: {type: Types.CloudinaryImage, autoCleanup: true },
-  description: {type: Types.Html, wysiwyg: true, height: 150},
+  description: {type: Types.Markdown, height: 150},
   edition: {type: Types.Relationship, ref: 'Edition', many: true},
 });
 

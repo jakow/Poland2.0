@@ -1,5 +1,6 @@
 import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
+import {AgendaDay} from './AgendaDay';
 const Types = keystone.Field.Types;
 
 function timeValidate(message = 'Invalid time entered') {
@@ -21,6 +22,7 @@ export interface AgendaEvent {
   speakers: keystone.Schema.Relationship;
   agendaDay: keystone.Schema.Relationship;
   venue: keystone.Schema.Relationship;
+  edition: keystone.Schema.Relationship;
 }
 
 export type AgendaEventDocument = keystone.ModelDocument<AgendaEvent>;
@@ -43,6 +45,24 @@ AgendaEvent.add({
   speakers: {type: Types.Relationship, ref: 'Speaker', many: true},
   agendaDay: {type: Types.Relationship, ref: 'AgendaDay'},
   venue: {type: Types.Relationship, ref: 'Venue'},
+  edition: {type: Types.Relationship, hidden: true, ref: 'Edition'},
+});
+
+// assign the same edition to agenda event as to the agenda day it belongs to
+AgendaEvent.schema.pre('save', async function(done) { // tslint:disable-line
+ const doc = this as AgendaEventDocument;
+ if (doc.agendaDay) {
+    try {
+      const day = await keystone.list<AgendaDay>('AgendaDay').model.findById(doc.agendaDay).exec();
+      doc.edition = day.edition;
+      done();
+    } catch (e) {
+      done(e);
+    }
+ } else {
+   done();
+ }
+
 });
 
 AgendaEvent.defaultColumns = 'name, time.start, time.end';

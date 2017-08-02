@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "@types/nodemailer": "^3.1.0",
     "animejs": "^2.0.2",
     "bluebird": "^3.5.0",
     "cloudinary": "^1.9.0",
@@ -22,6 +23,7 @@
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "mongoose": "^4.9.5",
+    "nodemailer": "^4.0.1",
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
     "pm2": "^2.4.6",
@@ -30,6 +32,7 @@
     "serve-static": "^1.12.3",
     "socket.io": "^1.7.3",
     "socket.io-client": "^2.0.1",
+    "socketio-jwt": "^4.5.0",
     "striptags": "^3.0.1",
     "validate.js": "https://github.com/ansman/validate.js.git"
   },

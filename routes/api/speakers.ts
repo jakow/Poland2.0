@@ -10,13 +10,14 @@ export const speakers = Router();
  * Get all speakers. Only speakers for current edition are sent.
  */
 async function getAll(req: Request, res: Response) {
-  const currentEdition = res.locals.currentEdition as Edition;
+  const currentEdition = await list<Edition>('Edition').model.findOne({current: true}).exec();
   if (currentEdition === null) {
     res.send([]);
     return;
   }
   try {
     const s = await list<Speaker>('Speaker').model.find({edition: currentEdition})
+      .select({description: 0})
       .populate({
         path: 'speakerCategory',
         select: 'displayName _id sortOrder',

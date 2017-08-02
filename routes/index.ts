@@ -49,9 +49,12 @@ router.get('/past-editions', views.pastEditions);
 router.all('/contact', views.contact);
 
 const allowCors = cors();
-router.use('/api', allowCors, api.login);
-router.use('/api/questions',  allowCors, api.questions);
-router.use('/api/speakers', allowCors, api.speakers);
+// router.options(/api*/, allowCors);
+router.all(/api*/, allowCors);
+router.use('/api/login', api.login);
+router.use('/api/questions', api.questions);
+router.use('/api/speakers', api.speakers);
+router.use('/api/events', api.events);
 
 // Static pages defined from Keystone admin
 router.get('/:staticRoute', middleware.getStaticPage); // dynamically registered static pages. Must be at bottom!

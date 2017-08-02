@@ -7,8 +7,10 @@ const animationParams = {
   captionTiming: 600,
 
 };
-export default class Loader {
-  public readonly progressBar: ProgressBar;
+
+class Loader {
+  public progressBar: ProgressBar;
+  private element: HTMLElement;
   private progressElem: HTMLElement;
   private logo: SVGSVGElement;
   private container: HTMLElement;
@@ -21,9 +23,21 @@ export default class Loader {
   private distanceToCenter: number;
   private captionDistance: number;
 
-  constructor(private element: HTMLElement) {
+  // list of resources
+  private resources: string[] = [];
+
+  constructor() {
     // create progressbar and obtain handles to elements
-    this.progressElem = element.querySelector('.loader__progress') as HTMLElement;
+    if (document.readyState === 'interactive') {
+      this.init();
+    } else {
+      document.addEventListener('DOMContentLoaded', () => this.init());
+    }
+  }
+
+  public init() {
+    this.element = document.querySelector('.loader') as HTMLElement;
+    this.progressElem = this.element.querySelector('.loader__progress') as HTMLElement;
     this.progressBar = new ProgressBar(this.progressElem as HTMLElement);
     this.container = this.element.querySelector('.loader__container') as HTMLElement;
     this.logo = this.element.querySelector('.loader__logo svg') as SVGSVGElement;
@@ -33,11 +47,16 @@ export default class Loader {
 
     this.computeDimensions();
     this.progressBar.onFinished = () => this.hide();
+    this.loadResources();
   }
 
-  public set progress(value: number) {
-    this.progressBar.progress = value;
+  public addResource(url: string) {
+    this.resources.push(url);
   }
+
+  // public set progress(value: number) {
+  //   this.progressBar.progress = value;
+  // }
 
   public get progress() {
     return this.progressBar.progress;
@@ -62,6 +81,16 @@ export default class Loader {
         document.body.classList.remove('prevent-scroll');
       },
     });
+  }
+
+  private async loadResources() {
+    // the resources should be cacheable
+    const nOfResources = this.resources.length;
+    this.resources.map( (r) => fetch(r).then((response) => {
+      this.progressBar.progress += 100 / nOfResources;
+    }));
+    // when all are done, the progress bar will resolve the on finished promise which will trigger
+    // the 'hide' event
   }
 
   private computeDimensions() {
@@ -117,3 +146,7 @@ export default class Loader {
     this.progressElem.classList.add('show');
   }
 }
+
+const loader = new Loader();
+
+export default loader;

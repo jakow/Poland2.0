@@ -5,7 +5,7 @@
 import {list, RawDocument} from 'keystone';
 import {Request, Response, NextFunction, Router} from 'express';
 import * as jsonPatch from 'json-patch';
-import {OK, UNPROCESSABLE_ENTITY, INTERNAL_SERVER_ERROR, NOT_FOUND} from 'http-status-codes';
+import {OK, CREATED, UNPROCESSABLE_ENTITY, INTERNAL_SERVER_ERROR, NOT_FOUND} from 'http-status-codes';
 import {UserDocument} from '../../models/User';
 // import {isAdmin} from '../../routes/api/auth';
 import {Question, QuestionDocument} from '../../models/Question';
@@ -57,8 +57,8 @@ async function create(req: Request, res: Response, next: NextFunction) {
     // prevent the user from self-accepting questions by adding 'accepted: true',
     // so only askedBy, text, forEvent and toPerson
     const {askedBy, text, forEvent, toPerson} = req.body;
-    const q = await questionModel().create({askedBy, text, forEvent});
-    res.send(q);
+    const q = await questionModel().create({askedBy, text, forEvent, toPerson});
+    res.status(CREATED).json(q);
     hooks.call('create', q);
   } catch (e) {
     if (e instanceof Error && e.name === 'ValidationError') {

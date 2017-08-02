@@ -1,5 +1,7 @@
 extends ../../layout/default/default
-
+include ../../mixins/opengraph
+include ../../mixins/twitter-card
+include ../../mixins/json-ld
 include ../../components/lazy-image/lazy-image
 include ../../components/animated-logo/animated-logo
 include ../../components/banner/banner
@@ -12,9 +14,16 @@ include ../../layout/sponsors/sponsors
 block append scripts
   script(src=assets("/home.js"))
   +googleMapKey
-block head
+block append head
+  //- Opengraph for rich facebook cards
+  +opengraph(opengraph)
+  //- Twitter card for rich twitter cards
+  +twitter-card(twitterCard)
+  //- JSON-Linked Data for google SEO
   if (currentEdition)
-    script(type="application/ld+json")!=JSON.stringify(linkedData.event(currentEdition, speakers, sponsors, contentControl))
+    +json-ld(linkedData.event(currentEdition, speakers, sponsors, contentControl))
+
+
 block content
   //- .baseline-grid
   //-   - for(let i = 0; i < 40; ++i)
@@ -33,9 +42,9 @@ block content
           | !{currentEdition.description} 
         else  
           | !{contentControl.description} 
-        .banner__whats-on  
-          p What's on?
-          a.button.button--circular.button--primary.button--icon.button--arrow-down(href="#" title="Explore the website")
+        //- .banner__whats-on  
+        //-   p What's on?
+        //-   a.button.button--circular.button--primary.button--icon.button--arrow-down(href="#" title="Explore the website")
             
     +banner-column('image')
       //- A slider with images
@@ -51,23 +60,14 @@ block content
           +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497536456/tprdqpldylorpccqpmg0.jpg', 900))
           +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497445653/DSC_0270n_rlkqba.jpg', 900))
 
-  section#testimonials.section--dark-background
-    .container
-      h2.center(style="color: white") Watch the promo video
-      if contentControl
-      .promo-video.responsive-video.responsive-video--with-loader
-        iframe(src="https://www.youtube.com/embed/63glh6e8SSI" frameborder="0" allowfullscreen)
-        .spinner
+  //- section#testimonials.section--dark-background
+  //-   .container
+  //-     h2.center(style="color: white") Watch the promo video
+  //-     if contentControl
+  //-     .promo-video.responsive-video.responsive-video--with-loader
+  //-       iframe(src="https://www.youtube.com/embed/63glh6e8SSI" frameborder="0" allowfullscreen)
+  //-       .spinner
 
-  //- Always guard against missing data!
-  //- if contentControl.showSpeakers && speakerCategories
-  //-   each category in speakerCategories
-  //-     h1= category.displayName
-  //-     each speaker in category.speakers
-  //-       //- img(src=speaker.photo.url, style="height: 25rem")
-  //-       h2=speaker.name
-  //-       +lazy-cl-image(speaker.photo,  400, '1:1', 'scroll')(style="max-width: 240px" alt=`Photo of ${speaker.name}`)
-  
   if contentControl.showSpeakers && speakerCategories
     +speakers(speakerCategories)
 
@@ -83,10 +83,6 @@ block content
   //-     'https://placehold.it/500x500',
   //-     '1:1', 'scroll')(alt='This is an image')
 
-  section#contact(style="background: #112233; padding: 1.5rem 0;")
-    .container.dark-bg
-      h2.center How can we help?
-      +contact-form#contact-form
 
   section#sponsors
     .container

@@ -1,4 +1,5 @@
 include ../../components/card/card
+include ../../components/modal/modal
 
 mixin speakers(speakerCategories)
   section#speakers
@@ -7,23 +8,46 @@ mixin speakers(speakerCategories)
     .container
       .center
         h2.bold.fat-heading.heading-stripe Speakers
-      each category in speakerCategories 
-        h3.fat-heading.center=category.displayName
-        ul.speaker-list
-          each speaker in category.speakers
-            li
-              +speakerCard(speaker)
+      each category in speakerCategories
+        //- Only show category if there are speakers
+        if category.speakers && category.speakers.length
+          h3.fat-heading.center=category.displayName
+          ul.card-list
+            each speaker in category.speakers
+              li
+                if (speaker.description)
+                  - const modalId = `speaker-${speaker.name.toLowerCase().replace(/\s+/g)}`;
+                  +modalOpenButton(modalId, `Learn more about ${speaker.name}`).speaker-card__modal-open
+                    +speakerCard(speaker)
+                  +speakerModal(modalId, speaker)
+                else
+                  +speakerCard(speaker)
 
 
 
 mixin speakerCard(speaker)
-  
     - const largeImg = imgTransform.limit(speaker.photo.secure_url, 400);
     - const smallImg = imgTransform.limit(speaker.photo.secure_url, 32);
-    +card(largeImg, smallImg)(alt=`Photo of ${speaker.name}`).speaker-card
-      .speaker-card__content 
-        .speaker-card__name=speaker.name
-        .speaker-card__position=speaker.position
+    +card.speaker-card
+      +card-image(largeImg, smallImg)(alt=`Photo of ${speaker.name}`)
+      +card-content
+        .card__heading.card__row=speaker.name
+        .card__row=speaker.position
         if speaker.company
-          .speaker-card__organization=speaker.company
+          .card__row.speaker-card__organization=speaker.company
+
+mixin speakerModal(modalId, speaker)
+  +modal(modalId, `About ${speaker.name}`)
+    .simple-modal
+      img.simple-modal__img(src=imgTransform.limit(speaker.photo.secure_url, 400))
+      .simple-modal__content
+        header
+          h4.simple-modal__heading=speaker.name
+          if speaker.company
+            p.simple-modal__subheading=`${speaker.position} at ${speaker.company}`
+          else
+            p.simple-modal__subheading=`${speaker.position}`
+        - console.log(speaker.description)
+        div!=speaker.description.html
+
           

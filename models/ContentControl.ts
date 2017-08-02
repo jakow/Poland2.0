@@ -29,6 +29,7 @@ export interface ContentControl {
   twitterUrl: string;
   linkedinUrl: string;
   snapchatUrl: string;
+  opengraphImage: string;
   gaTrackingID: string;
   bylawLink: string;
   // SEO
@@ -82,6 +83,7 @@ ContentControl.add(
   twitterUrl: {type: Types.Url, label: 'Twitter URL'},
   linkedinUrl: {type: Types.Url, label: 'LinkedIn URL'},
   snapchatUrl: {type: Types.Url, label: 'Snapchat URL'},
+  opengraphImage: String,
   gaTrackingID: {type: String, label: 'Google Analytics Tracking ID'},
 },
 'Legal',

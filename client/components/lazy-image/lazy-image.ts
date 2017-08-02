@@ -15,12 +15,8 @@ class LazyImage {
   constructor(private container: HTMLElement) {
     this.method = this.container.dataset.method;
     this.preview = this.container.querySelector('img.preview') as HTMLImageElement;
-    this.original = this.container.querySelector('img.original') as HTMLImageElement;
-    if (this.preview === null || this.original === null) {
-      throw new Error(`Container element ${container.tagName}.${container.className}` +
-        `does not have the required children preview and original`);
-    }
     this.previewSrc = this.preview.src;
+    this.original = this.container.querySelector('img.original') as HTMLImageElement;
     this.originalSrc = this.container.dataset.src;
     // this.yPosition = this.container.offsetTop;
     this.showPreview();

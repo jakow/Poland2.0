@@ -7,7 +7,7 @@ const ERROR_CLASS = 'form-field--error';
 const DEBOUNCE_AMOUNT = 500;
 
 const PHONE_REGEX = /^\s*\+?(\d(\s|\-)?)*$/; // permit spaces, dashes and a leading plus
-validate.validators.phone = (value: any, options: any, key: any, attributes: any) => {
+(validate.validators as any).phone = (value: any, options: any, key: any, attributes: any) => {
   if (!PHONE_REGEX.test(value)) {
     return options.message || 'is not a valid phone number';
   }
@@ -91,17 +91,26 @@ export default class Form {
    */
   public async submit(data: any) {
     const url = this.form.action;
+    let response: Response;
+    let result: any;
     try {
-      const response = await fetch(url, {
+      response = await fetch(url, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
-      this.onSubmitSuccess(await response.json());
+      result = response.json();
+      this.handleSubmitSuccess(result);
     } catch (e) {
-      this.onSubmitError(e);
+      this.handleSubmitError(e);
+    }
+  }
+
+  public clear() {
+    for (const field of this.getFields()) {
+      field.value = '';
     }
   }
 
@@ -110,7 +119,7 @@ export default class Form {
    * Override this method in your subclass.
    * @param response The successful JSON response object from server
    */
-  public onSubmitSuccess(response: any) {
+  public handleSubmitSuccess(response: any) {
     console.log(response);
   }
 
@@ -118,7 +127,7 @@ export default class Form {
    * Handle error returned when form was not successfully submitted.
    * @param error The error returned by the server
    */
-  public onSubmitError(error: any) {
+  public handleSubmitError(error: any) {
     console.error(error);
   }
 

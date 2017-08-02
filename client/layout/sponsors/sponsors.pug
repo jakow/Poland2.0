@@ -1,20 +1,54 @@
+include ../../components/modal/modal
 include ../../components/lazy-image/lazy-image
+
 mixin sponsors(sponsorCategories)
   div.center
     h2.bold.heading-stripe Partners
   each category in sponsorCategories
     .sponsor-category
+      - const categoryName = 'category-' + category.name.toLowerCase().replace(/\s+/g, '-');
+        //- create an inline style limiting the width of images 
+      if category.imageAdjust.width || category.imageAdjust.height
+        +category-inline-style(categoryName, category.imageAdjust.width, category.imageAdjust.height)
       h2=(category.sponsors.length > 1) ? category.name : category.singular
-      ul.sponsor-category__list(class=`sponsor-category__list--${category.perColumn}-col`)
+      ul.sponsor-category__list(class=`sponsor-category__list--${category.perColumn}-col ${categoryName}`)
         each sponsor in category.sponsors
-          li
-            +sponsor(sponsor, category.imageAdjust.width)
-
+          li 
+            +sponsor(sponsor)
 
   
-mixin sponsor(sponsor, width=`${5/4*12}rem`, ratio='5:4')
-  .sponsor
-      //- the assumption is that the logos are svgs so do not require placeholders
-      //- still we load them lazily
-      +lazy-image(sponsor.logo.secure_url, null, ratio)(style=`max-width: ${width}` alt=sponsor.name).sponsor__logo
-      span.sr-only=sponsor.name
+mixin sponsor(sponsor)
+  - const ratio = sponsor.logo.width / sponsor.logo.height;
+  if sponsor.description
+    - const modalId = `modal-${sponsor._id}`;
+    +modalOpenButton(modalId).sponsor__link(title=`Read about ${sponsor.name}`)
+      .sponsor
+          +lazy-image(sponsor.logo.secure_url, null, ratio)(alt=sponsor.name).sponsor__logo
+          //- img(src=sponsor.logo.secure_url alt=sponsor.name)
+          span.sr-only=sponsor.name
+    +modal(modalId, `About ${sponsor.name}`)
+      .simple-modal
+        img.simple-modal__img(src=sponsor.logo.secure_url)
+        .simple-modal__content
+          header
+            h4.simple-modal__heading=sponsor.name
+          div!=sponsor.description
+  else
+    a(href=sponsor.url title=`Go to ${sponsor.name}'s webpage`).sponsor__link
+      .sponsor
+        +lazy-image(sponsor.logo.secure_url, null, ratio)(alt=sponsor.name).sponsor__logo
+        //- img(src=sponsor.logo.secure_url alt=sponsor.name)
+        span.sr-only=sponsor.name 
+
+
+
+mixin sponsor-description(sponsor)
+  .sponsor__modal
+
+
+mixin category-inline-style(categoryName, maxWidth, maxHeight)
+    style.
+      .category-#{categoryName} img {
+          #{category.imageAdjust.width  ? 'max-width:'  + maxWidth   : '' }
+          #{category.imageAdjust.height ? 'max-height:' + maxHeight  : '' }
+      }

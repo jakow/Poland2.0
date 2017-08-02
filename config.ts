@@ -22,27 +22,24 @@ export const clientRoot = '/static/client';
 
 export const staticOptions = {
   cacheControl: true,
-  // thanks to cache busting the resources are cacheable with no penalty
-  maxAge: '180 days',
+  // thanks to webpack cache busting the js/css assets are cacheable with no penalty
+  maxAge: '365 days',
 };
-// export const staticDirs = {
-//   public: publicDir,
-//   client: isBuild ? path.join('client') : path.join('build', 'client'),
-// };
-
-// export const staticDirs = {
-// }
 
 export const viewsDir = path.resolve('client', 'views');
 
 const loaded = !!dotenv.config({path: path.join(rootDir, '.env'), silent: true});
 if (!loaded) {
-  console.info('.env missing. Relying on preset environment variables.');
+  console.warn('.env missing. Relying on preset environment variables.');
 }
+
+export const canonicalUrl: string = 'https://poland20.com';
+
+export const logoUrl: string = 'https://poland20.com/static/images/logo.svg';
 
 export const port: number =  process.env.OPENSHIFT_NODEJS_PORT || process.env.NODE_ENV === 'staging' ? 5000 :  4000;
 
-export const host: string = process.env.OPENSHIFT_NODEJS_IP || 'localhost';
+export const host: string = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
 export const mongo: string = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URI ||
   'mongodb://localhost/poland-20';
@@ -58,3 +55,18 @@ export const googleMapsBrowserKey: string = process.env.GOOGLE_BROWSER_KEY;
 export const trackingId: string = process.env.TRACKING_ID;
 
 export const viewEngine = 'pug';
+
+export const notificationEmail = process.env.EMAIL_USERNAME;
+
+export const nodemailerConfig = {
+  // host: process.env.EMAIL_HOST,
+  // port: process.env.EMAIL_PORT,
+  // secure: true,
+  service: 'Zoho',
+  auth: {
+    user: process.env.EMAIL_USERNAME,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+};
+
+export const targetEmail = process.env.TARGET_EMAIL;

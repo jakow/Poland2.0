@@ -1,3 +1,6 @@
+include ../../components/modal/modal
+include ../../layout/contact-form/contact-form
+
 mixin footer
   footer.site-footer
     .site-footer__container
@@ -16,8 +19,14 @@ mixin footer
         .site-footer__separator
         .site-footer__links
           a(href=contentControl.bylawLink) By-law for Poland 2.0
-          a(href="/contact") Contact
+          +modalOpenButton("contact-form-modal", "/contact")(title="Open contact form") Contact
         .site-footer__copyright
           small © #{moment().year()} Poland 2.0
-        .site-footer__credits
+        address.site-footer__credits
           small Created by <a href="https://github.com/jakow" target="_blank">Jakub Kowalczyk</a>
+
+    +modal("contact-form-modal", "Contact form")
+      .dark-bg
+        h2.center How can we help?
+        +contact-form#contact-form
+    

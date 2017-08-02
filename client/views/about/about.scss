@@ -1,0 +1,129 @@
+.about {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+.about__banner {
+  text-align: center;
+  padding: 3*$vertical-baseline 0 $vertical-baseline;
+}
+
+.about__background {
+  z-index: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  min-height: calc(100vh - #{$header-height});
+}
+
+.about__background--img { 
+  background: url('/static/images/about-banner.png') no-repeat top center/cover;
+}
+
+.about__background--gradient {
+  background: linear-gradient(180deg, rgba(255,255,255, 0.25), #fff);
+}
+
+
+.about__content {
+  padding: 0 $site-padding;
+  z-index: 2;
+}
+
+.about__logo {
+  img {
+    max-height: 10*$vertical-baseline;
+  }
+  margin-bottom: $vertical-baseline;
+}
+
+.about__main {
+  display: flex;
+}
+
+// .about__two-column-layout {
+//   display: flex;
+//   flex-direction: column;
+//   @include breakpoint($tablet) {
+//     flex-direction: row;
+//   }
+// }
+
+// .about__column {
+//   padding-right: 1rem;
+//   flex: 0 1 50%;
+//   &:last-child {
+//     padding-right: 0;
+//   }
+// }
+
+.about__mission {
+  margin: 0 auto;
+  max-width: 60/2*$vertical-baseline;
+  text-align: justify;
+}
+
+.about__heading {
+  h2 {
+    margin-bottom: $vertical-baseline;
+  }
+  p {
+    @include sgl-heading(2);
+    margin: 0 0 $vertical-baseline;
+  }
+  text-align: center;
+  margin-bottom: $vertical-baseline;
+}
+
+.about__column-header {
+  text-align: center;
+  p {
+    margin-top: 0;
+  }
+}
+
+.about__team {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  > li {
+    flex: 1 0 100%;
+    padding: 0 0.5rem $vertical-baseline;
+    @include breakpoint($mobile-landscape) {
+      flex-basis: 50%;
+    }
+    @include breakpoint($tablet) {
+      flex-basis: 25%;
+    }
+  }
+}
+
+ul.team-card__contact-links {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  &:empty {
+    display: none;
+  }
+  > li a {
+    color: $color-gray-dark;
+    display: block;
+    text-align: center;
+    width: 2*$vertical-baseline;
+    &:hover {
+      color: darken($color-gray-dark, 10%);
+    }
+  }
+  [class^="ion"] {
+    display: block;
+    font-size: 1.25*$vertical-baseline;
+    line-height: 2*$vertical-baseline;
+  }
+}

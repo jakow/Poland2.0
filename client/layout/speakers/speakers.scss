@@ -25,38 +25,8 @@
   background-position: bottom;
   background-image: url(https://res.cloudinary.com/dg1royeho/image/upload/v1500036070/DSC_0361n_desaturated_mhcrqh.jpg);
 }
-ul.speaker-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  list-style: none;
-  margin: 0 0 $vertical-baseline;
-  padding: 0;
-  align-items: stretch;
 
-  li {
-    flex: 1 0 auto;
-    margin-bottom: $vertical-baseline;
-    display: flex;
-    justify-content: center;
-    > * {
-      flex: none;
-    }
-  }
-}
-
-.speaker-card {
-  margin: 0 4px;
-  @include breakpoint($tablet) {
-    margin: 0 12px;
-  }
-}
-
-.speaker-card__content {
-  text-align: center;
-}
-.speaker-card__name {
-  @include sgl-heading(1);
-  font-weight: 400;
-  margin: 0;
+a.speaker-card__modal-open {
+  text-decoration: none;
+  color: inherit;
 }

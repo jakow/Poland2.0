@@ -6,7 +6,6 @@ const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 const nodeExternals = require('webpack-node-externals');
 const AssetsPlugin = require('assets-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
-console.log(path.resolve());
 
 const postcssPlugins = (loader) => ([
   require('autoprefixer')(),
