@@ -59,19 +59,20 @@ export const home: RequestHandler = async (req, res, next) => {
 
   // set opengraph
   const description = currentEdition ? currentEdition.caption : '';
+  const image = contentControl.opengraphImage && contentControl.opengraphImage.secure_url;
   const opengraph: Opengraph = {
     title,
     description,
+    image,
     url: canonicalUrl,
-    image: contentControl.opengraphImage.secure_url,
   };
   res.locals.opengraph = opengraph;
 
   const twitterCard: TwitterCard = {
     title,
     description,
+    image,
     site: twitterUsername(contentControl.twitterUrl),
-    image: contentControl.opengraphImage.secure_url,
   };
   res.locals.twitterCard = twitterCard;
 

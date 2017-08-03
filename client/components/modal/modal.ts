@@ -21,7 +21,7 @@ export default class Modal {
       this.closeButton.addEventListener('click', this.onCloseClick);
     }
     // use the aria-controls attribute to find the controlling button
-    this.openButton = document.querySelector(`a[aria-controls="${this.container.id}"`) as HTMLAnchorElement;
+    this.openButton = document.querySelector(`a[aria-controls="${this.container.id}"]`) as HTMLAnchorElement;
     if (this.openButton) {
       this.openButton.addEventListener('click', this.onOpenClick);
       this.openButton.setAttribute('aria-expanded', 'false');
