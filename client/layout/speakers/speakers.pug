@@ -47,7 +47,6 @@ mixin speakerModal(modalId, speaker)
             p.simple-modal__subheading=`${speaker.position} at ${speaker.company}`
           else
             p.simple-modal__subheading=`${speaker.position}`
-        - console.log(speaker.description)
         div!=speaker.description.html
 
           

@@ -38,10 +38,7 @@ block content
               time.banner__date(datetime=currentEdition.isoString)=`${currentEdition.dateString}` 
               span.banner__separator
               span.banner__place=`${currentEdition.venue.name}`
-        if currentEdition && currentEdition.description
-          | !{currentEdition.description} 
-        else  
-          | !{contentControl.description} 
+          div!=contentControl.description 
         //- .banner__whats-on  
         //-   p What's on?
         //-   a.button.button--circular.button--primary.button--icon.button--arrow-down(href="#" title="Explore the website")
@@ -60,13 +57,13 @@ block content
           +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497536456/tprdqpldylorpccqpmg0.jpg', 900))
           +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497445653/DSC_0270n_rlkqba.jpg', 900))
 
-  //- section#testimonials.section--dark-background
-  //-   .container
-  //-     h2.center(style="color: white") Watch the promo video
-  //-     if contentControl
-  //-     .promo-video.responsive-video.responsive-video--with-loader
-  //-       iframe(src="https://www.youtube.com/embed/63glh6e8SSI" frameborder="0" allowfullscreen)
-  //-       .spinner
+  if contentControl.video.enable
+    section#testimonials.section--dark-background
+    .container
+        h2.center(style="color: white") Watch the promo video
+        .promo-video.responsive-video.responsive-video--with-loader
+          .spinner
+          iframe(src=contentControl.video.url frameborder="0" allowfullscreen)
 
   if contentControl.showSpeakers && speakerCategories
     +speakers(speakerCategories)
@@ -86,6 +83,9 @@ block content
 
   section#sponsors
     .container
-      +sponsors(sponsorCategories)
+      if contentControl.showSponsors
+        +sponsors(sponsorCategories)
+      else if contentControl.showPreviousSponsors
+        +previous-sponsors(previousSponsors)
 
     //- p= JSON.stringify(speakers)

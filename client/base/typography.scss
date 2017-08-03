@@ -1,7 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,700&subset=latin-ext');
-// @import url('https://cdn.jsdelivr.net/font-entypo/0.1/dev/entypo.css');
-// @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
-@import url('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,700&subset=latin-ext");
 
 $body-font: 'Source Sans Pro', 'Helvetica Neue', 'Segoe UI', sans-serif;
 $base-font-size: 16px;
@@ -104,13 +101,23 @@ small {
   color: $color-gray-dark;
 }
 
+
 .subtitle {
   font-weight: 300;
-  &.for-h1 {
-    @include sgl-heading(1);
-    margin-bottom: $vertical-baseline;
-  }
+  @include sgl-heading(1);
+  margin-bottom: $vertical-baseline;
 }
+
+h1 + .subtitle {
+  @include sgl-heading(2);
+  margin: 0 0 $vertical-baseline;
+}
+
+h2 + .subtitle {
+  @include sgl-heading(1);
+  margin: 0 0 $vertical-baseline;
+}
+
 
 // ::selection {
 //   background-color: $color-primary;
@@ -126,22 +133,12 @@ small {
   }
 }
 
-// entypo icon resets
-[class^="icon-"], [class*=" icon-"] {
-  width: initial;
-  margin: 0 !important;
-}
-
-.right-icon {
+.icon-right {
   margin-left: $base-font-size/4;
 }
 
-.left-icon {
+.icon-left {
   margin-right: $base-font-size/4;
-}
-
-[class*="entypo-"]:before {
-  font-family: 'entypo', sans-serif;
 }
 
 .icon {
@@ -252,5 +249,13 @@ $underline-height: 7px;
     background-image: url('/static/images/stripe.svg');
     background-size: auto 100%;
     background-repeat: repeat-x;
+  }
+}
+
+// cookie consent window should also use Source sans
+.cc-window {
+  font-family: inherit;
+  .cc-btn {
+    border-radius: 2px !important;
   }
 }

@@ -15,6 +15,7 @@ import {initSockets} from './routes/sockets';
 import * as auth from './routes/api/auth';
 import imageHelpers from './routes/helpers/cloudinary';
 import createAssetStore from './routes/helpers/assets';
+
 (mongoose as any).Promise = Promise;
 
 const app = express();
@@ -46,7 +47,6 @@ keystone.init({
 });
 
 app.use(auth.initialize());
-
 
 // serve static files through node in development,
 // otherwise delegate static files to nginx for performance reasons

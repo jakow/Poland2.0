@@ -27,3 +27,7 @@ export function ordinalSuperscripts(text: string): string {
 function notEmpty(s?: string) {
   return s != null && s.length > 0;
 }
+
+export function slugify(str: string) {
+  return str.replace(/\s+/g, '-').toLowerCase();
+}

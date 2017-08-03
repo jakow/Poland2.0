@@ -1,8 +1,6 @@
 import {list} from 'keystone';
-import {Edition, EditionDocument} from '../models/Edition';
+import {Edition} from '../models/Edition';
 import {ContentControl} from '../models/ContentControl';
-import {Sponsor} from '../models/Sponsor';
-import {SponsorCategory} from '../models/SponsorCategory';
 import {StaticPage} from '../models/StaticPage';
 import {RequestHandler, Request, Response, NextFunction} from 'express';
 import {environment} from '../config';
@@ -29,22 +27,6 @@ export async function getContentControl(req: Request, res: Response, next: NextF
   }
 }
 
-export async function getSponsorsByCategory(req: Request, res: Response, next: NextFunction) {
-  const currentEdition = res.locals.currentEdition as EditionDocument;
-  try {
-    const sponsors = await list<Sponsor>('Sponsor')
-      .model.find({edition: currentEdition, category: {$ne: null}}).exec();
-    const sponsorCategories = await list<SponsorCategory>('SponsorCategory')
-      .model.find({edition: currentEdition}).exec();
-    const sponsorsByCategory = reversePopulate(sponsorCategories, 'sponsors', sponsors, 'category');
-    res.locals.sponsorCategories = sponsorsByCategory;
-    res.locals.sponsors = sponsors;
-    next();
-  } catch (e) {
-    next(e);
-  }
-}
-
 interface NavItem {
   name: string; // display name
   route: string; // where it goes
@@ -58,16 +40,11 @@ interface NavItem {
  * or replace it with your own templates / logic.
  */
 export async function initLocals(req: Request, res: Response, next: NextFunction) {
-  let staticPages;
   const contentControl = res.locals.contentControl as ContentControl;
-  try {
-    staticPages = await list<StaticPage>('StaticPage').model
-      .find({active: true, showInMenu: true})
-      .select({name: true, route: true})
-      .exec();
-  } catch (e) {
-    next(e);
-  }
+  const staticPages = await list<StaticPage>('StaticPage').model
+    .find({active: true, showInMenu: true})
+    .select({name: true, route: true}).exec();
+
   const nav: NavItem[] = [
     {name: 'About', route: '/about', key: 'about'},
     ...contentControl.showSpeakers ? [{name: 'Speakers', route: '/#speakers', key: 'speakers'}] : [],

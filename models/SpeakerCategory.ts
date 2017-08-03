@@ -7,6 +7,7 @@ export interface SpeakerCategory {
   displayName: string;
   edition: keystone.Schema.Relationship;
   moreToCome: boolean;
+  sortOrder: number;
 }
 
 export type SpeakerCategoryDocument = keystone.Document<SpeakerCategory>;
@@ -15,11 +16,13 @@ const SpeakerCategory = new keystone.List<SpeakerCategory>('SpeakerCategory', {
   autokey: { from: 'name', path: 'key', unique: true },
   sortable: true,
   sortContext: 'Edition:sponsor-categories',
+  defaultSort: '-sortOrder',
 });
 
 SpeakerCategory.add({
   name: { type: String, required: true },
   displayName: {type: String, required: true, initial: true},
+  sortOrder: {type: Number, label: 'Sort order (higher is more important)'},
   edition: {type: Types.Relationship, ref: 'Edition', many: true},
   moreToCome: {type: Boolean, label: 'More speakers to come?'},
 });

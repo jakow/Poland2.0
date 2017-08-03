@@ -115,8 +115,8 @@
     "build": "yarn run clean && yarn build:server && yarn build:client",
     "test": "mocha -r ts-node/register test/**/*.ts",
     "clean": "rimraf build/*",
-    "deploy:staging": "tools/deploy-staging.sh",
-    "deploy:production": "tools/deploy-production.sh"
+    "deploy:staging": "yarn build && tools/deploy-staging.sh",
+    "deploy:production": "yarn build && tools/deploy-production.sh"
   },
   "main": "keystone.js"
 }

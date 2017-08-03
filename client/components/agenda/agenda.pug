@@ -4,7 +4,7 @@ mixin agenda(agenda)
   .agenda__heading
     h2.bold.fat-heading.heading-stripe Agenda
   .agenda
-    .agenda__timeline
+    
     ol.agenda-days
       each day in agenda.days
     
@@ -19,7 +19,8 @@ mixin agenda(agenda)
             ol.agenda-day__events
               each event in day.events
                 +agenda-event(event, dayMoment)
-
+    //- long line with an arrow pointing down             
+    .agenda__timeline
 
 
 mixin agenda-event(event, dayMoment)

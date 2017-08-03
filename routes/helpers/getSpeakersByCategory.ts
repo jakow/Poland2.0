@@ -12,7 +12,7 @@ export default async function getSpeakersByCategory(edition: EditionDocument) {
     // store a handle to all speakers as well
   // const speakerCategories = await list<SpeakerCategory>('SpeakerCategory').model.find({edition}).exec();
   const [speakers, speakerCategories] = await Promise.all([
-    list<Speaker>('Speaker').model.find({ edition, speakerCategory: { $ne: null } }).exec(),
+    list<Speaker>('Speaker').model.find({ edition, speakerCategory: { $ne: null } }).sort('-sortOrder').exec(),
     list<SpeakerCategory>('SpeakerCategory').model.find({ edition }).exec(),
   ]);
   return reversePopulate(speakerCategories, 'speakers', speakers, 'speakerCategory');

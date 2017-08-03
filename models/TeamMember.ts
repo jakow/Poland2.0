@@ -27,7 +27,7 @@ TeamMember.add({
   position: {type: String},
   occupation: {type: String},
   photo: {type: Types.CloudinaryImage, width: 400, height: 400},
-  description: {type: Types.Html, wysiwyg: true},
+  description: {type: Types.Markdown},
   email: {type: Types.Email},
   linkedin: {type: Types.Url},
   // related to edition

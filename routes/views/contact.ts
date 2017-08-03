@@ -49,15 +49,22 @@ const contactFormConstraints = {
   },
 };
 
+// TODO: add a spam-busting solution
 export const contact: RequestHandler = async (req, res, next) => {
   const method = req.method;
   const view = new View(req, res);
+  const isAjax = req.params.ajax;
   if (method !== 'POST') {
+    // not a valid contact endpoint
     return next();
+  }
+  // likely not a real user but a bot
+  if (!isAjax) {
+    return next(); // 404
   }
   const formData =  pick(req.body, enquiryFields) as Enquiry;
   const errors = validate(formData, contactFormConstraints);
-  // const isAjax = req.params.ajax;
+
   if (errors) {
     res.status(UNPROCESSABLE_ENTITY).json({message: 'error', errors});
   } else {

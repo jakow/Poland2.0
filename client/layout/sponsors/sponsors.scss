@@ -12,11 +12,18 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  li {
+  align-items: center;
+
+  > li {
     display: flex;
     justify-content: center;
     flex: 0 1 100%;
     margin-bottom: 2*$vertical-baseline;
+  }
+  // restrict the height of all images
+  .lazy-img {
+    max-width: 12*$vertical-baseline;
+    max-height: 7*$vertical-baseline;
   }
   .sponsor__link {
     display: block;

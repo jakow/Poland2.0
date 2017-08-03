@@ -17,34 +17,26 @@ $blur: 5px;
   position: relative;
   overflow: hidden;
   // will have clip border radius
-  z-index: 0;
   .preview, .original {
+    // instead of positioning with top: 0 and left: 0 we can restrict the image height artificially,
+    // while also maintaining the height
     position: absolute;
-    // left: 0 - 1*$blur;
-    // top: 0 - 1*$blur;
-    // width: calc(100% + #{2*$blur});
-    // If we can accept the edges bluring with the background color then
-    // the image can have the correct
-    left: 0;
-    top: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    // respect max-height of parent
+    max-height: inherit;
+    // fill parent - important for the placeholders which otherwise will respect their natural (small) size
     width: 100%;
-    will-change: opacity; // prepare the browser for opacity anim
     opacity: 0;
-    z-index: 1;
+  // opacity animation
+    will-change: opacity;
     transition: opacity $lazy-img-transition;
   }
-   // .preview image is the blurry placeholder that first appears on the page
-   // .original image is the high-res larger image
+
+  // add a blur to the preview
   .preview {
     filter: blur($blur);
-  }
-
-  .original {
-    z-index: 3;
-  }
-
-  .spinner-container {
-    z-index: 2;
   }
 
   &.preview-loaded {
@@ -66,12 +58,10 @@ $blur: 5px;
     .spinner-container {
       opacity: 0;
     }
-  }
-
-
-  &.loaded .spinner {
-    transition-delay: $lazy-img-transition-duration;
-    visibility: hidden;
+    .spinner {
+      transition-delay: $lazy-img-transition-duration;
+      visibility: hidden;
+    }
   }
 
   noscript .original {
@@ -79,15 +69,18 @@ $blur: 5px;
     opacity: 1;
     visibility: visible;
   }
-}
-
-
-@each $numerator, $denominators in $predef-ratios {
-  @each $denominator in $denominators {
-    .lazy-img .ratio-#{$numerator}-to-#{$denominator} {
-      // display: inline-block;
-      padding-bottom: percentage($denominator/$numerator);
+  
+  // handle predefined padding for lazy images
+  @each $numerator, $denominators in $predef-ratios {
+    @each $denominator in $denominators {
+      .ratio-#{$numerator}-to-#{$denominator} {
+        // display: inline-block;
+        padding-bottom: percentage($denominator/$numerator);
+      }
     }
   }
 }
+
+
+
 

@@ -16,7 +16,9 @@ const EXPANDED_CLASS = 'agenda-event--expanded';
 export default class Agenda {
 
   constructor(private container: Element) {
-
+    if (!container) {
+      throw new Error('no container for agenda element');
+    }
     container.addEventListener('click', (ev) => {
       const target = ev.target as Element;
       // find the parent anchor element

@@ -2,21 +2,29 @@ include ../../components/modal/modal
 include ../../components/lazy-image/lazy-image
 
 mixin sponsors(sponsorCategories)
-  div.center
-    h2.bold.heading-stripe Partners
-  each category in sponsorCategories
-    .sponsor-category
-      - const categoryName = 'category-' + category.name.toLowerCase().replace(/\s+/g, '-');
-        //- create an inline style limiting the width of images 
-      if category.imageAdjust.width || category.imageAdjust.height
-        +category-inline-style(categoryName, category.imageAdjust.width, category.imageAdjust.height)
-      h2=(category.sponsors.length > 1) ? category.name : category.singular
-      ul.sponsor-category__list(class=`sponsor-category__list--${category.perColumn}-col ${categoryName}`)
-        each sponsor in category.sponsors
-          li 
-            +sponsor(sponsor)
+  if (sponsorCategories)
+    div.center
+      h2.bold.heading-stripe Partners
+    each category in sponsorCategories
+      .sponsor-category
+        - const categoryName = slugify(category.name);
+        - const categoryClass = 'sponsor-category__list--' + categoryName; 
+        +category-inline-style(category)
+        if (category.showName)
+          h2=(category.sponsors.length > 1) ? category.name : category.singular
+        ul.sponsor-category__list(class=`sponsor-category__list--${category.perColumn}-col ${categoryClass}`)
+          each sponsor in category.sponsors
+            li: +sponsor(sponsor)
 
-  
+mixin previous-sponsors(sponsors)
+  if (sponsors && sponsors.length)
+    div.center
+      h2.bold.heading-stripe Partners
+      p.subtitle Previously, Poland 2.0 has partnered up with the following companies, organisations and agencies:
+    ul.sponsor-category__list.sponsor-category__list--4-col
+      each sponsor in sponsors
+        li: +sponsor(sponsor)
+
 mixin sponsor(sponsor)
   - const ratio = sponsor.logo.width / sponsor.logo.height;
   if sponsor.description
@@ -46,9 +54,11 @@ mixin sponsor-description(sponsor)
   .sponsor__modal
 
 
-mixin category-inline-style(categoryName, maxWidth, maxHeight)
+mixin category-inline-style(category)
+  if category.imageAdjust.width || category.imageAdjust.height
+    - const categoryName = slugify(category.name);
+    - const categoryClass = 'sponsor-category__list--' + categoryName; 
+    - const maxWidth = category.imageAdjust.width;
+    - const maxHeight = category.imageAdjust.height;
     style.
-      .category-#{categoryName} img {
-          #{category.imageAdjust.width  ? 'max-width:'  + maxWidth   : '' }
-          #{category.imageAdjust.height ? 'max-height:' + maxHeight  : '' }
-      }
+      .sponsor-category__list.#{categoryClass} .lazy-img { #{maxWidth  ? 'max-width: '  + maxWidth  + ';' : '' } #{maxHeight ? 'max-height: ' + maxHeight + ';' : '' }}

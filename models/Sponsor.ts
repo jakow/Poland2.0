@@ -13,6 +13,7 @@ export interface Sponsor  {
   };
   edition: keystone.Schema.Relationship;
   category: keystone.Schema.Relationship;
+  showInPrevious: boolean;
 }
 
 export type SponsorDocument = keystone.Document<Sponsor>;
@@ -21,7 +22,7 @@ const Sponsor = new keystone.List<Sponsor>('Sponsor', {
   autokey: { from: 'name', path: 'key', unique: true },
   map: {name: 'name'},
   sortable: true,
-  sortContext: 'Edition:sponsors',
+  sortContext: 'SponsorCategory:sponsors',
 });
 
 Sponsor.add({
@@ -37,11 +38,13 @@ Sponsor.add({
   edition: {type: Types.Relationship, ref: 'Edition', many: true},
   // and to a sponsor category
   category: {type: Types.Relationship, ref: 'SponsorCategory'},
+  // show previous sponsors
+  showInPrevious: { type: Boolean, label: 'Show in previous partner list' },
 });
 
 // handle users being silly and not adding a http to the document
 Sponsor.schema.pre('save', function(this: SponsorDocument, done: () => void) {
-  if (!this.url.startsWith('http://')) {
+  if (!this.url.startsWith('http')) {
     this.url = 'http://' + this.url;
   }
   done();

@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
       lazyLoading: true,
       a11y: true,
     });
-
-  const agenda = new Agenda(document.querySelector('.agenda'));
+  const agendaContainer = document.querySelector('.agenda');
+  if (agendaContainer) {
+    const agenda = new Agenda(agendaContainer);
+  }
 });

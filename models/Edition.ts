@@ -28,9 +28,8 @@ export interface Edition {
 export type EditionDocument = keystone.Document<Edition>;
 
 const Edition = new keystone.List<Edition>('Edition', {
-  map: { name: 'name' },
-  autokey: { from: 'year', path: 'slug', unique: true },
   defaultSort: '-year',
+  autokey: {from: 'name', path: 'slug', unique: true},
 });
 
 Edition.add({
@@ -38,7 +37,7 @@ Edition.add({
     default: () => new Date().getFullYear()},
   name: {type: String, required: true, initial: true},
   current: {type: Boolean, initial: true},
-  description: Types.Html,
+  description: {type: Types.Markdown, label: 'Description (use Markdown)'},
   caption: String,
   venue: {
     name: { type: String },

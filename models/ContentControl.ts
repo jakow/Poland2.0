@@ -6,11 +6,15 @@ export interface ContentControl {
   // Content & promo
   description: string;
   testimonials: string;
-  video: boolean;
+  video: {
+    enable: boolean;
+    url: string;
+  };
   // Speakers
   showSpeakers: boolean;
   // Sponsors
   showSponsors: boolean;
+  showPreviousSponsors: boolean;
   // Tickets
   ticketsLive: boolean;
   ticketsUrl: string;
@@ -51,7 +55,10 @@ ContentControl.add(
   testimonials: {type: String, label:
     `Testimonials - in the form of: "quote text", author; "another quote text", another author;`},
   ticketNewsletterSignup: {type: Boolean, label: 'Ticket newsletter signup'},
-  video: Boolean,
+  video: {
+    enable: Boolean,
+    url: {type: String, label: 'Embed url'},
+  },
 },
 'Speakers & Registration',
 {
@@ -60,6 +67,7 @@ ContentControl.add(
 'Sponsors',
 {
   showSponsors: Boolean,
+  showPreviousSponsors: {type: Boolean, dependsOn: {showSponsors: false}},
 },
 'Tickets',
 {

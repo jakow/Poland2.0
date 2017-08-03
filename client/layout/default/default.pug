@@ -22,9 +22,12 @@ html(lang=contentControl.language || "en-GB").no-js
 
     block style
       link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css")
-      //- link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+      link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css")
+      link(rel="stylesheet", href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css")
       link(rel="stylesheet", href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css")
-      //- link(rel="stylesheet", href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css")
+      //- Cookie consent stuff
+      link(rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css")
+
       if env === 'production'
         link(rel="stylesheet", href=assets("main.css"))
           
@@ -60,9 +63,24 @@ html(lang=contentControl.language || "en-GB").no-js
         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
         ga('create', '#{trackingId}', 'auto');
         ga('send', 'pageview');
-
-
-
-
+      script(src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js")
+      script.
+        window.addEventListener("load", function(){
+        window.cookieconsent.initialise({
+          "palette": {
+            "popup": {
+              "background": "#e2445c",
+              "text": "#ffffff"
+            },
+            "button": {
+              "background": "#ffffff",
+              "text": "#000000"
+            }
+          },
+          "theme": "classic",
+          "content": {
+            "dismiss": "Got it!"
+          }
+        })});
 
   
