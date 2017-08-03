@@ -1,5 +1,5 @@
 #!/bin/sh
-git push docean master
+git push -f docean master
 cd build
 git add .
 git commit --allow-empty -am "Production commit $(date +'%F %T')"

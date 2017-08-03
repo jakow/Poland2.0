@@ -9,7 +9,7 @@ export const about: RequestHandler = async (req, res, next) => {
   const currentEdition = res.locals.currentEdition as EditionDocument;
   let team;
   if (currentEdition != null) {
-    team = await list<TeamMember>('TeamMember').model.find({edition: currentEdition}).exec();
+    team = await list<TeamMember>('TeamMember').model.find({edition: currentEdition}).sort('-sortOrder').exec();
   }
   res.locals.team = team;
   view.render(resolveView('about'));

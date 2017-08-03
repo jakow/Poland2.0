@@ -11,6 +11,7 @@ export interface TeamMember {
   email: string;
   linkedin: string;
   edition: keystone.Schema.Relationship[];
+  sortOrder: number;
 }
 
 export type TeamMemberDocument = keystone.Document<TeamMember>;
@@ -19,8 +20,8 @@ const TeamMember = new keystone.List<TeamMember>('TeamMember', {
     map: { name: 'name' },
   autokey: { path: 'slug', from: 'name', unique: true },
   sortable: true,
-  sortContext: 'Edition:team-members',
-  defaultSort: 'name',
+  // sortContext: 'Edition:team-members',
+  // defaultSort: '-name',
 });
 
 TeamMember.add({
@@ -33,9 +34,10 @@ TeamMember.add({
   linkedin: {type: Types.Url},
   // related to edition
   edition: {type: Types.Relationship, ref: 'Edition', many: true},
+  sortOrder: Number,
 });
 
-TeamMember.defaultColumns = 'name, position, edition';
+TeamMember.defaultColumns = 'name, position, edition, sortOrder';
 TeamMember.register();
 
 export default TeamMember;
