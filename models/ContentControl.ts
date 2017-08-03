@@ -33,7 +33,7 @@ export interface ContentControl {
   twitterUrl: string;
   linkedinUrl: string;
   snapchatUrl: string;
-  opengraphImage: string;
+  opengraphImage: keystone.Schema.CloudinaryImage;
   gaTrackingID: string;
   bylawLink: string;
   // SEO
@@ -91,7 +91,7 @@ ContentControl.add(
   twitterUrl: {type: Types.Url, label: 'Twitter URL'},
   linkedinUrl: {type: Types.Url, label: 'LinkedIn URL'},
   snapchatUrl: {type: Types.Url, label: 'Snapchat URL'},
-  opengraphImage: String,
+  opengraphImage: Types.CloudinaryImage,
   gaTrackingID: {type: String, label: 'Google Analytics Tracking ID'},
 },
 'Legal',
