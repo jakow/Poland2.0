@@ -256,12 +256,13 @@ declare module 'keystone' {
    * IMPORTANT:
    */
   type KeystoneDocument = {
-    id: string;
+    id: mongoose.Schema.Types.ObjectId;
+    _id: string;
     _: any;
   }
 
 
-  type ModelDocument<T> = T & mongoose.Document & KeystoneDocument;
+  type Document<T> = T & mongoose.Document & KeystoneDocument;
 
   /**
    * The result of calling toObject() on a mongoose document of type T
@@ -279,7 +280,7 @@ declare module 'keystone' {
      * query results (results from `find()`, `findOne()`) are frozen and
      * cannot have properties added to them.
      */
-    public model: mongoose.Model<ModelDocument<T>>;
+    public model: mongoose.Model<Document<T>>;
     public schema: mongoose.Schema;
     public readonly label: string;
     public readonly singular: string;
@@ -316,7 +317,7 @@ declare module 'keystone' {
     * @return a paginated mongoose document query that can be chained with subsequent
     * query operations.
     */
-    public paginate(options: List.PaginationOptions): mongoose.DocumentQuery<Array<ModelDocument<T>>, ModelDocument<T>>;
+    public paginate(options: List.PaginationOptions): mongoose.DocumentQuery<Array<Document<T>>, Document<T>>;
   }
 
   export namespace List {

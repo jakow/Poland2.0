@@ -25,7 +25,7 @@ export interface Edition {
   isoString?: string;
 }
 
-export type EditionDocument = keystone.ModelDocument<Edition>;
+export type EditionDocument = keystone.Document<Edition>;
 
 const Edition = new keystone.List<Edition>('Edition', {
   map: { name: 'name' },

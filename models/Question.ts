@@ -14,7 +14,7 @@ export interface Question {
   archived: boolean;
 }
 
-export type QuestionDocument = keystone.ModelDocument<Question>;
+export type QuestionDocument = keystone.Document<Question>;
 
 export const Question = new keystone.List<Question>('Question',
 {

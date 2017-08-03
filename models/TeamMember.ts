@@ -13,7 +13,7 @@ export interface TeamMember {
   edition: keystone.Schema.Relationship[];
 }
 
-export type TeamMemberDocument = keystone.ModelDocument<TeamMember>;
+export type TeamMemberDocument = keystone.Document<TeamMember>;
 
 const TeamMember = new keystone.List<TeamMember>('TeamMember', {
     map: { name: 'name' },

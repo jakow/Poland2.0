@@ -9,7 +9,7 @@ export interface SpeakerCategory {
   moreToCome: boolean;
 }
 
-export interface SpeakerCategoryDocument extends mongoose.Document, SpeakerCategory {}
+export type SpeakerCategoryDocument = keystone.Document<SpeakerCategory>;
 
 const SpeakerCategory = new keystone.List<SpeakerCategory>('SpeakerCategory', {
   autokey: { from: 'name', path: 'key', unique: true },

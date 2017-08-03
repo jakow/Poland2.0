@@ -57,9 +57,9 @@ mixin agenda-event(event, dayMoment)
     .agenda-event__details-container
       .agenda-event__details
         .agenda-event__description=event.description
-        .agenda-event__map(data-url=googleMapsEmbedUrl(event.venue.location), data-location=JSON.stringify(event.venue.location))
-          //- iframe(width="100%" height="100%" frameborder="0" style="border:0" src=googleMapsEmbedUrl(event.venue.location) allowfullscreen)
-          .spinner
+        if (event.venue.location)
+          .agenda-event__map(data-url=googleMapsEmbedUrl(event.venue.location), data-location=JSON.stringify(event.venue.location))
+            .spinner
 
 mixin speaker-avatar(speaker)
   +lazy-image(

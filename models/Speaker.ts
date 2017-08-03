@@ -12,7 +12,7 @@ export interface Speaker  {
   edition: keystone.Schema.Relationship[];
 }
 
-export type SpeakerDocument = keystone.ModelDocument<Speaker>;
+export type SpeakerDocument = keystone.Document<Speaker>;
 
 const Speaker = new keystone.List<Speaker>('Speaker', {
   autokey: { path: 'slug', from: 'name', unique: true },

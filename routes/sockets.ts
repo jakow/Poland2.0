@@ -1,5 +1,4 @@
 import * as SocketIO from 'socket.io';
-import * as socketioJwt from 'socketio-jwt';
 import {RawDocument} from 'keystone';
 import {Server, IncomingMessage} from 'http';
 import {Question} from '../models/Question';

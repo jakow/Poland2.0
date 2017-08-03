@@ -12,8 +12,9 @@ import {Document} from 'mongoose';
  * speakerCategory._id == child.speakerCategory.
  */
 
-export default function reversePopulate<Parent extends Document, Child extends Document, ChildKey extends keyof Child>
-(parents: Parent[], parentKey: string, children: Child[], childKey: ChildKey) {
+export default function reversePopulate<Parent extends Document, Child extends Document, ChildKey extends keyof Child>(
+  parents: Parent[], parentKey: string, children: Child[], childKey: ChildKey) {
+
   type PopulatedParent = Parent & {[key: string]: Child[]};
   const populatedParents = parents.map((p) => p.toObject()) as PopulatedParent[];
   populatedParents.forEach((p) => p[parentKey] = []);

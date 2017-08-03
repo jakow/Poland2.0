@@ -47,4 +47,3 @@ function addOrUpdate(q: Question) {
     }
     return questions.sort(byDateAccepted);
 }
-

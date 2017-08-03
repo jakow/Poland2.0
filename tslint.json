@@ -1,5 +1,5 @@
 {
-    "defaultSeverity": "error",
+    "defaultSeverity": "warning",
     "extends": [
         "tslint:recommended",
         "tslint-eslint-rules"
@@ -9,7 +9,7 @@
       "ordered-imports": [false],
       "interface-name": [true, "never-prefix"],
       "no-namespace": false,
-      "no-unused-variable": [true],
+      "no-unused-variable": true,
       "quotemark": ["single"],
       "no-console": [false],
       "object-literal-sort-keys": false,

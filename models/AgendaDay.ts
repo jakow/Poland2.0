@@ -14,7 +14,7 @@ export interface AgendaDay {
   events?: AgendaEvent[];
 }
 
-export type AgendaDayDocument = keystone.ModelDocument<AgendaDay>;
+export type AgendaDayDocument = keystone.Document<AgendaDay>;
 
 const AgendaDay = new keystone.List<AgendaDay>('AgendaDay', {
   // map: { name: 'name' },

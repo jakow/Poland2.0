@@ -33,7 +33,7 @@ export async function getSponsorsByCategory(req: Request, res: Response, next: N
   const currentEdition = res.locals.currentEdition as EditionDocument;
   try {
     const sponsors = await list<Sponsor>('Sponsor')
-      .model.find({edition: currentEdition, category: { $ne: null }}).exec();
+      .model.find({edition: currentEdition, category: {$ne: null}}).exec();
     const sponsorCategories = await list<SponsorCategory>('SponsorCategory')
       .model.find({edition: currentEdition}).exec();
     const sponsorsByCategory = reversePopulate(sponsorCategories, 'sponsors', sponsors, 'category');
@@ -72,7 +72,7 @@ export async function initLocals(req: Request, res: Response, next: NextFunction
     {name: 'About', route: '/about', key: 'about'},
     ...contentControl.showSpeakers ? [{name: 'Speakers', route: '/#speakers', key: 'speakers'}] : [],
     ...contentControl.showAgenda ? [{name: 'Agenda', route: '/#agenda', key: 'speakers'}] : [],
-    {name: 'Past editions', route: '/past-editions', key: 'past-editions'},
+    // {name: 'Past editions', route: '/past-editions', key: 'past-editions'},
     ...contentControl.showSponsors ? [{name: 'Sponsors', route: '/#sponsors', key: 'sponsors'}] : [],
   ];
   const staticPageRoutes: NavItem[] = staticPages.map( (p) => ({
@@ -82,7 +82,7 @@ export async function initLocals(req: Request, res: Response, next: NextFunction
   next();
 }
 
-export async function requireUser(req: Request, res: Response, next: NextFunction) {
+export function requireUser(req: Request, res: Response, next: NextFunction) {
   if (req.user) {
     res.redirect('/keystone/signin');
   } else {

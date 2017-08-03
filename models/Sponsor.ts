@@ -15,7 +15,7 @@ export interface Sponsor  {
   category: keystone.Schema.Relationship;
 }
 
-export type SponsorDocument = keystone.ModelDocument<Sponsor>;
+export type SponsorDocument = keystone.Document<Sponsor>;
 
 const Sponsor = new keystone.List<Sponsor>('Sponsor', {
   autokey: { from: 'name', path: 'key', unique: true },
