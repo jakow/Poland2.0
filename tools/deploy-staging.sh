@@ -1,5 +1,5 @@
 #!/bin/sh
-git push -f docean v2:master
+git push docean master
 cd build
 git add .
 git commit --allow-empty -am "Staging"
