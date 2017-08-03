@@ -63,7 +63,7 @@ export const home: RequestHandler = async (req, res, next) => {
     title,
     description,
     url: canonicalUrl,
-    image: contentControl.opengraphImage,
+    image: contentControl.opengraphImage.secure_url,
   };
   res.locals.opengraph = opengraph;
 
@@ -71,7 +71,7 @@ export const home: RequestHandler = async (req, res, next) => {
     title,
     description,
     site: twitterUsername(contentControl.twitterUrl),
-    image: contentControl.opengraphImage,
+    image: contentControl.opengraphImage.secure_url,
   };
   res.locals.twitterCard = twitterCard;
 
