@@ -1,0 +1,26 @@
+/** THIS DOESNT WORK **/
+@function scale-factor($depth, $perspective) {
+  @return 1 + (-$depth) / $perspective;
+}
+
+@mixin parallax-layer($depth: -2px, $perspective: 1px) {
+  transform: translateZ($depth) scale(scale-factor($depth, $perspective));
+}
+
+
+.parallax {
+  perspective: 2px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+}
+.parallax__layer {
+  transform-origin: center;
+}
+.parallax__layer--base {
+  transform: translateZ(0);
+}
+
+.parallax__layer--back {
+  @include parallax-layer(-2px, 1px);
+}

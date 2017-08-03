@@ -1,0 +1,87 @@
+// Angled edge mixin which supports at most two edges
+// By convention top and left edges are done with ::before pseudoelement
+// and bottom and right with an ::after pseudolement
+// TODO: think of a way to override this to have a right and bottom edge
+// TODO: add math library and replace with trigonometry
+@import "~mathsass/dist/math";
+
+$default-angled-edge-elems: (
+  top: before,
+  left: before,
+  right: after,
+  bottom: after
+);
+
+@mixin angled-edge($position, $angle, $pseudo-element: map-get($default-angled-edge-elems, $position)) {
+  position: relative;
+  transform: translate(0,0);
+  z-index: 2;
+  &::#{$pseudo-element} {
+
+    content: '';
+    z-index: -1;
+    background: inherit;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    // top: 0;
+    // bottom: 0;
+    // left: 0;
+    // right: 0;
+
+  }
+  @if $position == bottom {
+    &::#{$pseudo-element} {
+      top: 0;
+      transform: skewY($angle);
+      @if $angle > 0deg {
+        transform-origin: top left;
+      } @else {
+        transform-origin: top right;
+      }
+    }
+  }
+  @if $position == top {
+    &::#{$pseudo-element} {
+      transform: skewY($angle);
+      @if $angle > 0deg {
+        transform-origin: top right;
+      } @else {
+        transform-origin: top left;
+      }
+    }
+  }
+
+  @if $position == left {
+    // TODO
+  }
+
+  @if $position == right {
+    &::#{$pseudo-element} {
+    top: 0;
+      transform: skewX($angle);
+      @if $angle > 0deg {
+        transform-origin: top right;
+      } @else {
+        transform-origin: bottom right;
+      }
+    }
+  }
+}
+
+/*
+* Use this mixin to give an angle edge a margin so that it does not cover the div above/below/left/right of it
+*/
+@mixin angled-edge-margin($position, $angle) {
+  margin-#{$position}: abs(tan($angle)) * 100%; 
+}
+
+
+.angle-test {
+  background: linear-gradient(90deg, lightblue, turquoise);
+  @include angled-edge(top, -5deg);
+  @include angled-edge(bottom, -5deg);
+  @include angled-edge-margin(bottom, -5deg);
+}

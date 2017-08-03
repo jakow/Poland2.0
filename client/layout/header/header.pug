@@ -1,0 +1,41 @@
+include ../nav/nav
+include ../menu/menu
+mixin header(navOptions)
+  //- mobile menu here
+  //- main header
+  header.site-header
+    .site-header__container
+      .site-header__section.left
+        //- mobile only menu button
+        a(href="#" title="Open menu" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu").site-header__menu-button.site-header__button
+          +menu-icon
+        //- Logo with home link
+        a(href="/" title="Poland 2.0 Home").site-header__brand
+          img(src="static/images/logo.svg", alt="Poland 2.0 logo")
+          span Poland 2.0 Summit
+
+      +menu(id="mobile-menu")
+      .site-header__section.right
+        //- desktop navigation
+        nav(aria-label="Desktop navigation").site-nav
+          ul
+            each link in navLinks
+              +nav-item(link.route, link.key)=link.name
+            //- +nav-item("/about")
+            //- +nav-item("/#speakers") Speakers
+            if contentControl.ticketsLive
+              li: a(href=contentControl.ticketUrl).button.button--primary Tickets
+
+
+
+mixin nav-item(href, key)
+  - const active = key === route;
+  li: a(href=href): span.site-nav__title(class=active ? "active" : "")
+    block
+
+mixin menu-icon
+  span.site-header__menu-icon
+    span.menu-icon__bar
+    span.menu-icon__bar
+    span.menu-icon__bar
+

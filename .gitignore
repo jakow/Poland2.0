@@ -29,4 +29,9 @@ bower_components
 
 # Ignore .DS_Store files on OS X
 .DS_Store
-public/styles
+
+# Build files should not be checked in
+build/
+
+# ignore notes for the developer only
+NOTES.md

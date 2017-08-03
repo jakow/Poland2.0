@@ -1,0 +1,27 @@
+@import "~spinthatshit/src/loaders";
+$spinner-size: 32px;
+.spinner {
+  @include loader02($size: $spinner-size, $duration: 1s, $align: middle, $color: $color-gray-medium, $border-size: 3px);
+  // background-image: inline('static/images/spinner.svg');
+  // background-size: $spinner-size $spinner-size;
+  // width: $spinner-size;
+  // height: $spinner-size;
+  // animation: rotate 800ms linear infinite;
+  position: absolute;
+  margin-left: -$spinner-size/2;
+  margin-top: -$spinner-size/2;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+
+}
+
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

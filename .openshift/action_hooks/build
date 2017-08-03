@@ -1,0 +1,5 @@
+cd $OPENSHIFT_REPO_DIR
+export PATH=$PATH:./node_modules/.bin
+unset TMOUT
+export TMOUT=2880000
+npm run build

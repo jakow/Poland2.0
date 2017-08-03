@@ -1,0 +1,23 @@
+{
+    "authors": "Jakub Olek <https://github.com/hakubo/>",
+    "definitionFilename": "index.d.ts",
+    "libraryDependencies": [],
+    "moduleDependencies": [],
+    "libraryMajorVersion": "0",
+    "libraryMinorVersion": "7",
+    "libraryName": "headroom.js v0.7.0",
+    "typingsPackageName": "headroom",
+    "projectName": "http://wicky.nillia.ms/headroom.js/",
+    "sourceRepoURL": "https://www.github.com/DefinitelyTyped/DefinitelyTyped",
+    "sourceBranch": "types-2.0",
+    "kind": "Global",
+    "globals": [
+        "Headroom"
+    ],
+    "declaredModules": [],
+    "files": [
+        "index.d.ts"
+    ],
+    "hasPackageJson": false,
+    "contentHash": "a9810d98ddc02a53582ed253cd2bb0179c5082596374d4d60300036e405c8ccc"
+}

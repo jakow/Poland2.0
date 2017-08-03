@@ -1,0 +1,74 @@
+$card-border-style: 1px solid rgba(1, 1, 1, 0.12);
+$card-shadow-style: 0 1px 2px 0 rgba(1, 1, 1, 0.05);
+$small-mobile: (orientation portrait) (max-width 400px);
+
+.card {
+  display: flex;
+  flex-direction: column;
+  // make the card occupy full allocated space
+  height: 100%; 
+  width: 100%;
+  // ...within an arbitrary maximum size
+  max-width: 10*$vertical-baseline;
+  margin: 0 auto;
+  overflow: hidden;
+  // styling
+  border: $card-border-style;
+  box-shadow: $card-shadow-style;
+  transition: box-shadow 200ms ease-in-out;
+  background-color: white;
+  footer {
+    background: $color-gray-light;
+    flex: 0 1 auto;
+    border-top: $card-border-style;
+  }
+}
+
+// card links should behave like cards -> block displayed
+a > .card {
+  display: block;
+  width: 100%;
+}
+
+// also handle interactive card hover by making the box shadow large
+a:hover > .card {
+  box-shadow: 0 2px 12px 1px rgba(0, 0, 0, 0.13);
+}
+
+.card__image {
+  border-bottom: $card-border-style;
+}
+
+.card__content {
+  flex: 1 1 auto;
+  text-align: center;
+  padding: $vertical-baseline 1rem;
+  .card__row:not(:last-child) {
+    margin-bottom: 0.25*$vertical-baseline;
+  }
+}
+
+.card__heading {
+  @include sgl-heading(1);
+  font-weight: 400;
+  margin: 0;
+}
+
+// a list of cards, side by side
+.card-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  > li {
+    flex: 1 0 100%;
+    padding: 0 0.5rem $vertical-baseline;
+    @include breakpoint($mobile-landscape) {
+      flex-basis: 50%;
+    }
+    @include breakpoint($tablet) {
+      flex-basis: 25%;
+    }
+  }
+}

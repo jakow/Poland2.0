@@ -1,0 +1,51 @@
+.contact-form {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-form__success-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2*$vertical-baseline $vertical-baseline;
+  background: $color-success;
+  transition: transform 500ms cubic-bezier(0.23, 1, 0.320, 1), height 0ms linear, visibility 0ms linear;
+  transition-delay: 500ms, 500ms, 500ms;
+  visibility: hidden;
+  transform: translateY(100%);
+  z-index: 100;
+  text-align: center;
+  p {
+    @include sgl-heading(1);
+  }
+  &.contact-form__success-screen--show {
+    transition-delay: 0ms, 0ms, 0ms;
+    height: 100%;
+    visibility: visible;
+    transform: translateY(0%);
+  }
+}
+
+.contact-form__success-screen-icon {
+  border-radius: 50%;
+  margin: 0 auto;
+  width: 5*$vertical-baseline;
+  height: 5*$vertical-baseline;
+  border: 2px solid white;
+  padding: 1*$vertical-baseline;
+  overflow: hidden;
+  transform: translate3d(0,0,0);
+
+  img {
+    transition: transform 500ms cubic-bezier(0.165, 0.84, 0.44, 1) 200ms;
+    display: inline-block;
+    transform: translate(-5rem, 7.5rem);  
+  }
+  .contact-form__success-screen--show & {
+    img {
+      transform: translate(-0.3rem, 0rem);
+    }
+  }
+}

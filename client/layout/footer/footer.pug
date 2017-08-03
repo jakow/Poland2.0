@@ -1,0 +1,32 @@
+include ../../components/modal/modal
+include ../../layout/contact-form/contact-form
+
+mixin footer
+  footer.site-footer
+    .site-footer__container
+      //- .site-footer__bg(style="background-image: url('http://res.cloudinary.com/dg1royeho/image/upload/v1497445653/DSC_0270n_rlkqba.jpg')")
+      .site-footer__bg(style="background-image: url('https://res.cloudinary.com/dg1royeho/image/upload/c_scale,w_1366/v1498041997/footer-img2_afjcgn.jpg')")
+      .site-footer__fg
+        .site-footer__social
+          if contentControl.facebookUrl
+            a(href=contentControl.facebookUrl title="Facebook").site-footer__social-link.facebook
+          if contentControl.linkedinUrl
+            a(href=contentControl.linkedinUrl title="LinkedIn").site-footer__social-link.linkedin
+          if contentControl.twitterUrl
+            a(href=contentControl.twitterUrl title="Twitter").site-footer__social-link.twitter
+          if contentControl.snapchatUrl
+            a(href=contentControl.snapchatUrl title="Snapchat").site-footer__social-link.snapchat
+        .site-footer__separator
+        .site-footer__links
+          a(href=contentControl.bylawLink) By-law for Poland 2.0
+          +modalOpenButton("contact-form-modal", "/contact")(title="Open contact form") Contact
+        .site-footer__copyright
+          small © #{moment().year()} Poland 2.0
+        address.site-footer__credits
+          small Created by <a href="https://github.com/jakow" target="_blank">Jakub Kowalczyk</a>
+
+    +modal("contact-form-modal", "Contact form")
+      .dark-bg
+        h2.center How can we help?
+        +contact-form#contact-form
+    

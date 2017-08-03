@@ -1,0 +1,49 @@
+extends ../../layout/default/default
+
+include ../../components/card/card
+
+block content
+  .about
+    .about__background.about__background--img
+    .about__background.about__background--gradient
+    .about__content(vocab="http://schema.org/" typeof="Organization")
+      .about__banner
+        .about__logo
+          img(src='static/images/alpha.svg' property="image" alt="Poland 2.0 logo")
+        h1(property="name") Poland 2.0 Summit
+      article(property="description").about__mission#mission
+        header.about__heading
+          h2.fat-heading.heading-stripe.bold The mission
+          p To overtake the future: innovation across industries
+        p Progress defines future, and scientific and technological innovation shapes our everyday life. Some may argue that it is difficult to see this impact on all aspects of our life. We could not disagree more. And we are here to show that innovation is the omnipresent, universal language capable of connecting diverse fields together.  
+        p This November at Imperial College London, Poland 2.0 will create a platform for students, researchers and professionals to engage in an inspiring discussion about the future direction of research, business and public policy. We will prove that some seemingly distinct fields like finance, healthcare, environment, or entertainment are in fact connected by one factor: spectacular breakthroughs. We also think that Poland, with its fast-paced market and brilliant minds, has potential to set the scene for such unique marriages.
+        p Tomorrow may well be anybody’s guess, but we believe that the brilliant minds of today can take the future into their own hands and shape it. At Poland 2.0 Summit, you will have a unique chance to network with like-minded peers, meet the game-changing business players, learn about crucial changes across industries, and improve your career prospects, while simply having an amazing time. 
+      section#team.about__column
+        .about__heading
+          h2.fat-heading.heading-stripe.bold The team
+        ul.about__team: each teamMember in team
+          li
+            +team-card(teamMember)
+  .about__main
+
+
+mixin team-card(teamMember)
+  - const src = imgTransform.limit(teamMember.photo.secure_url, 300);
+  - const placeholder = imgTransform.limit(teamMember.photo.secure_url, 300);
+
+  +card.team-card(property="member" typeof="http://schema.org/Person")
+      +card-image(src, placeholder)(alt=`Photo of ${teamMember.name}` property="image")
+      .card__content
+        .card__row.card__heading(property="name")=teamMember.name
+        .card__row(property="jobTitle")=teamMember.position
+        .card__row(property="affiliation" typeof="http://schema.org/Organization")
+          span(property="name")=teamMember.occupation
+      if (teamMember.email || teamMember.linkedin)
+        footer
+          ul.team-card__contact-links
+            if teamMember.email
+              li
+                a(href=`mailto:${teamMember.email}` property="email" title="E-mail").email: i.ion-ios-email-outline
+            if teamMember.linkedin
+              li
+                a(href=teamMember.linkedin property="sameAs" target="_blank" title="LinkedIn").linkedin: i.ion-social-linkedin

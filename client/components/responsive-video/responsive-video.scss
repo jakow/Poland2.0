@@ -1,0 +1,35 @@
+$spinner-size: 32px;
+
+.responsive-video {
+  position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+  overflow: hidden; 
+  max-width: 100%;
+  &.responsive-video--with-loader {
+    background: black;
+    // &::before {
+    //   content: '';
+    //   display: block;
+    //   box-sizing: border-box;
+    //   margin-left: -$spinner-size/2;
+    //   @include loader02($size: $spinner-size, $duration: 1s, $align: middle, $color: $color-gray-medium, $border-size: 5px);
+    //   z-index: 1;
+    //   // percents in margin refer to width rather than height
+    //   margin-top: calc(56.25% / 2 - #{$spinner-size/2});
+    // }
+    iframe {
+      z-index: 2;
+    }
+    .spinner {
+      z-index: 1;
+    }
+  }
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

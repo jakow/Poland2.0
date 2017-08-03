@@ -1,0 +1,29 @@
+mixin banner
+  section.banner&attributes(attributes)
+      block
+
+mixin banner-image(src)
+  .banner__image(style=`background-image: url(${src})`)&attributes(attributes)
+
+
+mixin banner-column(role)
+  .banner__col(class=`banner__col--${role}`)&attributes(attributes)
+    block
+
+mixin banner-slider
+  .banner__slider
+    .swiper-wrapper
+      block
+    .swiper-pagination  
+
+mixin banner-slider-image(src)
+  //- .banner__image.swiper-lazy(data-background=src)&attributes(attributes)
+  .banner__image(style=`background-image: url(${src})`)&attributes(attributes)
+
+mixin banner-slider-lazy-image(src)
+  .banner__image.swiper-lazy(data-background=src)&attributes(attributes)
+    .swiper-lazy-preloader
+
+mixin banner-slider-image-slide(src)
+  .banner__slide.swiper-slide.banner__image-filter
+    +banner-slider-image(src)&attributes(attributes)

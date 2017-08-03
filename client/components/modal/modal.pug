@@ -1,0 +1,11 @@
+mixin modal(modalId, label)
+  .modal(role='dialog' aria-label=label id=modalId)
+    .modal__overlay
+    .modal__main
+      a(href="#" aria-label="Close" title="Close").modal__close-button
+      .modal__content
+        block
+
+mixin modalOpenButton(modalId, href="#")
+  a(href=href class=attributes.class aria-label=attributes.title title=attributes.title aria-controls=modalId)
+    block

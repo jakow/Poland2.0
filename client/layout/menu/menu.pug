@@ -1,0 +1,15 @@
+mixin menu
+  nav(aria-label="Mobile navigation").mobile-menu&attributes(attributes)
+    .mobile-menu__overlay            
+    ul
+      each link in navLinks
+        +menu-item(link.route, link.key)=link.name
+      //- +menu-item("/about")
+      //- +menu-item("/#speakers") Speakers
+      if contentControl.ticketsLive
+        li: a(href=contentControl.ticketUrl).button.button--primary Tickets
+
+mixin menu-item(href, key)
+  - const active = key === route;
+  li: a(href=href class=active ? "active" : "")
+    block

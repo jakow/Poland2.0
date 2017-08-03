@@ -1,2 +1,0 @@
-echo "Stopping maintenance web server."
-kill -9 `cat ${OPENSHIFT_RUN_DIR}/maintenance.pid`

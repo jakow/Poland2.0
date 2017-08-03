@@ -1,0 +1,100 @@
+include ../../components/lazy-image/lazy-image
+
+mixin agenda(agenda)
+  .agenda__heading
+    h2.bold.fat-heading.heading-stripe Agenda
+  .agenda
+    .agenda__timeline
+    ol.agenda-days
+      each day in agenda.days
+    
+        - const dayMoment = moment.utc(day.date);
+        li.agenda-day
+          header.agenda-day__description
+            //- ordinalSuperscripts => add superscript to numbers like '19th'
+            h3!=ordinalSuperscripts(moment(day.date).format('dddd, Do MMMM'))
+            if day.description
+              div=day.description
+          if day.events.length > 0    
+            ol.agenda-day__events
+              each event in day.events
+                +agenda-event(event, dayMoment)
+
+
+
+mixin agenda-event(event, dayMoment)
+  - const startDate = moment.utc(event.time.start);
+  - const startTime = startDate.format('H:mm');
+  - const endDate = moment.utc(event.time.end);
+  - const endTime = endDate.format('H:mm');
+  li.agenda-event(id=`event-${event.slug}`)
+    +event-permalink(event.slug)
+    header
+      //- div=JSON.stringify(event)
+      .agenda-event__time-and-type
+        //- time(datetime=`${startDate.toISOString()}/${endDate.toISOString()}`)=`${startTime}–${endTime}`
+        .agenda-event__time.
+          <time datetime=#{startDate.toISOString()})>#{startTime}</time>
+          <span>–</span>
+          <time datetime=#{endDate.toISOString()}>#{endTime}</time>
+        //- ${endDate.toISOString()}`)=`${startTime}–${endTime}`
+        .agenda-event__type=event.type
+      h4.agenda-event__name=event.name
+    .agenda-event__summary
+      if event.speakers
+        ul.agenda-event__speaker-list
+          each speaker in event.speakers
+            li
+              +speaker-avatar(speaker)
+              span.agenda-event__speaker-name=speaker.name
+              
+      
+      if event.venue          
+        +venue(event.venue)
+    a(href="#" title="Toggle details").agenda-event__expand-details
+      span.agenda-event__expand-chevron
+      span.agenda-event__expand-text more
+    .agenda-event__details-container
+      .agenda-event__details
+        .agenda-event__description=event.description
+        if (event.venue.location)
+          .agenda-event__map(data-url=googleMapsEmbedUrl(event.venue.location), data-location=JSON.stringify(event.venue.location))
+            .spinner
+
+mixin speaker-avatar(speaker)
+  +lazy-image(
+    imgTransform.limit(speaker.photo.secure_url, 120), 
+    imgTransform.limit(speaker.photo.secure_url, 32)).agenda-event__speaker-avatar(alt=speaker.name)
+  //- img(src=imgTransform.limit(speaker.photo.secure_url, 120)).agenda-event__speaker-avatar
+
+mixin venue(venue)
+  div.agenda-event__venue
+    if (venue.location == null)
+      div=venue.name
+    else
+      div
+        | #{venue.location.name}<br>
+        if venue.location.street1
+          | #{venue.location.street1}<br>
+        if venue.location.street2
+          | #{venue.location.street2}<br>
+        
+          
+        //- if venue.location.state
+        //-   | <br>#{venue.location.state}
+        if venue.location.suburb && venue.location.postcode
+          | #{venue.location.suburb}&nbsp;#{venue.location.postcode}<br>
+        else 
+          | #{venue.location.suburb}
+      div 
+        a(href=googleMapsUrl(venue.location) target="_blank").agenda-event__venue-show-map-link
+          //- i.ion-map.left-icon 
+          i.lnr.lnr-map.left-icon
+          span Open a map
+
+mixin event-permalink(slug)
+  a(href=`/#event-${slug}` title="Link to this event").agenda-event__permalink
+    span.agenda-event__permalink-caption Link to this event 
+    span.agenda-event__permalink-icon.lnr.lnr-link
+    //- i.agenda-event__permalink-icon.fa.fa-link
+    //- i.agenda-event__permalink-icon.ion-ios-link
