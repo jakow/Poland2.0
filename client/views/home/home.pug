@@ -33,12 +33,12 @@ block content
       .banner__col-content
         header.mobile-align-center
           h1 Poland 2.0 Summit
-          p.subtitle.for-h1.banner__dateplace
+          p.banner__dateplace
             if (currentEdition)
               time.banner__date(datetime=currentEdition.isoString)=`${currentEdition.dateString}` 
               span.banner__separator
               span.banner__place=`${currentEdition.venue.name}`
-          div!=contentControl.description 
+        div!=contentControl.description 
         //- .banner__whats-on  
         //-   p What's on?
         //-   a.button.button--circular.button--primary.button--icon.button--arrow-down(href="#" title="Explore the website")

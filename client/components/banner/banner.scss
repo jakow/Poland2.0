@@ -62,6 +62,8 @@
 
 .banner__dateplace {
   color: $color-gray-dark;
+  @include sgl-heading(1);
+  margin: 0 0 $vertical-baseline;
   display: flex;
   flex-direction: column;
   > * {
@@ -98,6 +100,7 @@
       position: absolute;
       height: $vertical-baseline;
       top: 0;
+      bottom: 0;
       transform: initial;
       width: 1px;
       left: initial;
