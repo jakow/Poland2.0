@@ -20,6 +20,7 @@ const TeamMember = new keystone.List<TeamMember>('TeamMember', {
   autokey: { path: 'slug', from: 'name', unique: true },
   sortable: true,
   sortContext: 'Edition:team-members',
+  defaultSort: 'name',
 });
 
 TeamMember.add({

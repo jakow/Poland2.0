@@ -2,6 +2,7 @@ import {RequestHandler} from 'express';
 import { EditionDocument } from '../../models/Edition';
 import { ContentControl } from '../../models/ContentControl';
 import { Sponsor } from '../../models/Sponsor';
+import { Speaker } from '../../models/Speaker';
 import { SponsorCategory } from '../../models/SponsorCategory';
 import {View, list, get} from 'keystone';
 import resolveView from '../helpers/resolveView';
@@ -21,11 +22,17 @@ export const home: RequestHandler = async (req, res, next) => {
 
   if (currentEdition != null) {
     const [speakerCategories, agenda] = await Promise.all([
-      await getSpeakersByCategory(currentEdition),
-      await getAgenda(currentEdition),
+      getSpeakersByCategory(currentEdition),
+      getAgenda(currentEdition),
     ]);
     res.locals.speakerCategories = speakerCategories;
     res.locals.agenda = agenda;
+    // also need speakers for JSON-LD
+    const speakers: Speaker[] = [];
+    for (const c of speakerCategories) {
+      speakers.push(...c.speakers);
+    }
+    res.locals.speakers = speakers;
   }
 
   if (currentEdition != null && contentControl.showSponsors) {

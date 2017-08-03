@@ -6,7 +6,7 @@ import {Sponsor} from '../../models/Sponsor';
 import {ContentControl} from '../../models/ContentControl';
 import {flatMap} from 'lodash';
 import {canonicalUrl, logoUrl} from '../../config';
-const stripTags: any = require('striptags');
+const stripTags = require('striptags');
 
 /**
  * Create a JSON-LD representation of the event promoted by the page.
