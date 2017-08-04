@@ -19,7 +19,7 @@ export const home: RequestHandler = async (req, res, next) => {
   const view = new View(req, res);
   const currentEdition = res.locals.currentEdition as EditionDocument;
   const contentControl = res.locals.contentControl as ContentControl;
-
+  // get agenda and speakers
   if (currentEdition != null) {
     const [speakerCategories, agenda] = await Promise.all([
       getSpeakersByCategory(currentEdition),
@@ -27,7 +27,7 @@ export const home: RequestHandler = async (req, res, next) => {
     ]);
     res.locals.speakerCategories = speakerCategories;
     res.locals.agenda = agenda;
-    // also need speakers for JSON-LD
+    // also need flat speaker list for JSON-LD
     const speakers: Speaker[] = [];
     for (const c of speakerCategories) {
       speakers.push(...c.speakers);
@@ -35,16 +35,13 @@ export const home: RequestHandler = async (req, res, next) => {
     res.locals.speakers = speakers;
   }
 
+  // Decide which sponsors to show
   if (currentEdition != null && contentControl.showSponsors) {
-    const sponsorCategories = await getSponsorsByCategory(currentEdition);
-    res.locals.sponsorCategories = sponsorCategories;
+    // current sponsor if there is an edition and allowed to show sponsors
+    res.locals.sponsorCategories = await getSponsorsByCategory({edition: currentEdition});
   } else if (contentControl.showPreviousSponsors) {
-    let previousSponsors = await list<Sponsor>('Sponsor').model
-      .find({showInPrevious: true}).populate('category').exec();
-    // we're first sorting by sort order, then by category importance
-    // TODO: keystone sort is F***ED
-    previousSponsors = sortBy(previousSponsors, (s1) => -((s1.category as any) as SponsorCategory).sortOrder);
-    res.locals.previousSponsors = previousSponsors;
+    // or previous sponsors
+    res.locals.previousSponsorCategories = await getSponsorsByCategory(null, {showInPrevious: true});
   }
 
   let title: string;

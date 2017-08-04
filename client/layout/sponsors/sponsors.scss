@@ -1,10 +1,17 @@
+.sponsor-category__list {
+  list-style: none;
+  margin: 0 0 $vertical-baseline;
+  padding: 0;
+}
+
 .sponsor-category {
+
   h2, h3 {
     text-align: center;
   }
 }
 
-.sponsor-category__list {
+.sponsor-list {
   list-style: none;
   margin: 0 0 $vertical-baseline;
   padding: 0;
@@ -22,8 +29,8 @@
   }
   // restrict the height of all images
   .lazy-img {
-    max-width: 12*$vertical-baseline;
-    max-height: 7*$vertical-baseline;
+    max-width: 11*$vertical-baseline;
+    max-height: 6*$vertical-baseline;
   }
   .sponsor__link {
     display: block;
@@ -33,7 +40,7 @@
 
 @include breakpoint($tablet) {
   @for $i from 2 to 6 {
-    .sponsor-category__list--#{$i}-col {
+    .sponsor-list--#{$i}-col {
       li {
         flex: 0 1 #{100% / $i};
       }
