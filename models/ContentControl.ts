@@ -35,6 +35,7 @@ export interface ContentControl {
   snapchatUrl: string;
   opengraphImage: string;
   opengraphDescription: string;
+  twitterImage: string;
   gaTrackingID: string;
   bylawLink: string;
   // SEO
@@ -94,6 +95,7 @@ ContentControl.add(
   snapchatUrl: {type: Types.Url, label: 'Snapchat URL'},
   opengraphImage: String,
   opengraphDescription: String,
+  twitterImage: String,
   gaTrackingID: {type: String, label: 'Google Analytics Tracking ID'},
 },
 'Legal',

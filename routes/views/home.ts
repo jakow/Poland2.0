@@ -56,11 +56,12 @@ export const home: RequestHandler = async (req, res, next) => {
 
   // set opengraph
   const description = contentControl.opengraphDescription;
-  const image = contentControl.opengraphImage || '/static/images/opengraph.png';
+  const ogImage = contentControl.opengraphImage || '/static/images/opengraph.png';
+  const twitterImage = contentControl.twitterImage || '/static/images/twitter-card.png';
   const opengraph: Opengraph = {
     title,
     description,
-    image,
+    image: ogImage,
     url: canonicalUrl,
   };
   res.locals.opengraph = opengraph;
@@ -68,7 +69,7 @@ export const home: RequestHandler = async (req, res, next) => {
   const twitterCard: TwitterCard = {
     title,
     description,
-    image,
+    image: twitterImage,
     site: twitterUsername(contentControl.twitterUrl),
   };
   res.locals.twitterCard = twitterCard;
