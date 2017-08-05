@@ -70,7 +70,9 @@ export const home: RequestHandler = async (req, res, next) => {
     title,
     description,
     image: twitterImage,
+    imageAlt: get('brand') + ' logo',
     site: twitterUsername(contentControl.twitterUrl),
+
   };
   res.locals.twitterCard = twitterCard;
 

@@ -11,6 +11,7 @@ export interface TwitterCard {
   title: string;
   description: string;
   image: string;
+  imageAlt?: string;
 }
 
 export function twitterUsername(twitterUrl: string) {
