@@ -55,8 +55,8 @@ export const home: RequestHandler = async (req, res, next) => {
   res.locals.title = title;
 
   // set opengraph
-  const description = currentEdition ? currentEdition.caption : '';
-  const image = contentControl.opengraphImage && contentControl.opengraphImage.secure_url;
+  const description = contentControl.opengraphDescription;
+  const image = contentControl.opengraphImage || '/static/images/opengraph.png';
   const opengraph: Opengraph = {
     title,
     description,
