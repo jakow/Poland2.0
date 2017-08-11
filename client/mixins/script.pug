@@ -1,4 +1,4 @@
 //- Place a script tag that gets deferred in production and resolves script
 //- Assets automatically
 mixin script(src)
-  script(src=assets(src) defer=config==='production')
+  script(src=assets(src) defer=config.environment==='production')
