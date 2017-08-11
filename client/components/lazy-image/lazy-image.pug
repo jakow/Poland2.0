@@ -6,7 +6,13 @@
 //- method - when is the image going to be loaded? 'immediate' or 'scroll'
 
 mixin lazy-image(source, placeholder, aspectRatio='1:1', method='scroll')
-    div.lazy-img(data-src=source, data-method=method class=attributes.class style=attributes.style)
+    div.lazy-img( 
+      class=attributes.class 
+      style=attributes.style
+      data-src=source,
+      data-method=method 
+      data-property=attributes.property
+      data-alt=attributes.alt)
       //- Calculate the bottom padding of the spacer
       -
         let ratio = aspectRatio;
@@ -20,9 +26,11 @@ mixin lazy-image(source, placeholder, aspectRatio='1:1', method='scroll')
         }
 
       +spacer(ratio, ratioType)
-      img(src=placeholder role="presentation" aria-hidden="true").preview
+      //- don't render an image placeholder with empty src tag
+      if placeholder
+        img(src=placeholder role="presentation" aria-hidden="true").preview
       .spinner
-      img(src=placeholder alt=attributes.alt property=attributes.property).original
+      //- img(alt=attributes.alt property=attributes.property).original
       //- If the user has disabled javascript, show the original image as loaded straight away
       //- with degraded UX.
       noscript: img(src=source alt=attributes.alt property=attributes.property).original.loaded
