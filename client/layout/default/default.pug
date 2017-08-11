@@ -5,6 +5,7 @@ include ../../layout/header/header
 include ../../layout/footer/footer
 include ../../vendor/outdated-browser
 include ../../mixins/favicons
+include ../../mixins/script
 
 doctype html
 html(lang=contentControl.language || "en-GB").no-js
@@ -35,9 +36,9 @@ html(lang=contentControl.language || "en-GB").no-js
       include ../../vendor/outdated-browser
       //- client bundle
       //- vendor/commons bundles
-      script(src=assets('commons.js'))
+      +script('commons.js')
       //- scripts used on all pages
-      script(src=assets('main.js'))
+      +script('main.js')
 
 
 
