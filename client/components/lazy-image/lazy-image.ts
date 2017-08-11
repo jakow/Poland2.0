@@ -61,6 +61,7 @@ class LazyImage {
 }
 }
 
+
 export function init() {
   const containers: HTMLElement[] = Array.prototype.slice.call(document.querySelectorAll('.lazy-img'));
   for (const container of containers) { // tslint disable-line
@@ -75,8 +76,22 @@ export function init() {
    * the images may not need to be loaded anymore. Because it is computationally heavy it is really
    * important that the event is throttled.
    */
+
+  // feature detect
+  let supportsPassive = false;
+  try {
+    const opts = Object.defineProperty({}, 'passive', {
+      get: () => {
+        supportsPassive = true;
+      },
+    });
+    window.addEventListener("test", null, opts);
+  } catch (e) {
+    console.warn('No support for passive scroll handlers');
+  }
+
   onScroll = throttle(showNextOnScroll, 500);
-  window.addEventListener('scroll', onScroll);
+  window.addEventListener('scroll', onScroll, (supportsPassive ? {passive: true} : false) as any);
   showNextOnScroll();
   return lazyImages;
 }
@@ -97,3 +112,5 @@ function showNextOnScroll(ev?: UIEvent) {
   // remove the shown images from the shown array
   scrollTriggeredQueue.splice(0, toBeShown.length);
 }
+
+

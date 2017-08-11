@@ -15,18 +15,17 @@ mixin speakers(speakerCategories)
           ul.card-list
             each speaker in category.speakers
               li
-                if (speaker.description)
-                  - const modalId = `speaker-${speaker.name.toLowerCase().replace(/\s+/g)}`;
-                  +modalOpenButton(modalId, `Learn more about ${speaker.name}`).speaker-card__modal-open
+                if (speaker.description.md)
+                  - const modalId = `speaker-${slugify(speaker.name)}`;
+                  +modalOpenButton(modalId)(title=`Learn more about ${speaker.name}`)
                     +speakerCard(speaker)
                   +speakerModal(modalId, speaker)
                 else
                   +speakerCard(speaker)
 
 
-
 mixin speakerCard(speaker)
-    - const largeImg = imgTransform.limit(speaker.photo.secure_url, 400);
+    - const largeImg = imgTransform.limit(speaker.photo.secure_url, 300);
     - const smallImg = imgTransform.limit(speaker.photo.secure_url, 32);
     +card.speaker-card
       +card-image(largeImg, smallImg)(alt=`Photo of ${speaker.name}`)

@@ -106,6 +106,7 @@
   },
   "scripts": {
     "start": "cross-env NODE_ENV=production pm2 start build/index.js --name app",
+    "start:staging": "cross-env NODE_ENV=staging pm2 start build/index.js --name app",
     "stop": "pm2 stop app && pm2 delete app",
     "dev": "concurrently \"yarn dev:server\" \"yarn dev:client\"",
     "dev:server": "nodemon --watch \"**/*.ts\" --ignore \"client/**/*\" --exec \"ts-node --project @config/tsconfig.server.json\" index.ts",

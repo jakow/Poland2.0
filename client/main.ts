@@ -3,7 +3,6 @@ import {debounce} from 'lodash';
 import * as moment from 'moment';
 import * as Headroom from 'headroom.js';
 import jump from 'jump.js';
-import loader from './layout/loader/loader';
 import Menu from './layout/menu/menu';
 import * as lazyImages from './components/lazy-image/lazy-image';
 import {initForms} from './components/form/form';
@@ -15,8 +14,6 @@ import { contactFormConstraints } from './layout/contact-form/contact-form';
 
 document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.classList.remove('no-js');
-  // a bespoke loader for the site
-  loader.hide(); // for now
   // animated menu
   const menu = new Menu();
   // hide top bar on mobile when scrolling using headroom-js

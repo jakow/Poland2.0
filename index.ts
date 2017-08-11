@@ -48,9 +48,9 @@ keystone.init({
 
 app.use(auth.initialize());
 
-// serve static files through node in development,
+// serve static files through node in development and in staging,
 // otherwise delegate static files to nginx for performance reasons
-if (config.environment === 'development') {
+if (config.environment === 'development' || config.environment === 'staging') {
   app.use(config.staticRoot, serveStatic(config.staticDir, config.staticOptions));
 }
 
