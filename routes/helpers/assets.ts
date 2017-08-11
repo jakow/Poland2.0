@@ -1,4 +1,4 @@
-import * as config from '../../config';
+import {environment, buildDir, clientRoot} from '../../config';
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -14,21 +14,18 @@ interface AssetStore {
  */
 export default function createAssetStore() {
   let assetStore: AssetStore = null;
-  if (config.environment === 'production') {
+  if (environment === 'production' || environment === 'staging') {
     try {
-      assetStore = JSON.parse(fs.readFileSync(path.resolve(config.buildDir, 'assets.json'), 'utf8'));
+      assetStore = JSON.parse(fs.readFileSync(path.resolve(buildDir, 'assets.json'), 'utf8'));
     } catch (e) {
       throw new Error("Asset file unreadable");
     }
   }
 
-  const assetRoot = config.clientRoot;
-
   return (asset: string): string => {
-
       if (assetStore === null) {
         // keep the asset string as-is because we are not in production.
-        return `${config.clientRoot}/${asset}`;
+        return `${clientRoot}/${asset}`;
       }
       // get from assets map
       const basename = path.basename(asset);

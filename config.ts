@@ -37,7 +37,7 @@ export const canonicalUrl: string = 'https://poland20.com';
 
 export const logoUrl: string = 'https://poland20.com/static/images/logo.svg';
 
-export const port: number =  process.env.OPENSHIFT_NODEJS_PORT || process.env.NODE_ENV === 'staging' ? 5000 :  4000;
+export const port: number =  process.env.OPENSHIFT_NODEJS_PORT || 4000;
 
 export const host: string = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
