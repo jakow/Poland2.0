@@ -49,4 +49,4 @@ mixin team-card(teamMember)
                 a(href=`mailto:${teamMember.email}` property="email" title="E-mail").email: i.ion-ios-email-outline
             if teamMember.linkedin
               li
-                a(href=teamMember.linkedin property="sameAs" target="_blank" title="LinkedIn").linkedin: i.ion-social-linkedin
+                a(href=teamMember.linkedin property="sameAs" target="_blank" rel="noopener" title="LinkedIn").linkedin: i.ion-social-linkedin
