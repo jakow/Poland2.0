@@ -22,11 +22,13 @@ html(lang=contentControl.language || "en-GB").no-js
     block head
 
     block style
-      link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css")
-      link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css")
-      link(rel="stylesheet", href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css")
-      link(rel="stylesheet", href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css")
-      //- Cookie consent stuff
+      //- Normalize.css
+      link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css")
+      //- Fonts
+      link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700&amp;subset=latin-ext")
+      link(rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css")
+      link(rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css")
+      //- Cookie consent styling
       link(rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css")
 
       if env === 'production'
