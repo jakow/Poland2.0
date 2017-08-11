@@ -1,8 +1,4 @@
-import {throttle, takeWhile} from 'lodash';
-
-const lazyImages: LazyImage[] = [];
-let scrollTriggeredQueue: LazyImage[];
-let onScroll: (ev: UIEvent) => void;
+import {throttle} from 'lodash';
 
 class LazyImage {
   public readonly method: string;
@@ -19,14 +15,13 @@ class LazyImage {
       this.showPreview();
     }
     this.originalSrc = this.container.dataset.src;
-    // this.yPosition = this.container.offsetTop;
     if (this.method === 'immediate') {
       this.showOriginal();
     }
  }
 
- public get yPosition() {
-   return this.container.offsetTop;
+ public get scrollPosition() {
+   return this.container.getBoundingClientRect().top;
  }
 
   public showPreview() {
@@ -36,7 +31,6 @@ class LazyImage {
   }
 
   public async showOriginal() {
-
     const img = await this.imgLoaded(this.originalSrc);
     img.classList.add('original');
     img.alt = this.container.dataset.alt;
@@ -56,17 +50,21 @@ class LazyImage {
   }
 
   private imgLoaded(src: string, element?: HTMLImageElement) {
-  return new Promise<HTMLImageElement>((resolve, reject) => {
-    const img = typeof element === 'undefined' ? new Image() : element;
-    // if network is dropped the promise never resolves.
-    img.onload = (elem) => {
-      img.onload = null;
-      resolve(img);
-    };
-    img.src = src;
-  });
+    return new Promise<HTMLImageElement>((resolve, reject) => {
+      const img = typeof element === 'undefined' ? new Image() : element;
+      // if network is dropped the promise never resolves.
+      img.onload = (elem) => {
+        img.onload = null;
+        resolve(img);
+      };
+      img.src = src;
+    });
+  }
 }
-}
+
+const lazyImages: LazyImage[] = [];
+let scrollTriggeredQueue: LazyImage[];
+let showOnScrollHandler: (ev: UIEvent) => void;
 
 export function init() {
   const containers: HTMLElement[] = Array.prototype.slice.call(document.querySelectorAll('.lazy-img'));
@@ -74,16 +72,21 @@ export function init() {
     lazyImages.push(new LazyImage(container));
   }
   // sort ascending by Y position
-  scrollTriggeredQueue = lazyImages.filter((img) => img.method === 'scroll').sort((a, b) => a.yPosition - b.yPosition);
+  scrollTriggeredQueue = lazyImages
+    .filter((img) => img.method === 'scroll')
+    .sort((a, b) => a.scrollPosition - b.scrollPosition);
 
-  /* The scroll event is expensive because it always reads the current offsetTop of elements
+  /* The scroll event is expensive because it always reads the bounding rect of elements
   * rather than doing it once for each iamge. This is because dom elements may expand in which case
   * the images may not need to be loaded anymore. Because it is computationally heavy it is really
   * important that the event is throttled.
   */
-  onScroll = throttle(showNextOnScroll, 500);
-  window.addEventListener('scroll', onScroll, (supportsPassiveEvents() ? {passive: true} : undefined) as any);
-  showNextOnScroll();
+  showOnScrollHandler = throttle(showOnScroll, 500);
+  window.addEventListener('scroll', showOnScrollHandler,
+    (supportsPassiveEvents() ? {passive: true} : undefined) as any);
+  // changing orientation may also put things into viewport
+  window.addEventListener('resize', showOnScrollHandler);
+  showOnScroll();
   return lazyImages;
 }
 
@@ -110,15 +113,15 @@ function supportsPassiveEvents() {
  * Handle showing of scroll-triggered LazyImages
  * @param ev The scroll event that triggers the loading.
  */
-function showNextOnScroll(ev?: UIEvent) {
-  const threshold = document.body.scrollTop + window.innerHeight;
-  // because the array is sorted w.r.t. y position then we can just select the images
-  // that are above the threshold and splice them from array;
-  const toBeShown = takeWhile(scrollTriggeredQueue, (img) => img.yPosition < threshold);
-  toBeShown.forEach((img) => img.showOriginal());
-  // remove the shown images from the shown array
-  scrollTriggeredQueue.splice(0, toBeShown.length);
-  if (scrollTriggeredQueue.length === 0) {
-    window.removeEventListener('scroll', onScroll);
+function showOnScroll(ev?: UIEvent) {
+  const threshold = window.innerHeight;
+
+  const q = scrollTriggeredQueue;
+  while (q.length > 0 && q[0].scrollPosition < threshold) {
+    q.shift().showOriginal();
+  }
+  if (q.length === 0) {
+    window.removeEventListener('scroll', showOnScrollHandler);
+    window.removeEventListener('resize', showOnScrollHandler);
   }
 }

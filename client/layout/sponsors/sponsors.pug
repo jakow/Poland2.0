@@ -33,11 +33,12 @@ mixin previous-sponsors(sponsorCategories)
 
 mixin sponsor(sponsor)
   - const ratio = sponsor.logo.width / sponsor.logo.height;
+  - const url = imgTransform.limit(sponsor.logo.secure_url, 400);
   if sponsor.description
     - const modalId = `modal-${sponsor._id}`;
     +modalOpenButton(modalId).sponsor__link(title=`Read about ${sponsor.name}`)
       .sponsor
-          +lazy-image(sponsor.logo.secure_url, null, ratio)(alt=sponsor.name).sponsor__logo
+          +lazy-image(url, null, ratio)(alt=sponsor.name).sponsor__logo
           //- img(src=sponsor.logo.secure_url alt=sponsor.name)
           span.sr-only=sponsor.name
     +modal(modalId, `About ${sponsor.name}`)
@@ -50,14 +51,10 @@ mixin sponsor(sponsor)
   else
     a(href=sponsor.url title=`Go to ${sponsor.name}'s webpage`).sponsor__link
       .sponsor
-        +lazy-image(sponsor.logo.secure_url, null, ratio)(alt=sponsor.name).sponsor__logo
+        
+        +lazy-image(url, null, ratio)(alt=sponsor.name).sponsor__logo
         //- img(src=sponsor.logo.secure_url alt=sponsor.name)
         span.sr-only=sponsor.name 
-
-
-
-mixin sponsor-description(sponsor)
-  .sponsor__modal
 
 
 mixin category-inline-style(category)
