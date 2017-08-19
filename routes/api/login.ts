@@ -1,7 +1,7 @@
 import {Router} from 'express';
 import {omit} from 'lodash';
 import {list} from 'keystone';
-import {User} from '../../models/User';
+import {User, UserDocument} from '../../models/User';
 import {UNAUTHORIZED, INTERNAL_SERVER_ERROR} from 'http-status-codes';
 import {createUserToken} from './auth';
 
@@ -15,18 +15,23 @@ login.post('/', async (req, res, next) => {
   try {
     // const user = await signIn(email, password);
     const user = await list<User>('User').model.findOne({email});
-    if (!user) {
-      res.status(UNAUTHORIZED).json({message: INVALID_LOGIN_MSG});
+    if (user != null && await verifyPassword(user, password)) {
+      // pluck password from user document
+      const userDoc: Partial<User> = omit(user.toJSON(), 'password');
+      // and send it in response
+      res.json({ message: 'OK', ...createUserToken(user), user: userDoc });
     } else {
-      user._.password.compare(password, (err: Error, success: boolean) => {
-        if (success) {
-          res.json({message: 'OK', ...createUserToken(user), user: omit(user, 'password')});
-        } else {
-          res.status(UNAUTHORIZED).json({message: INVALID_LOGIN_MSG});
-        }
-      });
+      res.status(UNAUTHORIZED).json({message: INVALID_LOGIN_MSG});
     }
   } catch (e) {
     return res.status(INTERNAL_SERVER_ERROR).json({message: INTERNAL_ERROR_MSG});
   }
 });
+
+function verifyPassword(user: UserDocument, password: string): Promise<boolean> {
+  return new Promise((resolve, reject) => {
+    user._.password.compare(password, (err: Error, success: boolean) => {
+      resolve(success);
+    });
+  });
+}
