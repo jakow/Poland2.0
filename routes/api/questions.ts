@@ -9,7 +9,7 @@ import {OK, CREATED, UNPROCESSABLE_ENTITY, INTERNAL_SERVER_ERROR, NOT_FOUND} fro
 import {UserDocument} from '../../models/User';
 // import {isAdmin} from '../../routes/api/auth';
 import {Question, QuestionDocument} from '../../models/Question';
-import ApiHooks from './apiHooks';
+import ApiHookEmitter from './apiHooks';
 import * as auth from '../api/auth';
 
 // status codes
@@ -25,7 +25,7 @@ interface ValidationError extends Error {
 
 export const questions = Router();
 
-export const hooks = new ApiHooks<Question>();
+export const hooks = new ApiHookEmitter<Question>();
 /**
  * Get all questions. Respects permissions and only fetches accepted
  * for regular users.
@@ -36,7 +36,7 @@ async function getAll(req: Request, res: Response, next: NextFunction) {
   const filter = req.user ? {} : {archived: false, accepted: true};
   const q = await questionModel().find(filter).sort({dateAdded: 1, dateAccepted: 1}).exec();
   res.json(q);
-  hooks.call('read', q);
+  hooks.emit('read', q);
 }
 
 async function getOne(req: Request, res: Response, next: NextFunction) {
@@ -46,7 +46,7 @@ async function getOne(req: Request, res: Response, next: NextFunction) {
   const q = await questionModel().findOne(filter);
   if (q !== null) {
     res.json(q);
-    hooks.call('read', q);
+    hooks.emit('read', q);
   } else {
     res.sendStatus(NOT_FOUND);
   }
@@ -59,7 +59,7 @@ async function create(req: Request, res: Response, next: NextFunction) {
     const {askedBy, text, forEvent, toPerson} = req.body;
     const q = await questionModel().create({askedBy, text, forEvent, toPerson});
     res.status(CREATED).json(q);
-    hooks.call('create', q);
+    hooks.emit('create', q);
   } catch (e) {
     if (e instanceof Error && e.name === 'ValidationError') {
       const err = e as ValidationError;
@@ -94,7 +94,7 @@ async function update(req: Request, res: Response, next: NextFunction) {
   }
   await q.save();
   res.json(q);
-  hooks.call('update', prevState, q.toObject() as RawDocument<Question>);
+  hooks.emit('update', prevState, q.toObject() as RawDocument<Question>);
 }
 
 questions.get('/', auth.authenticateWihoutRedirect, getAll);
