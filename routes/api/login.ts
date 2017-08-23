@@ -9,11 +9,10 @@ const INVALID_LOGIN_MSG = 'Invalid login or password.';
 const INTERNAL_ERROR_MSG = 'Unable to login due to an internal error';
 
 export const login = Router();
-// post to api/auth will return
+
 login.post('/', async (req, res, next) => {
   const {email, password} = req.body;
   try {
-    // const user = await signIn(email, password);
     const user = await list<User>('User').model.findOne({email});
     if (user != null && await verifyPassword(user, password)) {
       // pluck password from user document
@@ -31,6 +30,9 @@ login.post('/', async (req, res, next) => {
 function verifyPassword(user: UserDocument, password: string): Promise<boolean> {
   return new Promise((resolve, reject) => {
     user._.password.compare(password, (err: Error, success: boolean) => {
+      if (err) {
+        reject(err);
+      }
       resolve(success);
     });
   });
