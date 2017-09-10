@@ -15,7 +15,9 @@ events.get('/', async (req, res, next) => {
   }
   const eventList = await list<AgendaEvent>('AgendaEvent').model
   .find({edition: currentEdition})
+  // .find()
   .populate('venue')
+  .lean()
   .exec();
-  res.json(eventList.map((e) => e.toJSON()));
+  res.json(eventList);
 });

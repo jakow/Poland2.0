@@ -49,12 +49,14 @@ AgendaEvent.add({
 });
 
 // assign the same edition to agenda event as to the agenda day it belongs to
-AgendaEvent.schema.pre('save', async function(done) { // tslint:disable-line
- const doc = this as AgendaEventDocument;
- if (doc.agendaDay) {
+AgendaEvent.schema.pre('save', async function(this: AgendaEventDocument, done) {
+  const doc = this;
+  if (doc.agendaDay) {
     try {
       const day = await keystone.list<AgendaDay>('AgendaDay').model.findById(doc.agendaDay).exec();
+      console.log(day);
       doc.edition = day.edition;
+      console.log(doc);
       done();
     } catch (e) {
       done(e);

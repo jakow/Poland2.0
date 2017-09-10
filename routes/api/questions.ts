@@ -94,7 +94,8 @@ async function update(req: Request, res: Response, next: NextFunction) {
   }
   await q.save();
   res.json(q);
-  hooks.emit('update', prevState, q.toObject() as RawDocument<Question>);
+  const nextState = q.toObject() as RawDocument<Question>;
+  hooks.emit('update', prevState, nextState);
 }
 
 questions.get('/', auth.authenticateWihoutRedirect, getAll);

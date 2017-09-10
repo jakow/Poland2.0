@@ -3,7 +3,7 @@ import * as serveStatic from 'serve-static';
 import * as path from 'path';
 import * as fs from 'fs';
 
-export const environment = process.env.NODE_ENV;
+export const environment = process.env.NODE_ENV || 'development';
 // handle case where the server is run with ts-node in development
 
 const isBuild = path.basename(__dirname) === 'build';

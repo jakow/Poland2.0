@@ -53,11 +53,12 @@ const contactFormConstraints = {
 export const contact: RequestHandler = async (req, res, next) => {
   const method = req.method;
   const view = new View(req, res);
-  const isAjax = req.params.ajax;
+  const isAjax = req.query.ajax;
   if (method !== 'POST') {
     // not a valid contact endpoint
     return next();
   }
+
   // likely not a real user but a bot
   if (!isAjax) {
     return next(); // 404
@@ -81,7 +82,7 @@ export const contact: RequestHandler = async (req, res, next) => {
   }
 };
 
-async function createEnquiry(formData: Enquiry) {
+function createEnquiry(formData: Enquiry) {
   console.log(formData);
   return list<Enquiry>('Enquiry').model.create(formData);
 }
