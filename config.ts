@@ -69,4 +69,4 @@ export const nodemailerConfig = {
   },
 };
 
-export const targetEmail = process.env.TARGET_EMAIL;
+export const targetEmail = process.env.TARGET_EMAIL || 'contact@poland20.com';

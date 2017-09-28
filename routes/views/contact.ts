@@ -1,5 +1,6 @@
 import {RequestHandler} from 'express';
 import {list, View} from 'keystone';
+import {stripIndent} from 'common-tags';
 import * as moment from 'moment';
 import {CREATED, UNPROCESSABLE_ENTITY, INTERNAL_SERVER_ERROR} from 'http-status-codes';
 import {pick} from 'lodash';
@@ -74,7 +75,7 @@ export const contact: RequestHandler = async (req, res, next) => {
       res.status(CREATED).json({message: 'ok'});
       // if created, also send a notification email
       if (environment === 'production') {
-        sendEmail(enquiry);
+        await sendEmail(enquiry);
       }
     } catch (e) {
       res.sendStatus(INTERNAL_SERVER_ERROR);
@@ -83,28 +84,32 @@ export const contact: RequestHandler = async (req, res, next) => {
 };
 
 function createEnquiry(formData: Enquiry) {
-  console.log(formData);
   return list<Enquiry>('Enquiry').model.create(formData);
 }
 
 function sendEmail(enquiry: Enquiry) {
-  emails.sendMail({
+  // tslint:disable:max-line-length
+  const email = {
     from: `"Poland 2.0 Notifications" <${notificationEmail}>`,
     to: targetEmail,
     subject: 'New enquiry received',
-    text: `This e-mail is to notify that a new enquiry has been submitted at the Poland 2.0 website on
-${moment(enquiry.date).toLocaleString()}:
+    text: stripIndent`
+    This e-mail is to notify that a new enquiry has been submitted at the Poland 2.0 website on ${moment(enquiry.date).toLocaleString()}:
+    From: ${enquiry.name} | <email: ${enquiry.email} | phone: ${enquiry.phone || 'none'}>
+    Company/organization: ${enquiry.company}
+    Subject: ${enquiry.subject}
+    Question: ${enquiry.text}
 
-From: ${enquiry.name} | <email: ${enquiry.email} | phone: ${enquiry.phone || 'none'}>
-Company/organization: ${enquiry.company}
-Subject: ${enquiry.subject}
-Question: ${enquiry.text}
-
-Please reply promptly!`,
-  }, (err, info) => {
-    if (err) {
-      console.error('email send failed');
-      console.error(err);
-    }
+    Please reply promptly!`,
+  };
+  return new Promise<void>((resolve, reject) => {
+    emails.sendMail(email, (err, info) => {
+      if (err) {
+        console.error('[contact] Email send failed');
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
   });
 }
