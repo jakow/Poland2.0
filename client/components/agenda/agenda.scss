@@ -1,10 +1,10 @@
 $timeline-thickness: 4px;
 // $timeline-offset: 1rem;
-$timeline-offset: 0rem;
-$timeline-offset-tablet: 1rem;
+$timeline-offset: 0px;
+$timeline-offset-tablet: 16px;
 $agenda-event-top-padding: $vertical-baseline;
-$agenda-event-left-padding: 1.25rem;
-$agenda-event-right-padding: 1.25rem;
+$agenda-event-left-padding: 20px;
+$agenda-event-right-padding: 20px;
 $map-height: 14*$vertical-baseline;
 $ornament-width: 18px;
 $ornament-height: $ornament-width/2/0.866;
@@ -20,24 +20,19 @@ $height-transition-duration: 350ms;
   margin-bottom: $vertical-baseline;
 }
 .agenda__heading {
-  z-index: 2;
   text-align: center;
-  @include breakpoint($tablet) {
-    // margin-bottom: -4*$vertical-baseline;
-  }
 }
 .agenda__timeline {
 
   position: absolute;
   top: $ornament-width/2;
   bottom: $ornament-width/2;
-  left: calc(#{$timeline-offset} - #{$timeline-thickness/2});
+  left: $timeline-offset - $timeline-thickness/2;
   @include breakpoint($tablet) {
-    left: calc(#{$timeline-offset-tablet} - #{$timeline-thickness/2});
+    left: $timeline-offset-tablet - $timeline-thickness/2;
   }
   width: $timeline-thickness;
   background-color: $color-primary;
-  z-index: 2;
   // the arrow on the bottom of the timeline
   &::after {
     content: '';
@@ -75,7 +70,7 @@ $height-transition-duration: 350ms;
 .agenda-day__description {
   position: relative;
   margin: 0 0 $vertical-baseline $timeline-offset;
-  
+
   padding: 0 $agenda-event-right-padding 0 $agenda-event-right-padding;
   @include breakpoint($tablet) {
     margin-left: $timeline-offset-tablet;
@@ -104,12 +99,11 @@ $height-transition-duration: 350ms;
   // margin-top: $vertical-baseline;
   margin-bottom: $vertical-baseline;
 }
+
 .agenda-event {
-  // margin: 0 $vertical-baseline $vertical-baseline;
+  margin-bottom: 0 $vertical-baseline $vertical-baseline;
   position: relative;
-  margin-bottom: $vertical-baseline;
   background-color: white;
-  // padding: $agenda-event-top-padding $agenda-event-right-padding 0 $agenda-event-left-padding;
 
   border: $border-style;
   box-shadow: $feather-shadow;
@@ -118,12 +112,17 @@ $height-transition-duration: 350ms;
     box-shadow: 0 1px 12px 1px rgba(0, 0, 0, 0.18);
   }
 
+  &__wrapper {
+    padding: 1rem 0;
+    position: relative;
+  }
+
   header {
     margin: $vertical-baseline 0;
   }
 
-  // fit the padding 
-  > header, > div {
+  // fit the padding
+  &__content {
     // margin-bottom: $vertical-baseline;
     padding-right: $agenda-event-right-padding;
     padding-left: $timeline-offset + $agenda-event-left-padding;
@@ -133,8 +132,7 @@ $height-transition-duration: 350ms;
     }
   }
 
-  &::before {
-    content: '';
+  &__dash {
     position: absolute;
     left: $timeline-offset;
     @include breakpoint($tablet) {
@@ -144,6 +142,18 @@ $height-transition-duration: 350ms;
     height: $timeline-thickness;
     background: $color-primary;
     width: 12px;
+  }
+
+  &__line {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left: $timeline-offset - $timeline-thickness / 2;
+    @include breakpoint($tablet) {
+      left: $timeline-offset-tablet - $timeline-thickness / 2;
+    }
+    width: $timeline-thickness;
   }
 }
 
@@ -291,8 +301,8 @@ $location-pin-size-tablet: 1.5*$vertical-baseline;
   }
 
   margin-bottom: $vertical-baseline;
-  
-  // map marker icon on the left 
+
+  // map marker icon on the left
 	background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCwgMCwgMzIsIDMyIj48ZyBmaWxsLW9wYWNpdHk9Ii4zOCI+PHBhdGggZD0iTTE1Ljk5OSAzMGEuNy43IDAgMCAxLS41NTEtLjI2N2MtLjA3OS0uMTAzLTEuOTg1LTIuNTQtMy45MTUtNi4xMzktMS4xMzctMi4xMTktMi4wNDQtNC4xOTktMi42OTUtNi4xODNDOC4wMTYgMTQuOTA5IDcuNiAxMi41NSA3LjYgMTAuNCA3LjYgNS43NjkgMTEuMzY5IDIgMTYgMnM4LjQgMy43NjkgOC40IDguNGMwIDIuMTUtLjQxNyA0LjUwOC0xLjIzOCA3LjAxMS0uNjUxIDEuOTg0LTEuNTU4IDQuMDY0LTIuNjk1IDYuMTgzLTEuOTMyIDMuNTk5LTMuODM2IDYuMDM2LTMuOTE1IDYuMTM5YS43LjcgMCAwIDEtLjU1MS4yNjd6bTAtMjYuNmMtMy44NiAwLTcgMy4xNC03IDcgMCA0LjU1NiAyLjA0OCA5LjMzIDMuNzY3IDEyLjUzMWE0OC4wOTMgNDguMDkzIDAgMCAwIDMuMjMzIDUuMTk0IDQ4LjE5OCA0OC4xOTggMCAwIDAgMy4yNDUtNS4yMTZjMS43MTItMy4xOTYgMy43NTUtNy45NjIgMy43NTUtMTIuNTA5IDAtMy44Ni0zLjE0MS03LTctN3oiLz48cGF0aCBkPSJNMTYgMTYuMDQ3YTQuMjA1IDQuMjA1IDAgMCAxLTQuMi00LjJjMC0yLjMxNiAxLjg4NC00LjIgNC4yLTQuMiAyLjMxNiAwIDQuMiAxLjg4NCA0LjIgNC4yIDAgMi4zMTUtMS44ODQgNC4yLTQuMiA0LjJ6bTAtN2EyLjgwMyAyLjgwMyAwIDAgMC0yLjggMi44YzAgMS41NDQgMS4yNTYgMi44IDIuOCAyLjggMS41NDQgMCAyLjgtMS4yNTYgMi44LTIuOCAwLTEuNTQ0LTEuMjU2LTIuOC0yLjgtMi44eiIvPjwvZz48L3N2Zz4=');
   background-repeat: no-repeat;
   // background-position: top 0 left;
@@ -358,6 +368,12 @@ $location-pin-size-tablet: 1.5*$vertical-baseline;
 
 .agenda-event__venue-show-map-link {
   color: $color-primary;
+  display: flex;
+  align-items: center;
+}
+
+.agenda-event__venue-show-map-icon {
+  margin-right: 8px;
 }
 
 .agenda-event__expand-details {
@@ -402,5 +418,5 @@ $location-pin-size-tablet: 1.5*$vertical-baseline;
   .agenda-event--expanded & {
     transform: rotate(-180deg);
   }
-  
+
 }

@@ -22,6 +22,7 @@ export interface AgendaEvent {
   speakers: keystone.Schema.Relationship;
   agendaDay: keystone.Schema.Relationship;
   venue: keystone.Schema.Relationship;
+  category: keystone.Schema.Relationship;
   edition: keystone.Schema.Relationship;
 }
 
@@ -44,6 +45,7 @@ AgendaEvent.add({
   },
   speakers: {type: Types.Relationship, ref: 'Speaker', many: true},
   agendaDay: {type: Types.Relationship, ref: 'AgendaDay'},
+  category: {type: Types.Relationship, ref: 'AgendaEventCategory'},
   venue: {type: Types.Relationship, ref: 'Venue'},
   edition: {type: Types.Relationship, hidden: true, ref: 'Edition'},
 });
@@ -54,9 +56,7 @@ AgendaEvent.schema.pre('save', async function(this: AgendaEventDocument, done) {
   if (doc.agendaDay) {
     try {
       const day = await keystone.list<AgendaDay>('AgendaDay').model.findById(doc.agendaDay).exec();
-      console.log(day);
       doc.edition = day.edition;
-      console.log(doc);
       done();
     } catch (e) {
       done(e);

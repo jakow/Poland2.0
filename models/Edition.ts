@@ -102,6 +102,13 @@ Edition.schema.methods.getRefs = function(ref: string, filters = {}) {
   return keystone.list(ref).model.find({...filters, edition: this.id});
 };
 
+Edition.schema.pre('save', async function(this: EditionDocument, done) {
+  if (this.isModified('current') && this.current) {
+    await Edition.model.findOneAndUpdate({current: true}, { current: false});
+  }
+  done();
+});
+
 Edition.relationship({path: 'speakers', ref: 'Speaker', refPath: 'edition'});
 Edition.relationship({path: 'team-members', ref: 'TeamMember', refPath: 'edition'});
 Edition.relationship({path: 'sponsors', ref: 'Sponsor', refPath: 'edition'});

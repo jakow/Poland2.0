@@ -19,7 +19,7 @@ export default async function getAgenda(edition?: EditionDocument): Promise<Agen
   const agendaEvents = await list<AgendaEvent>('AgendaEvent').model
     .find({agendaDay: {$in: agendaDays}})
     .sort({'time.start': 'ascending'})
-    .populate('speakers venue')
+    .populate('speakers venue category')
     .exec();
 
   const days = agendaDays.map( (d) => d.toObject() as AgendaDayDocument);

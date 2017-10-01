@@ -20,7 +20,8 @@ AgendaEventCategory.add({
   color: { type: Types.Color },
 });
 
-AgendaEventCategory.defaultColumns = 'name, time.start, time.end';
+AgendaEventCategory.relationship({ path: 'agenda-events', ref: 'AgendaEvent', refPath: 'category' });
+
 AgendaEventCategory.register();
 
 export default AgendaEventCategory;

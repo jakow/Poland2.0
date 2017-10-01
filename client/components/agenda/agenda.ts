@@ -54,7 +54,7 @@ export default class Agenda {
     const height = this.detailsHeight(detailsContainer);
 
     // add a map if not already added
-    if (!el.dataset.hasMap) {
+    if (!el.dataset.hasMap && detailsContainer.querySelector(MAP_SELECTOR) != null) {
       this.addMap(el);
     }
     // animate height of the element

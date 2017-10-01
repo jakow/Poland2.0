@@ -82,7 +82,7 @@ import './models';
 
 // navigation in admin UI.
 keystone.set('nav', {
-  agenda: ['agenda-days', 'agenda-events', 'venues'],
+  agenda: ['agenda-days', 'agenda-events', 'agenda-event-categories', 'venues'],
   content: ['static-pages', 'content-controls'],
   editions: 'editions',
   people: ['speaker-categories', 'speakers', 'team-members'],

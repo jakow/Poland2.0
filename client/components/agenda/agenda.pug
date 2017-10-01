@@ -28,39 +28,45 @@ mixin agenda-event(event, dayMoment)
   - const startTime = startDate.format('H:mm');
   - const endDate = moment.utc(event.time.end);
   - const endTime = endDate.format('H:mm');
-  li.agenda-event(id=`event-${event.slug}`)
-    +event-permalink(event.slug)
-    header
-      //- div=JSON.stringify(event)
-      .agenda-event__time-and-type
-        //- time(datetime=`${startDate.toISOString()}/${endDate.toISOString()}`)=`${startTime}–${endTime}`
-        .agenda-event__time.
-          <time datetime=#{startDate.toISOString()})>#{startTime}</time>
-          <span>–</span>
-          <time datetime=#{endDate.toISOString()}>#{endTime}</time>
-        //- ${endDate.toISOString()}`)=`${startTime}–${endTime}`
-        .agenda-event__type=event.type
-      h4.agenda-event__name=event.name
-    .agenda-event__summary
-      if event.speakers
-        ul.agenda-event__speaker-list
-          each speaker in event.speakers
-            li
-              +speaker-avatar(speaker)
-              span.agenda-event__speaker-name=speaker.name
+  li.agenda-event__wrapper
+    +event-line(event.category)
+    .agenda-event(id=`event-${event.slug}`)
+      +event-dash(event.category)
+      +event-permalink(event.slug)
+      .agenda-event__content
+        header
+          //- div=JSON.stringify(event)
+          .agenda-event__time-and-type
+            //- time(datetime=`${startDate.toISOString()}/${endDate.toISOString()}`)=`${startTime}–${endTime}`
+            .agenda-event__time.
+              <time datetime=#{startDate.toISOString()})>#{startTime}</time>
+              <span>–</span>
+              <time datetime=#{endDate.toISOString()}>#{endTime}</time>
+            //- ${endDate.toISOString()}`)=`${startTime}–${endTime}`
+            .agenda-event__type=event.type
+          h4.agenda-event__name=event.name
+        .agenda-event__summary
+          if event.speakers
+            ul.agenda-event__speaker-list
+              each speaker in event.speakers
+                li
+                  +speaker-avatar(speaker)
+                  span.agenda-event__speaker-name=speaker.name
 
 
-      if event.venue
-        +venue(event.venue)
-    a(href="#" title="Toggle details").agenda-event__expand-details
-      span.agenda-event__expand-chevron
-      span.agenda-event__expand-text more
-    .agenda-event__details-container
-      .agenda-event__details
-        .agenda-event__description=event.description
-        if (event.venue && event.venue.location)
-          .agenda-event__map(data-url=googleMapsEmbedUrl(event.venue.location), data-location=JSON.stringify(event.venue.location))
-            .spinner
+        if event.venue
+          +venue(event.venue)
+
+      if event.venue || event.description
+        a(href="#" title="Toggle details").agenda-event__expand-details
+          span.agenda-event__expand-chevron
+          span.agenda-event__expand-text more
+        .agenda-event__details-container
+          .agenda-event__details
+            .agenda-event__description=event.description
+            if (event.venue && event.venue.location)
+              .agenda-event__map(data-url=googleMapsEmbedUrl(event.venue.location), data-location=JSON.stringify(event.venue.location))
+                .spinner
 
 mixin speaker-avatar(speaker)
   +lazy-image(
@@ -74,7 +80,7 @@ mixin venue(venue)
       div=venue.name
     else
       div
-        | #{venue.location.name}<br>
+        | #{venue.name}<br>
         if venue.location.street1
           | #{venue.location.street1}<br>
         if venue.location.street2
@@ -90,12 +96,22 @@ mixin venue(venue)
       div
         a(href=googleMapsUrl(venue.location) target="_blank").agenda-event__venue-show-map-link
           //- i.ion-map.left-icon
-          i.lnr.lnr-map.left-icon
+          i.lnr.lnr-map.left-icon.agenda-event__venue-show-map-icon
           span Open a map
 
 mixin event-permalink(slug)
   a(href=`/#event-${slug}` title="Link to this event").agenda-event__permalink
     span.agenda-event__permalink-caption Link to this event
     span.agenda-event__permalink-icon.lnr.lnr-link
-    //- i.agenda-event__permalink-icon.fa.fa-link
-    //- i.agenda-event__permalink-icon.ion-ios-link
+
+mixin event-dash(category)
+  if category
+    .agenda-event__dash(style=`background-color: ${category.color}`)
+  else
+    .agenda-event__dash
+
+mixin event-line(category)
+  if category
+    .agenda-event__line(style=`background-color: ${category.color}`)
+  else
+    .agenda-event__line

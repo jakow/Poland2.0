@@ -102,10 +102,7 @@ function supportsPassiveEvents() {
       },
     });
     window.addEventListener("test", null, opts);
-  } catch (e) {
-    // pass
-  }
-  // console.info('Support for passive scroll handlers', supportsPassive);
+  } catch (e) { /* noop */ }
   return supportsPassive;
 }
 
