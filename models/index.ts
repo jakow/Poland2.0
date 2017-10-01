@@ -1,5 +1,6 @@
 export * from './AgendaDay';
 export * from './AgendaEvent';
+export * from './AgendaEventCategory';
 export * from './ContentControl';
 export * from './Edition';
 export * from './Question';

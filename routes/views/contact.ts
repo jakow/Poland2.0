@@ -72,11 +72,11 @@ export const contact: RequestHandler = async (req, res, next) => {
   } else {
     try {
       const enquiry = await createEnquiry(formData);
-      res.status(CREATED).json({message: 'ok'});
       // if created, also send a notification email
       if (environment === 'production') {
         await sendEmail(enquiry);
       }
+      res.status(CREATED).json({message: 'ok'});
     } catch (e) {
       res.sendStatus(INTERNAL_SERVER_ERROR);
     }

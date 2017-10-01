@@ -16,9 +16,9 @@ const cssLoaders = [
   // {loader:'style-loader', options: {sourceMap: true}},
   {loader:'css-loader', options: {sourceMap: true}},
   {
-    loader:'postcss-loader',  
+    loader:'postcss-loader',
     options: {
-      sourceMap: true, 
+      sourceMap: true,
       plugins: postcssPlugins,
     },
   },
@@ -58,19 +58,19 @@ const config = {
       use: [{
         loader: 'ts-loader',
         options: {
-          configFileName: '@config/tsconfig.client.json',
+          configFile: '@config/tsconfig.client.json',
         }
       }
       ],
     },
     {
       test: /\.s?css$/,
-      use: isProduction ? 
-        ExtractTextPlugin.extract({fallback: 'style-loader', use: cssLoaders}) : 
+      use: isProduction ?
+        ExtractTextPlugin.extract({fallback: 'style-loader', use: cssLoaders}) :
         [{loader:'style-loader', options: {sourceMap: true}}, ...cssLoaders],
     }
     ],
-    
+
   },
   plugins: [...isProduction ? [
         new webpack.DefinePlugin({

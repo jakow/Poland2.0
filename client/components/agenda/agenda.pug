@@ -4,10 +4,10 @@ mixin agenda(agenda)
   .agenda__heading
     h2.bold.fat-heading.heading-stripe Agenda
   .agenda
-    
+
     ol.agenda-days
       each day in agenda.days
-    
+
         - const dayMoment = moment.utc(day.date);
         li.agenda-day
           header.agenda-day__description
@@ -15,11 +15,11 @@ mixin agenda(agenda)
             h3!=ordinalSuperscripts(moment(day.date).format('dddd, Do MMMM'))
             if day.description
               div=day.description
-          if day.events.length > 0    
+          if day.events.length > 0
             ol.agenda-day__events
               each event in day.events
                 +agenda-event(event, dayMoment)
-    //- long line with an arrow pointing down             
+    //- long line with an arrow pointing down
     .agenda__timeline
 
 
@@ -48,9 +48,9 @@ mixin agenda-event(event, dayMoment)
             li
               +speaker-avatar(speaker)
               span.agenda-event__speaker-name=speaker.name
-              
-      
-      if event.venue          
+
+
+      if event.venue
         +venue(event.venue)
     a(href="#" title="Toggle details").agenda-event__expand-details
       span.agenda-event__expand-chevron
@@ -58,13 +58,13 @@ mixin agenda-event(event, dayMoment)
     .agenda-event__details-container
       .agenda-event__details
         .agenda-event__description=event.description
-        if (event.venue.location)
+        if (event.venue && event.venue.location)
           .agenda-event__map(data-url=googleMapsEmbedUrl(event.venue.location), data-location=JSON.stringify(event.venue.location))
             .spinner
 
 mixin speaker-avatar(speaker)
   +lazy-image(
-    imgTransform.limit(speaker.photo.secure_url, 120), 
+    imgTransform.limit(speaker.photo.secure_url, 120),
     imgTransform.limit(speaker.photo.secure_url, 32)).agenda-event__speaker-avatar(alt=speaker.name)
   //- img(src=imgTransform.limit(speaker.photo.secure_url, 120)).agenda-event__speaker-avatar
 
@@ -79,23 +79,23 @@ mixin venue(venue)
           | #{venue.location.street1}<br>
         if venue.location.street2
           | #{venue.location.street2}<br>
-        
-          
+
+
         //- if venue.location.state
         //-   | <br>#{venue.location.state}
         if venue.location.suburb && venue.location.postcode
           | #{venue.location.suburb}&nbsp;#{venue.location.postcode}<br>
-        else 
+        else
           | #{venue.location.suburb}
-      div 
+      div
         a(href=googleMapsUrl(venue.location) target="_blank").agenda-event__venue-show-map-link
-          //- i.ion-map.left-icon 
+          //- i.ion-map.left-icon
           i.lnr.lnr-map.left-icon
           span Open a map
 
 mixin event-permalink(slug)
   a(href=`/#event-${slug}` title="Link to this event").agenda-event__permalink
-    span.agenda-event__permalink-caption Link to this event 
+    span.agenda-event__permalink-caption Link to this event
     span.agenda-event__permalink-icon.lnr.lnr-link
     //- i.agenda-event__permalink-icon.fa.fa-link
     //- i.agenda-event__permalink-icon.ion-ios-link
