@@ -35,14 +35,14 @@ block content
           h1 Poland 2.0 Summit
           p.banner__dateplace
             if (currentEdition)
-              time.banner__date(datetime=currentEdition.isoString)=`${currentEdition.dateString}` 
+              time.banner__date(datetime=currentEdition.isoString)=`${currentEdition.dateString}`
               span.banner__separator
               span.banner__place=`${currentEdition.venue.name}`
-        div!=contentControl.description 
-        //- .banner__whats-on  
+        div!=contentControl.description
+        //- .banner__whats-on
         //-   p What's on?
         //-   a.button.button--circular.button--primary.button--icon.button--arrow-down(href="#" title="Explore the website")
-            
+
     +banner-column('image')
       //- A slider with images
       +banner-slider
@@ -52,7 +52,7 @@ block content
             - const imgSrc = imgTransform.limit(photo.secure_url, 900)
             +banner-slider-image-slide(imgSrc)(data-src=imgSrc)
         //- 3 generic photos
-        else 
+        else
           +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497537104/ffoopf3pdr6xxft5pfel.jpg',900))
           +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497536456/tprdqpldylorpccqpmg0.jpg', 900))
           +banner-slider-image-slide(imgTransform.limit('https://res.cloudinary.com/dg1royeho/image/upload/v1497445653/DSC_0270n_rlkqba.jpg', 900))
@@ -72,7 +72,7 @@ block content
     section#agenda
       .container
         +agenda(agenda)
-  
+
 
   //- div(style="width: 240px")
   //-   +lazy-image(
@@ -81,7 +81,7 @@ block content
   //-     '1:1', 'scroll')(alt='This is an image')
 
 
-  section#sponsors
+  section#partners
     .container
       if contentControl.showSponsors
         +sponsors(sponsorCategories)
