@@ -50,7 +50,7 @@ export async function initLocals(req: Request, res: Response, next: NextFunction
     ...contentControl.showSpeakers ? [{name: 'Speakers', route: '/#speakers', key: 'speakers'}] : [],
     ...contentControl.showAgenda ? [{name: 'Agenda', route: '/#agenda', key: 'speakers'}] : [],
     // {name: 'Past editions', route: '/past-editions', key: 'past-editions'},
-    ...contentControl.showSponsors ? [{name: 'Sponsors', route: '/#sponsors', key: 'sponsors'}] : [],
+    ...contentControl.showSponsors ? [{name: 'Partners', route: '/#partners', key: 'partners'}] : [],
   ];
   const staticPageRoutes: NavItem[] = staticPages.map( (p) => ({
     name: p.name, route: p.route, key: p.route.replace(/\//g, ''),
