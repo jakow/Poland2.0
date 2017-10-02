@@ -8,10 +8,10 @@ mixin sponsor-list(sponsorCategories)
     each category in sponsorCategories
       li.sponsor-category
         - const categoryName = slugify(category.name);
-        - const categoryClass = 'sponsor-list--' + categoryName; 
+        - const categoryClass = 'sponsor-list--' + categoryName;
         +category-inline-style(category)
         if (category.showName)
-          h2=(category.sponsors.length > 1) ? category.name : category.singular
+          h2=(category.sponsors.length > 1 ? category.name : category.singular)
         ul.sponsor-list(class=`sponsor-list--${category.perColumn}-col ${categoryClass}`)
           each sponsor in category.sponsors
             li: +sponsor(sponsor)
@@ -51,16 +51,16 @@ mixin sponsor(sponsor)
   else
     a(href=sponsor.url title=`Go to ${sponsor.name}'s webpage`).sponsor__link
       .sponsor
-        
+
         +lazy-image(url, null, ratio)(alt=sponsor.name).sponsor__logo
         //- img(src=sponsor.logo.secure_url alt=sponsor.name)
-        span.sr-only=sponsor.name 
+        span.sr-only=sponsor.name
 
 
 mixin category-inline-style(category)
   if category.imageAdjust.width || category.imageAdjust.height
     - const categoryName = slugify(category.name);
-    - const categoryClass = 'sponsor-list--' + categoryName; 
+    - const categoryClass = 'sponsor-list--' + categoryName;
     - const maxWidth = category.imageAdjust.width;
     - const maxHeight = category.imageAdjust.height;
     style.
