@@ -73,19 +73,9 @@ block content
       .container
         +agenda(agenda)
 
-
-  //- div(style="width: 240px")
-  //-   +lazy-image(
-  //-     'https://unsplash.it/500/500?random',
-  //-     'https://placehold.it/500x500',
-  //-     '1:1', 'scroll')(alt='This is an image')
-
-
   section#partners
     .container
       if contentControl.showSponsors
         +sponsors(sponsorCategories)
       else if contentControl.showPreviousSponsors
         +previous-sponsors(previousSponsorCategories)
-
-    //- p= JSON.stringify(speakers)
