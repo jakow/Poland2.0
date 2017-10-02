@@ -6,8 +6,10 @@ import reversePopulate from '../helpers/reversePopulate';
 
 export default async function getSponsorsByCategory(sponsorFilter: any = {}, categoryFilter: any = {}) {
   const sponsors = await list<Sponsor>('Sponsor').model
-    .find({category: { $ne: null }, ...sponsorFilter}).exec();
+    .find({category: { $ne: null }, ...sponsorFilter})
+    .sort('sortOrder')
+    .exec();
   const sponsorCategories = await list<SponsorCategory>('SponsorCategory').model
-    .find(categoryFilter).sort('sortOrder').exec();
+    .find(categoryFilter).sort('-sortOrder').exec();
   return reversePopulate(sponsorCategories, 'sponsors', sponsors, 'category');
 }
