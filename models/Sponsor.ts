@@ -14,6 +14,7 @@ export interface Sponsor  {
   edition: keystone.Schema.Relationship;
   category: keystone.Schema.Relationship;
   showInPrevious: boolean;
+  sortOrder: number;
 }
 
 export type SponsorDocument = keystone.Document<Sponsor>;
@@ -40,6 +41,7 @@ Sponsor.add({
   category: {type: Types.Relationship, ref: 'SponsorCategory'},
   // show previous sponsors
   showInPrevious: { type: Boolean, label: 'Show in previous partner list' },
+  sortOrder: Number,
 });
 
 // handle users being silly and not adding a http to the document
