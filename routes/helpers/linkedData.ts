@@ -12,7 +12,7 @@ const stripTags = require('striptags');
  * Create a JSON-LD representation of the event promoted by the page.
  */
 export function event(edition: Edition, speakers: Speaker[], sponsors: Sponsor[], contentControl: ContentControl) {
-  const {facebookUrl, twitterUrl, linkedinUrl, language, ticketsLive} = contentControl;
+  const {facebookUrl, twitterUrl, linkedinUrl, language} = contentControl;
   const sameAs: string[] = [linkedinUrl, facebookUrl, twitterUrl].filter((url) => url != null);
   const languages = language && language.replace(/\s/g, '').split(',') || [];
   const {start, end} = edition.date;
@@ -29,7 +29,7 @@ export function event(edition: Edition, speakers: Speaker[], sponsors: Sponsor[]
     ...sameAs.length && {sameAs},
     ...sponsors && sponsors.length && {sponsor: sponsors.map(sponsorOrganization)},
     ...languages.length && {inLanguage: languages},
-    ...ticketsLive && {offers: offers(contentControl)},
+    // ...ticketsLive && {offers: offers(contentControl)},
     ...speakers && speakers.length && {performer: speakers.map(performer)},
   };
 }
@@ -70,18 +70,18 @@ function postalAddress(location: Schema.Location) {
   };
 }
 
-function offers(contentControl: ContentControl) {
-  const {ticketsPrices, ticketsCurrency, ticketsUrl} = contentControl;
-  const prices = ticketsPrices ? ticketsPrices.replace(/\s/g, '').split(',') : [];
-  return prices.map( (price) => (
-    {
-      '@type': 'Offer',
-      'price': price,
-      'priceCurrency': ticketsCurrency,
-      'url': ticketsUrl,
-    }
-  ));
-}
+// function offers(contentControl: ContentControl) {
+//   const {ticketsPrices, ticketsCurrency, ticketsUrl} = contentControl;
+//   const prices = ticketsPrices ? ticketsPrices.replace(/\s/g, '').split(',') : [];
+//   return prices.map( (price) => (
+//     {
+//       '@type': 'Offer',
+//       'price': price,
+//       'priceCurrency': ticketsCurrency,
+//       'url': ticketsUrl,
+//     }
+//   ));
+// }
 
 function performer(speaker: Speaker) {
   return {
