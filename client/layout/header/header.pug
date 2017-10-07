@@ -23,8 +23,8 @@ mixin header(navOptions)
               +nav-item(link.route, link.key)=link.name
             //- +nav-item("/about")
             //- +nav-item("/#speakers") Speakers
-            if contentControl.ticketsLive
-              li: a(href=contentControl.ticketUrl).button.button--primary Tickets
+            if contentControl.tickets.live && contentControl.tickets.url
+              li: a(href=contentControl.tickets.url).button.button--primary Tickets
 
 
 

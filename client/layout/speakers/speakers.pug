@@ -5,7 +5,7 @@ mixin speakers(speakerCategories)
   section#speakers
     .speakers-bg#speakers-bg-image
       .speakers-bg#speakers-bg-gradient
-    .container
+    .container.speakers__container
       .center
         h2.bold.fat-heading.heading-stripe Speakers
       each category in speakerCategories
@@ -48,4 +48,3 @@ mixin speakerModal(modalId, speaker)
             p.simple-modal__subheading=`${speaker.position}`
         div!=speaker.description.html
 
-          

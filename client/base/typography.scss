@@ -12,8 +12,8 @@ $sgl-base-line-height: $baseline-height;
 $sgl-base-unit: "rem";
 
 /// Scale factor.
-/// Any of: $MINOR_SECOND, $MAJOR_SECOND, $MINOR_THIRD, $MAJOR_THIRD, $PERFECT_FOURTH, $AUGMENTED_FOURTH, $PERFECT_FIFTH, 
-// $MINOR_SIXTH, $GOLDEN_SECTION, $MAJOR_SIXTH, $MINOR_SEVENTH, $MAJOR_SEVENTH, $OCTAVE, $MAJOR_TENTH, $MAJOR_ELEVENTH, 
+/// Any of: $MINOR_SECOND, $MAJOR_SECOND, $MINOR_THIRD, $MAJOR_THIRD, $PERFECT_FOURTH, $AUGMENTED_FOURTH, $PERFECT_FIFTH,
+// $MINOR_SIXTH, $GOLDEN_SECTION, $MAJOR_SIXTH, $MINOR_SEVENTH, $MAJOR_SEVENTH, $OCTAVE, $MAJOR_TENTH, $MAJOR_ELEVENTH,
 // $MAJOR_TWELFTH, $DOUBLE_OCTAVE
 ///
 $sgl-scale-factor: $PERFECT_FOURTH;
@@ -90,7 +90,7 @@ blockquote {
 
 }
 
-// design specific styling 
+// design specific styling
 h1, h2, h3 {
   font-weight: 300;
 }
@@ -99,6 +99,9 @@ small {
   color: $color-gray-dark;
 }
 
+strong, b {
+  font-weight: 600;
+}
 
 .subtitle {
   font-weight: 300;
@@ -184,10 +187,10 @@ a.fat-link {
     // animate with transform - text antialiasing issues
     // transform: scaleX(0);
     // transform-origin: left;
-    
+
     // animate with max width - potentially no 60 FPS
     max-width: 0;
-    
+
   }
   &:hover {
     text-decoration: none;

@@ -11,6 +11,7 @@ import {animatedHashAnchors, initHashNavigation, JUMP_OPTIONS} from './clientUti
 import ContactFormModal from './layout/contact-form-modal/contact-form-modal';
 import {initModals} from './components/modal/modal';
 import { contactFormConstraints } from './layout/contact-form/contact-form';
+import renderCountdowns from './components/countdown/renderCountdowns';
 
 document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.classList.remove('no-js');
@@ -38,4 +39,5 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalContainers = Array.from(document.querySelectorAll('.modal:not(.contact-form-modal)')) as HTMLElement[];
   initModals(modalContainers);
   const contactFormModal = new ContactFormModal(document.getElementById('contact-form-modal'));
+  renderCountdowns();
 });

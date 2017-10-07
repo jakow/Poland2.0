@@ -31,8 +31,8 @@ const buildDir = path.resolve(__dirname, '..', 'build');
 const config = {
   target: 'web',
   entry: {
-    main: './client/main.ts',
-    home: './client/views/home/home.ts'
+    main: './client/main',
+    home: './client/views/home/home'
   },
   output: {
     path: path.join(buildDir, 'client'),

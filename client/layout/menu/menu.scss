@@ -40,7 +40,7 @@ $menu-item-transition: cubic-bezier(0.55, 0.055, 0.675, 0.19) 150ms;
     margin-top: 0;
     margin-bottom: $vertical-baseline;
   }
-  
+
 }
 // overlay to prevent clicks
 body::after {
@@ -68,7 +68,7 @@ body.mobile-menu-open {
   left: calc(50% - 500px);
   transform: translateX(0) translateY(0) scale(0);
   border-radius: 50%;
-  background-color: transparentize($color-dark, 0.05);
+  background-color: rgba(29, 35, 41, 0.9);
   -webkit-overflow-scrolling: touch;
   &.mobile-menu__overlay--attached {
     border-radius: 0;

@@ -1,6 +1,8 @@
 @import '~cssgram/source/scss/cssgram';
 
 .banner {
+  background-color: white;
+  z-index: 4;
   overflow-x: hidden;
   position: relative;
   display: flex;
@@ -17,8 +19,12 @@
   position: relative;
 }
 
+.banner__container {
+  margin-bottom: $vertical-baseline;
+}
+
 .banner__col-content {
-  padding: 0 1rem;
+  padding: 0 1rem $vertical-baseline;
   @include breakpoint($tablet) {
     padding: $vertical-baseline 0 $vertical-baseline 2*$vertical-baseline;
   }
@@ -35,7 +41,7 @@
 }
 
 .banner__col--image {
-  min-height: 9*$vertical-baseline; 
+  min-height: 9*$vertical-baseline;
   @include breakpoint($tablet) {
     min-height: 0;
   }

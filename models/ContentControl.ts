@@ -16,15 +16,19 @@ export interface ContentControl {
   showSponsors: boolean;
   showPreviousSponsors: boolean;
   // Tickets
-  ticketsLive: boolean;
-  ticketsUrl: string;
-  ticketsMessage: string;
-  ticketsPrices: string;
-  ticketsCurrency: string;
+  tickets: {
+    live: boolean;
+    url: string;
+    header: string;
+    message: {md: string; html: string};
+    prices: string;
+    button: boolean;
+    buttonText: boolean;
+    currency: string;
+    countdown: boolean;
+    countdownDate: string;
+  };
 
-  countdown: boolean;
-  countdownDate: string;
-  ticketNewsletterSignup: boolean;
   showAgenda: boolean;
   showVenues: boolean;
 
@@ -56,7 +60,6 @@ ContentControl.add(
   description: {type: Types.Html, wysiwyg: false},
   testimonials: {type: String, label:
     `Testimonials - in the form of: "quote text", author; "another quote text", another author;`},
-  ticketNewsletterSignup: {type: Boolean, label: 'Ticket newsletter signup'},
   video: {
     enable: Boolean,
     url: {type: String, label: 'Embed url'},
@@ -73,13 +76,18 @@ ContentControl.add(
 },
 'Tickets',
 {
-  ticketsLive: Boolean,
-  ticketsUrl: Types.Url,
-  ticketsMessage: String,
-  ticketsPrices: {type: String, label: 'Ticket prices (comma separated)' },
-  ticketsCurrency: String,
-  countdown: Boolean,
-  countdownDate: {type: Date, label: 'Countdown date (UTC)', utc: true, dependsOn: {countdown: true}},
+  tickets: {
+    live: Boolean,
+    url: Types.Url,
+    header: String,
+    message: Types.Markdown,
+    prices: {type: String, label: 'Ticket prices (comma separated)' },
+    currency: String,
+    countdown: Boolean,
+    countdownDate: { type: Date, label: 'Countdown date (UTC)', utc: true, dependsOn: { 'tickets.countdown': true}},
+    button: {type: Boolean, label: 'Show tickets button'},
+    buttonText: {type: String, dependsOn: {'tickets.button': true }},
+  },
 },
 'Agenda & Venues',
 {

@@ -1,0 +1,40 @@
+.countdown {
+  $circle-size: 56px;
+  display: inline-flex;
+
+  &__period {
+    text-align: center;
+  }
+
+  &__period + &__period {
+    margin-left: 18px;
+  }
+
+  &__circle {
+    position: relative;
+    display: block;
+    width: $circle-size;
+    height: $circle-size;
+    margin-bottom: 12px;
+  }
+
+  &__arc {
+    stroke: $color-primary;
+  }
+
+  &__value {
+    $font-size: 24px;
+    font-size: 24px;
+    display: block;
+    position: absolute;
+    top: calc(50% - #{$font-size / 2});
+    height: $font-size;
+    width: 100%;
+    line-height: 100%;
+  }
+
+  &__unit {
+    font-size: 18px;
+    line-height: 1.5rem;
+  }
+}

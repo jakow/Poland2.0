@@ -1,0 +1,14 @@
+mixin tickets-section
+  .tickets-section
+    .container.tickets-section__layout
+      .tickets-section__column
+        div!=contentControl.tickets.message.html
+        if contentControl.tickets.countdown
+          .tickets-section__center-mobile
+            .countdown(data-date=contentControl.tickets.countdownDate.toISOString() data-max-unit="2")
+        if contentControl.tickets.button
+          .tickets-section__center-mobile
+            a.button.button--primary(href=contentControl.tickets.url)=contentControl.tickets.buttonText
+      .tickets-section__column
+        .tickets-section__image-container
+          img(src='/static/images/tickets.svg')

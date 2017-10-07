@@ -1,16 +1,21 @@
 #speakers {
-  background-color: $color-gray-light; 
+  background-color: $color-gray-light;
   position: relative;
-  padding: $vertical-baseline 0;
+
   h3 {
     margin-top: 0;
   }
+
 
 }
 .speakers-bg {
   position: absolute;
   width: 100%;
   bottom: 0;
+}
+
+.speakers__container {
+  padding: $vertical-baseline 0;
 }
 
 #speakers-bg-gradient {
