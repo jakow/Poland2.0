@@ -103,7 +103,7 @@ function Arc({max, value, className}: {max: number, value: number, className: st
   const size = 2 * radius + strokeWidth;
   const circumference = 2 * Math.PI * radius;
   let offset = 0;
-  if (max !== 0 && value !== 0) {
+  if (max !== 0) {
     offset = (value / max - 1) * circumference;
   }
   return (
