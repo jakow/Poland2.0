@@ -119,8 +119,8 @@ mixin times(startDate, endDate)
     time(datetime=endDate.toISOString())=endTime
   else if startDate
     time(datetime=startDate.toISOString())=startTime
-    span &nbsp;
+    span="–"
     span onwards
   else if endDate
-    span From
+    span Until
     time(datetime=endDate.toISOString())=endTime
