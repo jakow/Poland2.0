@@ -23,10 +23,8 @@ mixin agenda(agenda)
 
 
 mixin agenda-event(event, dayMoment)
-  - const startDate = moment.utc(event.time.start);
-  - const startTime = startDate.format('H:mm');
-  - const endDate = moment.utc(event.time.end);
-  - const endTime = endDate.format('H:mm');
+
+
   li.agenda-event__wrapper
     +event-line(event.category)
     .agenda-event(id=`event-${event.slug}`)
@@ -34,14 +32,10 @@ mixin agenda-event(event, dayMoment)
       +event-permalink(event.slug)
       .agenda-event__content
         header
-          //- div=JSON.stringify(event)
           .agenda-event__time-and-type
-            //- time(datetime=`${startDate.toISOString()}/${endDate.toISOString()}`)=`${startTime}–${endTime}`
-            .agenda-event__time.
-              <time datetime=#{startDate.toISOString()})>#{startTime}</time>
-              <span>–</span>
-              <time datetime=#{endDate.toISOString()}>#{endTime}</time>
-            //- ${endDate.toISOString()}`)=`${startTime}–${endTime}`
+            .agenda-event__time
+              if event.time
+                +times(event.time.start, event.time.end)
             .agenda-event__type=event.type
           h4.agenda-event__name=event.name
         .agenda-event__summary
@@ -114,3 +108,19 @@ mixin event-line(category)
     .agenda-event__line(style=`background-color: ${category.color}`)
   else
     .agenda-event__line
+
+mixin times(startDate, endDate)
+  - const startTime = moment.utc(startDate).format('H:mm');
+  - const endTime = moment.utc(endDate).format('H:mm');
+  - console.log(startDate, endDate);
+  if startDate && endDate
+    time(datetime=startDate.toISOString())=startTime
+    span="–"
+    time(datetime=endDate.toISOString())=endTime
+  else if startDate
+    time(datetime=startDate.toISOString())=startTime
+    span &nbsp;
+    span onwards
+  else if endDate
+    span From
+    time(datetime=endDate.toISOString())=endTime
