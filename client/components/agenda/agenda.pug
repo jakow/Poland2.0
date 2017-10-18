@@ -12,7 +12,7 @@ mixin agenda(agenda)
         li.agenda-day
           header.agenda-day__description
             //- ordinalSuperscripts => add superscript to numbers like '19th'
-            h3!=ordinalSuperscripts(moment(day.date).format('dddd, Do MMMM'))
+            h3!=ordinalSuperscripts(moment(day.date).format('dddd, MMMM Do'))
             if day.description
               div=day.description
           if day.events.length > 0

@@ -23,10 +23,11 @@ export interface ContentControl {
     message: {md: string; html: string};
     prices: string;
     button: boolean;
-    buttonText: boolean;
+    buttonText: string;
+    buttonClass: string;
     currency: string;
     countdown: boolean;
-    countdownDate: string;
+    countdownDate: Date;
   };
 
   showAgenda: boolean;
@@ -86,7 +87,8 @@ ContentControl.add(
     countdown: Boolean,
     countdownDate: { type: Date, label: 'Countdown date (UTC)', utc: true, dependsOn: { 'tickets.countdown': true}},
     button: {type: Boolean, label: 'Show tickets button'},
-    buttonText: {type: String, dependsOn: {'tickets.button': true }},
+    buttonText: { type: String, dependsOn: { 'tickets.button': true } },
+    buttonClass: { type: String, dependsOn: { 'tickets.button': true } },
   },
 },
 'Agenda & Venues',
