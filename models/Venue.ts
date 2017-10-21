@@ -2,7 +2,7 @@ import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
 const Types = keystone.Field.Types;
 
-interface Venue {
+export interface Venue {
   name: string;
   image: keystone.Schema.CloudinaryImage;
   location: keystone.Schema.Location;

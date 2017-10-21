@@ -1,0 +1,33 @@
+import { list } from 'keystone';
+import { Router } from 'express';
+import { keyBy } from 'lodash';
+import { AgendaEvent } from '../../models/AgendaEvent';
+import { AgendaDay } from '../../models/AgendaDay';
+import { Edition } from '../../models/Edition';
+import { Venue } from '../../models/Venue';
+import reversePopulate from '../helpers/reversePopulate';
+
+export const agenda = Router();
+
+/**
+ * Get all events for this edition
+ */
+agenda.get('/', async (req, res, next) => {
+  const currentEdition = await list<Edition>('Edition').model.findOne({ current: true }).exec();
+  if (!currentEdition) {
+    return res.json([]);
+  }
+
+  const [days, events, venues] = await Promise.all([
+      list<AgendaDay>('AgendaDay').model.find({ edition: currentEdition }),
+      list<AgendaEvent>('AgendaEvent').model.find({ edition: currentEdition }),
+      list<Venue>('Venue').model.find(),
+    ]);
+
+  const agendaObject = reversePopulate(days, 'events', events, 'agendaDay');
+
+  res.json({
+    agenda: agendaObject,
+    venues: keyBy(venues, '_id'),
+  });
+});

@@ -21,10 +21,11 @@ router.get('/past-editions', views.pastEditions);
 router.all('/contact', views.contact);
 // REST API
 router.all(/api*/, cors());
+router.use('/api/agenda', api.agenda);
+router.use('/api/events', api.events);
 router.use('/api/login', api.login);
 router.use('/api/questions', api.questions);
 router.use('/api/speakers', api.speakers);
-router.use('/api/events', api.events);
 
 // Static pages defined from admin pages
 router.get('/:staticRoute', middleware.getStaticPage); // dynamically registered static pages. Must be at bottom!
