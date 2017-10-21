@@ -16,8 +16,8 @@ export interface AgendaEvent {
   description: string;
   image: keystone.Schema.CloudinaryImage;
   time: {
-    start: string;
-    end: string;
+    start: Date;
+    end: Date;
   };
   speakers: keystone.Schema.Relationship;
   agendaDay: keystone.Schema.Relationship;
