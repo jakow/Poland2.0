@@ -26,8 +26,6 @@ agenda.get('/', async (req, res, next) => {
       list<Venue>('Venue').model.find().exec(),
     ]);
 
-  const agendaObject =
-
   res.json({
     agenda: reversePopulate(days, 'events', events, 'agendaDay'),
     categories: keyBy(categories, '_id'),
