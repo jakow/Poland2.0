@@ -36,6 +36,11 @@ a:hover .card {
   flex: none;
 }
 
+.card__link {
+  text-decoration: none;
+color: inherit;
+}
+
 .card__content {
   flex: 1;
   text-align: center;

@@ -17,7 +17,7 @@ mixin speakers(speakerCategories)
               li
                 if (speaker.description.md)
                   - const modalId = `speaker-${slugify(speaker.name)}`;
-                  +modalOpenButton(modalId)(title=`Learn more about ${speaker.name}`)
+                  +modalOpenButton(modalId)(title=`Learn more about ${speaker.name}`).card__link
                     +speakerCard(speaker)
                   +speakerModal(modalId, speaker)
                 else
