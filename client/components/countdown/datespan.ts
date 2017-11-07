@@ -113,6 +113,10 @@ function getFullMonthsFromEndDate(timespanInSeconds: number, endDate: Date) {
 }
 
 function getFullUnits(unit: DatespanUnit, timespanInSeconds: number, endDate: Date) {
+  if (unit === DatespanUnit.MONTHS || unit === DatespanUnit.YEARS) {
+    throw new Error('Cannot get full units of months or years');
+  }
+
   const unitDurations = {
     [DatespanUnit.SECONDS]: 1,
     [DatespanUnit.MINUTES]: 60,

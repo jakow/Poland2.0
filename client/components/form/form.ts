@@ -96,9 +96,9 @@ export default class Form {
     try {
       response = await fetch(url, {
         method: 'post',
-        headers: {
+        headers: new Headers({
           'Content-Type': 'application/json',
-        },
+        }),
         body: JSON.stringify(data),
       });
       result = response.json();

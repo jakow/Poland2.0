@@ -16,7 +16,7 @@ login.post('/', async (req, res, next) => {
     const user = await list<User>('User').model.findOne({email});
     if (user != null && await verifyPassword(user, password)) {
       // pluck password from user document
-      const userDoc: Partial<User> = omit(user.toJSON(), 'password');
+      const userDoc = omit(user, 'password');
       // and send it in response
       res.json({ message: 'OK', ...createUserToken(user), user: userDoc });
     } else {
