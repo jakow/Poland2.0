@@ -37,8 +37,10 @@ a:hover .card {
 }
 
 .card__link {
-  text-decoration: none;
-color: inherit;
+  color: inherit;
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .card__content {

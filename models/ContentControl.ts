@@ -38,6 +38,7 @@ export interface ContentControl {
   twitterUrl: string;
   linkedinUrl: string;
   snapchatUrl: string;
+  videoChannelUrl: string;
   opengraphImage: string;
   opengraphDescription: string;
   twitterImage: string;
@@ -103,6 +104,8 @@ ContentControl.add(
   twitterUrl: {type: Types.Url, label: 'Twitter URL'},
   linkedinUrl: {type: Types.Url, label: 'LinkedIn URL'},
   snapchatUrl: {type: Types.Url, label: 'Snapchat URL'},
+  videoChannelUrl: {type: Types.Url, label: 'Video channel URL (YouTube/Vimeo)'},
+
   opengraphImage: String,
   opengraphDescription: String,
   twitterImage: String,

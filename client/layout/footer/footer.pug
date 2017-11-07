@@ -16,6 +16,11 @@ mixin footer
             a(href=contentControl.twitterUrl title="Twitter").site-footer__social-link.twitter
           if contentControl.snapchatUrl
             a(href=contentControl.snapchatUrl title="Snapchat").site-footer__social-link.snapchat
+          if contentControl.videoChannelUrl
+            if contentControl.videoChannelUrl.includes('youtu')
+              a(href=contentControl.videoChannelUrl title="YouTube").site-footer__social-link.youtube
+            else if contentControl.videoChannelUrl.includes('vimeo')
+              a(href=contentControl.videoChannelUrl title="Vimeo").site-footer__social-link.vimeo
         .site-footer__separator
         .site-footer__links
           a(href=contentControl.bylawLink) By-law for Poland 2.0
@@ -29,4 +34,3 @@ mixin footer
       .dark-bg
         h2.center How can we help?
         +contact-form#contact-form
-    
