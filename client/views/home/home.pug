@@ -67,7 +67,7 @@ block content
           .spinner
           iframe(src=contentControl.video.url frameborder="0" allowfullscreen)
 
-  if contentControl.tickets.live
+  if contentControl.tickets.live && contentControl.tickets.showSection
     section#tickets
       +tickets-section
 

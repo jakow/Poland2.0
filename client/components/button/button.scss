@@ -1,14 +1,11 @@
 .button {
-  padding: 0 $vertical-baseline;
-  // font-size: sgl-heading(-1);
   -webkit-appearance: none;
-  // height: 1.5 * $vertical-baseline;
   border-radius: 1px;
   display: inline-block;
-  // margin: (0.125 * $vertical-baseline) 0 (0.125* $vertical-baseline) + $vertical-baseline;
   padding: 0.5*$vertical-baseline $vertical-baseline;
   margin: 0.5*$vertical-baseline 0;
   position: relative;
+  text-align: center;
   vertical-align: middle;
   touch-action: manipulation;
   white-space: nowrap;
@@ -29,17 +26,24 @@ a.button:hover {
   }
 }
 
-@mixin hollow-button-style($color: $color-primary, $hoverColor: white) {
+@mixin hollow-button-style($color: $color-primary, $hoverColor: lighten($color, 0.2)) {
+  background-color: initial;
+  box-shadow: initial;
   border: 2px solid $color;
   color: $color;
+  padding: calc(#{0.5*$vertical-baseline} - 2px) calc(#{$vertical-baseline} - 2px);
   &:hover {
-    background-color: $color;
+    border-color: $hoverColor;
     color: $hoverColor;
   }
 }
 
 .button.button--primary {
   @include button-style($color-primary, white);
+}
+
+.button.button--primary.button--hollow {
+  @include hollow-button-style($color-primary);
 }
 
 $circular-button-size: (
@@ -83,3 +87,18 @@ $circular-button-size: (
   background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCwgMCwgMzIsIDMyIj48ZyBzdHJva2U9IiNGRkYiIGZpbGw9Im5vbmUiPjxwYXRoIHZlY3Rvci1lZmZlY3Q9Im5vbi1zY2FsaW5nLXN0cm9rZSIgZD0iTTE2LjUgMi41djI4TTI2LjUgMjAuNWwtMTAgMTAtMTAtMTAiLz48L2c+PC9zdmc+');
 }
 
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: $vertical-baseline;
+  @include breakpoint($tablet) {
+    flex-direction: row;
+    align-items: initial;
+    justify-content: center;
+    .button + .button {
+      margin-left: 16px;
+    }
+  }
+}

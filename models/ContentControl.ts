@@ -18,6 +18,7 @@ export interface ContentControl {
   // Tickets
   tickets: {
     live: boolean;
+    showSection: boolean;
     url: string;
     header: string;
     message: {md: string; html: string};
@@ -80,6 +81,7 @@ ContentControl.add(
 {
   tickets: {
     live: Boolean,
+    showSection: Boolean,
     url: Types.Url,
     header: String,
     message: Types.Markdown,
