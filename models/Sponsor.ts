@@ -46,7 +46,7 @@ Sponsor.add({
 
 // handle users being silly and not adding a http to the document
 Sponsor.schema.pre('save', function(this: SponsorDocument, done: () => void) {
-  if (!this.url.startsWith('http')) {
+  if (this.url && !this.url.startsWith('http')) {
     this.url = 'http://' + this.url;
   }
   done();
