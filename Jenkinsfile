@@ -2,19 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage("Build") {
             steps {
-                echo 'Building..'
+                echo "Building.."
+                checkout scm
+                sh "npm install"
             }
         }
-        stage('Test') {
+        stage("Test") {
             steps {
-                echo 'Testing..'
+                echo "Testing.."
             }
         }
-        stage('Deploy') {
+        stage("Deploy") {
             steps {
-                echo 'Deploying....'
+                echo "Deploying...."
             }
         }
     }
