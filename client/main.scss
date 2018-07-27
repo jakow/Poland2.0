@@ -65,6 +65,8 @@ $site-padding: 1rem;
 
 @import 'views/home/home';
 @import 'views/about/about';
+@import 'views/pastEditions/pastEditions';
+@import 'views/mentoring/mentoring';
 
 html, body {
   margin: 0;
@@ -121,4 +123,3 @@ img {
 :active {
   outline: none;
 }
-

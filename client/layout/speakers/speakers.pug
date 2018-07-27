@@ -23,6 +23,19 @@ mixin speakers(speakerCategories)
                 else
                   +speakerCard(speaker)
 
+mixin speakersFlat(speakers)
+  .container.speakers__container
+    h3.fat-heading.center Speakers
+    ul.card-list
+      each speaker in speakers
+        li
+          if (speaker.description.md)
+            - const modalId = `speaker-${slugify(speaker.name)}`;
+            +modalOpenButton(modalId)(title=`Learn more about ${speaker.name}`).card__link
+              +speakerCard(speaker)
+            +speakerModal(modalId, speaker)
+          else
+            +speakerCard(speaker)
 
 mixin speakerCard(speaker)
     - const largeImg = imgTransform.limit(speaker.photo.secure_url, 300);

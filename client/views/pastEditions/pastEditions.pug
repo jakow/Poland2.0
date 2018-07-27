@@ -1,16 +1,21 @@
 extends ../../layout/default/default
 
+include ../../layout/nav/nav
+include ../../layout/speakers/speakers
+include ../../components/card/card
+
 block content
-  div
+  .past-editions
+    h1 Past Editions
+    nav(aria-label="Past edition navigation").site-nav
+      ul
+        each year in years
+          +nav-item(`#p${year}`)= year
     each edition in editions
-      h2= edition.name
-      p= edition._id
-      h3 Speakers
-      ul
-        each speaker in edition.speakers
-          li= speaker.name
-      h3 Team Members
-      ul
-        each teamMember in edition.teamMembers
-          li= teamMember.name
-      
+      .edition(id=`p${edition.year}`)
+        h2.bold.fat-heading.heading-stripe= edition.name
+        +speakersFlat(edition.speakers)
+        h3.fat-heading.center Team
+        ul.about__team.container: each teamMember in edition.teamMembers
+          li
+            +team-card(teamMember)

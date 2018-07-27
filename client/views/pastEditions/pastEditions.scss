@@ -1,0 +1,28 @@
+.past-editions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .edition {
+    width: 100%;
+    text-align: center;
+
+    &:nth-child(odd) {
+      background-color: $color-gray-light;
+    }
+  }
+
+  nav {
+    z-index: 0;
+    display: block;
+  }
+
+  h1 {
+    @include sgl-heading(4);
+  }
+
+  h1, h2 {
+    margin-bottom: 0;
+  }
+}

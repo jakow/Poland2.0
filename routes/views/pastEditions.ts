@@ -26,16 +26,16 @@ export const pastEditions: RequestHandler = async (req, res, next) => {
   res.locals.route = 'past-editions';
   // TODO: some eror handling on DB requests
   const view = new View(req, res);
-  const currentEditon = res.locals.edition as EditionDocument; // always available as a local
+  const currentEdition = res.locals.edition as EditionDocument; // always available as a local
   const editions = (await list<Edition>('Edition').model
     .find({current: false}).lean().exec()) as PastEdition[];
 
   const teamMembersDocs = await list<TeamMember>('TeamMember').model.find()
-    .where('edition').ne(currentEditon)
+    .where('edition').ne(currentEdition)
     .exec();
 
   const speakersDocs = await list<Speaker>('Speaker').model.find()
-    .where('edition').ne(currentEditon).exec();
+    .where('edition').ne(currentEdition).exec();
 
   const speakerMap: SpeakerMap = group<Speaker>(speakersDocs, editions);
   const teamMemberMap: TeamMemberMap = group<TeamMember>(teamMembersDocs, editions);
@@ -44,6 +44,7 @@ export const pastEditions: RequestHandler = async (req, res, next) => {
     e.teamMembers = teamMemberMap[e._id];
   });
   res.locals.editions = editions;
+  res.locals.years = editions.map(e => e.year);
   view.render(resolveView('pastEditions'));
 };
 
