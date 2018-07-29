@@ -3,8 +3,8 @@ import {Edition} from '../models/Edition';
 import {ContentControl} from '../models/ContentControl';
 import {StaticPage} from '../models/StaticPage';
 import {RequestHandler, Request, Response, NextFunction} from 'express';
-import {environment} from '../config';
-import reversePopulate from './helpers/reversePopulate';
+// import {environment} from '../config';
+// import reversePopulate from './helpers/reversePopulate';
 import resolveView from './helpers/resolveView';
 
 export async function getCurrentEdition(req: Request, res: Response, next: NextFunction) {
@@ -49,8 +49,9 @@ export async function initLocals(req: Request, res: Response, next: NextFunction
     {name: 'About', route: '/about', key: 'about'},
     ...contentControl.showSpeakers ? [{name: 'Speakers', route: '/#speakers', key: 'speakers'}] : [],
     ...contentControl.showAgenda ? [{name: 'Agenda', route: '/#agenda', key: 'speakers'}] : [],
-    // {name: 'Past editions', route: '/past-editions', key: 'past-editions'},
     ...contentControl.showSponsors ? [{name: 'Partners', route: '/#partners', key: 'partners'}] : [],
+    {name: 'Past Editions', route: '/past-editions', key: 'past-editions'},
+    {name: 'Mentoring', route: '/mentoring', key: 'mentoring'},
   ];
   const staticPageRoutes: NavItem[] = staticPages.map( (p) => ({
     name: p.name, route: p.route, key: p.route.replace(/\//g, ''),
