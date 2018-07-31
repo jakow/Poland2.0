@@ -1,0 +1,26 @@
+extends ../../layout/default/default
+
+block content
+  .empowerPL 
+    .about__background.empowerPL__background--img
+    .about__background.empowerPL__background--gradient
+    .empowerPL__content(vocab="http://schema.org/" typeof="Organization")
+      .empowerPL__banner
+        h2.bold Mentoring Programme
+        h1(property="name").heading-stripe empowerPL
+        h2 Poland 2.0 <b>x</b> BCG
+      article(property="description").about__mission#mission
+        header.about__heading
+          h2.fat-heading.heading-stripe.bold Objective
+        p This year, we will launch the second edition of the <strong>empowerPL</strong> programme, which was started in cooperation with the Boston Consulting Group during last year’s Poland 2.0 Summit.
+        p The programme aims to build relationships between the best Polish managers and directors, and Polish students from the best universities in the UK and France.
+        p While <strong>empowerPL</strong> is already the most significant mentoring program in Poland, we aim to expand this initiative further to celebrate Poland’s <strong>100</strong> years of independence with <strong>100</strong> inspiring mentors.
+      .aspect-ratio
+        iframe(
+          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBCGinPoland%2Fvideos%2F2853963694617122%2F&show_text=0"
+          style="border:none;overflow:hidden"
+          scrolling="no"
+          frameborder="0"
+          allowTransparency="true"
+          allowFullScreen="true")
+        

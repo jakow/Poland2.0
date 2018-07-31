@@ -51,7 +51,7 @@ export async function initLocals(req: Request, res: Response, next: NextFunction
     ...contentControl.showAgenda ? [{name: 'Agenda', route: '/#agenda', key: 'speakers'}] : [],
     ...contentControl.showSponsors ? [{name: 'Partners', route: '/#partners', key: 'partners'}] : [],
     {name: 'Past Editions', route: '/past-editions', key: 'past-editions'},
-    {name: 'Mentoring', route: '/mentoring', key: 'mentoring'},
+    {name: 'empowerPL', route: '/empowerPL', key: 'empowerPL'},
   ];
   const staticPageRoutes: NavItem[] = staticPages.map( (p) => ({
     name: p.name, route: p.route, key: p.route.replace(/\//g, ''),

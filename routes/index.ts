@@ -18,7 +18,7 @@ const router = Router();
 router.get('/', views.home);
 router.get('/about', views.about);
 router.get('/past-editions', views.pastEditions);
-router.get('/mentoring', views.mentoring);
+router.get('/empowerPL', views.empowerPL);
 // router.all('/contact', views.contact);
 // REST API
 router.all(/api*/, cors());

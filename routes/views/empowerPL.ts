@@ -2,9 +2,9 @@ import {View} from 'keystone';
 import {RequestHandler} from 'express';
 import resolveView from '../helpers/resolveView';
 
-export const mentoring: RequestHandler = async (req, res, next) => {
-    res.locals.route = 'mentoring';
+export const empowerPL: RequestHandler = async (req, res, next) => {
+    res.locals.route = 'empowerPL';
     const view = new View(req, res);
 
-    view.render(resolveView('mentoring'));
+    view.render(resolveView('empowerPL'));
   };

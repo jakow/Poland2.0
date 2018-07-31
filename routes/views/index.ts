@@ -1,5 +1,5 @@
 export {home} from './home';
 export {about} from './about';
 export {pastEditions} from './pastEditions';
-export {mentoring} from './mentoring';
+export {empowerPL} from './empowerPL';
 export {contact} from './contact';
