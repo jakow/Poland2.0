@@ -74,6 +74,7 @@
   p {
     @include sgl-heading(2);
     margin: 0 0 $vertical-baseline;
+    font-weight: 300;
   }
   text-align: center;
   margin-bottom: $vertical-baseline;

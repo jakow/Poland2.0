@@ -26,7 +26,7 @@ const cssLoaders = [
 ];
 
 // root build directory for the SERVER. Client is in /client/
-const buildDir = path.resolve(__dirname, '..', isProduction ? 'build' : 'static');
+const buildDir = path.resolve(__dirname, '..', 'build');
 
 const config = {
   target: 'web',
