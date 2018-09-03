@@ -13,7 +13,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "noFallthroughCasesInSwitch": false,
-        "typeRoots": ["../node_modules/@types", "node_modules/@types"],
+        "typeRoots": ["../node_modules/@types", "../@types"],
         "diagnostics": true,
         "downlevelIteration": true
     },
@@ -22,14 +22,10 @@
     ],
     "exclude": [
         "../node_modules/**/*",
-        "node_modules/**/*",
         "../client",
-        "client",
-        "test",
         "../test",
-        "@config",
         "../@config",
-        "build",
-        "../build"
+        "../build",
+        "../.next"
     ]
 }

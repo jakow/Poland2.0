@@ -1,20 +1,11 @@
 {
-    "defaultSeverity": "warning",
-    "extends": [
-        "tslint:recommended",
-        "tslint-eslint-rules"
-    ],
-    "jsRules": {},
+    "extends": ["tslint-config-airbnb", "tslint-react"],
     "rules": {
-      "ordered-imports": [false],
-      "interface-name": [true, "never-prefix"],
-      "no-namespace": false,
-      "no-unused-variable": true,
-      "quotemark": ["single"],
-      "no-console": ["warn"],
-      "object-literal-sort-keys": false,
-      "no-var-requires": false,
-      "only-arrow-functions": [true, "allow-declarations", "allow-named-functions"]
-    },
-    "rulesDirectory": []
+      "import-name": false,
+      "variable-name": false,
+      "jsx-no-multiline-js": false,
+      "trailing-comma": false,
+      "no-increment-decrement": false,
+      "no-parameter-reassignment": false
+    }
 }
