@@ -2,6 +2,9 @@
 logs
 *.log
 
+# next.js
+.next/
+
 # Runtime data
 pids
 *.pid
