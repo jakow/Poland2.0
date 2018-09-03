@@ -36,3 +36,6 @@ static/client/
 
 # ignore notes for the developer only
 NOTES.md
+
+yarn.lock
+package-lock.json
