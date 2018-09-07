@@ -1,5 +1,4 @@
 import 'source-map-support/register';
-// import 'isomorphic-fetch';
 import * as express from 'express';
 import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
@@ -10,12 +9,8 @@ import * as serveStatic from 'serve-static';
 import * as next from 'next';
 import * as config from './config';
 import routes from './routes';
-// import * as linkedData from './routes/helpers/linkedData';
-// import * as routeUtils from './routes/helpers/routeUtils';
 import { initSockets } from './routes/sockets';
 import * as auth from './routes/api/auth';
-// import imageHelpers from './routes/helpers/cloudinary';
-// import createAssetStore from './routes/helpers/assets';
 
 (mongoose as any).Promise = Promise;
 
@@ -37,8 +32,6 @@ keystone.init({
   compress: true,
   mongo: config.mongo,
   logger: config.environment === 'production' ? 'tiny' : 'dev',
-  'view engine': config.viewEngine,
-  views:  config.viewsDir,
   'cookie secret': config.cookieSecret,
   'cloudinary config': config.cloudinaryUrl,
   'cloudinary secure': true,
@@ -68,20 +61,6 @@ app.prepare().then(() => {
       hidePoweredBy: true,
     }));
   }
-
-  // // Locals variables added for each rendered Pug template
-  // keystone.set('locals', {
-  //   config, // templates have access to config data
-  //   linkedData,
-  //   env: config.environment,
-  //   utils: keystone.utils,
-  //   trackingId: config.trackingId,
-  //   assets: createAssetStore(),
-  //   imgTransform: imageHelpers(),
-  //   sanitize: require('sanitize-html'),
-  //   moment: require('moment'),
-  //   ...routeUtils,
-  // });
 
   keystone.set('routes', routes(app));
 
