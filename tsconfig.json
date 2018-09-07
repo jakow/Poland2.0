@@ -5,7 +5,7 @@
       "sourceMap": true,
       "noImplicitAny": true,
       "module": "esnext",
-      "target": "es5",
+      "target": "esnext",
       "moduleResolution": "node",
       "allowSyntheticDefaultImports": true,
       "allowUnreachableCode": false,
