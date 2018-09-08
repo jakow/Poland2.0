@@ -27,6 +27,7 @@ router.use('/api/events', api.events);
 router.use('/api/login', api.login);
 router.use('/api/questions', api.questions);
 router.use('/api/speakers', api.speakers);
+router.use('/api/teamMembers', api.teamMembers);
 
 // Static pages defined from admin pages
 router.get('/:staticRoute', middleware.getStaticPage); // dynamically registered static pages. Must be at bottom!
