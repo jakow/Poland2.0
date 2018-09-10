@@ -20,11 +20,11 @@ agenda.get('/', async (req, res, next) => {
   }
 
   const [days, events, categories, venues] = await Promise.all([
-      list<AgendaDay>('AgendaDay').model.find({ edition: currentEdition }).exec(),
-      list<AgendaEvent>('AgendaEvent').model.find({ edition: currentEdition }).exec(),
-      list<AgendaEventCategory>('AgendaEventCategory').model.find().exec(),
-      list<Venue>('Venue').model.find().exec(),
-    ]);
+    list<AgendaDay>('AgendaDay').model.find({ edition: currentEdition }).exec(),
+    list<AgendaEvent>('AgendaEvent').model.find({ edition: currentEdition }).exec(),
+    list<AgendaEventCategory>('AgendaEventCategory').model.find().exec(),
+    list<Venue>('Venue').model.find().exec(),
+  ]);
 
   res.json({
     agenda: reversePopulate(days, 'events', events, 'agendaDay'),

@@ -2,35 +2,24 @@ import { list } from 'keystone';
 import { Edition } from '../models/Edition';
 import { ContentControl } from '../models/ContentControl';
 import { StaticPage } from '../models/StaticPage';
-import { RequestHandler, Request, Response, NextFunction } from 'express';
-// import {environment} from '../config';
-// import reversePopulate from './helpers/reversePopulate';
-// import resolveView from './helpers/resolveView';
+import { Request, Response, NextFunction, Router } from 'express';
 
-export async function getCurrentEdition(req: Request, res: Response, next: NextFunction) {
-  try {
-    const currentEdition = await list<Edition>('Edition').model.findOne({ current: true }).exec();
-    res.locals.currentEdition = currentEdition;
-    next();
-  } catch (e) {
-    next(e);
-  }
-}
+const middleware = Router();
 
-export async function getContentControl(req: Request, res: Response, next: NextFunction) {
-  try {
-    const contentControl = await list('ContentControl').model.findOne().exec();
-    res.locals.contentControl = contentControl;
-    next();
-  } catch (e) {
-    next(e);
-  }
-}
+middleware.get('/getCurrentEdition', async (req: Request, res: Response, next: NextFunction) => {
+  const currentEdition = await list<Edition>('Edition').model.findOne({ current: true }).exec();
+  res.json({ currentEdition });
+});
 
-interface NavItem {
-  name: string; // display name
-  route: string; // where it goes
-  key: string; // what is the route key
+middleware.get('/getContentControl', async (req: Request, res: Response, next: NextFunction) => {
+  const contentControl = await list('ContentControl').model.findOne().exec();
+  res.json({ contentControl });
+});
+
+export interface NavItem {
+  title: string; // display name
+  url: string; // where it goes
+  style?: 'link' | 'button';
 }
 
 /**
@@ -39,38 +28,41 @@ interface NavItem {
  * the navigation in the header, you may wish to change this array
  * or replace it with your own templates / logic.
  */
-export async function initLocals(req: Request, res: Response, next: NextFunction) {
-  const contentControl = res.locals.contentControl as ContentControl;
+middleware.get('/getNavLinks', async (req: Request, res: Response, next: NextFunction) => {
+  const contentControl = await list<ContentControl>('ContentControl').model.findOne().exec();
   const staticPages = await list<StaticPage>('StaticPage').model
     .find({ active: true, showInMenu: true })
     .select({ name: true, route: true }).exec();
 
   const nav: NavItem[] = [
-    { name: 'About', route: '/about', key: 'about' },
-    ...contentControl.showSpeakers ? [{ name: 'Speakers', route: '/#speakers', key: 'speakers' }]
+    { title: 'About', url: '/about' },
+    ...contentControl.showSpeakers ? [{ title: 'Speakers', url: '/#speakers' }]
       : [],
-    ...contentControl.showAgenda ? [{ name: 'Agenda', route: '/#agenda', key: 'speakers' }]
+    ...contentControl.showAgenda ? [{ title: 'Agenda', url: '/#agenda' }]
       : [],
-    ...contentControl.showSponsors ? [{ name: 'Partners', route: '/#partners', key: 'partners' }]
+    ...contentControl.showSponsors ? [{ title: 'Partners', url: '/#partners' }]
       : [],
-    { name: 'Past Editions', route: '/past-editions', key: 'past-editions' },
-    { name: 'empowerPL', route: '/empowerPL', key: 'empowerPL' },
+    { title: 'Past Editions', url: '/past-editions' },
+    { title: 'empowerPL', url: '/empowerPL' },
   ];
   const staticPageRoutes: NavItem[] = staticPages.map(p => ({
-    name: p.name, route: p.route, key: p.route.replace(/\//g, ''),
+    title: p.name, url: p.route
   }));
-  res.locals.navLinks = [...nav, ...staticPageRoutes];
-  next();
-}
+  res.json({
+    navLinks: [...nav, ...staticPageRoutes]
+  });
+});
 
-export function requireUser(req: Request, res: Response, next: NextFunction) {
-  if (req.user) {
-    res.redirect('/keystone/signin');
-  } else {
-    next();
-  }
-}
+// export function requireUser(req: Request, res: Response, next: NextFunction) {
+//   if (req.user) {
+//     res.redirect('/keystone/signin');
+//   } else {
+//     next();
+//   }
+// }
 
-export async function getStaticPage(req: Request, res: Response, next: NextFunction) {
-  next();
-}
+// export async function getStaticPage(req: Request, res: Response, next: NextFunction) {
+//   next();
+// }
+
+export default middleware;

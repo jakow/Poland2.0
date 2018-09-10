@@ -1,7 +1,7 @@
-import * as Keystone from 'keystone';
+// import * as Keystone from 'keystone';
 import { Router } from 'express';
 import * as CORS from 'cors';
-import * as Middleware from './middleware';
+import Middleware from './middleware';
 // import * as views from './views';
 import * as API from './api';
 import * as Next from 'next';
@@ -12,9 +12,9 @@ export default (next: Next.Server) => {
   const router = Router();
 
   // Common Middleware
-  Keystone.pre('routes', Middleware.getCurrentEdition);
-  Keystone.pre('routes', Middleware.getContentControl);
-  Keystone.pre('routes', Middleware.initLocals);
+  // Keystone.pre('routes', Middleware.getCurrentEdition);
+  // Keystone.pre('routes', Middleware.getContentControl);
+  // Keystone.pre('routes', Middleware.initLocals);
 
   router.all(/api*/, CORS());
   router.use('/api/agenda', API.agenda);
@@ -22,6 +22,7 @@ export default (next: Next.Server) => {
   router.use('/api/login', API.login);
   router.use('/api/questions', API.questions);
   router.use('/api/speakers', API.speakers);
+  router.use('/middleware', Middleware);
 
   router.get('*', (request: IncomingMessage, response: ServerResponse) =>
     nextHandler(request, response)
