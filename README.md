@@ -1,3 +1,3 @@
-# Poland 2.0 v2
+# Poland 2.0 v3
 
-The redesign of the backend and the frontend happens on this branch.
+The re-design of the re-design of the backend and the frontend.
