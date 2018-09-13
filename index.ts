@@ -6,7 +6,6 @@ import * as mongoose from 'mongoose';
 import * as Promise from 'bluebird';
 import * as helmet from 'helmet';
 import * as path from 'path';
-import * as serveStatic from 'serve-static';
 import * as next from 'next';
 import * as config from './config';
 import routes from './routes';
@@ -46,11 +45,6 @@ import './models';
 app.prepare().then(() => {
   const server = express();
   server.use(auth.initialize());
-  // serve static files through node in development and in staging,
-  // otherwise delegate static files to nginx for performance reasons
-  if (config.environment === 'development' || config.environment === 'staging') {
-    server.use(config.staticRoot, serveStatic(config.staticDir, config.staticOptions));
-  }
 
   if (config.environment === 'production') {
     // external, mongo-based session store.
