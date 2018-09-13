@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { TypographyStyle, GoogleFont } from 'react-typography';
-import Document, { Head, Main, NextScript, RenderPageResponse } from 'next/document';
+import Document, { Head, Main, NextScript, NextDocumentContext } from 'next/document';
 import { typography } from 'p20-components';
 
 export default class extends Document {
-  static getInitialProps({ renderPage }: { renderPage: () => RenderPageResponse }) {
-    const { html, head, errorHtml, chunks } = renderPage();
-    return { html, head, errorHtml, chunks };
+  static async getInitialProps(context: NextDocumentContext) {
+    const initialProps = await Document.getInitialProps(context);
+    return { ...initialProps };
   }
 
   render() {
@@ -27,6 +27,9 @@ export default class extends Document {
           <link rel="icon" type="image/png" href="/static/images/favicons/favicon-32x32.png" sizes="32x32"/>
           <link rel="icon" type="image/png" href="/static/images/favicons/favicon-16x16.png" sizes="16x16"/>
           <link rel="mask-icon" href="/static/images/favicons/mask-icon.svg" color="#C53D56"/>
+          <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css"/>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css"/>
+
           <meta name="application-name" content="Poland 2.0"/>
           <meta name="msapplication-TileColor" content="#FFFFFF"/>
           <meta name="msapplication-TileImage" content="/static/images/favicons/mstile-144x144.png"/>
