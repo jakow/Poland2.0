@@ -11,11 +11,6 @@ export default (next: Next.Server) => {
   const nextHandler = next.getRequestHandler();
   const router = Router();
 
-  // Common Middleware
-  // Keystone.pre('routes', Middleware.getCurrentEdition);
-  // Keystone.pre('routes', Middleware.getContentControl);
-  // Keystone.pre('routes', Middleware.initLocals);
-
   router.all(/api*/, CORS());
   router.use('/api/agenda', API.agenda);
   router.use('/api/events', API.events);
