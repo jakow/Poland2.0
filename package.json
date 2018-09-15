@@ -34,7 +34,6 @@
     "react-emotion": "^9.2.8",
     "react-typography": "^0.16.13",
     "sanitize-html": "^1.14.1",
-    "serve-static": "^1.12.3",
     "socket.io": "^1.7.3",
     "socket.io-client": "^2.0.1",
     "socketio-jwt": "^4.5.0",
