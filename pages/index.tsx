@@ -1,8 +1,16 @@
 import React from 'react';
-import withDefault from './_app';
+import withDefault, { DefaultProps } from './_app';
+import { Banner } from 'p20-components';
 
-const Home: React.StatelessComponent = () => (
-  <div>Hello World</div>
-);
+class Home extends React.Component<DefaultProps> {
+  render = () => (
+    <React.Fragment>
+      <Banner
+        currentEdition={this.props.currentEdition}
+        description={this.props.contentControl.description}
+      />
+    </React.Fragment>
+  )
+}
 
 export default withDefault(Home);
