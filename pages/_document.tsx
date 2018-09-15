@@ -38,6 +38,10 @@ export default class extends Document {
           <title>Poland 2.0 Summit</title>
         </Head>
         <body>
+          <noscript>
+            This site requires JavaScript for best user experience.
+            Because you have disabled JavaScript, your experience may be limited.
+          </noscript>
           <TypographyStyle typography={typography} />
           <GoogleFont typography={typography} />
           <Main/>
