@@ -43,8 +43,12 @@ middleware.get('/', async (req: Request, res: Response, next: NextFunction) => {
 
   res.json({
     contentControl,
-    currentEdition,
-    navLinks
+    navLinks,
+    currentEdition: { // .toJSON({ virtuals: true }) doesn't work :(
+      ...currentEdition.toObject(),
+      dateString: currentEdition.dateString,
+      isoString: currentEdition.isoString
+    },
   });
 });
 
