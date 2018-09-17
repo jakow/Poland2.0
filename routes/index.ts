@@ -2,7 +2,7 @@
 import { Router } from 'express';
 import * as CORS from 'cors';
 import Middleware from './middleware';
-// import * as views from './views';
+import * as Views from './views';
 import * as API from './api';
 import * as Next from 'next';
 import { IncomingMessage, ServerResponse } from 'http';
@@ -18,6 +18,8 @@ export default (next: Next.Server) => {
   router.use('/api/questions', API.questions);
   router.use('/api/speakers', API.speakers);
   router.use('/middleware', Middleware);
+
+  router.use('/views/home', Views.home);
 
   router.get('*', (request: IncomingMessage, response: ServerResponse) =>
     nextHandler(request, response)
