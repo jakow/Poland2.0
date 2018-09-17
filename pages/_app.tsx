@@ -8,14 +8,16 @@ export interface DefaultProps {
   contentControl?: ContentControl;
   currentEdition?: Edition;
   navLinks?: NavItem[];
+  viewData?: any;
 }
 
-const withDefault = (Page: React.ComponentType<DefaultProps>) =>
+const withDefault = (Page: React.ComponentType<DefaultProps>, viewFetch: () => any) =>
   (class extends React.Component<DefaultProps> {
     static async getInitialProps() {
       const middleware = await fetch('http://localhost:9009/middleware')
         .then(data => data.json());
-      return { ...middleware };
+      const viewData = await viewFetch();
+      return { ...middleware, viewData };
     }
 
     render = () => (
@@ -25,6 +27,7 @@ const withDefault = (Page: React.ComponentType<DefaultProps>) =>
           <Page
             contentControl={this.props.contentControl}
             currentEdition={this.props.currentEdition}
+            {...this.props.viewData}
           />
         </main>
         <Footer
