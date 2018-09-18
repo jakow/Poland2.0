@@ -28,6 +28,9 @@ middleware.get('/', async (req: Request, res: Response, next: NextFunction) => {
       : [],
     ...contentControl.showSponsors ? [{ title: 'Partners', url: '/#partners' }]
       : [],
+    ...contentControl.showPreviousSponsors ?
+      [{ title: 'Previous Partners', url: '/#previous-partners' }]
+      : [],
     { title: 'Past Editions', url: '/past-editions' },
     { title: 'empowerPL', url: '/empowerPL' },
     ...contentControl.tickets.live && contentControl.tickets.url ?
