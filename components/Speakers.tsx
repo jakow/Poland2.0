@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'react-emotion';
+import styled, { css } from 'react-emotion';
 import {
   Container,
   rhythm,
@@ -8,20 +8,47 @@ import {
   fat,
   stripe,
   CardList,
-  Card
+  Card,
+  fill,
+  Modal,
+  breakpointMin
 } from 'p20-components';
-import { SpeakerCategories } from '../pages';
+import { SpeakerCategories, Speaker } from '../pages';
+import ModalCard from './ModalCard';
+
+const LearnMore = styled('small')({
+  [breakpointMin('tablet')]: {
+    display: 'none'
+  }
+});
 
 const Title = styled('h1')(bold, fat, stripe);
 
 const Wrapper = styled('section')({
   position: 'relative',
-  paddingBottom: rhythm(0.5),
-  backgroundSize: '100% auto',
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'bottom', // tslint:disable-next-line
-  backgroundImage: 'url(https://res.cloudinary.com/dg1royeho/image/upload/v1500036070/DSC_0361n_desaturated_mhcrqh.jpg)'
+  paddingBottom: rhythm(0.5)
 });
+
+const smallMarginBottom = css({ marginBottom: rhythm(0.25) });
+
+const speakerCard = (speaker: Speaker, index?: number) => (
+  <Card
+    key={index}
+    image={fill(speaker.photo.secure_url, 300, 300, { gravity: 'faces' })}
+    imagePreview={fill(speaker.photo.secure_url, 32, 32, { gravity: 'faces' })}
+    footer={(
+      <React.Fragment>
+        {speaker.position}<br/>
+        {index ? '' : <LearnMore>Tap on the image to learn more...</LearnMore>}
+      </React.Fragment>
+    )}
+  >
+    <Center>
+      <h3 className={smallMarginBottom}>{speaker.name}</h3>
+      <h4>{speaker.company && speaker.company}</h4>
+    </Center>
+  </Card>
+);
 
 const Speakers: React.StatelessComponent<{ speakerCategories: SpeakerCategories }> =
   ({ speakerCategories }) => (
@@ -34,7 +61,26 @@ const Speakers: React.StatelessComponent<{ speakerCategories: SpeakerCategories 
               <CardList>
                 {category.speakers && category.speakers.length > 0 &&
                   category.speakers.map((speaker, index) => (
-                    <Card key={index}/>
+                    <React.Fragment key={index}>
+                      {speaker.description.md
+                        ? (
+                        <Modal
+                          trigger={speakerCard(speaker)}
+                          label={`Learn more about ${speaker.name}`}
+                        >
+                          <ModalCard>
+                            <h1 className={smallMarginBottom}>{speaker.name}</h1>
+                            <p>
+                              <strong>
+                                {speaker.position}{speaker.company && `, ${speaker.company}`}
+                              </strong>
+                            </p>
+                            {speaker.description.md}
+                          </ModalCard>
+                        </Modal>
+                        ) : speakerCard(speaker, index)
+                      }
+                    </React.Fragment>
                   )
                 )}
               </CardList>
