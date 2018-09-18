@@ -3,7 +3,7 @@ import styled from 'react-emotion';
 import withDefault, { DefaultProps } from './_app';
 import { Banner, colors, Agenda } from 'p20-components';
 import { AgendaType } from 'p20-components/types/Agenda';
-import { SpeakerCategory, Speaker } from '../models';
+import { SpeakerCategory, Speaker as SpeakerModel } from '../models';
 import Tickets from '../components/Tickets';
 import Speakers from '../components/Speakers';
 
@@ -21,6 +21,7 @@ const Background = styled('section')({
   }
 });
 
+export type Speaker = (SpeakerModel & { description: { md: string } });
 export type SpeakerCategories = (SpeakerCategory & { speakers: Speaker[] })[];
 
 class Home extends React.Component<DefaultProps & Props> {
