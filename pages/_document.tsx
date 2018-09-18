@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { TypographyStyle, GoogleFont } from 'react-typography';
-import Document, { Head, Main, NextScript, NextDocumentContext } from 'next/document';
+import Document, { Head, Main, NextScript } from 'next/document';
 import { typography } from 'p20-components';
 
 export default class extends Document {
-  static async getInitialProps(context: NextDocumentContext) {
+  static async getInitialProps(context: any) {
     const initialProps = await Document.getInitialProps(context);
     return { ...initialProps };
   }
