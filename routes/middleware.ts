@@ -8,7 +8,7 @@ const middleware = Router();
 export interface NavItem {
   title: string; // display name
   url: string; // where it goes
-  style?: 'link' | 'button';
+  type?: 'link' | 'button';
 }
 
 /**
@@ -34,7 +34,7 @@ middleware.get('/', async (req: Request, res: Response, next: NextFunction) => {
     { title: 'Past Editions', url: '/past-editions' },
     { title: 'empowerPL', url: '/empowerPL' },
     ...contentControl.tickets.live && contentControl.tickets.url ?
-      [<NavItem>{ title: 'Buy Tickets', url: contentControl.tickets.url, style: 'button' }]
+      [<NavItem>{ title: 'Buy Tickets', url: contentControl.tickets.url, type: 'button' }]
       : []
   ];
 
