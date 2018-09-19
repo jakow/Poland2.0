@@ -3,6 +3,7 @@ import { TopNavigation, rhythm } from 'p20-components';
 import { NavItem } from '../routes/middleware';
 import Footer from '../components/Footer';
 import { ContentControl, Edition } from '../models';
+import { injectGlobal } from 'emotion';
 
 export interface DefaultProps {
   contentControl?: ContentControl;
@@ -10,6 +11,19 @@ export interface DefaultProps {
   navLinks?: NavItem[];
   viewData?: any;
 }
+
+injectGlobal({
+  '@media screen and (max-width: 320px)': { // iPhone 5/SE
+    body: {
+      fontSize: 14
+    }
+  },
+  '@media screen and (max-width: 414px)': { // iPhone 6/7/8 Plus
+    body: {
+      fontSize: 15
+    }
+  }
+});
 
 const withDefault = (Page: React.ComponentType<DefaultProps>, viewFetch: () => any) =>
   (class extends React.Component<DefaultProps> {

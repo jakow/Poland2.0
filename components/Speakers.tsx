@@ -1,4 +1,5 @@
 import React from 'react';
+import Markdown from 'react-markdown';
 import styled, { css } from 'react-emotion';
 import {
   Container,
@@ -29,7 +30,10 @@ const Wrapper = styled('section')({
   paddingBottom: rhythm(0.5)
 });
 
-const smallMarginBottom = css({ marginBottom: rhythm(0.25) });
+export const smallMarginBottom = css({
+  marginBottom: rhythm(0.25),
+  wordWrap: 'normal'
+});
 
 const speakerCard = (speaker: Speaker, index?: number) => (
   <Card
@@ -60,29 +64,26 @@ const Speakers: React.StatelessComponent<{ speakerCategories: SpeakerCategories 
               <Center><h2>{category.displayName}</h2></Center>
               <CardList>
                 {category.speakers && category.speakers.length > 0 &&
-                  category.speakers.map((speaker, index) => (
-                    <React.Fragment key={index}>
-                      {speaker.description.md
-                        ? (
-                        <Modal
-                          trigger={speakerCard(speaker)}
-                          label={`Learn more about ${speaker.name}`}
-                        >
-                          <ModalCard>
-                            <h1 className={smallMarginBottom}>{speaker.name}</h1>
-                            <p>
-                              <strong>
-                                {speaker.position}{speaker.company && `, ${speaker.company}`}
-                              </strong>
-                            </p>
-                            {speaker.description.md}
-                          </ModalCard>
-                        </Modal>
-                        ) : speakerCard(speaker, index)
-                      }
-                    </React.Fragment>
+                  category.speakers.map((speaker, index) =>
+                    speaker.description.md ?
+                      <Modal
+                        key={index}
+                        trigger={speakerCard(speaker)}
+                        label={`Learn more about ${speaker.name}`}
+                      >
+                        <ModalCard>
+                          <h1 className={smallMarginBottom}>{speaker.name}</h1>
+                          <p>
+                            <strong>
+                              {speaker.position}{speaker.company && `, ${speaker.company}`}
+                            </strong>
+                          </p>
+                          <Markdown>{speaker.description.md}</Markdown>
+                        </ModalCard>
+                      </Modal>
+                    : speakerCard(speaker, index)
                   )
-                )}
+                }
               </CardList>
             </React.Fragment>
           ))}
