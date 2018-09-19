@@ -3,30 +3,48 @@ import styled from 'react-emotion';
 import withDefault, { DefaultProps } from './_app';
 import { Banner, colors, Agenda } from 'p20-components';
 import { AgendaType } from 'p20-components/types/Agenda';
-import { SpeakerCategory, Speaker as SpeakerModel } from '../models';
+import {
+  SpeakerCategory,
+  Speaker as SpeakerModel,
+  SponsorCategory as SponsorCategoryModel,
+  Sponsor as SponsorModel
+} from '../models';
 import Tickets from '../components/Tickets';
 import Speakers from '../components/Speakers';
+import Sponsors from '../components/Sponsors';
 
 interface Props {
   speakerCategories: SpeakerCategories;
+  sponsorCategories: SponsorCategories;
+  previousSponsorCategories: SponsorCategories;
   agenda: AgendaType;
 }
 
 const Background = styled('section')({
-  '& > *:nth-child(even)': {
+  '& > *:nth-child(odd)': {
     backgroundColor: `${colors.lightGray}`
   },
-  '& > *:nth-child(odd)': {
+  '& > *:nth-child(even)': {
     backgroundColor: `${colors.white}`
   }
 });
 
-export type Speaker = (SpeakerModel & { description: { md: string } });
+type MarkdownDescription = { description: { md: string } };
+export type Speaker = (SpeakerModel & MarkdownDescription);
 export type SpeakerCategories = (SpeakerCategory & { speakers: Speaker[] })[];
+export type Sponsor = (SponsorModel & MarkdownDescription);
+export type SponsorCategories = (SponsorCategoryModel & { sponsors: Sponsor[] })[];
 
 class Home extends React.Component<DefaultProps & Props> {
   render() {
-    const { agenda, currentEdition, contentControl, speakerCategories } = this.props;
+    const {
+      agenda,
+      currentEdition,
+      contentControl,
+      speakerCategories,
+      sponsorCategories,
+      previousSponsorCategories
+    } = this.props;
     return (
       <React.Fragment>
         {contentControl.tickets.live && contentControl.tickets.showSection &&
@@ -37,11 +55,21 @@ class Home extends React.Component<DefaultProps & Props> {
           description={contentControl.description}
         />
         <Background>
+          {contentControl.showAgenda &&
+            <Agenda agenda={agenda}/>
+          }
           {contentControl.showSpeakers &&
             <Speakers speakerCategories={speakerCategories}/>
           }
-          {contentControl.showAgenda &&
-            <Agenda agenda={agenda}/>
+          {contentControl.showSponsors &&
+            <Sponsors id="partners" sponsorCategories={sponsorCategories} title="Partners"/>
+          }
+          {!contentControl.showSponsors && contentControl.showPreviousSponsors &&
+            <Sponsors
+              id="previous-partners"
+              sponsorCategories={previousSponsorCategories}
+              title="Previous Partners"
+            />
           }
         </Background>
       </React.Fragment>
