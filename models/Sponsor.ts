@@ -21,24 +21,24 @@ export type SponsorDocument = keystone.Document<Sponsor>;
 
 const Sponsor = new keystone.List<Sponsor>('Sponsor', {
   autokey: { from: 'name', path: 'key', unique: true },
-  map: {name: 'name'},
+  map: { name: 'name' },
   sortable: true,
   sortContext: 'SponsorCategory:sponsors',
 });
 
 Sponsor.add({
-  name: {type: String, required: true},
-  logo: {type: Types.CloudinaryImage, autoCleanup: true},
-  description: {type: Types.Html, wysiwyg: true},
-  url: {type: Types.Url},
+  name: { type: String, required: true },
+  logo: { type: Types.CloudinaryImage, autoCleanup: true },
+  description: { type: Types.Markdown },
+  url: { type: Types.Url },
   imageAdjust: {
-    width: {type: String, label: 'Width (px, %, em,rem)'},
-    height: {type: String, label: 'Height (px, %, em,rem)'},
+    width: { type: String, label: 'Width (px, %, em,rem)' },
+    height: { type: String, label: 'Height (px, %, em,rem)' },
   },
   // related to edition
-  edition: {type: Types.Relationship, ref: 'Edition', many: true},
+  edition: { type: Types.Relationship, ref: 'Edition', many: true },
   // and to a sponsor category
-  category: {type: Types.Relationship, ref: 'SponsorCategory'},
+  category: { type: Types.Relationship, ref: 'SponsorCategory' },
   // show previous sponsors
   showInPrevious: { type: Boolean, label: 'Show in previous partner list' },
   sortOrder: Number,
