@@ -1,23 +1,17 @@
 import React from 'react';
 import styled from 'react-emotion';
-import { colors, rhythm, breakpointMin, Anchor, Modal } from 'p20-components';
-
-const Background = styled('div')({
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  height: '100%',
-  width: '100%',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center center', // tslint:disable-next-line
-  backgroundImage: `url('https://res.cloudinary.com/dg1royeho/image/upload/c_scale,w_1024/v1498041997/footer-img2_afjcgn.jpg')`
-});
+import { colors, rhythm, breakpointMin, Anchor, Modal, breakpointMax } from 'p20-components';
 
 const Container = styled('footer')({
   background: 'white',
   display: 'flex',
   flexDirection: 'column',
-  position: 'relative'
+  alignItems: 'center',
+  position: 'relative',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center center', // tslint:disable-next-line
+  backgroundImage: `url('https://res.cloudinary.com/dg1royeho/image/upload/c_scale,w_1024/v1498041997/footer-img2_afjcgn.jpg')`,
+  padding: `${rhythm(2)} ${rhythm(1)}`
 });
 
 const Credits = styled('small')({
@@ -25,12 +19,14 @@ const Credits = styled('small')({
   textAlign: 'center'
 });
 
-const Foreground = styled('div')({
-  zIndex: 101, // for modals to appear on top
-  padding: `${rhythm(2)} ${rhythm(1)}`,
+const Legal = styled('div')({
   display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center'
+  [breakpointMax('mobile')]: {
+    '& > *': {
+      flexBasis: '33.3%',
+      textAlign: 'center'
+    }
+  }
 });
 
 const Separator = styled('div')({
@@ -83,32 +79,67 @@ const Footer: React.StatelessComponent<Props> = ({
   bylawLink, facebookUrl, linkedinUrl, twitterUrl, videoChannelUrl
 }) => (
   <Container>
-    <Background/>
-    <Foreground>
-      <Social>
-        {facebookUrl && <Icon className="facebook" href={facebookUrl} title="Facebook"/>}
-        {linkedinUrl && <Icon className="linkedin" href={linkedinUrl} title="LinkedIn"/>}
-        {twitterUrl && <Icon className="twitter" href={twitterUrl} title="Twitter"/>}
-        {videoChannelUrl && videoChannelUrl.includes('youtu') &&
-          <Icon className="youtube" href={videoChannelUrl} title="YouTube"/>}
-        {videoChannelUrl && videoChannelUrl.includes('vimeo') &&
-          <Icon className="vimeo" href={videoChannelUrl} title="Vimeo"/>}
-      </Social>
-      <Separator/>
-      <div>
-        <Anchor href={bylawLink}>By-law for Poland 2.0</Anchor>
-        <Modal trigger={<Anchor>Privacy Policy</Anchor>} label="Privacy Policy">
-          {/* TODO */}
-        </Modal>
-        <Anchor href="mailto:contact@poland20.com">Contact</Anchor>
-      </div>
-      <Credits>
-        &#169; {(new Date()).getFullYear()} Poland 2.0<br/>
-        Created by&nbsp;
-        <a href="https://github.com/jakow" target="_blank" rel="noopener">Jakub Kowalczyk</a><br/>
-        Maintained by <a href="mailto:artur@komoter.pl">Artur Komoter</a>
-      </Credits>
-    </Foreground>
+    <Social>
+      {facebookUrl &&
+        <Icon
+          className="facebook"
+          href={facebookUrl}
+          rel="noopener noreferrer"
+          target="_blank"
+          title="Facebook"
+        />
+      }
+      {linkedinUrl &&
+        <Icon
+          className="linkedin"
+          href={linkedinUrl}
+          rel="noopener noreferrer"
+          target="_blank"
+          title="LinkedIn"
+        />
+      }
+      {twitterUrl &&
+        <Icon
+          className="twitter"
+          href={twitterUrl}
+          title="Twitter"
+          rel="noopener noreferrer"
+          target="_blank"
+        />
+      }
+      {videoChannelUrl && videoChannelUrl.includes('youtu') &&
+        <Icon
+          className="youtube"
+          href={videoChannelUrl}
+          title="YouTube"
+          rel="noopener noreferrer"
+          target="_blank"
+        />
+      }
+      {videoChannelUrl && videoChannelUrl.includes('vimeo') &&
+        <Icon
+          className="vimeo"
+          href={videoChannelUrl}
+          title="Vimeo"
+          rel="noopener noreferrer"
+          target="_blank"
+        />
+      }
+    </Social>
+    <Separator/>
+    <Legal>
+      <Anchor href={bylawLink}>By-law for Poland 2.0</Anchor>
+      <Modal trigger={<Anchor>Privacy Policy</Anchor>} label="Privacy Policy">
+        {/* TODO */}
+      </Modal>
+      <Anchor href="mailto:contact@poland20.com">Contact</Anchor>
+    </Legal>
+    <Credits>
+      &#169; {(new Date()).getFullYear()} Poland 2.0<br/>
+      Created by&nbsp;
+      <a href="https://github.com/jakow" target="_blank" rel="noopener">Jakub Kowalczyk</a><br/>
+      Maintained by <a href="mailto:artur@komoter.pl">Artur Komoter</a>
+    </Credits>
   </Container>
 );
 
