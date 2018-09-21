@@ -20,6 +20,7 @@ export default (next: Next.Server) => {
   router.use('/middleware', Middleware);
 
   router.use('/views/home', Views.home);
+  router.use('/views/about', Views.about);
 
   router.get('*', (request: IncomingMessage, response: ServerResponse) =>
     nextHandler(request, response)
