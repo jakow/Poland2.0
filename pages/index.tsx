@@ -35,50 +35,41 @@ export type SpeakerCategories = (SpeakerCategory & { speakers: Speaker[] })[];
 export type Sponsor = (SponsorModel & MarkdownDescription);
 export type SponsorCategories = (SponsorCategoryModel & { sponsors: Sponsor[] })[];
 
-class Home extends React.Component<DefaultProps & Props> {
-  render() {
-    const {
-      agenda,
-      currentEdition,
-      contentControl,
-      speakerCategories,
-      sponsorCategories,
-      previousSponsorCategories
-    } = this.props;
-    return (
-      <React.Fragment>
-        {contentControl.tickets.live && contentControl.tickets.showSection &&
-          <Tickets tickets={contentControl.tickets}/>
-        }
-        <Banner
-          currentEdition={currentEdition}
-          description={contentControl.description}
+const Home: React.StatelessComponent<DefaultProps & Props> = ({
+  agenda,
+  currentEdition,
+  contentControl,
+  speakerCategories,
+  sponsorCategories,
+  previousSponsorCategories
+}) => (
+  <React.Fragment>
+    {contentControl.tickets.live && contentControl.tickets.showSection &&
+      <Tickets tickets={contentControl.tickets}/>
+    }
+    <Banner
+      currentEdition={currentEdition}
+      description={contentControl.description}
+    />
+    <Background>
+      {contentControl.showAgenda && agenda.days.length > 0 &&
+        <Agenda agenda={agenda}/>
+      }
+      {contentControl.showSpeakers && speakerCategories.length > 0 &&
+        <Speakers speakerCategories={speakerCategories}/>
+      }
+      {contentControl.showSponsors &&
+        <Sponsors id="partners" sponsorCategories={sponsorCategories} title="Partners"/>
+      }
+      {!contentControl.showSponsors && contentControl.showPreviousSponsors &&
+        <Sponsors
+          id="previous-partners"
+          sponsorCategories={previousSponsorCategories}
+          title="Previous Partners"
         />
-        <Background>
-          {contentControl.showAgenda &&
-            <Agenda agenda={agenda}/>
-          }
-          {contentControl.showSpeakers &&
-            <Speakers speakerCategories={speakerCategories}/>
-          }
-          {contentControl.showSponsors &&
-            <Sponsors id="partners" sponsorCategories={sponsorCategories} title="Partners"/>
-          }
-          {!contentControl.showSponsors && contentControl.showPreviousSponsors &&
-            <Sponsors
-              id="previous-partners"
-              sponsorCategories={previousSponsorCategories}
-              title="Previous Partners"
-            />
-          }
-        </Background>
-      </React.Fragment>
-    );
-  }
-}
+      }
+    </Background>
+  </React.Fragment>
+);
 
-export default withDefault(Home, async () => {
-  const data = await fetch('http://localhost:9009/views/home')
-    .then(data => data.json());
-  return { ...data };
-});
+export default withDefault(Home, 'home');
