@@ -16,8 +16,8 @@ import {
   colors
 } from 'p20-components';
 import ModalCard from './ModalCard';
-import { TeamMember } from '../models';
 import { smallMarginBottom } from './Speakers';
+import { TeamMember } from './types';
 
 const LearnMore = styled('small')({
   [breakpointMin('tablet')]: {
@@ -27,13 +27,17 @@ const LearnMore = styled('small')({
 
 const Title = styled('h1')(bold, fat, stripe);
 
+const Subtitle = styled('h2')();
+
 const Wrapper = styled('section')({
-  position: 'relative',
   paddingBottom: rhythm(0.5),
   'li > *:nth-child(2)': {
     display: 'flex',
     flexDirection: 'column',
     minHeight: rhythm(8)
+  },
+  'li > footer': {
+    minHeight: rhythm(3)
   }
 });
 
@@ -97,12 +101,19 @@ const memberCard = (member: TeamMember, index?: number) => (
   </Card>
 );
 
-const TeamMembers: React.StatelessComponent<{ teamMembers: TeamMember[] }> =
-  ({ teamMembers }) => (
+interface Props {
+  teamMembers: TeamMember[];
+  isInSubcategory?: boolean;
+}
+
+const TeamMembers: React.StatelessComponent<Props> =
+  ({ teamMembers, isInSubcategory }) => (
     <Wrapper id="team">
       <Container>
         <Center>
-          <Title>Team</Title>
+          {!isInSubcategory ? <Title>Team</Title>
+                            : <Subtitle>Team</Subtitle>
+          }
           <CardList>
             {teamMembers && teamMembers.map((member, index) => (
               member.description.md ?
