@@ -25,13 +25,14 @@ injectGlobal({
   }
 });
 
-const withDefault = (Page: React.ComponentType<DefaultProps>, view: string) =>
+const withDefault = (Page: React.ComponentType<DefaultProps>, view?: string) =>
   (class extends React.Component<DefaultProps> {
     static async getInitialProps() {
       const middleware = await fetch('http://localhost:9009/middleware')
-        .then(data => data.json());
-      const viewData = await fetch(`http://localhost:9009/views/${view}`)
-        .then(data => data.json());
+                               .then(data => data.json());
+      const viewData = view ? await fetch(`http://localhost:9009/views/${view}`)
+                                    .then(data => data.json())
+        : null;
       return { ...middleware, viewData };
     }
 
