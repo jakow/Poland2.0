@@ -1,5 +1,4 @@
 import 'source-map-support/register';
-import 'isomorphic-fetch';
 import * as express from 'express';
 import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';

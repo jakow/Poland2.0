@@ -1,8 +1,8 @@
-import * as withTypescript from '@zeit/next-typescript';
-import * as withCSS from '@zeit/next-css';
-import * as withOptimizedImages from 'next-optimized-images';
+const withTypescript = require('@zeit/next-typescript');
+const withCSS = require('@zeit/next-css');
+const withOptimizedImages = require('next-optimized-images');
 
-export default
+module.exports =
   withTypescript(
   withCSS(
   withOptimizedImages({
