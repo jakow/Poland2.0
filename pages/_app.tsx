@@ -1,9 +1,16 @@
 import React from 'react';
+import Link from 'next/link';
 import { TopNavigation, rhythm } from 'p20-components';
 import { NavItem } from '../routes/middleware';
 import Footer from '../components/Footer';
 import { ContentControl, Edition } from '../models';
-import { injectGlobal } from 'emotion';
+import { injectGlobal, hydrate } from 'emotion';
+
+// Adds server generated styles to emotion cache.
+// '__NEXT_DATA__.ids' is set in '_document.js'
+if (typeof window !== 'undefined') {
+  hydrate(window.__NEXT_DATA__.ids);
+}
 
 export interface DefaultProps {
   contentControl?: ContentControl;
@@ -38,7 +45,7 @@ const withDefault = (Page: React.ComponentType<DefaultProps>, view?: string) =>
 
     render = () => (
       <React.Fragment>
-        <TopNavigation items={this.props.navLinks}/>
+        <TopNavigation items={this.props.navLinks} Router={Link}/>
         <main style={{ marginTop: rhythm(3) }}>
           <Page
             contentControl={this.props.contentControl}
