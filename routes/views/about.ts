@@ -1,10 +1,10 @@
 import { list } from 'keystone';
 import { RequestHandler } from 'express';
 import { TeamMember } from '../../models/TeamMember';
-import { Edition } from '../../models';
+import { getCurrentEdition } from '../middleware';
 
 export const about: RequestHandler = async (req, res, next) => {
-  const currentEdition = await list<Edition>('Edition').model.findOne({ current: true }).exec();
+  const currentEdition = await getCurrentEdition();
   let team;
   if (currentEdition != null) {
     team = await list<TeamMember>('TeamMember').model.find({ edition: currentEdition })

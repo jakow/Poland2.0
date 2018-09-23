@@ -1,7 +1,6 @@
 import { list } from 'keystone';
-import { Edition } from '../models/Edition';
-import { ContentControl } from '../models/ContentControl';
-import { Request, Response, NextFunction, Router } from 'express';
+import { Request, Response, Router } from 'express';
+import { ContentControl, Edition } from '../models';
 
 const middleware = Router();
 
@@ -11,17 +10,22 @@ export interface NavItem {
   type?: 'link' | 'button';
 }
 
+export const getContentControl = async () =>
+  list<ContentControl>('ContentControl').model.findOne().exec();
+
+export const getCurrentEdition = async () =>
+  list<Edition>('Edition').model.findOne({ current: true }).exec();
+
 /**
  * Returns information used on all pages.
  * This includes enabled navigation items, content control and information regarding
  * current edition of Poland 2.0.
  */
-middleware.get('/', async (req: Request, res: Response, next: NextFunction) => {
-  const contentControl = await list<ContentControl>('ContentControl').model.findOne().exec();
-  const currentEdition = await list<Edition>('Edition').model.findOne({ current: true }).exec();
+middleware.get('/', async (req: Request, res: Response) => {
+  const contentControl = await getContentControl();
+  const currentEdition = await getCurrentEdition();
 
   const navLinks: NavItem[] = [
-    { title: 'About', url: '/about' },
     ...contentControl.showSpeakers ? [{ title: 'Speakers', url: '/#speakers' }]
       : [],
     ...contentControl.showAgenda ? [{ title: 'Agenda', url: '/#agenda' }]
@@ -31,8 +35,9 @@ middleware.get('/', async (req: Request, res: Response, next: NextFunction) => {
     ...contentControl.showPreviousSponsors ?
       [{ title: 'Previous Partners', url: '/#previous-partners' }]
       : [],
-    { title: 'Past Editions', url: '/past-editions' },
+    { title: 'About', url: '/about' },
     { title: 'empowerPL', url: '/empowerPL' },
+    { title: 'Past Editions', url: '/past-editions' },
     ...contentControl.tickets.live && contentControl.tickets.url ?
       [<NavItem>{ title: 'Buy Tickets', url: contentControl.tickets.url, type: 'button' }]
       : []

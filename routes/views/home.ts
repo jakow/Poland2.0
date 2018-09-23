@@ -1,15 +1,13 @@
 import { RequestHandler } from 'express';
-import { Edition } from '../../models/Edition';
-import { ContentControl } from '../../models/ContentControl';
 import { Speaker } from '../../models/Speaker';
-import { list } from 'keystone';
 import getAgenda from '../helpers/getAgenda';
 import getSpeakersByCategory from '../helpers/getSpeakersByCategory';
 import getSponsorsByCategory from '../helpers/getSponsorsByCategory';
+import { getContentControl, getCurrentEdition } from '../middleware';
 
-export const home: RequestHandler = async (req, res, next) => {
-  const contentControl = await list<ContentControl>('ContentControl').model.findOne().exec();
-  const currentEdition = await list<Edition>('Edition').model.findOne({ current: true }).exec();
+export const home: RequestHandler = async (req, res) => {
+  const contentControl = await getContentControl();
+  const currentEdition = await getCurrentEdition();
 
   let speakerCategories = {};
   let agenda = {};
