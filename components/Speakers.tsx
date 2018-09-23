@@ -14,8 +14,8 @@ import {
   Modal,
   breakpointMin
 } from 'p20-components';
-import { SpeakerCategories, Speaker } from '../pages';
 import ModalCard from './ModalCard';
+import { SpeakerCategories, Speaker } from './types';
 
 const LearnMore = styled('small')({
   [breakpointMin('tablet')]: {
@@ -24,6 +24,8 @@ const LearnMore = styled('small')({
 });
 
 const Title = styled('h1')(bold, fat, stripe);
+
+const Subtitle = styled('h2')();
 
 const Wrapper = styled('section')({
   position: 'relative',
@@ -52,6 +54,47 @@ const speakerCard = (speaker: Speaker, index?: number) => (
       <h4>{speaker.company && speaker.company}</h4>
     </Center>
   </Card>
+);
+
+interface FlatProps {
+  speakers: Speaker[];
+  isInSubcategory?: boolean;
+}
+
+export const SpeakersFlat: React.StatelessComponent<FlatProps> =
+  ({ speakers, isInSubcategory }) => (
+    <Wrapper id="speakers">
+      <Container>
+        <Center>
+          {!isInSubcategory ? <Title>Speakers</Title>
+                            : <Subtitle>Speakers</Subtitle>
+          }
+        </Center>
+          <CardList>
+            {speakers && speakers.length > 0 &&
+              speakers.map((speaker, index) =>
+                speaker.description.md ?
+                  <Modal
+                    key={index}
+                    trigger={speakerCard(speaker)}
+                    label={`Learn more about ${speaker.name}`}
+                  >
+                    <ModalCard>
+                      <h1 className={smallMarginBottom}>{speaker.name}</h1>
+                      <p>
+                        <strong>
+                          {speaker.position}{speaker.company && `, ${speaker.company}`}
+                        </strong>
+                      </p>
+                      <Markdown>{speaker.description.md}</Markdown>
+                    </ModalCard>
+                  </Modal>
+                : speakerCard(speaker, index)
+              )
+            }
+          </CardList>
+      </Container>
+    </Wrapper>
 );
 
 const Speakers: React.StatelessComponent<{ speakerCategories: SpeakerCategories }> =
@@ -89,6 +132,6 @@ const Speakers: React.StatelessComponent<{ speakerCategories: SpeakerCategories 
           ))}
       </Container>
     </Wrapper>
-  );
+);
 
 export default Speakers;
