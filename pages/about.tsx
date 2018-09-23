@@ -3,7 +3,7 @@ import withDefault, { DefaultProps } from './_app';
 import styled, { css } from 'react-emotion';
 import { colors, rhythm, Center, fat, stripe, bold } from 'p20-components';
 import TeamMembers from '../components/TeamMembers';
-import { TeamMember } from '../models';
+import { TeamMember } from '../components/types';
 
 const background = css({
   zIndex: 0,
@@ -42,7 +42,7 @@ const Image = styled('div')(background, { // tslint:disable-next-line
   background: 'url("https://res.cloudinary.com/dg1royeho/image/upload/c_scale,q_70,w_1000/v1501759687/about-banner_izxi8y.png") no-repeat top center/cover'
 });
 
-const Mission = styled('article')({
+export const Mission = styled('article')({
   margin: '0 auto',
   maxWidth: rhythm(32),
   textAlign: 'justify'
