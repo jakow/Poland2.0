@@ -21,6 +21,8 @@ export default (next: Next.Server) => {
 
   router.use('/views/home', Views.home);
   router.use('/views/about', Views.about);
+  router.use('/views/past-editions', Views.pastEditions);
+  router.use('/views/empowerPL', Views.empowerPL);
 
   router.get('*', (request: IncomingMessage, response: ServerResponse) =>
     nextHandler(request, response)
