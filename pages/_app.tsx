@@ -5,6 +5,7 @@ import { NavItem } from '../routes/middleware';
 import Footer from '../components/Footer';
 import { ContentControl, Edition } from '../models';
 import { injectGlobal, hydrate } from 'emotion';
+import { port } from '../config';
 
 // Adds server generated styles to emotion cache.
 // '__NEXT_DATA__.ids' is set in '_document.js'
@@ -35,9 +36,9 @@ injectGlobal({
 const withDefault = (Page: React.ComponentType<DefaultProps>, view?: string) =>
   (class extends React.Component<DefaultProps> {
     static async getInitialProps() {
-      const middleware = await fetch('http://localhost:9009/middleware')
+      const middleware = await fetch(`http://localhost:${port}/middleware`)
                                .then(data => data.json());
-      const viewData = view ? await fetch(`http://localhost:9009/views/${view}`)
+      const viewData = view ? await fetch(`http://localhost:${port}/views/${view}`)
                                     .then(data => data.json())
         : null;
       return { ...middleware, viewData };
