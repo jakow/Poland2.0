@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'react-emotion';
 import withDefault, { DefaultProps } from './_app';
-import { fat, Anchor, bold, stripe, Center } from 'p20-components';
+import { fat, Anchor, bold, stripe, Center } from '@poland20/p20-components';
 import { Speaker, TeamMember } from '../components/types';
 import { Edition } from '../models';
 import { Background } from '.';

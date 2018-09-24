@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { TopNavigation, rhythm } from 'p20-components';
+import { TopNavigation, rhythm } from '@poland20/p20-components';
 import { NavItem } from '../routes/middleware';
 import Footer from '../components/Footer';
 import { ContentControl, Edition } from '../models';

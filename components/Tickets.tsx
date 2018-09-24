@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'react-emotion';
 import Markdown from 'react-markdown';
-import { colors, rhythm, Container, Countdown, breakpointMin, NavButton } from 'p20-components';
+import {
+  colors, rhythm, Container, Countdown, breakpointMin
+} from '@poland20/p20-components';
 import { ContentControl } from '../models';
 const meshTopLeft = require('../static/images/mesh-corner-top-left.svg');
 const meshBottomRight = require('../static/images/mesh-corner-bottom-right.svg');

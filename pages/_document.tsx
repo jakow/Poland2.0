@@ -3,7 +3,7 @@ import * as React from 'react';
 import { TypographyStyle, GoogleFont } from 'react-typography';
 import Document, { Head, Main, NextScript, DocumentProps } from 'next/document';
 import { extractCritical } from 'emotion-server';
-import { typography } from 'p20-components';
+import { typography } from '@poland20/p20-components';
 
 export default class extends Document {
   constructor (props: DocumentProps) {

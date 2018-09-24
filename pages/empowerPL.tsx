@@ -1,7 +1,9 @@
 import React from 'react';
 import styled, { css } from 'react-emotion';
 import withDefault, { DefaultProps } from './_app';
-import { rhythm, colors, stripe, fat, Center, bold, ResponsiveVideo } from 'p20-components';
+import {
+  rhythm, colors, stripe, fat, Center, bold, ResponsiveVideo
+} from '@poland20/p20-components';
 import { Mission } from './about';
 
 const background = css({

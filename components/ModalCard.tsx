@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'react-emotion';
-import { colors, rhythm } from 'p20-components';
+import { colors, rhythm } from '@poland20/p20-components';
 
 const Container = styled('section')({
   backgroundColor: `${colors.white}`,

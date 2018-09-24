@@ -3,6 +3,7 @@
   "version": "0.3.0",
   "private": true,
   "dependencies": {
+    "@poland20/p20-components": "^0.3.0",
     "bluebird": "^3.5.0",
     "cloudinary": "^1.11.0",
     "color": "^3.0.0",
@@ -27,7 +28,6 @@
     "mongoose": "^4",
     "next": "^5",
     "nodemailer": "^4.0.1",
-    "p20-components": "../p20-components/dist",
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
     "pm2": "^2.4.6",

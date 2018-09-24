@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'react-emotion';
-import { colors, rhythm, breakpointMin, Anchor, Modal, breakpointMax } from 'p20-components';
+import {
+  colors, rhythm, breakpointMin, Anchor, Modal, breakpointMax
+} from '@poland20/p20-components';
 
 const Container = styled('footer')({
   background: 'white',

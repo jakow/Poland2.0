@@ -13,7 +13,7 @@ import {
   fill,
   Modal,
   breakpointMin
-} from 'p20-components';
+} from '@poland20/p20-components';
 import ModalCard from './ModalCard';
 import { SpeakerCategories, Speaker } from './types';
 

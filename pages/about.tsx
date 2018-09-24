@@ -1,7 +1,7 @@
 import React from 'react';
 import withDefault, { DefaultProps } from './_app';
 import styled, { css } from 'react-emotion';
-import { colors, rhythm, Center, fat, stripe, bold } from 'p20-components';
+import { colors, rhythm, Center, fat, stripe, bold } from '@poland20/p20-components';
 import TeamMembers from '../components/TeamMembers';
 import { TeamMember } from '../components/types';
 

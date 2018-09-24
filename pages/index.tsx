@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'react-emotion';
 import withDefault, { DefaultProps } from './_app';
-import { Banner, colors, Agenda } from 'p20-components';
-import { AgendaType } from 'p20-components/types/Agenda';
+import { Banner, colors, Agenda } from '@poland20/p20-components';
+import { AgendaType } from '@poland20/p20-components/types/Agenda';
 import Tickets from '../components/Tickets';
 import Speakers from '../components/Speakers';
 import Sponsors from '../components/Sponsors';
