@@ -131,9 +131,15 @@ const Footer: React.StatelessComponent<Props> = ({
     <Separator/>
     <Legal>
       <Anchor href={bylawLink}>By-law for Poland 2.0</Anchor>
-      <Modal trigger={<Anchor>Privacy Policy</Anchor>} label="Privacy Policy">
-        {/* TODO */}
-      </Modal>
+      {/* <Modal trigger={<Anchor>Privacy Policy</Anchor>} label="Privacy Policy">
+      </Modal> */}
+      <Anchor
+        href="/static/privacy-policy.pdf"
+        label="Privacy Policy"
+        target="_blank"
+      >
+        Privacy Policy
+      </Anchor>
       <Anchor href="mailto:contact@poland20.com">Contact</Anchor>
     </Legal>
     <Credits>
