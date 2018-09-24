@@ -13,9 +13,9 @@ import {
   CardList,
   Modal
 } from 'p20-components';
-import { SponsorCategories, Sponsor } from '../pages';
 import ModalCard from './ModalCard';
 import { smallMarginBottom } from './Speakers';
+import { SponsorCategories, Sponsor } from './types';
 
 const Wrapper = styled('section')({
   margin: 0,
