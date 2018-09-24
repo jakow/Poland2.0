@@ -33,7 +33,7 @@ const Home: React.StatelessComponent<DefaultProps & Props> = ({
   previousSponsorCategories
 }) => (
   <React.Fragment>
-    {contentControl.tickets.live && contentControl.tickets.showSection &&
+    {contentControl.tickets.showSection &&
       <Tickets tickets={contentControl.tickets}/>
     }
     <Banner
