@@ -22,6 +22,9 @@ module.exports =
       }
 
       return config;
+    },
+    publicRuntimeConfig: {
+      host: process.env.NODE_ENV === 'production' ? 'https://poland20.com' : 'http://localhost:9009',
     }
   }
 )));

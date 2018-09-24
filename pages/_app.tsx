@@ -1,11 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
+import getConfig from 'next/config';
 import { TopNavigation, rhythm } from '@poland20/p20-components';
 import { NavItem } from '../routes/middleware';
 import Footer from '../components/Footer';
 import { ContentControl, Edition } from '../models';
 import { injectGlobal, hydrate } from 'emotion';
-import { port } from '../config';
+
+const { publicRuntimeConfig } = getConfig();
 
 // Adds server generated styles to emotion cache.
 // '__NEXT_DATA__.ids' is set in '_document.js'
@@ -36,9 +38,9 @@ injectGlobal({
 const withDefault = (Page: React.ComponentType<DefaultProps>, view?: string) =>
   (class extends React.Component<DefaultProps> {
     static async getInitialProps() {
-      const middleware = await fetch(`http://localhost:${port}/middleware`)
+      const middleware = await fetch(`${publicRuntimeConfig.host}/middleware`)
                                .then(data => data.json());
-      const viewData = view ? await fetch(`http://localhost:${port}/views/${view}`)
+      const viewData = view ? await fetch(`${publicRuntimeConfig.host}/views/${view}`)
                                     .then(data => data.json())
         : null;
       return { ...middleware, viewData };
