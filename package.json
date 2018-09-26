@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "private": true,
   "dependencies": {
-    "@poland20/p20-components": "^0.3.0",
+    "@poland20/p20-components": "latest",
     "bluebird": "^3.5.0",
     "cloudinary": "^1.11.0",
     "color": "^3.0.0",
@@ -72,8 +72,8 @@
     "@types/sinon-chai": "^2.7.27",
     "@types/socket.io": "^1.4.29",
     "@types/socket.io-client": "^1.4.29",
-    "@zeit/next-css": "^0.2.0",
-    "@zeit/next-typescript": "^0.1.1",
+    "@zeit/next-css": "0.2.0",
+    "@zeit/next-typescript": "0.1.1",
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^7.0.0",
     "chai": "^3.5.0",
@@ -81,7 +81,7 @@
     "keystonejs-stub": "^0.2.3",
     "mocha": "^3.2.0",
     "next-optimized-images": "^1.4.1",
-    "nodemon": "^1.11.0",
+    "nodemon": "^1.18.4",
     "prop-types": "^15.6.2",
     "proxyquire": "^1.7.11",
     "rimraf": "^2.6.1",
@@ -103,15 +103,10 @@
   },
   "scripts": {
     "start": "cross-env NODE_ENV=production node production/index.js",
-    "start:staging": "cross-env NODE_ENV=staging pm2 start build/index.js --name app",
-    "stop": "pm2 stop app && pm2 delete app",
+    "start:staging": "cross-env NODE_ENV=staging node production/index.js",
     "dev": "nodemon index.ts",
-    "build:server": "cross-env NODE_ENV=production tsc --project @config/tsconfig.server.json",
-    "build:client": "cross-env NODE_ENV=production webpack --config @config/client.config.js -p",
-    "build": "yarn clean && next build && cross-env NODE_ENV=production tsc --project @config/tsconfig.server.json",
+    "build": "yarn clean && next build && cross-env NODE_ENV=production tsc --project tsconfig.server.json",
     "test": "mocha -r ts-node/register test/**/*.ts",
-    "clean": "rimraf production/*",
-    "deploy:staging": "yarn build && tools/deploy-staging.sh",
-    "deploy:production": "yarn build && tools/deploy-production.sh"
+    "clean": "rimraf production/*"
   }
 }

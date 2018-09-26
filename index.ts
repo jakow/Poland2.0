@@ -13,8 +13,7 @@ import * as auth from './routes/api/auth';
 
 (mongoose as any).Promise = Promise;
 
-// const app = express();
-const app = next({ dev: config.environment !== 'production' });
+const app = next({ dev: config.environment === 'development' });
 
 keystone.init({
   mongoose,
@@ -34,8 +33,8 @@ keystone.init({
   'cookie secret': config.cookieSecret,
   'cloudinary config': config.cloudinaryUrl,
   'cloudinary secure': true,
-  'google server api key': config.googleMapsServerKey,
-  'google api key': config.googleMapsBrowserKey,
+  // 'google server api key': config.googleMapsServerKey,
+  // 'google api key': config.googleMapsBrowserKey,
   'default region': 'gb',
 });
 
