@@ -30,11 +30,3 @@ export default (next: Next.Server) => {
 
   return router;
 };
-
-// HTML views
-// router.get('/', views.home);
-// router.get('/about', views.about);
-// router.get('/past-editions', views.pastEditions);
-// router.get('/empowerPL', views.empowerPL);
-// router.all('/contact', views.contact);
-// REST API
