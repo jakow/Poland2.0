@@ -1,16 +1,14 @@
-import {list, View} from 'keystone';
-import {RequestHandler} from 'express';
-import {EditionDocument} from '../../models/Edition';
-import {TeamMember} from '../../models/TeamMember';
-import resolveView from '../helpers/resolveView';
+import { list } from 'keystone';
+import { RequestHandler } from 'express';
+import { TeamMember } from '../../models/TeamMember';
+import { getCurrentEdition } from '../middleware';
+
 export const about: RequestHandler = async (req, res, next) => {
-  res.locals.route = 'about';
-  const view = new View(req, res);
-  const currentEdition = res.locals.currentEdition as EditionDocument;
+  const currentEdition = await getCurrentEdition();
   let team;
   if (currentEdition != null) {
-    team = await list<TeamMember>('TeamMember').model.find({edition: currentEdition}).sort('sortOrder').exec();
+    team = await list<TeamMember>('TeamMember').model.find({ edition: currentEdition })
+      .sort('sortOrder').exec();
   }
-  res.locals.team = team;
-  view.render(resolveView('about'));
+  res.json({ team });
 };

@@ -2,6 +2,9 @@
 logs
 *.log
 
+# next.js
+.next/
+
 # Runtime data
 pids
 *.pid
@@ -31,8 +34,10 @@ bower_components
 .DS_Store
 
 # Build files should not be checked in
-build/
-static/client/
+production/
 
 # ignore notes for the developer only
 NOTES.md
+
+yarn.lock
+package-lock.json

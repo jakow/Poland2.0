@@ -1,25 +1,19 @@
 {
-    "compilerOptions": {
-        "lib": ["es2015", "es2016", "es2017", "dom"],
-        "outDir": "./build/",
-        "sourceMap": true,
-        "noImplicitAny": true,
-        "module": "es2015",
-        "moduleResolution": "node",
-        "target": "es5",
-        "allowSyntheticDefaultImports": true,
-        "allowUnreachableCode": false,
-        "allowJs": true,
-        "jsx": "react",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "diagnostics": true,
-        "downlevelIteration": true
-    },
-    "include": [
-        "**/*"
-    ],
-    "exclude": [
-        "node_modules"
-    ]
+  "compilerOptions": {
+    "lib": ["es2015", "es2016", "dom"],
+    "baseUrl": ".",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false,
+    "allowJs": true,
+    "jsx": "react",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "diagnostics": true,
+    "downlevelIteration": true
+  }
 }

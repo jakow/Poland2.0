@@ -1,86 +1,57 @@
-import {list} from 'keystone';
-import {Edition} from '../models/Edition';
-import {ContentControl} from '../models/ContentControl';
-import {StaticPage} from '../models/StaticPage';
-import {RequestHandler, Request, Response, NextFunction} from 'express';
-// import {environment} from '../config';
-// import reversePopulate from './helpers/reversePopulate';
-import resolveView from './helpers/resolveView';
+import { list } from 'keystone';
+import { Request, Response, Router } from 'express';
+import { ContentControl, Edition } from '../models';
 
-export async function getCurrentEdition(req: Request, res: Response, next: NextFunction) {
-  try {
-    const currentEdition = await list<Edition>('Edition').model.findOne({current: true}).exec();
-    res.locals.currentEdition = currentEdition;
-    next();
-  } catch (e) {
-    next(e);
-  }
+const middleware = Router();
+
+export interface NavItem {
+  title: string; // display name
+  url: string; // where it goes
+  type?: 'link' | 'button';
 }
 
-export async function getContentControl(req: Request, res: Response, next: NextFunction) {
-  try {
-    const contentControl = await list('ContentControl').model.findOne().exec();
-    res.locals.contentControl = contentControl;
-    next();
-  } catch (e) {
-    next(e);
-  }
-}
+export const getContentControl = async () =>
+  list<ContentControl>('ContentControl').model.findOne().exec();
 
-interface NavItem {
-  name: string; // display name
-  route: string; // where it goes
-  key: string; // what is the route key
-}
+export const getCurrentEdition = async () =>
+  list<Edition>('Edition').model.findOne({ current: true }).exec();
 
 /**
- * Initialises the standard view locals
- * The included layout depends on the navLinks array to generate
- * the navigation in the header, you may wish to change this array
- * or replace it with your own templates / logic.
+ * Returns information used on all pages.
+ * This includes enabled navigation items, content control and information regarding
+ * current edition of Poland 2.0.
  */
-export async function initLocals(req: Request, res: Response, next: NextFunction) {
-  const contentControl = res.locals.contentControl as ContentControl;
-  const staticPages = await list<StaticPage>('StaticPage').model
-    .find({active: true, showInMenu: true})
-    .select({name: true, route: true}).exec();
+middleware.get('/', async (req: Request, res: Response) => {
+  const contentControl = await getContentControl();
+  const currentEdition = await getCurrentEdition();
 
-  const nav: NavItem[] = [
-    {name: 'About', route: '/about', key: 'about'},
-    ...contentControl.showSpeakers ? [{name: 'Speakers', route: '/#speakers', key: 'speakers'}] : [],
-    ...contentControl.showAgenda ? [{name: 'Agenda', route: '/#agenda', key: 'speakers'}] : [],
-    ...contentControl.showSponsors ? [{name: 'Partners', route: '/#partners', key: 'partners'}] : [],
-    {name: 'Past Editions', route: '/past-editions', key: 'past-editions'},
-    {name: 'empowerPL', route: '/empowerPL', key: 'empowerPL'},
+  const navLinks: NavItem[] = [
+    ...contentControl.showSpeakers ? [{ title: 'Speakers', url: '/#speakers' }]
+      : [],
+    ...contentControl.showAgenda ? [{ title: 'Agenda', url: '/#agenda' }]
+      : [],
+    ...contentControl.showSponsors ? [{ title: 'Partners', url: '/#partners' }]
+      : [],
+    ...contentControl.showPreviousSponsors ?
+      [{ title: 'Previous Partners', url: '/#previous-partners' }]
+      : [],
+    { title: 'About', url: '/about' },
+    { title: 'empowerPL', url: '/empowerPL' },
+    { title: 'Past Editions', url: '/past-editions' },
+    ...contentControl.tickets.live && contentControl.tickets.url ?
+      [<NavItem>{ title: 'Buy Tickets', url: contentControl.tickets.url, type: 'button' }]
+      : []
   ];
-  const staticPageRoutes: NavItem[] = staticPages.map( (p) => ({
-    name: p.name, route: p.route, key: p.route.replace(/\//g, ''),
-  }));
-  res.locals.navLinks = [...nav, ...staticPageRoutes];
-  next();
-}
 
-export function requireUser(req: Request, res: Response, next: NextFunction) {
-  if (req.user) {
-    res.redirect('/keystone/signin');
-  } else {
-    next();
-  }
-}
+  res.json({
+    contentControl,
+    navLinks,
+    currentEdition: { // .toJSON({ virtuals: true }) doesn't work :(
+      ...currentEdition.toObject(),
+      dateString: currentEdition.dateString,
+      isoString: currentEdition.isoString
+    },
+  });
+});
 
-export async function getStaticPage(req: Request, res: Response, next: NextFunction) {
-  const route = req.params.staticRoute;
-  try {
-    const staticPage = await list<StaticPage>('StaticPage').model
-    .findOne({route, showInMenu: true, active: true})
-    .exec();
-    if (staticPage == null) {
-      throw new Error(`${route} not found`);
-    }
-    res.locals.staticContent = staticPage.content;
-    res.locals.route = route;
-    res.render(resolveView('staticPage'));
-} catch (e) {
-    next(); // will fall through to a not found
-  }
-}
+export default middleware;
