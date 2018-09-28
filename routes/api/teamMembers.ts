@@ -16,7 +16,8 @@ async function getAll(req: Request, res: Response) {
     return;
   }
   try {
-    const s = await list<TeamMember>('TeamMember').model.find({edition: currentEdition}).sort('sortOrder').exec();
+    const s = await list<TeamMember>('TeamMember').model.find({edition: currentEdition})
+                    .sort('sortOrder').exec();
     res.send(s);
   } catch (e) {
     res.status(INTERNAL_SERVER_ERROR).send(e);
