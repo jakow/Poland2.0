@@ -43,10 +43,9 @@ export interface ContentControl {
   opengraphImage: string;
   opengraphDescription: string;
   twitterImage: string;
-  gaTrackingID: string;
+  // gaTrackingID: string;
   bylawLink: string;
-  // SEO
-
+  privacyPolicy: string;
 }
 
 const ContentControl = new keystone.List<ContentControl>('ContentControl', {
@@ -57,66 +56,72 @@ const ContentControl = new keystone.List<ContentControl>('ContentControl', {
 });
 
 ContentControl.add(
-{title: {type: String, noedit: true}},
-'Content & Promo',
-{
-  description: {type: Types.Html, wysiwyg: false},
-  testimonials: {type: String, label:
-    `Testimonials - in the form of: "quote text", author; "another quote text", another author;`},
-  video: {
-    enable: Boolean,
-    url: {type: String, label: 'Embed url'},
+  { title: { type: String, noedit: true } },
+  'Content & Promo',
+  {
+    description: { type: Types.Html, wysiwyg: false },
+    testimonials: {type: String, label:
+    'Testimonials - in the form of: "quote text", author; "another quote text", another author;'},
+    video: {
+      enable: Boolean,
+      url: { type: String, label: 'Embed url' },
+    },
   },
-},
-'Speakers & Registration',
-{
-  showSpeakers: Boolean,
-},
-'Sponsors',
-{
-  showSponsors: Boolean,
-  showPreviousSponsors: {type: Boolean, dependsOn: {showSponsors: false}},
-},
-'Tickets',
-{
-  tickets: {
-    live: Boolean,
-    showSection: Boolean,
-    url: Types.Url,
-    header: String,
-    message: Types.Markdown,
-    prices: {type: String, label: 'Ticket prices (comma separated)' },
-    currency: String,
-    countdown: Boolean,
-    countdownDate: { type: Date, label: 'Countdown date (UTC)', utc: true, dependsOn: { 'tickets.countdown': true}},
-    button: {type: Boolean, label: 'Show tickets button'},
-    buttonText: { type: String, dependsOn: { 'tickets.button': true } },
-    buttonClass: { type: String, dependsOn: { 'tickets.button': true } },
+  'Speakers & Registration',
+  {
+    showSpeakers: Boolean,
   },
-},
-'Agenda & Venues',
-{
-  showAgenda: Boolean,
-  showVenues: Boolean,
-},
-'SEO & Technical',
-{
-  language: {type: String, label: 'Languages (comma-separated in IETF BCP 47 format)'},
-  facebookUrl: {type: Types.Url, label: 'Facebook URL'},
-  twitterUrl: {type: Types.Url, label: 'Twitter URL'},
-  linkedinUrl: {type: Types.Url, label: 'LinkedIn URL'},
-  snapchatUrl: {type: Types.Url, label: 'Snapchat URL'},
-  videoChannelUrl: {type: Types.Url, label: 'Video channel URL (YouTube/Vimeo)'},
+  'Sponsors',
+  {
+    showSponsors: Boolean,
+    showPreviousSponsors: { type: Boolean, dependsOn: { showSponsors: false } },
+  },
+  'Tickets',
+  {
+    tickets: {
+      live: Boolean,
+      showSection: Boolean,
+      url: Types.Url,
+      header: String,
+      message: Types.Markdown,
+      prices: { type: String, label: 'Ticket prices (comma separated)' },
+      currency: String,
+      countdown: Boolean,
+      countdownDate: {
+        type: Date,
+        label: 'Countdown date (UTC)',
+        utc: true,
+        dependsOn: { 'tickets.countdown': true }
+      },
+      button: { type: Boolean, label: 'Show tickets button' },
+      buttonText: { type: String, dependsOn: { 'tickets.button': true } },
+      buttonClass: { type: String, dependsOn: { 'tickets.button': true } },
+    },
+  },
+  'Agenda & Venues',
+  {
+    showAgenda: Boolean,
+    showVenues: Boolean,
+  },
+  'SEO & Technical',
+  {
+    language: { type: String, label: 'Languages (comma-separated in IETF BCP 47 format)' },
+    facebookUrl: { type: Types.Url, label: 'Facebook URL' },
+    twitterUrl: { type: Types.Url, label: 'Twitter URL' },
+    linkedinUrl: { type: Types.Url, label: 'LinkedIn URL' },
+    snapchatUrl: { type: Types.Url, label: 'Snapchat URL' },
+    videoChannelUrl: { type: Types.Url, label: 'Video channel URL (YouTube/Vimeo)' },
 
-  opengraphImage: String,
-  opengraphDescription: String,
-  twitterImage: String,
-  gaTrackingID: {type: String, label: 'Google Analytics Tracking ID'},
-},
-'Legal',
-{
-  bylawLink: {type: Types.Url, label: 'Link to the By-law Document'},
-},
+    opengraphImage: String,
+    opengraphDescription: String,
+    twitterImage: String,
+    // gaTrackingID: { type: String, label: 'Google Analytics Tracking ID' },
+  },
+  'Legal',
+  {
+    bylawLink: { type: Types.Url, label: 'Link to the By-law Document' },
+    privacyPolicy: { type: Types.Markdown, label: 'Privacy Policy' }
+  }
 );
 
 ContentControl.register();
