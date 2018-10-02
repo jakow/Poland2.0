@@ -9,10 +9,14 @@ import { injectGlobal, hydrate } from 'emotion';
 
 const { publicRuntimeConfig } = getConfig();
 
+type EmotionWindow = Window & {
+  __NEXT_DATA__: any;
+};
+
 // Adds server generated styles to emotion cache.
 // '__NEXT_DATA__.ids' is set in '_document.js'
 if (typeof window !== 'undefined') {
-  hydrate(window.__NEXT_DATA__.ids);
+  hydrate((window as EmotionWindow).__NEXT_DATA__.ids);
 }
 
 export interface DefaultProps {
