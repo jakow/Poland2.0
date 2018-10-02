@@ -16,7 +16,7 @@ if (typeof window !== 'undefined') {
 }
 
 export interface DefaultProps {
-  contentControl?: ContentControl;
+  contentControl?: ContentControl & { privacyPolicy: { md: string } };
   currentEdition?: Edition;
   navLinks?: NavItem[];
   viewData?: any;
@@ -58,6 +58,7 @@ const withDefault = (Page: React.ComponentType<DefaultProps>, view?: string) =>
         </main>
         <Footer
           bylawLink={this.props.contentControl.bylawLink}
+          privacyPolicy={this.props.contentControl.privacyPolicy}
           facebookUrl={this.props.contentControl.facebookUrl}
           linkedinUrl={this.props.contentControl.linkedinUrl}
           twitterUrl={this.props.contentControl.twitterUrl}
