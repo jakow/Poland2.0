@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'react-emotion';
+import Markdown from 'react-markdown';
 import {
   colors, rhythm, breakpointMin, Anchor, Modal, breakpointMax
 } from '@poland20/p20-components';
+import ModalCard from './ModalCard';
 
 const Container = styled('footer')({
   background: 'white',
@@ -69,8 +71,31 @@ const Icon = styled('a')(
   ...socialMedia
 );
 
+const PrivacyPolicy = styled('div')({
+  textAlign: 'initial',
+  'h1, h2, h3, h4': {
+    fontWeight: 'bold',
+    margin: `${rhythm(0.75)} 0`
+  },
+  'h1:first-child': {
+    textAlign: 'center',
+    marginTop: 0
+  },
+  'p, ul, ol': {
+    marginTop: rhythm(0.25),
+    marginBottom: rhythm(0.25)
+  },
+  hr: {
+    margin: `${rhythm(1)} 0`
+  },
+  del: {
+    textDecoration: 'underline'
+  }
+});
+
 interface Props {
   bylawLink: string;
+  privacyPolicy: { md: string };
   facebookUrl?: string;
   linkedinUrl?: string;
   twitterUrl?: string;
@@ -78,7 +103,7 @@ interface Props {
 }
 
 const Footer: React.StatelessComponent<Props> = ({
-  bylawLink, facebookUrl, linkedinUrl, twitterUrl, videoChannelUrl
+  bylawLink, privacyPolicy, facebookUrl, linkedinUrl, twitterUrl, videoChannelUrl
 }) => (
   <Container>
     <Social>
@@ -131,15 +156,22 @@ const Footer: React.StatelessComponent<Props> = ({
     <Separator/>
     <Legal>
       <Anchor href={bylawLink}>By-law for Poland 2.0</Anchor>
-      {/* <Modal trigger={<Anchor>Privacy Policy</Anchor>} label="Privacy Policy">
-      </Modal> */}
-      <Anchor
+      <Modal trigger={<Anchor>Privacy Policy</Anchor>} label="Privacy Policy">
+        <ModalCard>
+          <PrivacyPolicy>
+            <Markdown escapeHtml={false} linkTarget="_blank">
+              {privacyPolicy.md}
+            </Markdown>
+          </PrivacyPolicy>
+        </ModalCard>
+      </Modal>
+      {/* <Anchor
         href="/static/privacy-policy.pdf"
         label="Privacy Policy"
         target="_blank"
       >
         Privacy Policy
-      </Anchor>
+      </Anchor> */}
       <Anchor href="mailto:contact@poland20.com">Contact</Anchor>
     </Legal>
     <Credits>

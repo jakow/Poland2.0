@@ -9,14 +9,18 @@ import { injectGlobal, hydrate } from 'emotion';
 
 const { publicRuntimeConfig } = getConfig();
 
+type EmotionWindow = Window & {
+  __NEXT_DATA__: any;
+};
+
 // Adds server generated styles to emotion cache.
 // '__NEXT_DATA__.ids' is set in '_document.js'
 if (typeof window !== 'undefined') {
-  hydrate(window.__NEXT_DATA__.ids);
+  hydrate((window as EmotionWindow).__NEXT_DATA__.ids);
 }
 
 export interface DefaultProps {
-  contentControl?: ContentControl;
+  contentControl?: ContentControl & { privacyPolicy: { md: string } };
   currentEdition?: Edition;
   navLinks?: NavItem[];
   viewData?: any;
@@ -58,6 +62,7 @@ const withDefault = (Page: React.ComponentType<DefaultProps>, view?: string) =>
         </main>
         <Footer
           bylawLink={this.props.contentControl.bylawLink}
+          privacyPolicy={this.props.contentControl.privacyPolicy}
           facebookUrl={this.props.contentControl.facebookUrl}
           linkedinUrl={this.props.contentControl.linkedinUrl}
           twitterUrl={this.props.contentControl.twitterUrl}

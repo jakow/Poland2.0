@@ -32,12 +32,12 @@ middleware.get('/', async (req: Request, res: Response) => {
       : [],
     ...contentControl.showSponsors ? [{ title: 'Partners', url: '/#partners' }]
       : [],
+    { title: 'About', url: '/about' },
+    { title: 'Past Editions', url: '/past-editions' },
     ...contentControl.showPreviousSponsors ?
       [{ title: 'Previous Partners', url: '/#previous-partners' }]
       : [],
-    { title: 'About', url: '/about' },
     { title: 'empowerPL', url: '/empowerPL' },
-    { title: 'Past Editions', url: '/past-editions' },
     ...contentControl.tickets.live && contentControl.tickets.url ?
       [<NavItem>{ title: 'Buy Tickets', url: contentControl.tickets.url, type: 'button' }]
       : []
