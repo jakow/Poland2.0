@@ -32,13 +32,12 @@ export const home: RequestHandler = async (req, res) => {
   let sponsorCategories = {};
   let previousSponsorCategories = {};
 
-  // Decide which sponsors to show
   if (currentEdition != null && contentControl.showSponsors) {
     // current sponsor if there is an edition and allowed to show sponsors
     sponsorCategories = await getSponsorsByCategory(
       { edition: currentEdition });
-  } else if (contentControl.showPreviousSponsors) {
-    // or previous sponsors
+  }
+  if (contentControl.showPreviousSponsors) {
     previousSponsorCategories = await getSponsorsByCategory({ showInPrevious: true });
   }
 

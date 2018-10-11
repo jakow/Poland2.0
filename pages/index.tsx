@@ -50,7 +50,7 @@ const Home: React.StatelessComponent<DefaultProps & Props> = ({
       {contentControl.showSponsors &&
         <Sponsors id="partners" sponsorCategories={sponsorCategories} title="Partners"/>
       }
-      {!contentControl.showSponsors && contentControl.showPreviousSponsors &&
+      {contentControl.showPreviousSponsors &&
         <Sponsors
           id="previous-partners"
           sponsorCategories={previousSponsorCategories}

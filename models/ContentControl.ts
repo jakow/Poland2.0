@@ -74,7 +74,7 @@ ContentControl.add(
   'Sponsors',
   {
     showSponsors: Boolean,
-    showPreviousSponsors: { type: Boolean, dependsOn: { showSponsors: false } },
+    showPreviousSponsors: { type: Boolean },
   },
   'Tickets',
   {
