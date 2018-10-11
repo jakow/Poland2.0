@@ -69,10 +69,10 @@ const Sponsors: React.StatelessComponent<Props> = ({ sponsorCategories, title, i
         <Title>{title}</Title>
       </Center>
       {sponsorCategories.map((category, index) =>
-        category.showName ?
+        category.sponsors.length > 0 && category.showName ?
           <React.Fragment key={index}>
             <Center>
-              <h2>{category.sponsors.length > 0 ? category.name : category.singular}</h2>
+              <h2>{category.sponsors.length > 1 ? category.name : category.singular}</h2>
             </Center>
             <CardList>
               {category.sponsors.map((sponsor, index) =>
