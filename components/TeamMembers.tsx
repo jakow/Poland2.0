@@ -31,7 +31,7 @@ const Subtitle = styled('h2')();
 
 const Wrapper = styled('section')({
   paddingBottom: rhythm(0.5),
-  'li > *:nth-child(2)': {
+  'li > div:nth-child(2)': {
     display: 'flex',
     flexDirection: 'column',
     minHeight: rhythm(8)
