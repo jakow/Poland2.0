@@ -20,15 +20,18 @@ import { SponsorCategories, Sponsor } from './types';
 const Wrapper = styled('section')({
   margin: 0,
   paddingBottom: rhythm(1),
-  'li > a': {
+  'li > *:first-child': {
     minHeight: rhythm(6),
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    '& > *': {
+      width: rhythm(12),
+      padding: rhythm(1)
+    }
   },
   img: {
-    maxWidth: rhythm(12),
-    maxHeight: rhythm(6),
-    padding: rhythm(1)
+    width: '100%',
+    height: 'auto'
   },
   'p:last-child': {
     marginBottom: 0
