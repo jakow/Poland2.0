@@ -41,3 +41,5 @@ NOTES.md
 
 yarn.lock
 package-lock.json
+
+.vscode/settings.json
