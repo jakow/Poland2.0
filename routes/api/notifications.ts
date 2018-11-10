@@ -10,7 +10,7 @@ const notifications = Router();
 async function create(req: Request, res: Response) {
   try {
     const { token } = req.body;
-    if (!Expo.isExpoPushToken(token.value)) {
+    if (!token || !Expo.isExpoPushToken(token.value)) {
       throw 'Invalid token';
     }
 
