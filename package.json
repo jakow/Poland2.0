@@ -16,6 +16,7 @@
     "dotenv": "^1.1.0",
     "emotion": "^9.2.8",
     "emotion-server": "^9.2.10",
+    "expo-server-sdk": "^3.0.1",
     "helmet": "^3.6.0",
     "http-status-codes": "^1.1.6",
     "intersection-observer": "^0.5.0",
