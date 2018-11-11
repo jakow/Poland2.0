@@ -1,6 +1,6 @@
 {
   "name": "poland-20",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "dependencies": {
     "@poland20/p20-components": "latest",
@@ -31,8 +31,8 @@
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
     "pm2": "^2.4.6",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
+    "react": "16.4.2",
+    "react-dom": "16.4.2",
     "react-emotion": "^9.2.8",
     "react-typography": "^0.16.13",
     "sanitize-html": "^1.14.1",
@@ -60,14 +60,12 @@
     "@types/mocha": "^2.2.41",
     "@types/mongoose": "^4.7.18",
     "@types/next": "6.0.0",
-    "@types/node": "^7.0.13",
+    "@types/node": "^8",
     "@types/nodemailer": "^3.1.0",
     "@types/passport-jwt": "^2.0.19",
     "@types/passport-strategy": "^0.2.31",
     "@types/proxyquire": "^1.3.27",
     "@types/pug": "^2.0.4",
-    "@types/react": "^16.4.13",
-    "@types/react-dom": "^16.0.7",
     "@types/sinon": "^2.2.1",
     "@types/sinon-chai": "^2.7.27",
     "@types/socket.io": "^1.4.29",
@@ -96,6 +94,10 @@
     "typescript": "^3.0.3",
     "webpack": "^3",
     "webpack-node-externals": "^1.5.4"
+  },
+  "resolutions": {
+    "@types/react": "^16.4.13",
+    "@types/react-dom": "^16.0.7"
   },
   "engines": {
     "node": ">=8.11.3",
