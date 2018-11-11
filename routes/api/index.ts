@@ -4,6 +4,7 @@ import { agenda } from './agenda';
 import { teamMembers } from './teamMembers';
 import { events } from './events';
 import questions from './questions';
+import notifications from './notifications';
 import { login } from './login';
 import { speakers } from './speakers';
 
@@ -15,5 +16,6 @@ router.use('/login', login);
 router.use('/questions', questions);
 router.use('/speakers', speakers);
 router.use('/teamMembers', teamMembers);
+router.use('/notifications', notifications);
 
 export default router;

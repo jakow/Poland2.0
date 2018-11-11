@@ -65,6 +65,7 @@ app.prepare().then(() => {
     people: ['speaker-categories', 'speakers', 'team-members'],
     sponsors: ['sponsors', 'sponsor-categories'],
     users: 'users',
+    notifications: ['push-devices', 'notifications']
   });
 
   keystone.initExpressApp(server);

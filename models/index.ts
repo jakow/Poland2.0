@@ -13,3 +13,5 @@ export * from './TeamMember';
 export * from './User';
 export * from './Venue';
 export * from './Enquiry';
+export * from './PushDevice';
+export * from './Notification';
