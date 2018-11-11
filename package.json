@@ -5,7 +5,6 @@
   "dependencies": {
     "@poland20/p20-components": "latest",
     "bluebird": "^3.5.0",
-    "cloudinary": "^1.11.0",
     "color": "^3.0.0",
     "common-tags": "^1.4.0",
     "concurrently": "^3.5.0",
@@ -35,6 +34,7 @@
     "react": "16.4.2",
     "react-dom": "16.4.2",
     "react-emotion": "^9.2.8",
+    "react-markdown": "^4.0.3",
     "react-typography": "^0.16.13",
     "sanitize-html": "^1.14.1",
     "socket.io": "^1.7.3",
@@ -98,7 +98,8 @@
   },
   "resolutions": {
     "@types/react": "16.4.7",
-    "@types/react-dom": "16.0.6"
+    "@types/react-dom": "16.0.6",
+    "cloudinary": "1.11.0"
   },
   "engines": {
     "node": ">=8.11.3",

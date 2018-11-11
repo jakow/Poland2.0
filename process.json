@@ -1,0 +1,11 @@
+{
+  "apps": [{
+    "name": "p20-website",
+    "script": "yarn",
+    "args": "start",
+    "env": {
+      "NODE_ENV": "production",
+      "PORT": "4000"
+    }
+  }]
+}
