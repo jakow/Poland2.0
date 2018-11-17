@@ -1,8 +1,9 @@
-import { INTERNAL_SERVER_ERROR, CREATED } from 'http-status-codes';
+import { INTERNAL_SERVER_ERROR, CREATED, BAD_REQUEST, CONFLICT } from 'http-status-codes';
 import { Request, Response, Router } from 'express';
 import Expo from 'expo-server-sdk';
 import { list } from 'keystone';
 import { PushDevice } from '../../models';
+import { WriteError } from 'mongodb';
 
 const pushDeviceModel = () => list<PushDevice>('PushDevice').model;
 const notifications = Router();
@@ -14,11 +15,21 @@ async function create(req: Request, res: Response) {
       throw 'Invalid token';
     }
 
-    const query = await pushDeviceModel().create({ token: token.value });
-    res.status(CREATED).json(query);
+    pushDeviceModel().create({ token: token.value }, (err: WriteError, query: any) => {
+      if (err) {
+        console.log(err.errmsg);
+        if (err.code === 11000) {
+          res.status(CONFLICT).json('Device is already registered');
+        } else {
+          res.status(INTERNAL_SERVER_ERROR).json('Registration error');
+        }
+      } else {
+        res.status(CREATED).json(query);
+      }
+    });
   } catch (e) {
     console.log(e);
-    res.status(INTERNAL_SERVER_ERROR).json(e);
+    res.status(BAD_REQUEST).json(e);
   }
 }
 

@@ -12,7 +12,7 @@ const PushDevice = new Keystone.List<PushDevice>('PushDevice', {
 });
 
 PushDevice.add({
-  token: { type: String, initial: true }
+  token: { type: String, initial: true, unique: true }
 });
 
 PushDevice.defaultColumns = 'token';
