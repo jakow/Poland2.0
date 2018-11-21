@@ -43,9 +43,9 @@ Notification.schema.pre('save', function (this: NotificationDocument, next) {
 
 // send notification to all registered devices after saving this notification
 Notification.schema.post('save', async (doc: NotificationDocument) => {
-  const devices = await pushDeviceModel().find().exec();
+  const devices = await pushDeviceModel().find().distinct('token').exec();
   const messages = await devices.map(token => ({
-    to: token.token,
+    to: token,
     title: doc.name,
     body: doc.body,
     priority: doc.priority
