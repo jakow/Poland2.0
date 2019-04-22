@@ -108,9 +108,10 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production ts-node --project tsconfig.server.json index.ts",
     "staging": "cross-env NODE_ENV=staging ts-node --project tsconfig.server.json index.ts",
+    "docker:staging": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml up",
+    "docker:down": "docker-compose down -v",
+    "docker:sh": "docker-compose exec web sh",
     "dev": "nodemon index.ts",
-    "build": "yarn clean && next build",
-    "test": "mocha -r ts-node/register test/**/*.ts",
-    "clean": "rimraf production/*"
+    "build": "next build"
   }
 }

@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:10
+FROM mhart/alpine-node:10 AS base
 
 WORKDIR /app
 COPY . .
@@ -6,7 +6,6 @@ COPY . .
 RUN apk add git make bash g++ zlib-dev libpng-dev
 
 RUN yarn
-RUN yarn build
 
 EXPOSE 9009
-CMD ["yarn", "staging"]
+#CMD ["yarn", "staging"]
