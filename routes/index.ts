@@ -3,7 +3,6 @@ import Middleware from './middleware';
 import Views from './views';
 import API from './api';
 import Next from 'next';
-import { IncomingMessage, ServerResponse } from 'http';
 
 export default (next: Next.Server) => {
   const nextHandler = next.getRequestHandler();
@@ -13,7 +12,7 @@ export default (next: Next.Server) => {
   router.use('/middleware', Middleware);
   router.use('/views', Views);
 
-  router.get('*', (request: IncomingMessage, response: ServerResponse) =>
+  router.get('*', (request, response) =>
     nextHandler(request, response)
   );
 
