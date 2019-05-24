@@ -1,7 +1,8 @@
 {
   "name": "poland-20",
-  "version": "0.4.1",
-  "private": true,
+  "version": "2.19.0",
+  "license": "MIT",
+  "author": "Poland 2.0",
   "dependencies": {
     "@poland20/p20-components": "latest",
     "bluebird": "~3.5.0",
@@ -101,15 +102,16 @@
     "cloudinary": "1.11.0"
   },
   "engines": {
-    "node": ">=8.11.3",
-    "yarn": ">=1.9.4"
+    "node": ">=10",
+    "yarn": ">=1.13"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=production node production/index.js",
-    "staging": "cross-env NODE_ENV=staging node production/index.js",
+    "start": "cross-env NODE_ENV=production ts-node --project tsconfig.server.json index.ts",
+    "staging": "cross-env NODE_ENV=staging ts-node --project tsconfig.server.json index.ts",
+    "docker": "docker-compose -f docker-compose.yml -f docker-compose.production.yml up -d",
+    "docker:logs": "docker-compose -f docker-compose.yml -f docker-compose.production.yml up",
+    "docker:staging": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml up",
     "dev": "nodemon index.ts",
-    "build": "yarn clean && next build && cross-env NODE_ENV=production tsc --project tsconfig.server.json",
-    "test": "mocha -r ts-node/register test/**/*.ts",
-    "clean": "rimraf production/*"
+    "build": "next build"
   }
 }

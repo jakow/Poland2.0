@@ -28,7 +28,7 @@ keystone.init({
   host: config.host,
   port: config.port,
   compress: true,
-  mongo: config.mongo,
+  mongo: config.environment === 'development' ? 'mongodb://localhost/poland-20' : config.mongo,
   logger: config.environment === 'production' ? 'tiny' : 'dev',
   'cookie secret': config.cookieSecret,
   'cloudinary config': config.cloudinaryUrl,
@@ -43,6 +43,10 @@ import './models';
 app.prepare().then(() => {
   const server = express();
   server.use(auth.initialize());
+
+  server.get('/robots.txt', (request, response) => (
+    app.serveStatic(request, response, path.join(config.staticDir, 'robots.txt')
+  )));
 
   if (config.environment === 'production') {
     // external, mongo-based session store.
