@@ -1,0 +1,7 @@
+version: '3.5'
+services:
+  web:
+    ports:
+      - '80:9009'
+    restart: unless-stopped
+    command: sh -c "yarn build && yarn start"
