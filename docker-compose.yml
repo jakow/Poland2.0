@@ -5,16 +5,14 @@ services:
       context: .
       dockerfile: Dockerfile
       target: base
-    ports:
-      - '9009:9009'
+    image: poland20/p20-website
+    container_name: p20-website
     depends_on:
       - db
   db:
     image: mongo
-    ports:
-      - "27017:27017"
+    container_name: p20-db
     volumes:
       - data:/data/db
-    command: "--smallfiles --logpath=/dev/null"
 volumes:
   data:
