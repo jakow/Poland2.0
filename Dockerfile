@@ -6,5 +6,3 @@ COPY . .
 RUN apk add git make bash g++ zlib-dev libpng-dev
 
 RUN yarn
-
-EXPOSE 9009
