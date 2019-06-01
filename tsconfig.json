@@ -1,16 +1,19 @@
 {
   "compilerOptions": {
-    "lib": ["es2015", "es2016", "dom"],
+    "paths": {
+      "*": ["@types/*"]
+    },
+    "lib": ["es2017", "dom"],
     "baseUrl": ".",
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "es2015",
-    "target": "es2015",
+    "module": "esnext",
+    "target": "esnext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "allowJs": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "diagnostics": true,
