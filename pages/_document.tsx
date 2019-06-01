@@ -1,25 +1,8 @@
-import 'isomorphic-fetch';
+import 'isomorphic-unfetch';
 import * as React from 'react';
-import { TypographyStyle, GoogleFont } from 'react-typography';
-import Document, { Head, Main, NextScript, DocumentProps } from 'next/document';
-import { extractCritical } from 'emotion-server';
-import { typography } from '@poland20/p20-components';
+import Document, { Head, Main, NextScript } from 'next/document';
 
 export default class extends Document {
-  constructor (props: DocumentProps) {
-    super(props);
-    const { __NEXT_DATA__, ids } = props;
-    if (ids) {
-      __NEXT_DATA__.ids = ids;
-    }
-  }
-
-  static async getInitialProps({ renderPage }: any) {
-    const page = renderPage();
-    const styles = extractCritical(page.html);
-    return { ...page, ...styles };
-  }
-
   render() {
     return (
       <html lang="en-GB">
@@ -46,17 +29,13 @@ export default class extends Document {
           <meta name="msapplication-TileImage" content="/static/images/favicons/mstile-144x144.png"/>
           {/* tslint:enable */}
 
-          <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
-
-          <title>Poland 2.0 Summit</title>
+          {/* <style dangerouslySetInnerHTML={{ __html: this.props.css }} /> */}
         </Head>
         <body>
           <noscript>
             This site requires JavaScript for best user experience.
             Because you have disabled JavaScript, your experience may be limited.
           </noscript>
-          <TypographyStyle typography={typography} />
-          <GoogleFont typography={typography} />
           <Main/>
           <NextScript/>
         </body>

@@ -1,6 +1,7 @@
 import React from 'react';
-import withDefault, { DefaultProps } from './_app';
-import styled, { css } from 'react-emotion';
+import { DefaultProps } from './_app';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import { colors, rhythm, Center, fat, stripe, bold } from '@poland20/p20-components';
 import TeamMembers from '../components/TeamMembers';
 import { TeamMember } from '../components/types';
@@ -92,4 +93,4 @@ const About: React.StatelessComponent<DefaultProps & { team: TeamMember[] }> = (
   </Container>
 );
 
-export default withDefault(About, 'about');
+export default About;

@@ -26,7 +26,7 @@ export const staticOptions = {
 
 export const viewsDir = path.resolve('client', 'views');
 
-const loaded = !!dotenv.config({path: path.join(rootDir, '.env'), silent: true});
+const loaded = !!dotenv.config({ path: path.join(rootDir, '.env') });
 if (!loaded) {
   console.warn('.env missing. Relying on preset environment variables.');
 }
@@ -35,7 +35,7 @@ export const canonicalUrl: string = 'https://poland20.com';
 
 export const logoUrl: string = 'https://poland20.com/static/images/logo.svg';
 
-export const port: number =  parseInt(process.env.PORT, 10) || 9009;
+export const port: number = parseInt(process.env.PORT, 10) || 9009;
 
 export const host: string = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
@@ -51,8 +51,6 @@ export const googleMapsServerKey: string = process.env.GOOGLE_SERVER_KEY;
 export const googleMapsBrowserKey: string = process.env.GOOGLE_BROWSER_KEY;
 
 export const trackingId: string = process.env.TRACKING_ID;
-
-export const viewEngine = 'pug';
 
 export const notificationEmail = process.env.EMAIL_USERNAME;
 

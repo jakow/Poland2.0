@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'react-emotion';
-import withDefault, { DefaultProps } from './_app';
+import styled from '@emotion/styled';
+import { DefaultProps } from './_app';
 import { fat, Anchor, bold, stripe, Center } from '@poland20/p20-components';
 import { Speaker, TeamMember } from '../components/types';
 import { Edition } from '../models';
@@ -54,4 +54,4 @@ const PastEditions: React.StatelessComponent<DefaultProps & Props> = ({ editions
   </Container>
 );
 
-export default withDefault(PastEditions, 'past-editions');
+export default PastEditions;

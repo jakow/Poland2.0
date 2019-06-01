@@ -1,6 +1,7 @@
 import React from 'react';
 import Markdown from 'react-markdown';
-import styled, { css } from 'react-emotion';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import {
   Container,
   rhythm,
@@ -32,10 +33,11 @@ const Wrapper = styled('section')({
   paddingBottom: rhythm(0.5)
 });
 
-export const smallMarginBottom = css({
+export const SmallMarginBottom = styled('h1')({
   marginBottom: rhythm(0.25),
   wordWrap: 'normal'
 });
+const H3 = SmallMarginBottom.withComponent('h3');
 
 const speakerCard = (speaker: Speaker, index?: number) => (
   <Card
@@ -50,7 +52,7 @@ const speakerCard = (speaker: Speaker, index?: number) => (
     )}
   >
     <Center>
-      <h3 className={smallMarginBottom}>{speaker.name}</h3>
+      <H3>{speaker.name}</H3>
       <h4>{speaker.company && speaker.company}</h4>
     </Center>
   </Card>
@@ -80,7 +82,7 @@ export const SpeakersFlat: React.StatelessComponent<FlatProps> =
                     label={`Learn more about ${speaker.name}`}
                   >
                     <ModalCard>
-                      <h1 className={smallMarginBottom}>{speaker.name}</h1>
+                      <SmallMarginBottom>{speaker.name}</SmallMarginBottom>
                       <p>
                         <strong>
                           {speaker.position}{speaker.company && `, ${speaker.company}`}
@@ -115,7 +117,7 @@ const Speakers: React.StatelessComponent<{ speakerCategories: SpeakerCategories 
                         label={`Learn more about ${speaker.name}`}
                       >
                         <ModalCard>
-                          <h1 className={smallMarginBottom}>{speaker.name}</h1>
+                          <SmallMarginBottom>{speaker.name}</SmallMarginBottom>
                           <p>
                             <strong>
                               {speaker.position}{speaker.company && `, ${speaker.company}`}

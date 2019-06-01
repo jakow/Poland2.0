@@ -1,12 +1,13 @@
 import React from 'react';
-import styled from 'react-emotion';
-import withDefault, { DefaultProps } from './_app';
+import styled from '@emotion/styled';
+import { DefaultProps } from './_app';
 import { Banner, colors, Agenda } from '@poland20/p20-components';
 import { AgendaType } from '@poland20/p20-components/types/Agenda';
 import Tickets from '../components/Tickets';
 import Speakers from '../components/Speakers';
 import Sponsors from '../components/Sponsors';
 import { SpeakerCategories, SponsorCategories } from '../components/types';
+import { NextFunctionComponent } from 'next';
 
 interface Props {
   speakerCategories: SpeakerCategories;
@@ -24,7 +25,7 @@ export const Background = styled('section')({
   }
 });
 
-const Home: React.StatelessComponent<DefaultProps & Props> = ({
+const Home: NextFunctionComponent<DefaultProps & Props> = ({
   agenda,
   currentEdition,
   contentControl,
@@ -61,4 +62,4 @@ const Home: React.StatelessComponent<DefaultProps & Props> = ({
   </React.Fragment>
 );
 
-export default withDefault(Home, 'home');
+export default Home;

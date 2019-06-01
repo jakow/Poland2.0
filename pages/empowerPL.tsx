@@ -1,6 +1,7 @@
 import React from 'react';
-import styled, { css } from 'react-emotion';
-import withDefault, { DefaultProps } from './_app';
+import { css } from '@emotion/core';
+import styled from '@emotion/styled';
+import { DefaultProps } from './_app';
 import {
   rhythm, colors, stripe, fat, Center, bold, ResponsiveVideo
 } from '@poland20/p20-components';
@@ -111,4 +112,4 @@ const empowerPL: React.StatelessComponent<DefaultProps> = () => (
   </Container>
 );
 
-export default withDefault(empowerPL);
+export default empowerPL;

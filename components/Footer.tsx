@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import Markdown from 'react-markdown';
 import {
   colors, rhythm, breakpointMin, Anchor, Modal, breakpointMax

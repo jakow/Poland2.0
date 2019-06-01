@@ -1,6 +1,7 @@
 import React from 'react';
 import Markdown from 'react-markdown';
-import styled, { css } from 'react-emotion';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import {
   Container,
   rhythm,
@@ -16,7 +17,7 @@ import {
   colors
 } from '@poland20/p20-components';
 import ModalCard from './ModalCard';
-import { smallMarginBottom } from './Speakers';
+import { SmallMarginBottom } from './Speakers';
 import { TeamMember } from './types';
 
 const LearnMore = styled('small')({
@@ -64,6 +65,8 @@ const Icon = styled('a')({
   }
 });
 
+const H3 = SmallMarginBottom.withComponent('h3');
+
 const memberCard = (member: TeamMember, index?: number) => (
   <Card
     key={index}
@@ -76,7 +79,7 @@ const memberCard = (member: TeamMember, index?: number) => (
       </React.Fragment>
     )}
   >
-    <h3 className={smallMarginBottom}>{member.name}</h3>
+    <H3>{member.name}</H3>
     <h4 style={{ flexGrow: 1 }}>{member.occupation && member.occupation}</h4>
     <div>
       {member.linkedin &&
@@ -123,7 +126,7 @@ const TeamMembers: React.StatelessComponent<Props> =
                   label={`Learn more about ${member.name}`}
                 >
                   <ModalCard>
-                    <h1 className={smallMarginBottom}>{member.name}</h1>
+                    <SmallMarginBottom>{member.name}</SmallMarginBottom>
                     <p>
                       <strong>
                         {member.position}{member.occupation && `, ${member.occupation}`}

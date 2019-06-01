@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import Markdown from 'react-markdown';
 import {
   rhythm,
@@ -14,7 +14,7 @@ import {
   Modal
 } from '@poland20/p20-components';
 import ModalCard from './ModalCard';
-import { smallMarginBottom } from './Speakers';
+import { SmallMarginBottom } from './Speakers';
 import { SponsorCategories, Sponsor } from './types';
 
 const Wrapper = styled('section')({
@@ -86,7 +86,7 @@ const Sponsors: React.StatelessComponent<Props> = ({ sponsorCategories, title, i
                     label={`Learn more about ${sponsor.name}`}
                   >
                     <ModalCard>
-                      <h1 className={smallMarginBottom}>{sponsor.name}</h1>
+                      <SmallMarginBottom>{sponsor.name}</SmallMarginBottom>
                       <p>
                         <small>
                           <a

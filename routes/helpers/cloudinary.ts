@@ -1,5 +1,5 @@
 import {basename} from 'path';
-import {CloudinaryConfig} from 'keystone';
+// import {CloudinaryConfig} from 'keystone';
 const cloudinary: any = require('cloudinary');
 const sizeTransformations = [
   'fit',
@@ -27,7 +27,7 @@ export type TransformationFunction =
 export default function imageHelpers() {
   // cloudinary.config(config);
   const functions: {[name: string]: TransformationFunction} = {};
-  sizeTransformations.forEach( (t) => {
+  sizeTransformations.forEach((t) => {
     functions[t] = (img, width, height, options) => cloudinary.url(basename(img), {
       width, height, crop: t, secure: true,
     });

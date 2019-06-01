@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import { colors, rhythm } from '@poland20/p20-components';
 
 const Container = styled('section')({
