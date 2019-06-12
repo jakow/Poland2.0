@@ -31,11 +31,3 @@ yarn.lock
 package-lock.json
 
 .vscode/settings.json
-
-############################
-# Strapi
-############################
-
-exports
-.cache
-build
