@@ -8,34 +8,41 @@ import Footer from '../components/Footer';
 import { ContentControl, Edition } from '../models';
 import { Global, css } from '@emotion/core';
 import { TypographyStyle, GoogleFont } from 'react-typography';
-import { Head } from 'next/document';
+import Head from 'next/head';
 
 const { publicRuntimeConfig } = getConfig();
 
 export interface DefaultProps {
   contentControl?: ContentControl & { privacyPolicy: { md: string } };
   currentEdition?: Edition;
-  navLinks?: NavItem[];
 }
 
 export default class Website extends App<DefaultProps> {
-  static async getInitialProps({ Component }: NextAppContext) {
-    const middleware = await fetch(`${publicRuntimeConfig.host}/middleware`)
-                            .then(data => data.json());
-    const view = Component.displayName.toLowerCase();
-    const pageProps = await fetch(`${publicRuntimeConfig.host}/views/${view}`)
-                            .then(data => data.json());
+  static async getInitialProps({ Component, ctx }: NextAppContext) {
+    let pageProps = {};
 
-    return { ...middleware, pageProps };
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
+    }
+
+    const currentEdition = await fetch(`${publicRuntimeConfig.host}/currentEdition`)
+                                .then(data => data.json());
+    const contentControl = await fetch(`${publicRuntimeConfig.host}/contentControl`)
+                                .then(data => data.json());
+
+    return { currentEdition, contentControl, pageProps };
   }
 
   render() {
-    const { Component, contentControl, currentEdition, navLinks, pageProps } = this.props;
+    const { Component, contentControl, currentEdition, pageProps } = this.props;
+    const navLinks: NavItem[] = [
+      { title: 'About', url: '/about' },
+      { title: 'Past Editions', url: '/past-editions' },
+      { title: 'empowerPL', url: '/empowerPL' }
+    ];
+
     return (
       <Container>
-        <Head>
-          <title>Poland 2.0 Summit</title>
-        </Head>
         <Global
           styles={css({
             '@media screen and (max-width: 320px)': { // iPhone 5/SE
@@ -52,6 +59,9 @@ export default class Website extends App<DefaultProps> {
         />
         <TypographyStyle typography={typography}/>
         <GoogleFont typography={typography}/>
+        <Head>
+          <title>Poland 2.0 Summit</title>
+        </Head>
         <TopNavigation items={navLinks} Router={Link}/>
         <main style={{ marginTop: rhythm(3) }}>
           <Component
@@ -61,7 +71,7 @@ export default class Website extends App<DefaultProps> {
           />
         </main>
         <Footer
-          bylawLink={contentControl.bylawLink}
+          bylawUrl={contentControl.bylawUrl}
           privacyPolicy={contentControl.privacyPolicy}
           facebookUrl={contentControl.facebookUrl}
           linkedinUrl={contentControl.linkedinUrl}

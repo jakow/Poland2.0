@@ -1,12 +1,13 @@
 import 'isomorphic-unfetch';
 import * as React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Head, Main, NextScript, Html } from 'next/document';
 
 export default class extends Document {
   render() {
     return (
-      <html lang="en-GB">
-        <Head> {/* tslint:disable */}
+      <Html lang="en-GB">
+        <Head>
+          {/* tslint:disable */}
           <meta charSet="utf-8"/>
           <meta httpEquiv="x-ua-compatible" content="ie=edge"/>
           <meta name="description" content="Annual Polish student conference held at Imperial College London, tackling entrepreneurship, innovation and change across industries."/>
@@ -28,8 +29,6 @@ export default class extends Document {
           <meta name="msapplication-TileColor" content="#FFFFFF"/>
           <meta name="msapplication-TileImage" content="/static/images/favicons/mstile-144x144.png"/>
           {/* tslint:enable */}
-
-          {/* <style dangerouslySetInnerHTML={{ __html: this.props.css }} /> */}
         </Head>
         <body>
           <noscript>
@@ -39,7 +38,7 @@ export default class extends Document {
           <Main/>
           <NextScript/>
         </body>
-      </html>
+      </Html>
     );
   }
 
