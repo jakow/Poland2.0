@@ -94,7 +94,7 @@ const PrivacyPolicy = styled('div')({
 });
 
 interface Props {
-  bylawLink: string;
+  bylawUrl: string;
   privacyPolicy: { md: string };
   facebookUrl?: string;
   linkedinUrl?: string;
@@ -103,7 +103,7 @@ interface Props {
 }
 
 const Footer: React.StatelessComponent<Props> = ({
-  bylawLink, privacyPolicy, facebookUrl, linkedinUrl, twitterUrl, videoChannelUrl
+  bylawUrl, privacyPolicy, facebookUrl, linkedinUrl, twitterUrl, videoChannelUrl
 }) => (
   <Container>
     <Social>
