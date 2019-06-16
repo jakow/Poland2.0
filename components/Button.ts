@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { colors } from '../variables';
+import { colors } from './variables';
 import { rhythm } from 'components/typography';
 import { css } from '@emotion/core';
 

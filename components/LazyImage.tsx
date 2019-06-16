@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { css } from 'emotion';
 import Observer from '@researchgate/react-intersection-observer';
-import Spinner from '../Spinner';
+import Spinner from './Spinner';
 
 const Wrapper = styled('div')({
   display: 'flex',
