@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import Swiper from 'react-id-swiper';
+import { Pagination, Autoplay, SwiperOptions } from 'swiper/dist/js/swiper.esm';
 import Markdown from 'react-markdown';
 
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { injectGlobal } from 'emotion';
 import { colors, breakpointMin } from 'components/variables';
 import { rhythm, fat } from 'components/typography';
 import { Edition } from 'types/Edition';
@@ -45,6 +45,21 @@ const Carousel = styled('div')(column, {
   minHeight: rhythm(9),
   [breakpointMin('tablet')]: {
     minHeight: 0
+  },
+  '.swiper-container': {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  '.swiper-pagination-bullet': {
+    opacity: 1,
+    backgroundColor: `${colors.white}`,
+    boxShadow: '0px 1px 4px 0px rgba(0,0,0,0.4)',
+    '&.swiper-pagination-bullet-active': {
+      backgroundColor: `${colors.primary}`
+    }
   }
 });
 
@@ -78,7 +93,7 @@ const Image = styled('div')(walden, (props: { src: string }) => ({
   backgroundRepeat: 'no-repeat',
   backgroundOrigin: 'content-box',
   backgroundClip: 'content-box',
-  backgroundPosition: 'center center',
+  backgroundPosition: 'center 20%',
   backgroundImage: `url(${props.src})`
 }));
 
@@ -128,7 +143,8 @@ const _Banner = styled('section')({
   }
 });
 
-const swiperProps = {
+const swiperProps: SwiperOptions & { modules: any } = {
+  modules: [Pagination, Autoplay],
   loop: true,
   simulateTouch: false,
   autoplay: {
@@ -137,31 +153,13 @@ const swiperProps = {
   },
   speed: 500,
   pagination: {
-    el: '.swiper-pagination'
+    el: '.swiper-pagination',
+    type: 'bullets'
   },
   a11y: {
     enabled: true
   },
 };
-
-// Swiper style
-injectGlobal({
-  '.swiper-container': {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0
-  },
-  '.swiper-pagination-bullet': {
-    opacity: 1,
-    backgroundColor: `${colors.white}`,
-    boxShadow: '0px 1px 4px 0px rgba(0,0,0,0.4)',
-    '&.swiper-pagination-bullet-active': {
-      backgroundColor: `${colors.primary}`
-    }
-  }
-});
 
 interface Props {
   currentEdition?: Edition;
