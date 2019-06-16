@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { DefaultProps } from './_app';
-import { Banner, colors, Agenda } from '@poland20/p20-components';
-import { AgendaType } from '@poland20/p20-components/types/Agenda';
-import Tickets from '../components/Tickets';
 import Speakers from '../components/Speakers';
 import Sponsors from '../components/Sponsors';
 import { SpeakerCategories, SponsorCategories } from '../components/types';
 import { NextFunctionComponent } from 'next';
+import { AgendaType } from 'types/Agenda';
+import { colors } from 'components/variables';
+import Banner from 'components/Banner';
+import Agenda from 'components/Agenda';
 
 interface Props {
   speakerCategories: SpeakerCategories;
@@ -34,9 +35,9 @@ const Home: NextFunctionComponent<DefaultProps & Props> = ({
   previousSponsorCategories
 }) => (
   <React.Fragment>
-    {contentControl.tickets.showSection &&
+    {/* {contentControl.tickets.showSection &&
       <Tickets tickets={contentControl.tickets}/>
-    }
+    } */}
     <Banner
       currentEdition={currentEdition}
       description={contentControl.description}

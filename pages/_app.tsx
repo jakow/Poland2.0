@@ -2,19 +2,20 @@ import React from 'react';
 import App, { Container, NextAppContext } from 'next/app';
 import Link from 'next/link';
 import getConfig from 'next/config';
-import { TopNavigation, rhythm, typography } from '@poland20/p20-components';
-import { NavItem } from '../routes/middleware';
-import Footer from '../components/Footer';
-import { ContentControl, Edition } from '../models';
+import { NavItem } from 'routes/middleware';
+import Footer from 'components/Footer';
+import { ContentControl, Edition } from 'models';
 import { Global, css } from '@emotion/core';
 import { TypographyStyle, GoogleFont } from 'react-typography';
 import Head from 'next/head';
+import typography, { rhythm } from 'components/typography';
+import TopNavigation from 'components/TopNavigation';
 
 const { publicRuntimeConfig } = getConfig();
 
 export interface DefaultProps {
-  contentControl?: ContentControl & { privacyPolicy: { md: string } };
-  currentEdition?: Edition;
+  contentControl: ContentControl & { privacyPolicy: { md: string } };
+  currentEdition: Edition;
 }
 
 export default class Website extends App<DefaultProps> {

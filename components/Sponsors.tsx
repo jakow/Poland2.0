@@ -1,26 +1,19 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Markdown from 'react-markdown';
-import {
-  rhythm,
-  Center,
-  bold,
-  stripe,
-  fat,
-  limit,
-  Container,
-  Card,
-  CardList,
-  Modal
-} from '@poland20/p20-components';
 import ModalCard from './ModalCard';
 import { SmallMarginBottom } from './Speakers';
 import { SponsorCategories, Sponsor } from './types';
+import { rhythm, bold, fat, stripe, Center } from './typography';
+import Card, { CardList } from './Card';
+import { limit } from 'helpers/cloudinary';
+import Container from './Container';
+import Modal from './Modal';
 
 const Wrapper = styled('section')({
   margin: 0,
   paddingBottom: rhythm(1),
-  'li > *:first-child': {
+  'li > *:first-of-type': {
     minHeight: rhythm(6),
     display: 'flex',
     justifyContent: 'center',
@@ -33,7 +26,7 @@ const Wrapper = styled('section')({
     width: '100%',
     height: 'auto'
   },
-  'p:last-child': {
+  'p:last-of-type': {
     marginBottom: 0
   }
 });

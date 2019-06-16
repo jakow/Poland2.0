@@ -1,24 +1,15 @@
 import React from 'react';
 import Markdown from 'react-markdown';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
-import {
-  Container,
-  rhythm,
-  Center,
-  bold,
-  fat,
-  stripe,
-  CardList,
-  Card,
-  fill,
-  Modal,
-  breakpointMin,
-  colors
-} from '@poland20/p20-components';
 import ModalCard from './ModalCard';
 import { SmallMarginBottom } from './Speakers';
 import { TeamMember } from './types';
+import { breakpointMin, colors } from './variables';
+import { bold, fat, stripe, rhythm, Center } from './typography';
+import Card, { CardList } from './Card';
+import Container from './Container';
+import Modal from './Modal';
+import { fill } from 'helpers/cloudinary';
 
 const LearnMore = styled('small')({
   [breakpointMin('tablet')]: {

@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Markdown from 'react-markdown';
-import {
-  colors, rhythm, breakpointMin, Anchor, Modal, breakpointMax
-} from '@poland20/p20-components';
-import ModalCard from './ModalCard';
+import { rhythm, Anchor } from './typography';
+import { breakpointMax, colors, breakpointMin } from './variables';
 
 const Container = styled('footer')({
   background: 'white',
@@ -77,7 +74,7 @@ const PrivacyPolicy = styled('div')({
     fontWeight: 'bold',
     margin: `${rhythm(0.75)} 0`
   },
-  'h1:first-child': {
+  'h1:first-of-type': {
     textAlign: 'center',
     marginTop: 0
   },
@@ -155,8 +152,8 @@ const Footer: React.StatelessComponent<Props> = ({
     </Social>
     <Separator/>
     <Legal>
-      <Anchor href={bylawLink}>By-law for Poland 2.0</Anchor>
-      <Modal trigger={<Anchor>Privacy Policy</Anchor>} label="Privacy Policy">
+      <Anchor href={bylawUrl}>By-law for Poland 2.0</Anchor>
+      {/* <Modal trigger={<Anchor>Privacy Policy</Anchor>} label="Privacy Policy">
         <ModalCard>
           <PrivacyPolicy>
             <Markdown escapeHtml={false} linkTarget="_blank">
@@ -164,21 +161,22 @@ const Footer: React.StatelessComponent<Props> = ({
             </Markdown>
           </PrivacyPolicy>
         </ModalCard>
-      </Modal>
-      {/* <Anchor
+      </Modal> */}
+      <Anchor
         href="/static/privacy-policy.pdf"
         label="Privacy Policy"
         target="_blank"
       >
         Privacy Policy
-      </Anchor> */}
+      </Anchor>
       <Anchor href="mailto:contact@poland20.com">Contact</Anchor>
     </Legal>
     <Credits>
       &#169; {(new Date()).getFullYear()} Poland 2.0<br/>
       Created by&nbsp;
       <a href="https://github.com/jakow" target="_blank" rel="noopener">Jakub Kowalczyk</a><br/>
-      Maintained by <a href="mailto:artur@komoter.pl">Artur Komoter</a>
+      Maintained by&nbsp;
+      <a href="https://github.com/arutr" target="_blank" rel="noopener">Artur Komoter</a>
     </Credits>
   </Container>
 );
