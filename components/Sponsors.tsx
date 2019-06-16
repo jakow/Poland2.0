@@ -4,7 +4,7 @@ import Markdown from 'react-markdown';
 import ModalCard from './ModalCard';
 import { SmallMarginBottom } from './Speakers';
 import { SponsorCategories, Sponsor } from './types';
-import { rhythm, bold, fat, stripe, Center } from './typography';
+import { rhythm, bold, _bold, fat, stripe, Center } from './typography';
 import Card, { CardList } from './Card';
 import { limit } from 'helpers/cloudinary';
 import Container from './Container';
@@ -103,7 +103,7 @@ const Sponsors: React.StatelessComponent<Props> = ({ sponsorCategories, title, i
       }
       <br/><br/>
       <Center>
-        <h4 className={bold}>
+        <h4 className={_bold}>
           Would your organisation like to join this list?&nbsp;
           <a href="mailto:contact@poland20.com">Contact us!</a>
         </h4>

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { css } from 'emotion';
+import { css } from '@emotion/core';
 import * as moment from 'moment';
 import Markdown from 'react-markdown';
 
-import { bold, rhythm } from 'components/typography';
+import { _bold, rhythm } from 'components/typography';
 import { breakpointMin, colors, featherShadow } from 'components/variables';
 import { EventType, EventTime } from 'types/Agenda';
 import { LinkIcon } from 'components/icons';
@@ -112,7 +112,7 @@ const Duration: React.StatelessComponent<EventTime> =
 
     if (startDate && endDate) {
       return (
-        <span className={bold}>
+        <span className={_bold}>
           <time dateTime={startDate.toISOString()}>{startTime}</time>
           <span>-</span>
           <time dateTime={endDate.toISOString()}>{endTime}</time>
@@ -121,7 +121,7 @@ const Duration: React.StatelessComponent<EventTime> =
     }
     if (startDate) {
       return (
-        <span className={bold}>
+        <span className={_bold}>
           <time dateTime={startDate.toISOString()}>{startTime}</time>
           <span>-</span>
           <span>onwards</span>
@@ -130,7 +130,7 @@ const Duration: React.StatelessComponent<EventTime> =
     }
     if (endDate) {
       return (
-        <span className={bold}>
+        <span className={_bold}>
           <span>Until </span>
           <time dateTime={endDate.toISOString()}>{endTime}</time>
         </span>
@@ -150,7 +150,7 @@ export const Event: React.StatelessComponent<{ event: EventType }> = ({ event })
       <Main id={eventSlug}>
         <Dash color={categoryColor}/>
         <Permalink href={`#${eventSlug}`} title="Link to this event">
-          <LinkIcon className={permalinkIcon}/>
+          <LinkIcon css={permalinkIcon}/>
         </Permalink>
         <Content>
           <header style={{ marginBottom: rhythm(1) }}>
@@ -160,7 +160,7 @@ export const Event: React.StatelessComponent<{ event: EventType }> = ({ event })
               }
               <span style={{ marginLeft: rhythm(0.5) }}>{event.type}</span>
             </TimeAndType>
-            <h3 className={bold}>{event.name}</h3>
+            <h3 className={_bold}>{event.name}</h3>
           </header>
           {event.description.length > 0 && <Markdown>{event.description}</Markdown>}
           <Summary>

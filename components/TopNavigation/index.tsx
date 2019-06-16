@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { css } from 'emotion';
+import { css } from '@emotion/core';
 import Container from 'components/Container';
 import { breakpointMin, colors, breakpointMax } from 'components/variables';
 import Brand from './Brand';
@@ -99,7 +99,7 @@ export default class TopNavigation extends React.Component<Props, State> {
       <Header>
         <Container>
           <Layout>
-            <Column className={brand}>
+            <Column css={brand}>
               <Brand Router={this.props.Router} />
             </Column>
             <Column>

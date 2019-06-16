@@ -1,5 +1,5 @@
 // SOURCE: https://github.com/una/CSSgram/blob/master/source/css/walden.css
-import { css } from 'emotion';
+import { css } from '@emotion/core';
 
 export default css({
   position: 'relative',

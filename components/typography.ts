@@ -1,9 +1,10 @@
 import Typography from 'typography';
 import { colors, breakpointMin } from './variables';
-import { css, injectGlobal } from 'emotion';
+import { css as _css, injectGlobal } from 'emotion';
 import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 
-const _stripe = require('./stripe.svg');
+const stripeSVG = require('./stripe.svg');
 
 const fonts = ['Source Sans Pro',
   'Avenir Next',
@@ -14,7 +15,7 @@ const fonts = ['Source Sans Pro',
   'sans-serif',
 ];
 
-injectGlobal(css({
+injectGlobal(_css({
   small: {
     color: `${colors.darkGray}`,
     a: {
@@ -73,16 +74,20 @@ export const Anchor = styled('a')<{ [propName: string]: any }>({
   }
 });
 
-export const bold = css({
+const boldStyle = {
   fontWeight: 600
-});
+};
+export const bold = css(boldStyle);
+export const _bold = _css(boldStyle);
 
 export const Center = styled('div')({ textAlign: 'center' });
 
-export const fat = css({
+const fatStyle = {
   marginTop: rhythm(1),
   marginBottom: rhythm(2),
-});
+};
+export const fat = css(fatStyle);
+export const _fat = _css(fatStyle);
 
 export const dangerousSuperscripts = (text: string) => {
   const ordinalRegexp = /\d+(st|th|rd|nd)/g;
@@ -104,14 +109,33 @@ export const stripe = css({
     position: 'absolute',
     bottom: -7,
     height: 7,
-    backgroundImage: `url(${_stripe})`,
+    backgroundImage: `url(${stripeSVG})`,
+    backgroundSize: 'auto 100%',
+    backgroundRepeat: 'round',
+  },
+});
+export const _stripe = _css({
+  position: 'relative',
+  display: 'inline-block',
+  verticalAlign: 'top',
+  lineHeight: rhythm(2),
+  '&::before': {
+    content: '""',
+    width: '100%',
+    display: 'block',
+    position: 'absolute',
+    bottom: -7,
+    height: 7,
+    backgroundImage: `url(${stripeSVG})`,
     backgroundSize: 'auto 100%',
     backgroundRepeat: 'round',
   },
 });
 
-export const thin = css({
+const thinStyle = {
   fontWeight: 300
-});
+};
+export const thin = css(thinStyle);
+export const _thin = _css(thinStyle);
 
 export default typography;
