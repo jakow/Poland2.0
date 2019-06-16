@@ -1,6 +1,6 @@
 {
   "name": "p20-website",
-  "version": "2.19.1",
+  "version": "2.19.2",
   "license": "MIT",
   "author": "Poland 2.0",
   "dependencies": {
@@ -12,8 +12,8 @@
     "cloudinary-core": "~2.6.3",
     "color": "~3.0.0",
     "cross-env": "~5.2.0",
-    "dotenv": "~8.0.0",
-    "emotion": "~10.0.9",
+    "dotenv": "~8",
+    "emotion": "~10",
     "expo-server-sdk": "~3.3",
     "express": "~4.17.1",
     "intersection-observer": "~0.7.0",
@@ -65,7 +65,8 @@
     "tslint": "~5.17.0",
     "tslint-config-airbnb": "~5.11.1",
     "tslint-react": "~4",
-    "typescript": "~3.5.1"
+    "typescript": "~3.5.1",
+    "webpack": "~4"
   },
   "engines": {
     "node": ">=10",
