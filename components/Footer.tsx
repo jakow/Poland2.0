@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { rhythm, Anchor } from './typography';
 import { breakpointMax, colors, breakpointMin } from './variables';
+import { Urls } from 'types/ContentControl';
 
 const Container = styled('footer')({
   background: 'white',
@@ -43,7 +44,7 @@ const Social = styled('div')({
 });
 
 const socialMedia =
-  ['facebook', 'linkedin', 'twitter', 'youtube', 'vimeo'].map(media => ({
+  ['facebook', 'linkedin', 'instagram', 'github'].map(media => ({
     [`&.${media}`]: {
       backgroundImage: `url('/static/images/icons/${media}.svg')`
     }
@@ -68,43 +69,43 @@ const Icon = styled('a')(
   ...socialMedia
 );
 
-const PrivacyPolicy = styled('div')({
-  textAlign: 'initial',
-  'h1, h2, h3, h4': {
-    fontWeight: 'bold',
-    margin: `${rhythm(0.75)} 0`
-  },
-  'h1:first-of-type': {
-    textAlign: 'center',
-    marginTop: 0
-  },
-  'p, ul, ol': {
-    marginTop: rhythm(0.25),
-    marginBottom: rhythm(0.25)
-  },
-  hr: {
-    margin: `${rhythm(1)} 0`
-  },
-  del: {
-    textDecoration: 'underline'
-  }
-});
+// const PrivacyPolicy = styled('div')({
+//   textAlign: 'initial',
+//   'h1, h2, h3, h4': {
+//     fontWeight: 'bold',
+//     margin: `${rhythm(0.75)} 0`
+//   },
+//   'h1:first-of-type': {
+//     textAlign: 'center',
+//     marginTop: 0
+//   },
+//   'p, ul, ol': {
+//     marginTop: rhythm(0.25),
+//     marginBottom: rhythm(0.25)
+//   },
+//   hr: {
+//     margin: `${rhythm(1)} 0`
+//   },
+//   del: {
+//     textDecoration: 'underline'
+//   }
+// });
 
-interface Props {
-  bylawUrl: string;
-  privacyPolicy: { md: string };
-  facebookUrl?: string;
-  linkedinUrl?: string;
-  twitterUrl?: string;
-  videoChannelUrl?: string;
-}
+// interface Props {
+//   bylawUrl: string;
+//   privacyPolicy: { md: string };
+//   facebookUrl?: string;
+//   linkedinUrl?: string;
+//   twitterUrl?: string;
+//   videoChannelUrl?: string;
+// }
 
-const Footer: React.StatelessComponent<Props> = ({
-  bylawUrl, privacyPolicy, facebookUrl, linkedinUrl, twitterUrl, videoChannelUrl
+const Footer: React.StatelessComponent<Urls> = ({
+  bylawUrl, privacyPolicyUrl, facebookUrl, linkedinUrl, instagramUrl, githubUrl
 }) => (
   <Container>
     <Social>
-      {facebookUrl &&
+      {facebookUrl.length > 0 &&
         <Icon
           className="facebook"
           href={facebookUrl}
@@ -113,7 +114,25 @@ const Footer: React.StatelessComponent<Props> = ({
           title="Facebook"
         />
       }
-      {linkedinUrl &&
+      {githubUrl.length > 0 &&
+        <Icon
+          className="github"
+          href={githubUrl}
+          title="GitHub"
+          rel="noopener noreferrer"
+          target="_blank"
+        />
+      }
+      {instagramUrl.length > 0 &&
+        <Icon
+          className="instagram"
+          href={instagramUrl}
+          title="Instagram"
+          rel="noopener noreferrer"
+          target="_blank"
+        />
+      }
+      {linkedinUrl.length > 0 &&
         <Icon
           className="linkedin"
           href={linkedinUrl}
@@ -122,37 +141,10 @@ const Footer: React.StatelessComponent<Props> = ({
           title="LinkedIn"
         />
       }
-      {twitterUrl &&
-        <Icon
-          className="twitter"
-          href={twitterUrl}
-          title="Twitter"
-          rel="noopener noreferrer"
-          target="_blank"
-        />
-      }
-      {videoChannelUrl && videoChannelUrl.includes('youtu') &&
-        <Icon
-          className="youtube"
-          href={videoChannelUrl}
-          title="YouTube"
-          rel="noopener noreferrer"
-          target="_blank"
-        />
-      }
-      {videoChannelUrl && videoChannelUrl.includes('vimeo') &&
-        <Icon
-          className="vimeo"
-          href={videoChannelUrl}
-          title="Vimeo"
-          rel="noopener noreferrer"
-          target="_blank"
-        />
-      }
     </Social>
     <Separator/>
     <Legal>
-      <Anchor href={bylawUrl}>By-law for Poland 2.0</Anchor>
+      {bylawUrl.length > 0 && <Anchor href={bylawUrl}>By-law for Poland 2.0</Anchor>}
       {/* <Modal trigger={<Anchor>Privacy Policy</Anchor>} label="Privacy Policy">
         <ModalCard>
           <PrivacyPolicy>
@@ -162,13 +154,11 @@ const Footer: React.StatelessComponent<Props> = ({
           </PrivacyPolicy>
         </ModalCard>
       </Modal> */}
-      <Anchor
-        href="/static/privacy-policy.pdf"
-        label="Privacy Policy"
-        target="_blank"
-      >
-        Privacy Policy
-      </Anchor>
+      {privacyPolicyUrl.length > 0 &&
+        <Anchor href={privacyPolicyUrl} label="Privacy Policy" target="_blank">
+          Privacy Policy
+        </Anchor>
+      }
       <Anchor href="mailto:contact@poland20.com">Contact</Anchor>
     </Legal>
     <Credits>
