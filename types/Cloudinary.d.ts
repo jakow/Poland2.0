@@ -1,3 +1,3 @@
 export type CloudinaryPhoto = {
-  secure_url: string;
+  url: string;
 };
