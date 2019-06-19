@@ -5,6 +5,7 @@ import SponsorCategory from './SponsorCategory';
 import Sponsor from './Sponsor';
 import TeamMember from './TeamMember';
 import { AgendaDay } from './Agenda';
+import SpeakerCategory from './SpeakerCategory';
 
 type Edition = {
   year?: number;
@@ -13,6 +14,7 @@ type Edition = {
   startDate: string;
   endDate: string;
   venue: Venue;
+  speakerCategories?: SpeakerCategory[];
   speakers?: Speaker[];
   sponsorCategories?: SponsorCategory[];
   sponsors?: Sponsor[];
