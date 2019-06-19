@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors } from 'components/variables';
+import { colors } from '../variables';
 
 const setStroke = (color?: string) => css({
   stroke: color ? color : `${colors.primary}`

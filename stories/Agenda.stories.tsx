@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import Agenda from 'components/Agenda';
-import { colors } from 'components/variables';
-import Venue from 'types/Venue';
-import Speaker from 'types/Speaker';
-import { AgendaEvent, AgendaDay } from 'types/Agenda';
+import Agenda from '../components/Agenda';
+import { colors } from '../components/variables';
+import Venue from '../types/Venue';
+import Speaker from '../types/Speaker';
+import { AgendaEvent, AgendaDay } from '../types/Agenda';
 
 storiesOf('Agenda', module)
   .add('default view', () => {

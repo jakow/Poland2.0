@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { colors } from 'components/variables';
-import { rhythm } from 'components/typography';
+import { colors } from '../variables';
+import { rhythm } from '../typography';
 
 const logo = require('./logo.svg');
 

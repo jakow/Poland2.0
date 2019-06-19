@@ -3,7 +3,7 @@
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/core';
 import { colors } from './variables';
-import { rhythm } from 'components/typography';
+import { rhythm } from './typography';
 
 const loaderRotate = keyframes({
   from: {

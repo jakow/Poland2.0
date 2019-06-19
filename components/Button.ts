@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { colors } from './variables';
-import { rhythm } from 'components/typography';
+import { rhythm } from './typography';
 import { css } from '@emotion/core';
 
 const themes = {

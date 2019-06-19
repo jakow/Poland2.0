@@ -1,6 +1,5 @@
 import { basename } from 'path';
 import { Cloudinary } from 'cloudinary-core';
-// const Cloudinary = require('cloudinary');
 
 // hardcoded for the client-side
 const cloudinary = Cloudinary.new({ cloud_name: 'dg1royeho' });

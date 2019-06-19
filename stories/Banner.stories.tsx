@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import Banner from 'components/Banner';
-import Edition from 'types/Edition';
+import Banner from '../components/Banner';
+import Edition from '../types/Edition';
 
 storiesOf('Banner', module)
   .add('default view', () => {

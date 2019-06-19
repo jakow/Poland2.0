@@ -4,12 +4,12 @@ import { css } from '@emotion/core';
 import * as moment from 'moment';
 import Markdown from 'react-markdown';
 
-import { _bold, rhythm } from 'components/typography';
-import { breakpointMin, colors, featherShadow } from 'components/variables';
+import { _bold, rhythm } from '../typography';
+import { breakpointMin, colors, featherShadow } from '../variables';
 // import { LinkIcon } from 'components/icons';
 import { SpeakerList, SpeakerItem } from './Speaker';
 // import Venue from './Venue';
-import { AgendaEvent } from 'types/Agenda';
+import { AgendaEvent } from '../../types/Agenda';
 
 export const EventList = styled('ol')({
   listStyle: 'none',

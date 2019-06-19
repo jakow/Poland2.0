@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { colors } from 'components/variables';
-import { rhythm } from 'components/typography';
-import { CrossIcon } from 'components/icons';
+import { colors } from './variables';
+import { rhythm } from './typography';
+import { CrossIcon } from './icons';
 
 const transitionDuration = '300ms';
 

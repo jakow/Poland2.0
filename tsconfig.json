@@ -1,9 +1,7 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "lib": ["es2017", "dom"],
     "sourceMap": true,
-    "noImplicitAny": true,
     "module": "esnext",
     "target": "esnext",
     "moduleResolution": "node",
@@ -14,7 +12,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "diagnostics": true,
-    "downlevelIteration": true,
     "typeRoots": [
       "./node_modules/@types",
       "./@types"

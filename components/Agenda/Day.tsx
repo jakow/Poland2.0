@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { rhythm } from 'components/typography';
-import { colors } from 'components/variables';
+import { rhythm } from '../typography';
+import { colors } from '../variables';
 
 export const DayList = styled('ol')({
   listStyle: 'none',

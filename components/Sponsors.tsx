@@ -5,11 +5,11 @@ import ModalCard from './ModalCard';
 import { SmallMarginBottom } from './Speakers';
 import { rhythm, bold, _bold, fat, stripe, Center } from './typography';
 import Card, { CardList } from './Card';
-import { limit } from 'helpers/cloudinary';
+import { limit } from '../helpers/cloudinary';
 import Container from './Container';
 import Modal from './Modal';
-import SponsorCategory from 'types/SponsorCategory';
-import Sponsor from 'types/Sponsor';
+import SponsorCategory from '../types/SponsorCategory';
+import Sponsor from '../types/Sponsor';
 
 const Wrapper = styled('section')({
   margin: 0,

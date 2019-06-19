@@ -1,12 +1,12 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import Container from 'components/Container';
-import { breakpointMin, colors, breakpointMax } from 'components/variables';
+import Container from '../Container';
+import { breakpointMin, colors, breakpointMax } from '../variables';
 import Brand from './Brand';
 import DesktopNav from './DesktopNav';
 import MobileNav, { MobileNavButton } from './MobileNav';
-import { rhythm } from 'components/typography';
+import { rhythm } from '../typography';
 
 export type MenuItem = {
   title: string,

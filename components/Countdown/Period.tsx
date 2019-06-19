@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { css } from 'emotion';
 import { DatespanUnit, DatespanPeriod } from './datespan';
-import { rhythm, Center } from 'components/typography';
+import { rhythm, Center } from '../typography';
 import Arc from './Arc';
 import { breakpointMax } from '../variables';
 

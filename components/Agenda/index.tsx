@@ -6,7 +6,7 @@ import { bold, Center, dangerousSuperscripts, fat, rhythm, stripe } from '../typ
 import { colors } from '../variables';
 import { DayItem, DayList, Description } from './Day';
 import { Event, EventList } from './Event';
-import { AgendaDay } from 'types/Agenda';
+import { AgendaDay } from '../../types/Agenda';
 
 const Main = styled('main')({
   position: 'relative',

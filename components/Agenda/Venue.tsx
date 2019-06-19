@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { breakpointMin, colors } from 'components/variables';
-import { rhythm, bold } from 'components/typography';
-import { MapIcon } from 'components/icons';
-import { mapsUrl } from 'helpers/maps';
-import Venue from 'types/Venue';
+import { breakpointMin, colors } from '../variables';
+import { rhythm, bold } from '../typography';
+import { MapIcon } from '../icons';
+import { mapsUrl } from '../../helpers/maps';
+import Venue from '../../types/Venue';
 
 const Wrapper = styled('section')({
   [breakpointMin('mobile')]: {

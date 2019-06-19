@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { css } from 'emotion';
-import { colors, breakpointMin } from 'components/variables';
+import { colors, breakpointMin } from '../variables';
 import { MenuItem } from '.';
-import { rhythm } from 'components/typography';
-import { NavButton } from 'components/Button';
+import { rhythm } from '../typography';
+import { NavButton } from '../Button';
 
 const transition = '200ms cubic-bezier(0.77, 0, 0.175, 1)';
 const iconWidth = 28.284;
@@ -36,10 +36,10 @@ const bar = css({
   transformOrigin: 'left',
   transform: 'scale(1)',
   transition: `transform ${transition}, background-color ${transition}`,
-  ':nth-child(2)': {
+  ':nth-of-type(2)': {
     top: (iconHeight - 1) / 2,
   },
-  ':nth-child(3)': {
+  ':nth-of-type(3)': {
     top: iconHeight - 1,
   },
   ':last-of-type': {
@@ -50,13 +50,13 @@ const bar = css({
 const isOpenClass = css({
   [`& .${bar}`]: {
     backgroundColor: `${colors.white}`,
-    ':nth-child(1)': {
+    ':nth-of-type(1)': {
       transform: `translateX(${(iconWidth - iconHeight) / 2}px) rotate(45deg)`,
     },
-    ':nth-child(2)': {
+    ':nth-of-type(2)': {
       transform: 'scaleX(0)',
     },
-    ':nth-child(3)': {
+    ':nth-of-type(3)': {
       transform: `translateX(${(iconWidth - iconHeight) / 2}px) rotate(-45deg)`,
     },
   },

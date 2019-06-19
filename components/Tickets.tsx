@@ -5,9 +5,10 @@ import { colors, breakpointMin } from './variables';
 import { rhythm } from './typography';
 import Container from './Container';
 import Countdown from './Countdown';
-import { TicketControl } from 'types/ContentControl';
-const meshTopLeft = require('static/images/mesh-corner-top-left.svg');
-const meshBottomRight = require('static/images/mesh-corner-bottom-right.svg');
+import { TicketControl } from '../types/ContentControl';
+
+const meshTopLeft = require('../static/images/mesh-corner-top-left.svg');
+const meshBottomRight = require('../static/images/mesh-corner-bottom-right.svg');
 
 const Center = styled('div')({
   display: 'flex',

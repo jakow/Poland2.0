@@ -8,8 +8,8 @@ import { bold, fat, stripe, rhythm, Center } from './typography';
 import Card, { CardList } from './Card';
 import Container from './Container';
 import Modal from './Modal';
-import { fill } from 'helpers/cloudinary';
-import TeamMember from 'types/TeamMember';
+import { fill } from '../helpers/cloudinary';
+import TeamMember from '../types/TeamMember';
 
 const LearnMore = styled('small')({
   [breakpointMin('tablet')]: {
@@ -23,7 +23,7 @@ const Subtitle = styled('h2')();
 
 const Wrapper = styled('section')({
   paddingBottom: rhythm(0.5),
-  'li > div:nth-child(2)': {
+  'li > div:nth-of-type(2)': {
     display: 'flex',
     flexDirection: 'column',
     minHeight: rhythm(8)

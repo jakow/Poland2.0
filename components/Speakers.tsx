@@ -7,9 +7,9 @@ import { bold, fat, stripe, rhythm, Center } from './typography';
 import Card, { CardList } from './Card';
 import Container from './Container';
 import Modal from './Modal';
-import { fill } from 'helpers/cloudinary';
-import Speaker from 'types/Speaker';
-import SpeakerCategory from 'types/SpeakerCategory';
+import { fill } from '../helpers/cloudinary';
+import Speaker from '../types/Speaker';
+import SpeakerCategory from '../types/SpeakerCategory';
 
 const LearnMore = styled('small')({
   [breakpointMin('tablet')]: {

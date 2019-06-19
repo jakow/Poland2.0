@@ -1,17 +1,16 @@
 import * as React from 'react';
 
 import Swiper from 'react-id-swiper';
-import { Pagination, Autoplay, SwiperOptions } from 'swiper/dist/js/swiper.esm';
 import Markdown from 'react-markdown';
 
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { colors, breakpointMin } from 'components/variables';
-import { rhythm, fat } from 'components/typography';
-import Edition from 'types/Edition';
-import walden from 'components/Banner/walden';
-import { limit } from 'helpers/cloudinary';
-import { dateString } from 'helpers/date';
+import { colors, breakpointMin } from '../variables';
+import { rhythm, fat } from '../typography';
+import Edition from '../../types/Edition';
+import walden from './walden';
+import { limit } from '../../helpers/cloudinary';
+import { dateString } from '../../helpers/date';
 
 const angledEdge = css({
   position: 'relative',
@@ -94,7 +93,7 @@ const Image = styled('div')(walden, (props: { src: string }) => ({
   backgroundRepeat: 'no-repeat',
   backgroundOrigin: 'content-box',
   backgroundClip: 'content-box',
-  backgroundPosition: 'center 20%',
+  backgroundPosition: 'center center',
   backgroundImage: `url(${props.src})`
 }));
 
@@ -144,8 +143,7 @@ const _Banner = styled('section')({
   }
 });
 
-const swiperProps: SwiperOptions & { modules: any } = {
-  modules: [Pagination, Autoplay],
+const swiperProps = {
   loop: true,
   simulateTouch: false,
   autoplay: {
@@ -178,7 +176,7 @@ const Banner: React.StatelessComponent<Props> = ({ currentEdition }) => (
                 {dateString(currentEdition.startDate, currentEdition.endDate)}
               </time>
               <Separator/>
-              <span>{currentEdition.venue.name}</span>
+              {currentEdition.venue && <span>{currentEdition.venue.name}</span>}
             </DatePlace>
           )}
         </Header>
