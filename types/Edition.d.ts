@@ -7,17 +7,17 @@ import TeamMember from './TeamMember';
 import { AgendaDay } from './Agenda';
 
 type Edition = {
-  year: number;
+  year?: number;
   description: string;
-  coverPhoto: CloudinaryPhoto;
+  coverPhoto?: CloudinaryPhoto;
   startDate: string;
   endDate: string;
   venue: Venue;
-  speakers: Speaker[];
-  sponsorCategories: SponsorCategory[];
-  sponsors: Sponsor[];
-  teamMembers: TeamMember[];
-  agendaDays: AgendaDay[];
+  speakers?: Speaker[];
+  sponsorCategories?: SponsorCategory[];
+  sponsors?: Sponsor[];
+  teamMembers?: TeamMember[];
+  agendaDays?: AgendaDay[];
 };
 
 export default Edition;

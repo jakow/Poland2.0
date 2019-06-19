@@ -19,9 +19,9 @@ export type AgendaEvent = {
 
 export type AgendaDay = {
   name: string;
-  date: string;
+  date?: string;
   description: string;
   venue: Venue;
   events: AgendaEvent[];
-  edition: Edition;
+  edition?: Edition;
 };

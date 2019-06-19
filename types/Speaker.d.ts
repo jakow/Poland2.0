@@ -5,13 +5,13 @@ import SpeakerCategory from "./SpeakerCategory";
 
 type Speaker = {
     name: string;
-    occupation: string;
+    occupation?: string;
     organisation: string;
     photo: CloudinaryPhoto;
-    description: string;
-    category: SpeakerCategory;
-    agendaEvents: AgendaEvent[];
-    editions: Edition[];
+    description?: string;
+    category?: SpeakerCategory;
+    agendaEvents?: AgendaEvent[];
+    editions?: Edition[];
 }
 
 export default Speaker;
