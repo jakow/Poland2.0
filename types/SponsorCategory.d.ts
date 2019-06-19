@@ -1,4 +1,5 @@
 type SponsorCategory = {
+    _id: string;
     name: string;
 }
 
