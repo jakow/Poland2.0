@@ -1,64 +1,54 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { DefaultProps } from './_app';
+import { DefaultPageProps } from './_app';
 import Speakers from '../components/Speakers';
 import Sponsors from '../components/Sponsors';
-import { SpeakerCategories, SponsorCategories } from '../components/types';
 import { NextFunctionComponent } from 'next';
-import { AgendaType } from 'types/Agenda';
-import { colors } from 'components/variables';
-import Banner from 'components/Banner';
-import Agenda from 'components/Agenda';
-
-interface Props {
-  speakerCategories: SpeakerCategories;
-  sponsorCategories: SponsorCategories;
-  previousSponsorCategories: SponsorCategories;
-  agenda: AgendaType;
-}
+import { colors } from '../components/variables';
+import Banner from '../components/Banner';
+import Agenda from '../components/Agenda';
+import Tickets from '../components/Tickets';
 
 export const Background = styled('section')({
-  '& > *:nth-child(odd)': {
+  '& > *:nth-of-type(odd)': {
     backgroundColor: `${colors.lightGray}`
   },
-  '& > *:nth-child(even)': {
+  '& > *:nth-of-type(even)': {
     backgroundColor: `${colors.white}`
   }
 });
 
-const Home: NextFunctionComponent<DefaultProps & Props> = ({
-  agenda,
-  currentEdition,
-  contentControl,
-  speakerCategories,
-  sponsorCategories,
-  previousSponsorCategories
-}) => (
+const Home: NextFunctionComponent<DefaultPageProps> = ({ currentEdition, contentControl }) => (
   <React.Fragment>
-    {/* {contentControl.tickets.showSection &&
-      <Tickets tickets={contentControl.tickets}/>
-    } */}
-    <Banner
-      currentEdition={currentEdition}
-      description={contentControl.description}
-    />
+    {contentControl.ticketControl.onSale &&
+      <Tickets ticketControl={contentControl.ticketControl}/>
+    }
+    <Banner currentEdition={currentEdition}/>
     <Background>
-      {contentControl.showAgenda && agenda.days.length > 0 &&
-        <Agenda agenda={agenda}/>
+      {contentControl.showAgenda && currentEdition.agendaDays.length > 0 &&
+        <Agenda agendaDays={currentEdition.agendaDays}/>
       }
-      {contentControl.showSpeakers && speakerCategories.length > 0 &&
-        <Speakers speakerCategories={speakerCategories}/>
+      {contentControl.showSpeakers && currentEdition.speakers.length > 0 &&
+        <Speakers
+          speakerCategories={currentEdition.speakerCategories}
+          speakers={currentEdition.speakers}
+        />
       }
       {contentControl.showSponsors &&
-        <Sponsors id="partners" sponsorCategories={sponsorCategories} title="Partners"/>
+        <Sponsors
+          id="partners"
+          sponsorCategories={currentEdition.sponsorCategories}
+          sponsors={currentEdition.sponsors}
+          title="Partners"
+        />
       }
-      {contentControl.showPreviousSponsors &&
+      {/* {contentControl.showPreviousSponsors &&
         <Sponsors
           id="previous-partners"
           sponsorCategories={previousSponsorCategories}
           title="Previous Partners"
         />
-      }
+      } */}
     </Background>
   </React.Fragment>
 );

@@ -1,10 +1,10 @@
 import React from 'react';
-import { DefaultProps } from './_app';
+import { DefaultPageProps } from './_app';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { colors, rhythm, Center, fat, stripe, bold } from '@poland20/p20-components';
 import TeamMembers from '../components/TeamMembers';
-import { TeamMember } from '../components/types';
+import { rhythm, Center, _fat, _stripe, _bold } from '../components/typography';
+import { colors } from '../components/variables';
 
 const background = css({
   zIndex: 0,
@@ -49,7 +49,7 @@ export const Mission = styled('article')({
   textAlign: 'justify'
 });
 
-const About: React.StatelessComponent<DefaultProps & { team: TeamMember[] }> = ({ team }) => (
+const About: React.StatelessComponent<DefaultPageProps> = ({ currentEdition }) => (
   <Container>
     <Image/>
     <Gradient/>
@@ -61,8 +61,8 @@ const About: React.StatelessComponent<DefaultProps & { team: TeamMember[] }> = (
         </Center>
       </Banner>
       <Mission property="description">
-        <Center className={fat}>
-          <h1 className={`${stripe} ${bold}`} style={{ marginBottom: rhythm(1.25) }}>Mission</h1>
+        <Center className={_fat}>
+          <h1 className={`${_stripe} ${_bold}`} style={{ marginBottom: rhythm(1.25) }}>Mission</h1>
           <h3><em>To overtake the future: innovation across industries</em></h3>
         </Center>
         <p> {/* TODO: Put this into Keystone */}
@@ -88,7 +88,7 @@ const About: React.StatelessComponent<DefaultProps & { team: TeamMember[] }> = (
           across industries, and improve your career prospects, while simply having an amazing time.
         </p>
       </Mission>
-      <TeamMembers teamMembers={team}/>
+      <TeamMembers teamMembers={currentEdition.teamMembers}/>
     </Content>
   </Container>
 );
