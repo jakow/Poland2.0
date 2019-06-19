@@ -3,13 +3,13 @@ import Markdown from 'react-markdown';
 import styled from '@emotion/styled';
 import ModalCard from './ModalCard';
 import { SmallMarginBottom } from './Speakers';
-import { TeamMember } from './types';
 import { breakpointMin, colors } from './variables';
 import { bold, fat, stripe, rhythm, Center } from './typography';
 import Card, { CardList } from './Card';
 import Container from './Container';
 import Modal from './Modal';
 import { fill } from 'helpers/cloudinary';
+import TeamMember from 'types/TeamMember';
 
 const LearnMore = styled('small')({
   [breakpointMin('tablet')]: {
@@ -61,8 +61,8 @@ const H3 = SmallMarginBottom.withComponent('h3');
 const memberCard = (member: TeamMember, index?: number) => (
   <Card
     key={index}
-    image={fill(member.photo.secure_url, 300, 300, { gravity: 'faces' })}
-    imagePreview={fill(member.photo.secure_url, 32, 32, { gravity: 'faces' })}
+    image={fill(member.photo.url, 300, 300, { gravity: 'faces' })}
+    imagePreview={fill(member.photo.url, 32, 32, { gravity: 'faces' })}
     footer={(
       <React.Fragment>
         {member.position}<br/>
@@ -71,7 +71,7 @@ const memberCard = (member: TeamMember, index?: number) => (
     )}
   >
     <H3>{member.name}</H3>
-    <h4 style={{ flexGrow: 1 }}>{member.occupation && member.occupation}</h4>
+    <h4 style={{ flexGrow: 1 }}>{member.position && member.position}</h4>
     <div>
       {member.linkedin &&
         <Icon
@@ -110,7 +110,7 @@ const TeamMembers: React.StatelessComponent<Props> =
           }
           <CardList>
             {teamMembers && teamMembers.map((member, index) => (
-              member.description.md ?
+              member.description ?
                 <Modal
                   key={index}
                   trigger={memberCard(member)}
@@ -120,10 +120,10 @@ const TeamMembers: React.StatelessComponent<Props> =
                     <SmallMarginBottom>{member.name}</SmallMarginBottom>
                     <p>
                       <strong>
-                        {member.position}{member.occupation && `, ${member.occupation}`}
+                        {member.position}{member.position && `, ${member.position}`}
                       </strong>
                     </p>
-                    <Markdown>{member.description.md}</Markdown>
+                    <Markdown>{member.description}</Markdown>
                   </ModalCard>
                 </Modal>
               : memberCard(member, index)

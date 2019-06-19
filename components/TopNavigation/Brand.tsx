@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import { colors } from 'components/variables';
 import { rhythm } from 'components/typography';
 
-// import logo from './logo.svg';
 const logo = require('./logo.svg');
 
 const BrandLink = styled('a')({

@@ -2,9 +2,9 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 
 import { rhythm } from 'components/typography';
-import { EventSpeaker } from 'types/Agenda';
 import LazyImage from 'components/LazyImage';
 import { fill } from 'helpers/cloudinary';
+import Speaker from 'types/Speaker';
 
 const Avatar = styled('div')({
   flex: 'none',
@@ -47,17 +47,17 @@ const Wrapper = styled('li')({
   flexBasis: '25%'
 });
 
-export const SpeakerItem: React.StatelessComponent<EventSpeaker> = ({ name, company, photo }) => (
+export const SpeakerItem: React.StatelessComponent<Speaker> = ({ name, organisation, photo }) => (
   <Wrapper>
     <Avatar>
       <LazyImage
-        src={fill(photo.secure_url, 120, 120, { gravity: 'face' })}
-        placeholder={fill(photo.secure_url, 32, 32, { gravity: 'face' })}
+        src={fill(photo.url, 120, 120, { gravity: 'face' })}
+        placeholder={fill(photo.url, 32, 32, { gravity: 'face' })}
       />
     </Avatar>
     <Name>
       <h3>{name}</h3>
-      <h4>{company && company}</h4>
+      <h4>{organisation && organisation}</h4>
     </Name>
   </Wrapper>
 );

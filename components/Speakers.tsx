@@ -2,13 +2,14 @@ import React from 'react';
 import Markdown from 'react-markdown';
 import styled from '@emotion/styled';
 import ModalCard from './ModalCard';
-import { SpeakerCategories, Speaker } from './types';
 import { breakpointMin } from './variables';
 import { bold, fat, stripe, rhythm, Center } from './typography';
 import Card, { CardList } from './Card';
 import Container from './Container';
 import Modal from './Modal';
 import { fill } from 'helpers/cloudinary';
+import Speaker from 'types/Speaker';
+import SpeakerCategory from 'types/SpeakerCategory';
 
 const LearnMore = styled('small')({
   [breakpointMin('tablet')]: {
@@ -34,18 +35,18 @@ const H3 = SmallMarginBottom.withComponent('h3');
 const speakerCard = (speaker: Speaker, index?: number) => (
   <Card
     key={index}
-    image={fill(speaker.photo.secure_url, 300, 300, { gravity: 'faces' })}
-    imagePreview={fill(speaker.photo.secure_url, 32, 32, { gravity: 'faces' })}
+    image={fill(speaker.photo.url, 300, 300, { gravity: 'faces' })}
+    imagePreview={fill(speaker.photo.url, 32, 32, { gravity: 'faces' })}
     footer={(
       <React.Fragment>
-        {speaker.position}<br/>
+        {speaker.occupation}<br/>
         {index ? '' : <LearnMore>Tap on the image to learn more...</LearnMore>}
       </React.Fragment>
     )}
   >
     <Center>
       <H3>{speaker.name}</H3>
-      <h4>{speaker.company && speaker.company}</h4>
+      <h4>{speaker.organisation && speaker.organisation}</h4>
     </Center>
   </Card>
 );
@@ -67,7 +68,7 @@ export const SpeakersFlat: React.StatelessComponent<FlatProps> =
           <CardList>
             {speakers && speakers.length > 0 &&
               speakers.map((speaker, index) =>
-                speaker.description.md ?
+                speaker.description ?
                   <Modal
                     key={index}
                     trigger={speakerCard(speaker)}
@@ -77,10 +78,10 @@ export const SpeakersFlat: React.StatelessComponent<FlatProps> =
                       <SmallMarginBottom>{speaker.name}</SmallMarginBottom>
                       <p>
                         <strong>
-                          {speaker.position}{speaker.company && `, ${speaker.company}`}
+                          {speaker.occupation}{speaker.organisation && `, ${speaker.organisation}`}
                         </strong>
                       </p>
-                      <Markdown>{speaker.description.md}</Markdown>
+                      <Markdown>{speaker.description}</Markdown>
                     </ModalCard>
                   </Modal>
                 : speakerCard(speaker, index)
@@ -91,18 +92,24 @@ export const SpeakersFlat: React.StatelessComponent<FlatProps> =
     </Wrapper>
 );
 
-const Speakers: React.StatelessComponent<{ speakerCategories: SpeakerCategories }> =
-  ({ speakerCategories }) => (
+interface Props {
+  speakers: Speaker[];
+  speakerCategories: SpeakerCategory[];
+}
+
+const Speakers: React.StatelessComponent<Props> =
+  ({ speakers, speakerCategories }) => (
     <Wrapper id="speakers">
       <Container>
         <Center><Title>Speakers</Title></Center>
           {speakerCategories && speakerCategories.map((category, index) => (
             <React.Fragment key={index}>
-              <Center><h2>{category.displayName}</h2></Center>
+              <Center><h2>{category.name}</h2></Center>
               <CardList>
-                {category.speakers && category.speakers.length > 0 &&
-                  category.speakers.map((speaker, index) =>
-                    speaker.description.md ?
+                {speakers && speakers.length > 0 &&
+                  speakers
+                    .filter(speaker => speaker.category._id === category._id)
+                    .map((speaker, index) => speaker.description ?
                       <Modal
                         key={index}
                         trigger={speakerCard(speaker)}
@@ -112,10 +119,11 @@ const Speakers: React.StatelessComponent<{ speakerCategories: SpeakerCategories 
                           <SmallMarginBottom>{speaker.name}</SmallMarginBottom>
                           <p>
                             <strong>
-                              {speaker.position}{speaker.company && `, ${speaker.company}`}
+                              {speaker.occupation}
+                              {speaker.organisation && `, ${speaker.organisation}`}
                             </strong>
                           </p>
-                          <Markdown>{speaker.description.md}</Markdown>
+                          <Markdown>{speaker.description}</Markdown>
                         </ModalCard>
                       </Modal>
                     : speakerCard(speaker, index)

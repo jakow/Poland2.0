@@ -6,10 +6,10 @@ import Markdown from 'react-markdown';
 
 import { _bold, rhythm } from 'components/typography';
 import { breakpointMin, colors, featherShadow } from 'components/variables';
-import { EventType, EventTime } from 'types/Agenda';
-import { LinkIcon } from 'components/icons';
+// import { LinkIcon } from 'components/icons';
 import { SpeakerList, SpeakerItem } from './Speaker';
-import Venue from './Venue';
+// import Venue from './Venue';
+import { AgendaEvent } from 'types/Agenda';
 
 export const EventList = styled('ol')({
   listStyle: 'none',
@@ -103,7 +103,7 @@ const permalinkIcon = css({
   fontSize: rhythm(1),
 });
 
-const Duration: React.StatelessComponent<EventTime> =
+const Duration: React.StatelessComponent<{ start: string, end: string }> =
   ({ start, end }) => {
     const startDate = start ? new Date(start) : undefined;
     const endDate = end ? new Date(end) : undefined;
@@ -140,23 +140,23 @@ const Duration: React.StatelessComponent<EventTime> =
     return <div/>;
   };
 
-export const Event: React.StatelessComponent<{ event: EventType }> = ({ event }) => {
+export const Event: React.StatelessComponent<{ event: AgendaEvent }> = ({ event }) => {
   const categoryColor = event.category && event.category.color;
-  const eventSlug = `event-${event.slug}`;
+  // const eventSlug = `event-${event.slug}`;
 
   return (
     <Wrapper>
       <Line color={categoryColor}/>
-      <Main id={eventSlug}>
+      <Main>
         <Dash color={categoryColor}/>
-        <Permalink href={`#${eventSlug}`} title="Link to this event">
+        {/* <Permalink href={`#${eventSlug}`} title="Link to this event">
           <LinkIcon css={permalinkIcon}/>
-        </Permalink>
+        </Permalink> */}
         <Content>
           <header style={{ marginBottom: rhythm(1) }}>
             <TimeAndType>
-              {event.time &&
-                <Duration {...event.time}/>
+              {event.startTime && event.endTime &&
+                <Duration start={event.startTime} end={event.endTime}/>
               }
               <span style={{ marginLeft: rhythm(0.5) }}>{event.type}</span>
             </TimeAndType>
@@ -172,7 +172,7 @@ export const Event: React.StatelessComponent<{ event: EventType }> = ({ event })
               }
             </SpeakerList>
           </Summary>
-          {event.venue && <Venue venue={event.venue}/>}
+          {/* {event.venue && <Venue venue={event.venue}/>} */}
         </Content>
       </Main>
     </Wrapper>

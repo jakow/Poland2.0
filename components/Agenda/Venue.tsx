@@ -2,9 +2,9 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { breakpointMin, colors } from 'components/variables';
 import { rhythm, bold } from 'components/typography';
-import { Venue } from 'types/Venue';
 import { MapIcon } from 'components/icons';
 import { mapsUrl } from 'helpers/maps';
+import Venue from 'types/Venue';
 
 const Wrapper = styled('section')({
   [breakpointMin('mobile')]: {
@@ -12,7 +12,8 @@ const Wrapper = styled('section')({
   },
   marginBottom: rhythm(1),
   p: {
-    margin: 0
+    margin: 0,
+    whiteSpace: 'pre-line'
   }
 });
 
@@ -39,13 +40,7 @@ const _Venue: React.StatelessComponent<{ venue: Venue }> = ({ venue }) => (
     :
       <React.Fragment>
         <p>{venue.name}</p>
-        {venue.location.street1 && <p>{venue.location.street1}</p>}
-        {venue.location.street2 && <p>{venue.location.street2}</p>}
-        {venue.location.suburb &&
-          <p>
-            {venue.location.suburb}, {venue.location.postcode && venue.location.postcode}
-          </p>
-        }
+        <p>{venue.location}</p>
         <MapLink
           href={mapsUrl(venue.name, venue.location)}
           rel="noopener noreferrer"

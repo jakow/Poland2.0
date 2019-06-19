@@ -1,11 +1,12 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { AgendaType } from '../../types/Agenda';
 import Container from '../Container';
+import Venue from './Venue';
 import { bold, Center, dangerousSuperscripts, fat, rhythm, stripe } from '../typography';
 import { colors } from '../variables';
 import { DayItem, DayList, Description } from './Day';
 import { Event, EventList } from './Event';
+import { AgendaDay } from 'types/Agenda';
 
 const Main = styled('main')({
   position: 'relative',
@@ -39,10 +40,10 @@ const Timeline = styled('div')({
 });
 
 interface Props {
-  agenda: AgendaType;
+  agendaDays: AgendaDay[];
 }
 
-const Agenda: React.StatelessComponent<Props> = ({ agenda }) => (
+const Agenda: React.StatelessComponent<Props> = ({ agendaDays }) => (
   <Section id="agenda">
     <Container>
       <Center>
@@ -52,12 +53,13 @@ const Agenda: React.StatelessComponent<Props> = ({ agenda }) => (
       </Center>
       <Main>
         <DayList>
-          {agenda.days.map((day, index) => {
+          {agendaDays.map((day, index) => {
             return (
               <DayItem key={index}>
                 <Description>
                   <h3 dangerouslySetInnerHTML={dangerousSuperscripts(day.name)}/>
                   {day.description && <p>{day.description}</p>}
+                  {day.venue && <Venue venue={day.venue}/>}
                 </Description>
                 {day.events &&
                   <EventList>

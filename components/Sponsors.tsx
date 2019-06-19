@@ -3,12 +3,13 @@ import styled from '@emotion/styled';
 import Markdown from 'react-markdown';
 import ModalCard from './ModalCard';
 import { SmallMarginBottom } from './Speakers';
-import { SponsorCategories, Sponsor } from './types';
 import { rhythm, bold, _bold, fat, stripe, Center } from './typography';
 import Card, { CardList } from './Card';
 import { limit } from 'helpers/cloudinary';
 import Container from './Container';
 import Modal from './Modal';
+import SponsorCategory from 'types/SponsorCategory';
+import Sponsor from 'types/Sponsor';
 
 const Wrapper = styled('section')({
   margin: 0,
@@ -34,7 +35,8 @@ const Wrapper = styled('section')({
 const Title = styled('h1')(bold, fat, stripe);
 
 interface Props {
-  sponsorCategories: SponsorCategories;
+  sponsorCategories: SponsorCategory[];
+  sponsors: Sponsor[];
   title: string;
   id: string;
 }
@@ -43,36 +45,38 @@ const sponsorCard = (sponsor: Sponsor, index: number, inModal?: boolean) => (
   inModal ? (
     <Card
       key={index}
-      image={limit(sponsor.logo.secure_url, 300)}
-      imagePreview={limit(sponsor.logo.secure_url, 32)}
+      image={limit(sponsor.logo.url, 300)}
+      imagePreview={limit(sponsor.logo.url, 32)}
       footer={sponsor.name}
     />
   ) : (
     <Card
       key={index}
-      image={limit(sponsor.logo.secure_url, 300)}
-      imagePreview={limit(sponsor.logo.secure_url, 32)}
+      image={limit(sponsor.logo.url, 300)}
+      imagePreview={limit(sponsor.logo.url, 32)}
       href={sponsor.url}
       footer={sponsor.name}
     />
   )
 );
 
-const Sponsors: React.StatelessComponent<Props> = ({ sponsorCategories, title, id }) => (
+const Sponsors: React.StatelessComponent<Props> = ({ sponsors, sponsorCategories, title, id }) => (
   <Wrapper id={id}>
     <Container>
       <Center>
         <Title>{title}</Title>
       </Center>
       {sponsorCategories.map((category, index) =>
-        category.sponsors.length > 0 && category.showName ?
+        sponsors.length > 0 && category.name ?
           <React.Fragment key={index}>
             <Center>
-              <h2>{category.sponsors.length > 1 ? category.name : category.singular}</h2>
+              <h2>{category.name}</h2>
             </Center>
             <CardList>
-              {category.sponsors.map((sponsor, index) =>
-                sponsor.description.md && sponsor.description.md.length > 0 ?
+              {sponsors
+                .filter(sponsor => sponsor.category._id === category._id)
+                .map((sponsor, index) =>
+                sponsor.description && sponsor.description.length > 0 ?
                   <Modal
                     key={index}
                     trigger={sponsorCard(sponsor, index, true)}
@@ -91,7 +95,7 @@ const Sponsors: React.StatelessComponent<Props> = ({ sponsorCategories, title, i
                           </a>
                         </small>
                       </p>
-                      <Markdown>{sponsor.description.md}</Markdown>
+                      <Markdown>{sponsor.description}</Markdown>
                     </ModalCard>
                   </Modal>
                 : sponsorCard(sponsor, index)
