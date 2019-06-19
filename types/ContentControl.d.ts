@@ -1,3 +1,10 @@
+export type TicketControl = {
+    onSale: boolean;
+    salesDate: string;
+    description: string;
+    showCountdown: boolean;
+}
+
 export type Urls = {
     facebookUrl: string;
     githubUrl: string;
@@ -11,7 +18,7 @@ type ContentControl = {
     showSpeakers: boolean;
     showSponsors: boolean;
     showAgenda: boolean;
-    ticketsOnSale: boolean;
+    ticketControl: TicketControl;
 } & Urls;
 
 export default ContentControl;
