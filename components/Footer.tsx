@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { rhythm, Anchor } from './typography';
 import { breakpointMax, colors, breakpointMin } from './variables';
-import { Urls } from 'types/ContentControl';
+import { Urls } from '../types/ContentControl';
 
 const Container = styled('footer')({
   background: 'white',
@@ -46,7 +46,7 @@ const Social = styled('div')({
 const socialMedia =
   ['facebook', 'linkedin', 'instagram', 'github'].map(media => ({
     [`&.${media}`]: {
-      backgroundImage: `url('/static/images/icons/${media}.svg')`
+      backgroundImage: `url('https://unpkg.com/simple-icons@latest/icons/${media}.svg')`
     }
   }));
 
@@ -144,7 +144,7 @@ const Footer: React.StatelessComponent<Urls> = ({
     </Social>
     <Separator/>
     <Legal>
-      {bylawUrl.length > 0 && <Anchor href={bylawUrl}>By-law for Poland 2.0</Anchor>}
+      {bylawUrl && bylawUrl.length > 0 && <Anchor href={bylawUrl}>By-law for Poland 2.0</Anchor>}
       {/* <Modal trigger={<Anchor>Privacy Policy</Anchor>} label="Privacy Policy">
         <ModalCard>
           <PrivacyPolicy>
@@ -154,7 +154,7 @@ const Footer: React.StatelessComponent<Urls> = ({
           </PrivacyPolicy>
         </ModalCard>
       </Modal> */}
-      {privacyPolicyUrl.length > 0 &&
+      {privacyPolicyUrl && privacyPolicyUrl.length > 0 &&
         <Anchor href={privacyPolicyUrl} label="Privacy Policy" target="_blank">
           Privacy Policy
         </Anchor>
