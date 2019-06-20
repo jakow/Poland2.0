@@ -7,7 +7,7 @@ type Sponsor = {
     description: string;
     url: string;
     showInPrevious: boolean;
-    category: SponsorCategory;
+    category: string;
 };
 
 export default Sponsor;

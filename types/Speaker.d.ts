@@ -9,7 +9,7 @@ type Speaker = {
     organisation: string;
     photo: CloudinaryPhoto;
     description?: string;
-    category?: SpeakerCategory;
+    category?: string;
     agendaEvents?: AgendaEvent[];
     editions?: Edition[];
 }
