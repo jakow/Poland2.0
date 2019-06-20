@@ -41,14 +41,15 @@ const Timeline = styled('div')({
 
 interface Props {
   agendaDays: AgendaDay[];
+  endDate?: Date;
 }
 
-const Agenda: React.StatelessComponent<Props> = ({ agendaDays }) => (
+const Agenda: React.StatelessComponent<Props> = ({ agendaDays, endDate }) => (
   <Section id="agenda">
     <Container>
       <Center>
         <Heading>
-          Agenda
+          {endDate && endDate > new Date() ? 'Agenda' : `Agenda of ${endDate.getFullYear()}`}
         </Heading>
       </Center>
       <Main>

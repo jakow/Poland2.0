@@ -162,7 +162,7 @@ export const Event: React.StatelessComponent<{ event: AgendaEvent }> = ({ event 
             </TimeAndType>
             <h3 className={_bold}>{event.name}</h3>
           </header>
-          {event.description.length > 0 && <Markdown>{event.description}</Markdown>}
+          {event.description && <Markdown>{event.description}</Markdown>}
           <Summary>
             <SpeakerList>
               {event.speakers &&

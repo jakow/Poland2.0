@@ -26,7 +26,7 @@ const Home: NextFunctionComponent<DefaultPageProps> = ({ currentEdition, content
     <Banner currentEdition={currentEdition}/>
     <Background>
       {contentControl.showAgenda && currentEdition.agendaDays.length > 0 &&
-        <Agenda agendaDays={currentEdition.agendaDays}/>
+        <Agenda agendaDays={currentEdition.agendaDays} endDate={new Date(currentEdition.endDate)}/>
       }
       {contentControl.showSpeakers && currentEdition.speakers.length > 0 &&
         <Speakers
@@ -34,7 +34,7 @@ const Home: NextFunctionComponent<DefaultPageProps> = ({ currentEdition, content
           speakers={currentEdition.speakers}
         />
       }
-      {contentControl.showSponsors &&
+      {contentControl.showSponsors && currentEdition.sponsors.length > 0 &&
         <Sponsors
           id="partners"
           sponsorCategories={currentEdition.sponsorCategories}
