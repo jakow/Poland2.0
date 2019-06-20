@@ -50,10 +50,16 @@ const Wrapper = styled('li')({
 export const SpeakerItem: React.StatelessComponent<Speaker> = ({ name, organisation, photo }) => (
   <Wrapper>
     <Avatar>
-      <LazyImage
-        src={fill(photo.url, 120, 120, { gravity: 'face' })}
-        placeholder={fill(photo.url, 32, 32, { gravity: 'face' })}
-      />
+      {photo ?
+        <LazyImage
+          src={fill(photo.url, 120, 120, { gravity: 'face' })}
+          placeholder={fill(photo.url, 32, 32, { gravity: 'face' })}
+        /> :
+        <LazyImage
+          src="https://via.placeholder.com/120?text=?"
+          placeholder="https://via.placeholder.com/32?text=?"
+        />
+      }
     </Avatar>
     <Name>
       <h3>{name}</h3>
