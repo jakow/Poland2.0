@@ -105,7 +105,7 @@ const Footer: React.StatelessComponent<Urls> = ({
 }) => (
   <Container>
     <Social>
-      {facebookUrl.length > 0 &&
+      {facebookUrl &&
         <Icon
           className="facebook"
           href={facebookUrl}
@@ -114,7 +114,7 @@ const Footer: React.StatelessComponent<Urls> = ({
           title="Facebook"
         />
       }
-      {githubUrl.length > 0 &&
+      {githubUrl &&
         <Icon
           className="github"
           href={githubUrl}
@@ -123,7 +123,7 @@ const Footer: React.StatelessComponent<Urls> = ({
           target="_blank"
         />
       }
-      {instagramUrl.length > 0 &&
+      {instagramUrl &&
         <Icon
           className="instagram"
           href={instagramUrl}
@@ -132,7 +132,7 @@ const Footer: React.StatelessComponent<Urls> = ({
           target="_blank"
         />
       }
-      {linkedinUrl.length > 0 &&
+      {linkedinUrl &&
         <Icon
           className="linkedin"
           href={linkedinUrl}
@@ -144,7 +144,7 @@ const Footer: React.StatelessComponent<Urls> = ({
     </Social>
     <Separator/>
     <Legal>
-      {bylawUrl && bylawUrl.length > 0 && <Anchor href={bylawUrl}>By-law for Poland 2.0</Anchor>}
+      {bylawUrl && <Anchor href={bylawUrl}>By-law for Poland 2.0</Anchor>}
       {/* <Modal trigger={<Anchor>Privacy Policy</Anchor>} label="Privacy Policy">
         <ModalCard>
           <PrivacyPolicy>
@@ -154,7 +154,7 @@ const Footer: React.StatelessComponent<Urls> = ({
           </PrivacyPolicy>
         </ModalCard>
       </Modal> */}
-      {privacyPolicyUrl && privacyPolicyUrl.length > 0 &&
+      {privacyPolicyUrl &&
         <Anchor href={privacyPolicyUrl} label="Privacy Policy" target="_blank">
           Privacy Policy
         </Anchor>
