@@ -14,7 +14,7 @@ import Sponsor from '../types/Sponsor';
 const Wrapper = styled('section')({
   margin: 0,
   paddingBottom: rhythm(1),
-  'li > *:first-of-type': {
+  'li > a:first-of-type': {
     minHeight: rhythm(6),
     display: 'flex',
     justifyContent: 'center',
@@ -67,16 +67,16 @@ const Sponsors: React.StatelessComponent<Props> = ({ sponsors, sponsorCategories
         <Title>{title}</Title>
       </Center>
       {sponsorCategories.map((category, index) =>
-        sponsors.length > 0 && category.name ?
+        sponsors && category.name ?
           <React.Fragment key={index}>
             <Center>
               <h2>{category.name}</h2>
             </Center>
             <CardList>
               {sponsors
-                .filter(sponsor => sponsor.category._id === category._id)
+                .filter(sponsor => sponsor.category === category._id)
                 .map((sponsor, index) =>
-                sponsor.description && sponsor.description.length > 0 ?
+                sponsor.description ?
                   <Modal
                     key={index}
                     trigger={sponsorCard(sponsor, index, true)}

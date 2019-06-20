@@ -66,7 +66,7 @@ export const SpeakersFlat: React.StatelessComponent<FlatProps> =
           }
         </Center>
           <CardList>
-            {speakers && speakers.length > 0 &&
+            {speakers &&
               speakers.map((speaker, index) =>
                 speaker.description ?
                   <Modal
@@ -106,9 +106,9 @@ const Speakers: React.StatelessComponent<Props> =
             <React.Fragment key={index}>
               <Center><h2>{category.name}</h2></Center>
               <CardList>
-                {speakers && speakers.length > 0 &&
+                {speakers &&
                   speakers
-                    .filter(speaker => speaker.category._id === category._id)
+                    .filter(speaker => speaker.category && speaker.category === category._id)
                     .map((speaker, index) => speaker.description ?
                       <Modal
                         key={index}
