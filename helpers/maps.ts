@@ -7,7 +7,7 @@
 // }
 
 function locationString(name: string, location: string) {
-  return [name, location].join(', ').replace('\n', '');
+  return [name, location].join(', ').replace('\n', ', ');
 }
 
 export const mapsUrl = (name: string, location: string) =>
