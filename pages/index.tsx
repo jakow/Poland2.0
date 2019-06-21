@@ -26,12 +26,16 @@ const Home: NextFunctionComponent<DefaultPageProps> = ({ currentEdition, content
     <Banner currentEdition={currentEdition}/>
     <Background>
       {contentControl.showAgenda && currentEdition.agendaDays.length > 0 &&
-        <Agenda agendaDays={currentEdition.agendaDays} endDate={new Date(currentEdition.endDate)}/>
+        <Agenda
+          agendaDays={currentEdition.agendaDays}
+          year={currentEdition.previousAgendaYear && currentEdition.previousAgendaYear}
+        />
       }
       {contentControl.showSpeakers && currentEdition.speakers.length > 0 &&
         <Speakers
           speakerCategories={currentEdition.speakerCategories}
           speakers={currentEdition.speakers}
+          year={currentEdition.previousAgendaYear && currentEdition.previousAgendaYear}
         />
       }
       {contentControl.showSponsors && currentEdition.sponsors.length > 0 &&
@@ -40,6 +44,7 @@ const Home: NextFunctionComponent<DefaultPageProps> = ({ currentEdition, content
           sponsorCategories={currentEdition.sponsorCategories}
           sponsors={currentEdition.sponsors}
           title="Partners"
+          year={currentEdition.previousSponsorsYear && currentEdition.previousSponsorsYear}
         />
       }
       {/* {contentControl.showPreviousSponsors &&

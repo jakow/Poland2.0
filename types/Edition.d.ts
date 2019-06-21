@@ -18,8 +18,10 @@ type Edition = {
   speakers?: Speaker[];
   sponsorCategories?: SponsorCategory[];
   sponsors?: Sponsor[];
+  previousSponsorsYear?: number;
   teamMembers?: TeamMember[];
   agendaDays?: AgendaDay[];
+  previousAgendaYear?: number;
 };
 
 export default Edition;

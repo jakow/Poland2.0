@@ -13,6 +13,9 @@ import Edition from '../types/Edition';
 
 const { publicRuntimeConfig } = getConfig();
 
+const api = (path: string) =>
+  fetch(`${publicRuntimeConfig.host}/${path}`).then(data => data.json());
+
 export interface DefaultPageProps {
   contentControl: ContentControl;
   currentEdition: Edition;
@@ -26,10 +29,23 @@ export default class Website extends App<DefaultPageProps> {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    const currentEdition = await fetch(`${publicRuntimeConfig.host}/currentEdition`)
-                                .then(data => data.json());
-    const contentControl = await fetch(`${publicRuntimeConfig.host}/contentControl`)
-                                .then(data => data.json());
+    const currentEdition: Edition = await api('currentEdition');
+    const contentControl: ContentControl = await api('contentControl');
+    if (!currentEdition.agendaDays.length || !currentEdition.sponsors.length) {
+      const year = currentEdition.year - 1;
+      const previousEdition: Edition = await api(`editions/${year}`);
+      if (!currentEdition.agendaDays.length) {
+        currentEdition.previousAgendaYear = year;
+        currentEdition.agendaDays = previousEdition.agendaDays;
+        currentEdition.speakers = previousEdition.speakers;
+        currentEdition.speakerCategories = previousEdition.speakerCategories;
+      }
+      if (!currentEdition.sponsors.length) {
+        currentEdition.previousSponsorsYear = year;
+        currentEdition.sponsors = previousEdition.sponsors;
+        currentEdition.sponsorCategories = previousEdition.sponsorCategories;
+      }
+    }
 
     return { currentEdition, contentControl, pageProps };
   }
