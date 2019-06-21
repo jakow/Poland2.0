@@ -95,14 +95,18 @@ export const SpeakersFlat: React.StatelessComponent<FlatProps> =
 interface Props {
   speakers: Speaker[];
   speakerCategories: SpeakerCategory[];
+  year?: number;
 }
 
 const Speakers: React.StatelessComponent<Props> =
-  ({ speakers, speakerCategories }) => (
+  ({ speakers, speakerCategories, year }) => (
     <Wrapper id="speakers">
       <Container>
-        <Center><Title>Speakers</Title></Center>
-          {speakerCategories && speakerCategories.map((category, index) => (
+        <Center>
+          <Title>{!year ? 'Speakers' : `Speakers of ${year}`}</Title>
+        </Center>
+          {speakerCategories &&
+            speakerCategories.sort((a, b) => b.priority - a.priority).map((category, index) => (
             <React.Fragment key={index}>
               <Center><h2>{category.name}</h2></Center>
               <CardList>

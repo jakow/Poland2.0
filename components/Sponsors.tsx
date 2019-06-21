@@ -39,6 +39,7 @@ interface Props {
   sponsors: Sponsor[];
   title: string;
   id: string;
+  year?: number;
 }
 
 const sponsorCard = (sponsor: Sponsor, index: number, inModal?: boolean) => (
@@ -60,13 +61,15 @@ const sponsorCard = (sponsor: Sponsor, index: number, inModal?: boolean) => (
   )
 );
 
-const Sponsors: React.StatelessComponent<Props> = ({ sponsors, sponsorCategories, title, id }) => (
+const Sponsors: React.StatelessComponent<Props> = ({
+  sponsors, sponsorCategories, title, id, year
+}) => (
   <Wrapper id={id}>
     <Container>
       <Center>
-        <Title>{title}</Title>
+        <Title>{!year ? title : `${title} of ${year}`}</Title>
       </Center>
-      {sponsorCategories.map((category, index) =>
+      {sponsorCategories.sort((a, b) => b.priority - a.priority).map((category, index) =>
         sponsors && category.name ?
           <React.Fragment key={index}>
             <Center>
