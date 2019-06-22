@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { DefaultProps } from './_app';
-import { fat, Anchor, bold, stripe, Center } from '@poland20/p20-components';
-import { Speaker, TeamMember } from '../components/types';
-import { Edition } from '../models';
+import { DefaultPageProps } from './_app';
 import { Background } from '.';
 import TeamMembers from '../components/TeamMembers';
 import { SpeakersFlat } from '../components/Speakers';
+import Edition from '../types/Edition';
+import Speaker from '../types/Speaker';
+import TeamMember from '../types/TeamMember';
+import { _fat, Anchor, Center, _bold, _stripe } from '../components/typography';
 
 const Container = styled('section')({
   display: 'flex',
@@ -34,9 +35,9 @@ interface Props {
   years: string[];
 }
 
-const PastEditions: React.StatelessComponent<DefaultProps & Props> = ({ editions, years }) => (
+const PastEditions: React.StatelessComponent<DefaultPageProps & Props> = ({ editions, years }) => (
   <Container>
-    <h1 className={fat}>Past Editions</h1>
+    {/* <h1 className={_fat}>Past Editions</h1>
     <YearList>
       {years.map((year, index) => <Anchor key={index} href={`#p${year}`}>{year}</Anchor>)}
     </YearList>
@@ -44,13 +45,15 @@ const PastEditions: React.StatelessComponent<DefaultProps & Props> = ({ editions
       {editions.map((edition, index) => (
         <article key={index}>
           <Center>
-            <h2 id={`p${edition.year}`} className={`${bold} ${fat} ${stripe}`}>{edition.name}</h2>
+            <h2 id={`p${edition.year}`} className={`${_bold} ${_fat} ${_stripe}`}>
+              Poland 2.0 Summit {edition.year}
+            </h2>
           </Center>
           <SpeakersFlat speakers={edition.speakers} isInSubcategory={true}/>
           <TeamMembers teamMembers={edition.teamMembers} isInSubcategory={true}/>
         </article>
       ))}
-    </Background>
+    </Background> */}
   </Container>
 );
 
