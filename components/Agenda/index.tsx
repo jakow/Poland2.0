@@ -16,6 +16,7 @@ const Main = styled('main')({
 const Heading = styled('h1')(bold, fat, stripe);
 
 const Section = styled('section')({
+  position: 'relative',
   paddingBottom: rhythm(1)
 });
 
@@ -45,10 +46,9 @@ interface Props {
 }
 
 const Agenda: React.StatelessComponent<Props> = ({ agendaDays, year }) => {
-  // const endDate = new Date(agendaDays[agendaDays.length - 1].date);
-
   return (
-  <Section id="agenda">
+  <Section>
+    <a id="agenda"/>
     <Container>
       <Center>
         <Heading>

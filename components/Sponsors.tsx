@@ -12,6 +12,7 @@ import SponsorCategory from '../types/SponsorCategory';
 import Sponsor from '../types/Sponsor';
 
 const Wrapper = styled('section')({
+  position: 'relative',
   margin: 0,
   paddingBottom: rhythm(1),
   'li > a:first-of-type': {
@@ -35,12 +36,53 @@ const Wrapper = styled('section')({
 const Title = styled('h1')(bold, fat, stripe);
 
 interface Props {
-  sponsorCategories: SponsorCategory[];
+  sponsorCategories?: SponsorCategory[];
   sponsors: Sponsor[];
   title: string;
-  id: string;
+  id?: string;
   year?: number;
 }
+
+const mapSponsors = (category: SponsorCategory, index: number, sponsors: Sponsor[]) => (
+  sponsors && (
+    <React.Fragment key={index}>
+      {category &&
+        <Center>
+          <h2>{category.name}</h2>
+        </Center>
+      }
+      <CardList>
+        {sponsors
+          .filter(sponsor => !category || sponsor.category === category._id)
+          .map((sponsor, index) =>
+            sponsor.description ?
+              <Modal
+                key={index}
+                trigger={sponsorCard(sponsor, index, true)}
+                label={`Learn more about ${sponsor.name}`}
+              >
+                <ModalCard>
+                  <SmallMarginBottom>{sponsor.name}</SmallMarginBottom>
+                  <p>
+                    <small>
+                      <a
+                        href={sponsor.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {sponsor.url}
+                      </a>
+                    </small>
+                  </p>
+                  <Markdown>{sponsor.description}</Markdown>
+                </ModalCard>
+              </Modal>
+          : sponsorCard(sponsor, index)
+        )}
+      </CardList>
+    </React.Fragment>
+  )
+);
 
 const sponsorCard = (sponsor: Sponsor, index: number, inModal?: boolean) => (
   inModal ? (
@@ -64,49 +106,17 @@ const sponsorCard = (sponsor: Sponsor, index: number, inModal?: boolean) => (
 const Sponsors: React.StatelessComponent<Props> = ({
   sponsors, sponsorCategories, title, id, year
 }) => (
-  <Wrapper id={id}>
+  <Wrapper>
+    <a id={id}/>
     <Container>
       <Center>
         <Title>{!year ? title : `${title} of ${year}`}</Title>
       </Center>
-      {sponsorCategories.sort((a, b) => b.priority - a.priority).map((category, index) =>
-        sponsors && category.name ?
-          <React.Fragment key={index}>
-            <Center>
-              <h2>{category.name}</h2>
-            </Center>
-            <CardList>
-              {sponsors
-                .filter(sponsor => sponsor.category === category._id)
-                .map((sponsor, index) =>
-                sponsor.description ?
-                  <Modal
-                    key={index}
-                    trigger={sponsorCard(sponsor, index, true)}
-                    label={`Learn more about ${sponsor.name}`}
-                  >
-                    <ModalCard>
-                      <SmallMarginBottom>{sponsor.name}</SmallMarginBottom>
-                      <p>
-                        <small>
-                          <a
-                            href={sponsor.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {sponsor.url}
-                          </a>
-                        </small>
-                      </p>
-                      <Markdown>{sponsor.description}</Markdown>
-                    </ModalCard>
-                  </Modal>
-                : sponsorCard(sponsor, index)
-              )}
-            </CardList>
-          </React.Fragment>
-          : null
-        )
+      {sponsorCategories ?
+        sponsorCategories
+          .sort((a, b) => b.priority - a.priority)
+          .map((category, index) => mapSponsors(category, index, sponsors))
+        : mapSponsors(null, null, sponsors)
       }
       <br/><br/>
       <Center>

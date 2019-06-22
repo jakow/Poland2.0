@@ -17,6 +17,7 @@ export type Urls = {
 type ContentControl = {
     showSpeakers: boolean;
     showSponsors: boolean;
+    showPreviousSponsors: boolean;
     showAgenda: boolean;
     ticketControl: TicketControl;
 } & Urls;

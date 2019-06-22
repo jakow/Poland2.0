@@ -100,7 +100,8 @@ interface Props {
 
 const Speakers: React.StatelessComponent<Props> =
   ({ speakers, speakerCategories, year }) => (
-    <Wrapper id="speakers">
+    <Wrapper>
+      <a id="speakers"/>
       <Container>
         <Center>
           <Title>{!year ? 'Speakers' : `Speakers of ${year}`}</Title>

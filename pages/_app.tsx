@@ -13,7 +13,7 @@ import Edition from '../types/Edition';
 
 const { publicRuntimeConfig } = getConfig();
 
-const api = (path: string) =>
+export const api = (path: string) =>
   fetch(`${publicRuntimeConfig.host}/${path}`).then(data => data.json());
 
 export interface DefaultPageProps {
@@ -31,6 +31,7 @@ export default class Website extends App<DefaultPageProps> {
 
     const currentEdition: Edition = await api('currentEdition');
     const contentControl: ContentControl = await api('contentControl');
+
     if (!currentEdition.agendaDays.length || !currentEdition.sponsors.length) {
       const year = currentEdition.year - 1;
       const previousEdition: Edition = await api(`editions/${year}`);
@@ -54,8 +55,11 @@ export default class Website extends App<DefaultPageProps> {
     const { Component, contentControl, currentEdition, pageProps } = this.props;
     const navLinks = [
       { title: 'About', url: '/about' },
-      { title: 'Past Editions', url: '/past-editions' },
-      { title: 'empowerPL', url: '/empowerPL' }
+      contentControl.showAgenda && { title: 'Agenda', url: '/#agenda' },
+      contentControl.showSpeakers && { title: 'Speakers', url: '/#speakers' },
+      contentControl.showSponsors && { title: 'Partners', url: '/#partners' },
+      { title: 'empowerPL', url: '/empowerPL' },
+      // { title: 'Past Editions', url: '/past-editions' },
     ];
 
     return (
@@ -71,6 +75,10 @@ export default class Website extends App<DefaultPageProps> {
               body: {
                 fontSize: 15
               }
+            },
+            'a[id]': {
+              position: 'absolute',
+              top: `-${rhythm(3)}`
             }
           })}
         />
