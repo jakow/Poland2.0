@@ -24,7 +24,7 @@ module.exports =
       return config;
     },
     publicRuntimeConfig: {
-      host: process.env.NODE_ENV === 'production' ? process.env.WEBSITE_URL : 'http://localhost:1337',
+      host: process.env.NODE_ENV === 'production' ? process.env.API_URL : 'http://localhost:1337',
     }
   }
 )));
