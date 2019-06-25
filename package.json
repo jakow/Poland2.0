@@ -79,6 +79,7 @@
     "start": "next start",
     "docker": "docker-compose -f docker-compose.yml -f docker-compose.production.yml up -d",
     "docker:build": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml build",
+    "docker:db": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml up db",
     "docker:logging": "docker-compose -f docker-compose.yml -f docker-compose.production.yml up",
     "docker:staging": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml up",
     "storybook": "start-storybook"
