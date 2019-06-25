@@ -3,8 +3,16 @@ services:
   web:
     volumes:
       - .:/app
-    ports:
-      - '9009:9009'
-    command: sh -c "yarn build && yarn staging"
+    environment:
+      - NODE_ENV=staging
+      - API_URL=http://api.localhost
+  api:
+    build:
+      args:
+        - config=staging
+    volumes:
+      - ../p20-backend:/api
+    environment:
+      - NODE_ENV=staging
   db:
     command: "--smallfiles --logpath=/dev/null"
