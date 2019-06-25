@@ -1,7 +1,16 @@
 version: '3.5'
 services:
-  web:
-    ports:
-      - '80:9009'
+  nginx:
     restart: unless-stopped
-    command: sh -c "yarn build && yarn start"
+  web:
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - API_URL=https://api.poland20.com
+  api:
+    build:
+      args:
+        - config=production
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped

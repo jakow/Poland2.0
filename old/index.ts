@@ -2,16 +2,12 @@ import 'source-map-support/register';
 import * as express from 'express';
 import * as keystone from 'keystone';
 import * as mongoose from 'mongoose';
-import * as Promise from 'bluebird';
-import * as helmet from 'helmet';
 import * as path from 'path';
 import * as next from 'next';
 import * as config from './config';
 import routes from './routes';
 import { initSockets } from './routes/sockets';
 import * as auth from './routes/api/auth';
-
-(mongoose as any).Promise = Promise;
 
 const app = next({ dev: config.environment === 'development' });
 
@@ -53,10 +49,10 @@ app.prepare().then(() => {
     // Built in store apparently leaks memory so needs to be replaced.
     keystone.set('session store', 'connect-mongo');
     // security options
-    server.use(helmet({
-      dnsPrefetchControl: false,
-      hidePoweredBy: true,
-    }));
+    // server.use(helmet({
+    //   dnsPrefetchControl: false,
+    //   hidePoweredBy: true,
+    // }));
   }
 
   keystone.set('routes', routes(app));

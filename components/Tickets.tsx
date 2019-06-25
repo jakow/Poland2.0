@@ -1,10 +1,12 @@
 import React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import Markdown from 'react-markdown';
-import {
-  colors, rhythm, Container, Countdown, breakpointMin
-} from '@poland20/p20-components';
-import { ContentControl } from '../models';
+import { colors, breakpointMin } from './variables';
+import { rhythm } from './typography';
+import Container from './Container';
+import Countdown from './Countdown';
+import { TicketControl } from '../types/ContentControl';
+
 const meshTopLeft = require('../static/images/mesh-corner-top-left.svg');
 const meshBottomRight = require('../static/images/mesh-corner-bottom-right.svg');
 
@@ -42,16 +44,16 @@ const Wrapper = styled('section')({
   }
 });
 
-export default class Tickets extends React.Component<{ tickets: ContentControl['tickets'] }> {
+export default class Tickets extends React.Component<{ ticketControl: TicketControl }> {
   render() {
-    const { tickets } = this.props;
+    const { ticketControl } = this.props;
     return (
       <Wrapper>
         <Container>
           <Center>
-            <Markdown>{tickets.message.md}</Markdown>
-            {tickets.countdown &&
-              <Countdown date={new Date(tickets.countdownDate)} stroke={`${colors.white}`}/>
+            <Markdown>{ticketControl.description}</Markdown>
+            {ticketControl.showCountdown &&
+              <Countdown date={new Date(ticketControl.salesDate)} stroke={`${colors.white}`}/>
             }
           </Center>
         </Container>

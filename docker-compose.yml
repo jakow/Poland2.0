@@ -1,5 +1,16 @@
 version: '3.5'
 services:
+  nginx:
+    build:
+      context: ../p20-backend
+      dockerfile: nginx.Dockerfile
+    image: nginx
+    container_name: p20-nginx
+    ports:
+      - 80:80
+    depends_on:
+      - api
+      - web
   web:
     build:
       context: .
@@ -7,6 +18,15 @@ services:
       target: base
     image: poland20/p20-website
     container_name: p20-website
+    command: sh -c "yarn build && yarn start"
+  api:
+    build:
+      context: ../p20-backend
+      dockerfile: strapi.Dockerfile
+      target: base
+    image: poland20/p20-backend
+    container_name: p20-backend
+    command: sh -c "yarn start"
     depends_on:
       - db
   db:

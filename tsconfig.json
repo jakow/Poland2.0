@@ -1,19 +1,20 @@
 {
   "compilerOptions": {
-    "lib": ["es2015", "es2016", "dom"],
-    "baseUrl": ".",
+    "lib": ["es2017", "dom"],
     "sourceMap": true,
-    "noImplicitAny": true,
-    "module": "es2015",
-    "target": "es2015",
+    "module": "esnext",
+    "target": "esnext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "allowJs": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "diagnostics": true,
-    "downlevelIteration": true
+    "typeRoots": [
+      "./node_modules/@types",
+      "./@types"
+    ]
   }
 }

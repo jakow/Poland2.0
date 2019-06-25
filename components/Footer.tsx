@@ -1,10 +1,8 @@
 import React from 'react';
-import styled from 'react-emotion';
-import Markdown from 'react-markdown';
-import {
-  colors, rhythm, breakpointMin, Anchor, Modal, breakpointMax
-} from '@poland20/p20-components';
-import ModalCard from './ModalCard';
+import styled from '@emotion/styled';
+import { rhythm, Anchor } from './typography';
+import { breakpointMax, colors, breakpointMin } from './variables';
+import { Urls } from '../types/ContentControl';
 
 const Container = styled('footer')({
   background: 'white',
@@ -46,9 +44,9 @@ const Social = styled('div')({
 });
 
 const socialMedia =
-  ['facebook', 'linkedin', 'twitter', 'youtube', 'vimeo'].map(media => ({
+  ['facebook', 'linkedin', 'instagram', 'github'].map(media => ({
     [`&.${media}`]: {
-      backgroundImage: `url('/static/images/icons/${media}.svg')`
+      backgroundImage: `url('https://unpkg.com/simple-icons@latest/icons/${media}.svg')`
     }
   }));
 
@@ -71,39 +69,39 @@ const Icon = styled('a')(
   ...socialMedia
 );
 
-const PrivacyPolicy = styled('div')({
-  textAlign: 'initial',
-  'h1, h2, h3, h4': {
-    fontWeight: 'bold',
-    margin: `${rhythm(0.75)} 0`
-  },
-  'h1:first-child': {
-    textAlign: 'center',
-    marginTop: 0
-  },
-  'p, ul, ol': {
-    marginTop: rhythm(0.25),
-    marginBottom: rhythm(0.25)
-  },
-  hr: {
-    margin: `${rhythm(1)} 0`
-  },
-  del: {
-    textDecoration: 'underline'
-  }
-});
+// const PrivacyPolicy = styled('div')({
+//   textAlign: 'initial',
+//   'h1, h2, h3, h4': {
+//     fontWeight: 'bold',
+//     margin: `${rhythm(0.75)} 0`
+//   },
+//   'h1:first-of-type': {
+//     textAlign: 'center',
+//     marginTop: 0
+//   },
+//   'p, ul, ol': {
+//     marginTop: rhythm(0.25),
+//     marginBottom: rhythm(0.25)
+//   },
+//   hr: {
+//     margin: `${rhythm(1)} 0`
+//   },
+//   del: {
+//     textDecoration: 'underline'
+//   }
+// });
 
-interface Props {
-  bylawLink: string;
-  privacyPolicy: { md: string };
-  facebookUrl?: string;
-  linkedinUrl?: string;
-  twitterUrl?: string;
-  videoChannelUrl?: string;
-}
+// interface Props {
+//   bylawUrl: string;
+//   privacyPolicy: { md: string };
+//   facebookUrl?: string;
+//   linkedinUrl?: string;
+//   twitterUrl?: string;
+//   videoChannelUrl?: string;
+// }
 
-const Footer: React.StatelessComponent<Props> = ({
-  bylawLink, privacyPolicy, facebookUrl, linkedinUrl, twitterUrl, videoChannelUrl
+const Footer: React.StatelessComponent<Urls> = ({
+  bylawUrl, privacyPolicyUrl, facebookUrl, linkedinUrl, instagramUrl, githubUrl
 }) => (
   <Container>
     <Social>
@@ -116,6 +114,24 @@ const Footer: React.StatelessComponent<Props> = ({
           title="Facebook"
         />
       }
+      {githubUrl &&
+        <Icon
+          className="github"
+          href={githubUrl}
+          title="GitHub"
+          rel="noopener noreferrer"
+          target="_blank"
+        />
+      }
+      {instagramUrl &&
+        <Icon
+          className="instagram"
+          href={instagramUrl}
+          title="Instagram"
+          rel="noopener noreferrer"
+          target="_blank"
+        />
+      }
       {linkedinUrl &&
         <Icon
           className="linkedin"
@@ -125,38 +141,11 @@ const Footer: React.StatelessComponent<Props> = ({
           title="LinkedIn"
         />
       }
-      {twitterUrl &&
-        <Icon
-          className="twitter"
-          href={twitterUrl}
-          title="Twitter"
-          rel="noopener noreferrer"
-          target="_blank"
-        />
-      }
-      {videoChannelUrl && videoChannelUrl.includes('youtu') &&
-        <Icon
-          className="youtube"
-          href={videoChannelUrl}
-          title="YouTube"
-          rel="noopener noreferrer"
-          target="_blank"
-        />
-      }
-      {videoChannelUrl && videoChannelUrl.includes('vimeo') &&
-        <Icon
-          className="vimeo"
-          href={videoChannelUrl}
-          title="Vimeo"
-          rel="noopener noreferrer"
-          target="_blank"
-        />
-      }
     </Social>
     <Separator/>
     <Legal>
-      <Anchor href={bylawLink}>By-law for Poland 2.0</Anchor>
-      <Modal trigger={<Anchor>Privacy Policy</Anchor>} label="Privacy Policy">
+      {bylawUrl && <Anchor href={bylawUrl}>By-law for Poland 2.0</Anchor>}
+      {/* <Modal trigger={<Anchor>Privacy Policy</Anchor>} label="Privacy Policy">
         <ModalCard>
           <PrivacyPolicy>
             <Markdown escapeHtml={false} linkTarget="_blank">
@@ -164,21 +153,20 @@ const Footer: React.StatelessComponent<Props> = ({
             </Markdown>
           </PrivacyPolicy>
         </ModalCard>
-      </Modal>
-      {/* <Anchor
-        href="/static/privacy-policy.pdf"
-        label="Privacy Policy"
-        target="_blank"
-      >
-        Privacy Policy
-      </Anchor> */}
+      </Modal> */}
+      {privacyPolicyUrl &&
+        <Anchor href={privacyPolicyUrl} label="Privacy Policy" target="_blank">
+          Privacy Policy
+        </Anchor>
+      }
       <Anchor href="mailto:contact@poland20.com">Contact</Anchor>
     </Legal>
     <Credits>
       &#169; {(new Date()).getFullYear()} Poland 2.0<br/>
       Created by&nbsp;
       <a href="https://github.com/jakow" target="_blank" rel="noopener">Jakub Kowalczyk</a><br/>
-      Maintained by <a href="mailto:artur@komoter.pl">Artur Komoter</a>
+      Maintained by&nbsp;
+      <a href="https://github.com/arutr" target="_blank" rel="noopener">Artur Komoter</a>
     </Credits>
   </Container>
 );

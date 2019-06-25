@@ -1,23 +1,15 @@
 import React from 'react';
 import Markdown from 'react-markdown';
-import styled, { css } from 'react-emotion';
-import {
-  Container,
-  rhythm,
-  Center,
-  bold,
-  fat,
-  stripe,
-  CardList,
-  Card,
-  fill,
-  Modal,
-  breakpointMin,
-  colors
-} from '@poland20/p20-components';
+import styled from '@emotion/styled';
 import ModalCard from './ModalCard';
-import { smallMarginBottom } from './Speakers';
-import { TeamMember } from './types';
+import { SmallMarginBottom } from './Speakers';
+import { breakpointMin, colors } from './variables';
+import { bold, fat, stripe, rhythm, Center } from './typography';
+import Card, { CardList } from './Card';
+import Container from './Container';
+import Modal from './Modal';
+import { fill } from '../helpers/cloudinary';
+import TeamMember from '../types/TeamMember';
 
 const LearnMore = styled('small')({
   [breakpointMin('tablet')]: {
@@ -31,7 +23,7 @@ const Subtitle = styled('h2')();
 
 const Wrapper = styled('section')({
   paddingBottom: rhythm(0.5),
-  'li > div:nth-child(2)': {
+  'li > div:nth-of-type(2)': {
     display: 'flex',
     flexDirection: 'column',
     minHeight: rhythm(8)
@@ -64,11 +56,13 @@ const Icon = styled('a')({
   }
 });
 
+const H3 = SmallMarginBottom.withComponent('h3');
+
 const memberCard = (member: TeamMember, index?: number) => (
   <Card
     key={index}
-    image={fill(member.photo.secure_url, 300, 300, { gravity: 'faces' })}
-    imagePreview={fill(member.photo.secure_url, 32, 32, { gravity: 'faces' })}
+    image={fill(member.photo.url, 300, 300, { gravity: 'faces' })}
+    imagePreview={fill(member.photo.url, 32, 32, { gravity: 'faces' })}
     footer={(
       <React.Fragment>
         {member.position}<br/>
@@ -76,8 +70,8 @@ const memberCard = (member: TeamMember, index?: number) => (
       </React.Fragment>
     )}
   >
-    <h3 className={smallMarginBottom}>{member.name}</h3>
-    <h4 style={{ flexGrow: 1 }}>{member.occupation && member.occupation}</h4>
+    <H3>{member.name}</H3>
+    <h4 style={{ flexGrow: 1 }}>{member.position && member.position}</h4>
     <div>
       {member.linkedin &&
         <Icon
@@ -116,20 +110,20 @@ const TeamMembers: React.StatelessComponent<Props> =
           }
           <CardList>
             {teamMembers && teamMembers.map((member, index) => (
-              member.description.md ?
+              member.description ?
                 <Modal
                   key={index}
                   trigger={memberCard(member)}
                   label={`Learn more about ${member.name}`}
                 >
                   <ModalCard>
-                    <h1 className={smallMarginBottom}>{member.name}</h1>
+                    <SmallMarginBottom>{member.name}</SmallMarginBottom>
                     <p>
                       <strong>
-                        {member.position}{member.occupation && `, ${member.occupation}`}
+                        {member.position}{member.position && `, ${member.position}`}
                       </strong>
                     </p>
-                    <Markdown>{member.description.md}</Markdown>
+                    <Markdown>{member.description}</Markdown>
                   </ModalCard>
                 </Modal>
               : memberCard(member, index)

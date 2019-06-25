@@ -1,21 +1,15 @@
 import React from 'react';
 import Markdown from 'react-markdown';
-import styled, { css } from 'react-emotion';
-import {
-  Container,
-  rhythm,
-  Center,
-  bold,
-  fat,
-  stripe,
-  CardList,
-  Card,
-  fill,
-  Modal,
-  breakpointMin
-} from '@poland20/p20-components';
+import styled from '@emotion/styled';
 import ModalCard from './ModalCard';
-import { SpeakerCategories, Speaker } from './types';
+import { breakpointMin } from './variables';
+import { bold, fat, stripe, rhythm, Center } from './typography';
+import Card, { CardList } from './Card';
+import Container from './Container';
+import Modal from './Modal';
+import { fill } from '../helpers/cloudinary';
+import Speaker from '../types/Speaker';
+import SpeakerCategory from '../types/SpeakerCategory';
 
 const LearnMore = styled('small')({
   [breakpointMin('tablet')]: {
@@ -32,26 +26,27 @@ const Wrapper = styled('section')({
   paddingBottom: rhythm(0.5)
 });
 
-export const smallMarginBottom = css({
+export const SmallMarginBottom = styled('h1')({
   marginBottom: rhythm(0.25),
   wordWrap: 'normal'
 });
+const H3 = SmallMarginBottom.withComponent('h3');
 
 const speakerCard = (speaker: Speaker, index?: number) => (
   <Card
     key={index}
-    image={fill(speaker.photo.secure_url, 300, 300, { gravity: 'faces' })}
-    imagePreview={fill(speaker.photo.secure_url, 32, 32, { gravity: 'faces' })}
+    image={fill(speaker.photo.url, 300, 300, { gravity: 'faces' })}
+    imagePreview={fill(speaker.photo.url, 32, 32, { gravity: 'faces' })}
     footer={(
       <React.Fragment>
-        {speaker.position}<br/>
+        {speaker.occupation}<br/>
         {index ? '' : <LearnMore>Tap on the image to learn more...</LearnMore>}
       </React.Fragment>
     )}
   >
     <Center>
-      <h3 className={smallMarginBottom}>{speaker.name}</h3>
-      <h4>{speaker.company && speaker.company}</h4>
+      <H3>{speaker.name}</H3>
+      <h4>{speaker.organisation && speaker.organisation}</h4>
     </Center>
   </Card>
 );
@@ -71,22 +66,22 @@ export const SpeakersFlat: React.StatelessComponent<FlatProps> =
           }
         </Center>
           <CardList>
-            {speakers && speakers.length > 0 &&
+            {speakers &&
               speakers.map((speaker, index) =>
-                speaker.description.md ?
+                speaker.description ?
                   <Modal
                     key={index}
                     trigger={speakerCard(speaker)}
                     label={`Learn more about ${speaker.name}`}
                   >
                     <ModalCard>
-                      <h1 className={smallMarginBottom}>{speaker.name}</h1>
+                      <SmallMarginBottom>{speaker.name}</SmallMarginBottom>
                       <p>
                         <strong>
-                          {speaker.position}{speaker.company && `, ${speaker.company}`}
+                          {speaker.occupation}{speaker.organisation && `, ${speaker.organisation}`}
                         </strong>
                       </p>
-                      <Markdown>{speaker.description.md}</Markdown>
+                      <Markdown>{speaker.description}</Markdown>
                     </ModalCard>
                   </Modal>
                 : speakerCard(speaker, index)
@@ -97,31 +92,43 @@ export const SpeakersFlat: React.StatelessComponent<FlatProps> =
     </Wrapper>
 );
 
-const Speakers: React.StatelessComponent<{ speakerCategories: SpeakerCategories }> =
-  ({ speakerCategories }) => (
-    <Wrapper id="speakers">
+interface Props {
+  speakers: Speaker[];
+  speakerCategories: SpeakerCategory[];
+  year?: number;
+}
+
+const Speakers: React.StatelessComponent<Props> =
+  ({ speakers, speakerCategories, year }) => (
+    <Wrapper>
+      <a id="speakers"/>
       <Container>
-        <Center><Title>Speakers</Title></Center>
-          {speakerCategories && speakerCategories.map((category, index) => (
+        <Center>
+          <Title>{!year ? 'Speakers' : `Speakers of ${year}`}</Title>
+        </Center>
+          {speakerCategories &&
+            speakerCategories.sort((a, b) => b.priority - a.priority).map((category, index) => (
             <React.Fragment key={index}>
-              <Center><h2>{category.displayName}</h2></Center>
+              <Center><h2>{category.name}</h2></Center>
               <CardList>
-                {category.speakers && category.speakers.length > 0 &&
-                  category.speakers.map((speaker, index) =>
-                    speaker.description.md ?
+                {speakers &&
+                  speakers
+                    .filter(speaker => speaker.category && speaker.category === category._id)
+                    .map((speaker, index) => speaker.description ?
                       <Modal
                         key={index}
                         trigger={speakerCard(speaker)}
                         label={`Learn more about ${speaker.name}`}
                       >
                         <ModalCard>
-                          <h1 className={smallMarginBottom}>{speaker.name}</h1>
+                          <SmallMarginBottom>{speaker.name}</SmallMarginBottom>
                           <p>
                             <strong>
-                              {speaker.position}{speaker.company && `, ${speaker.company}`}
+                              {speaker.occupation}
+                              {speaker.organisation && `, ${speaker.organisation}`}
                             </strong>
                           </p>
-                          <Markdown>{speaker.description.md}</Markdown>
+                          <Markdown>{speaker.description}</Markdown>
                         </ModalCard>
                       </Modal>
                     : speakerCard(speaker, index)

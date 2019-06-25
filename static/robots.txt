@@ -1,2 +1,2 @@
-User-agent: *
-Disallow: /keystone/
+User-Agent: *
+Disallow: /panel/

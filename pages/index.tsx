@@ -1,64 +1,72 @@
 import React from 'react';
-import styled from 'react-emotion';
-import withDefault, { DefaultProps } from './_app';
-import { Banner, colors, Agenda } from '@poland20/p20-components';
-import { AgendaType } from '@poland20/p20-components/types/Agenda';
-import Tickets from '../components/Tickets';
+import styled from '@emotion/styled';
+import { DefaultPageProps, api } from './_app';
 import Speakers from '../components/Speakers';
 import Sponsors from '../components/Sponsors';
-import { SpeakerCategories, SponsorCategories } from '../components/types';
-
-interface Props {
-  speakerCategories: SpeakerCategories;
-  sponsorCategories: SponsorCategories;
-  previousSponsorCategories: SponsorCategories;
-  agenda: AgendaType;
-}
+import { colors } from '../components/variables';
+import Banner from '../components/Banner';
+import Agenda from '../components/Agenda';
+import Tickets from '../components/Tickets';
+import Sponsor from '../types/Sponsor';
 
 export const Background = styled('section')({
-  '& > *:nth-child(odd)': {
+  '& > *:nth-of-type(odd)': {
     backgroundColor: `${colors.lightGray}`
   },
-  '& > *:nth-child(even)': {
+  '& > *:nth-of-type(even)': {
     backgroundColor: `${colors.white}`
   }
 });
 
-const Home: React.StatelessComponent<DefaultProps & Props> = ({
-  agenda,
-  currentEdition,
-  contentControl,
-  speakerCategories,
-  sponsorCategories,
-  previousSponsorCategories
-}) => (
-  <React.Fragment>
-    {contentControl.tickets.showSection &&
-      <Tickets tickets={contentControl.tickets}/>
-    }
-    <Banner
-      currentEdition={currentEdition}
-      description={contentControl.description}
-    />
-    <Background>
-      {contentControl.showAgenda && agenda.days.length > 0 &&
-        <Agenda agenda={agenda}/>
-      }
-      {contentControl.showSpeakers && speakerCategories.length > 0 &&
-        <Speakers speakerCategories={speakerCategories}/>
-      }
-      {contentControl.showSponsors &&
-        <Sponsors id="partners" sponsorCategories={sponsorCategories} title="Partners"/>
-      }
-      {contentControl.showPreviousSponsors &&
-        <Sponsors
-          id="previous-partners"
-          sponsorCategories={previousSponsorCategories}
-          title="Previous Partners"
-        />
-      }
-    </Background>
-  </React.Fragment>
-);
+interface Props {
+  previousSponsors: Sponsor[];
+}
 
-export default withDefault(Home, 'home');
+export default class extends React.Component<DefaultPageProps & Props> {
+  static async getInitialProps() {
+    const previousSponsors = await api('previousSponsors');
+    return { previousSponsors };
+  }
+
+  render() {
+    const { contentControl, currentEdition, previousSponsors } = this.props;
+    return (
+      <React.Fragment>
+        {contentControl.ticketControl.onSale &&
+          <Tickets ticketControl={contentControl.ticketControl}/>
+        }
+        <Banner currentEdition={currentEdition}/>
+        <Background>
+          {contentControl.showAgenda && currentEdition.agendaDays.length > 0 &&
+            <Agenda
+              agendaDays={currentEdition.agendaDays}
+              year={currentEdition.previousAgendaYear && currentEdition.previousAgendaYear}
+            />
+          }
+          {contentControl.showSpeakers && currentEdition.speakers.length > 0 &&
+            <Speakers
+              speakerCategories={currentEdition.speakerCategories}
+              speakers={currentEdition.speakers}
+              year={currentEdition.previousAgendaYear && currentEdition.previousAgendaYear}
+            />
+          }
+          {contentControl.showSponsors && currentEdition.sponsors.length > 0 &&
+            <Sponsors
+              id="partners"
+              sponsorCategories={currentEdition.sponsorCategories}
+              sponsors={currentEdition.sponsors}
+              title="Partners"
+              year={currentEdition.previousSponsorsYear && currentEdition.previousSponsorsYear}
+            />
+          }
+          {contentControl.showPreviousSponsors &&
+            <Sponsors
+              title="Previous Partners"
+              sponsors={previousSponsors}
+            />
+          }
+        </Background>
+      </React.Fragment>
+    );
+  }
+}

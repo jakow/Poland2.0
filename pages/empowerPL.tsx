@@ -1,10 +1,11 @@
 import React from 'react';
-import styled, { css } from 'react-emotion';
-import withDefault, { DefaultProps } from './_app';
-import {
-  rhythm, colors, stripe, fat, Center, bold, ResponsiveVideo
-} from '@poland20/p20-components';
+import { css } from '@emotion/core';
+import styled from '@emotion/styled';
+import { DefaultPageProps } from './_app';
 import { Mission } from './about';
+import { rhythm, fat, stripe, bold, Center, _fat } from '../components/typography';
+import { colors } from '../components/variables';
+import ResponsiveVideo from '../components/ResponsiveVideo';
 
 const background = css({
   zIndex: 0,
@@ -75,7 +76,7 @@ const Objective = styled('h1')(stripe, bold, {
   }
 });
 
-const empowerPL: React.StatelessComponent<DefaultProps> = () => (
+const empowerPL: React.StatelessComponent<DefaultPageProps> = () => (
   <Container>
     <Image/>
     <Gradient/>
@@ -88,7 +89,7 @@ const empowerPL: React.StatelessComponent<DefaultProps> = () => (
         </Center>
       </Banner>
       <Mission property="description">
-        <Center className={fat}>
+        <Center className={_fat}>
           <Objective>Objective</Objective>
         </Center>
         <p>
@@ -111,4 +112,4 @@ const empowerPL: React.StatelessComponent<DefaultProps> = () => (
   </Container>
 );
 
-export default withDefault(empowerPL);
+export default empowerPL;
