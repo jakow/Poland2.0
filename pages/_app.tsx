@@ -11,10 +11,12 @@ import TopNavigation from '../components/TopNavigation';
 import ContentControl from '../types/ContentControl';
 import Edition from '../types/Edition';
 
-const { publicRuntimeConfig } = getConfig();
+const { publicRuntimeConfig, serverRuntimeConfig } = getConfig();
 
-export const api = (path: string) =>
-  fetch(`${publicRuntimeConfig.host}/${path}`).then(data => data.json());
+export const api = (path: string) => {
+  const host = serverRuntimeConfig.host || publicRuntimeConfig.host;
+  return fetch(`${host}/${path}`).then(data => data.json());
+};
 
 export interface DefaultPageProps {
   contentControl: ContentControl;
