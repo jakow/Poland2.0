@@ -77,11 +77,13 @@
     "build": "next build",
     "dev": "next",
     "start": "next start",
-    "docker": "docker-compose -f docker-compose.yml -f docker-compose.production.yml up -d",
-    "docker:build": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml build",
-    "docker:db": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml up db",
-    "docker:logging": "docker-compose -f docker-compose.yml -f docker-compose.production.yml up",
-    "docker:staging": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml up",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook",
+    "docker:prod": "docker-compose -f docker-compose.yml -f docker-compose.production.yml up -d",
+    "docker:prod:web": "docker-compose -f docker-compose.yml -f docker-compose.production.yml up -d web",
+    "docker:prod:build:web": "docker-compose -f docker-compose.yml -f docker-compose.production.yml build web",
+    "docker:stag:build": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml build",
+    "docker:stag:db": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml up db",
+    "docker:prod:log": "docker-compose -f docker-compose.yml -f docker-compose.production.yml up",
+    "docker:stag": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml up"
   }
 }
