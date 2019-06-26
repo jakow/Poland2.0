@@ -71,7 +71,7 @@ const memberCard = (member: TeamMember, index?: number) => (
     )}
   >
     <H3>{member.name}</H3>
-    <h4 style={{ flexGrow: 1 }}>{member.position && member.position}</h4>
+    <h4 style={{ flexGrow: 1 }}>{member.organisation && member.organisation}</h4>
     <div>
       {member.linkedin &&
         <Icon
@@ -110,23 +110,24 @@ const TeamMembers: React.StatelessComponent<Props> =
           }
           <CardList>
             {teamMembers && teamMembers.map((member, index) => (
-              member.description ?
-                <Modal
-                  key={index}
-                  trigger={memberCard(member)}
-                  label={`Learn more about ${member.name}`}
-                >
-                  <ModalCard>
-                    <SmallMarginBottom>{member.name}</SmallMarginBottom>
-                    <p>
-                      <strong>
-                        {member.position}{member.position && `, ${member.position}`}
-                      </strong>
-                    </p>
-                    <Markdown>{member.description}</Markdown>
-                  </ModalCard>
-                </Modal>
-              : memberCard(member, index)
+              memberCard(member, index)
+              // member.description ?
+              //   <Modal
+              //     key={index}
+              //     trigger={memberCard(member)}
+              //     label={`Learn more about ${member.name}`}
+              //   >
+              //     <ModalCard>
+              //       <SmallMarginBottom>{member.name}</SmallMarginBottom>
+              //       <p>
+              //         <strong>
+              //           {member.position}{member.position && `, ${member.position}`}
+              //         </strong>
+              //       </p>
+              //       <Markdown>{member.description}</Markdown>
+              //     </ModalCard>
+              //   </Modal>
+              // : memberCard(member, index)
             ))}
           </CardList>
         </Center>
