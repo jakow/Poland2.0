@@ -26,10 +26,10 @@ module.exports =
       return config;
     },
     serverRuntimeConfig: {
-      host: process.env.NODE_ENV ? 'http://api:1337' : localhost
+      host: process.env.NODE_ENV !== 'development' ? 'http://api:1337' : localhost
     },
     publicRuntimeConfig: {
-      host: process.env.NODE_ENV ? process.env.API_URL : localhost
+      host: process.env.NODE_ENV !== 'development' ? process.env.API_URL : localhost
     }
   }
 )));
