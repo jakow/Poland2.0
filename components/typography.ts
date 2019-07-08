@@ -4,16 +4,10 @@ import { css as _css, injectGlobal } from 'emotion';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 
-const stripeSVG = require('./stripe.svg');
+const stripeSVG = require('../static/images/stripe.svg');
 
-const fonts = ['Source Sans Pro',
-  'Avenir Next',
-  'Helvetica Neue',
-  'Segoe UI',
-  'Helvetica',
-  'Arial',
-  'sans-serif',
-];
+const headerFonts = ['Source Sans Pro', 'sans-serif'];
+const bodyFonts = ['Montserrat', 'sans-serif'];
 
 injectGlobal(_css({
   small: {
@@ -21,7 +15,7 @@ injectGlobal(_css({
     a: {
       textDecoration: 'none',
       fontStyle: 'italic',
-      color: `${colors.link}`,
+      color: `${colors.deepBlue}`,
       '&:hover': {
         textDecoration: 'underline'
       }
@@ -35,13 +29,17 @@ const typography = new Typography({
   scaleRatio: 2.375,
   googleFonts: [
     {
+      name: 'Montserrat',
+      styles: ['300', '400', '400i', '600', '700'],
+    },
+    {
       name: 'Source Sans Pro',
       styles: ['300', '400', '400i', '600', '700'],
     },
   ],
-  headerFontFamily: fonts,
+  headerFontFamily: headerFonts,
   headerWeight: 300,
-  bodyFontFamily: fonts,
+  bodyFontFamily: bodyFonts,
   bodyColor: colors.dark.toString()
 });
 
