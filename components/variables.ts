@@ -3,15 +3,16 @@ import Color from 'color';
 import { css } from '@emotion/core';
 
 export const colors = {
-  primary: Color('#E2445C'),
+  red: Color('#C63D57'),
   dark: Color('#323232'),
-  lightGray: Color('#F5F5F5'),
+  gray: Color('#F5F5F5'), // new: #BAC7BE
   mediumGray: Color('#cccccc'),
   darkGray: Color('#999999'),
-  white: Color('#FFFFFF'),
-  link: Color('#217AC0'),
-  success: Color('#1ED760'),
-  error: Color('#FF0033'),
+  white: Color('#FFFFFF'), // new: #F5F5F5
+  deepBlue: Color('#00458A'),
+  empowerGreen: Color('#66BB91'),
+  royalPurple: Color('#AC1E70'),
+  teal: Color('#70D8D1')
 };
 
 export const featherShadow = css({
