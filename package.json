@@ -4,6 +4,8 @@
   "license": "MIT",
   "author": "Poland 2.0",
   "dependencies": {
+    "@blueprintjs/core": "~3.17.1",
+    "@blueprintjs/icons": "~3.9.1",
     "@emotion/core": "~10",
     "@emotion/styled": "~10",
     "@researchgate/react-intersection-observer": "~1.0.1",
