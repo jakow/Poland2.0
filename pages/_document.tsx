@@ -10,7 +10,7 @@ export default class extends Document {
           {/* tslint:disable */}
           <meta charSet="utf-8"/>
           <meta httpEquiv="x-ua-compatible" content="ie=edge"/>
-          <meta name="description" content="Annual Polish student conference held at Imperial College London, tackling entrepreneurship, innovation and change across industries."/>
+          <meta name="description" content="Annual Polish student conference, tackling entrepreneurship, innovation and change across industries."/>
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
           <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/static/images/favicons/apple-touch-icon-57x57.png"/>
@@ -24,6 +24,7 @@ export default class extends Document {
           <link rel="mask-icon" href="/static/images/favicons/mask-icon.svg" color="#C53D56"/>
           <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css"/>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css"/>
+          <link rel="stylesheet" href="/static/fonts/league-spartan.css"/>
 
           <meta name="application-name" content="Poland 2.0"/>
           <meta name="msapplication-TileColor" content="#FFFFFF"/>
