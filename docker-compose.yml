@@ -14,16 +14,14 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile
-      target: base
+      dockerfile: staging.Dockerfile
     image: poland20/p20-website
     container_name: p20-website
     command: sh -c "npm run build && npm run start"
   api:
     build:
       context: ../p20-backend
-      dockerfile: strapi.Dockerfile
-      target: base
+      dockerfile: strapi.staging.Dockerfile
     image: poland20/p20-backend
     container_name: p20-backend
     command: sh -c "npm run start"
