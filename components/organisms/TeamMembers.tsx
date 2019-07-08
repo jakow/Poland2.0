@@ -1,13 +1,10 @@
 import React from 'react';
-import Markdown from 'react-markdown';
 import styled from '@emotion/styled';
-import ModalCard from '../molecules/ModalCard';
 import { SmallMarginBottom } from './Speakers';
 import { breakpointMin, colors } from '../variables';
 import { bold, fat, stripe, rhythm, Center } from '../typography';
 import Card, { CardList } from '../molecules/Card';
 import Container from '../atoms/Container';
-import Modal from '../molecules/Modal';
 import { fill } from '../../helpers/cloudinary';
 import TeamMember from '../../types/TeamMember';
 
@@ -63,12 +60,7 @@ const memberCard = (member: TeamMember, index?: number) => (
     key={index}
     image={fill(member.photo.url, 300, 300, { gravity: 'faces' })}
     imagePreview={fill(member.photo.url, 32, 32, { gravity: 'faces' })}
-    footer={(
-      <React.Fragment>
-        {member.position}<br/>
-        {index ? null : <LearnMore>Tap on the image to learn more...</LearnMore>}
-      </React.Fragment>
-    )}
+    footer={member.position}
   >
     <H3>{member.name}</H3>
     <h4 style={{ flexGrow: 1 }}>{member.organisation && member.organisation}</h4>
@@ -97,38 +89,16 @@ const memberCard = (member: TeamMember, index?: number) => (
 
 interface Props {
   teamMembers: TeamMember[];
-  isInSubcategory?: boolean;
 }
 
 const TeamMembers: React.StatelessComponent<Props> =
-  ({ teamMembers, isInSubcategory }) => (
+  ({ teamMembers }) => (
     <Wrapper id="team">
       <Container>
         <Center>
-          {!isInSubcategory ? <Title>Team</Title>
-                            : <Subtitle>Team</Subtitle>
-          }
+          <Title>Team</Title>
           <CardList>
-            {teamMembers && teamMembers.map((member, index) => (
-              memberCard(member, index)
-              // member.description ?
-              //   <Modal
-              //     key={index}
-              //     trigger={memberCard(member)}
-              //     label={`Learn more about ${member.name}`}
-              //   >
-              //     <ModalCard>
-              //       <SmallMarginBottom>{member.name}</SmallMarginBottom>
-              //       <p>
-              //         <strong>
-              //           {member.position}{member.position && `, ${member.position}`}
-              //         </strong>
-              //       </p>
-              //       <Markdown>{member.description}</Markdown>
-              //     </ModalCard>
-              //   </Modal>
-              // : memberCard(member, index)
-            ))}
+            {teamMembers && teamMembers.map((member, index) => memberCard(member, index))}
           </CardList>
         </Center>
       </Container>
