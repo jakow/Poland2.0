@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { colors } from './variables';
-import AnimatedLogo from './AnimatedLogo';
+import { colors } from '../variables';
+import AnimatedLogo from '../atoms/AnimatedLogo';
 
 const _Loader = styled('div')({
   position: 'fixed',

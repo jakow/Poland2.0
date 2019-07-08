@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { colors, breakpointMin } from './variables';
-import { rhythm } from './typography';
-import LazyImage from './LazyImage';
+import { colors, breakpointMin } from '../variables';
+import { rhythm } from '../typography';
+import LazyImage from '../atoms/LazyImage';
 
 const borderStyle = '1px solid rgba(1, 1, 1, 0.12)';
 const shadowStyle = '0 1px 2px 0 rgba(1, 1, 1, 0.05)';

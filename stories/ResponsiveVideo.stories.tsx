@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import ResponsiveVideo from '../components/ResponsiveVideo';
+import ResponsiveVideo from '../components/atoms/ResponsiveVideo';
 
 storiesOf('ResponsiveVideo', module)
   .add('default view', () => (

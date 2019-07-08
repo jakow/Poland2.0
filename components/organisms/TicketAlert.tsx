@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Markdown from 'react-markdown';
-import { colors, breakpointMin } from './variables';
-import { rhythm } from './typography';
-import Container from './Container';
-import Countdown from './Countdown';
-import { TicketControl } from '../types/ContentControl';
+import { colors, breakpointMin } from '../variables';
+import { rhythm } from '../typography';
+import Container from '../atoms/Container';
+import Countdown from '../molecules/Countdown';
+import { TicketControl } from '../../types/ContentControl';
 
 const meshTopLeft = require('../static/images/mesh-corner-top-left.svg');
 const meshBottomRight = require('../static/images/mesh-corner-bottom-right.svg');
@@ -19,7 +19,7 @@ const Center = styled('div')({
 
 const Wrapper = styled('section')({
   color: `${colors.white}`,
-  backgroundColor: `${colors.primary}`,
+  backgroundColor: `${colors.red}`,
   position: 'relative',
   padding: `${rhythm(1)} 0 ${rhythm(3)} 0`,
   [breakpointMin('tablet')]: {

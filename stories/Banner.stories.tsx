@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import Banner from '../components/Banner';
+import Banner from '../components/organisms/Banner';
 import Edition from '../types/Edition';
 
 storiesOf('Banner', module)

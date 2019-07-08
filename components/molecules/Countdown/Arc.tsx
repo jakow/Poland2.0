@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { css } from 'emotion';
-import { colors } from '../variables';
+import { colors } from '../../variables';
 
 const setStroke = (color?: string) => css({
-  stroke: color ? color : `${colors.primary}`
+  stroke: color ? color : `${colors.red}`
 });
 
 interface ArcProps {

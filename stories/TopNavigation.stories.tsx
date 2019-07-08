@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import TopNavigation, { MenuItem } from '../components/TopNavigation';
+import TopNavigation, { MenuItem } from '../components/organisms/TopNavigation';
 
 storiesOf('TopNavigation', module)
   .add('basic', () => {

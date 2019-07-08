@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
-import { colors } from './variables';
-import { rhythm } from './typography';
+import { colors } from '../variables';
+import { rhythm } from '../typography';
 import { css } from '@emotion/core';
 
 const themes = {
   primary: {
     foreground: colors.white,
-    background: colors.primary,
+    background: colors.red,
   },
 };
 

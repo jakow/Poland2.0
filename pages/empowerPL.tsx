@@ -5,7 +5,7 @@ import { DefaultPageProps } from './_app';
 import { Mission } from './about';
 import { rhythm, fat, stripe, bold, Center, _fat } from '../components/typography';
 import { colors } from '../components/variables';
-import ResponsiveVideo from '../components/ResponsiveVideo';
+import ResponsiveVideo from '../components/atoms/ResponsiveVideo';
 
 const background = css({
   zIndex: 0,

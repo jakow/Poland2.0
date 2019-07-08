@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { rhythm } from '../typography';
-import { colors } from '../variables';
+import { rhythm } from '../../typography';
+import { colors } from '../../variables';
 
 export const DayList = styled('ol')({
   listStyle: 'none',
@@ -24,7 +24,7 @@ export const Description = styled('header')({
     position: 'absolute',
     width: [ornamentSize],
     height: [ornamentSize],
-    backgroundColor: `${colors.primary}`,
+    backgroundColor: `${colors.red}`,
     borderRadius: '50%',
     marginLeft: 0,
     top: rhythm(0.1),

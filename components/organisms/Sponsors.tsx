@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Markdown from 'react-markdown';
-import ModalCard from './ModalCard';
+import ModalCard from '../molecules/ModalCard';
 import { SmallMarginBottom } from './Speakers';
-import { rhythm, bold, _bold, fat, stripe, Center } from './typography';
-import Card, { CardList } from './Card';
-import { limit } from '../helpers/cloudinary';
-import Container from './Container';
-import Modal from './Modal';
-import SponsorCategory from '../types/SponsorCategory';
-import Sponsor from '../types/Sponsor';
+import { rhythm, bold, _bold, fat, stripe, Center } from '../typography';
+import Card, { CardList } from '../molecules/Card';
+import { limit } from '../../helpers/cloudinary';
+import Container from '../atoms/Container';
+import Modal from '../molecules/Modal';
+import SponsorCategory from '../../types/SponsorCategory';
+import Sponsor from '../../types/Sponsor';
 
 const Wrapper = styled('section')({
   position: 'relative',

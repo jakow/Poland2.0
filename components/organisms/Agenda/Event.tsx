@@ -4,12 +4,12 @@ import { css } from '@emotion/core';
 import * as moment from 'moment';
 import Markdown from 'react-markdown';
 
-import { _bold, rhythm } from '../typography';
-import { breakpointMin, colors, featherShadow } from '../variables';
+import { _bold, rhythm } from '../../typography';
+import { breakpointMin, colors, featherShadow } from '../../variables';
 // import { LinkIcon } from 'components/icons';
 import { SpeakerList, SpeakerItem } from './Speaker';
 // import Venue from './Venue';
-import { AgendaEvent } from '../../types/Agenda';
+import { AgendaEvent } from '../../../types/Agenda';
 
 export const EventList = styled('ol')({
   listStyle: 'none',
@@ -32,7 +32,7 @@ const Dash = styled('div')((props: { color?: string }) => ({
   top: rhythm(1.4),
   height: 4,
   width: rhythm(0.75),
-  backgroundColor: props.color ? props.color : `${colors.primary}`,
+  backgroundColor: props.color ? props.color : `${colors.red}`,
 }));
 
 const Line = styled('div')((props: { color?: string }) => ({
@@ -42,7 +42,7 @@ const Line = styled('div')((props: { color?: string }) => ({
   height: '100%',
   left: rhythm(0.6),
   width: 4,
-  backgroundColor: props.color ? props.color : `${colors.primary}`,
+  backgroundColor: props.color ? props.color : `${colors.red}`,
 }));
 
 const Main = styled('section')(

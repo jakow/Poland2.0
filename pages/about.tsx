@@ -2,7 +2,7 @@ import React from 'react';
 import { DefaultPageProps } from './_app';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import TeamMembers from '../components/TeamMembers';
+import TeamMembers from '../components/organisms/TeamMembers';
 import { rhythm, Center, _fat, _stripe, _bold } from '../components/typography';
 import { colors } from '../components/variables';
 

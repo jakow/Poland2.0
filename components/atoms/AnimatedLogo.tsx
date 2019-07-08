@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import { keyframes } from '@emotion/core';
 
 // tslint:disable
-// TODO: find a way of loading this from a file
 const Logo: React.StatelessComponent = () => (
   <svg version="1.1" x="0" y="0" width="96" height="110" viewBox="0, 0, 373.768, 430.135">
     <g id="Layer_1" transform="translate(-53.116, -24.933)">

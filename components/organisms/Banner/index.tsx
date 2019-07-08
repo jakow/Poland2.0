@@ -5,12 +5,12 @@ import Markdown from 'react-markdown';
 
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { colors, breakpointMin } from '../variables';
-import { rhythm, fat } from '../typography';
-import Edition from '../../types/Edition';
+import { colors, breakpointMin } from '../../variables';
+import { rhythm, fat } from '../../typography';
+import Edition from '../../../types/Edition';
 import walden from './walden';
-import { limit } from '../../helpers/cloudinary';
-import { dateString } from '../../helpers/date';
+import { limit } from '../../../helpers/cloudinary';
+import { dateString } from '../../../helpers/date';
 
 const angledEdge = css({
   position: 'relative',
@@ -58,7 +58,7 @@ const Carousel = styled('div')(column, {
     backgroundColor: `${colors.white}`,
     boxShadow: '0px 1px 4px 0px rgba(0,0,0,0.4)',
     '&.swiper-pagination-bullet-active': {
-      backgroundColor: `${colors.primary}`
+      backgroundColor: `${colors.red}`
     }
   }
 });

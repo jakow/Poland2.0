@@ -2,8 +2,8 @@
 
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/core';
-import { colors } from './variables';
-import { rhythm } from './typography';
+import { colors } from '../variables';
+import { rhythm } from '../typography';
 
 const loaderRotate = keyframes({
   from: {
@@ -16,7 +16,7 @@ const loaderRotate = keyframes({
 
 const props =  {
   size: rhythm(2),
-  color: colors.primary,
+  color: colors.red,
   borderSize: '3px',
   duration: '1s',
 };

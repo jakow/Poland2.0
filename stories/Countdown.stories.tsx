@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import Countdown from '../components/Countdown';
+import Countdown from '../components/molecules/Countdown';
 
 storiesOf('Countdown', module)
   .add('default view', () => (

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 
-import { rhythm } from '../typography';
-import LazyImage from '../LazyImage';
-import { fill } from '../../helpers/cloudinary';
-import Speaker from '../../types/Speaker';
+import { rhythm } from '../../typography';
+import LazyImage from '../../atoms/LazyImage';
+import { fill } from '../../../helpers/cloudinary';
+import Speaker from '../../../types/Speaker';
 
 const Avatar = styled('div')({
   flex: 'none',

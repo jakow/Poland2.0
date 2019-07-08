@@ -1,12 +1,12 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import Container from '../Container';
+import Container from '../../atoms/Container';
 import Venue from './Venue';
-import { bold, Center, dangerousSuperscripts, fat, rhythm, stripe } from '../typography';
-import { colors } from '../variables';
+import { bold, Center, dangerousSuperscripts, fat, rhythm, stripe } from '../../typography';
+import { colors } from '../../variables';
 import { DayItem, DayList, Description } from './Day';
 import { Event, EventList } from './Event';
-import { AgendaDay } from '../../types/Agenda';
+import { AgendaDay } from '../../../types/Agenda';
 
 const Main = styled('main')({
   position: 'relative',
@@ -26,7 +26,7 @@ const Timeline = styled('div')({
   bottom: rhythm(0.5),
   left: rhythm(0.6),
   width: 4,
-  backgroundColor: `${colors.primary}`,
+  backgroundColor: `${colors.red}`,
   '&::after': {
     content: '""',
     position: 'absolute',
@@ -36,7 +36,7 @@ const Timeline = styled('div')({
     left: `-${rhythm(0.45)}`,
     borderLeft: `${rhythm(0.5)} solid transparent`,
     borderRight: `${rhythm(0.5)} solid transparent`,
-    borderTop: `${rhythm(0.5)} solid ${colors.primary}`,
+    borderTop: `${rhythm(0.5)} solid ${colors.red}`,
   },
 });
 

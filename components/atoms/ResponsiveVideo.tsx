@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { rhythm } from './typography';
+import { rhythm } from '../typography';
 
 const _ResponsiveVideo = styled('div')({
   position: 'relative',

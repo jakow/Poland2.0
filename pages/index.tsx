@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { DefaultPageProps, api } from './_app';
-import Speakers from '../components/Speakers';
-import Sponsors from '../components/Sponsors';
+import Speakers from '../components/organisms/Speakers';
+import Sponsors from '../components/organisms/Sponsors';
 import { colors } from '../components/variables';
-import Banner from '../components/Banner';
-import Agenda from '../components/Agenda';
-import Tickets from '../components/Tickets';
+import Banner from '../components/organisms/Banner';
+import Agenda from '../components/organisms/Agenda';
+import TicketAlert from '../components/organisms/TicketAlert';
 import Sponsor from '../types/Sponsor';
 
 export const Background = styled('section')({
   '& > *:nth-of-type(odd)': {
-    backgroundColor: `${colors.lightGray}`
+    backgroundColor: `${colors.gray}`
   },
   '& > *:nth-of-type(even)': {
     backgroundColor: `${colors.white}`
@@ -33,7 +33,7 @@ export default class extends React.Component<DefaultPageProps & Props> {
     return (
       <React.Fragment>
         {contentControl.ticketControl.onSale &&
-          <Tickets ticketControl={contentControl.ticketControl}/>
+          <TicketAlert ticketControl={contentControl.ticketControl}/>
         }
         <Banner currentEdition={currentEdition}/>
         <Background>

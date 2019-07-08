@@ -2,12 +2,12 @@ import React from 'react';
 import App, { Container, NextAppContext } from 'next/app';
 import Link from 'next/link';
 import getConfig from 'next/config';
-import Footer from '../components/Footer';
+import Footer from '../components/organisms/Footer';
 import { Global, css } from '@emotion/core';
 import { TypographyStyle, GoogleFont } from 'react-typography';
 import Head from 'next/head';
 import typography, { rhythm } from '../components/typography';
-import TopNavigation from '../components/TopNavigation';
+import TopNavigation from '../components/organisms/TopNavigation';
 import ContentControl from '../types/ContentControl';
 import Edition from '../types/Edition';
 

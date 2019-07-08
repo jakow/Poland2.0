@@ -1,15 +1,15 @@
 import React from 'react';
 import Markdown from 'react-markdown';
 import styled from '@emotion/styled';
-import ModalCard from './ModalCard';
+import ModalCard from '../molecules/ModalCard';
 import { SmallMarginBottom } from './Speakers';
-import { breakpointMin, colors } from './variables';
-import { bold, fat, stripe, rhythm, Center } from './typography';
-import Card, { CardList } from './Card';
-import Container from './Container';
-import Modal from './Modal';
-import { fill } from '../helpers/cloudinary';
-import TeamMember from '../types/TeamMember';
+import { breakpointMin, colors } from '../variables';
+import { bold, fat, stripe, rhythm, Center } from '../typography';
+import Card, { CardList } from '../molecules/Card';
+import Container from '../atoms/Container';
+import Modal from '../molecules/Modal';
+import { fill } from '../../helpers/cloudinary';
+import TeamMember from '../../types/TeamMember';
 
 const LearnMore = styled('small')({
   [breakpointMin('tablet')]: {

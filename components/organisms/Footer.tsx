@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { rhythm, Anchor } from './typography';
-import { breakpointMax, colors, breakpointMin } from './variables';
-import { Urls } from '../types/ContentControl';
+import { rhythm, Anchor } from '../typography';
+import { breakpointMax, colors, breakpointMin } from '../variables';
+import { Urls } from '../../types/ContentControl';
 
 const Container = styled('footer')({
   background: 'white',
@@ -69,37 +69,6 @@ const Icon = styled('a')(
   ...socialMedia
 );
 
-// const PrivacyPolicy = styled('div')({
-//   textAlign: 'initial',
-//   'h1, h2, h3, h4': {
-//     fontWeight: 'bold',
-//     margin: `${rhythm(0.75)} 0`
-//   },
-//   'h1:first-of-type': {
-//     textAlign: 'center',
-//     marginTop: 0
-//   },
-//   'p, ul, ol': {
-//     marginTop: rhythm(0.25),
-//     marginBottom: rhythm(0.25)
-//   },
-//   hr: {
-//     margin: `${rhythm(1)} 0`
-//   },
-//   del: {
-//     textDecoration: 'underline'
-//   }
-// });
-
-// interface Props {
-//   bylawUrl: string;
-//   privacyPolicy: { md: string };
-//   facebookUrl?: string;
-//   linkedinUrl?: string;
-//   twitterUrl?: string;
-//   videoChannelUrl?: string;
-// }
-
 const Footer: React.StatelessComponent<Urls> = ({
   bylawUrl, privacyPolicyUrl, facebookUrl, linkedinUrl, instagramUrl, githubUrl
 }) => (
@@ -145,15 +114,6 @@ const Footer: React.StatelessComponent<Urls> = ({
     <Separator/>
     <Legal>
       {bylawUrl && <Anchor href={bylawUrl}>By-law for Poland 2.0</Anchor>}
-      {/* <Modal trigger={<Anchor>Privacy Policy</Anchor>} label="Privacy Policy">
-        <ModalCard>
-          <PrivacyPolicy>
-            <Markdown escapeHtml={false} linkTarget="_blank">
-              {privacyPolicy.md}
-            </Markdown>
-          </PrivacyPolicy>
-        </ModalCard>
-      </Modal> */}
       {privacyPolicyUrl &&
         <Anchor href={privacyPolicyUrl} label="Privacy Policy" target="_blank">
           Privacy Policy

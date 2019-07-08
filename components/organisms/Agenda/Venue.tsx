@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { breakpointMin, colors } from '../variables';
-import { rhythm, bold } from '../typography';
-import { MapIcon } from '../icons';
-import { mapsUrl } from '../../helpers/maps';
-import Venue from '../../types/Venue';
+import { breakpointMin, colors } from '../../variables';
+import { rhythm, bold } from '../../typography';
+import { MapIcon } from '../../atoms/Icons';
+import { mapsUrl } from '../../../helpers/maps';
+import Venue from '../../../types/Venue';
 
 const Wrapper = styled('section')({
   [breakpointMin('mobile')]: {
@@ -18,7 +18,7 @@ const Wrapper = styled('section')({
 });
 
 const MapLink = styled('a')({
-  color: `${colors.primary}`,
+  color: `${colors.red}`,
   display: 'flex',
   alignItems: 'center',
   textDecoration: 'none'

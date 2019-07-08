@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { colors } from '../variables';
-import { rhythm } from '../typography';
+import { colors } from '../../variables';
+import { rhythm } from '../../typography';
 
-const logo = require('./logo.svg');
+const logo = require('../../../static/images/logo.svg');
 
 const BrandLink = styled('a')({
   // resets
