@@ -114,7 +114,6 @@ const Sponsors: React.StatelessComponent<Props> = ({
       </Center>
       {sponsorCategories ?
         sponsorCategories
-          .sort((a, b) => b.priority - a.priority)
           .map((category, index) => mapSponsors(category, index, sponsors))
         : mapSponsors(null, null, sponsors)
       }

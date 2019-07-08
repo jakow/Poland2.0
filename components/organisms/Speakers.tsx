@@ -107,7 +107,7 @@ const Speakers: React.StatelessComponent<Props> =
           <Title>{!year ? 'Speakers' : `Speakers of ${year}`}</Title>
         </Center>
           {speakerCategories &&
-            speakerCategories.sort((a, b) => b.priority - a.priority).map((category, index) => (
+            speakerCategories.map((category, index) => (
             <React.Fragment key={index}>
               <Center><h2>{category.name}</h2></Center>
               <CardList>
