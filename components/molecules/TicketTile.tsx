@@ -7,12 +7,15 @@ import styled from '@emotion/styled';
 import { rhythm } from '../typography';
 import { colors } from '../variables';
 import { css } from '@emotion/core';
+import { useState, useEffect } from 'react';
 
 interface Props {
+  id: string;
   name: string;
   description: string;
   price: number;
   quantity?: number;
+  warningLimit?: number;
   soldRecently?: number;
   benefits?: string;
 }
@@ -22,7 +25,6 @@ const Wrapper = styled('section')({
     marginBottom: rhythm(0.5)
   },
   p: {
-    // textAlign: 'justify',
     marginBottom: rhythm(0.5)
   }
 });
@@ -35,15 +37,18 @@ const Benefit = styled('p')({
   }
 });
 
-const FooterStyled = styled('section')({
+const Flex = styled('section')({
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
   alignItems: 'center',
+  userSelect: 'none',
   '.bp3-icon': {
     height: '20px'
   }
 });
+
+const Status = Flex.withComponent('small');
 
 const margin = css({
   margin: `0 ${rhythm(0.5)}`
@@ -52,24 +57,64 @@ const margin = css({
 const IconLabel = styled('span')(margin);
 
 const Quantity = styled('b')(margin, {
-  paddingTop: '2px'
+  paddingTop: '2px',
+  width: rhythm(1),
 });
 
-const Footer = ({ price }) => (
-  <FooterStyled>
-    <Header3 bold noMargin>£{price}</Header3>
-    <FooterStyled>
-      <Icon icon="remove" color={`${colors.dark}`} iconSize={20}/>
-      <Quantity>0</Quantity>
-      <Icon icon="add" color={`${colors.dark}`} iconSize={20}/>
-    </FooterStyled>
-  </FooterStyled>
-);
+const getBasket = (id: string) => {
+  const storage = JSON.parse(localStorage.getItem('basket'));
+  if (!storage || !storage[id]) {
+    return 0;
+  }
+
+  return storage[id];
+};
+
+const Footer = ({ id, price, quantity }) => {
+  const [basket, setBasket] = useState(getBasket(id));
+  useEffect(
+    () => {
+      let storage = JSON.parse(localStorage.getItem('basket'));
+      if (!storage) {
+        storage = {};
+      }
+
+      storage[id] = basket;
+      localStorage.setItem('basket', JSON.stringify(storage));
+    },
+    [basket]
+  );
+  return (
+    <Flex>
+      <Header3 bold noMargin>£{price}</Header3>
+      {quantity > 0
+      ? <Flex>
+          <Icon
+            icon="remove"
+            color={`${basket > 0 ? colors.dark : colors.mediumGray}`}
+            iconSize={20}
+            onClick={() => setBasket(basket > 0 ? basket - 1 : 0)}
+            style={{ cursor: basket > 0 ? 'pointer' : 'auto' }}
+          />
+          <Quantity>{basket}</Quantity>
+          <Icon
+            icon="add"
+            color={`${basket < quantity ? colors.dark : colors.mediumGray}`}
+            iconSize={20}
+            onClick={() => setBasket(basket < quantity ? basket + 1 : basket)}
+            style={{ cursor: basket < quantity ? 'pointer' : 'auto' }}
+          />
+        </Flex>
+      : <Header3 noMargin>Sold out!</Header3>
+      }
+    </Flex>
+  );
+};
 
 const TicketTile: NextFC<Props> = ({
-  name, description, quantity, soldRecently, price, benefits
+  id, name, description, quantity, warningLimit, soldRecently, price, benefits
 }) => (
-  <Card footer={<Footer price={price}/>}>
+  <Card footer={<Footer id={id} price={price} quantity={quantity}/>}>
     <Wrapper>
       <Header3 bold>{name}</Header3>
       {description && <Markdown>{description}</Markdown>}
@@ -79,15 +124,28 @@ const TicketTile: NextFC<Props> = ({
           <IconLabel>{benefit}</IconLabel>
         </Benefit>
       ))}
-      {quantity &&
-        <small>
-          <b>{quantity}</b> tickets remaining.&nbsp;
-          {soldRecently &&
-            <span>
-              <u>{soldRecently} sold</u> in the past 24 hours!
-            </span>
+      {quantity > 0 &&
+        <Status>
+          {quantity <= warningLimit &&
+            <Icon
+              icon="warning-sign"
+              color={`${colors.dark}`}
+              iconSize={22}
+              style={{ marginRight: rhythm(0.5), marginBottom: rhythm(0.2) }}
+            />
           }
-        </small>
+          <span>
+            {!warningLimit || quantity > warningLimit
+            ? <span><b>{quantity}</b> tickets remaining.&nbsp;</span>
+            : <span>Only <b>{quantity}</b> tickets remaining!&nbsp;</span>
+            }
+            {soldRecently &&
+              <span>
+                <u>{soldRecently} sold</u> in the past 24 hours!
+              </span>
+            }
+          </span>
+        </Status>
       }
     </Wrapper>
   </Card>
