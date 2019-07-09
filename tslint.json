@@ -4,6 +4,7 @@
       "import-name": false,
       "variable-name": false,
       "jsx-boolean-value": false,
+      "jsx-no-lambda": false,
       "jsx-no-multiline-js": false,
       "trailing-comma": false,
       "no-increment-decrement": false,
