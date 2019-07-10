@@ -38,11 +38,12 @@ export default ({ items, Router }: Props) => (
       {items.map((item, index) => (
         <MenuListItem key={index}>
           {item.type === 'button'
-            ? <span style={{ padding: `0 ${rhythm(0.5)}` }}>
+            ? <span style={{ padding: `0 ${rhythm(0.5)}`}}>
                 <NavButton
                   href={item.url}
                   rel="noopener noreferrer"
                   target="_blank"
+                  style={{ marginTop: rhythm(0.5) }}
                 >
                   {item.title}
                 </NavButton>
