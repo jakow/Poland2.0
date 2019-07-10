@@ -11,26 +11,32 @@ const themes = {
 };
 
 interface Props {
-  // theme: 'primary';
   hollow?: boolean;
+  wide?: boolean;
 }
+
+const options = (props: Props) => css({
+  width: props.wide ? '100%' : 'initial'
+});
 
 const theme = (props: Props) => {
   const { foreground, background } = themes['primary'];
   if (props.hollow) {
-    return css({
-      padding: rhythm(0.5),
-      borderWidth: 2,
-      borderStyle: 'solid',
-      borderColor: `${background}`,
-      color: `${background}`,
-      backgroundColor: 'transparent',
-      boxShadow: 'none',
-      ':hover': {
-        borderColor: `${background.lighten(0.2)}`,
-        color: `${background.lighten(0.2)}`
+    return css(
+      {
+        padding: rhythm(0.5),
+        borderWidth: 2,
+        borderStyle: 'solid',
+        borderColor: `${background}`,
+        color: `${background}`,
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
+        ':hover': {
+          borderColor: `${background.lighten(0.2)}`,
+          color: `${background.lighten(0.2)}`
+        }
       }
-    });
+    );
   }
 
   return css({
@@ -47,7 +53,6 @@ const style = css({
   borderRadius: 1,
   display: 'inline-block',
   padding: `${rhythm(0.5)} ${rhythm(1)}`,
-  margin: `${rhythm(0.5)} 0`,
   position: 'relative',
   textAlign: 'center',
   verticalAlign: 'middle',
@@ -59,7 +64,11 @@ const style = css({
   boxShadow: '0px 2px 7px 0px rgba(1, 1, 1, 0.18)',
 });
 
-export const Button = styled('button')(style, theme);
+export const Button = styled('button')(
+  style,
+  theme,
+  options
+);
 
 export const NavButton = styled('a')(style, theme);
 
