@@ -8,17 +8,7 @@ import { rhythm } from '../typography';
 import { colors } from '../variables';
 import { css } from '@emotion/core';
 import { useState, useEffect } from 'react';
-
-interface Props {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  quantity?: number;
-  warningLimit?: number;
-  soldRecently?: number;
-  benefits?: string;
-}
+import TicketType from '../../types/TicketType';
 
 const Wrapper = styled('section')({
   '& > h3': {
@@ -37,18 +27,22 @@ const Benefit = styled('p')({
   }
 });
 
-const Flex = styled('section')({
+const flex = css({
   display: 'flex',
-  flexDirection: 'row',
+  alignItems: 'center'
+});
+
+export const Flex = styled('section')(flex, {
   justifyContent: 'space-between',
-  alignItems: 'center',
   userSelect: 'none',
   '.bp3-icon': {
     height: '20px'
   }
 });
 
-const Status = Flex.withComponent('small');
+const Status = styled('small')(flex, {
+  justifyContent: 'flex-start'
+});
 
 const margin = css({
   margin: `0 ${rhythm(0.5)}`
@@ -79,8 +73,14 @@ const Footer = ({ id, price, quantity }) => {
         storage = {};
       }
 
-      storage[id] = basket;
+      if (basket > 0) {
+        storage[id] = basket;
+      } else {
+        delete storage[id];
+      }
+
       localStorage.setItem('basket', JSON.stringify(storage));
+      dispatchEvent(new Event('storage'));
     },
     [basket]
   );
@@ -93,7 +93,7 @@ const Footer = ({ id, price, quantity }) => {
             icon="remove"
             color={`${basket > 0 ? colors.dark : colors.mediumGray}`}
             iconSize={20}
-            onClick={() => setBasket(basket > 0 ? basket - 1 : 0)}
+            onClick={() => basket > 0 && setBasket(basket - 1)}
             style={{ cursor: basket > 0 ? 'pointer' : 'auto' }}
           />
           <Quantity>{basket}</Quantity>
@@ -101,7 +101,7 @@ const Footer = ({ id, price, quantity }) => {
             icon="add"
             color={`${basket < quantity ? colors.dark : colors.mediumGray}`}
             iconSize={20}
-            onClick={() => setBasket(basket < quantity ? basket + 1 : basket)}
+            onClick={() => basket < quantity && setBasket(basket + 1)}
             style={{ cursor: basket < quantity ? 'pointer' : 'auto' }}
           />
         </Flex>
@@ -111,7 +111,7 @@ const Footer = ({ id, price, quantity }) => {
   );
 };
 
-const TicketTile: NextFC<Props> = ({
+const TicketTile: NextFC<TicketType> = ({
   id, name, description, quantity, warningLimit, soldRecently, price, benefits
 }) => (
   <Card footer={<Footer id={id} price={price} quantity={quantity}/>}>
@@ -137,7 +137,9 @@ const TicketTile: NextFC<Props> = ({
           <span>
             {!warningLimit || quantity > warningLimit
             ? <span><b>{quantity}</b> tickets remaining.&nbsp;</span>
-            : <span>Only <b>{quantity}</b> tickets remaining!&nbsp;</span>
+            : <span>
+                Only <b>{quantity}</b> {quantity !== 1 ? 'tickets' : 'ticket'} remaining!&nbsp;
+              </span>
             }
             {soldRecently &&
               <span>
