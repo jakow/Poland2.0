@@ -2,9 +2,9 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { breakpointMin, colors } from '../../variables';
 import { rhythm, bold } from '../../typography';
-import { MapIcon } from '../../atoms/Icons';
 import { mapsUrl } from '../../../helpers/maps';
 import Venue from '../../../types/Venue';
+import { Icon } from '@blueprintjs/core';
 
 const Wrapper = styled('section')({
   [breakpointMin('mobile')]: {
@@ -46,7 +46,7 @@ const _Venue: React.StatelessComponent<{ venue: Venue }> = ({ venue }) => (
           rel="noopener noreferrer"
           target="_blank"
         >
-          <i><MapIcon/>&ensp;</i>
+          <i><Icon icon="map" iconSize={12} color={`${colors.red}`}/>&ensp;</i>
           <span>View on the map</span>
         </MapLink>
       </React.Fragment>

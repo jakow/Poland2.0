@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { colors } from '../variables';
 import { rhythm } from '../typography';
-import { CrossIcon } from '../atoms/Icons';
+import { Icon } from '@blueprintjs/core';
 
 const transitionDuration = '300ms';
 
@@ -116,7 +116,7 @@ export default class Modal extends React.Component<Props, VisibilityProps> {
           <Overlay className={this.state.visible}/>
           <Main className={this.state.visible}>
             <CloseButton onClick={this.close} aria-label="Close" title="Close">
-              <h2><CrossIcon/></h2>
+              <h2><Icon icon="cross" iconSize={20} color={`${colors.white}`}/></h2>
             </CloseButton>
             <Content>
               {this.props.children}
