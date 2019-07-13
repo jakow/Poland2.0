@@ -94,7 +94,7 @@ const Basket: NextFC<Props> = ({ ticketTypes }) => {
             <Center>
               Your basket is empty!<br/>
               Use&nbsp;&nbsp;
-              <Icon icon="add" color={`${colors.dark}`} iconSize={18}/>&nbsp;&nbsp;
+              <Icon icon="add" color={`${colors.dark}`} iconSize={18}/>&nbsp;
               to add tickets to the basket.
             </Center>
           </React.Fragment>
