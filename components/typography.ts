@@ -1,27 +1,13 @@
 import Typography from 'typography';
 import { colors, breakpointMin } from './variables';
-import { css as _css, injectGlobal } from 'emotion';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import { css as _css } from 'emotion';
 
 const stripeSVG = require('../static/images/stripe.svg');
 
 const headerFonts = ['Source Sans Pro', 'sans-serif'];
 const bodyFonts = ['Montserrat', 'sans-serif'];
-
-injectGlobal(_css({
-  small: {
-    color: `${colors.darkGray}`,
-    a: {
-      textDecoration: 'none',
-      fontStyle: 'italic',
-      color: `${colors.deepBlue}`,
-      '&:hover': {
-        textDecoration: 'underline'
-      }
-    }
-  }
-}));
 
 const typography = new Typography({
   baseFontSize: '16px',
@@ -44,6 +30,45 @@ const typography = new Typography({
 });
 
 export const { rhythm, scale } = typography;
+
+export const globalStyle = css({
+  '@media screen and (max-width: 320px)': { // iPhone 5/SE
+    body: {
+      fontSize: 14
+    }
+  },
+  '@media screen and (max-width: 414px)': { // iPhone 6/7/8 Plus
+    body: {
+      fontSize: 15
+    }
+  },
+  'a[id]': {
+    position: 'absolute',
+    top: `-${rhythm(3)}`
+  },
+  small: {
+    color: `${colors.darkGray}`,
+    a: {
+      textDecoration: 'none',
+      fontStyle: 'italic',
+      color: `${colors.deepBlue}`,
+      '&:hover': {
+        textDecoration: 'underline'
+      }
+    }
+  },
+  '.bp3-icon': {
+    display: 'inline-block',
+    flex: '0 0 auto',
+    verticalAlign: 'text-bottom',
+    '& > svg': {
+      display: 'block'
+    },
+    '& > svg:not([fill])': {
+      fill: 'currentColor'
+    }
+  },
+});
 
 export const Anchor = styled('a')<{ [propName: string]: any }>({
   cursor: 'pointer',

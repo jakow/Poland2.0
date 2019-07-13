@@ -6,7 +6,7 @@ import Footer from '../components/organisms/Footer';
 import { Global, css } from '@emotion/core';
 import { TypographyStyle, GoogleFont } from 'react-typography';
 import Head from 'next/head';
-import typography, { rhythm } from '../components/typography';
+import typography, { rhythm, globalStyle } from '../components/typography';
 import TopNavigation from '../components/organisms/TopNavigation';
 import ContentControl from '../types/ContentControl';
 import Edition from '../types/Edition';
@@ -66,26 +66,9 @@ export default class Website extends App<DefaultPageProps> {
 
     return (
       <Container>
-        <Global
-          styles={css({
-            '@media screen and (max-width: 320px)': { // iPhone 5/SE
-              body: {
-                fontSize: 14
-              }
-            },
-            '@media screen and (max-width: 414px)': { // iPhone 6/7/8 Plus
-              body: {
-                fontSize: 15
-              }
-            },
-            'a[id]': {
-              position: 'absolute',
-              top: `-${rhythm(3)}`
-            }
-          })}
-        />
         <TypographyStyle typography={typography}/>
         <GoogleFont typography={typography}/>
+        <Global styles={globalStyle}/>
         <Head>
           <title>Poland 2.0 Summit</title>
         </Head>
