@@ -5,10 +5,8 @@ import * as moment from 'moment';
 import Markdown from 'react-markdown';
 
 import { _bold, rhythm } from '../../typography';
-import { breakpointMin, colors, featherShadow } from '../../variables';
-// import { LinkIcon } from 'components/icons';
+import { breakpointMin, colors, activeShadow } from '../../variables';
 import { SpeakerList, SpeakerItem } from './Speaker';
-// import Venue from './Venue';
 import { AgendaEvent } from '../../../types/Agenda';
 
 export const EventList = styled('ol')({
@@ -56,7 +54,7 @@ const Main = styled('section')(
       boxShadow: '0 1px 12px 1px rgba(0, 0, 0, 0.18)',
     },
   },
-  featherShadow,
+  activeShadow,
 );
 
 const Permalink = styled('a')({

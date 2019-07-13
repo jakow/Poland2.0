@@ -15,8 +15,24 @@ export const colors = {
   teal: Color('#70D8D1')
 };
 
-export const featherShadow = css({
-  boxShadow: '0 1px 2px 0 rgba(1, 1, 1, 0.05)',
+export const idleShadow = css({
+  boxShadow: '0 1px 8px 0 rgba(0, 0, 0, 0.16)',
+  transition: 'box-shadow 200ms ease-in-out'
+});
+
+export const hoverShadow = css({
+  boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.16)',
+  transition: 'box-shadow 200ms ease-in-out'
+});
+
+export const redShadow = css({
+  boxShadow: `0 3px 8px 0 ${colors.red}`,
+  transition: 'box-shadow 200ms ease-in-out'
+});
+
+export const activeShadow = css({
+  boxShadow: '0 3px 8px 0 rgba(0, 0, 0, 0.16)',
+  transition: 'box-shadow 200ms ease-in-out'
 });
 
 interface Breakpoints {
