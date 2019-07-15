@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { colors } from '../components/variables';
-import { Field } from '../components/atoms/Form';
+import { InputField } from '../components/atoms/Form';
 import { Formik, Form } from 'formik';
 import { object, string } from 'yup';
 import Container from '../components/atoms/Container';
-import { action } from '@storybook/addon-actions';
+import Button from '../components/atoms/Button';
 
 storiesOf('Form', module)
   .add('text input', () => (
@@ -13,18 +13,30 @@ storiesOf('Form', module)
       <Formik
         initialValues={{
           fullName: '',
-          email: ''
+          email: '',
+          comment: '',
+          age: ''
         }}
-        onSubmit={values => action(JSON.stringify(values))}
+        onSubmit={(values, actions) => {
+          console.log(values);
+          actions.setSubmitting(false);
+        }}
         validationSchema={object().shape({
           fullName: string().required('Please enter a full name.'),
-          email: string().email().required('Please enter a valid e-mail address.')
+          email: string()
+            .email('Please enter a valid e-mail address.')
+            .required('Please enter an e-mail address.'),
+          comment: string(),
+          age: string().oneOf(
+            ['Prefer not to answer', '16-19', '20-24'],
+            'Please select one of the options.'
+          )
         })}
       >
         {({ errors, touched }) => {
           return (
             <Form>
-              <Field
+              <InputField
                 name="fullName"
                 type="text"
                 placeholder="Name and Surname"
@@ -32,7 +44,7 @@ storiesOf('Form', module)
                 error={errors.fullName && touched.fullName ? errors.fullName : null}
                 mandatory
               />
-              <Field
+              <InputField
                 name="email"
                 type="email"
                 placeholder="E-mail address"
@@ -40,6 +52,21 @@ storiesOf('Form', module)
                 error={errors.email && touched.email ? errors.email : null}
                 mandatory
               />
+              <InputField
+                name="comment"
+                type="textarea"
+                placeholder="Do you have anything else to add?"
+                leftIcon="more"
+                error={errors.comment && touched.comment ? errors.comment : null}
+              />
+              <InputField
+                name="age"
+                type="select"
+                placeholder="Select your age range"
+                options={['Prefer not to answer', '16-19', '20-24']}
+                error={errors.age && touched.age ? errors.age : null}
+              />
+              <Button wide type="submit">Submit</Button>
             </Form>
           );
         }}

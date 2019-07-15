@@ -15,6 +15,7 @@ interface FieldProps {
   leftIcon?: IconName;
   mandatory?: boolean;
   error?: string;
+  options?: string[];
 }
 
 const Flex = styled('div')(
@@ -23,6 +24,7 @@ const Flex = styled('div')(
     border: borderStyle,
     display: 'flex',
     '&, & > *': {
+      color: `${colors.dark}`,
       backgroundColor: props.error ? `${colors.red.fade(0.9)}` : `${colors.white}`,
       transition: 'background-color 200ms ease-in-out'
     },
@@ -30,7 +32,7 @@ const Flex = styled('div')(
       paddingTop: rhythm(0.35),
       paddingLeft: rhythm(0.5)
     },
-    '.bp3-icon:last-of-type': {
+    '.bp3-icon:last-child': {
       paddingRight: rhythm(0.5)
     },
     '& > *': {
@@ -40,14 +42,31 @@ const Flex = styled('div')(
       color: `${colors.dark}`,
       border: 'none',
       flex: 1,
-      '&:focus': {
+      ':focus': {
         outline: 'none'
       }
     },
-    '&:focus': {
+    'textarea, select': {
+      width: '100%',
+      ':focus': {
+        outline: 'none'
+      },
+      border: 'none',
+      resize: 'none'
+    },
+    textarea: {
+      height: rhythm(3)
+    },
+    select: {
+      paddingLeft: rhythm(0.2),
+      ':last-child': {
+        marginRight: rhythm(0.5)
+      }
+    },
+    ':focus': {
       outline: 'none'
     },
-    '&:hover, &:focus-within': activeShadow
+    ':hover, :focus-within': activeShadow
   })
 );
 
@@ -62,14 +81,56 @@ const Wrapper = styled('fieldset')(
   }
 );
 
-export const Field: NextFC<FieldProps> = ({
-  name, type, placeholder, leftIcon, mandatory, error
+export const InputField: NextFC<FieldProps> = ({
+  name, type, placeholder, leftIcon, mandatory, error, options
 }) => (
   <Wrapper>
     <Flex error={error}>
-      <Icon icon={leftIcon} iconSize={16} color={`${colors.dark}`}/>
-      <FormikField id={name} name={name} type={type} placeholder={placeholder} required={true}/>
-      {mandatory ? <Icon icon="asterisk" color={`${colors.red}`} iconSize={16}/> : null}
+      {leftIcon
+      ? <Icon icon={leftIcon} iconSize={16} color={`${colors.dark}`}/>
+      : <div style={{ width: '32px' }}/>
+      }
+      {(() => {
+        switch (type) {
+          case 'select':
+            return <FormikField
+              component="select"
+              id={name}
+              name={name}
+              required={mandatory}
+            >
+              <option value="" disabled hidden>{placeholder}</option>
+              {options
+              ? options.map((option, index) => <option key={index} value={option}>{option}</option>)
+              : null
+              }
+            </FormikField>;
+          case 'textarea':
+            return <FormikField
+              component="textarea"
+              id={name}
+              name={name}
+              placeholder={placeholder}
+              required={mandatory}
+            />;
+          default:
+            return <FormikField
+              id={name}
+              name={name}
+              type={type}
+              placeholder={placeholder}
+              required={mandatory}
+            />;
+        }
+      })()}
+      {mandatory
+      ? <Icon
+          icon="asterisk"
+          color={`${colors.red}`}
+          iconSize={16}
+          title="This field is mandatory."
+      />
+      : null}
     </Flex>
     {error
     ? <small>{error}</small>
