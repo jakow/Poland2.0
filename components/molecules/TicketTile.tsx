@@ -40,7 +40,7 @@ export const Flex = styled('section')(flex, {
   }
 });
 
-const Status = styled('small')(flex, {
+const Status = styled('h4')(flex, {
   justifyContent: 'flex-start'
 });
 
