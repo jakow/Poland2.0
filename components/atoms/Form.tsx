@@ -1,5 +1,4 @@
-import React from 'react';
-import { NextFC } from 'next';
+import React, { FunctionComponent } from 'react';
 import styled from '@emotion/styled';
 import { Icon, IconName } from '@blueprintjs/core';
 import { colors, activeShadow, idleShadow } from '../variables';
@@ -81,7 +80,7 @@ const Wrapper = styled('fieldset')(
   }
 );
 
-export const InputField: NextFC<FieldProps> = ({
+export const InputField: FunctionComponent<FieldProps> = ({
   name, type, placeholder, leftIcon, mandatory, error, options
 }) => (
   <Wrapper>

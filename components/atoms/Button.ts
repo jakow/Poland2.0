@@ -64,12 +64,12 @@ const style = css({
   boxShadow: '0px 2px 7px 0px rgba(1, 1, 1, 0.18)',
 });
 
-export const Button = styled('button')(
+export const Button = styled('button')([
   style,
   theme,
   options
-);
+]);
 
-export const NavButton = styled('a')(style, theme);
+export const NavButton = styled('a')([style, theme]);
 
 export default Button;

@@ -1,13 +1,12 @@
-import { NextFC } from 'next';
 import Card from './Card';
 import Markdown from 'react-markdown';
 import { Icon } from '@blueprintjs/core';
-import { Header3, Header2, Header4 } from '../atoms/Headers';
+import { Header3 } from '../atoms/Headers';
 import styled from '@emotion/styled';
 import { rhythm } from '../typography';
 import { colors } from '../variables';
 import { css } from '@emotion/core';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FunctionComponent } from 'react';
 import TicketType from '../../types/TicketType';
 
 const Wrapper = styled('section')({
@@ -111,7 +110,7 @@ const Footer = ({ id, price, quantity }) => {
   );
 };
 
-const TicketTile: NextFC<TicketType> = ({
+const TicketTile: FunctionComponent<TicketType> = ({
   id, name, description, quantity, warningLimit, soldRecently, price, benefits
 }) => (
   <Card footer={<Footer id={id} price={price} quantity={quantity}/>}>

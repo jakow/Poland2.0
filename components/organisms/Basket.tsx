@@ -1,7 +1,6 @@
-import { NextFC } from 'next';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, FunctionComponent } from 'react';
 import Card from '../molecules/Card';
-import { Header2, Header3, Header4 } from '../atoms/Headers';
+import { Header2 } from '../atoms/Headers';
 import styled from '@emotion/styled';
 import TicketType from '../../types/TicketType';
 import { Center, rhythm } from '../typography';
@@ -22,14 +21,7 @@ interface Props {
   ticketTypes: TicketType[];
 }
 
-const getBasket = () => {
-  const storage = JSON.parse(localStorage.getItem('basket'));
-  if (!storage) {
-    return {};
-  }
-
-  return storage;
-};
+const getBasket = () => JSON.parse(localStorage.getItem('basket') || '{}');
 
 const Checkout = () => {
   return (
@@ -37,12 +29,12 @@ const Checkout = () => {
   );
 };
 
-const Basket: NextFC<Props> = ({ ticketTypes }) => {
+const Basket: FunctionComponent<Props> = ({ ticketTypes }) => {
   const [basket, setBasket] = useState(getBasket());
   useEffect(() => {
     const handleBasketChange = () => {
-      const storage = JSON.parse(localStorage.getItem('basket'));
-      if (storage) {
+      const storage = JSON.parse(localStorage.getItem('basket') || '{}');
+      if (Object.entries(storage).length > 0) {
         setBasket(storage);
       }
     };
