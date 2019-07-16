@@ -1,11 +1,9 @@
-const withTypescript = require('@zeit/next-typescript');
 const withCSS = require('@zeit/next-css');
 const withOptimizedImages = require('next-optimized-images');
 
 const localhost = 'http://localhost:1337';
 
 module.exports =
-  withTypescript(
   withCSS(
   withOptimizedImages({
     webpack: config => {
@@ -32,4 +30,4 @@ module.exports =
       host: process.env.NODE_ENV !== 'development' ? process.env.API_URL : localhost
     }
   }
-)));
+));

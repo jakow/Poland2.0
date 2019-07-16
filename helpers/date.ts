@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 
 export function dateString(startDate: string, endDate: string) {
   // NOTE the use of en dash instead of hyphen in dates

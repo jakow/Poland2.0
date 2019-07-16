@@ -1,6 +1,6 @@
 {
   "name": "p20-website",
-  "version": "2.19.3",
+  "version": "2.19.4",
   "license": "MIT",
   "author": "Poland 2.0",
   "dependencies": {
@@ -19,7 +19,7 @@
     "isomorphic-unfetch": "~3.0.0",
     "lodash": "~4.17.11",
     "moment": "~2.24.0",
-    "next": "~8.1",
+    "next": "~9",
     "react": "~16.8",
     "react-dom": "~16.8",
     "react-id-swiper": "~1.6.9",
@@ -29,7 +29,7 @@
     "yup": "~0.27.0"
   },
   "devDependencies": {
-    "@babel/core": "~7.4.5",
+    "@babel/core": "~7",
     "@storybook/addon-actions": "~5.1.8",
     "@storybook/addon-links": "~5.1.8",
     "@storybook/addons": "~5.1.8",
@@ -40,7 +40,6 @@
     "@types/express-session": "~1.15.12",
     "@types/lodash": "~4.14",
     "@types/mongoose": "~4.7.18",
-    "@types/next": "~8.0.5",
     "@types/node": "~10",
     "@types/storybook__react": "~4.0.2",
     "@types/react": "~16.8",
@@ -50,7 +49,6 @@
     "@types/typography": "~0.16.2",
     "@types/yup": "~0.26.21",
     "@zeit/next-css": "~1.0.1",
-    "@zeit/next-typescript": "~1.1.1",
     "babel-loader": "~8.0.6",
     "imagemin-mozjpeg": "~8.0.0",
     "imagemin-optipng": "~7.0.0",
@@ -58,7 +56,6 @@
     "next-optimized-images": "~2.5.1",
     "prop-types": "~15.7.2",
     "swiper": "~4.5.0",
-    "ts-node": "~8.3",
     "tsconfig-paths-webpack-plugin": "~3.2.0",
     "tslint": "~5.17.0",
     "tslint-config-airbnb": "~5.11.1",
