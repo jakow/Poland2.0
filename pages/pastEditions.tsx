@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { DefaultPageProps } from './_app';
-import { Background } from '.';
 import TeamMembers from '../components/organisms/TeamMembers';
 import { SpeakersFlat } from '../components/organisms/Speakers';
 import Edition from '../types/Edition';
