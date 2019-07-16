@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { colors } from '../../variables';
 import { rhythm } from '../../typography';
+import Link from 'next/link';
 
 const logo = require('../../../static/images/logo.svg');
 
@@ -23,17 +24,13 @@ const BrandLogo = styled('img')({
   marginBottom: rhythm(0.5),
 });
 
-export default ({ Router }: { Router?: React.ComponentType<any> }) => {
+export default () => {
   const brandLogo = <BrandLogo src={`${logo}`} alt="Poland 2.0 logo"/>;
-  return Router ? (
-    <Router href="/">
+  return (
+    <Link href="/">
       <BrandLink title="Home Page">
         {brandLogo}
       </BrandLink>
-    </Router>
-  ) : (
-    <BrandLink href="/" title="Home Page">
-      {brandLogo}
-    </BrandLink>
+    </Link>
   );
 };

@@ -18,7 +18,6 @@ export type MenuItem = {
 
 type Props = {
   items: MenuItem[];
-  Router?: React.ComponentType<any>;
 };
 
 type State = {
@@ -100,10 +99,10 @@ export default class TopNavigation extends React.Component<Props, State> {
         <Container>
           <Layout>
             <Column css={brand}>
-              <Brand Router={this.props.Router} />
+              <Brand/>
             </Column>
             <Column>
-              <DesktopNav items={this.props.items} Router={this.props.Router} />
+              <DesktopNav items={this.props.items}/>
             </Column>
           </Layout>
           <MobileNavButtonContainer>
@@ -118,7 +117,6 @@ export default class TopNavigation extends React.Component<Props, State> {
           items={this.props.items}
           open={this.state.open}
           requestClose={this.toggleNav}
-          Router={this.props.Router}
         />
       </Header>
     );

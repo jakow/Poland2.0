@@ -4,6 +4,7 @@ import { MenuItem } from '.';
 import typography, { Anchor } from '../../typography';
 import { breakpointMin } from '../../variables';
 import { NavButton } from '../../atoms/Button';
+import Link from 'next/link';
 
 const { rhythm } = typography;
 
@@ -28,17 +29,16 @@ const MenuListItem = styled('li')({
 });
 
 type Props = {
-  items: MenuItem[],
-  Router?: React.ComponentType<any>
+  items: MenuItem[]
 };
 
-export default ({ items, Router }: Props) => (
+export default ({ items }: Props) => (
   <Container aria-label="Desktop navigation">
     <MenuList>
       {items.map((item, index) => (
         <MenuListItem key={index}>
           {item.type === 'button'
-            ? <span style={{ padding: `0 ${rhythm(0.5)}`}}>
+            ? <span style={{ padding: `0 ${rhythm(0.5)}` }}>
                 <NavButton
                   href={item.url}
                   rel="noopener noreferrer"
@@ -48,11 +48,9 @@ export default ({ items, Router }: Props) => (
                   {item.title}
                 </NavButton>
               </span>
-            : Router ?
-              <Router href={item.url}>
+            : <Link href={item.url}>
                 <Anchor active={item}>{item.title}</Anchor>
-              </Router>
-              : <Anchor href={item.url} active={item}>{item.title}</Anchor>
+              </Link>
         }
       </MenuListItem>
       ))}

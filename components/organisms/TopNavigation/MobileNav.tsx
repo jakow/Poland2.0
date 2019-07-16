@@ -5,6 +5,7 @@ import { colors, breakpointMin } from '../../variables';
 import { MenuItem } from '.';
 import { rhythm } from '../../typography';
 import { NavButton } from '../../atoms/Button';
+import Link from 'next/link';
 
 const transition = '200ms cubic-bezier(0.77, 0, 0.175, 1)';
 const iconWidth = 28.284;
@@ -149,10 +150,9 @@ interface NavProps {
   items: MenuItem[];
   open: boolean;
   requestClose: () => void;
-  Router?: React.ComponentType<any>;
 }
 
-export default ({ items, open, requestClose, Router }: NavProps) => (
+export default ({ items, open, requestClose }: NavProps) => (
   <React.Fragment>
     {open && (
       <Menu>
@@ -170,22 +170,13 @@ export default ({ items, open, requestClose, Router }: NavProps) => (
                     >
                       {item.title}
                     </NavButton>
-                    : Router ?
-                      <Router href={item.url}>
+                    : <Link href={item.url}>
                         <a>
                           <span onClick={requestClose}>
                             {item.title}
                           </span>
                         </a>
-                      </Router>
-                      :
-                      <a
-                        href={item.url}
-                        className={item.active ? 'active' : ''}
-                        onClick={requestClose}
-                      >
-                        {item.title}
-                      </a>
+                      </Link>
                   }
                 </ItemLink>
               </Item>
