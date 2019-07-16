@@ -1,5 +1,4 @@
 import 'isomorphic-unfetch';
-import * as React from 'react';
 import Document, { Head, Main, NextScript, Html } from 'next/document';
 
 export default class extends Document {
