@@ -46,7 +46,7 @@ const _Venue: React.StatelessComponent<{ venue: Venue }> = ({ venue }) => (
           rel="noopener noreferrer"
           target="_blank"
         >
-          <i><Icon icon="map" iconSize={12} color={`${colors.red}`}/>&ensp;</i>
+          <i><Icon icon="map" iconSize={16} color={`${colors.red}`}/>&ensp;</i>
           <span>View on the map</span>
         </MapLink>
       </React.Fragment>
