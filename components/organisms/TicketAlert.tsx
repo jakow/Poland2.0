@@ -7,8 +7,8 @@ import Container from '../atoms/Container';
 import Countdown from '../molecules/Countdown';
 import { TicketControl } from '../../types/ContentControl';
 
-const meshTopLeft = require('../static/images/mesh-corner-top-left.svg');
-const meshBottomRight = require('../static/images/mesh-corner-bottom-right.svg');
+const meshTopLeft = require('../../static/images/mesh-corner-top-left.svg');
+const meshBottomRight = require('../../static/images/mesh-corner-bottom-right.svg');
 
 const Center = styled('div')({
   display: 'flex',
