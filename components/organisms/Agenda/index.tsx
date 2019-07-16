@@ -48,7 +48,7 @@ interface Props {
 const Agenda: React.StatelessComponent<Props> = ({ agendaDays, year }) => {
   return (
   <Section>
-    <a id="agenda"/>
+    {/* <a id="agenda"/> */}
     <Container>
       <Center>
         <Heading>
@@ -79,7 +79,8 @@ const Agenda: React.StatelessComponent<Props> = ({ agendaDays, year }) => {
         <Timeline/>
       </Main>
     </Container>
-  </Section>)
+  </Section>
+  );
 };
 
 export default Agenda;
