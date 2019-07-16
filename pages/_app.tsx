@@ -1,6 +1,5 @@
 import React from 'react';
-import App, { Container, NextAppContext } from 'next/app';
-import Link from 'next/link';
+import App, { Container, AppContext } from 'next/app';
 import getConfig from 'next/config';
 import Footer from '../components/organisms/Footer';
 import { Global, css } from '@emotion/core';
@@ -13,9 +12,10 @@ import Edition from '../types/Edition';
 
 const { publicRuntimeConfig, serverRuntimeConfig } = getConfig();
 
-export const api = (path: string) => {
+export const api = async (path: string) => {
   const host = serverRuntimeConfig.host || publicRuntimeConfig.host;
-  return fetch(`${host}/${path}`).then(data => data.json());
+  const data = await fetch(`${host}/${path}`);
+  return await data.json();
 };
 
 export interface DefaultPageProps {
@@ -24,7 +24,7 @@ export interface DefaultPageProps {
 }
 
 export default class Website extends App<DefaultPageProps> {
-  static async getInitialProps({ Component, ctx }: NextAppContext) {
+  static async getInitialProps({ Component, ctx }: AppContext) {
     let pageProps = {};
 
     if (Component.getInitialProps) {
@@ -57,11 +57,11 @@ export default class Website extends App<DefaultPageProps> {
     const { Component, contentControl, currentEdition, pageProps } = this.props;
     const navLinks = [
       { title: 'About', url: '/about' },
-      contentControl.showAgenda && { title: 'Agenda', url: '/#agenda' },
-      contentControl.showSpeakers && { title: 'Speakers', url: '/#speakers' },
-      contentControl.showSponsors && { title: 'Partners', url: '/#partners' },
-      { title: 'empowerPL', url: '/empowerPL' },
+      ...(contentControl.showAgenda ? [{ title: 'Agenda', url: '/agenda' }] : []),
+      ...(contentControl.showSpeakers ? [{ title: 'Speakers', url: '/speakers' }] : []),
+      ...(contentControl.showSponsors ? [{ title: 'Partners', url: '/partners' }] : []),
       // { title: 'Past Editions', url: '/past-editions' },
+      { title: 'empowerPL', url: '/empowerPL' }
     ];
 
     return (
@@ -72,7 +72,7 @@ export default class Website extends App<DefaultPageProps> {
         <Head>
           <title>Poland 2.0 Summit</title>
         </Head>
-        <TopNavigation items={navLinks} Router={Link}/>
+        <TopNavigation items={navLinks}/>
         <main style={{ marginTop: rhythm(3) }}>
           <Component
             contentControl={contentControl}
