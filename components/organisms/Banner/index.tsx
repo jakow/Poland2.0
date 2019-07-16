@@ -1,16 +1,13 @@
 import * as React from 'react';
 
-import Swiper from 'react-id-swiper';
 import Markdown from 'react-markdown';
-
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { colors, breakpointMin } from '../../variables';
-import { rhythm, fat } from '../../typography';
+import { rhythm, fat, dangerousSuperscripts } from '../../typography';
 import Edition from '../../../types/Edition';
-import walden from './walden';
-import { limit } from '../../../helpers/cloudinary';
 import { dateString } from '../../../helpers/date';
+import { Header1, Header2 } from '../../atoms/Headers';
 
 const angledEdge = css({
   position: 'relative',
@@ -37,33 +34,24 @@ const angledEdge = css({
 
 const column = css({
   backgroundColor: `${colors.white}`,
-  flex: '1 0 50%',
   position: 'relative'
 });
 
 const Carousel = styled('div')(column, {
-  minHeight: rhythm(9),
-  [breakpointMin('tablet')]: {
-    minHeight: 0
-  },
-  '.swiper-container': {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0
-  },
-  '.swiper-pagination-bullet': {
-    opacity: 1,
-    backgroundColor: `${colors.white}`,
-    boxShadow: '0px 1px 4px 0px rgba(0,0,0,0.4)',
-    '&.swiper-pagination-bullet-active': {
-      backgroundColor: `${colors.red}`
+  flex: '1 0 58%',
+  video: {
+    objectFit: 'cover',
+    width: '100vw',
+    [breakpointMin('tablet')]: {
+      width: '100%',
+      height: '100%'
     }
   }
 });
 
-const Content = styled('div')(column, angledEdge);
+const Content = styled('div')(column, angledEdge, {
+  flex: '1 0 42%'
+});
 
 const DatePlace = styled('h3')(fat, {
   color: `${colors.darkGray}`,
@@ -88,14 +76,14 @@ const Header = styled('header')({
   }
 });
 
-const Image = styled('div')(walden, (props: { src: string }) => ({
-  backgroundSize: 'cover',
-  backgroundRepeat: 'no-repeat',
-  backgroundOrigin: 'content-box',
-  backgroundClip: 'content-box',
-  backgroundPosition: 'center center',
-  backgroundImage: `url(${props.src})`
-}));
+// const Image = styled('div')(walden, (props: { src: string }) => ({
+//   backgroundSize: 'cover',
+//   backgroundRepeat: 'no-repeat',
+//   backgroundOrigin: 'content-box',
+//   backgroundClip: 'content-box',
+//   backgroundPosition: 'center center',
+//   backgroundImage: `url(${props.src})`
+// }));
 
 const Padding = styled('div')({
   padding: `${rhythm(1)} ${rhythm(1)} 0`,
@@ -130,16 +118,18 @@ const Separator = styled('span')({
   }
 });
 
-const _Banner = styled('section')({
+const Wrapper = styled('section')({
   backgroundColor: `${colors.white}`,
+  height: `calc(100vh - ${rhythm(3)})`,
   zIndex: 4,
-  overflowX: 'hidden',
+  overflow: 'hidden',
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
   [breakpointMin('tablet')]: {
     flexDirection: 'row',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    maxHeight: '50vh'
   }
 });
 
@@ -164,39 +154,50 @@ interface Props {
   currentEdition?: Edition;
 }
 
-const Banner: React.StatelessComponent<Props> = ({ currentEdition }) => (
-  <_Banner>
-    <Content>
-      <Padding>
-        <Header>
-          <h1>Poland 2.0 Summit</h1>
-          {currentEdition && (
-            <DatePlace>
-              <time dateTime={currentEdition.startDate}>
-                {dateString(currentEdition.startDate, currentEdition.endDate)}
-              </time>
-              <Separator/>
-              {currentEdition.venue && <span>{currentEdition.venue.name}</span>}
-            </DatePlace>
-          )}
-        </Header>
-        <Markdown source={currentEdition.description}/>
-      </Padding>
-    </Content>
-    <Carousel>
-      <Swiper {...swiperProps}>
-        {['ffoopf3pdr6xxft5pfel', 'tprdqpldylorpccqpmg0', 'DSC_0270n_rlkqba'] // default images
-          .map((secure_url, index) => (
-            <Image className="swiper-slide" key={index} src={limit(secure_url, 900)}/>
-          ))
+const Banner: React.StatelessComponent<Props> = ({ currentEdition }) => {
+  return (
+    <Wrapper>
+      <Content>
+        <Padding>
+          <Header>
+            <Header1 style={{ marginBottom: rhythm(0.25) }}>Poland 2.0 Summit</Header1>
+            {currentEdition.name &&
+              <Header2 bold dangerouslySetInnerHTML={dangerousSuperscripts(currentEdition.name)}/>
+            }
+            {currentEdition && (
+              <DatePlace>
+                <time dateTime={currentEdition.startDate}>
+                  {dateString(currentEdition.startDate, currentEdition.endDate)}
+                </time>
+                <Separator/>
+                {currentEdition.venue && <span>{currentEdition.venue.name}</span>}
+              </DatePlace>
+            )}
+          </Header>
+          <Markdown source={currentEdition.description}/>
+        </Padding>
+      </Content>
+      <Carousel>
+        {currentEdition.coverPhoto && (
+        currentEdition.coverPhoto.url.endsWith('.jpg') ||
+        currentEdition.coverPhoto.url.endsWith('.png')) &&
+          <img src={currentEdition.coverPhoto.url}/>
         }
-      </Swiper>
-    </Carousel>
-  </_Banner>
-);
+        {currentEdition.coverPhoto && currentEdition.coverPhoto.url.endsWith('.mp4') &&
+          <video autoPlay loop muted>
+            <source
+              src={`${currentEdition.coverPhoto.url.slice(0, -4)}.webm`}
+              type="video/webm"
+            />
+            <source
+              src={currentEdition.coverPhoto.url}
+              type="video/mp4"
+            />
+          </video>
+        }
+      </Carousel>
+    </Wrapper>
+  );
+};
 
-/**
- * Requires Swiper stylesheet, available at
- * https://github.com/kidjp85/react-id-swiper#use-swiper-stylesheet-file-from-cdn
- */
 export default Banner;
