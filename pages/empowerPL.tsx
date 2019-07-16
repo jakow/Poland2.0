@@ -1,4 +1,4 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { DefaultPageProps } from './_app';
@@ -76,7 +76,7 @@ const Objective = styled('h1')(stripe, bold, {
   }
 });
 
-const empowerPL: React.StatelessComponent<DefaultPageProps> = () => (
+const empowerPL: FunctionComponent<DefaultPageProps> = () => (
   <Container>
     <Image/>
     <Gradient/>
@@ -93,9 +93,9 @@ const empowerPL: React.StatelessComponent<DefaultPageProps> = () => (
           <Objective>Objective</Objective>
         </Center>
         <p>
-          This year, we will launch the second edition of the <strong>empowerPL</strong> programme,
-          which was started in cooperation with the Boston Consulting Group during last year’s
-          Poland 2.0 Summit.
+          This year, we have launched the second edition of the <strong>empowerPL</strong>
+          programme, which was started in cooperation with the Boston Consulting Group during last
+          year’s Poland 2.0 Summit.
         </p>
         <p>
           The programme aims to build relationships between the best Polish managers and directors,
@@ -103,11 +103,11 @@ const empowerPL: React.StatelessComponent<DefaultPageProps> = () => (
         </p>
         <p>
           While <strong>empowerPL</strong> is already the most significant mentoring programme in
-          Poland, we aim to expand this initiative further to celebrate Poland’s&nbsp;
+          Poland, this initiative is expanded further to celebrate Poland’s&nbsp;
           <strong>100 years of independence</strong> with <strong>100 inspiring mentors</strong>.
         </p>
       </Mission> {/* tslint:disable-next-line */}
-      <ResponsiveVideo src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBCGinPoland%2Fvideos%2F2853963694617122"/>
+      <ResponsiveVideo src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FEmpowerPL%2Fvideos%2F369558683817966"/>
     </Content>
   </Container>
 );
