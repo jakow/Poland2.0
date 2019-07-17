@@ -38,7 +38,10 @@ const column = css({
 });
 
 const Carousel = styled('div')(column, {
-  flex: '1 0 58%',
+  flex: '1 0 60%',
+  [breakpointMin('desktopWide')]: {
+    flex: '1 0 70%'
+  },
   video: {
     objectFit: 'cover',
     width: '100vw',
@@ -50,7 +53,11 @@ const Carousel = styled('div')(column, {
 });
 
 const Content = styled('div')(column, angledEdge, {
-  flex: '1 0 42%'
+  textAlign: 'justify',
+  flex: '1 0 40%',
+  [breakpointMin('desktopWide')]: {
+    flex: '1 0 30%'
+  },
 });
 
 const DatePlace = styled('h3')(fat, {
