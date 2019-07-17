@@ -10,24 +10,25 @@ const shadowStyle = '0 1px 2px 0 rgba(1, 1, 1, 0.05)';
 
 interface Props {
   clickable: boolean;
+  width?: string;
 }
 
 const CardContainer = styled('li')(
-  {
+  (props: Props) => ({
     display: 'flex',
     flexDirection: 'column',
     // make the card occupy full allocated space
     width: '100%',
     // height: '100%',
     // ...within an arbitrary maximum size
-    maxWidth: `${rhythm(16)}`,
+    maxWidth: props.width || `${rhythm(16)}`,
     overflow: 'hidden',
     // styling
     border: borderStyle,
     boxShadow: shadowStyle,
     transition: 'box-shadow 200ms ease-in-out',
     backgroundColor: `${colors.white}`,
-  },
+  }),
   (props: Props) => (props.clickable ? {
     ':hover': {
       boxShadow: '0 2px 12px 1px rgba(0, 0, 0, 0.13)',
@@ -86,16 +87,16 @@ export const CardList = styled('ol')({
   '& > li': {
     flex: '0 0 100%',
     margin: `0 ${rhythm(0.33)} ${rhythm(1)}`,
-    flexBasis: '50%',
-    [breakpointMin('mobile')]: {
-      flexBasis: '33%'
-    },
-    [breakpointMin('tablet')]: {
-      flexBasis: '25%'
-    },
-    [breakpointMin('tabletLandscape')]: {
-      flexBasis: '20%'
-    }
+    // flexBasis: '50%',
+    // [breakpointMin('mobile')]: {
+    //   flexBasis: '33%'
+    // },
+    // [breakpointMin('tablet')]: {
+    //   flexBasis: '25%'
+    // },
+    // [breakpointMin('tabletLandscape')]: {
+    //   flexBasis: '20%'
+    // }
   }
 });
 
@@ -116,10 +117,11 @@ interface CardProps {
   imagePreview?: string;
   onClick?: () => void;
   href?: string;
+  width?: string;
 }
 
 const Card: React.StatelessComponent<CardProps> = ({
-  children, footer, image, imagePreview, onClick, href,
+  children, footer, image, imagePreview, onClick, href, width
 }) => {
   const content = (
     <React.Fragment>
@@ -133,7 +135,7 @@ const Card: React.StatelessComponent<CardProps> = ({
   );
 
   return (
-    <CardContainer clickable={!!onClick || !!href}>
+    <CardContainer clickable={!!onClick || !!href} width={width}>
       {renderCardContent(content, href, onClick)}
       {footer && <CardFooter>{footer}</CardFooter>}
     </CardContainer>

@@ -91,6 +91,7 @@ const sponsorCard = (sponsor: Sponsor, index: number, inModal?: boolean) => (
       image={limit(sponsor.logo.url, 300)}
       imagePreview={limit(sponsor.logo.url, 32)}
       footer={sponsor.name}
+      width={rhythm(8)}
     />
   ) : (
     <Card
@@ -99,6 +100,7 @@ const sponsorCard = (sponsor: Sponsor, index: number, inModal?: boolean) => (
       imagePreview={limit(sponsor.logo.url, 32)}
       href={sponsor.url}
       footer={sponsor.name}
+      width={rhythm(8)}
     />
   )
 );

@@ -34,9 +34,7 @@ const Basket: FunctionComponent<Props> = ({ ticketTypes }) => {
   useEffect(() => {
     const handleBasketChange = () => {
       const storage = JSON.parse(localStorage.getItem('basket') || '{}');
-      if (Object.entries(storage).length > 0) {
-        setBasket(storage);
-      }
+      setBasket(storage);
     };
 
     addEventListener('storage', handleBasketChange);
@@ -45,7 +43,8 @@ const Basket: FunctionComponent<Props> = ({ ticketTypes }) => {
   });
 
   return (
-    <Card>
+    <Card width={rhythm(14)}>
+      <a id="basket"/>
       <Wrapper>
         <Header2 bold noMargin>Basket</Header2>
         {Object.entries(basket).length > 0
@@ -74,7 +73,9 @@ const Basket: FunctionComponent<Props> = ({ ticketTypes }) => {
                 <td>
                   £{ticketTypes.reduce(
                     (sum, ticketType) =>
-                      basket[ticketType.id] ? sum + basket[ticketType.id] * ticketType.price : sum,
+                      basket[ticketType.id]
+                      ? sum + basket[ticketType.id] * ticketType.price
+                      : sum,
                     0
                   )}
                 </td>

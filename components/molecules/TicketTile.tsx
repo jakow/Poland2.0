@@ -113,7 +113,7 @@ const Footer = ({ id, price, quantity }) => {
 const TicketTile: FunctionComponent<TicketType> = ({
   id, name, description, quantity, warningLimit, soldRecently, price, benefits
 }) => (
-  <Card footer={<Footer id={id} price={price} quantity={quantity}/>}>
+  <Card width={rhythm(15)} footer={<Footer id={id} price={price} quantity={quantity}/>}>
     <Wrapper>
       <Header3 bold>{name}</Header3>
       {description && <Markdown>{description}</Markdown>}

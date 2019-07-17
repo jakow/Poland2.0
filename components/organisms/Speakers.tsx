@@ -37,6 +37,7 @@ const speakerCard = (speaker: Speaker, index?: number) => (
     key={index}
     image={fill(speaker.photo.url, 300, 300, { gravity: 'faces' })}
     imagePreview={fill(speaker.photo.url, 32, 32, { gravity: 'faces' })}
+    width={rhythm(8)}
     footer={(
       <React.Fragment>
         {speaker.occupation}<br/>
