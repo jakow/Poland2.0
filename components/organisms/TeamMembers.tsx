@@ -44,12 +44,10 @@ const Icon = styled('a')({
     }
   },
   '&.linkedin': {
-    backgroundImage: 'url("/static/images/icons/linkedin.svg")'
+    background: 'url("https://unpkg.com/simple-icons@latest/icons/linkedin.svg")'
   },
-  '&.lnr': {
-    textDecoration: 'none',
-    color: `${colors.dark}`,
-    fontSize: rhythm(0.75)
+  '&.email': {
+    background: 'url("https://unpkg.com/simple-icons@latest/icons/mail-dot-ru.svg")'
   }
 });
 
@@ -61,6 +59,7 @@ const memberCard = (member: TeamMember, index?: number) => (
     image={fill(member.photo.url, 300, 300, { gravity: 'faces' })}
     imagePreview={fill(member.photo.url, 32, 32, { gravity: 'faces' })}
     footer={member.position}
+    width={rhythm(8)}
   >
     <H3>{member.name}</H3>
     <h4 style={{ flexGrow: 1 }}>{member.organisation && member.organisation}</h4>
@@ -76,7 +75,7 @@ const memberCard = (member: TeamMember, index?: number) => (
       }
       {member.email &&
         <Icon
-          className="lnr lnr-envelope"
+          className="email"
           href={`mailto:${member.email}`}
           rel="noopener noreferrer"
           target="_blank"
