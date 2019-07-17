@@ -21,17 +21,17 @@ export const idleShadow = css({
 });
 
 export const hoverShadow = css({
-  boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.16)',
+  boxShadow: '0 2px 8px 1px rgba(0, 0, 0, 0.16)',
   transition: 'box-shadow 200ms ease-in-out'
 });
 
 export const redShadow = css({
-  boxShadow: `0 3px 8px 0 ${colors.red}`,
+  boxShadow: `0 3px 8px 1px ${colors.red}`,
   transition: 'box-shadow 200ms ease-in-out'
 });
 
 export const activeShadow = css({
-  boxShadow: '0 3px 8px 0 rgba(0, 0, 0, 0.16)',
+  boxShadow: '0 3px 8px 1px rgba(0, 0, 0, 0.16)',
   transition: 'box-shadow 200ms ease-in-out'
 });
 
