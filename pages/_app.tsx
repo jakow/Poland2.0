@@ -6,7 +6,7 @@ import { Global, css } from '@emotion/core';
 import { TypographyStyle, GoogleFont } from 'react-typography';
 import Head from 'next/head';
 import typography, { rhythm, globalStyle } from '../components/typography';
-import TopNavigation from '../components/organisms/TopNavigation';
+import TopNavigation, { MenuItem } from '../components/organisms/TopNavigation';
 import ContentControl from '../types/ContentControl';
 import Edition from '../types/Edition';
 
@@ -55,13 +55,17 @@ export default class Website extends App<DefaultPageProps> {
 
   render() {
     const { Component, contentControl, currentEdition, pageProps } = this.props;
-    const navLinks = [
+    const navLinks: MenuItem[] = [
       { title: 'About', url: '/about' },
       ...(contentControl.showAgenda ? [{ title: 'Agenda', url: '/agenda' }] : []),
       ...(contentControl.showSpeakers ? [{ title: 'Speakers', url: '/speakers' }] : []),
       ...(contentControl.showSponsors ? [{ title: 'Partners', url: '/partners' }] : []),
       // { title: 'Past Editions', url: '/past-editions' },
-      { title: 'empowerPL', url: '/empowerPL' }
+      { title: 'empowerPL', url: '/empowerPL' },
+      ...(contentControl.ticketControl.onSale
+          ? [{ title: 'Get Tickets', url: '/tickets', type: 'button' } as MenuItem]
+          : []
+      )
     ];
 
     return (
