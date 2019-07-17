@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { MenuItem } from '.';
 import typography, { Anchor } from '../../typography';
 import { breakpointMin } from '../../variables';
-import { NavButton } from '../../atoms/Button';
+import Button, { NavButton } from '../../atoms/Button';
 import Link from 'next/link';
 
 const { rhythm } = typography;
@@ -39,14 +39,17 @@ export default ({ items }: Props) => (
         <MenuListItem key={index}>
           {item.type === 'button'
             ? <span style={{ padding: `0 ${rhythm(0.5)}` }}>
-                <NavButton
+                {/* <NavButton
                   href={item.url}
                   rel="noopener noreferrer"
                   target="_blank"
                   style={{ marginTop: rhythm(0.5) }}
                 >
                   {item.title}
-                </NavButton>
+                </NavButton> */}
+                <Link href={item.url}>
+                  <Button style={{ marginTop: rhythm(0.5) }}>{item.title}</Button>
+                </Link>
               </span>
             : <Link href={item.url}>
                 <Anchor active={item}>{item.title}</Anchor>
