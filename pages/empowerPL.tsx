@@ -94,12 +94,12 @@ const empowerPL: FunctionComponent<DefaultPageProps> = () => (
         </Center>
         <p>
           This year, we have launched the second edition of the <strong>empowerPL</strong>
-          programme, which was started in cooperation with the Boston Consulting Group during last
-          year’s Poland 2.0 Summit.
+          &nbsp;programme, which was started in cooperation with the Boston Consulting Group during
+          last year’s Poland 2.0 Summit.
         </p>
         <p>
           The programme aims to build relationships between the best Polish managers and directors,
-          and Polish students from the best universities in the UK and France.
+          and Polish students from the best universities in the UK and across Europe.
         </p>
         <p>
           While <strong>empowerPL</strong> is already the most significant mentoring programme in
