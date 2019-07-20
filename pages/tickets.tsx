@@ -8,7 +8,7 @@ import { Center, rhythm } from '../components/typography';
 import { CardList } from '../components/molecules/Card';
 import { NextPage } from 'next';
 import { api } from './_app';
-import { breakpointMax, breakpointMin } from '../components/variables';
+import { breakpointMax, breakpointMin, colors } from '../components/variables';
 
 interface Props {
   ticketTypes: TicketType[];
@@ -16,8 +16,10 @@ interface Props {
 
 const BasketWrapper = styled('aside')({
   display: 'flex',
+  zIndex: 2,
   [breakpointMax('tablet')]: {
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: `${colors.gray}`
   },
   [breakpointMin('tablet')]: {
     position: 'fixed',
@@ -60,6 +62,11 @@ const DynamicBasket = dynamic(
   { ssr: false }
 );
 
+const DynamicMobileBasketStatus = dynamic(
+  () => import('../components/organisms/Basket/MobileBasketStatus'),
+  { ssr: false }
+);
+
 const Tickets: NextPage<Props> = ({ ticketTypes }) => (
   <Background>
     <Center>
@@ -75,10 +82,9 @@ const Tickets: NextPage<Props> = ({ ticketTypes }) => (
         ))}
       </CardList>
       <BasketWrapper>
-        {/* <CardList> */}
-          <DynamicBasket ticketTypes={ticketTypes}/>
-        {/* </CardList> */}
+        <DynamicBasket ticketTypes={ticketTypes}/>
       </BasketWrapper>
+      <DynamicMobileBasketStatus ticketTypes={ticketTypes}/>
     </Wrapper>
   </Background>
 );
