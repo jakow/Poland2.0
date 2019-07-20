@@ -1,12 +1,14 @@
 import React, { useEffect, useState, FunctionComponent } from 'react';
-import Card from '../molecules/Card';
-import { Header2 } from '../atoms/Headers';
+import Card from '../../molecules/Card';
+import { Header2 } from '../../atoms/Headers';
 import styled from '@emotion/styled';
-import TicketType from '../../types/TicketType';
-import { Center, rhythm } from '../typography';
+import TicketType from '../../../types/TicketType';
+import { Center, rhythm } from '../../typography';
 import { Icon } from '@blueprintjs/core';
-import { colors } from '../variables';
-import Button from '../atoms/Button';
+import { colors } from '../../variables';
+import Button from '../../atoms/Button';
+import { basketEffect, getBasket, getTotalAmount, BasketProps } from './logic';
+import { toGBP } from '../../../helpers/currency';
 
 const Wrapper = styled('section')({
   table: {
@@ -17,30 +19,15 @@ const Wrapper = styled('section')({
   }
 });
 
-interface Props {
-  ticketTypes: TicketType[];
-}
-
-const getBasket = () => JSON.parse(localStorage.getItem('basket') || '{}');
-
 const Checkout = () => {
   return (
     <Button wide>Checkout</Button>
   );
 };
 
-const Basket: FunctionComponent<Props> = ({ ticketTypes }) => {
+const Basket: FunctionComponent<BasketProps> = ({ ticketTypes }) => {
   const [basket, setBasket] = useState(getBasket());
-  useEffect(() => {
-    const handleBasketChange = () => {
-      const storage = JSON.parse(localStorage.getItem('basket') || '{}');
-      setBasket(storage);
-    };
-
-    addEventListener('storage', handleBasketChange);
-
-    return () => removeEventListener('storage', handleBasketChange);
-  });
+  useEffect(basketEffect(setBasket));
 
   return (
     <Card width={rhythm(14)}>
@@ -62,7 +49,7 @@ const Basket: FunctionComponent<Props> = ({ ticketTypes }) => {
                   <tr key={index}>
                     <td><Center>{basket[ticketType.id]}</Center></td>
                     <td>{ticketType.name}</td>
-                    <td><Center>£{basket[ticketType.id] * ticketType.price}</Center></td>
+                    <td><Center>{toGBP(basket[ticketType.id] * ticketType.price)}</Center></td>
                   </tr>
                 ) : null
               ))}
@@ -71,13 +58,7 @@ const Basket: FunctionComponent<Props> = ({ ticketTypes }) => {
               <tr>
                 <th colSpan={2}>Total Amount</th>
                 <td>
-                  £{ticketTypes.reduce(
-                    (sum, ticketType) =>
-                      basket[ticketType.id]
-                      ? sum + basket[ticketType.id] * ticketType.price
-                      : sum,
-                    0
-                  )}
+                  {getTotalAmount(ticketTypes, basket)}
                 </td>
               </tr>
             </tfoot>
