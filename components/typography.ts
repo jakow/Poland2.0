@@ -43,7 +43,7 @@ export const globalStyle = css({
     }
   },
   'a[id]': {
-    position: 'absolute',
+    position: 'relative',
     top: `-${rhythm(3)}`
   },
   small: {
