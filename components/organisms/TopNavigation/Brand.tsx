@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { colors } from '../../variables';
+import { colors, breakpointMax } from '../../variables';
 import { rhythm } from '../../typography';
 import Link from 'next/link';
 
@@ -15,13 +15,17 @@ const BrandLink = styled('a')({
   height: '100%',
   zIndex: 1000,
   padding: `0 ${rhythm(1)}`, // to make it easily clickable on mobile,
-  cursor: 'pointer'
+  cursor: 'pointer',
+  [breakpointMax('tablet')]: {
+    transform: 'translateX(25%)'
+  }
 });
 
 const BrandLogo = styled('img')({
   height: rhythm(2),
   marginTop: rhythm(0.5),
   marginBottom: rhythm(0.5),
+  minWidth: rhythm(1.66)
 });
 
 export default () => {
