@@ -8,6 +8,7 @@ import { colors } from '../variables';
 import { css } from '@emotion/core';
 import { useState, useEffect, FunctionComponent } from 'react';
 import TicketType from '../../types/TicketType';
+import { toGBP } from '../../helpers/currency';
 
 const Wrapper = styled('section')({
   '& > h3': {
@@ -85,7 +86,7 @@ const Footer = ({ id, price, quantity }) => {
   );
   return (
     <Flex>
-      <Header3 bold noMargin>£{price}</Header3>
+      <Header3 bold noMargin>{toGBP(price)}</Header3>
       {quantity > 0
       ? <Flex>
           <Icon
