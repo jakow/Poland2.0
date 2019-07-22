@@ -4,7 +4,8 @@ import { Flex } from '../../molecules/TicketTile';
 import { Header3 } from '../../atoms/Headers';
 import { rhythm } from '../../typography';
 import { useEffect, useState, FunctionComponent } from 'react';
-import { getBasket, basketEffect, getTotalAmount, BasketProps } from './logic';
+import { getBasket, basketEffect, getTotalAmount } from './logic';
+import TicketType from '../../../types/TicketType';
 
 const Wrapper = styled('a')({
   display: 'none',
@@ -31,7 +32,11 @@ const Wrapper = styled('a')({
   }
 });
 
-const MobileBasketStatus: FunctionComponent<BasketProps> = ({ ticketTypes }) => {
+interface Props {
+  ticketTypes: TicketType[];
+}
+
+const MobileBasketStatus: FunctionComponent<Props> = ({ ticketTypes }) => {
   const [basket, setBasket] = useState(getBasket());
   useEffect(basketEffect(setBasket));
 

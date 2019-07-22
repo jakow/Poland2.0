@@ -2,10 +2,6 @@ import React from 'react';
 import TicketType from '../../../types/TicketType';
 import { toGBP } from '../../../helpers/currency';
 
-export interface BasketProps {
-  ticketTypes: TicketType[];
-}
-
 export const getBasket = () => JSON.parse(localStorage.getItem('basket') || '{}');
 
 export const getTotalAmount = (ticketTypes: TicketType[], basket: any) => {
