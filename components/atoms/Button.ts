@@ -62,6 +62,11 @@ const style = css({
   border: 'none',
   cursor: 'pointer',
   boxShadow: '0px 2px 7px 0px rgba(1, 1, 1, 0.18)',
+  ':disabled': {
+    pointerEvents: 'none',
+    color: `${colors.darkGray}`,
+    backgroundColor: `${colors.mediumGray}`
+  }
 });
 
 export const Button = styled('button')([
