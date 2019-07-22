@@ -1,11 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { DefaultPageProps } from './_app';
-import TeamMembers from '../components/organisms/TeamMembers';
-import { SpeakersFlat } from '../components/organisms/Speakers';
 import Edition from '../types/Edition';
-import Speaker from '../types/Speaker';
-import TeamMember from '../types/TeamMember';
 import { _fat, Anchor, Center, _bold, _stripe } from '../components/typography';
 
 const Container = styled('section')({
@@ -27,14 +23,10 @@ const YearList = styled('ol')({
 });
 
 interface Props {
-  editions: (Edition & {
-    speakers: Speaker[];
-    teamMembers: TeamMember[]
-  })[];
-  years: string[];
+  editions: Edition[];
 }
 
-const PastEditions: React.StatelessComponent<DefaultPageProps & Props> = ({ editions, years }) => (
+const PastEditions: React.StatelessComponent<DefaultPageProps & Props> = ({ editions }) => (
   <Container>
     {/* <h1 className={_fat}>Past Editions</h1>
     <YearList>
