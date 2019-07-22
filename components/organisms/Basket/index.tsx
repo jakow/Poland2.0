@@ -7,8 +7,9 @@ import { Center, rhythm } from '../../typography';
 import { Icon } from '@blueprintjs/core';
 import { colors } from '../../variables';
 import Button from '../../atoms/Button';
-import { basketEffect, getBasket, getTotalAmount, BasketProps } from './logic';
+import { basketEffect, getBasket, getTotalAmount } from './logic';
 import { toGBP } from '../../../helpers/currency';
+import Link from 'next/link';
 
 const Wrapper = styled('section')({
   table: {
@@ -19,18 +20,41 @@ const Wrapper = styled('section')({
   }
 });
 
-const Checkout = () => {
-  return (
-    <Button wide>Checkout</Button>
-  );
-};
+export interface SubmitButtonProps {
+  href?: string;
+  label: string;
+  form?: string;
+  ref?: React.Ref<HTMLButtonElement>;
+}
 
-const Basket: FunctionComponent<BasketProps> = ({ ticketTypes }) => {
+const Submission = React.forwardRef<HTMLButtonElement, SubmitButtonProps>(
+  ({ href, label, form }, ref) => {
+    const button = (
+      <Button
+        wide
+        ref={ref}
+        form={form}
+        type={form ? 'submit' : 'button'}
+      >
+        {label}
+      </Button>
+    );
+
+    return href ? <Link href={href}>{button}</Link> : button;
+  }
+);
+
+interface Props {
+  ticketTypes: TicketType[];
+  submitButton: SubmitButtonProps;
+}
+
+const Basket = ({ ticketTypes, submitButton }) => {
   const [basket, setBasket] = useState(getBasket());
   useEffect(basketEffect(setBasket));
 
   return (
-    <Card width={rhythm(14)}>
+    <Card width={rhythm(15)}>
       <a id="basket"/>
       <Wrapper>
         <Header2 bold noMargin>Basket</Header2>
@@ -73,7 +97,10 @@ const Basket: FunctionComponent<BasketProps> = ({ ticketTypes }) => {
             </Center>
           </React.Fragment>
         }
-        {Object.entries(basket).length > 0 ? <Checkout/> : null}
+        {Object.entries(basket).length > 0
+          ? <Submission {...submitButton}/>
+          : null
+        }
       </Wrapper>
     </Card>
   );
