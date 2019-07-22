@@ -1,6 +1,5 @@
 import TicketType from '../types/TicketType';
 import Background from '../components/atoms/Background';
-import Container from '../components/atoms/Container';
 import dynamic from 'next/dynamic';
 import { Header1 } from '../components/atoms/Headers';
 import styled from '@emotion/styled';
@@ -14,7 +13,7 @@ interface Props {
   ticketTypes: TicketType[];
 }
 
-const BasketWrapper = styled('aside')({
+export const BasketWrapper = styled('aside')({
   display: 'flex',
   zIndex: 2,
   [breakpointMax('tablet')]: {
@@ -24,11 +23,6 @@ const BasketWrapper = styled('aside')({
   [breakpointMin('tablet')]: {
     position: 'fixed',
     right: rhythm(1)
-  },
-  li: {
-    [breakpointMax('mobile')]: {
-      maxWidth: rhythm(15)
-    },
   }
 });
 
@@ -41,14 +35,8 @@ const Wrapper = styled('main')({
   '& > ol': {
     [breakpointMin('tablet')]: {
       paddingLeft: '2rem',
-      width: '55%',
+      width: `calc(100vw - ${rhythm(17)})`,
     },
-    [breakpointMin('desktop')]: {
-      width: '70%'
-    },
-    [breakpointMin('desktopWide')]: {
-      width: '77%'
-    }
   }
 });
 
@@ -82,7 +70,10 @@ const Tickets: NextPage<Props> = ({ ticketTypes }) => (
         ))}
       </CardList>
       <BasketWrapper>
-        <DynamicBasket ticketTypes={ticketTypes}/>
+        <DynamicBasket
+          submitButton={{ href: '/checkout', label: 'Checkout' }}
+          ticketTypes={ticketTypes}
+        />
       </BasketWrapper>
       <DynamicMobileBasketStatus ticketTypes={ticketTypes}/>
     </Wrapper>
