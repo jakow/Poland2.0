@@ -42,7 +42,7 @@ const Carousel = styled('div')(column, {
   [breakpointMin('desktopWide')]: {
     flex: '1 0 70%'
   },
-  video: {
+  'video, img': {
     objectFit: 'cover',
     width: '100vw',
     [breakpointMin('tablet')]: {
@@ -140,22 +140,22 @@ const Wrapper = styled('section')({
   }
 });
 
-const swiperProps = {
-  loop: true,
-  simulateTouch: false,
-  autoplay: {
-    delay: 2000,
-    disableOnInteraction: false,
-  },
-  speed: 500,
-  pagination: {
-    el: '.swiper-pagination',
-    type: 'bullets'
-  },
-  a11y: {
-    enabled: true
-  },
-};
+// const swiperProps = {
+//   loop: true,
+//   simulateTouch: false,
+//   autoplay: {
+//     delay: 2000,
+//     disableOnInteraction: false,
+//   },
+//   speed: 500,
+//   pagination: {
+//     el: '.swiper-pagination',
+//     type: 'bullets'
+//   },
+//   a11y: {
+//     enabled: true
+//   },
+// };
 
 interface Props {
   currentEdition?: Edition;
