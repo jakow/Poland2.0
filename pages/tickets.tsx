@@ -70,10 +70,12 @@ const Tickets: NextPage<Props> = ({ ticketTypes }) => (
         ))}
       </CardList>
       <BasketWrapper>
-        <DynamicBasket
-          submitButton={{ href: '/checkout', label: 'Checkout' }}
-          ticketTypes={ticketTypes}
-        />
+        <CardList>
+          <DynamicBasket
+            submitButton={{ href: '/checkout', label: 'Checkout' }}
+            ticketTypes={ticketTypes}
+          />
+        </CardList>
       </BasketWrapper>
       <DynamicMobileBasketStatus ticketTypes={ticketTypes}/>
     </Wrapper>

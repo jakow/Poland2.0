@@ -5,12 +5,15 @@ import { Formik, Form, FieldArray, getIn } from 'formik';
 import { Header3 } from '../atoms/Headers';
 import { InputField } from '../atoms/Form';
 import { array, object, string } from 'yup';
-import Button from '../atoms/Button';
 
 interface Props {
   ticketTypes: TicketType[];
   submitButtonRef: React.RefObject<HTMLButtonElement>;
+  onSubmit: (values: any) => void;
 }
+
+// tslint:disable-next-line
+// const fullNameRegex = /^[a-zA-Z\u00C0-\u00FF\u0100-\u017F]+(([',. -][a-zA-Z\u00C0-\u00FF\u0100-\u017F ])?[a-zA-Z\u00C0-\u00FF\u0100-\u017F]*)*$/g;
 
 class Participants extends Component<Props> {
   state = {
@@ -22,23 +25,25 @@ class Participants extends Component<Props> {
       <Formik
         initialValues={{
           participants: Object.entries(this.state.basket).reduce(
-            (values, [id, quantity]) => [...values, {
+            (values, [id, quantity]) => [...values, ...Array(quantity).fill({
               ticket: id,
               fullName: '',
               email: ''
-            }],
+            })],
             []
           )
         }}
         onSubmit={(values, actions) => {
           actions.setSubmitting(true);
-          console.log(values);
+          this.props.onSubmit(values);
           actions.setSubmitting(false);
         }}
         validationSchema={object().shape({
           participants: array().of(
             object().shape({
-              fullName: string().required('Please enter a full name.'),
+              fullName: string()
+                // .matches(fullNameRegex, 'Please enter a valid full name. Accented characters are allowed!')
+                .required('Please enter a full name.'),
               email: string()
                 .email('Please enter a valid e-mail address.')
                 .required('Please enter an e-mail address.')
@@ -48,8 +53,11 @@ class Participants extends Component<Props> {
         })}
       >
         {({ errors, touched, isSubmitting, values }) => {
-          this.props.submitButtonRef.current.disabled =
-            !Object.entries(touched).length || !!errors.participants || isSubmitting;
+          if (this.props.submitButtonRef.current) {
+            const disabled = !Object.entries(touched).length || !!errors.participants || isSubmitting;
+            this.props.submitButtonRef.current.disabled = disabled;
+          }
+
           return (
             <Form id="participants">
               <FieldArray name="participants">
