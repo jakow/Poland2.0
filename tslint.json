@@ -1,6 +1,7 @@
 {
     "extends": ["tslint-config-airbnb", "tslint-react"],
     "rules": {
+      "max-line-length": [true, 110],
       "import-name": false,
       "variable-name": false,
       "jsx-boolean-value": false,
