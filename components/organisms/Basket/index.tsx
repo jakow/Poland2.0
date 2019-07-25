@@ -7,7 +7,7 @@ import { Center, rhythm } from '../../typography';
 import { Icon } from '@blueprintjs/core';
 import { colors } from '../../variables';
 import Button from '../../atoms/Button';
-import { basketEffect, getBasket, getTotalAmount } from './logic';
+import { basketEffect, getBasket, getFormattedTotalAmount } from './logic';
 import { toGBP } from '../../../helpers/currency';
 import Link from 'next/link';
 
@@ -54,8 +54,7 @@ const Basket = ({ ticketTypes, submitButton }) => {
   useEffect(basketEffect(setBasket));
 
   return (
-    <Card width={rhythm(15)}>
-      <a id="basket"/>
+    <Card width={rhythm(15)} id="basket">
       <Wrapper>
         <Header2 bold noMargin>Basket</Header2>
         {Object.entries(basket).length > 0
@@ -73,7 +72,7 @@ const Basket = ({ ticketTypes, submitButton }) => {
                   <tr key={index}>
                     <td><Center>{basket[ticketType.id]}</Center></td>
                     <td>{ticketType.name}</td>
-                    <td><Center>{toGBP(basket[ticketType.id] * ticketType.price)}</Center></td>
+                    <td>{toGBP(basket[ticketType.id] * ticketType.price)}</td>
                   </tr>
                 ) : null
               ))}
@@ -82,7 +81,7 @@ const Basket = ({ ticketTypes, submitButton }) => {
               <tr>
                 <th colSpan={2}>Total Amount</th>
                 <td>
-                  {getTotalAmount(ticketTypes, basket)}
+                  {getFormattedTotalAmount(ticketTypes, basket)}
                 </td>
               </tr>
             </tfoot>

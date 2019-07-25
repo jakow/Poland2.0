@@ -118,10 +118,11 @@ interface CardProps {
   onClick?: () => void;
   href?: string;
   width?: string;
+  id?: string;
 }
 
 const Card: React.StatelessComponent<CardProps> = ({
-  children, footer, image, imagePreview, onClick, href, width
+  children, footer, image, imagePreview, onClick, href, width, id
 }) => {
   const content = (
     <React.Fragment>
@@ -136,6 +137,7 @@ const Card: React.StatelessComponent<CardProps> = ({
 
   return (
     <CardContainer clickable={!!onClick || !!href} width={width}>
+      {id && <a id={id}/>}
       {renderCardContent(content, href, onClick)}
       {footer && <CardFooter>{footer}</CardFooter>}
     </CardContainer>

@@ -4,17 +4,17 @@ import { toGBP } from '../../../helpers/currency';
 
 export const getBasket = () => JSON.parse(localStorage.getItem('basket') || '{}');
 
-export const getTotalAmount = (ticketTypes: TicketType[], basket: any) => {
-  const sum = ticketTypes.reduce(
+export const getTotalAmount = (ticketTypes: TicketType[], basket: any) =>
+  ticketTypes.reduce(
     (sum, ticketType) =>
       basket[ticketType.id]
       ? sum + basket[ticketType.id] * ticketType.price
       : sum,
     0
-  );
+);
 
-  return toGBP(sum);
-};
+export const getFormattedTotalAmount = (ticketTypes: TicketType[], basket: any) =>
+  toGBP(getTotalAmount(ticketTypes, basket));
 
 export const basketEffect = (setBasket: React.Dispatch<any>) => () => {
   const handleBasketChange = () => {

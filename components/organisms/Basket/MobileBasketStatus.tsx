@@ -4,7 +4,7 @@ import { Flex } from '../../molecules/TicketTile';
 import { Header3 } from '../../atoms/Headers';
 import { rhythm } from '../../typography';
 import { useEffect, useState, FunctionComponent } from 'react';
-import { getBasket, basketEffect, getTotalAmount } from './logic';
+import { getBasket, basketEffect, getFormattedTotalAmount } from './logic';
 import TicketType from '../../../types/TicketType';
 
 const Wrapper = styled('a')({
@@ -45,7 +45,7 @@ const MobileBasketStatus: FunctionComponent<Props> = ({ ticketTypes }) => {
     <Wrapper href="#basket">
       <Flex>
         <b>Go to Basket</b>
-        <Header3 bold noMargin>{getTotalAmount(ticketTypes, basket)}</Header3>
+        <Header3 bold noMargin>{getFormattedTotalAmount(ticketTypes, basket)}</Header3>
       </Flex>
     </Wrapper>
     ) : null;
