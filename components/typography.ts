@@ -32,17 +32,8 @@ const typography = new Typography({
 export const { rhythm, scale } = typography;
 
 export const globalStyle = css({
-  '@media screen and (max-width: 320px)': { // iPhone 5/SE
-    body: {
-      fontSize: 14
-    }
-  },
-  '@media screen and (max-width: 414px)': { // iPhone 6/7/8 Plus
-    body: {
-      fontSize: 15
-    }
-  },
   'a[id]': {
+    display: 'block',
     position: 'relative',
     top: `-${rhythm(3)}`
   },

@@ -28,6 +28,12 @@ export default class extends Document {
           <meta name="application-name" content="Poland 2.0"/>
           <meta name="msapplication-TileColor" content="#FFFFFF"/>
           <meta name="msapplication-TileImage" content="/static/images/favicons/mstile-144x144.png"/>
+
+          <script src="https://js.stripe.com/v3/"/>
+
+          <style>
+          {`@media screen and (max-width: 375px) { html { font-size: 85% !important } }`}
+          </style>
           {/* tslint:enable */}
         </Head>
         <body>
