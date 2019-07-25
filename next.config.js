@@ -1,10 +1,14 @@
-const withCSS = require('@zeit/next-css');
+const dotEnv = require('dotenv').config();
+if (dotEnv.error) {
+  throw dotEnv.error;
+}
+
 const withOptimizedImages = require('next-optimized-images');
 
 const localhost = 'http://localhost:1337';
 
 module.exports =
-  withCSS(
+  // withCSS(
   withOptimizedImages({
     webpack: config => {
       config.node = {
@@ -23,6 +27,9 @@ module.exports =
 
       return config;
     },
+    env: {
+      stripeApiKey: process.env.NODE_ENV !== 'production' ? process.env.STRIPE_PK_TEST : process.env.STRIPE_PK_LIVE,
+    },
     serverRuntimeConfig: {
       host: process.env.NODE_ENV !== 'development' ? 'http://api:1337' : localhost
     },
@@ -30,4 +37,4 @@ module.exports =
       host: process.env.NODE_ENV !== 'development' ? process.env.API_URL : localhost
     }
   }
-));
+);//);
