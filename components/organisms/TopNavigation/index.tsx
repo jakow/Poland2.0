@@ -52,10 +52,7 @@ const Column = styled('div')({
   height: navHeight,
   display: 'flex',
   flexDirection: 'row',
-  alignItems: 'center',
-  '& + &': {
-    marginLeft: rhythm(2),
-  },
+  alignItems: 'center'
 });
 
 const brand = css({

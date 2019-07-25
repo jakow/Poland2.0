@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { colors, breakpointMax } from '../../variables';
+import { colors } from '../../variables';
 import { rhythm } from '../../typography';
 import Link from 'next/link';
 
@@ -15,10 +15,7 @@ const BrandLink = styled('a')({
   height: '100%',
   zIndex: 1000,
   padding: `0 ${rhythm(1)}`, // to make it easily clickable on mobile,
-  cursor: 'pointer',
-  [breakpointMax('tablet')]: {
-    transform: 'translateX(25%)'
-  }
+  cursor: 'pointer'
 });
 
 const BrandLogo = styled('img')({
