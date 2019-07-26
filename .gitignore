@@ -24,9 +24,6 @@ bower_components
 # Build files should not be checked in
 production/
 
-# ignore notes for the developer only
-NOTES.md
-
 yarn.lock
 package-lock.json
 
