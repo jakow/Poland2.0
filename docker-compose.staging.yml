@@ -9,6 +9,9 @@ services:
   api:
     volumes:
       - ../p20-backend:/api
+    build:
+      args:
+        - NODE_ENV=staging
     environment:
       - NODE_ENV=staging
   db:

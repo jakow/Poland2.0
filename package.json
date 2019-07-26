@@ -78,6 +78,10 @@
     "docker:prod:web": "docker-compose -f docker-compose.yml -f docker-compose.production.yml up -d web",
     "docker:prod:build:web": "docker-compose -f docker-compose.yml -f docker-compose.production.yml build web",
     "docker:stag:build": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml build",
+    "docker:stag:build:web": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml build web",
+    "docker:stag:build:api": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml build api",
+    "docker:stag:web": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml up web",
+    "docker:stag:api": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml up api",
     "docker:stag:db": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml up db",
     "docker:prod:log": "docker-compose -f docker-compose.yml -f docker-compose.production.yml up",
     "docker:stag": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml up"
