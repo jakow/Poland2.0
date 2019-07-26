@@ -1,14 +1,10 @@
 version: '3.5'
 services:
   web:
-    volumes:
-      - .:/app
     environment:
       - NODE_ENV=staging
       - API_URL=http://api.localhost
   api:
-    volumes:
-      - ../p20-backend:/api
     build:
       args:
         - NODE_ENV=staging
