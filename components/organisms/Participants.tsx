@@ -5,17 +5,17 @@ import { Formik, Form, FieldArray, getIn } from 'formik';
 import { Header3 } from '../atoms/Headers';
 import { InputField } from '../atoms/Form';
 import { array, object, string } from 'yup';
+import { SubmitButtonProps } from '../../pages/checkout';
 
 interface Props {
   ticketTypes: TicketType[];
-  submitButtonRef: React.RefObject<HTMLButtonElement>;
   onSubmit: (values: any) => void;
 }
 
 // tslint:disable-next-line
 // const fullNameRegex = /^[a-zA-Z\u00C0-\u00FF\u0100-\u017F]+(([',. -][a-zA-Z\u00C0-\u00FF\u0100-\u017F ])?[a-zA-Z\u00C0-\u00FF\u0100-\u017F]*)*$/g;
 
-class Participants extends Component<Props> {
+class Participants extends Component<Props & SubmitButtonProps> {
   state = {
     basket: getBasket()
   };
