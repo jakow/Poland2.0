@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { colors } from '../components/variables';
 import { InputField } from '../components/atoms/Form';
 import { Formik, Form } from 'formik';
 import { object, string } from 'yup';
@@ -63,7 +62,11 @@ storiesOf('Form', module)
                 name="age"
                 type="select"
                 placeholder="Select your age range"
-                options={['Prefer not to answer', '16-19', '20-24']}
+                options={{ data: [
+                  { value: 'Prefer not to answer' },
+                  { value: '16-19' },
+                  { value: '20-24' }
+                ]}}
                 error={errors.age && touched.age ? errors.age : null}
               />
               <Button wide type="submit">Submit</Button>

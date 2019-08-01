@@ -14,7 +14,18 @@ interface FieldProps {
   leftIcon?: IconName;
   mandatory?: boolean;
   error?: string;
-  options?: string[];
+  options?: SelectProps;
+}
+
+interface SelectProps {
+  valueLabel?: string;
+  nameLabel?: string;
+  data: SelectOption[];
+}
+
+interface SelectOption {
+  value: string;
+  name?: string;
 }
 
 const Flex = styled('div')(
@@ -75,7 +86,8 @@ const Wrapper = styled('fieldset')(
     border: 'none',
     small: {
       marginTop: rhythm(1),
-      marginLeft: rhythm(1.75)
+      marginLeft: rhythm(1.75),
+      color: `${colors.red}`
     }
   }
 );
@@ -100,7 +112,13 @@ export const InputField: FunctionComponent<FieldProps> = ({
             >
               <option value="" disabled hidden>{placeholder}</option>
               {options
-              ? options.map((option, index) => <option key={index} value={option}>{option}</option>)
+              ? options.data.map((option, index) =>
+                <option
+                  key={index}
+                  value={option[`${options.valueLabel || 'value'}`]}
+                >
+                  {option[`${options.nameLabel || 'name'}`] || option['value']}
+                </option>)
               : null
               }
             </FormikField>;
