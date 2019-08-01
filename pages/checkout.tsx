@@ -18,6 +18,10 @@ interface Props {
   ticketTypes: TicketType[];
 }
 
+export interface SubmitButtonProps {
+  submitButtonRef: React.RefObject<HTMLButtonElement>;
+}
+
 enum CheckoutStep {
   PARTICIPANTS,
   SURVEY,
@@ -65,7 +69,7 @@ const Wrapper = styled('main')({
 const buttonRef = React.createRef<HTMLButtonElement>();
 const submitButton = {
   label: 'Continue',
-  form: 'participants',
+  form: 'payment',
   ref: buttonRef
 };
 
@@ -108,6 +112,7 @@ const Checkout: NextPage<Props> = ({ ticketTypes }) => {
                         host={publicRuntimeConfig.host}
                         ticketTypes={ticketTypes}
                         apiKey={process.env.stripeApiKey}
+                        submitButtonRef={buttonRef}
                       />
                     </Card>
                   );
