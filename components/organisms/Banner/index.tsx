@@ -83,15 +83,6 @@ const Header = styled('header')({
   }
 });
 
-// const Image = styled('div')(walden, (props: { src: string }) => ({
-//   backgroundSize: 'cover',
-//   backgroundRepeat: 'no-repeat',
-//   backgroundOrigin: 'content-box',
-//   backgroundClip: 'content-box',
-//   backgroundPosition: 'center center',
-//   backgroundImage: `url(${props.src})`
-// }));
-
 const Padding = styled('div')({
   padding: `${rhythm(1)} ${rhythm(1)} 0`,
   [breakpointMin('tablet')]: {
@@ -127,35 +118,17 @@ const Separator = styled('span')({
 
 const Wrapper = styled('section')({
   backgroundColor: `${colors.white}`,
-  height: `calc(100vh - ${rhythm(3)})`,
   zIndex: 4,
   overflow: 'hidden',
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
   [breakpointMin('tablet')]: {
+    maxHeight: rhythm(20),
     flexDirection: 'row',
-    alignItems: 'stretch',
-    maxHeight: '50vh'
+    alignItems: 'stretch'
   }
 });
-
-// const swiperProps = {
-//   loop: true,
-//   simulateTouch: false,
-//   autoplay: {
-//     delay: 2000,
-//     disableOnInteraction: false,
-//   },
-//   speed: 500,
-//   pagination: {
-//     el: '.swiper-pagination',
-//     type: 'bullets'
-//   },
-//   a11y: {
-//     enabled: true
-//   },
-// };
 
 interface Props {
   currentEdition?: Edition;
@@ -191,7 +164,7 @@ const Banner: React.StatelessComponent<Props> = ({ currentEdition }) => {
           <img src={currentEdition.coverPhoto.url}/>
         }
         {currentEdition.coverPhoto && currentEdition.coverPhoto.url.endsWith('.mp4') &&
-          <video autoPlay loop muted>
+          <video autoPlay loop muted playsInline>
             <source
               src={`${currentEdition.coverPhoto.url.slice(0, -4)}.webm`}
               type="video/webm"
