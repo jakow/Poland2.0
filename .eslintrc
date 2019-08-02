@@ -1,0 +1,44 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "useJSXTextNode": true,
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint", "react-hooks"],
+  "extends": ["airbnb"],
+  "rules": {
+    "consistent-return": 0,
+    "default-case": 0,
+    "import-name": 0,
+    "variable-name": 0,
+    "jsx-boolean-value": 0,
+    "jsx-no-lambda": 0,
+    "jsx-no-multiline-js": 0,
+    "max-len": [1, 110],
+    "no-console": 0,
+    "no-increment-decrement": 0,
+    "no-param-reassign": 0,
+    "no-parameter-reassignment": 0,
+    "no-unused-vars": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "react/no-array-index-key": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/prop-types": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".d.ts", ".tsx"]
+      }
+    }
+  }
+}

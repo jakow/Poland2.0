@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import styled from '@emotion/styled';
 import { Icon, IconName } from '@blueprintjs/core';
+import { Field as FormikField } from 'formik';
 import { colors, activeShadow, idleShadow } from '../variables';
 import { rhythm } from '../typography';
-import { Field as FormikField } from 'formik';
 
 const borderStyle = '1px solid rgba(1, 1, 1, 0.12)';
 
@@ -36,48 +36,48 @@ const Flex = styled('div')(
     '&, & > *': {
       color: `${colors.dark}`,
       backgroundColor: props.error ? `${colors.red.fade(0.9)}` : `${colors.white}`,
-      transition: 'background-color 200ms ease-in-out'
+      transition: 'background-color 200ms ease-in-out',
     },
     '.bp3-icon': {
       paddingTop: rhythm(0.35),
-      paddingLeft: rhythm(0.5)
+      paddingLeft: rhythm(0.5),
     },
     '.bp3-icon:last-child': {
-      paddingRight: rhythm(0.5)
+      paddingRight: rhythm(0.5),
     },
     '& > *': {
-      padding: rhythm(0.25)
+      padding: rhythm(0.25),
     },
     input: {
       color: `${colors.dark}`,
       border: 'none',
       flex: 1,
       ':focus': {
-        outline: 'none'
-      }
+        outline: 'none',
+      },
     },
     'textarea, select': {
       width: '100%',
       ':focus': {
-        outline: 'none'
+        outline: 'none',
       },
       border: 'none',
-      resize: 'none'
+      resize: 'none',
     },
     textarea: {
-      height: rhythm(3)
+      height: rhythm(3),
     },
     select: {
       paddingLeft: rhythm(0.2),
       ':last-child': {
-        marginRight: rhythm(0.5)
-      }
+        marginRight: rhythm(0.5),
+      },
     },
     ':focus': {
-      outline: 'none'
+      outline: 'none',
     },
-    ':hover, :focus-within': activeShadow
-  })
+    ':hover, :focus-within': activeShadow,
+  }),
 );
 
 const Wrapper = styled('fieldset')(
@@ -87,71 +87,82 @@ const Wrapper = styled('fieldset')(
     small: {
       marginTop: rhythm(1),
       marginLeft: rhythm(1.75),
-      color: `${colors.red}`
-    }
-  }
+      color: `${colors.red}`,
+    },
+  },
 );
 
-export const InputField: FunctionComponent<FieldProps> = ({
-  name, type, placeholder, leftIcon, mandatory, error, options
+const InputField: FunctionComponent<FieldProps> = ({
+  name, type, placeholder, leftIcon, mandatory, error, options,
 }) => (
   <Wrapper>
     <Flex error={error}>
       {leftIcon
-      ? <Icon icon={leftIcon} iconSize={16} color={`${colors.dark}`}/>
-      : <div style={{ width: '32px' }}/>
+        ? <Icon icon={leftIcon} iconSize={16} color={`${colors.dark}`} />
+        : <div style={{ width: '32px' }} />
       }
       {(() => {
         switch (type) {
           case 'select':
-            return <FormikField
-              component="select"
-              id={name}
-              name={name}
-              required={mandatory}
-            >
-              <option value="" disabled hidden>{placeholder}</option>
-              {options
-              ? options.data.map((option, index) =>
-                <option
-                  key={index}
-                  value={option[`${options.valueLabel || 'value'}`]}
-                >
-                  {option[`${options.nameLabel || 'name'}`] || option['value']}
-                </option>)
-              : null
-              }
-            </FormikField>;
+            return (
+              <FormikField
+                component="select"
+                id={name}
+                name={name}
+                required={mandatory}
+              >
+                <option value="" disabled hidden>{placeholder}</option>
+                {options
+                  ? options.data.map((option, index) => (
+                    <option
+                      key={index}
+                      value={option[`${options.valueLabel || 'value'}`]}
+                    >
+                      {option[`${options.nameLabel || 'name'}`] || option.value}
+                    </option>
+                  ))
+                  : null
+                }
+              </FormikField>
+            );
           case 'textarea':
-            return <FormikField
-              component="textarea"
-              id={name}
-              name={name}
-              placeholder={placeholder}
-              required={mandatory}
-            />;
+            return (
+              <FormikField
+                component="textarea"
+                id={name}
+                name={name}
+                placeholder={placeholder}
+                required={mandatory}
+              />
+            );
           default:
-            return <FormikField
-              id={name}
-              name={name}
-              type={type}
-              placeholder={placeholder}
-              required={mandatory}
-            />;
+            return (
+              <FormikField
+                id={name}
+                name={name}
+                type={type}
+                placeholder={placeholder}
+                required={mandatory}
+              />
+            );
         }
       })()}
       {mandatory
-      ? <Icon
-          icon="asterisk"
-          color={`${colors.red}`}
-          iconSize={16}
-          title="This field is mandatory."
-      />
-      : null}
+        ? (
+          <Icon
+            icon="asterisk"
+            color={`${colors.red}`}
+            iconSize={16}
+            title="This field is mandatory."
+          />
+        ) : null
+        }
     </Flex>
     {error
-    ? <small>{error}</small>
-    : null
+      ? <small>{error}</small>
+      : null
     }
   </Wrapper>
 );
+
+export default InputField;
