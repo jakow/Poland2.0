@@ -1,28 +1,31 @@
 import React, { useState } from 'react';
-import { StripeProvider, CardElement, Elements, injectStripe } from 'react-stripe-elements';
+import styled from '@emotion/styled';
+import {
+  StripeProvider, CardElement, Elements, injectStripe,
+} from 'react-stripe-elements';
+import { Formik, Form } from 'formik';
+import { object, string } from 'yup';
+import { getData, getCodes } from 'country-list';
 import { Header2 } from '../atoms/Headers';
 import { colors } from '../variables';
-import styled from '@emotion/styled';
 import { rhythm } from '../typography';
 import TicketType from '../../types/TicketType';
 import { getBasket, getTotalAmount } from './Basket/logic';
-import { Formik, Form } from 'formik';
-import { object, string } from 'yup';
-import { InputField } from '../atoms/Form';
-import { SubmitButtonProps } from '../../pages/checkout';
-import { getData, getCodes } from 'country-list';
+import InputField from '../atoms/Form';
+import { SubmitButtonRefProps, CheckoutState } from '../../pages/checkout';
+import { api } from '../../pages/_app';
 
 const style = {
   base: {
     iconColor: `${colors.dark}`,
     color: `${colors.dark}`,
     fontFamily: 'Montserrat',
-    fontSize: '16px'
+    fontSize: '16px',
   },
   invalid: {
     iconColor: `${colors.red}`,
     color: `${colors.red}`,
-  }
+  },
 };
 
 const CardElementWrapper = styled('div')({
@@ -41,21 +44,21 @@ const CardElementWrapper = styled('div')({
     resize: 'none',
     background: `${colors.white}`,
     '&::placeholder': {
-      color: 'currentColor'
-    }
+      color: 'currentColor',
+    },
   },
   small: {
     // display: 'block',
     marginTop: rhythm(1),
-    marginLeft: rhythm(1.75)
-  }
+    marginLeft: rhythm(1.75),
+  },
 });
 
 interface StripeFormProps {
   clientSecret: string;
 }
 
-const StripeForm = injectStripe<StripeFormProps & SubmitButtonProps>(
+const StripeForm = injectStripe<StripeFormProps & SubmitButtonRefProps>(
   ({ stripe, clientSecret, submitButtonRef }) => {
     const [paymentError, setPaymentError] = useState(null);
     const [cardElementError, setCardElementError] = useState(null);
@@ -67,7 +70,7 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonProps>(
           email: '',
           street: '',
           city: '',
-          country: ''
+          country: '',
         }}
         validationSchema={object().shape({
           name: string().required('Please enter your full name.'),
@@ -78,7 +81,7 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonProps>(
           city: string().required('Please enter your city.'),
           country: string()
             .oneOf(getCodes(), 'Please select a valid country.')
-            .required('Please select your country.')
+            .required('Please select your country.'),
         })}
         onSubmit={async (values, actions) => {
           actions.setSubmitting(true);
@@ -94,14 +97,14 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonProps>(
                 address: {
                   line1: values.street,
                   city: values.city,
-                  country: values.country
-                }
-              }
-            }
+                  country: values.country,
+                },
+              },
+            },
           });
           if (error) {
             setPaymentError(error.message);
-            scrollTo(0, 0);
+            window.scrollTo(0, 0);
           } else {
             console.log(paymentIntent);
           }
@@ -110,18 +113,15 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonProps>(
       >
         {({ errors, touched, isSubmitting }) => {
           if (submitButtonRef.current) {
-            const disabled =
-              !Object.entries(touched).length ||
-              Object.entries(errors).length ||
-              cardElementError ||
-              !cardElementComplete ||
-              isSubmitting;
+            const disabled = !Object.entries(touched).length || Object.entries(errors).length
+              || cardElementError || !cardElementComplete || isSubmitting;
             submitButtonRef.current.disabled = disabled;
           }
 
           return (
             <Form id="payment">
-              {paymentError &&
+              {paymentError
+              && (
               <div style={{ color: `${colors.red}`, marginBottom: rhythm(1) }}>
                 <p>
                   Payment method provided has been rejected: <strong>{paymentError}</strong>
@@ -132,7 +132,7 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonProps>(
                   <a href="mailto:contact@poland20.com">get in touch with us</a>.
                 </p>
               </div>
-              }
+              )}
               <CardElementWrapper>
                 <CardElement
                   style={style}
@@ -140,7 +140,7 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonProps>(
                     if (complete !== undefined && cardElementComplete !== complete) {
                       setCardElementComplete(complete);
                     }
-                    setCardElementError(error && error.message || null);
+                    setCardElementError((error && error.message) || null);
                   }}
                 />
                 {cardElementError && <small style={{ color: `${colors.red}` }}>{cardElementError}</small>}
@@ -191,12 +191,13 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonProps>(
         }}
       </Formik>
     );
-  }
+  },
 );
 
 interface Props {
   apiKey: string;
-  host: string;
+  dispatch: React.Dispatch<any>;
+  checkoutState: CheckoutState;
   ticketTypes: TicketType[];
 }
 
@@ -206,46 +207,50 @@ const Wrapper = styled('section')({
   // }
 });
 
-class Payment extends React.Component<Props & SubmitButtonProps> {
+class Payment extends React.Component<Props & SubmitButtonRefProps> {
   state = {
-    clientSecret: null,
-    basket: getBasket()
+    basket: getBasket(),
   };
 
   async componentDidMount() {
-    if (!this.state.clientSecret) {
-      const data = await fetch(`${this.props.host}/orders/intent`, {
+    const { checkoutState, dispatch, ticketTypes } = this.props;
+    const { basket } = this.state;
+    if (!checkoutState.clientSecret) {
+      /* eslint-disable camelcase */
+      const { client_secret } = await api('orders/intent', {
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         method: 'POST',
         body: JSON.stringify({
-          amount: getTotalAmount(this.props.ticketTypes, this.state.basket)
-        })
+          basket: JSON.stringify(basket, null, 2),
+          participants: JSON.stringify(checkoutState.participants, null, 2),
+          amount: getTotalAmount(ticketTypes, basket),
+        }),
       });
 
-      const { clientSecret } = await data.json();
-      if (clientSecret) {
-        this.setState({ clientSecret });
+      if (client_secret) {
+        dispatch({ clientSecret: client_secret });
       } else {
-        throw 'Could not get PaymentIntent';
+        throw Error('Could not get PaymentIntent');
       }
     }
   }
 
   render() {
+    const { apiKey, checkoutState, submitButtonRef } = this.props;
     return (
       <Wrapper>
         <Header2 bold>Payment</Header2>
         <p>
           Please enter your debit/credit card details, and billing information below.
         </p>
-        <StripeProvider apiKey={this.props.apiKey}>
+        <StripeProvider apiKey={apiKey}>
           <Elements locale="en-GB">
             <StripeForm
-              clientSecret={this.state.clientSecret}
-              submitButtonRef={this.props.submitButtonRef}
+              clientSecret={checkoutState.clientSecret}
+              submitButtonRef={submitButtonRef}
             />
           </Elements>
         </StripeProvider>
