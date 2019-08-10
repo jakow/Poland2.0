@@ -12,7 +12,9 @@ import { rhythm } from '../typography';
 import TicketType from '../../types/TicketType';
 import { getBasket, getTotalAmount } from './Basket/logic';
 import InputField from '../atoms/Form';
-import { SubmitButtonRefProps, CheckoutState } from '../../pages/checkout';
+import {
+  SubmitButtonRefProps, CheckoutState, CheckoutAction, CheckoutActionTypes,
+} from '../../pages/checkout';
 import { api } from '../../pages/_app';
 
 const style = {
@@ -48,7 +50,6 @@ const CardElementWrapper = styled('div')({
     },
   },
   small: {
-    // display: 'block',
     marginTop: rhythm(1),
     marginLeft: rhythm(1.75),
   },
@@ -56,10 +57,13 @@ const CardElementWrapper = styled('div')({
 
 interface StripeFormProps {
   clientSecret: string;
+  checkoutDispatch: React.Dispatch<CheckoutAction>;
 }
 
 const StripeForm = injectStripe<StripeFormProps & SubmitButtonRefProps>(
-  ({ stripe, clientSecret, submitButtonRef }) => {
+  ({
+    stripe, clientSecret, checkoutDispatch: dispatch, submitButtonRef,
+  }) => {
     const [paymentError, setPaymentError] = useState(null);
     const [cardElementError, setCardElementError] = useState(null);
     const [cardElementComplete, setCardElementComplete] = useState(false);
@@ -101,12 +105,13 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonRefProps>(
                 },
               },
             },
+            receipt_email: values.email,
           });
           if (error) {
             setPaymentError(error.message);
             window.scrollTo(0, 0);
           } else {
-            console.log(paymentIntent);
+            dispatch({ paymentIntent, type: CheckoutActionTypes.NEXT });
           }
           actions.setSubmitting(false);
         }}
@@ -196,16 +201,10 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonRefProps>(
 
 interface Props {
   apiKey: string;
-  dispatch: React.Dispatch<any>;
+  checkoutDispatch: React.Dispatch<CheckoutAction>;
   checkoutState: CheckoutState;
   ticketTypes: TicketType[];
 }
-
-const Wrapper = styled('section')({
-  // p: {
-  //   marginBottom: rhythm(0.75)
-  // }
-});
 
 class Payment extends React.Component<Props & SubmitButtonRefProps> {
   state = {
@@ -213,7 +212,7 @@ class Payment extends React.Component<Props & SubmitButtonRefProps> {
   };
 
   async componentDidMount() {
-    const { checkoutState, dispatch, ticketTypes } = this.props;
+    const { checkoutState, checkoutDispatch, ticketTypes } = this.props;
     const { basket } = this.state;
     if (!checkoutState.clientSecret) {
       /* eslint-disable camelcase */
@@ -224,14 +223,13 @@ class Payment extends React.Component<Props & SubmitButtonRefProps> {
         },
         method: 'POST',
         body: JSON.stringify({
-          basket: JSON.stringify(basket, null, 2),
-          participants: JSON.stringify(checkoutState.participants, null, 2),
-          amount: getTotalAmount(ticketTypes, basket),
+          basket,
+          ...checkoutState.participants,
         }),
       });
 
       if (client_secret) {
-        dispatch({ clientSecret: client_secret });
+        checkoutDispatch({ clientSecret: client_secret });
       } else {
         throw Error('Could not get PaymentIntent');
       }
@@ -239,9 +237,11 @@ class Payment extends React.Component<Props & SubmitButtonRefProps> {
   }
 
   render() {
-    const { apiKey, checkoutState, submitButtonRef } = this.props;
+    const {
+      apiKey, checkoutState, checkoutDispatch, submitButtonRef,
+    } = this.props;
     return (
-      <Wrapper>
+      <React.Fragment>
         <Header2 bold>Payment</Header2>
         <p>
           Please enter your debit/credit card details, and billing information below.
@@ -250,6 +250,7 @@ class Payment extends React.Component<Props & SubmitButtonRefProps> {
           <Elements locale="en-GB">
             <StripeForm
               clientSecret={checkoutState.clientSecret}
+              checkoutDispatch={checkoutDispatch}
               submitButtonRef={submitButtonRef}
             />
           </Elements>
@@ -258,7 +259,7 @@ class Payment extends React.Component<Props & SubmitButtonRefProps> {
           All information entered is processed and stored securely by Stripe.&nbsp;
           We do not process nor store information entered into this form.
         </small>
-      </Wrapper>
+      </React.Fragment>
     );
   }
 }
