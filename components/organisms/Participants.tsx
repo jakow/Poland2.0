@@ -27,7 +27,7 @@ class Participants extends Component<Props & SubmitButtonRefProps> {
           participants: Object.entries(basket).reduce(
             (values, [id, quantity]) => [...values, ...Array(quantity).fill({
               ticket: id,
-              fullName: '',
+              name: '',
               email: '',
             })],
             [],
@@ -43,7 +43,7 @@ class Participants extends Component<Props & SubmitButtonRefProps> {
           participants: array()
             .of(
               object().shape({
-                fullName: string()
+                name: string()
                   .required('Please enter a full name.'),
                 email: string()
                   .email('Please enter a valid e-mail address.')
@@ -74,14 +74,14 @@ class Participants extends Component<Props & SubmitButtonRefProps> {
                             {ticketTypes.find(ticketType => ticketType.id === participant.ticket).name}
                           </Header3>
                           <InputField
-                            name={`participants[${index}].fullName`}
+                            name={`participants[${index}].name`}
                             type="text"
                             placeholder="Name and Surname"
                             leftIcon="person"
                             error={
-                              getIn(errors, `participants[${index}].fullName`)
-                              && getIn(touched, `participants[${index}].fullName`)
-                                ? getIn(errors, `participants[${index}].fullName`)
+                              getIn(errors, `participants[${index}].name`)
+                              && getIn(touched, `participants[${index}].name`)
+                                ? getIn(errors, `participants[${index}].name`)
                                 : null
                             }
                             mandatory
