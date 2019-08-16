@@ -10,7 +10,7 @@ import { Header2 } from '../atoms/Headers';
 import { colors } from '../variables';
 import { rhythm } from '../typography';
 import TicketType from '../../types/TicketType';
-import { getBasket, getTotalAmount } from './Basket/logic';
+import { getBasket } from './Basket/logic';
 import InputField from '../atoms/Form';
 import {
   SubmitButtonRefProps, CheckoutState, CheckoutAction, CheckoutActionTypes,
@@ -21,7 +21,7 @@ const style = {
   base: {
     iconColor: `${colors.dark}`,
     color: `${colors.dark}`,
-    fontFamily: 'Montserrat',
+    fontFamily: 'monospace',
     fontSize: '16px',
   },
   invalid: {
@@ -62,7 +62,7 @@ interface StripeFormProps {
 
 const StripeForm = injectStripe<StripeFormProps & SubmitButtonRefProps>(
   ({
-    stripe, clientSecret, checkoutDispatch: dispatch, submitButtonRef,
+    stripe, clientSecret, checkoutDispatch, submitButtonRef,
   }) => {
     const [paymentError, setPaymentError] = useState(null);
     const [cardElementError, setCardElementError] = useState(null);
@@ -110,9 +110,13 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonRefProps>(
           if (error) {
             setPaymentError(error.message);
             window.scrollTo(0, 0);
+          } else if (paymentIntent.status !== 'succeeded') {
+            setPaymentError('An unknown error has occurred.');
+            window.scrollTo(0, 0);
           } else {
-            dispatch({ paymentIntent, type: CheckoutActionTypes.NEXT });
+            checkoutDispatch({ paymentIntent, type: CheckoutActionTypes.NEXT });
           }
+
           actions.setSubmitting(false);
         }}
       >
@@ -127,16 +131,16 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonRefProps>(
             <Form id="payment">
               {paymentError
               && (
-              <div style={{ color: `${colors.red}`, marginBottom: rhythm(1) }}>
-                <p>
-                  Payment method provided has been rejected: <strong>{paymentError}</strong>
-                </p>
-                <p>
-                  Please ensure that the payment method details are correct, and try again.&nbsp;
-                  If the issue persists, then&nbsp;
-                  <a href="mailto:contact@poland20.com">get in touch with us</a>.
-                </p>
-              </div>
+                <div style={{ color: `${colors.red}`, marginBottom: rhythm(1) }}>
+                  <p>
+                    An issue has occurred: <strong>{paymentError}</strong>
+                  </p>
+                  <p>
+                    Please ensure that the payment method details are correct, and try again.&nbsp;
+                    If the issue persists, then&nbsp;
+                    <a href="mailto:contact@poland20.com">get in touch with us</a>.
+                  </p>
+                </div>
               )}
               <CardElementWrapper>
                 <CardElement
@@ -212,27 +216,27 @@ class Payment extends React.Component<Props & SubmitButtonRefProps> {
   };
 
   async componentDidMount() {
-    const { checkoutState, checkoutDispatch, ticketTypes } = this.props;
+    const { checkoutState, checkoutDispatch } = this.props;
     const { basket } = this.state;
     if (!checkoutState.clientSecret) {
       /* eslint-disable camelcase */
-      const { client_secret } = await api('orders/intent', {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify({
-          basket,
-          ...checkoutState.participants,
-        }),
-      });
-
-      if (client_secret) {
+      try {
+        const { client_secret } = await api('orders/intent', {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          body: JSON.stringify({
+            basket,
+            ...checkoutState.participants,
+          }),
+        });
         checkoutDispatch({ clientSecret: client_secret });
-      } else {
-        throw Error('Could not get PaymentIntent');
+      } catch (error) {
+        window.location.assign('tickets');
       }
+      /* eslint-enable camelcase */
     }
   }
 
