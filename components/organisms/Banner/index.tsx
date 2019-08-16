@@ -27,36 +27,36 @@ const angledEdge = css({
     transformOrigin: 'top right',
     [breakpointMin('tablet')]: {
       transform: 'skewX(-10deg)',
-      transformOrigin: 'bottom right'
-    }
+      transformOrigin: 'bottom right',
+    },
   },
 });
 
 const column = css({
   backgroundColor: `${colors.white}`,
-  position: 'relative'
+  position: 'relative',
 });
 
 const Carousel = styled('div')(column, {
   flex: '1 0 60%',
   [breakpointMin('desktopWide')]: {
-    flex: '1 0 70%'
+    flex: '1 0 70%',
   },
   'video, img': {
     objectFit: 'cover',
     width: '100vw',
     [breakpointMin('tablet')]: {
       width: '100%',
-      height: '100%'
-    }
-  }
+      height: '100%',
+    },
+  },
 });
 
 const Content = styled('div')(column, angledEdge, {
   textAlign: 'justify',
   flex: '1 0 40%',
   [breakpointMin('desktopWide')]: {
-    flex: '1 0 30%'
+    flex: '1 0 30%',
   },
 });
 
@@ -66,28 +66,28 @@ const DatePlace = styled('h3')(fat, {
   display: 'flex',
   flexDirection: 'column',
   '& > *': {
-    flex: 'none'
+    flex: 'none',
   },
   [breakpointMin('tablet')]: {
-    flexDirection: 'row'
-  }
+    flexDirection: 'row',
+  },
 });
 
 const Header = styled('header')({
   textAlign: 'center',
   [breakpointMin('tablet')]: {
-    textAlign: 'initial'
+    textAlign: 'initial',
   },
   span: {
-    backgroundColor: `${colors.white}`
-  }
+    backgroundColor: `${colors.white}`,
+  },
 });
 
 const Padding = styled('div')({
   padding: `${rhythm(1)} ${rhythm(1)} 0`,
   [breakpointMin('tablet')]: {
-    padding: `${rhythm(1)} 0 ${rhythm(0)} ${rhythm(1)}`
-  }
+    padding: `${rhythm(1)} 0 ${rhythm(0)} ${rhythm(1)}`,
+  },
 });
 
 const Separator = styled('span')({
@@ -111,9 +111,9 @@ const Separator = styled('span')({
       bottom: 0,
       left: 'initial',
       transform: 'initial',
-      width: 1
-    }
-  }
+      width: 1,
+    },
+  },
 });
 
 const Wrapper = styled('section')({
@@ -126,44 +126,44 @@ const Wrapper = styled('section')({
   [breakpointMin('tablet')]: {
     maxHeight: rhythm(20),
     flexDirection: 'row',
-    alignItems: 'stretch'
-  }
+    alignItems: 'stretch',
+  },
 });
 
 interface Props {
   currentEdition?: Edition;
 }
 
-const Banner: React.StatelessComponent<Props> = ({ currentEdition }) => {
-  return (
-    <Wrapper>
-      <Content>
-        <Padding>
-          <Header>
-            <Header1 style={{ marginBottom: rhythm(0.25) }}>Poland 2.0 Summit</Header1>
-            {currentEdition.name &&
-              <Header2 bold dangerouslySetInnerHTML={dangerousSuperscripts(currentEdition.name)}/>
-            }
-            {currentEdition && (
-              <DatePlace>
-                <time dateTime={currentEdition.startDate}>
-                  {dateString(currentEdition.startDate, currentEdition.endDate)}
-                </time>
-                <Separator/>
-                {currentEdition.venue && <span>{currentEdition.venue.name}</span>}
-              </DatePlace>
-            )}
-          </Header>
-          <Markdown source={currentEdition.description}/>
-        </Padding>
-      </Content>
-      <Carousel>
-        {currentEdition.coverPhoto && (
-        currentEdition.coverPhoto.url.endsWith('.jpg') ||
-        currentEdition.coverPhoto.url.endsWith('.png')) &&
-          <img src={currentEdition.coverPhoto.url}/>
-        }
-        {currentEdition.coverPhoto && currentEdition.coverPhoto.url.endsWith('.mp4') &&
+const Banner: React.StatelessComponent<Props> = ({ currentEdition }) => (
+  <Wrapper>
+    <Content>
+      <Padding>
+        <Header>
+          <Header1 style={{ marginBottom: rhythm(0.25) }}>Poland 2.0 Summit</Header1>
+          {currentEdition.name
+            && <Header2 bold dangerouslySetInnerHTML={dangerousSuperscripts(currentEdition.name)} />
+          }
+          {currentEdition && (
+            <DatePlace>
+              <time dateTime={currentEdition.startDate}>
+                {dateString(currentEdition.startDate, currentEdition.endDate)}
+              </time>
+              <Separator />
+              {currentEdition.venue && <span>{currentEdition.venue.name}</span>}
+            </DatePlace>
+          )}
+        </Header>
+        <Markdown source={currentEdition.description} />
+      </Padding>
+    </Content>
+    <Carousel>
+      {currentEdition.coverPhoto && (
+        currentEdition.coverPhoto.url.endsWith('.jpg')
+        || currentEdition.coverPhoto.url.endsWith('.png'))
+        && <img src={currentEdition.coverPhoto.url} alt="Graphical cover of this year's edition" />
+      }
+      {currentEdition.coverPhoto && currentEdition.coverPhoto.url.endsWith('.mp4')
+        && (
           <video autoPlay loop muted playsInline>
             <source
               src={`${currentEdition.coverPhoto.url.slice(0, -4)}.webm`}
@@ -174,10 +174,10 @@ const Banner: React.StatelessComponent<Props> = ({ currentEdition }) => {
               type="video/mp4"
             />
           </video>
-        }
-      </Carousel>
-    </Wrapper>
-  );
-};
+        )
+      }
+    </Carousel>
+  </Wrapper>
+);
 
 export default Banner;

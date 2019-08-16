@@ -1,6 +1,6 @@
-import memoize from '../helpers/memoize';
-import Color from 'color';
 import { css } from '@emotion/core';
+import Color from 'color';
+import memoize from '../helpers/memoize';
 
 export const colors = {
   red: Color('#C63D57'),
@@ -50,7 +50,7 @@ export const breakpoints: Breakpoints = {
   tablet: 768,
   tabletLandscape: 960,
   desktop: 1024,
-  desktopWide: 1280
+  desktopWide: 1280,
 };
 
 type Breakpoint = keyof Breakpoints;
