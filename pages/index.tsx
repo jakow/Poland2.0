@@ -20,17 +20,18 @@ export default class extends React.Component<DefaultPageProps & Props> {
     const { contentControl, currentEdition, previousSponsors } = this.props;
     return (
       <React.Fragment>
-        {contentControl.ticketControl.onSale &&
-          <TicketAlert ticketControl={contentControl.ticketControl}/>
+        {contentControl.ticketControl.onSale
+          && <TicketAlert ticketControl={contentControl.ticketControl} />
         }
-        <Banner currentEdition={currentEdition}/>
+        <Banner currentEdition={currentEdition} />
         <Background>
-          {contentControl.showPreviousSponsors &&
+          {contentControl.showPreviousSponsors
+          && (
             <Sponsors
               title="Previous Partners"
               sponsors={previousSponsors}
             />
-          }
+          )}
         </Background>
       </React.Fragment>
     );

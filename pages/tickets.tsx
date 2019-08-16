@@ -1,11 +1,11 @@
+import dynamic from 'next/dynamic';
+import styled from '@emotion/styled';
+import { NextPage } from 'next';
 import TicketType from '../types/TicketType';
 import Background from '../components/atoms/Background';
-import dynamic from 'next/dynamic';
 import { Header1 } from '../components/atoms/Headers';
-import styled from '@emotion/styled';
 import { Center, rhythm } from '../components/typography';
 import { CardList } from '../components/molecules/Card';
-import { NextPage } from 'next';
 import { api } from './_app';
 import { breakpointMax, breakpointMin, colors } from '../components/variables';
 
@@ -18,41 +18,41 @@ export const BasketWrapper = styled('aside')({
   zIndex: 2,
   [breakpointMax('tablet')]: {
     justifyContent: 'center',
-    backgroundColor: `${colors.gray}`
+    backgroundColor: `${colors.gray}`,
   },
   [breakpointMin('tablet')]: {
     position: 'fixed',
-    right: rhythm(1)
-  }
+    right: rhythm(1),
+  },
 });
 
 const Wrapper = styled('main')({
   display: 'flex',
   minHeight: '50vh',
   [breakpointMax('tablet')]: {
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   '& > ol': {
     [breakpointMin('tablet')]: {
       paddingLeft: '2rem',
       width: `calc(100vw - ${rhythm(17)})`,
     },
-  }
+  },
 });
 
 const DynamicTicketTile = dynamic(
   () => import('../components/molecules/TicketTile'),
-  { ssr: false }
+  { ssr: false },
 );
 
 const DynamicBasket = dynamic(
   () => import('../components/organisms/Basket'),
-  { ssr: false }
+  { ssr: false },
 );
 
 const DynamicMobileBasketStatus = dynamic(
   () => import('../components/organisms/Basket/MobileBasketStatus'),
-  { ssr: false }
+  { ssr: false },
 );
 
 const Tickets: NextPage<Props> = ({ ticketTypes }) => (
@@ -63,10 +63,12 @@ const Tickets: NextPage<Props> = ({ ticketTypes }) => (
     <Wrapper>
       <CardList>
         {ticketTypes.length > 0 && ticketTypes.map((ticketType, index) => (
-          <DynamicTicketTile
-            key={index}
-            {...ticketType}
-          />
+          ticketType.active ? (
+            <DynamicTicketTile
+              key={index}
+              {...ticketType}
+            />
+          ) : null
         ))}
       </CardList>
       <BasketWrapper>
@@ -77,7 +79,7 @@ const Tickets: NextPage<Props> = ({ ticketTypes }) => (
           />
         </CardList>
       </BasketWrapper>
-      <DynamicMobileBasketStatus ticketTypes={ticketTypes}/>
+      <DynamicMobileBasketStatus ticketTypes={ticketTypes} />
     </Wrapper>
   </Background>
 );

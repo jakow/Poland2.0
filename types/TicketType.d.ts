@@ -1,5 +1,6 @@
 type TicketType = {
   id: string;
+  active: boolean;
   name: string;
   description: string;
   price: number;
