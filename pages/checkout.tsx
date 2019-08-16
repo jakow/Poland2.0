@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from 'react';
+import React, { useReducer, useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import styled from '@emotion/styled';
 import { NextPage } from 'next';
@@ -10,6 +10,7 @@ import { BasketWrapper } from './tickets';
 import { breakpointMax, breakpointMin } from '../components/variables';
 import Card, { CardList } from '../components/molecules/Card';
 import TicketType from '../types/TicketType';
+import Container from '../components/atoms/Container';
 
 interface Props {
   ticketTypes: TicketType[];
@@ -30,10 +31,6 @@ const submitButtons: SubmitButton[] = [
     label: 'Continue',
     form: 'participants',
   },
-  // {
-  //   label: 'Continue',
-  //   form: 'survey',
-  // },
   {
     label: 'Pay with Stripe',
     form: 'payment',
@@ -51,7 +48,7 @@ const DynamicParticipants = dynamic(
   { ssr: false },
 );
 
-// STEP 3: Make payment
+// STEP 2: Make payment
 const DynamicPayment = dynamic(
   () => import('../components/organisms/Payment'),
   { ssr: false },
@@ -133,7 +130,7 @@ const Checkout: NextPage<Props> = ({ ticketTypes }) => {
   return (
     <Background>
       <Center>
-        <Header1 fat bold stripe>{state.step !== CheckoutStep.DONE ? 'Checkout' : 'Save the Date!'}</Header1>
+        <Header1 fat bold stripe>{state.step !== CheckoutStep.DONE ? 'Checkout' : 'Save the Date'}</Header1>
       </Center>
       <Wrapper>
         {state.step !== CheckoutStep.DONE
@@ -186,10 +183,33 @@ const Checkout: NextPage<Props> = ({ ticketTypes }) => {
             </React.Fragment>
           )
           : (
-            <div />
+            <Container style={{ padding: `0 ${rhythm(1.5)}`, textAlign: 'justify' }}>
+              <p>Your payment method has been successfully processed!</p>
+              <p>
+                A receipt for this transaction will be e-mailed to the address specified on the payment page.
+              </p>
+              <p>
+                Ticket confirmation(s) will also arrive via e-mail within the next few minutes. If more than
+                one participant was entered, then each participant will receive their corresponding ticket
+                confirmation to their e-mail address.
+              </p>
+              <p>
+                <strong>If a ticket confirmation does not arrive,</strong> then remember to check the spam
+                folder first!
+                Otherwise, <a href="mailto:contact@poland20.com">contact us</a> immediately.
+              </p>
+              <p>
+                Here is a summary of the order:
+              </p>
+              <CardList>
+                <DynamicBasket
+                  ticketTypes={ticketTypes}
+                  width={rhythm(24)}
+                />
+              </CardList>
+            </Container>
           )
         }
-
       </Wrapper>
     </Background>
   );
