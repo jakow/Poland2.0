@@ -14,8 +14,13 @@ const { publicRuntimeConfig, serverRuntimeConfig } = getConfig();
 
 export const api = async (path: string, init?: RequestInit) => {
   const host = serverRuntimeConfig.host || publicRuntimeConfig.host;
-  const data = await fetch(`${host}/${path}`, init);
-  return data.json();
+  const response = await fetch(`${host}/${path}`, init);
+  const json = await response.json();
+  if (!response.ok) {
+    throw Error(json.message);
+  }
+
+  return json;
 };
 
 export interface DefaultPageProps {
