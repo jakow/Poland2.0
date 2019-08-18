@@ -1,6 +1,7 @@
 version: '3.5'
 services:
   web:
-    image: p20-website
+    build:
+      context: .
     container_name: p20-website
     command: sh -c "yarn start"

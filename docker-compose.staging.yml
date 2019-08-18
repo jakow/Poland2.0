@@ -1,6 +1,9 @@
 version: '3.5'
 services:
   web:
+    build:
+      args:
+        - NODE_ENV=staging
     environment:
       - NODE_ENV=staging
       - API_URL=http://api.localhost
