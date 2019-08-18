@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import styled from '@emotion/styled';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import TicketType from '../types/TicketType';
 import Background from '../components/atoms/Background';
 import { Header1 } from '../components/atoms/Headers';
@@ -57,6 +58,9 @@ const DynamicMobileBasketStatus = dynamic(
 
 const Tickets: NextPage<Props> = ({ ticketTypes }) => (
   <Background>
+    <Head>
+      <title>Tickets - Poland 2.0 Summit</title>
+    </Head>
     <Center>
       <Header1 fat bold stripe>Tickets</Header1>
     </Center>
