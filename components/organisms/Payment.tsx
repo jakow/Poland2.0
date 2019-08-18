@@ -244,6 +244,12 @@ class Payment extends React.Component<Props & SubmitButtonRefProps> {
     const {
       apiKey, checkoutState, checkoutDispatch, submitButtonRef,
     } = this.props;
+    const { basket } = this.state;
+
+    if (!Object.entries(basket).length) {
+      window.location.assign('tickets');
+    }
+
     return (
       <React.Fragment>
         <Header2 bold>Payment</Header2>

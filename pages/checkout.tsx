@@ -1,7 +1,8 @@
-import React, { useReducer, useRef, useEffect } from 'react';
-import dynamic from 'next/dynamic';
-import styled from '@emotion/styled';
+import React, { useReducer, useRef } from 'react';
 import { NextPage } from 'next';
+import dynamic from 'next/dynamic';
+import Head from 'next/head';
+import styled from '@emotion/styled';
 import Background from '../components/atoms/Background';
 import { Center, rhythm } from '../components/typography';
 import { Header1, Header2 } from '../components/atoms/Headers';
@@ -129,6 +130,9 @@ const Checkout: NextPage<Props> = ({ ticketTypes }) => {
 
   return (
     <Background>
+      <Head>
+        <title>Checkout - Poland 2.0 Summit</title>
+      </Head>
       <Center>
         <Header1 fat bold stripe>{state.step !== CheckoutStep.DONE ? 'Checkout' : 'Save the Date'}</Header1>
       </Center>
@@ -205,6 +209,10 @@ const Checkout: NextPage<Props> = ({ ticketTypes }) => {
                 <DynamicBasket
                   ticketTypes={ticketTypes}
                   width={rhythm(24)}
+                  refresh={false}
+                  onRender={() => {
+                    localStorage.removeItem('basket');
+                  }}
                 />
               </CardList>
             </Container>

@@ -48,11 +48,18 @@ interface Props {
   ticketTypes: TicketType[];
   submitButton?: SubmitButtonProps;
   width?: string;
+  refresh?: boolean;
+  onRender?: () => void;
 }
 
-const Basket: React.FunctionComponent<Props> = ({ ticketTypes, submitButton, width }) => {
+const Basket: React.FunctionComponent<Props> = ({
+  ticketTypes, submitButton, width, refresh, onRender,
+}) => {
   const [basket, setBasket] = useState(getBasket(ticketTypes));
-  useEffect(basketEffect(setBasket));
+  useEffect(refresh === false ? () => {} : basketEffect(setBasket));
+  if (onRender) {
+    onRender();
+  }
 
   return (
     <Card width={width || rhythm(15)} id="basket">

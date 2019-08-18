@@ -21,6 +21,10 @@ class Participants extends Component<Props & SubmitButtonRefProps> {
 
   render() {
     const { basket } = this.state;
+    if (!Object.entries(basket).length) {
+      window.location.assign('tickets');
+    }
+
     return (
       <Formik
         initialValues={{
