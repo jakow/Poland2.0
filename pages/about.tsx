@@ -1,8 +1,9 @@
 import React from 'react';
-import { DefaultPageProps } from './_app';
+import Head from 'next/head';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import TeamMembers from '../components/TeamMembers';
+import { DefaultPageProps } from './_app';
+import TeamMembers from '../components/organisms/TeamMembers';
 import { rhythm, Center, _fat, _stripe, _bold } from '../components/typography';
 import { colors } from '../components/variables';
 
@@ -51,6 +52,9 @@ export const Mission = styled('article')({
 
 const About: React.StatelessComponent<DefaultPageProps> = ({ currentEdition }) => (
   <Container>
+    <Head>
+      <title>About - Poland 2.0 Summit</title>
+    </Head>
     <Image/>
     <Gradient/>
     <Content vocab="http://schema.org/" typeof="Organization">

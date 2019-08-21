@@ -1,33 +1,13 @@
 import Typography from 'typography';
 import { colors, breakpointMin } from './variables';
-import { css as _css, injectGlobal } from 'emotion';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import { css as _css } from 'emotion';
 
-const stripeSVG = require('./stripe.svg');
+const stripeSVG = require('../static/images/stripe.svg');
 
-const fonts = ['Source Sans Pro',
-  'Avenir Next',
-  'Helvetica Neue',
-  'Segoe UI',
-  'Helvetica',
-  'Arial',
-  'sans-serif',
-];
-
-injectGlobal(_css({
-  small: {
-    color: `${colors.darkGray}`,
-    a: {
-      textDecoration: 'none',
-      fontStyle: 'italic',
-      color: `${colors.link}`,
-      '&:hover': {
-        textDecoration: 'underline'
-      }
-    }
-  }
-}));
+const headerFonts = ['Source Sans Pro', 'sans-serif'];
+const bodyFonts = ['Montserrat', 'sans-serif'];
 
 const typography = new Typography({
   baseFontSize: '16px',
@@ -35,17 +15,51 @@ const typography = new Typography({
   scaleRatio: 2.375,
   googleFonts: [
     {
+      name: 'Montserrat',
+      styles: ['300', '400', '400i', '600', '700'],
+    },
+    {
       name: 'Source Sans Pro',
       styles: ['300', '400', '400i', '600', '700'],
     },
   ],
-  headerFontFamily: fonts,
+  headerFontFamily: headerFonts,
   headerWeight: 300,
-  bodyFontFamily: fonts,
+  bodyFontFamily: bodyFonts,
   bodyColor: colors.dark.toString()
 });
 
 export const { rhythm, scale } = typography;
+
+export const globalStyle = css({
+  'a[id]': {
+    display: 'block',
+    position: 'relative',
+    top: `-${rhythm(3)}`
+  },
+  small: {
+    color: `${colors.darkGray}`,
+    a: {
+      textDecoration: 'none',
+      fontStyle: 'italic',
+      color: `${colors.deepBlue}`,
+      '&:hover': {
+        textDecoration: 'underline'
+      }
+    }
+  },
+  '.bp3-icon': {
+    display: 'inline-block',
+    flex: '0 0 auto',
+    verticalAlign: 'text-bottom',
+    '& > svg': {
+      display: 'block'
+    },
+    '& > svg:not([fill])': {
+      fill: 'currentColor'
+    }
+  },
+});
 
 export const Anchor = styled('a')<{ [propName: string]: any }>({
   cursor: 'pointer',

@@ -1,18 +1,9 @@
 version: '3.5'
 services:
   web:
-    volumes:
-      - .:/app
+    build:
+      args:
+        - NODE_ENV=staging
     environment:
       - NODE_ENV=staging
       - API_URL=http://api.localhost
-  api:
-    build:
-      args:
-        - config=staging
-    volumes:
-      - ../p20-backend:/api
-    environment:
-      - NODE_ENV=staging
-  db:
-    command: "--smallfiles --logpath=/dev/null"

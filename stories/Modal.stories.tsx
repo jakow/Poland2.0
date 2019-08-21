@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import Modal from '../components/Modal';
-import Button from '../components/Button';
+import Modal from '../components/molecules/Modal';
+import Button from '../components/atoms/Button';
 
 // tslint:disable
 const text = `Quia voluptate fugiat velit et eos. Ipsum magni ut et suscipit. Qui optio beatae optio eaque tenetur omnis. Facere voluptas aut rerum eligendi esse voluptatum sint.

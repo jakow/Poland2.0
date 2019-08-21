@@ -8,6 +8,7 @@ import { AgendaDay } from './Agenda';
 import SpeakerCategory from './SpeakerCategory';
 
 type Edition = {
+  name: string;
   year?: number;
   description: string;
   coverPhoto?: CloudinaryPhoto;

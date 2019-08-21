@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import Agenda from '../components/Agenda';
+import Agenda from '../components/organisms/Agenda';
 import { colors } from '../components/variables';
 import Venue from '../types/Venue';
 import Speaker from '../types/Speaker';
@@ -46,7 +46,7 @@ storiesOf('Agenda', module)
     const days = [day, day];
 
     return (
-      <div style={{ backgroundColor: `${colors.lightGray}` }}>
+      <div style={{ backgroundColor: `${colors.gray}` }}>
         <Agenda agendaDays={days}/>
       </div>
     );
