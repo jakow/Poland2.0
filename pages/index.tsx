@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { DefaultPageProps, api } from './_app';
 import Background from '../components/atoms/Background';
 import Sponsors from '../components/organisms/Sponsors';
@@ -20,7 +21,15 @@ export default class extends React.Component<DefaultPageProps & Props> {
     const { contentControl, currentEdition, previousSponsors } = this.props;
     return (
       <React.Fragment>
-        {contentControl.ticketControl.onSale
+        <Head>
+          {/* Mailchimp */}
+          <script
+            src="https://downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js"
+            data-dojo-config="usePlainJson: true, isDebug: false"
+          />
+          <script src="/static/mc.js" />
+        </Head>
+        {contentControl.ticketControl.description
           && <TicketAlert ticketControl={contentControl.ticketControl} />
         }
         <Banner currentEdition={currentEdition} />
