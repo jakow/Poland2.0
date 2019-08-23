@@ -14,7 +14,7 @@ const Center = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  textAlign: 'center'
+  textAlign: 'center',
 });
 
 const Wrapper = styled('section')({
@@ -25,7 +25,7 @@ const Wrapper = styled('section')({
   [breakpointMin('tablet')]: {
     '&::before, &::after': {
       content: '""',
-      position: 'absolute'
+      position: 'absolute',
     },
     '&::before': {
       top: 0,
@@ -39,25 +39,26 @@ const Wrapper = styled('section')({
       right: 0,
       width: rhythm(6.5),
       height: rhythm(3.5),
-      backgroundImage: `url(${meshBottomRight})`
-    }
-  }
+      backgroundImage: `url(${meshBottomRight})`,
+    },
+  },
 });
 
-export default class Tickets extends React.Component<{ ticketControl: TicketControl }> {
-  render() {
-    const { ticketControl } = this.props;
-    return (
-      <Wrapper>
-        <Container>
-          <Center>
-            <Markdown>{ticketControl.description}</Markdown>
-            {ticketControl.showCountdown &&
-              <Countdown date={new Date(ticketControl.salesDate)} stroke={`${colors.white}`}/>
-            }
-          </Center>
-        </Container>
-      </Wrapper>
-    );
-  }
+interface Props {
+  ticketControl: TicketControl;
 }
+
+const Tickets: React.FunctionComponent<Props> = ({ ticketControl }) => (
+  <Wrapper>
+    <Container>
+      <Center>
+        <Markdown>{ticketControl.description}</Markdown>
+        {ticketControl.showCountdown
+          && <Countdown date={new Date(ticketControl.salesDate)} stroke={`${colors.white}`} />
+        }
+      </Center>
+    </Container>
+  </Wrapper>
+);
+
+export default Tickets;
