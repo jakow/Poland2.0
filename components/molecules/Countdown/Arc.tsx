@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import { colors } from '../../variables';
 
 const setStroke = (color?: string) => css({
-  stroke: color ? color : `${colors.red}`
+  stroke: color || `${colors.red}`,
 });
 
 interface ArcProps {

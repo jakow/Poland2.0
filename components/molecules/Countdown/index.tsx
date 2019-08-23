@@ -1,10 +1,10 @@
-import * as React from 'react';
-import Datespan, { DatespanUnit } from './datespan';
+import React from 'react';
 import styled from '@emotion/styled';
+import Datespan, { DatespanUnit } from './datespan';
 import Period from './Period';
 
 const Time = styled('time')({
-  display: 'inline-flex'
+  display: 'inline-flex',
 });
 
 interface CountdownProps {
@@ -16,6 +16,7 @@ interface CountdownProps {
 
 interface CountdownState {
   datespan: Datespan;
+  interval: NodeJS.Timeout;
 }
 
 export default class Countdown extends React.Component<CountdownProps, CountdownState> {
@@ -25,52 +26,63 @@ export default class Countdown extends React.Component<CountdownProps, Countdown
     minUnit: DatespanUnit.SECONDS,
   };
 
-  interval: any;
+  componentDidMount() {
+    const { date } = this.props;
+    if (date) {
+      this.start();
+    }
+  }
 
-  componentWillMount() {
-    this.props.date && this.start();
+  componentDidUpdate(prevProps: CountdownProps) {
+    const { date } = this.props;
+    if (date !== prevProps.date) {
+      this.stop();
+      this.start();
+    }
   }
 
   componentWillUnmount() {
     this.stop();
   }
 
-  componentWillReceiveProps(newProps: CountdownProps) {
-    if (this.props.date !== newProps.date) {
-      this.stop();
-      this.start();
-    }
+  private update = () => {
+    const { date, minUnit, maxUnit } = this.props;
+    const datespan = new Datespan(new Date(), date, {
+      minUnit,
+      maxUnit,
+    });
+
+    this.setState({ datespan }, () => {
+      if (datespan.isZero) {
+        this.stop();
+      }
+    });
+  }
+
+  private stop() {
+    const { interval } = this.state;
+    clearInterval(interval);
   }
 
   private start() {
     this.update();
-    this.interval = setInterval(this.update, 1000);
-  }
-
-  private stop() {
-    clearInterval(this.interval);
-  }
-
-  private update = () => {
-    const datespan = new Datespan(new Date(), this.props.date, {
-      minUnit: this.props.minUnit,
-      maxUnit: this.props.maxUnit,
-    });
-
-    this.refs.time && this.setState({ datespan }, () => {
-      datespan.isZero && this.stop();
+    this.setState({
+      interval: setInterval(this.update, 1000),
     });
   }
 
   private renderDatespan() {
-    const datespan = this.state.datespan;
-    return datespan.toArray().map(d => <Period key={d.unit} stroke={this.props.stroke} {...d} />);
+    const { datespan } = this.state;
+    const { stroke } = this.props;
+
+    return datespan.toArray().map(d => <Period key={d.unit} stroke={stroke} {...d} />);
   }
 
   render() {
+    const { date } = this.props;
     return (
-      <Time ref="time" dateTime={this.props.date.toISOString()}>
-        {this.refs.time && this.renderDatespan()}
+      <Time dateTime={date.toISOString()}>
+        {this.state && this.renderDatespan()}
       </Time>
     );
   }
