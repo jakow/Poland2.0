@@ -22,20 +22,17 @@ export default class extends Document {
           <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/images/favicons/apple-touch-icon-152x152.png" />
           <link rel="icon" type="image/png" href="/static/images/favicons/favicon-32x32.png" sizes="32x32" />
           <link rel="icon" type="image/png" href="/static/images/favicons/favicon-16x16.png" sizes="16x16" />
-          <link rel="mask-icon" href="/static/images/favicons/mask-icon.svg" color="#C53D56" />
+          <link rel="mask-icon" href="/static/images/favicons/mask-icon.svg" color="#C63D57" />
 
+          <link href="/static/style.css" rel="stylesheet" />
           <link href="https://unpkg.com/@blueprintjs/icons@^3.4.0/lib/css/blueprint-icons.css" rel="preload" as="style" />
           <link rel="stylesheet" href="/static/fonts/league-spartan.css" />
 
           <meta name="application-name" content="Poland 2.0" />
-          <meta name="msapplication-TileColor" content="#FFFFFF" />
+          <meta name="msapplication-TileColor" content="#F5F5F5" />
           <meta name="msapplication-TileImage" content="/static/images/favicons/mstile-144x144.png" />
 
           <script src="https://js.stripe.com/v3/" />
-
-          <style>
-            {'@media screen and (max-width: 375px) { html { font-size: 85% !important } }'}
-          </style>
 
           {/* Global site tag (gtag.js) - Google Analytics */}
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146052606-1" />
