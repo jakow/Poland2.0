@@ -1,3 +1,4 @@
+import React from 'react';
 import dynamic from 'next/dynamic';
 import styled from '@emotion/styled';
 import { NextPage } from 'next';
@@ -9,6 +10,7 @@ import { Center, rhythm } from '../components/typography';
 import { CardList } from '../components/molecules/Card';
 import { api } from './_app';
 import { breakpointMax, breakpointMin, colors } from '../components/variables';
+import Container from '../components/atoms/Container';
 
 interface Props {
   ticketTypes: TicketType[];
@@ -56,37 +58,50 @@ const DynamicMobileBasketStatus = dynamic(
   { ssr: false },
 );
 
-const Tickets: NextPage<Props> = ({ ticketTypes }) => (
-  <Background>
-    <Head>
-      <title>Tickets - Poland 2.0 Summit</title>
-    </Head>
-    <Center>
-      <Header1 fat bold stripe>Tickets</Header1>
-    </Center>
-    <Wrapper>
-      <CardList>
-        {ticketTypes.length > 0 && ticketTypes.map((ticketType, index) => (
-          ticketType.active ? (
-            <DynamicTicketTile
-              key={index}
-              {...ticketType}
-            />
-          ) : null
-        ))}
-      </CardList>
-      <BasketWrapper>
-        <CardList>
-          <DynamicBasket
-            submitButton={{ href: '/checkout', label: 'Checkout' }}
-            ticketTypes={ticketTypes}
-          />
-        </CardList>
-      </BasketWrapper>
-      <DynamicMobileBasketStatus ticketTypes={ticketTypes} />
-    </Wrapper>
-  </Background>
-);
+const Tickets: NextPage<Props> = ({ ticketTypes }) => {
+  const ticketsAvailable = ticketTypes.length > 0 && ticketTypes.some(ticketType => ticketType.active);
+  return (
+    <Background>
+      <Head>
+        <title>Tickets - Poland 2.0 Summit</title>
+      </Head>
+      <Center>
+        <Header1 fat bold stripe>Tickets</Header1>
+      </Center>
+      <Wrapper>
+        {ticketsAvailable ? (
+          <React.Fragment>
+            <CardList>
+              {ticketTypes.map((ticketType, index) => (
+                ticketType.active ? (
+                  <DynamicTicketTile
+                    key={index}
+                    {...ticketType}
+                  />
+                ) : null
+              ))}
+            </CardList>
+            <BasketWrapper>
+              <CardList>
+                <DynamicBasket
+                  submitButton={{ href: '/checkout', label: 'Checkout' }}
+                  ticketTypes={ticketTypes}
+                />
+              </CardList>
+            </BasketWrapper>
+            <DynamicMobileBasketStatus ticketTypes={ticketTypes} />
+          </React.Fragment>
+        ) : (
+          <Container>
+            <Center>
+              <p>Tickets are currently unavailable. Please check back in later!</p>
+            </Center>
+          </Container>
+        )}
+      </Wrapper>
+    </Background>
+  );
+};
 
 Tickets.getInitialProps = async () => {
   const ticketTypes = await api('tickettypes');
