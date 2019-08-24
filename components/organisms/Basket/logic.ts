@@ -13,9 +13,10 @@ export const getBasket = (ticketTypes?: TicketType[]) => {
     return basket;
   }
 
-  ticketTypes.forEach((ticketType) => {
-    if ((basket[ticketType.id] && !ticketType.active) || (basket[ticketType.id] > ticketType.quantity)) {
-      delete basket[ticketType.id];
+  Object.entries(basket).forEach(([id, quantity]) => {
+    const ticketType = ticketTypes.find(_ticketType => _ticketType.id === id);
+    if (!ticketType || !ticketType.active || (quantity > ticketType.quantity)) {
+      delete basket[id];
     }
   });
 

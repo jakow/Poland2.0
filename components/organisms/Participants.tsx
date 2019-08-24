@@ -15,8 +15,8 @@ interface Props {
 }
 
 class Participants extends Component<Props & SubmitButtonRefProps> {
-  state = {
-    basket: getBasket(),
+  state = { // eslint-disable-next-line
+    basket: getBasket(this.props.ticketTypes),
   };
 
   render() {
