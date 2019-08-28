@@ -85,7 +85,7 @@ const empowerPL: FunctionComponent<DefaultPageProps> = () => (
         <Center>
           <h2 style={{ fontWeight: 'bolder' }}>Mentoring Programme</h2>
           <Title>empowerPL</Title>
-          <h2>Poland 2.0 <b>x</b> BCG</h2>
+          <h2>Poland 2.0 Summit<b>x</b> BCG</h2>
         </Center>
       </Banner>
       <Mission property="description">
