@@ -21,11 +21,21 @@ export const BasketWrapper = styled('aside')({
   zIndex: 2,
   [breakpointMax('tablet')]: {
     justifyContent: 'center',
+    padding: '0 1rem',
     backgroundColor: `${colors.gray}`,
+    li: {
+      maxWidth: '100%',
+    },
+    ol: {
+      width: '100%',
+    },
   },
   [breakpointMin('tablet')]: {
     position: 'fixed',
     right: rhythm(1),
+    [breakpointMin('desktopWide')]: {
+      left: '70vw',
+    },
   },
 });
 
@@ -36,6 +46,12 @@ const Wrapper = styled('main')({
     flexDirection: 'column',
   },
   '& > ol': {
+    [breakpointMax('tablet')]: {
+      li: {
+        maxWidth: 'unset',
+      },
+      padding: '0 1rem',
+    },
     [breakpointMin('tablet')]: {
       paddingLeft: '2rem',
       width: `calc(100vw - ${rhythm(17)})`,
