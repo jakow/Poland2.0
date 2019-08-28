@@ -8,13 +8,20 @@ import { rhythm } from '../typography';
 const borderStyle = '1px solid rgba(1, 1, 1, 0.12)';
 
 interface FieldProps {
+  error?: string;
+  icon?: IconName | JSX.Element;
+  inline?: boolean;
+  mandatory?: boolean;
   name: string;
   type: string;
   placeholder: string;
-  leftIcon?: IconName;
-  mandatory?: boolean;
-  error?: string;
-  options?: SelectProps;
+  prefix?: string;
+  radioOptions?: RadioProps;
+  selectOptions?: SelectProps;
+}
+
+interface RadioProps {
+  values: string[];
 }
 
 interface SelectProps {
@@ -44,6 +51,12 @@ const Flex = styled('div')(
     },
     '.bp3-icon:last-child': {
       paddingRight: rhythm(0.5),
+    },
+    '.prefix': {
+      lineHeight: '26px',
+      '& + *': {
+        paddingLeft: 0,
+      },
     },
     '& > *': {
       padding: rhythm(0.25),
@@ -81,7 +94,8 @@ const Flex = styled('div')(
 );
 
 const Wrapper = styled('fieldset')(
-  {
+  ((props: { inline?: boolean }) => ({
+    display: props.inline ? 'inline' : 'block',
     marginBottom: rhythm(0.75),
     border: 'none',
     small: {
@@ -89,80 +103,117 @@ const Wrapper = styled('fieldset')(
       marginLeft: rhythm(1.75),
       color: `${colors.red}`,
     },
-  },
+  })),
 );
 
+const RadioButtons = styled('div')({
+  display: 'flex',
+  justifyContent: 'space-evenly',
+  '*': {
+    marginRight: rhythm(0.25),
+  },
+});
+
 const InputField: FunctionComponent<FieldProps> = ({
-  name, type, placeholder, leftIcon, mandatory, error, options,
-}) => (
-  <Wrapper>
-    <Flex error={error}>
-      {leftIcon
-        ? <Icon icon={leftIcon} iconSize={16} color={`${colors.dark}`} />
-        : <div style={{ width: '32px' }} />
-      }
-      {(() => {
-        switch (type) {
-          case 'select':
-            return (
-              <FormikField
-                component="select"
-                id={name}
-                name={name}
-                required={mandatory}
-              >
-                <option value="" disabled hidden>{placeholder}</option>
-                {options
-                  ? options.data.map((option, index) => (
-                    <option
-                      key={index}
-                      value={option[`${options.valueLabel || 'value'}`]}
-                    >
-                      {option[`${options.nameLabel || 'name'}`] || option.value}
-                    </option>
-                  ))
-                  : null
-                }
-              </FormikField>
-            );
-          case 'textarea':
-            return (
-              <FormikField
-                component="textarea"
-                id={name}
-                name={name}
-                placeholder={placeholder}
-                required={mandatory}
-              />
-            );
-          default:
-            return (
-              <FormikField
-                id={name}
-                name={name}
-                type={type}
-                placeholder={placeholder}
-                required={mandatory}
-              />
-            );
-        }
-      })()}
-      {mandatory
+  name, type, placeholder, icon, inline, prefix, mandatory, error, selectOptions, radioOptions,
+}) => {
+  let LeftIcon;
+  if (typeof icon === 'string') {
+    LeftIcon = <Icon icon={icon} iconSize={16} color={`${colors.dark}`} />;
+  } else if (icon) {
+    LeftIcon = <span className="bp3-icon" style={{ width: 34 }}>{icon}</span>;
+  }
+
+  return (
+    <Wrapper inline={inline}>
+      {type === 'radio'
         ? (
-          <Icon
-            icon="asterisk"
-            color={`${colors.red}`}
-            iconSize={16}
-            title="This field is mandatory."
-          />
-        ) : null
-        }
-    </Flex>
-    {error
-      ? <small>{error}</small>
-      : null
-    }
-  </Wrapper>
-);
+          <RadioButtons>
+            {radioOptions
+              ? radioOptions.values.map((value, index) => (
+                <span key={index}>
+                  <FormikField
+                    id={value}
+                    type={type}
+                    name={name}
+                    required={mandatory}
+                    value={value}
+                  />
+                  <span>{value}</span>
+                </span>
+              )) : null}
+          </RadioButtons>
+        )
+        : (
+          <Flex error={error}>
+            {LeftIcon || <div style={{ width: '32px' }} />}
+            {prefix ? <span className="prefix">{prefix}</span> : null}
+            {(() => {
+              switch (type) {
+                case 'select':
+                  return (
+                    <FormikField
+                      component="select"
+                      id={name}
+                      name={name}
+                      required={mandatory}
+                    >
+                      <option value="" disabled hidden>{placeholder}</option>
+                      {selectOptions
+                        ? selectOptions.data.map((option, index) => (
+                          <option
+                            key={index}
+                            value={option[`${selectOptions.valueLabel || 'value'}`]}
+                          >
+                            {option[`${selectOptions.nameLabel || 'name'}`] || option.value}
+                          </option>
+                        ))
+                        : null
+                      }
+                    </FormikField>
+                  );
+                case 'textarea':
+                  return (
+                    <FormikField
+                      component="textarea"
+                      id={name}
+                      name={name}
+                      placeholder={placeholder}
+                      required={mandatory}
+                    />
+                  );
+                default:
+                  return (
+                    <FormikField
+                      id={name}
+                      name={name}
+                      type={type}
+                      placeholder={placeholder}
+                      required={mandatory}
+                      size={8}
+                    />
+                  );
+              }
+            })()}
+            {mandatory
+              ? (
+                <Icon
+                  icon="asterisk"
+                  color={`${colors.red}`}
+                  iconSize={16}
+                  title="This field is mandatory."
+                />
+              ) : null
+              }
+          </Flex>
+        )
+      }
+      {error
+        ? <small>{error}</small>
+        : null
+      }
+    </Wrapper>
+  );
+};
 
 export default InputField;
