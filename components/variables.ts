@@ -12,27 +12,27 @@ export const colors = {
   deepBlue: Color('#00458A'),
   empowerGreen: Color('#66BB91'),
   royalPurple: Color('#AC1E70'),
-  teal: Color('#70D8D1')
+  teal: Color('#70D8D1'),
 };
 
 export const idleShadow = css({
   boxShadow: '0 1px 8px 0 rgba(0, 0, 0, 0.16)',
-  transition: 'box-shadow 200ms ease-in-out'
+  transition: 'box-shadow 200ms ease-in-out',
 });
 
 export const hoverShadow = css({
   boxShadow: '0 2px 8px 1px rgba(0, 0, 0, 0.16)',
-  transition: 'box-shadow 200ms ease-in-out'
+  transition: 'box-shadow 200ms ease-in-out',
 });
 
 export const redShadow = css({
   boxShadow: `0 3px 8px 1px ${colors.red}`,
-  transition: 'box-shadow 200ms ease-in-out'
+  transition: 'box-shadow 200ms ease-in-out',
 });
 
 export const activeShadow = css({
   boxShadow: '0 3px 8px 1px rgba(0, 0, 0, 0.16)',
-  transition: 'box-shadow 200ms ease-in-out'
+  transition: 'box-shadow 200ms ease-in-out',
 });
 
 interface Breakpoints {
@@ -47,7 +47,7 @@ interface Breakpoints {
 export const breakpoints: Breakpoints = {
   mobileSmall: 384,
   mobile: 512,
-  tablet: 768,
+  tablet: 800,
   tabletLandscape: 960,
   desktop: 1024,
   desktopWide: 1280,
