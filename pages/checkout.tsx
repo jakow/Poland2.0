@@ -3,12 +3,13 @@ import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import styled from '@emotion/styled';
+import { Icon } from '@blueprintjs/core';
 import Background from '../components/atoms/Background';
 import { Center, rhythm } from '../components/typography';
 import { Header1, Header2 } from '../components/atoms/Headers';
 import { api } from './_app';
 import { BasketWrapper } from './tickets';
-import { breakpointMax, breakpointMin } from '../components/variables';
+import { breakpointMax, breakpointMin, colors } from '../components/variables';
 import Card, { CardList } from '../components/molecules/Card';
 import TicketType from '../types/TicketType';
 import Container from '../components/atoms/Container';
@@ -62,11 +63,20 @@ const Wrapper = styled('main')({
     flexDirection: 'column',
   },
   '& > ol': {
-    justifyContent: 'center',
+    [breakpointMax('tablet')]: {
+      padding: '0 1rem',
+    },
     [breakpointMin('tablet')]: {
       justifyContent: 'flex-end',
-      paddingLeft: '2rem',
+      paddingLeft: rhythm(2),
       width: `calc(100vw - ${rhythm(17.5)})`,
+    },
+    [breakpointMin('desktopWide')]: {
+      justifyContent: 'center',
+      paddingLeft: rhythm(3),
+      li: {
+        maxWidth: 860,
+      },
     },
   },
 });
@@ -147,7 +157,15 @@ const Checkout: NextPage<Props> = ({ ticketTypes }) => {
                       <Header2 bold>Participant Details</Header2>
                       <p>
                         Please enter the following information for each participant&nbsp;
-                        <em>underneath their corresponding ticket</em>.
+                        <em>underneath their corresponding ticket</em>.<br />
+                        Fields marked with&nbsp;
+                        <Icon
+                          icon="asterisk"
+                          color={`${colors.red}`}
+                          iconSize={16}
+                          style={{ paddingBottom: 1 }}
+                        />
+                        &nbsp;are mandatory.
                       </p>
                       <DynamicParticipants
                         ticketTypes={ticketTypes}
