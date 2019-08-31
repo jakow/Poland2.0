@@ -158,7 +158,7 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonRefProps>(
                 name="name"
                 type="text"
                 placeholder="Name and Surname"
-                leftIcon="person"
+                icon="person"
                 error={errors.name && touched.name ? errors.name : null}
                 mandatory
               />
@@ -166,7 +166,7 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonRefProps>(
                 name="email"
                 type="email"
                 placeholder="E-mail address"
-                leftIcon="envelope"
+                icon="envelope"
                 error={errors.email && touched.email ? errors.email : null}
                 mandatory
               />
@@ -174,7 +174,7 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonRefProps>(
                 name="street"
                 type="text"
                 placeholder="Street"
-                leftIcon="office"
+                icon="office"
                 error={errors.street && touched.street ? errors.street : null}
                 mandatory
               />
@@ -182,7 +182,7 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonRefProps>(
                 name="city"
                 type="text"
                 placeholder="City"
-                leftIcon="map-marker"
+                icon="map-marker"
                 error={errors.city && touched.city ? errors.city : null}
                 mandatory
               />
@@ -190,8 +190,8 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonRefProps>(
                 name="country"
                 type="select"
                 placeholder="Country"
-                leftIcon="globe"
-                options={{ valueLabel: 'code', data: getData() }}
+                icon="globe"
+                selectOptions={{ valueLabel: 'code', data: getData() }}
                 error={errors.country && touched.country ? errors.country : null}
                 mandatory
               />

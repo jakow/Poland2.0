@@ -24,7 +24,7 @@
     "country-list": "^2.1.1",
     "dotenv": "~8.0.0",
     "emotion": "~10",
-    "formik": "~1.5.8",
+    "formik": "2.0.1-rc.13",
     "imagemin-mozjpeg": "~8.0.0",
     "imagemin-optipng": "~7.0.0",
     "imagemin-svgo": "~7.0.0",
