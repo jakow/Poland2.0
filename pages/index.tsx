@@ -22,11 +22,6 @@ export default class extends React.Component<DefaultPageProps & Props> {
     return (
       <React.Fragment>
         <Head>
-          {/* Mailchimp */}
-          <script
-            src="https://downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js"
-            data-dojo-config="usePlainJson: true, isDebug: false"
-          />
           <script src="/static/mc.js" />
         </Head>
         {contentControl.ticketControl.description

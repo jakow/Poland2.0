@@ -31,8 +31,13 @@ export default class extends Document {
           <link rel="stylesheet" href="/static/fonts/league-spartan.css" />
 
           <script src="https://js.stripe.com/v3/" />
-          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146052606-1" />
+          <script
+            src="https://downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js"
+            data-dojo-config="usePlainJson: true, isDebug: false"
+          />
           <script src="/static/gtag.js" />
+          <script async src="https://www.google-analytics.com/analytics.js" />
+          <script async src="/static/autotrack.js" />
           <script src="/static/fb.js" />
 
           {/* eslint-enable */}
