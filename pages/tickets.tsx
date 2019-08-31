@@ -120,7 +120,7 @@ const Tickets: NextPage<Props> = ({ ticketTypes }) => {
 };
 
 Tickets.getInitialProps = async () => {
-  const ticketTypes = await api('tickettypes');
+  const ticketTypes = await api('tickettypes?_sort=quantity:desc');
   return { ticketTypes };
 };
 
