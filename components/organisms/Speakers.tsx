@@ -62,9 +62,7 @@ export const SpeakersFlat: React.StatelessComponent<FlatProps> =
     <Wrapper id="speakers">
       <Container>
         <Center>
-          {!isInSubcategory ? <Title>Speakers</Title>
-                            : <Subtitle>Speakers</Subtitle>
-          }
+          {!isInSubcategory ? <Title>Speakers</Title> : <Subtitle>Speakers</Subtitle>}
         </Center>
           <CardList>
             {speakers &&

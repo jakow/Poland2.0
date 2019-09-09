@@ -1,6 +1,6 @@
+import { FunctionComponent } from 'react';
 import Background from '../components/atoms/Background';
 import Sponsors from '../components/organisms/Sponsors';
-import { FunctionComponent } from 'react';
 import { DefaultPageProps } from './_app';
 
 const Partners: FunctionComponent<DefaultPageProps> = ({ currentEdition }) => (
@@ -10,7 +10,7 @@ const Partners: FunctionComponent<DefaultPageProps> = ({ currentEdition }) => (
       sponsorCategories={currentEdition.sponsorCategories}
       sponsors={currentEdition.sponsors}
       title="Partners"
-      year={currentEdition.previousSponsorsYear && currentEdition.previousSponsorsYear}
+      year={currentEdition.previousSponsorsYear}
     />
   </Background>
 );

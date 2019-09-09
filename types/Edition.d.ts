@@ -17,6 +17,7 @@ type Edition = {
   venue: Venue;
   speakerCategories?: SpeakerCategory[];
   speakers?: Speaker[];
+  previousSpeakersYear?: number;
   sponsorCategories?: SponsorCategory[];
   sponsors?: Sponsor[];
   previousSponsorsYear?: number;

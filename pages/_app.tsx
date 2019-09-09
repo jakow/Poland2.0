@@ -2,7 +2,7 @@ import React from 'react';
 import App, { Container, AppContext } from 'next/app';
 import getConfig from 'next/config';
 import Head from 'next/head';
-import { Global, css } from '@emotion/core';
+import { Global } from '@emotion/core';
 import { TypographyStyle, GoogleFont } from 'react-typography';
 import Footer from '../components/organisms/Footer';
 import typography, { rhythm, globalStyle } from '../components/typography';
@@ -45,6 +45,9 @@ export default class Website extends App<DefaultPageProps> {
       if (!currentEdition.agendaDays.length) {
         currentEdition.previousAgendaYear = year;
         currentEdition.agendaDays = previousEdition.agendaDays;
+      }
+      if (!currentEdition.speakers.length || !currentEdition.speakerCategories.length) {
+        currentEdition.previousSpeakersYear = year;
         currentEdition.speakers = previousEdition.speakers;
         currentEdition.speakerCategories = previousEdition.speakerCategories;
       }
