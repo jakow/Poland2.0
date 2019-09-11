@@ -13,13 +13,14 @@ import { breakpointMax, breakpointMin, colors } from '../components/variables';
 import Card, { CardList } from '../components/molecules/Card';
 import TicketType from '../types/TicketType';
 import Container from '../components/atoms/Container';
+import Button from '../components/atoms/Button';
 
 interface Props {
   ticketTypes: TicketType[];
 }
 
 export interface SubmitButtonRefProps {
-  submitButtonRef: React.RefObject<HTMLButtonElement>;
+  submitButtonRef: React.MutableRefObject<Button>;
 }
 
 enum CheckoutStep {
@@ -28,30 +29,19 @@ enum CheckoutStep {
   DONE = 2
 }
 
-const submitButtons: SubmitButton[] = [
-  {
-    label: 'Continue',
-    form: 'participants',
-  },
-  {
-    label: 'Pay with Stripe',
-    form: 'payment',
-  },
-];
-
-const DynamicBasket = dynamic(
+const Basket = dynamic(
   () => import('../components/organisms/Basket'),
   { ssr: false },
 );
 
 // STEP 1: Get participant details
-const DynamicParticipants = dynamic(
+const Participants = dynamic(
   () => import('../components/organisms/Participants'),
   { ssr: false },
 );
 
 // STEP 2: Make payment
-const DynamicPayment = dynamic(
+const Payment = dynamic(
   () => import('../components/organisms/Payment'),
   { ssr: false },
 );
@@ -84,15 +74,27 @@ const Wrapper = styled('main')({
 interface SubmitButton {
   label: string;
   form: string;
+  loading?: boolean;
 }
 
+const submitButtons: SubmitButton[] = [
+  {
+    label: 'Continue',
+    form: 'participants',
+  },
+  {
+    label: 'Pay with Stripe',
+    form: 'payment',
+  },
+];
+
 export interface CheckoutState {
+  clientSecret?: string;
   participants?: any[];
-  survey?: any;
+  paymentIntent?: stripe.paymentIntents.PaymentIntent;
   step?: CheckoutStep;
   submitButton?: SubmitButton;
-  clientSecret?: string;
-  paymentIntent?: stripe.paymentIntents.PaymentIntent;
+  survey?: any;
 }
 
 export type CheckoutAction = {
@@ -106,7 +108,7 @@ export enum CheckoutActionTypes {
 
 const reducer: React.Reducer<CheckoutState, CheckoutAction> = (state, action) => {
   if (action.type === CheckoutActionTypes.NEXT) {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     return {
       ...state,
       ...action,
@@ -116,7 +118,7 @@ const reducer: React.Reducer<CheckoutState, CheckoutAction> = (state, action) =>
   }
 
   if (action.type === CheckoutActionTypes.PREVIOUS) {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     return {
       ...state,
       ...action,
@@ -132,7 +134,7 @@ const reducer: React.Reducer<CheckoutState, CheckoutAction> = (state, action) =>
 };
 
 const Checkout: NextPage<Props> = ({ ticketTypes }) => {
-  const submitButton = useRef<HTMLButtonElement>();
+  const submitButton = useRef<Button>(null);
   const [state, dispatch] = useReducer(reducer, {
     step: CheckoutStep.PARTICIPANTS,
     submitButton: submitButtons[CheckoutStep.PARTICIPANTS],
@@ -167,7 +169,7 @@ const Checkout: NextPage<Props> = ({ ticketTypes }) => {
                         />
                         &nbsp;are mandatory.
                       </p>
-                      <DynamicParticipants
+                      <Participants
                         ticketTypes={ticketTypes}
                         submitButtonRef={submitButton}
                         onSubmit={values => dispatch({
@@ -180,7 +182,7 @@ const Checkout: NextPage<Props> = ({ ticketTypes }) => {
                 {state.step === CheckoutStep.PAYMENT
                   && (
                     <Card width={rhythm(48)}>
-                      <DynamicPayment
+                      <Payment
                         checkoutState={state}
                         checkoutDispatch={dispatch}
                         ticketTypes={ticketTypes}
@@ -193,11 +195,12 @@ const Checkout: NextPage<Props> = ({ ticketTypes }) => {
               </CardList>
               <BasketWrapper>
                 <CardList>
-                  <DynamicBasket
+                  <Basket
                     submitButton={{
                       ...state.submitButton,
                       ref: submitButton,
                     }}
+                    refresh={false}
                     ticketTypes={ticketTypes}
                   />
                 </CardList>
@@ -224,12 +227,13 @@ const Checkout: NextPage<Props> = ({ ticketTypes }) => {
                 Here is a summary of the order:
               </p>
               <CardList>
-                <DynamicBasket
+                <Basket
                   ticketTypes={ticketTypes}
                   width={rhythm(24)}
                   refresh={false}
                   onRender={() => {
                     localStorage.removeItem('basket');
+                    localStorage.removeItem('coupon');
                   }}
                 />
               </CardList>

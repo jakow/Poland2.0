@@ -10,7 +10,7 @@ import { Header2 } from '../atoms/Headers';
 import { colors } from '../variables';
 import { rhythm } from '../typography';
 import TicketType from '../../types/TicketType';
-import { getBasket } from './Basket/logic';
+import { getBasket, getCoupon } from './Basket/logic';
 import InputField from '../atoms/Form';
 import {
   SubmitButtonRefProps, CheckoutState, CheckoutAction, CheckoutActionTypes,
@@ -88,7 +88,10 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonRefProps>(
             .required('Please select your country.'),
         })}
         onSubmit={async (values, actions) => {
-          actions.setSubmitting(true);
+          if (submitButtonRef && submitButtonRef.current) {
+            submitButtonRef.current.setState({ _loading: true });
+          }
+
           if (paymentError) {
             setPaymentError(null);
           }
@@ -109,22 +112,25 @@ const StripeForm = injectStripe<StripeFormProps & SubmitButtonRefProps>(
           });
           if (error) {
             setPaymentError(error.message);
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           } else if (paymentIntent.status !== 'succeeded') {
             setPaymentError('An unknown error has occurred.');
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           } else {
             checkoutDispatch({ paymentIntent, type: CheckoutActionTypes.NEXT });
           }
 
+          if (submitButtonRef && submitButtonRef.current) {
+            submitButtonRef.current.setState({ _loading: false });
+          }
           actions.setSubmitting(false);
         }}
       >
-        {({ errors, touched, isSubmitting }) => {
-          if (submitButtonRef.current) {
-            const disabled = !Object.entries(touched).length || Object.entries(errors).length
-              || cardElementError || !cardElementComplete || isSubmitting;
-            submitButtonRef.current.disabled = disabled;
+        {({ errors, touched }) => {
+          if (submitButtonRef && submitButtonRef.current && !submitButtonRef.current.state._loading) {
+            const _disabled = !Object.entries(touched).length || Object.entries(errors).length
+                              || cardElementError || !cardElementComplete;
+            submitButtonRef.current.setState({ _disabled });
           }
 
           return (
@@ -213,11 +219,12 @@ interface Props {
 class Payment extends React.Component<Props & SubmitButtonRefProps> {
   state = {
     basket: getBasket(),
+    coupon: getCoupon(),
   };
 
   async componentDidMount() {
     const { checkoutState, checkoutDispatch } = this.props;
-    const { basket } = this.state;
+    const { basket, coupon } = this.state;
     if (!checkoutState.clientSecret) {
       /* eslint-disable camelcase */
       try {
@@ -229,11 +236,14 @@ class Payment extends React.Component<Props & SubmitButtonRefProps> {
           method: 'POST',
           body: JSON.stringify({
             basket,
+            coupon: coupon ? coupon.code : null,
             ...checkoutState.participants,
           }),
         });
         checkoutDispatch({ clientSecret: client_secret });
       } catch (error) {
+        localStorage.removeItem('basket');
+        localStorage.removeItem('coupon');
         window.location.assign('tickets');
       }
       /* eslint-enable camelcase */

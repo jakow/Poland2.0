@@ -52,7 +52,7 @@ class Participants extends Component<Props & SubmitButtonRefProps> {
 
               // Additional information
               // type: '',
-              // programmingLanguages: [],
+              programmingLanguages: [],
 
               // Student
               // university: '',
@@ -66,9 +66,15 @@ class Participants extends Component<Props & SubmitButtonRefProps> {
           ),
         }}
         onSubmit={(values, actions) => {
-          const { onSubmit } = this.props;
-          actions.setSubmitting(true);
+          const { onSubmit, submitButtonRef } = this.props;
+          if (submitButtonRef && submitButtonRef.current) {
+            submitButtonRef.current.setState({ _loading: true });
+          }
           onSubmit(values);
+
+          if (submitButtonRef && submitButtonRef.current) {
+            submitButtonRef.current.setState({ _loading: false });
+          }
           actions.setSubmitting(false);
         }}
         validationSchema={object().shape({
@@ -98,12 +104,12 @@ class Participants extends Component<Props & SubmitButtonRefProps> {
         })}
       >
         {({
-          errors, touched, isSubmitting, values,
+          errors, touched, values,
         }) => {
           const { submitButtonRef, ticketTypes } = this.props;
-          if (submitButtonRef.current) {
-            const disabled = !Object.entries(touched).length || !!errors.participants || isSubmitting;
-            submitButtonRef.current.disabled = disabled;
+          if (submitButtonRef && submitButtonRef.current && !submitButtonRef.current.state._loading) {
+            const _disabled = !Object.entries(touched).length || !!errors.participants;
+            submitButtonRef.current.setState({ _disabled });
           }
 
           return (

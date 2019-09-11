@@ -8,7 +8,9 @@ import TicketType from '../../../types/TicketType';
 import { Center, rhythm } from '../../typography';
 import { colors } from '../../variables';
 import Button from '../../atoms/Button';
-import { basketEffect, getBasket, getFormattedTotalAmount } from './logic';
+import {
+  basketEffect, getBasket, getFormattedTotalAmount, getCoupon, getTotalAmount,
+} from './logic';
 import { toGBP } from '../../../helpers/currency';
 
 const Wrapper = styled('section')({
@@ -18,24 +20,26 @@ const Wrapper = styled('section')({
   'th, td': {
     border: 0,
   },
+  '.bp3-icon': {
+    userSelect: 'none',
+    cursor: 'pointer',
+  },
+  button: {
+    minHeight: rhythm(2),
+  },
 });
 
 export interface SubmitButtonProps {
   href?: string;
   label: string;
   form?: string;
-  ref?: React.Ref<HTMLButtonElement>;
+  ref?: React.MutableRefObject<Button>;
 }
 
-const Submission = React.forwardRef<HTMLButtonElement, SubmitButtonProps>(
+const Submission = React.forwardRef<Button, SubmitButtonProps>(
   ({ href, label, form }, ref) => {
     const button = (
-      <Button
-        wide
-        ref={ref}
-        form={form}
-        type={form ? 'submit' : 'button'}
-      >
+      <Button wide ref={ref} form={form} type={form ? 'submit' : 'button'}>
         {label}
       </Button>
     );
@@ -56,7 +60,9 @@ const Basket: React.FunctionComponent<Props> = ({
   ticketTypes, submitButton, width, refresh, onRender,
 }) => {
   const [basket, setBasket] = useState(getBasket(ticketTypes));
-  useEffect(refresh === false ? () => {} : basketEffect(setBasket));
+  const [coupon, setCoupon] = useState(getCoupon());
+  useEffect(refresh === false ? () => {} : basketEffect(setBasket, setCoupon));
+
   if (onRender) {
     onRender();
   }
@@ -87,10 +93,36 @@ const Basket: React.FunctionComponent<Props> = ({
                 ))}
               </tbody>
               <tfoot>
+                {coupon ? (
+                  <tr>
+                    <th colSpan={2}>
+                      {coupon.code}
+                      {coupon.type === 'discountPercentage' && ` (-${coupon.value}%)`}
+                      {refresh !== false && (
+                        <Icon
+                          icon="delete"
+                          color={`${colors.dark}`}
+                          iconSize={20}
+                          style={{ paddingLeft: rhythm(0.5) }}
+                          onClick={() => {
+                            localStorage.removeItem('coupon');
+                            dispatchEvent(new Event('storage'));
+                          }}
+                        />
+                      )}
+                    </th>
+                    <td>
+                      {coupon.type === 'discountFixed' && `(${toGBP(coupon.value)})`}
+                      {coupon.type === 'discountPercentage'
+                        && `(${toGBP(getTotalAmount(ticketTypes, basket) * (coupon.value / 100))})`
+                      }
+                    </td>
+                  </tr>
+                ) : null}
                 <tr>
                   <th colSpan={2}>Total Amount</th>
                   <td>
-                    {getFormattedTotalAmount(ticketTypes, basket)}
+                    {getFormattedTotalAmount(ticketTypes, basket, coupon)}
                   </td>
                 </tr>
               </tfoot>

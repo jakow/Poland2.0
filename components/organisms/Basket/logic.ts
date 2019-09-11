@@ -1,6 +1,9 @@
 import React from 'react';
 import TicketType from '../../../types/TicketType';
+import Coupon from '../../../types/Coupon';
 import { toGBP } from '../../../helpers/currency';
+
+export const getCoupon = () => JSON.parse(localStorage.getItem('coupon'));
 
 export const getBasket = (ticketTypes?: TicketType[]) => {
   const storage = localStorage.getItem('basket');
@@ -32,14 +35,29 @@ export const getTotalAmount = (ticketTypes: TicketType[], basket: any) => ticket
   ), 0,
 );
 
-export const getFormattedTotalAmount = (ticketTypes: TicketType[], basket: any) => (
-  toGBP(getTotalAmount(ticketTypes, basket))
-);
+export const getFormattedTotalAmount = (ticketTypes: TicketType[], basket: any, coupon: Coupon) => {
+  if (!coupon) {
+    return toGBP(getTotalAmount(ticketTypes, basket));
+  }
 
-export const basketEffect = (setBasket: React.Dispatch<any>) => () => {
+  if (coupon.type === 'discountFixed') {
+    const amount = Math.max(getTotalAmount(ticketTypes, basket) - coupon.value, 1);
+    return toGBP(amount);
+  }
+
+  if (coupon.type === 'discountPercentage') {
+    const amount = Math.max(getTotalAmount(ticketTypes, basket) * (1 - coupon.value / 100), 1);
+    return toGBP(amount);
+  }
+
+  return toGBP(getTotalAmount(ticketTypes, basket));
+};
+
+export const basketEffect = (setBasket: React.Dispatch<any>, setCoupon: React.Dispatch<any>) => () => {
   const handleBasketChange = () => {
     const storage = JSON.parse(localStorage.getItem('basket') || '{}');
     setBasket(storage);
+    setCoupon(getCoupon());
   };
 
   window.addEventListener('storage', handleBasketChange);

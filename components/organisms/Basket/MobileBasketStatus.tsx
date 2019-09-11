@@ -1,10 +1,12 @@
+import { useEffect, useState, FunctionComponent } from 'react';
 import styled from '@emotion/styled';
 import { breakpointMax, colors } from '../../variables';
 import { Flex } from '../../molecules/TicketTile';
 import { Header3 } from '../../atoms/Headers';
 import { rhythm } from '../../typography';
-import { useEffect, useState, FunctionComponent } from 'react';
-import { getBasket, basketEffect, getFormattedTotalAmount } from './logic';
+import {
+  getBasket, basketEffect, getFormattedTotalAmount, getCoupon,
+} from './logic';
 import TicketType from '../../../types/TicketType';
 
 const Wrapper = styled('a')({
@@ -22,14 +24,14 @@ const Wrapper = styled('a')({
     b: {
       textAlign: 'center',
       transform: 'translateX(6%)',
-      flex: 2
+      flex: 2,
     },
     h3: {
       width: rhythm(3.25),
       textAlign: 'right',
-      marginRight: rhythm(1)
-    }
-  }
+      marginRight: rhythm(1),
+    },
+  },
 });
 
 interface Props {
@@ -38,16 +40,17 @@ interface Props {
 
 const MobileBasketStatus: FunctionComponent<Props> = ({ ticketTypes }) => {
   const [basket, setBasket] = useState(getBasket());
-  useEffect(basketEffect(setBasket));
+  const [coupon, setCoupon] = useState(getCoupon());
+  useEffect(basketEffect(setBasket, setCoupon));
 
   return Object.entries(basket).length > 0
     ? (
-    <Wrapper href="#basket">
-      <Flex>
-        <b>Go to Basket</b>
-        <Header3 bold noMargin>{getFormattedTotalAmount(ticketTypes, basket)}</Header3>
-      </Flex>
-    </Wrapper>
+      <Wrapper href="#basket">
+        <Flex>
+          <b>Go to Basket</b>
+          <Header3 bold noMargin>{getFormattedTotalAmount(ticketTypes, basket, coupon)}</Header3>
+        </Flex>
+      </Wrapper>
     ) : null;
 };
 
