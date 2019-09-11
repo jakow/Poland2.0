@@ -37,25 +37,18 @@ export default ({ items }: Props) => (
     <MenuList>
       {items.map((item, index) => (
         <MenuListItem key={index}>
-          {item.type === 'button'
-            ? <span style={{ padding: `0 ${rhythm(0.5)}` }}>
-                {/* <NavButton
-                  href={item.url}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  style={{ marginTop: rhythm(0.5) }}
-                >
-                  {item.title}
-                </NavButton> */}
-                <Link href={item.url}>
-                  <Button style={{ marginTop: rhythm(0.5) }}>{item.title}</Button>
-                </Link>
-              </span>
-            : <Link href={item.url}>
-                <Anchor active={item}>{item.title}</Anchor>
+          {item.type === 'button' ? (
+            <span style={{ padding: `0 ${rhythm(0.5)}` }}>
+              <Link href={item.url}>
+                <Button style={{ marginTop: rhythm(0.5) }}>{item.title}</Button>
               </Link>
-        }
-      </MenuListItem>
+            </span>
+          ) : (
+            <Link href={item.url}>
+              <Anchor active={item}>{item.title}</Anchor>
+            </Link>
+          )}
+        </MenuListItem>
       ))}
     </MenuList>
   </Container>

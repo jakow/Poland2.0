@@ -51,7 +51,7 @@ const margin = css({
 const IconLabel = styled('span')(margin);
 
 const Quantity = styled('b')(margin, {
-  paddingTop: '2px',
+  paddingTop: 2,
   width: rhythm(1),
 });
 

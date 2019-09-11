@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { colors, breakpointMin } from '../variables';
+import { colors } from '../variables';
 import { rhythm } from '../typography';
 import LazyImage from '../atoms/LazyImage';
 
@@ -39,19 +39,19 @@ const CardContainer = styled('li')(
 const CardContent = styled('div')({
   flex: '1 0 0',
   padding: `${rhythm(1)} 1rem`,
-  width: '100%'
+  width: '100%',
 });
 
 const CardFooter = styled('footer')({
   flex: '0 1',
   padding: `${rhythm(0.5)} 1rem`,
   borderTop: borderStyle,
-  textAlign: 'center'
+  textAlign: 'center',
 });
 
 const container = css({
   display: 'contents',
-  flex: '1 0 0'
+  flex: '1 0 0',
 });
 
 const CardLink = styled('a')(
@@ -59,7 +59,7 @@ const CardLink = styled('a')(
   {
     textDecoration: 'inherit',
     color: 'inherit',
-  }
+  },
 );
 
 const CardClickable = styled('button')(
@@ -73,8 +73,8 @@ const CardClickable = styled('button')(
     border: 'none',
     color: 'inherit',
     outline: 'none',
-    backgroundColor: 'transparent'
-  }
+    backgroundColor: 'transparent',
+  },
 );
 
 export const CardList = styled('ol')({
@@ -87,17 +87,7 @@ export const CardList = styled('ol')({
   '& > li': {
     flex: '0 0 100%',
     margin: `0 ${rhythm(0.33)} ${rhythm(1)}`,
-    // flexBasis: '50%',
-    // [breakpointMin('mobile')]: {
-    //   flexBasis: '33%'
-    // },
-    // [breakpointMin('tablet')]: {
-    //   flexBasis: '25%'
-    // },
-    // [breakpointMin('tabletLandscape')]: {
-    //   flexBasis: '20%'
-    // }
-  }
+  },
 });
 
 const renderCardContent = (content: React.ReactNode, href?: string, onClick?: () => void) => {
@@ -122,22 +112,22 @@ interface CardProps {
 }
 
 const Card: React.StatelessComponent<CardProps> = ({
-  children, footer, image, imagePreview, onClick, href, width, id
+  children, footer, image, imagePreview, onClick, href, width, id,
 }) => {
   const content = (
     <React.Fragment>
-      {image && imagePreview && <LazyImage src={image} placeholder={imagePreview}/>}
-      {children &&
+      {image && imagePreview && <LazyImage src={image} placeholder={imagePreview} />}
+      {children && (
         <CardContent>
           {children}
         </CardContent>
-      }
+      )}
     </React.Fragment>
   );
 
   return (
     <CardContainer clickable={!!onClick || !!href} width={width}>
-      {id && <a id={id}/>}
+      {id && <a id={id}/>} {/* eslint-disable-line */}
       {renderCardContent(content, href, onClick)}
       {footer && <CardFooter>{footer}</CardFooter>}
     </CardContainer>
