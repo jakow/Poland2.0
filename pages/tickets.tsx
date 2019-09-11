@@ -18,6 +18,7 @@ interface Props {
 
 export const BasketWrapper = styled('aside')({
   display: 'flex',
+  flexDirection: 'column',
   zIndex: 2,
   [breakpointMax('tablet')]: {
     justifyContent: 'center',
@@ -33,8 +34,8 @@ export const BasketWrapper = styled('aside')({
   [breakpointMin('tablet')]: {
     position: 'fixed',
     right: rhythm(1),
-    [breakpointMin('desktopWide')]: {
-      left: '70vw',
+    li: {
+      margin: 0,
     },
   },
 });
@@ -59,18 +60,23 @@ const Wrapper = styled('main')({
   },
 });
 
-const DynamicTicketTile = dynamic(
-  () => import('../components/molecules/TicketTile'),
-  { ssr: false },
-);
-
-const DynamicBasket = dynamic(
+const Basket = dynamic(
   () => import('../components/organisms/Basket'),
   { ssr: false },
 );
 
-const DynamicMobileBasketStatus = dynamic(
+const MobileBasketStatus = dynamic(
   () => import('../components/organisms/Basket/MobileBasketStatus'),
+  { ssr: false },
+);
+
+const PromotionField = dynamic(
+  () => import('../components/molecules/PromotionField'),
+  { ssr: false },
+);
+
+const TicketTile = dynamic(
+  () => import('../components/molecules/TicketTile'),
   { ssr: false },
 );
 
@@ -90,7 +96,7 @@ const Tickets: NextPage<Props> = ({ ticketTypes }) => {
             <CardList>
               {ticketTypes.map((ticketType, index) => (
                 ticketType.active ? (
-                  <DynamicTicketTile
+                  <TicketTile
                     key={index}
                     {...ticketType}
                   />
@@ -98,14 +104,15 @@ const Tickets: NextPage<Props> = ({ ticketTypes }) => {
               ))}
             </CardList>
             <BasketWrapper>
+              <PromotionField />
               <CardList>
-                <DynamicBasket
+                <Basket
                   submitButton={{ href: '/checkout', label: 'Checkout' }}
                   ticketTypes={ticketTypes}
                 />
               </CardList>
             </BasketWrapper>
-            <DynamicMobileBasketStatus ticketTypes={ticketTypes} />
+            <MobileBasketStatus ticketTypes={ticketTypes} />
           </React.Fragment>
         ) : (
           <Container>
