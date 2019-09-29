@@ -1,12 +1,14 @@
-import * as React from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import Container from '../../atoms/Container';
-import { breakpointMin, colors, breakpointMax } from '../../variables';
+import {
+  breakpointMin, colors, breakpointMax, shadow
+} from '../../variables';
 import Brand from './Brand';
 import DesktopNav from './DesktopNav';
 import MobileNav, { MobileNavButton } from './MobileNav';
 import { rhythm } from '../../typography';
+import Container from '../../atoms/Container';
 
 export type MenuItem = {
   title: string,
@@ -24,25 +26,27 @@ type State = {
   open: boolean,
 };
 
-const navHeight = rhythm(3);
+export const navHeight = rhythm(3);
 
-const Header = styled('header')({
-  zIndex: 100,
-  position: 'fixed',
-  top: -1, // fixes weird 1px space at the top on mobile
-  paddingTop: 1,
-  left: 0,
-  right: 0,
-  background: `${colors.white}`,
-  boxShadow: '0 1px 2px 0 rgba(1, 1, 1, 0.05)',
-  borderBottom: '1px solid rgba(1, 1, 1, 0.12)',
-});
+const Header = styled('header')(
+  {
+    zIndex: 100,
+    position: 'fixed',
+    top: -1, // fixes weird 1px space at the top on mobile
+    paddingTop: 1,
+    left: 0,
+    right: 0,
+    background: `${colors.red.alpha(0.88)}`,
+    backdropFilter: `saturate(180%) blur(${rhythm(0.25)})`,
+  },
+  shadow,
+);
 
 const Layout = styled('div')({
   display: 'flex',
   flexDirection: 'row',
-  justifyContent: 'center',
-  [breakpointMin('tablet')]: {
+  justifyContent: 'flex-start',
+  [breakpointMin('tabletLarge')]: {
     justifyContent: 'space-between',
   },
 });
@@ -52,16 +56,16 @@ const Column = styled('div')({
   height: navHeight,
   display: 'flex',
   flexDirection: 'row',
-  alignItems: 'center'
+  alignItems: 'center',
 });
 
 const brand = css({
-  [breakpointMax('tablet')]: {
+  [breakpointMax('tabletLarge')]: {
     position: 'absolute',
     top: 0,
     left: '50%',
-    transform: 'translateX(-50%)'
-  }
+    transform: 'translateX(-50%)',
+  },
 });
 
 const MobileNavButtonContainer = styled('div')({
@@ -69,7 +73,7 @@ const MobileNavButtonContainer = styled('div')({
   right: 0,
   top: 0,
   bottom: 0,
-  [breakpointMin('tablet')]: {
+  [breakpointMin('tabletLarge')]: {
     display: 'none',
   },
 });
@@ -79,40 +83,35 @@ export default class TopNavigation extends React.Component<Props, State> {
     open: false,
   };
 
-  componentDidUpdate() { // prevent root element from scrolling
-    if (document.documentElement) {
-      document.documentElement.style.overflow =
-      this.state.open ? 'hidden' : 'unset';
-    }
-  }
-
   toggleNav = () => {
     this.setState(state => ({ open: !state.open }));
-  }
+  };
 
   render() {
+    const { items } = this.props;
+    const { open } = this.state;
     return (
       <Header>
         <Container>
           <Layout>
             <Column css={brand}>
-              <Brand/>
+              <Brand />
             </Column>
             <Column>
-              <DesktopNav items={this.props.items}/>
+              <DesktopNav items={items} />
             </Column>
           </Layout>
           <MobileNavButtonContainer>
             <MobileNavButton
               onClick={this.toggleNav}
-              isOpen={this.state.open}
+              isOpen={open}
               navName="Mobile navigation"
             />
           </MobileNavButtonContainer>
         </Container>
         <MobileNav
-          items={this.props.items}
-          open={this.state.open}
+          items={items}
+          open={open}
           requestClose={this.toggleNav}
         />
       </Header>

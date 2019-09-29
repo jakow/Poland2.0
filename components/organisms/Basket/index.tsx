@@ -39,7 +39,7 @@ export interface SubmitButtonProps {
 const Submission = React.forwardRef<Button, SubmitButtonProps>(
   ({ href, label, form }, ref) => {
     const button = (
-      <Button wide ref={ref} form={form} type={form ? 'submit' : 'button'}>
+      <Button wide ref={ref} form={form} type={form ? 'submit' : 'button'} background={colors.red}>
         {label}
       </Button>
     );

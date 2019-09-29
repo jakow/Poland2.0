@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { colors } from '../variables';
+import {
+  colors, shadow, shadowLight,
+} from '../variables';
 import { rhythm } from '../typography';
 import LazyImage from '../atoms/LazyImage';
 
 const borderStyle = '1px solid rgba(1, 1, 1, 0.12)';
-const shadowStyle = '0 1px 2px 0 rgba(1, 1, 1, 0.05)';
 
 interface Props {
   clickable: boolean;
@@ -14,26 +15,19 @@ interface Props {
 }
 
 const CardContainer = styled('li')(
+  shadowLight,
   (props: Props) => ({
     display: 'flex',
     flexDirection: 'column',
-    // make the card occupy full allocated space
     width: '100%',
-    // height: '100%',
-    // ...within an arbitrary maximum size
-    maxWidth: props.width || `${rhythm(16)}`,
+    maxWidth: props.width || rhythm(16),
     overflow: 'hidden',
-    // styling
     border: borderStyle,
-    boxShadow: shadowStyle,
-    transition: 'box-shadow 200ms ease-in-out',
     backgroundColor: `${colors.white}`,
   }),
-  (props: Props) => (props.clickable ? {
-    ':hover': {
-      boxShadow: '0 2px 12px 1px rgba(0, 0, 0, 0.13)',
-    },
-  } : null),
+  (props: Props) => (props.clickable && {
+    '&:hover': shadow,
+  }),
 );
 
 const CardContent = styled('div')({
@@ -111,7 +105,7 @@ interface CardProps {
   id?: string;
 }
 
-const Card: React.StatelessComponent<CardProps> = ({
+const Card: React.FunctionComponent<CardProps> = ({
   children, footer, image, imagePreview, onClick, href, width, id,
 }) => {
   const content = (

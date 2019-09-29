@@ -1,16 +1,10 @@
+import Color from 'color';
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { colors } from '../variables';
-import { rhythm } from '../typography';
+import { colors, shadowLight, transition } from '../variables';
+import { bold, rhythm } from '../typography';
 import Spinner from './Spinner';
-
-const themes = {
-  primary: {
-    foreground: colors.white,
-    background: colors.red,
-  },
-};
 
 const options = (props: Props) => css({
   minWidth: props.width,
@@ -19,8 +13,10 @@ const options = (props: Props) => css({
   paddingBottom: props.compact && 0,
 });
 
-const theme = (props: Props) => {
-  const { foreground, background } = themes.primary;
+const themeConfig = (props: Props) => {
+  const foreground = props.foreground || colors.white;
+  const background = props.background || colors.green;
+
   if (props.hollow) {
     return css(
       {
@@ -42,52 +38,62 @@ const theme = (props: Props) => {
   return css({
     color: `${foreground}`,
     backgroundColor: `${background}`,
-    '&:hover': {
+    ':hover': {
       backgroundColor: `${background.darken(0.1)}`,
     },
   });
 };
 
-const baseStyle = css({
-  WebkitAppearance: 'none',
-  borderRadius: 1,
-  display: 'inline-block',
-  paddingTop: rhythm(0.5),
-  paddingBottom: rhythm(0.5),
-  paddingLeft: rhythm(1),
-  paddingRight: rhythm(1),
-  position: 'relative',
-  textAlign: 'center',
-  verticalAlign: 'middle',
-  touchAction: 'manipulation',
-  textDecoration: 'none',
-  whiteSpace: 'nowrap',
-  border: 'none',
-  cursor: 'pointer',
-  boxShadow: '0px 2px 7px 0px rgba(1, 1, 1, 0.18)',
-  ':disabled': {
-    pointerEvents: 'none',
-    color: `${colors.darkGray}`,
-    backgroundColor: `${colors.mediumGray}`,
-  },
-  div: {
-    width: rhythm(1),
-    height: rhythm(1),
+const baseStyle = css(
+  {
+    WebkitAppearance: 'none',
+    borderRadius: 1,
+    display: 'inline-block',
+    paddingTop: rhythm(0.5),
+    paddingBottom: rhythm(0.5),
+    paddingLeft: rhythm(1),
+    paddingRight: rhythm(1),
     position: 'relative',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    touchAction: 'manipulation',
+    textDecoration: 'none',
+    textTransform: 'uppercase',
+    whiteSpace: 'nowrap',
+    border: 'none',
+    cursor: 'pointer',
+    ':disabled': {
+      pointerEvents: 'none',
+      color: `${colors.grayDark}`,
+      backgroundColor: `${colors.gray}`,
+    },
+    ':focus': {
+      outline: 'none',
+    },
+    div: {
+      width: rhythm(1),
+      height: rhythm(1),
+      position: 'relative',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
   },
-});
+  shadowLight,
+  bold,
+  transition('background-color'),
+);
 
 const ButtonWrapper = styled('button')([
   baseStyle,
-  theme,
+  themeConfig,
   options,
 ]);
 
 interface Props {
   hollow?: boolean;
   wide?: boolean;
+  background?: Color,
+  foreground?: Color,
   compact?: boolean;
   loading?: boolean;
   disabled?: boolean;
@@ -100,25 +106,25 @@ interface State {
   _disabled: boolean;
 }
 
-/* eslint-disable */
 export class Button extends React.Component<Props, State> {
   state = {
     _loading: false,
-    _disabled: false
+    _disabled: false,
   };
 
   render() {
-    const { children, disabled, loading, ...other } = this.props;
+    const {
+      children, disabled, loading, theme, ...other
+    } = this.props;
     const { _loading, _disabled } = this.state;
     return (
       <ButtonWrapper {...other} disabled={disabled || _disabled || loading || _loading}>
-        {loading || _loading ? <Spinner /> : children}
+        {(loading || _loading) ? <Spinner /> : children}
       </ButtonWrapper>
     );
   }
-};
-/* eslint-enable */
+}
 
-export const NavButton = styled('a')([baseStyle, theme]);
+export const NavButton = styled('a')([baseStyle, themeConfig]);
 
 export default Button;

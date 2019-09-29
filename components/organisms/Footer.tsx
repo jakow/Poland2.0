@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import SimpleIcons from 'simple-icons-react-component';
 import { rhythm, Anchor } from '../typography';
 import { breakpointMax, colors, breakpointMin } from '../variables';
 import { Urls } from '../../types/ContentControl';
@@ -35,7 +36,7 @@ const Separator = styled('div')({
   height: 1,
   width: rhythm(8),
   marginTop: rhythm(1),
-  backgroundColor: `${colors.mediumGray}`,
+  backgroundColor: `${colors.gray}`,
 });
 
 const Social = styled('div')({
@@ -53,11 +54,9 @@ const Icon = styled('a')(
   {
     width: rhythm(2),
     height: rhythm(2),
+    padding: rhythm(0.45),
     display: 'inline-block',
-    backgroundSize: `auto ${rhythm(1)}`,
-    backgroundPosition: 'center center',
-    backgroundRepeat: 'no-repeat',
-    backgroundColor: `${colors.white}`,
+    backgroundColor: `${colors.red}`,
     '& + &': {
       marginLeft: rhythm(0.5),
       [breakpointMin('tablet')]: {
@@ -65,65 +64,60 @@ const Icon = styled('a')(
       },
     },
   },
-  ...socialMedia,
 );
 
-const Footer: React.StatelessComponent<Urls> = ({
+const Footer: React.FunctionComponent<Urls> = ({
   bylawUrl, privacyPolicyUrl, facebookUrl, linkedinUrl, instagramUrl, githubUrl,
 }) => (
   <Container>
     <Social>
-      {facebookUrl
-        && (
-          <Icon
-            className="facebook"
-            href={facebookUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-            title="Facebook"
-          />
-        )
-      }
-      {githubUrl
-        && (
-          <Icon
-            className="github"
-            href={githubUrl}
-            title="GitHub"
-            rel="noopener noreferrer"
-            target="_blank"
-          />
-        )
-      }
-      {instagramUrl
-        && (
-          <Icon
-            className="instagram"
-            href={instagramUrl}
-            title="Instagram"
-            rel="noopener noreferrer"
-            target="_blank"
-          />
-        )
-      }
-      {linkedinUrl
-        && (
-          <Icon
-            className="linkedin"
-            href={linkedinUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-            title="LinkedIn"
-          />
-        )
-      }
+      {facebookUrl && (
+        <Icon
+          href={facebookUrl}
+          rel="noopener noreferrer"
+          target="_blank"
+          title="Facebook"
+        >
+          <SimpleIcons name="Facebook" color={`${colors.white}`} />
+        </Icon>
+      )}
+      {instagramUrl && (
+        <Icon
+          href={instagramUrl}
+          title="Instagram"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <SimpleIcons name="Instagram" color={`${colors.white}`} />
+        </Icon>
+      )}
+      {linkedinUrl && (
+        <Icon
+          href={linkedinUrl}
+          rel="noopener noreferrer"
+          target="_blank"
+          title="LinkedIn"
+        >
+          <SimpleIcons name="LinkedIn" color={`${colors.white}`} />
+        </Icon>
+      )}
+      {githubUrl && (
+        <Icon
+          href={githubUrl}
+          title="GitHub"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <SimpleIcons name="GitHub" color={`${colors.white}`} />
+        </Icon>
+      )}
     </Social>
     <Separator />
     <Legal>
       {bylawUrl && <Anchor href={bylawUrl}>By-law for Poland 2.0 Summit</Anchor>}
       {privacyPolicyUrl
         && (
-          <Anchor href={privacyPolicyUrl} label="Privacy Policy" target="_blank" rel="noopener noreferrer">
+          <Anchor href={privacyPolicyUrl} target="_blank" rel="noopener noreferrer">
             Privacy Policy
           </Anchor>
         )
@@ -131,11 +125,12 @@ const Footer: React.StatelessComponent<Urls> = ({
       <Anchor href="mailto:contact@poland20.com">Contact</Anchor>
     </Legal>
     <Credits>
-      &#169; {(new Date()).getFullYear()} Poland 2.0 Summit<br />
-      Created by&nbsp;
-      <a href="https://github.com/jakow" target="_blank" rel="noopener noreferrer">Jakub Kowalczyk</a><br />
-      and&nbsp;
-      <a href="https://github.com/arutr" target="_blank" rel="noopener noreferrer">Artur Komoter</a>
+      <span>&#169; {(new Date()).getFullYear()} Poland 2.0 Summit</span>
+      <p>
+        Created by&nbsp;
+        <a href="https://github.com/arutr" target="_blank" rel="noopener noreferrer">Artur Komoter</a> and&nbsp;
+        <a href="https://github.com/jakow" target="_blank" rel="noopener noreferrer">Jakub Kowalczyk</a>
+      </p>
     </Credits>
   </Container>
 );

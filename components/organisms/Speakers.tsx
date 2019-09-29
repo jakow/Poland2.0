@@ -1,9 +1,12 @@
 import React from 'react';
 import Markdown from 'react-markdown';
 import styled from '@emotion/styled';
+import { Header3, Header4 } from '../atoms/Headers';
 import ModalCard from '../molecules/ModalCard';
 import { breakpointMin } from '../variables';
-import { bold, fat, stripe, rhythm, Center } from '../typography';
+import {
+  bold, fat, rhythm, Center,
+} from '../typography';
 import Card, { CardList } from '../molecules/Card';
 import Container from '../atoms/Container';
 import Modal from '../molecules/Modal';
@@ -13,24 +16,24 @@ import SpeakerCategory from '../../types/SpeakerCategory';
 
 const LearnMore = styled('small')({
   [breakpointMin('tablet')]: {
-    display: 'none'
-  }
+    display: 'none',
+  },
 });
 
-const Title = styled('h1')(bold, fat, stripe);
+const Title = styled('h1')(bold, fat);
 
-const Subtitle = styled('h2')();
+// const Subtitle = styled('h2')();
 
 const Wrapper = styled('section')({
   position: 'relative',
-  paddingBottom: rhythm(0.5)
+  paddingBottom: rhythm(0.5),
 });
 
 export const SmallMarginBottom = styled('h1')({
   marginBottom: rhythm(0.25),
-  wordWrap: 'normal'
+  wordWrap: 'normal',
 });
-const H3 = SmallMarginBottom.withComponent('h3');
+const H3 = SmallMarginBottom.withComponent(Header3);
 
 const speakerCard = (speaker: Speaker, index?: number) => (
   <Card
@@ -40,56 +43,53 @@ const speakerCard = (speaker: Speaker, index?: number) => (
     width={rhythm(8)}
     footer={(
       <React.Fragment>
-        {speaker.occupation}<br/>
+        {speaker.occupation}<br />
         {index ? '' : <LearnMore>Tap on the image to learn more...</LearnMore>}
       </React.Fragment>
     )}
   >
     <Center>
-      <H3>{speaker.name}</H3>
-      <h4>{speaker.organisation && speaker.organisation}</h4>
+      <H3 bodyFont semiBold>{speaker.name}</H3>
+      <Header4 bodyFont normal>{speaker.organisation}</Header4>
     </Center>
   </Card>
 );
 
-interface FlatProps {
-  speakers: Speaker[];
-  isInSubcategory?: boolean;
-}
+// interface FlatProps {
+//   speakers: Speaker[];
+//   isInSubcategory?: boolean;
+// }
 
-export const SpeakersFlat: React.StatelessComponent<FlatProps> =
-  ({ speakers, isInSubcategory }) => (
-    <Wrapper id="speakers">
-      <Container>
-        <Center>
-          {!isInSubcategory ? <Title>Speakers</Title> : <Subtitle>Speakers</Subtitle>}
-        </Center>
-          <CardList>
-            {speakers &&
-              speakers.map((speaker, index) =>
-                speaker.description ?
-                  <Modal
-                    key={index}
-                    trigger={speakerCard(speaker)}
-                    label={`Learn more about ${speaker.name}`}
-                  >
-                    <ModalCard>
-                      <SmallMarginBottom>{speaker.name}</SmallMarginBottom>
-                      <p>
-                        <strong>
-                          {speaker.occupation}{speaker.organisation && `, ${speaker.organisation}`}
-                        </strong>
-                      </p>
-                      <Markdown>{speaker.description}</Markdown>
-                    </ModalCard>
-                  </Modal>
-                : speakerCard(speaker, index)
-              )
-            }
-          </CardList>
-      </Container>
-    </Wrapper>
-);
+// export const SpeakersFlat: React.FunctionComponent<FlatProps> = ({ speakers, isInSubcategory }) => (
+//   <Wrapper id="speakers">
+//     <Container>
+//       {!isInSubcategory ? <Title>Speakers</Title> : <Subtitle>Speakers</Subtitle>}
+//       <CardList>
+//         {speakers &&
+//           speakers.map((speaker, index) =>
+//             speaker.description ?
+//               <Modal
+//                 key={index}
+//                 trigger={speakerCard(speaker)}
+//                 label={`Learn more about ${speaker.name}`}
+//               >
+//                 <ModalCard>
+//                   <SmallMarginBottom>{speaker.name}</SmallMarginBottom>
+//                   <p>
+//                     <strong>
+//                       {speaker.occupation}{speaker.organisation && `, ${speaker.organisation}`}
+//                     </strong>
+//                   </p>
+//                   <Markdown>{speaker.description}</Markdown>
+//                 </ModalCard>
+//               </Modal>
+//             : speakerCard(speaker, index)
+//           )
+//         }
+//       </CardList>
+//     </Container>
+//   </Wrapper>
+// );
 
 interface Props {
   speakers: Speaker[];
@@ -97,47 +97,45 @@ interface Props {
   year?: number;
 }
 
-const Speakers: React.StatelessComponent<Props> =
-  ({ speakers, speakerCategories, year }) => (
-    <Wrapper>
-      <a id="speakers"/>
-      <Container>
-        <Center>
-          <Title>{!year ? 'Speakers' : `Speakers of ${year}`}</Title>
-        </Center>
-          {speakerCategories &&
-            speakerCategories.map((category, index) => (
-            <React.Fragment key={index}>
-              <Center><h2>{category.name}</h2></Center>
-              <CardList>
-                {speakers &&
-                  speakers
-                    .filter(speaker => speaker.category && speaker.category === category._id)
-                    .map((speaker, index) => speaker.description ?
-                      <Modal
-                        key={index}
-                        trigger={speakerCard(speaker)}
-                        label={`Learn more about ${speaker.name}`}
-                      >
-                        <ModalCard>
-                          <SmallMarginBottom>{speaker.name}</SmallMarginBottom>
-                          <p>
-                            <strong>
-                              {speaker.occupation}
-                              {speaker.organisation && `, ${speaker.organisation}`}
-                            </strong>
-                          </p>
-                          <Markdown>{speaker.description}</Markdown>
-                        </ModalCard>
-                      </Modal>
-                    : speakerCard(speaker, index)
-                  )
-                }
-              </CardList>
-            </React.Fragment>
-          ))}
-      </Container>
-    </Wrapper>
+const Speakers: React.FunctionComponent<Props> = ({ speakers, speakerCategories, year }) => (
+  <Wrapper>
+    <a id="speakers" />
+    <Container>
+      <Center>
+        <Title>{!year ? 'Speakers' : `Speakers of ${year}`}</Title>
+      </Center>
+      {speakerCategories
+        && speakerCategories.map((category, categoryIndex) => (
+          <React.Fragment key={categoryIndex}>
+            <Center><h2>{category.name}</h2></Center>
+            <CardList>
+              {speakers &&
+                speakers
+                  .filter(speaker => speaker.category && speaker.category === category._id)
+                  .map((speaker, index) => speaker.description ? (
+                    <Modal
+                      key={index}
+                      trigger={speakerCard(speaker)}
+                      label={`Learn more about ${speaker.name}`}
+                    >
+                      <ModalCard>
+                        <SmallMarginBottom>{speaker.name}</SmallMarginBottom>
+                        <p>
+                          <strong>
+                            {speaker.occupation}
+                            {speaker.organisation && `, ${speaker.organisation}`}
+                          </strong>
+                        </p>
+                        <Markdown>{speaker.description}</Markdown>
+                      </ModalCard>
+                    </Modal>
+                  ) : speakerCard(speaker, index))
+              }
+            </CardList>
+          </React.Fragment>
+        ))}
+    </Container>
+  </Wrapper>
 );
 
 export default Speakers;

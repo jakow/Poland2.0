@@ -46,7 +46,7 @@ storiesOf('Agenda', module)
     const days = [day, day];
 
     return (
-      <div style={{ backgroundColor: `${colors.gray}` }}>
+      <div style={{ backgroundColor: `${colors.white}` }}>
         <Agenda agendaDays={days}/>
       </div>
     );

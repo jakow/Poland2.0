@@ -26,7 +26,7 @@ const MapLink = styled('a')({
 
 const Header = styled('header')(
   {
-    color: `${colors.darkGray}`
+    color: `${colors.grayDark}`
   },
   bold
 );

@@ -1,8 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import Container from '../../atoms/Container';
 import Venue from './Venue';
-import { bold, Center, dangerousSuperscripts, fat, rhythm, stripe } from '../../typography';
+import {
+  bold, Center, dangerousSuperscripts, fat, rhythm
+} from '../../typography';
 import { colors } from '../../variables';
 import { DayItem, DayList, Description } from './Day';
 import { Event, EventList } from './Event';
@@ -13,11 +15,11 @@ const Main = styled('main')({
   marginBottom: rhythm(1),
 });
 
-const Heading = styled('h1')(bold, fat, stripe);
+const Heading = styled('h1')(bold, fat);
 
 const Section = styled('section')({
   position: 'relative',
-  paddingBottom: rhythm(1)
+  paddingBottom: rhythm(1),
 });
 
 const Timeline = styled('div')({
@@ -45,10 +47,8 @@ interface Props {
   year?: number;
 }
 
-const Agenda: React.StatelessComponent<Props> = ({ agendaDays, year }) => {
-  return (
+const Agenda: React.FunctionComponent<Props> = ({ agendaDays, year }) => (
   <Section>
-    {/* <a id="agenda"/> */}
     <Container>
       <Center>
         <Heading>
@@ -76,11 +76,10 @@ const Agenda: React.StatelessComponent<Props> = ({ agendaDays, year }) => {
             );
           })}
         </DayList>
-        <Timeline/>
+        <Timeline />
       </Main>
     </Container>
   </Section>
-  );
-};
+);
 
 export default Agenda;

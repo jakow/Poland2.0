@@ -36,10 +36,14 @@ export default class Website extends App<DefaultPageProps> {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    const currentEdition: Edition = await api('currentEdition');
+    const currentEdition: Edition = await api('editions/current');
     const contentControl: ContentControl = await api('contentControl');
 
-    if (!currentEdition.agendaDays.length || !currentEdition.sponsors.length) {
+    if (!currentEdition.agendaDays.length
+        || !currentEdition.speakers.length
+        || !currentEdition.speakerCategories.length
+        || !currentEdition.sponsors.length
+    ) {
       const year = currentEdition.year - 1;
       const previousEdition: Edition = await api(`editions/${year}`);
       if (!currentEdition.agendaDays.length) {
@@ -71,7 +75,7 @@ export default class Website extends App<DefaultPageProps> {
       ...(contentControl.showSpeakers ? [{ title: 'Speakers', url: '/speakers' }] : []),
       ...(contentControl.showSponsors ? [{ title: 'Partners', url: '/partners' }] : []),
       // { title: 'Past Editions', url: '/past-editions' },
-      { title: 'empowerPL', url: '/empowerPL' },
+      { title: 'EmpowerPL', url: '/empowerPL' },
       ...(contentControl.ticketControl.onSale
         ? [{ title: 'Get Tickets', url: '/tickets', type: 'button' } as MenuItem]
         : []
@@ -79,7 +83,7 @@ export default class Website extends App<DefaultPageProps> {
     ];
 
     return (
-      <Container>
+      <React.Fragment>
         <TypographyStyle typography={typography} />
         <GoogleFont typography={typography} />
         <Global styles={globalStyle} />
@@ -95,7 +99,7 @@ export default class Website extends App<DefaultPageProps> {
           />
         </main>
         <Footer {...contentControl} />
-      </Container>
+      </React.Fragment>
     );
   }
 }

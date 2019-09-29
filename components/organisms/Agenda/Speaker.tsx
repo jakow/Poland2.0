@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
-
+import { Header3, Header4 } from '../../atoms/Headers';
 import { rhythm } from '../../typography';
 import LazyImage from '../../atoms/LazyImage';
 import { fill } from '../../../helpers/cloudinary';
@@ -15,8 +15,8 @@ const Avatar = styled('div')({
   borderRadius: '50%',
   zIndex: 1,
   img: {
-    borderRadius: '50%'
-  }
+    borderRadius: '50%',
+  },
 });
 
 const Name = styled('div')({
@@ -24,8 +24,8 @@ const Name = styled('div')({
   flexDirection: 'column',
   marginLeft: rhythm(0.5),
   h3: {
-    marginBottom: rhythm(0.25)
-  }
+    marginBottom: rhythm(0.25),
+  },
 });
 
 export const SpeakerList = styled('ul')({
@@ -36,7 +36,7 @@ export const SpeakerList = styled('ul')({
   margin: 0,
   padding: 0,
   flex: '1 0',
-  alignItems: 'flex-start'
+  alignItems: 'flex-start',
 });
 
 const Wrapper = styled('li')({
@@ -44,26 +44,27 @@ const Wrapper = styled('li')({
   alignItems: 'center',
   marginBottom: `${rhythm(1)} !important`,
   flex: '1 0 100%',
-  flexBasis: '25%'
+  flexBasis: '25%',
 });
 
-export const SpeakerItem: React.StatelessComponent<Speaker> = ({ name, organisation, photo }) => (
+export const SpeakerItem: React.FunctionComponent<Speaker> = ({ name, organisation, photo }) => (
   <Wrapper>
     <Avatar>
-      {photo ?
+      {photo ? (
         <LazyImage
           src={fill(photo.url, 120, 120, { gravity: 'face' })}
           placeholder={fill(photo.url, 32, 32, { gravity: 'face' })}
-        /> :
+        />
+      ) : (
         <LazyImage
           src="https://via.placeholder.com/120?text=?"
           placeholder="https://via.placeholder.com/32?text=?"
         />
-      }
+      )}
     </Avatar>
     <Name>
-      <h3>{name}</h3>
-      <h4>{organisation && organisation}</h4>
+      <Header3 bodyFont semiBold>{name}</Header3>
+      <Header4 bodyFont normal>{organisation && organisation}</Header4>
     </Name>
   </Wrapper>
 );

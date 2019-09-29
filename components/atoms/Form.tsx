@@ -2,7 +2,9 @@ import React, { FunctionComponent } from 'react';
 import styled from '@emotion/styled';
 import { Icon, IconName } from '@blueprintjs/core';
 import { Field as FormikField } from 'formik';
-import { colors, activeShadow, idleShadow, breakpointMin, breakpointMax } from '../variables';
+import {
+  colors, shadow, breakpointMin, breakpointMax, shadowLight
+} from '../variables';
 import { rhythm } from '../typography';
 
 const borderStyle = '1px solid rgba(1, 1, 1, 0.12)';
@@ -33,7 +35,7 @@ interface SelectOption {
 }
 
 const Flex = styled('div')(
-  idleShadow,
+  shadowLight,
   (props: { error?: string }) => ({
     border: borderStyle,
     display: 'flex',
@@ -86,7 +88,7 @@ const Flex = styled('div')(
     ':focus': {
       outline: 'none',
     },
-    ':hover, :focus-within': activeShadow,
+    ':hover, :focus-within': shadow,
   }),
 );
 
@@ -110,7 +112,7 @@ const Buttons = styled('div')((props: { mobileFriendly?: boolean }) => ({
   '*': {
     marginRight: rhythm(0.25),
     flexBasis: '45%',
-    [breakpointMin('tabletLandscape')]: {
+    [breakpointMin('tablet')]: {
       flexBasis: '22.5%',
     },
     [breakpointMax('tablet')]: {

@@ -7,6 +7,7 @@ import Button from '../atoms/Button';
 import { rhythm } from '../typography';
 import { api } from '../../pages/_app';
 import Coupon from '../../types/Coupon';
+import { colors } from '../variables';
 
 const Wrapper = styled('section')({
   display: 'flex',
@@ -74,6 +75,7 @@ const PromotionField = () => {
               disabled={!values.coupon.length || !!errors.coupon}
               compact
               type="submit"
+              background={colors.red}
             >
               Apply
             </Button>

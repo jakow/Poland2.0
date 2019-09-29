@@ -29,6 +29,8 @@
     "no-parameter-reassignment": 0,
     "no-underscore-dangle": 0,
     "no-unused-vars": 0,
+    "jsx-a11y/anchor-has-content": 0,
+    "jsx-a11y/anchor-is-valid": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "react/no-array-index-key": 0,
     "react/jsx-one-expression-per-line": 0,

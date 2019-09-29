@@ -4,7 +4,9 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { DefaultPageProps } from './_app';
 import TeamMembers from '../components/organisms/TeamMembers';
-import { rhythm, Center, _fat, _stripe, _bold } from '../components/typography';
+import {
+  rhythm, Center, _fat, _bold,
+} from '../components/typography';
 import { colors } from '../components/variables';
 
 const background = css({
@@ -13,14 +15,14 @@ const background = css({
   left: 0,
   right: 0,
   top: 0,
-  minHeight: `calc(100vh - ${rhythm(3)})`
+  minHeight: `calc(100vh - ${rhythm(3)})`,
 });
 
 const Banner = styled('div')({
   padding: `${rhythm(3)} 0 ${rhythm(1)}`,
   img: {
-    maxHeight: rhythm(8)
-  }
+    maxHeight: rhythm(8),
+  },
 });
 
 const Container = styled('div')({
@@ -28,45 +30,45 @@ const Container = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
 });
 
 const Content = styled('section')({
   padding: `0 ${rhythm(1)}`,
-  zIndex: 2
+  zIndex: 2,
 });
 
 const Gradient = styled('div')(background, {
-  background: `linear-gradient(180deg, ${colors.white.fade(0.75)}, ${colors.white})`
+  background: `linear-gradient(180deg, ${colors.white.fade(0.75)}, white)`,
 });
 
-const Image = styled('div')(background, { // tslint:disable-next-line
-  background: 'url("https://res.cloudinary.com/dg1royeho/image/upload/c_scale,q_70,w_1000/v1501759687/about-banner_izxi8y.png") no-repeat top center/cover'
+const Image = styled('div')(background, { // eslint-disable-next-line
+  background: 'url("https://res.cloudinary.com/dg1royeho/image/upload/c_scale,q_70,w_1000/v1501759687/about-banner_izxi8y.png") no-repeat top center/cover',
 });
 
 export const Mission = styled('article')({
   margin: '0 auto',
   maxWidth: rhythm(32),
-  textAlign: 'justify'
+  textAlign: 'justify',
 });
 
-const About: React.StatelessComponent<DefaultPageProps> = ({ currentEdition }) => (
+const About: React.FunctionComponent<DefaultPageProps> = ({ currentEdition }) => (
   <Container>
     <Head>
       <title>About - Poland 2.0 Summit</title>
     </Head>
-    <Image/>
-    <Gradient/>
-    <Content vocab="http://schema.org/" typeof="Organization">
+    <Image />
+    <Gradient />
+    <Content>
       <Banner>
         <Center>
-          <img src="/static/images/alpha.svg" property="image" alt="Logo"/>
+          <img src="/static/images/alpha.svg" property="image" alt="Logo" />
           <h1>Poland 2.0 Summit</h1>
         </Center>
       </Banner>
       <Mission property="description">
         <Center className={_fat}>
-          <h1 className={`${_stripe} ${_bold}`} style={{ marginBottom: rhythm(1.25) }}>Mission</h1>
+          <h1 className={`${_bold}`} style={{ marginBottom: rhythm(1.25) }}>Mission</h1>
           <h3><em>To overtake the future: innovation across industries</em></h3>
         </Center>
         <p>
@@ -90,7 +92,7 @@ const About: React.StatelessComponent<DefaultPageProps> = ({ currentEdition }) =
           industries, and improve your career prospects, during this annual event.
         </p>
       </Mission>
-      <TeamMembers teamMembers={currentEdition.teamMembers}/>
+      <TeamMembers teamMembers={currentEdition.teamMembers} />
     </Content>
   </Container>
 );

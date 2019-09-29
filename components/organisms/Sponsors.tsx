@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Markdown from 'react-markdown';
+import { Header4 } from '../atoms/Headers';
 import ModalCard from '../molecules/ModalCard';
 import { SmallMarginBottom } from './Speakers';
-import { rhythm, bold, _bold, fat, stripe, Center } from '../typography';
+import {
+  rhythm, bold, fat, Center,
+} from '../typography';
 import Card, { CardList } from '../molecules/Card';
 import { limit } from '../../helpers/cloudinary';
 import Container from '../atoms/Container';
@@ -21,19 +24,19 @@ const Wrapper = styled('section')({
     justifyContent: 'center',
     '& > *': {
       width: rhythm(12),
-      padding: rhythm(1)
-    }
+      padding: rhythm(1),
+    },
   },
   img: {
     width: '100%',
-    height: 'auto'
+    height: 'auto',
   },
   'p:last-of-type': {
-    marginBottom: 0
-  }
+    marginBottom: 0,
+  },
 });
 
-const Title = styled('h1')(bold, fat, stripe);
+const Title = styled('h1')(bold, fat);
 
 interface Props {
   sponsorCategories?: SponsorCategory[];
@@ -42,47 +45,6 @@ interface Props {
   id?: string;
   year?: number;
 }
-
-const mapSponsors = (category: SponsorCategory, index: number, sponsors: Sponsor[]) => (
-  sponsors && (
-    <React.Fragment key={index}>
-      {category &&
-        <Center>
-          <h2>{category.name}</h2>
-        </Center>
-      }
-      <CardList>
-        {sponsors
-          .filter(sponsor => !category || sponsor.category === category._id)
-          .map((sponsor, index) =>
-            sponsor.description ?
-              <Modal
-                key={index}
-                trigger={sponsorCard(sponsor, index, true)}
-                label={`Learn more about ${sponsor.name}`}
-              >
-                <ModalCard>
-                  <SmallMarginBottom>{sponsor.name}</SmallMarginBottom>
-                  <p>
-                    <small>
-                      <a
-                        href={sponsor.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {sponsor.url}
-                      </a>
-                    </small>
-                  </p>
-                  <Markdown>{sponsor.description}</Markdown>
-                </ModalCard>
-              </Modal>
-          : sponsorCard(sponsor, index)
-        )}
-      </CardList>
-    </React.Fragment>
-  )
-);
 
 const sponsorCard = (sponsor: Sponsor, index: number, inModal?: boolean) => (
   inModal ? (
@@ -105,26 +67,63 @@ const sponsorCard = (sponsor: Sponsor, index: number, inModal?: boolean) => (
   )
 );
 
-const Sponsors: React.StatelessComponent<Props> = ({
-  sponsors, sponsorCategories, title, id, year
+const mapSponsors = (category: SponsorCategory, index: number, sponsors: Sponsor[]) => (
+  sponsors && (
+    <React.Fragment key={index}>
+      {category && (
+        <Center>
+          <h2>{category.name}</h2>
+        </Center>
+      )}
+      <CardList>
+        {sponsors
+          .filter(sponsor => !category || sponsor.category === category._id)
+          .map((sponsor, sponsorIndex) => (sponsor.description
+            ? (
+              <Modal
+                key={sponsorIndex}
+                trigger={sponsorCard(sponsor, sponsorIndex, true)}
+                label={`Learn more about ${sponsor.name}`}
+              >
+                <ModalCard>
+                  <SmallMarginBottom>{sponsor.name}</SmallMarginBottom>
+                  <p>
+                    <small>
+                      <a
+                        href={sponsor.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {sponsor.url}
+                      </a>
+                    </small>
+                  </p>
+                  <Markdown>{sponsor.description}</Markdown>
+                </ModalCard>
+              </Modal>
+            ) : sponsorCard(sponsor, sponsorIndex)))
+        }
+      </CardList>
+    </React.Fragment>
+  )
+);
+
+const Sponsors: React.FunctionComponent<Props> = ({
+  sponsors, sponsorCategories, title, id, year,
 }) => (
   <Wrapper>
-    <a id={id}/>
+    <a id={id} />
     <Container>
       <Center>
         <Title>{!year ? title : `${title} of ${year}`}</Title>
       </Center>
-      {sponsorCategories ?
-        sponsorCategories
-          .map((category, index) => mapSponsors(category, index, sponsors))
+      {sponsorCategories
+        ? sponsorCategories.map((category, index) => mapSponsors(category, index, sponsors))
         : mapSponsors(null, null, sponsors)
       }
-      <br/><br/>
+      <br /><br />
       <Center>
-        <h4 className={_bold}>
-          Would your organisation like to join this list?&nbsp;
-          <a href="mailto:contact@poland20.com">Contact us!</a>
-        </h4>
+        Would your organisation like to join this list? <a href="mailto:contact@poland20.com">Contact us!</a>
       </Center>
     </Container>
   </Wrapper>

@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { DefaultPageProps } from './_app';
+import {DefaultPageProps} from './_app';
 import Edition from '../types/Edition';
-import { _fat, Anchor, Center, _bold, _stripe } from '../components/typography';
 
 const Container = styled('section')({
   display: 'flex',
@@ -26,7 +25,7 @@ interface Props {
   editions: Edition[];
 }
 
-const PastEditions: React.StatelessComponent<DefaultPageProps & Props> = ({ editions }) => (
+const PastEditions: React.StatelessComponent<DefaultPageProps & Props> = ({editions}) => (
   <Container>
     {/* <h1 className={_fat}>Past Editions</h1>
     <YearList>

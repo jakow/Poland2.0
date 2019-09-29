@@ -23,7 +23,7 @@ export const BasketWrapper = styled('aside')({
   [breakpointMax('tablet')]: {
     justifyContent: 'center',
     padding: '0 1rem',
-    backgroundColor: `${colors.gray}`,
+    backgroundColor: `${colors.white}`,
     li: {
       maxWidth: '100%',
     },
@@ -88,7 +88,7 @@ const Tickets: NextPage<Props> = ({ ticketTypes }) => {
         <title>Tickets - Poland 2.0 Summit</title>
       </Head>
       <Center>
-        <Header1 fat bold stripe>Tickets</Header1>
+        <Header1 fat bold>Tickets</Header1>
       </Center>
       <Wrapper>
         {ticketsAvailable ? (

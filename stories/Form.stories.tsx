@@ -4,9 +4,9 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Formik, Form } from 'formik';
 import { object, string } from 'yup';
-import { InputField } from '../components/atoms/Form';
 import Container from '../components/atoms/Container';
 import Button from '../components/atoms/Button';
+import InputField from '../components/atoms/Form';
 
 storiesOf('Form', module)
   .add('text input', () => (
@@ -40,7 +40,7 @@ storiesOf('Form', module)
               name="fullName"
               type="text"
               placeholder="Name and Surname"
-              leftIcon="person"
+              icon="person"
               error={errors.fullName && touched.fullName ? errors.fullName : null}
               mandatory
             />
@@ -48,7 +48,7 @@ storiesOf('Form', module)
               name="email"
               type="email"
               placeholder="E-mail address"
-              leftIcon="envelope"
+              icon="envelope"
               error={errors.email && touched.email ? errors.email : null}
               mandatory
             />
@@ -56,14 +56,14 @@ storiesOf('Form', module)
               name="comment"
               type="textarea"
               placeholder="Do you have anything else to add?"
-              leftIcon="more"
+              icon="more"
               error={errors.comment && touched.comment ? errors.comment : null}
             />
             <InputField
               name="age"
               type="select"
               placeholder="Select your age range"
-              options={{
+              selectOptions={{
                 data: [
                   { value: 'Prefer not to answer' },
                   { value: '16-19' },

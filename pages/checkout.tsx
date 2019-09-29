@@ -61,7 +61,7 @@ const Wrapper = styled('main')({
       paddingLeft: rhythm(2),
       width: `calc(100vw - ${rhythm(17.5)})`,
     },
-    [breakpointMin('desktopWide')]: {
+    [breakpointMin('desktop')]: {
       justifyContent: 'center',
       paddingLeft: rhythm(3),
       li: {
@@ -146,7 +146,7 @@ const Checkout: NextPage<Props> = ({ ticketTypes }) => {
         <title>Checkout - Poland 2.0 Summit</title>
       </Head>
       <Center>
-        <Header1 fat bold stripe>{state.step !== CheckoutStep.DONE ? 'Checkout' : 'Save the Date'}</Header1>
+        <Header1 fat bold>{state.step !== CheckoutStep.DONE ? 'Checkout' : 'Save the Date'}</Header1>
       </Center>
       <Wrapper>
         {state.step !== CheckoutStep.DONE

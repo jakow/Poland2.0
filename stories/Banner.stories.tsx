@@ -22,9 +22,9 @@ storiesOf('Banner', module)
 
     return (
       <React.Fragment>
-        <TopNavigation items={[]}/>
-        <div style={{ height: rhythm(3) }}/>
-        <Banner currentEdition={edition}/>
+        <TopNavigation items={[]} />
+        <div style={{ height: rhythm(3) }} />
+        <Banner currentEdition={edition} />
       </React.Fragment>
     );
   });

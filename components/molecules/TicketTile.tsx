@@ -19,7 +19,7 @@ const Wrapper = styled('section')({
   },
 });
 
-const Benefit = styled('p')({
+export const TextWithIcon = styled('p')({
   display: 'flex',
   marginBottom: rhythm(0.25),
   '.bp3-icon': {
@@ -48,7 +48,7 @@ const margin = css({
   margin: `0 ${rhythm(0.5)}`,
 });
 
-const IconLabel = styled('span')(margin);
+export const IconLabel = styled('span')(margin);
 
 const Quantity = styled('b')(margin, {
   paddingTop: 2,
@@ -91,7 +91,7 @@ const Footer = ({ id, price, quantity }) => {
           <Flex>
             <Icon
               icon="remove"
-              color={`${basketItem > 0 ? colors.dark : colors.mediumGray}`}
+              color={`${basketItem > 0 ? colors.dark : colors.gray}`}
               iconSize={20}
               onClick={() => basketItem > 0 && setBasketItem(basketItem - 1)}
               style={{ cursor: basketItem > 0 ? 'pointer' : 'auto' }}
@@ -99,7 +99,7 @@ const Footer = ({ id, price, quantity }) => {
             <Quantity>{basketItem}</Quantity>
             <Icon
               icon="add"
-              color={`${basketItem < quantity ? colors.dark : colors.mediumGray}`}
+              color={`${basketItem < quantity ? colors.dark : colors.gray}`}
               iconSize={20}
               onClick={() => basketItem < quantity && setBasketItem(basketItem + 1)}
               style={{ cursor: basketItem < quantity ? 'pointer' : 'auto' }}
@@ -119,10 +119,10 @@ const TicketTile: FunctionComponent<TicketType> = ({
       <Header3 bold>{name}</Header3>
       {description && <Markdown>{description}</Markdown>}
       {benefits && benefits.split('\n').map((benefit, index) => (
-        <Benefit key={index}>
+        <TextWithIcon key={index}>
           <Icon icon="tick-circle" color={`${colors.dark}`} iconSize={20} />
           <IconLabel>{benefit}</IconLabel>
-        </Benefit>
+        </TextWithIcon>
       ))}
       {quantity > 0
         && (

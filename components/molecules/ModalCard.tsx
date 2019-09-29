@@ -6,7 +6,7 @@ import { rhythm } from '../typography';
 const Container = styled('section')({
   backgroundColor: `${colors.white}`,
   padding: rhythm(1),
-  border: `1px solid ${colors.mediumGray}`,
+  border: `1px solid ${colors.gray}`,
 });
 
 const ModalCard: React.StatelessComponent = ({ children }) => (

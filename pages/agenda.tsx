@@ -7,7 +7,7 @@ const AgendaPage: FunctionComponent<DefaultPageProps> = ({ currentEdition }) => 
   <Background>
     <Agenda
       agendaDays={currentEdition.agendaDays}
-      year={currentEdition.previousAgendaYear && currentEdition.previousAgendaYear}
+      year={currentEdition.previousAgendaYear}
     />
   </Background>
 );

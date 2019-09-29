@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import Markdown from 'react-markdown';
 
 import { _bold, rhythm } from '../../typography';
-import { breakpointMin, colors, activeShadow } from '../../variables';
+import {breakpointMin, colors, shadow, shadowActive} from '../../variables';
 import { SpeakerList, SpeakerItem } from './Speaker';
 import { AgendaEvent } from '../../../types/Agenda';
 
@@ -30,7 +30,7 @@ const Dash = styled('div')((props: { color?: string }) => ({
   top: rhythm(1.4),
   height: 4,
   width: rhythm(0.75),
-  backgroundColor: props.color ? props.color : `${colors.red}`,
+  backgroundColor: props.color || `${colors.red}`,
 }));
 
 const Line = styled('div')((props: { color?: string }) => ({
@@ -40,21 +40,18 @@ const Line = styled('div')((props: { color?: string }) => ({
   height: '100%',
   left: rhythm(0.6),
   width: 4,
-  backgroundColor: props.color ? props.color : `${colors.red}`,
+  backgroundColor: props.color || `${colors.red}`,
 }));
 
 const Main = styled('section')(
+  shadow,
   {
     padding: `${rhythm(1)} 0`,
     position: 'relative',
     backgroundColor: `${colors.white}`,
     border: '1px solid rgba(1, 1, 1, 0.12)',
-    transition: 'boxShadow 200ms ease-in-out',
-    '&:hover': {
-      boxShadow: '0 1px 12px 1px rgba(0, 0, 0, 0.18)',
-    },
+    '&:hover': shadowActive,
   },
-  activeShadow,
 );
 
 const Permalink = styled('a')({
@@ -63,7 +60,7 @@ const Permalink = styled('a')({
   top: rhythm(1),
   right: rhythm(1),
   overflow: 'hidden',
-  color: `${colors.mediumGray}`,
+  color: `${colors.gray}`,
   '& > *': {
     display: 'inline-block',
   },
@@ -81,7 +78,7 @@ const Summary = styled('section')({
 const TimeAndType = styled('div')(
   {
     display: 'flex',
-    color: `${colors.darkGray}`,
+    color: `${colors.grayDark}`,
     marginBottom: rhythm(0.25)
   },
 );

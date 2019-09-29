@@ -39,7 +39,7 @@ const column = css({
 
 const Carousel = styled('div')(column, {
   flex: '1 0 60%',
-  [breakpointMin('desktopWide')]: {
+  [breakpointMin('desktop')]: {
     flex: '1 0 70%',
   },
   'video, img': {
@@ -55,13 +55,13 @@ const Carousel = styled('div')(column, {
 const Content = styled('div')(column, angledEdge, {
   textAlign: 'justify',
   flex: '1 0 40%',
-  [breakpointMin('desktopWide')]: {
+  [breakpointMin('desktop')]: {
     flex: '1 0 30%',
   },
 });
 
 const DatePlace = styled('h3')(fat, {
-  color: `${colors.darkGray}`,
+  color: `${colors.grayDark}`,
   margin: `0 0 ${rhythm(1)}`,
   display: 'flex',
   flexDirection: 'column',
@@ -102,7 +102,7 @@ const Separator = styled('span')({
     top: `${rhythm(0.5)}`,
     left: '50%',
     transform: 'translateX(-50%)',
-    backgroundColor: `${colors.mediumGray}`,
+    backgroundColor: `${colors.gray}`,
     width: '33%',
     height: 1,
     [breakpointMin('tablet')]: {

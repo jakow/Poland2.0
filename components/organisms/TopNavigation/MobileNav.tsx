@@ -1,14 +1,14 @@
-import * as React from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { css } from 'emotion';
-import { colors, breakpointMin } from '../../variables';
-import { MenuItem } from '.';
-import { rhythm } from '../../typography';
-import { NavButton } from '../../atoms/Button';
 import Link from 'next/link';
+import {colors, breakpointMin, breakpointMax} from '../../variables';
+import { MenuItem } from '.';
+import {Anchor, rhythm} from '../../typography';
+import { NavButton } from '../../atoms/Button';
 
 const transition = '200ms cubic-bezier(0.77, 0, 0.175, 1)';
-const iconWidth = 28.284;
+const iconWidth = 28;
 const iconHeight = 20;
 
 const button = css({
@@ -31,9 +31,9 @@ const bar = css({
   display: 'block',
   position: 'absolute',
   top: 0,
-  backgroundColor: `${colors.dark}`,
+  backgroundColor: `${colors.white}`,
   width: iconWidth,
-  height: 1,
+  height: 2,
   transformOrigin: 'left',
   transform: 'scale(1)',
   transition: `transform ${transition}, background-color ${transition}`,
@@ -68,62 +68,45 @@ const icon = css({
   height: iconHeight,
   display: 'block',
   position: 'relative',
-  zIndex: 2018
+  zIndex: 2018,
 });
 
 const ItemList = styled('ul')({
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
-  justifyContent: 'center',
+  justifyContent: 'space-evenly',
   listStyle: 'none',
-  marginTop: rhythm(4),
-  marginLeft: '0 !important'
+  marginLeft: 0,
+  marginBottom: rhythm(0.5),
 });
 
 const Item = styled('li')({
+  [breakpointMax('mobile')]: {
+    flexBasis: '35%',
+  },
+  flexBasis: '27%',
   textAlign: 'center',
-  flex: '1 0 100%',
+  [Anchor as any]: {
+    margin: 0,
+    width: '100%',
+    padding: `${rhythm(0.25)} 0`,
+  },
 });
 
-const ItemLink = styled('h3')({
-  display: 'inline-block',
-  marginBottom: `${rhythm(1)} !important`,
-  a: {
-    textDecoration: 'none',
-    color: `${colors.white}`,
-    '&.active': {
-      borderBottom: `1px solid ${colors.white}`,
-      paddingBottom: '2px'
-    }
-  }
-});
-
-const Menu = styled('nav')({
-  position: 'fixed',
-  top: 0,
-  bottom: 0,
-  left: 0,
-  right: 0,
-  [breakpointMin('tablet')]: {
-    display: 'none !important'
-  }
-});
-
-const Overlay = styled('div')({
-  position: 'fixed',
-  overflowY: 'scroll',
+const Menu = styled('nav')<{ open: boolean }>(props => ({
   width: '100%',
-  height: '100%',
-  top: 0,
-  left: 0,
-  borderRadius: 0,
-  transform: 'initial',
-  backgroundColor: `${colors.dark.alpha(0.75)}`
-});
+  maxHeight: props.open ? rhythm(9) : 0,
+  paddingTop: 0,
+  overflow: 'hidden',
+  transition: 'all 200ms ease-in-out',
+  [breakpointMin('tabletLarge')]: {
+    display: 'none !important',
+  },
+}));
 
-export const MobileNavIcon = ({ isOpen }: { isOpen: boolean }) => (
-  <div className={`${icon} ${isOpen ? isOpenClass : ''}`}>
+export const MobileNavIcon = ({ isOpen }) => (
+  <div className={`${icon} ${isOpen && isOpenClass}`}>
     <span className={bar} />
     <span className={bar} />
     <span className={bar} />
@@ -141,6 +124,7 @@ export const MobileNavButton = ({ onClick, navName, isOpen }: HamburgerProps) =>
     aria-controls={navName}
     onClick={onClick}
     className={button}
+    type="button"
   >
     <MobileNavIcon isOpen={isOpen} />
   </button>
@@ -154,36 +138,30 @@ interface NavProps {
 
 export default ({ items, open, requestClose }: NavProps) => (
   <React.Fragment>
-    {open && (
-      <Menu>
-        <Overlay>
-          <ItemList>
-            {items.map((item, index) => (
-              <Item key={index}>
-                <ItemLink>
-                  {item.type === 'button'
-                    ?
-                    <NavButton
-                      href={item.url}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      {item.title}
-                    </NavButton>
-                    : <Link href={item.url}>
-                        <a>
-                          <span onClick={requestClose}>
-                            {item.title}
-                          </span>
-                        </a>
-                      </Link>
-                  }
-                </ItemLink>
-              </Item>
-            ))}
-          </ItemList>
-        </Overlay>
-      </Menu>
-    )}
+    <Menu open={open}>
+      <ItemList>
+        {items.map((item, index) => (
+          item.type === 'button' ? (
+            <Item key={index} style={{ flexBasis: '100%' }}>
+              <NavButton
+                href={item.url}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {item.title}
+              </NavButton>
+            </Item>
+          ) : (
+            <Item key={index}>
+              <Link href={item.url}>
+                <Anchor bold onClick={requestClose}>
+                  {item.title}
+                </Anchor>
+              </Link>
+            </Item>
+          )
+        ))}
+      </ItemList>
+    </Menu>
   </React.Fragment>
 );

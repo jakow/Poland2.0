@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import { TypographyStyle, GoogleFont } from 'react-typography';
 import { addDecorator, configure } from '@storybook/react';
 import typography, { globalStyle } from '../components/typography';
 
-import '@blueprintjs/icons/lib/css/blueprint-icons.css';
+import '../static/fonts/league-spartan.css';
 import { Global } from '@emotion/core';
 
 addDecorator(story => (
