@@ -22,9 +22,6 @@ const Wrapper = styled('section')({
 export const TextWithIcon = styled('p')({
   display: 'flex',
   marginBottom: rhythm(0.25),
-  '.bp3-icon': {
-    marginTop: '2px',
-  },
 });
 
 const flex = css({

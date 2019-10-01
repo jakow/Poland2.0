@@ -20,16 +20,16 @@ const Wrapper = styled('a')({
     backgroundColor: `${colors.red}`,
     color: `${colors.white}`,
     textDecoration: 'none',
-    padding: `${rhythm(0.5)} 0`,
+    padding: `${rhythm(0.5)} ${rhythm(1)}`,
     b: {
-      textAlign: 'center',
-      transform: 'translateX(6%)',
+      // textAlign: 'center',
+      // transform: 'translateX(8%)',
       flex: 2,
     },
     h3: {
-      width: rhythm(3.25),
+      // width: rhythm(4),
+      paddingTop: 2,
       textAlign: 'right',
-      marginRight: rhythm(1),
     },
   },
 });
