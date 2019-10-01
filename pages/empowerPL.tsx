@@ -110,7 +110,7 @@ const empowerPL: FunctionComponent<DefaultPageProps> = () => (
           <strong>100 years of independence</strong> with <strong>100 inspiring mentors</strong>.
         </p>
       </Mission> {/* eslint-disable-next-line */}
-      <ResponsiveVideo src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FEmpowerPL%2Fvideos%2F1556736697801591" />
+      <ResponsiveVideo src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FEmpowerPL%2Fvideos%2F2560842277469466" />
     </Content>
   </Container>
 );
