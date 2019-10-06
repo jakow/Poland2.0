@@ -4,8 +4,6 @@ import styled from '@emotion/styled';
 import { colors } from '../../variables';
 import { rhythm } from '../../typography';
 
-const logo = require('../../../static/images/logo_white.svg');
-
 const BrandLink = styled('a')({
   color: `${colors.dark}`,
   textDecoration: 'none',
@@ -13,8 +11,6 @@ const BrandLink = styled('a')({
   alignItems: 'center',
   height: '100%',
   zIndex: 1000,
-  marginLeft: rhythm(0.5),
-  marginRight: rhythm(1),
   cursor: 'pointer',
 });
 
@@ -32,7 +28,7 @@ const BrandLogo = styled('img')({
 export default () => (
   <Link href="/">
     <BrandLink title="Home Page">
-      <BrandLogo src={logo} alt="Poland 2.0 Summit logo" />
+      <BrandLogo src="/static/images/logo_white.svg" alt="" />
     </BrandLink>
   </Link>
 );

@@ -7,9 +7,6 @@ import Container from '../atoms/Container';
 import Countdown from '../molecules/Countdown';
 import { TicketControl } from '../../types/ContentControl';
 
-const meshTopLeft = require('../../static/images/mesh-corner-top-left.svg');
-const meshBottomRight = require('../../static/images/mesh-corner-bottom-right.svg');
-
 const Center = styled('div')({
   display: 'flex',
   flexDirection: 'column',
@@ -30,7 +27,7 @@ const Wrapper = styled('section')({
     '&::before': {
       top: 0,
       left: 0,
-      backgroundImage: `url(${meshTopLeft})`,
+      backgroundImage: 'url("/static/images/mesh-corner-top-left.svg")',
       width: rhythm(7),
       height: rhythm(3.5),
     },
@@ -39,7 +36,7 @@ const Wrapper = styled('section')({
       right: 0,
       width: rhythm(6.5),
       height: rhythm(3.5),
-      backgroundImage: `url(${meshBottomRight})`,
+      backgroundImage: 'url("/static/images/mesh-corner-bottom-right.svg")',
     },
   },
 });
