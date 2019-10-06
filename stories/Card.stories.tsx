@@ -1,17 +1,18 @@
-import * as React from 'react';
+/* eslint-disable */
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Card, { CardList } from '../components/molecules/Card';
+import PersonCard from '../components/molecules/PersonCard';
+import { colors } from '../components/variables';
+import TeamMember from '../types/TeamMember';
 
-// tslint:disable
 const text = 'Qui dolorum dolore illum eos laudantium nobis. Et hic similique numquam voluptatem aut inventore maiores. Harum impedit qui nulla eos aut natus.';
 const text2 = 'Qui dolorum dolore illum eos laudantium nobis. Et hic similique numquam voluptatem aut inventore maiores.';
-// tslint:enable
 
 storiesOf('Card', module)
   .add('basic', () => (<Card>{text}</Card>))
   .add('with image', () => (
-    // tslint:disable
     <Card image="https://via.placeholder.com/400" imagePreview="http://via.placeholder.com/400?text=Loading...">
       {text}
     </Card>
@@ -42,7 +43,7 @@ storiesOf('Card', module)
         {Math.random() > 0.5 ? text : text2}
       </Card>
     );
-    // tslint:enable
+
     return (
       <CardList>
         {Array(3).fill('').map((_, index) => card(index))}

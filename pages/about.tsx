@@ -5,7 +5,7 @@ import React from 'react';
 import Container from '../components/atoms/Container';
 import { Header1 } from '../components/atoms/Headers';
 import { withBackground } from '../components/hoc';
-import TeamMembers from '../components/organisms/TeamMembers';
+import PersonCard from '../components/molecules/PersonCard';
 import { navHeight } from '../components/organisms/TopNavigation';
 import { breakpointMax, breakpointMin, colors } from '../components/variables';
 import { DefaultPageProps } from './_app';
@@ -35,6 +35,7 @@ const Information = styled('div')({
     left: 0,
     width: '100%',
     [breakpointMin('tabletLarge')]: {
+      opacity: 0.5,
       height: rhythm(32),
       left: rhythm(informationWidth + 3),
       width: `calc(100% - ${rhythm(informationWidth + 3)})`,
@@ -65,6 +66,23 @@ const Wrapper = styled('section')({
   'h1, p': {
     position: 'relative',
     zIndex: 2,
+  },
+});
+
+const Team = styled('ul')({
+  display: 'flex',
+  width: '100%',
+  margin: 0,
+  marginBottom: rhythm(1),
+  flexWrap: 'wrap',
+  li: {
+    flexBasis: '100%',
+    [breakpointMin(830)]: {
+      flexBasis: '50%',
+    },
+    [breakpointMin('desktop')]: {
+      flexBasis: '33%',
+    },
   },
 });
 
@@ -105,6 +123,11 @@ const About: NextPage<DefaultPageProps> = ({ currentEdition }) => (
         <img src="https://res.cloudinary.com/dg1royeho/image/upload/v1570296453/DSC_8002_cqz2l8.jpg" alt="" />
       </Information>
       <Header1>Meet the Team</Header1>
+      <Team>
+        {currentEdition.teamMembers && currentEdition.teamMembers.map((teamMember, index) => (
+          <PersonCard person={teamMember} color={colors.purple.desaturate(0.25)} key={index} />
+        ))}
+      </Team>
     </Wrapper>
   </Container>
 );

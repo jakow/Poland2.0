@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import {
-  breakpointMin, colors, breakpointMax, shadow, transition,
+  breakpointMin, breakpointMax, shadow, transition,
 } from '../../variables';
 import Brand from './Brand';
 import DesktopNav from './DesktopNav';
