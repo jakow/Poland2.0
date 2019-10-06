@@ -121,4 +121,4 @@ const empowerPL: FunctionComponent<DefaultPageProps> = () => (
   </Container>
 );
 
-export default withBackground(empowerPL);
+export default withBackground(empowerPL, colors.green);
