@@ -41,7 +41,7 @@
     "react-stripe-elements": "~4.0.0",
     "react-typography": "~0.16.19",
     "simple-icons-react-component": "~1.0.0",
-    "typescript": "~3.5.3",
+    "typescript": "^3.6.3",
     "typography": "~0.16.19",
     "yup": "~0.27.0"
   },
