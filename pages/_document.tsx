@@ -12,7 +12,7 @@ export default class extends Document {
           <meta charSet="utf-8"/>
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <meta name="description" content="Annual Polish student conference, tackling entrepreneurship, innovation and change across industries." />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 
           <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/static/images/favicons/apple-touch-icon-57x57.png" />
           <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/favicons/apple-touch-icon-114x114.png" />
@@ -26,6 +26,8 @@ export default class extends Document {
           <meta name="application-name" content="Poland 2.0 Summit" />
           <meta name="msapplication-TileColor" content="#F5F5F5" />
           <meta name="msapplication-TileImage" content="/static/images/favicons/mstile-144x144.png" />
+          <meta name="theme-color" content="#C53D57" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
           <link href="/static/style.css" rel="stylesheet" />
           <link rel="stylesheet" href="/static/fonts/league-spartan.css" />
