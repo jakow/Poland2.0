@@ -1,14 +1,13 @@
-import * as React from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { css } from 'emotion';
 import Observer from '@researchgate/react-intersection-observer';
-import Spinner from './Spinner';
 
 const Wrapper = styled('div')({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  overflow: 'hidden'
+  overflow: 'hidden',
 });
 
 const style = css({
@@ -52,7 +51,7 @@ export default class LazyImage extends React.Component<Props> {
         this.loadImage(entry.target as HTMLImageElement);
       }
     }
-  }
+  };
 
   loadImage = (image: HTMLImageElement) => {
     image.src = this.props.src;
@@ -64,10 +63,10 @@ export default class LazyImage extends React.Component<Props> {
         }
       });
     }
-  }
+  };
 
   observerOptions = {
-    onChange: this.handleIntersection
+    onChange: this.handleIntersection,
   };
 
   render() {
@@ -80,7 +79,6 @@ export default class LazyImage extends React.Component<Props> {
             className={`${style} ${!this.state.disabled ? preview : ''}`}
           />
         </Observer>
-        {!this.state.disabled ? <Spinner/> : null}
       </Wrapper>
     );
   }
