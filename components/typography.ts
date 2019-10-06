@@ -14,7 +14,7 @@ const typography = new Typography({
   googleFonts: [
     {
       name: 'Montserrat',
-      styles: ['300', '400', '400i', '600', '700'],
+      styles: ['400', '400i', '600', '700'],
     },
   ],
   headerFontFamily: headerFonts,
@@ -22,7 +22,8 @@ const typography = new Typography({
   bodyColor: `${colors.dark}`,
 });
 
-export const { rhythm } = typography;
+/* eslint-disable-next-line */
+export const rhythm = typography.rhythm;
 
 export const globalStyle = css({
   'html::-webkit-scrollbar': {
@@ -58,7 +59,7 @@ export const globalStyle = css({
   },
 });
 
-export const Anchor = styled('a')<{ bold?: boolean }>(
+export const Anchor = styled('a')<{ bold?: boolean, dark?: boolean }>(
   props => ({
     cursor: 'pointer',
     display: 'inline-block',
@@ -66,10 +67,10 @@ export const Anchor = styled('a')<{ bold?: boolean }>(
     fontWeight: props.bold ? 600 : 300,
     textDecoration: 'none',
     textAlign: 'center',
-    color: `${colors.white}`,
+    color: `${props.dark ? colors.dark : colors.white}`,
     margin: `0 ${rhythm(0.5)}`,
     '&:hover': {
-      color: `${colors.white.fade(0.25)}`,
+      color: `${props.dark ? colors.dark.fade(0.5) : colors.white.fade(0.25)}`,
     },
     img: {
       marginBottom: -2,

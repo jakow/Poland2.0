@@ -24,6 +24,7 @@ const Credits = styled('small')({
 
 const Legal = styled('div')({
   display: 'flex',
+  marginBottom: rhythm(1),
   [breakpointMax('mobile')]: {
     '& > *': {
       flexBasis: '33.3%',
@@ -36,6 +37,7 @@ const Separator = styled('div')({
   height: 1,
   width: rhythm(8),
   marginTop: rhythm(1),
+  marginBottom: rhythm(0.5),
   backgroundColor: `${colors.gray}`,
 });
 
@@ -43,12 +45,6 @@ const Social = styled('div')({
   display: 'flex',
   justifyContent: 'center',
 });
-
-const socialMedia = ['facebook', 'linkedin', 'instagram', 'github'].map(media => ({
-  [`&.${media}`]: {
-    backgroundImage: `url('https://unpkg.com/simple-icons@latest/icons/${media}.svg')`,
-  },
-}));
 
 const Icon = styled('a')(
   {
@@ -114,15 +110,15 @@ const Footer: React.FunctionComponent<Urls> = ({
     </Social>
     <Separator />
     <Legal>
-      {bylawUrl && <Anchor href={bylawUrl}>By-law for Poland 2.0 Summit</Anchor>}
+      {bylawUrl && <Anchor dark href={bylawUrl}>By-law for Poland 2.0 Summit</Anchor>}
       {privacyPolicyUrl
         && (
-          <Anchor href={privacyPolicyUrl} target="_blank" rel="noopener noreferrer">
+          <Anchor dark href={privacyPolicyUrl} target="_blank" rel="noopener noreferrer">
             Privacy Policy
           </Anchor>
         )
       }
-      <Anchor href="mailto:contact@poland20.com">Contact</Anchor>
+      <Anchor dark href="mailto:contact@poland20.com">Contact</Anchor>
     </Legal>
     <Credits>
       <span>&#169; {(new Date()).getFullYear()} Poland 2.0 Summit</span>
