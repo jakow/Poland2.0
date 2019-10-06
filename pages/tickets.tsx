@@ -3,12 +3,13 @@ import dynamic from 'next/dynamic';
 import styled from '@emotion/styled';
 import { NextPage } from 'next';
 import Head from 'next/head';
+import { withBackground } from '../components/hoc';
+import { api } from '../helpers/misc';
 import TicketType from '../types/TicketType';
 import Background from '../components/atoms/Background';
 import { Header1 } from '../components/atoms/Headers';
 import { Center, rhythm } from '../components/typography';
 import { CardList } from '../components/molecules/Card';
-import { api } from './_app';
 import { breakpointMax, breakpointMin, colors } from '../components/variables';
 import Container from '../components/atoms/Container';
 
@@ -131,4 +132,4 @@ Tickets.getInitialProps = async () => {
   return { ticketTypes };
 };
 
-export default Tickets;
+export default withBackground(Tickets);

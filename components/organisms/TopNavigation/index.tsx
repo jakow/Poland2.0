@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import {
-  breakpointMin, colors, breakpointMax, shadow
+  breakpointMin, colors, breakpointMax, shadow, transition,
 } from '../../variables';
 import Brand from './Brand';
 import DesktopNav from './DesktopNav';
@@ -13,7 +13,6 @@ import Container from '../../atoms/Container';
 export type MenuItem = {
   title: string,
   url: string,
-  active?: boolean,
   type?: 'link' | 'button';
   [propName: string]: any;
 };
@@ -28,7 +27,7 @@ type State = {
 
 export const navHeight = rhythm(3);
 
-const Header = styled('header')(
+export const Header = styled('header')(
   {
     zIndex: 100,
     position: 'fixed',
@@ -36,10 +35,11 @@ const Header = styled('header')(
     paddingTop: 1,
     left: 0,
     right: 0,
-    background: `${colors.red.alpha(0.88)}`,
+    // backgroundColor: `${colors.red.alpha(0.88)}`,
     backdropFilter: `saturate(180%) blur(${rhythm(0.25)})`,
   },
   shadow,
+  transition('background-color'),
 );
 
 const Layout = styled('div')({

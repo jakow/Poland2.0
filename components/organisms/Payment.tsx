@@ -6,6 +6,7 @@ import {
 import { Formik, Form } from 'formik';
 import { object, string } from 'yup';
 import { getData, getCodes } from 'country-list';
+import { api } from '../../helpers/misc';
 import { Header2 } from '../atoms/Headers';
 import { colors } from '../variables';
 import { rhythm } from '../typography';
@@ -15,7 +16,6 @@ import InputField from '../atoms/Form';
 import {
   SubmitButtonRefProps, CheckoutState, CheckoutAction, CheckoutActionTypes,
 } from '../../pages/checkout';
-import { api } from '../../pages/_app';
 
 const style = {
   base: {

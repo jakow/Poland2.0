@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 import Background from '../components/atoms/Background';
+import { withBackground } from '../components/hoc';
 import Sponsors from '../components/organisms/Sponsors';
 import { DefaultPageProps } from './_app';
 
@@ -15,4 +16,4 @@ const Partners: FunctionComponent<DefaultPageProps> = ({ currentEdition }) => (
   </Background>
 );
 
-export default Partners;
+export default withBackground(Partners);

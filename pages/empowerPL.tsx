@@ -1,14 +1,14 @@
-import { FunctionComponent } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
+import { FunctionComponent } from 'react';
 import { Header2 } from '../components/atoms/Headers';
-import { DefaultPageProps } from './_app';
-import { Mission } from './about';
+import ResponsiveVideo from '../components/atoms/ResponsiveVideo';
+import { withBackground } from '../components/hoc';
 import {
-  rhythm, fat, bold, Center, _fat,
+  _fat, bold, Center, fat, rhythm,
 } from '../components/typography';
 import { colors } from '../components/variables';
-import ResponsiveVideo from '../components/atoms/ResponsiveVideo';
+import { DefaultPageProps } from './_app';
 
 const background = css({
   zIndex: 0,
@@ -79,6 +79,12 @@ const Objective = styled('h1')(bold, {
   },
 });
 
+const Mission = styled('article')({
+  margin: '0 auto',
+  maxWidth: rhythm(32),
+  textAlign: 'justify',
+});
+
 const empowerPL: FunctionComponent<DefaultPageProps> = () => (
   <Container>
     <Image />
@@ -115,4 +121,4 @@ const empowerPL: FunctionComponent<DefaultPageProps> = () => (
   </Container>
 );
 
-export default empowerPL;
+export default withBackground(empowerPL);

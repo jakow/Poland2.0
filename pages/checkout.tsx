@@ -5,9 +5,10 @@ import Head from 'next/head';
 import styled from '@emotion/styled';
 import { Icon } from '@blueprintjs/core';
 import Background from '../components/atoms/Background';
+import { withBackground } from '../components/hoc';
 import { Center, rhythm } from '../components/typography';
 import { Header1, Header2 } from '../components/atoms/Headers';
-import { api } from './_app';
+import { api } from '../helpers/misc';
 import { BasketWrapper } from './tickets';
 import { breakpointMax, breakpointMin, colors } from '../components/variables';
 import Card, { CardList } from '../components/molecules/Card';
@@ -250,4 +251,4 @@ Checkout.getInitialProps = async () => {
   return { ticketTypes };
 };
 
-export default Checkout;
+export default withBackground(Checkout);

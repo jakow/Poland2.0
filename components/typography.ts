@@ -2,7 +2,7 @@ import Typography from 'typography';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { css as _css } from 'emotion';
-import { colors } from './variables';
+import { colors, transition } from './variables';
 
 const headerFonts = ['League Spartan', 'sans-serif'];
 const bodyFonts = ['Montserrat', 'sans-serif'];
@@ -22,9 +22,13 @@ const typography = new Typography({
   bodyColor: `${colors.dark}`,
 });
 
-export const { rhythm, scale } = typography;
+export const { rhythm } = typography;
 
 export const globalStyle = css({
+  'html::-webkit-scrollbar': {
+    width: 0,
+  },
+  body: transition('background-color'),
   'a[id]': {
     display: 'block',
     position: 'relative',
@@ -54,20 +58,27 @@ export const globalStyle = css({
   },
 });
 
-export const Anchor = styled('a')<{ bold?: boolean }>(props => ({
-  cursor: 'pointer',
-  display: 'inline-block',
-  position: 'relative',
-  fontWeight: props.bold ? 600 : 300,
-  textDecoration: 'none',
-  textAlign: 'center',
-  color: `${colors.white}`,
-  transition: 'color 200ms ease-in-out',
-  margin: `0 ${rhythm(0.5)}`,
-  '&:hover': {
-    color: `${colors.white.fade(0.25)}`,
-  },
-}));
+export const Anchor = styled('a')<{ bold?: boolean }>(
+  props => ({
+    cursor: 'pointer',
+    display: 'inline-block',
+    position: 'relative',
+    fontWeight: props.bold ? 600 : 300,
+    textDecoration: 'none',
+    textAlign: 'center',
+    color: `${colors.white}`,
+    margin: `0 ${rhythm(0.5)}`,
+    '&:hover': {
+      color: `${colors.white.fade(0.25)}`,
+    },
+    img: {
+      marginBottom: -2,
+      marginRight: rhythm(0.33),
+      height: rhythm(0.75),
+    },
+  }),
+  transition('color'),
+);
 
 const boldStyle = {
   fontWeight: 600,
@@ -93,10 +104,5 @@ export const dangerousSuperscripts = (text: string) => {
     }),
   };
 };
-
-const thinStyle = {
-  fontWeight: 300,
-};
-export const thin = css(thinStyle);
 
 export default typography;

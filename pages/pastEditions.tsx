@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { withBackground } from '../components/hoc';
 import {DefaultPageProps} from './_app';
 import Edition from '../types/Edition';
 
@@ -47,4 +48,4 @@ const PastEditions: React.StatelessComponent<DefaultPageProps & Props> = ({editi
   </Container>
 );
 
-export default PastEditions;
+export default withBackground(PastEditions);

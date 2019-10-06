@@ -1,34 +1,21 @@
-import React from 'react';
-import App, { Container, AppContext } from 'next/app';
-import getConfig from 'next/config';
-import Head from 'next/head';
 import { Global } from '@emotion/core';
-import { TypographyStyle, GoogleFont } from 'react-typography';
+import App, { AppContext } from 'next/app';
+import Head from 'next/head';
+import React from 'react';
+import { GoogleFont, TypographyStyle } from 'react-typography';
 import Footer from '../components/organisms/Footer';
-import typography, { rhythm, globalStyle } from '../components/typography';
-import TopNavigation, { MenuItem } from '../components/organisms/TopNavigation';
+import TopNavigation, { MenuItem, navHeight } from '../components/organisms/TopNavigation';
+import typography, { globalStyle } from '../components/typography';
+import { api } from '../helpers/misc';
 import ContentControl from '../types/ContentControl';
 import Edition from '../types/Edition';
-
-const { publicRuntimeConfig, serverRuntimeConfig } = getConfig();
-
-export const api = async (path: string, init?: RequestInit) => {
-  const host = serverRuntimeConfig.host || publicRuntimeConfig.host;
-  const response = await fetch(`${host}/${path}`, init);
-  const json = await response.json();
-  if (!response.ok) {
-    throw Error(json.message);
-  }
-
-  return json;
-};
 
 export interface DefaultPageProps {
   contentControl: ContentControl;
   currentEdition: Edition;
 }
 
-export default class Website extends App<DefaultPageProps> {
+export default class extends App<DefaultPageProps> {
   static async getInitialProps({ Component, ctx }: AppContext) {
     let pageProps = {};
 
@@ -91,7 +78,7 @@ export default class Website extends App<DefaultPageProps> {
           <title>Poland 2.0 Summit</title>
         </Head>
         <TopNavigation items={navLinks} />
-        <main style={{ marginTop: rhythm(3) }}>
+        <main style={{ marginTop: navHeight }}>
           <Component
             contentControl={contentControl}
             currentEdition={currentEdition}

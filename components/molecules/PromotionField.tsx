@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { Formik, Form } from 'formik';
 import { object, string } from 'yup';
+import { api } from '../../helpers/misc';
 import InputField from '../atoms/Form';
 import Button from '../atoms/Button';
 import { rhythm } from '../typography';
-import { api } from '../../pages/_app';
 import Coupon from '../../types/Coupon';
 import { colors } from '../variables';
 
