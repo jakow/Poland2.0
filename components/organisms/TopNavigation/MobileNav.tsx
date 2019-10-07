@@ -2,12 +2,12 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { css } from 'emotion';
 import Link from 'next/link';
-import { colors, breakpointMin, breakpointMax } from '../../variables';
+import { colors, breakpointMin, breakpointMax, transition } from '../../variables';
 import { MenuItem } from '.';
 import { Anchor, rhythm } from '../../typography';
 import Button from '../../atoms/Button';
 
-const transition = '200ms cubic-bezier(0.77, 0, 0.175, 1)';
+const barTransition = '200ms cubic-bezier(0.77, 0, 0.175, 1)';
 const iconWidth = 28;
 const iconHeight = 20;
 
@@ -36,7 +36,7 @@ const bar = css({
   height: 2,
   transformOrigin: 'left',
   transform: 'scale(1)',
-  transition: `transform ${transition}, background-color ${transition}`,
+  transition: `transform ${barTransition}, background-color ${barTransition}`,
   ':nth-of-type(2)': {
     top: (iconHeight - 1) / 2,
   },
@@ -94,16 +94,18 @@ const Item = styled('li')({
   },
 });
 
-const Menu = styled('nav')<{ open: boolean }>(props => ({
-  width: '100%',
-  maxHeight: props.open ? rhythm(9) : 0,
-  paddingTop: 0,
-  overflow: 'hidden',
-  transition: 'all 200ms ease-in-out',
-  [breakpointMin('tabletLarge')]: {
-    display: 'none !important',
-  },
-}));
+const Menu = styled('nav')<{ open: boolean }>(
+  props => ({
+    width: '100%',
+    maxHeight: props.open ? rhythm(9) : 0,
+    paddingTop: 0,
+    overflow: 'hidden',
+    [breakpointMin('tabletLarge')]: {
+      display: 'none !important',
+    },
+  }),
+  transition('max-height'),
+);
 
 export const MobileNavIcon = ({ isOpen }) => (
   <Icon className={isOpen && isOpenClass}>

@@ -22,8 +22,6 @@ const LearnMore = styled('small')({
 
 const Title = styled('h1')(bold, fat);
 
-// const Subtitle = styled('h2')();
-
 const Wrapper = styled('section')({
   position: 'relative',
   paddingBottom: rhythm(0.5),
@@ -54,42 +52,6 @@ const speakerCard = (speaker: Speaker, index?: number) => (
     </Center>
   </Card>
 );
-
-// interface FlatProps {
-//   speakers: Speaker[];
-//   isInSubcategory?: boolean;
-// }
-
-// export const SpeakersFlat: React.FunctionComponent<FlatProps> = ({ speakers, isInSubcategory }) => (
-//   <Wrapper id="speakers">
-//     <Container>
-//       {!isInSubcategory ? <Title>Speakers</Title> : <Subtitle>Speakers</Subtitle>}
-//       <CardList>
-//         {speakers &&
-//           speakers.map((speaker, index) =>
-//             speaker.description ?
-//               <Modal
-//                 key={index}
-//                 trigger={speakerCard(speaker)}
-//                 label={`Learn more about ${speaker.name}`}
-//               >
-//                 <ModalCard>
-//                   <SmallMarginBottom>{speaker.name}</SmallMarginBottom>
-//                   <p>
-//                     <strong>
-//                       {speaker.occupation}{speaker.organisation && `, ${speaker.organisation}`}
-//                     </strong>
-//                   </p>
-//                   <Markdown>{speaker.description}</Markdown>
-//                 </ModalCard>
-//               </Modal>
-//             : speakerCard(speaker, index)
-//           )
-//         }
-//       </CardList>
-//     </Container>
-//   </Wrapper>
-// );
 
 interface Props {
   speakers: Speaker[];
