@@ -49,25 +49,45 @@ const Information = styled('div')({
 const Details = styled('div')({
   display: 'flex',
   flexDirection: 'column',
+  flexWrap: 'wrap',
+  width: '100%',
   padding: rhythm(0.5),
   p: {
     marginBottom: 0,
+  },
+  [breakpointMin(570)]: {
+    '& > *:nth-child(-n+3)': {
+      maxWidth: `calc(100% - ${rhythm(4.33)})`,
+    },
+  },
+  [Anchor as any]: {
+    color: `${colors.gray}`,
+    width: '100%',
+    margin: 0,
+    textAlign: 'right',
+    marginRight: rhythm(0.25),
+  },
+  [`& > ${Anchor}`]: {
+    [breakpointMin(570)]: {
+      display: 'none',
+    },
+    textAlign: 'left',
   },
 });
 
 const Links = styled('div')({
   display: 'flex',
-  flexDirection: 'column',
-  flexWrap: 'wrap',
-  justifyContent: 'space-evenly',
-  marginLeft: 'auto',
-  [Anchor as any]: {
-    [breakpointMax('mobile')]: {
+  [breakpointMax(570)]: {
+    [Anchor as any]: {
       display: 'none',
     },
-    minWidth: rhythm(4.33),
-    color: `${colors.gray}`,
-    marginRight: rhythm(1.5),
+  },
+  justifyContent: 'space-around',
+  [breakpointMin(480)]: {
+    flexDirection: 'column',
+    flexBasis: '100%',
+    alignItems: 'flex-end',
+    justifyContent: 'space-evenly',
   },
 });
 
@@ -99,8 +119,10 @@ const Position = styled('p')({
 const Icon = styled('a')({
   width: rhythm(0.75),
   height: rhythm(0.75),
-  margin: rhythm(0.25),
-  marginRight: rhythm(1.25),
+  marginTop: rhythm(0.5),
+  [breakpointMin('mobile')]: {
+    margin: rhythm(0.25),
+  },
   textDecoration: 'none',
   svg: {
     pointerEvents: 'none',
@@ -114,6 +136,11 @@ interface Props {
 
 const PersonCard: React.FunctionComponent<Props> = ({ person, color }) => {
   const [open, toggleOpen] = useState(false);
+  const LearnMore = (
+    <Anchor onClick={() => toggleOpen(!open)}>
+      {!open ? 'Learn more...' : 'Collapse...'}
+    </Anchor>
+  );
   return (
     <Wrapper cardColor={color} open={open}>
       <Information>
@@ -125,46 +152,45 @@ const PersonCard: React.FunctionComponent<Props> = ({ person, color }) => {
           <Header3 noMargin>{person.name}</Header3>
           <p>{person.organisation}</p>
           <Position>{(person as Speaker).occupation || (person as TeamMember).position}</Position>
+          {person.description && LearnMore}
+          {(person as TeamMember).email && (
+            <Links>
+              <Icon
+                href={`mailto:${(person as TeamMember).email}`}
+                rel="noopener noreferrer"
+                target="_blank"
+                title={`${person.name}'s e-mail`}
+              >
+                <SimpleIcons name="Mail.Ru" color={`${colors.white}`} />
+              </Icon>
+              {(person as TeamMember).linkedin && (
+                <Icon
+                  href={(person as TeamMember).linkedin}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  title={`${(person as TeamMember).name}'s LinkedIn`}
+                >
+                  <SimpleIcons name="LinkedIn" color={`${colors.white}`} />
+                </Icon>
+              )}
+              {(person as TeamMember).instagram && (
+                <Icon
+                  href={(person as TeamMember).instagram}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  title={`${(person as TeamMember).name}'s Instagram`}
+                >
+                  <SimpleIcons name="Instagram" color={`${colors.white}`} />
+                </Icon>
+              )}
+            </Links>
+          )}
+          {person.description && (
+            <Links>
+              {LearnMore}
+            </Links>
+          )}
         </Details>
-        {(person as TeamMember).email && (
-          <Links>
-            <Icon
-              href={`mailto:${(person as TeamMember).email}`}
-              rel="noopener noreferrer"
-              target="_blank"
-              title={`${person.name}'s e-mail`}
-            >
-              <SimpleIcons name="Mail.Ru" color={`${colors.white}`} />
-            </Icon>
-            {(person as TeamMember).linkedin && (
-              <Icon
-                href={(person as TeamMember).linkedin}
-                rel="noopener noreferrer"
-                target="_blank"
-                title={`${(person as TeamMember).name}'s LinkedIn`}
-              >
-                <SimpleIcons name="LinkedIn" color={`${colors.white}`} />
-              </Icon>
-            )}
-            {(person as TeamMember).instagram && (
-              <Icon
-                href={(person as TeamMember).instagram}
-                rel="noopener noreferrer"
-                target="_blank"
-                title={`${(person as TeamMember).name}'s Instagram`}
-              >
-                <SimpleIcons name="Instagram" color={`${colors.white}`} />
-              </Icon>
-            )}
-          </Links>
-        )}
-        {person.description && (
-          <Links>
-            <Anchor onClick={() => toggleOpen(!open)}>
-              {!open ? 'Learn more...' : 'Collapse...'}
-            </Anchor>
-          </Links>
-        )}
       </Information>
       <Description open={open}>
         <ReactMarkdown>

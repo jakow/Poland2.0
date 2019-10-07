@@ -24,7 +24,7 @@ const List = styled('ul')({
   flexWrap: 'wrap',
   li: {
     flexBasis: '100%',
-    [breakpointMin(970)]: {
+    [breakpointMin(900)]: {
       flexBasis: '50%',
     },
   },

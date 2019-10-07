@@ -77,7 +77,7 @@ const Team = styled('ul')({
   flexWrap: 'wrap',
   li: {
     flexBasis: '100%',
-    [breakpointMin(830)]: {
+    [breakpointMin(890)]: {
       flexBasis: '50%',
     },
     [breakpointMin('desktop')]: {
