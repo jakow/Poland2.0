@@ -5,7 +5,7 @@ import React from 'react';
 import Container from '../components/atoms/Container';
 import { Header1 } from '../components/atoms/Headers';
 import { withBackground } from '../components/hoc';
-import PersonCard from '../components/molecules/PersonCard';
+import PersonCard, { PersonDetails } from '../components/molecules/PersonCard';
 import { navHeight } from '../components/organisms/TopNavigation';
 import { breakpointMax, breakpointMin, colors } from '../components/variables';
 import { DefaultPageProps } from './_app';
@@ -84,6 +84,13 @@ const Team = styled('ul')({
       flexBasis: '33%',
     },
   },
+  [PersonDetails as any]: {
+    [breakpointMin(570)]: {
+      '& > *:nth-child(-n+3)': {
+        maxWidth: `calc(100% - ${rhythm(1.33)})`,
+      },
+    },
+  },
 });
 
 const About: NextPage<DefaultPageProps> = ({ currentEdition }) => (
@@ -120,7 +127,7 @@ const About: NextPage<DefaultPageProps> = ({ currentEdition }) => (
           </p>
         </Text>
         <Gradient />
-        <img src="https://res.cloudinary.com/dg1royeho/image/upload/v1570296453/DSC_8002_cqz2l8.jpg" alt="" />
+        <img src="https://res.cloudinary.com/dg1royeho/image/upload/v1570649020/no_filter_VER_bprfkm.jpg" alt="" />
       </Information>
       <Header1>Meet the Team</Header1>
       <Team>

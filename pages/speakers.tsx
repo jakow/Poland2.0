@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import Container from '../components/atoms/Container';
 import { Header1, Header2 } from '../components/atoms/Headers';
 import { withBackground } from '../components/hoc';
-import PersonCard from '../components/molecules/PersonCard';
+import PersonCard, { PersonDetails } from '../components/molecules/PersonCard';
 import { rhythm } from '../components/typography';
 import { breakpointMin, colors } from '../components/variables';
 import Speaker from '../types/Speaker';
@@ -26,6 +26,13 @@ const List = styled('ul')({
     flexBasis: '100%',
     [breakpointMin(900)]: {
       flexBasis: '50%',
+    },
+  },
+  [PersonDetails as any]: {
+    [breakpointMin(570)]: {
+      '& > *:nth-child(-n+3)': {
+        maxWidth: `calc(100% - ${rhythm(4.33)})`,
+      },
     },
   },
 });

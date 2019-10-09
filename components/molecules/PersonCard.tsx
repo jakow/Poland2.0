@@ -46,7 +46,7 @@ const Information = styled('div')({
   },
 });
 
-const Details = styled('div')({
+export const PersonDetails = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   flexWrap: 'wrap',
@@ -54,11 +54,6 @@ const Details = styled('div')({
   padding: rhythm(0.5),
   p: {
     marginBottom: 0,
-  },
-  [breakpointMin(570)]: {
-    '& > *:nth-child(-n+3)': {
-      maxWidth: `calc(100% - ${rhythm(4.33)})`,
-    },
   },
   [Anchor as any]: {
     color: `${colors.gray}`,
@@ -148,7 +143,7 @@ const PersonCard: React.FunctionComponent<Props> = ({ person, color }) => {
           src={fill(person.photo.url, 256, 256, { gravity: 'faces' })}
           placeholder={fill(person.photo.url, 32, 32, { gravity: 'faces' })}
         />
-        <Details>
+        <PersonDetails>
           <Header3 noMargin>{person.name}</Header3>
           <p>{person.organisation}</p>
           <Position>{(person as Speaker).occupation || (person as TeamMember).position}</Position>
@@ -190,7 +185,7 @@ const PersonCard: React.FunctionComponent<Props> = ({ person, color }) => {
               {LearnMore}
             </Links>
           )}
-        </Details>
+        </PersonDetails>
       </Information>
       <Description open={open}>
         <ReactMarkdown>
