@@ -1,18 +1,16 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 import Markdown from 'react-markdown';
-import { Header4 } from '../atoms/Headers';
-import ModalCard from '../molecules/ModalCard';
-import { SmallMarginBottom } from './Speakers';
-import {
-  rhythm, bold, fat, Center,
-} from '../typography';
-import Card, { CardList } from '../molecules/Card';
 import { limit } from '../../helpers/cloudinary';
-import Container from '../atoms/Container';
-import Modal from '../molecules/Modal';
-import SponsorCategory from '../../types/SponsorCategory';
 import Sponsor from '../../types/Sponsor';
+import SponsorCategory from '../../types/SponsorCategory';
+import Container from '../atoms/Container';
+import Card, { CardList } from '../molecules/Card';
+import Modal from '../molecules/Modal';
+import ModalCard from '../molecules/ModalCard';
+import {
+  bold, Center, fat, rhythm,
+} from '../typography';
 
 const Wrapper = styled('section')({
   position: 'relative',
@@ -66,6 +64,11 @@ const sponsorCard = (sponsor: Sponsor, index: number, inModal?: boolean) => (
     />
   )
 );
+
+const SmallMarginBottom = styled('h1')({
+  marginBottom: rhythm(0.25),
+  wordWrap: 'normal',
+});
 
 const mapSponsors = (category: SponsorCategory, index: number, sponsors: Sponsor[]) => (
   sponsors && (
