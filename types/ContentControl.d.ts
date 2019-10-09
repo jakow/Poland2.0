@@ -3,6 +3,7 @@ export type TicketControl = {
     salesDate: string;
     description: string;
     showCountdown: boolean;
+    showTicketsRemaining: boolean;
 }
 
 export type Urls = {

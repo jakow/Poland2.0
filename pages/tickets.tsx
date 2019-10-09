@@ -5,6 +5,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import { withBackground } from '../components/hoc';
 import { api } from '../helpers/misc';
+import ContentControl, { TicketControl } from '../types/ContentControl';
 import TicketType from '../types/TicketType';
 import Background from '../components/atoms/Background';
 import { Header1 } from '../components/atoms/Headers';
@@ -12,10 +13,7 @@ import { Center, rhythm } from '../components/typography';
 import { CardList } from '../components/molecules/Card';
 import { breakpointMax, breakpointMin, colors } from '../components/variables';
 import Container from '../components/atoms/Container';
-
-interface Props {
-  ticketTypes: TicketType[];
-}
+import { DefaultPageProps } from './_app';
 
 export const BasketWrapper = styled('aside')({
   display: 'flex',
@@ -81,7 +79,12 @@ const TicketTile = dynamic(
   { ssr: false },
 );
 
-const Tickets: NextPage<Props> = ({ ticketTypes }) => {
+interface Props {
+  ticketTypes: TicketType[];
+  contentControl?: ContentControl;
+}
+
+const Tickets: NextPage<Props> = ({ ticketTypes, contentControl }) => {
   const ticketsAvailable = ticketTypes.length > 0 && ticketTypes.some(ticketType => ticketType.active);
   return (
     <Background>
@@ -100,6 +103,7 @@ const Tickets: NextPage<Props> = ({ ticketTypes }) => {
                   <TicketTile
                     key={index}
                     {...ticketType}
+                    ticketControl={contentControl.ticketControl}
                   />
                 ) : null
               ))}
@@ -127,8 +131,8 @@ const Tickets: NextPage<Props> = ({ ticketTypes }) => {
   );
 };
 
-Tickets.getInitialProps = async () => {
-  const ticketTypes = await api('tickettypes?_sort=quantity:desc');
+Tickets.getInitialProps = async (ctx) => {
+  const ticketTypes: TicketType[] = await api('tickettypes?_sort=quantity:desc');
   return { ticketTypes };
 };
 

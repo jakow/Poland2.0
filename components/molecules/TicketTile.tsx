@@ -3,6 +3,7 @@ import Markdown from 'react-markdown';
 import { Icon } from '@blueprintjs/core';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import { TicketControl } from '../../types/ContentControl';
 import Card from './Card';
 import { Header3 } from '../atoms/Headers';
 import { rhythm } from '../typography';
@@ -108,8 +109,8 @@ const Footer = ({ id, price, quantity }) => {
   );
 };
 
-const TicketTile: FunctionComponent<TicketType> = ({
-  id, name, description, quantity, warningLimit, soldRecently, price, benefits,
+const TicketTile: FunctionComponent<TicketType & { ticketControl: TicketControl }> = ({
+  id, name, description, quantity, warningLimit, soldRecently, price, benefits, ticketControl,
 }) => (
   <Card width={rhythm(15)} footer={<Footer id={id} price={price} quantity={quantity} />}>
     <Wrapper>
@@ -135,21 +136,15 @@ const TicketTile: FunctionComponent<TicketType> = ({
               )
             }
             <span>
-              {!warningLimit || quantity > warningLimit
-                ? <span><b>{quantity}</b> tickets remaining.&nbsp;</span>
-                : (
-                  <span>
-                    Only <b>{quantity}</b> {quantity !== 1 ? 'tickets' : 'ticket'} remaining!&nbsp;
-                  </span>
-                )
-              }
-              {soldRecently
-                && (
+              {ticketControl.showTicketsRemaining && (!warningLimit || (quantity > warningLimit)) && (
+                <span><b>{quantity}</b> tickets remaining.&nbsp;</span>
+              )}
+              {quantity <= warningLimit && (
                 <span>
-                  <u>{soldRecently} sold</u> in the past 24 hours!
+                  Only <b>{quantity}</b> {quantity !== 1 ? 'tickets' : 'ticket'} remaining!&nbsp;
                 </span>
-                )
-              }
+              )}
+              {soldRecently && <span><u>{soldRecently} sold</u> in the past 24 hours!</span>}
             </span>
           </Status>
         )
