@@ -1,11 +1,11 @@
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { FunctionComponent } from 'react';
+import { NextPage } from 'next';
 import { Header2 } from '../components/atoms/Headers';
 import ResponsiveVideo from '../components/atoms/ResponsiveVideo';
 import { withBackground } from '../components/hoc';
 import {
-  _fat, bold, Center, fat, rhythm,
+  bold, Center, rhythm,
 } from '../components/typography';
 import { colors } from '../components/variables';
 import { DefaultPageProps } from './_app';
@@ -26,8 +26,6 @@ const Banner = styled('div')({
   justifyContent: 'center',
 });
 
-const bcgGreen = '#5fc090';
-
 const Container = styled('div')({
   position: 'relative',
   display: 'flex',
@@ -35,7 +33,7 @@ const Container = styled('div')({
   alignItems: 'center',
   justifyContent: 'center',
   color: `${colors.white}`,
-  backgroundColor: bcgGreen,
+  backgroundColor: `${colors.green}`,
 });
 
 const Content = styled('section')({
@@ -58,13 +56,12 @@ const Content = styled('section')({
   },
 });
 
-const Title = styled('h1')(fat, {
-  fontSize: rhythm(3),
-  paddingBottom: rhythm(1.5),
+const Title = styled('h1')({
+  fontSize: rhythm(2.33),
 });
 
 const Gradient = styled('div')(background, {
-  background: `linear-gradient(180deg, ${colors.white.fade(0.75)}, ${bcgGreen})`,
+  background: `linear-gradient(180deg, ${colors.white.fade(0.75)}, ${colors.green})`,
 });
 
 const Image = styled('div')(background, { // eslint-disable-next-line
@@ -74,9 +71,6 @@ const Image = styled('div')(background, { // eslint-disable-next-line
 const Objective = styled('h1')(bold, {
   marginBottom: rhythm(1.25),
   paddingBottom: rhythm(0.5),
-  '&::before': {
-    background: `${colors.white} !important`,
-  },
 });
 
 const Mission = styled('article')({
@@ -85,7 +79,7 @@ const Mission = styled('article')({
   textAlign: 'justify',
 });
 
-const empowerPL: FunctionComponent<DefaultPageProps> = () => (
+const empowerPL: NextPage<DefaultPageProps> = () => (
   <Container>
     <Image />
     <Gradient />
@@ -93,18 +87,16 @@ const empowerPL: FunctionComponent<DefaultPageProps> = () => (
       <Banner>
         <Center>
           <Header2>Mentoring Programme</Header2>
-          <Title>empowerPL</Title>
+          <Title>EmpowerPL</Title>
           <Header2 bodyFont normal>Poland 2.0 Summit <b>x</b> BCG</Header2>
         </Center>
       </Banner>
       <Mission>
-        <Center className={_fat}>
-          <Objective>Objective</Objective>
-        </Center>
+        <Center><Objective>Objective</Objective></Center>
         <p>
-          This year, we have launched the second edition of the <strong>empowerPL</strong>
-          &nbsp;programme, which was started in cooperation with the Boston Consulting Group during
-          last year’s Poland 2.0 Summit.
+          This year, we will be hosting the launch of the third edition of the <strong>#empowerPL</strong>
+          &nbsp;programme, which was started in cooperation with the Boston Consulting Group and the Federation of
+          Polish Societies in the UK during the third edition of Poland 2.0 Summit.
         </p>
         <p>
           The programme aims to build relationships between the best Polish managers and directors,
