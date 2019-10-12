@@ -76,7 +76,7 @@
     "build": "next build",
     "dev": "next",
     "start": "next start",
-    "storybook": "start-storybook",
+    "storybook": "start-storybook -s .",
     "docker:prod": "docker-compose ${npm_package_config_composeProduction} up -d web api",
     "docker:prod:all": "docker-compose ${npm_package_config_composeProduction} up -d",
     "docker:prod:api": "docker-compose ${npm_package_config_composeProduction} up -d api",
