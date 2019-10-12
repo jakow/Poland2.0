@@ -1,5 +1,5 @@
 import { CloudinaryPhoto } from './Cloudinary';
-import { AgendaEvent } from './Agenda';
+import { AgendaEventType } from './Agenda';
 import Edition from './Edition';
 
 type Speaker = {
@@ -9,7 +9,7 @@ type Speaker = {
     photo: CloudinaryPhoto;
     description?: string;
     category?: string;
-    agendaEvents?: AgendaEvent[];
+    agendaEvents?: AgendaEventType[];
     editions?: Edition[];
 }
 

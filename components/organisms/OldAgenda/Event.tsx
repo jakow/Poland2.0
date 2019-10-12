@@ -7,7 +7,7 @@ import Markdown from 'react-markdown';
 import { _bold, rhythm } from '../../typography';
 import {breakpointMin, colors, shadow, shadowActive} from '../../variables';
 import { SpeakerList, SpeakerItem } from './Speaker';
-import { AgendaEvent } from '../../../types/Agenda';
+import { AgendaEventType } from '../../../types/Agenda';
 
 export const EventList = styled('ol')({
   listStyle: 'none',
@@ -135,7 +135,7 @@ const Duration: React.StatelessComponent<{ start: string, end: string }> =
     return <div/>;
   };
 
-export const Event: React.StatelessComponent<{ event: AgendaEvent }> = ({ event }) => {
+export const Event: React.StatelessComponent<{ event: AgendaEventType }> = ({ event }) => {
   const categoryColor = event.category && event.category.color;
   // const eventSlug = `event-${event.slug}`;
 

@@ -8,7 +8,7 @@ import {
 import { colors } from '../../variables';
 import { DayItem, DayList, Description } from './Day';
 import { Event, EventList } from './Event';
-import { AgendaDay } from '../../../types/Agenda';
+import { AgendaDayType } from '../../../types/Agenda';
 
 const Main = styled('main')({
   position: 'relative',
@@ -43,7 +43,7 @@ const Timeline = styled('div')({
 });
 
 interface Props {
-  agendaDays: AgendaDay[];
+  agendaDays: AgendaDayType[];
   year?: number;
 }
 

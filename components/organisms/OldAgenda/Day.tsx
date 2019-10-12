@@ -5,7 +5,7 @@ import { colors } from '../../variables';
 export const DayList = styled('ol')({
   listStyle: 'none',
   margin: 0,
-  padding: `0 0 ${rhythm(1)}`
+  padding: `0 0 ${rhythm(1)}`,
 });
 
 export const DayItem = styled('li')({

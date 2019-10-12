@@ -1,13 +1,13 @@
-import Venue from "./Venue";
-import Edition from "./Edition";
-import Speaker from "./Speaker";
+import Venue from './Venue';
+import Edition from './Edition';
+import Speaker from './Speaker';
 
 export type AgendaEventCategory = {
   name: string;
   color: string;
 };
 
-export type AgendaEvent = {
+export type AgendaEventType = {
   name: string;
   type: string;
   description: string;
@@ -17,11 +17,11 @@ export type AgendaEvent = {
   speakers: Speaker[];
 };
 
-export type AgendaDay = {
+export type AgendaDayType = {
   name: string;
   date?: string;
   description: string;
   venue: Venue;
-  events: AgendaEvent[];
+  events: AgendaEventType[];
   edition?: Edition;
 };

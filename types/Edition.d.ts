@@ -4,7 +4,7 @@ import Speaker from './Speaker';
 import SponsorCategory from './SponsorCategory';
 import Sponsor from './Sponsor';
 import TeamMember from './TeamMember';
-import { AgendaDay } from './Agenda';
+import { AgendaDayType } from './Agenda';
 import SpeakerCategory from './SpeakerCategory';
 
 type Edition = {
@@ -22,7 +22,7 @@ type Edition = {
   sponsors?: Sponsor[];
   previousSponsorsYear?: number;
   teamMembers?: TeamMember[];
-  agendaDays?: AgendaDay[];
+  agendaDays?: AgendaDayType[];
   previousAgendaYear?: number;
 };
 
