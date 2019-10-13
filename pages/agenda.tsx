@@ -27,4 +27,4 @@ const AgendaPage: FunctionComponent<DefaultPageProps> = ({ currentEdition }) => 
   </Container>
 );
 
-export default withBackground(AgendaPage, colors.purple);
+export default withBackground(AgendaPage, colors.green.darken(0.5));
