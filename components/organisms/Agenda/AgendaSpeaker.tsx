@@ -35,7 +35,7 @@ const Wrapper = styled('li')({
   marginRight: rhythm(0.75),
   marginBottom: rhythm(1),
   textAlign: 'left',
-  [breakpointMin('tablet')]: {
+  [breakpointMin(500)]: {
     flexBasis: '45%',
   },
 });
