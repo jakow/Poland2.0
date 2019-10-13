@@ -29,6 +29,7 @@ const column = css({
 
 const Time = styled('div')(column, {
   flexBasis: rhythm(3),
+  height: rhythm(2),
   [Header3 as any]: {
     lineHeight: '1.5rem',
   },
@@ -140,12 +141,12 @@ const AgendaEvent: React.FunctionComponent<AgendaEventType> = ({
         <Time>
           <Header3 noMargin>
             {(new Date(startTime)).toLocaleTimeString('en-GB', {
-              hour: 'numeric', minute: 'numeric', timeZone: 'UTC',
+              hour: 'numeric', minute: 'numeric', timeZone: 'UTC', hour12: false,
             })}
           </Header3>
           <span>
             {(new Date(endTime)).toLocaleTimeString('en-GB', {
-              hour: 'numeric', minute: 'numeric', timeZone: 'UTC',
+              hour: 'numeric', minute: 'numeric', timeZone: 'UTC', hour12: false,
             })}
           </span>
         </Time>
