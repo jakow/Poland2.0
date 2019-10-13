@@ -5,7 +5,10 @@ import styled from '@emotion/styled';
 import { Icon } from '@blueprintjs/core';
 import ReactMarkdown from 'react-markdown';
 import Button from '../components/atoms/Button';
+import Container from '../components/atoms/Container';
 import { withBackground } from '../components/hoc';
+import Card, { CardList } from '../components/molecules/Card';
+import { limit } from '../helpers/cloudinary';
 import { dateString } from '../helpers/date';
 import { api } from '../helpers/misc';
 import { DefaultPageProps } from './_app';
@@ -13,10 +16,11 @@ import Background from '../components/atoms/Background';
 import Sponsors from '../components/organisms/Sponsors';
 import Sponsor from '../types/Sponsor';
 import { breakpointMax, breakpointMin, colors } from '../components/variables';
-import { dangerousSuperscripts, rhythm } from '../components/typography';
+import { Center, dangerousSuperscripts, rhythm } from '../components/typography';
 import { navHeight } from '../components/organisms/TopNavigation';
-import { Header1, Header3 } from '../components/atoms/Headers';
+import { Header1, Header2, Header3 } from '../components/atoms/Headers';
 import { IconLabel, TextWithIcon } from '../components/molecules/TicketTile';
+import { PartnersWrapper } from './partners';
 
 const informationWidth = 14;
 const desktopExcessLeft = '((100vw - 1280px) / 2)';
@@ -140,12 +144,32 @@ class Home extends React.Component<DefaultPageProps & Props> {
             <img src={currentEdition.coverPhoto.url} alt="Graphical cover of this year's edition" />
           )}
         </Hero>
-        <Background>
-          {contentControl.showPreviousSponsors && <Sponsors title="Previous Partners" sponsors={previousSponsors} />}
-        </Background>
+        {contentControl.showPreviousSponsors && previousSponsors && (
+          <PartnersWrapper>
+            <Container>
+              <Header1 fat>Previous Partners</Header1>
+              <CardList style={{ justifyContent: 'flex-start' }}>
+                {previousSponsors.map((sponsor, index) => (
+                  <Card
+                    key={index}
+                    image={limit(sponsor.logo.url, 300)}
+                    imagePreview={limit(sponsor.logo.url, 32)}
+                    href={sponsor.url}
+                    footer={sponsor.name}
+                    width={rhythm(7.85)}
+                  />
+                ))}
+              </CardList>
+              <br />
+              <Center>
+                Would your organisation like to join this list? <a href="mailto:contact@poland20.com">Contact us!</a>
+              </Center>
+            </Container>
+          </PartnersWrapper>
+        )}
       </React.Fragment>
     );
   }
 }
 
-export default withBackground(Home);
+export default withBackground(Home, colors.red);
