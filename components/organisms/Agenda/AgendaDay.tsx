@@ -57,17 +57,19 @@ const AgendaDay: React.FunctionComponent<AgendaDayType> = ({
     <Wrapper>
       <Header3 uppercase dangerouslySetInnerHTML={dangerousSuperscripts(name)} />
       <ReactMarkdown>{description}</ReactMarkdown>
-      <TextWithIcon>
-        <Icon icon="map-marker" color={`${colors.white}`} iconSize={24} />
-        <IconLabel>
-          {venue.name}
-          <br />
-          {venue.location}
-        </IconLabel>
-        <MapLink href={mapsUrl(venue.name, venue.location)} rel="noopener noreferrer" target="_blank">
-          <Icon icon="map" color={`${colors.white}`} iconSize={24} />
-        </MapLink>
-      </TextWithIcon>
+      {venue && (
+        <TextWithIcon>
+          <Icon icon="map-marker" color={`${colors.white}`} iconSize={24} />
+          <IconLabel>
+            {venue.name}
+            <br />
+            {venue.location}
+          </IconLabel>
+          <MapLink href={mapsUrl(venue.name, venue.location)} rel="noopener noreferrer" target="_blank">
+            <Icon icon="map" color={`${colors.white}`} iconSize={24} />
+          </MapLink>
+        </TextWithIcon>
+      )}
       {events && events.map((event, index) => <AgendaEvent {...event} key={index} />)}
     </Wrapper>
   );
