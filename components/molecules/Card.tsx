@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import {
+  breakpointMax,
   colors, shadow, shadowLight,
 } from '../variables';
 import { rhythm } from '../typography';
@@ -23,7 +24,7 @@ const CardContainer = styled('li')(
     maxWidth: props.width || rhythm(16),
     overflow: 'hidden',
     border: borderStyle,
-    backgroundColor: `${colors.white}`,
+    backgroundColor: 'white',
   }),
   (props: Props) => (props.clickable && {
     '&:hover': shadow,
@@ -39,6 +40,7 @@ const CardContent = styled('div')({
 const CardFooter = styled('footer')({
   flex: '0 1',
   padding: `${rhythm(0.5)} 1rem`,
+  backgroundColor: `${colors.white}`,
   borderTop: borderStyle,
   textAlign: 'center',
 });
@@ -79,7 +81,7 @@ export const CardList = styled('ol')({
   padding: 0,
   margin: 0,
   '& > li': {
-    flex: '0 0 100%',
+    flexBasis: '45%',
     margin: `0 ${rhythm(0.33)} ${rhythm(1)}`,
   },
 });
