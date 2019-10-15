@@ -7,15 +7,17 @@ import { AgendaDayType } from '../../../types/Agenda';
 import { Header2, Header3 } from '../../atoms/Headers';
 import { IconLabel, TextWithIcon } from '../../molecules/TicketTile';
 import { dangerousSuperscripts, rhythm } from '../../typography';
-import { colors } from '../../variables';
+import { breakpointMax, colors } from '../../variables';
 import AgendaEvent from './AgendaEvent';
 
 const MapLink = styled('a')({
   display: 'flex',
   alignItems: 'center',
-  marginLeft: 'auto',
   paddingLeft: rhythm(0.5),
   textDecoration: 'none',
+  [breakpointMax('tablet')]: {
+    marginLeft: 'auto',
+  },
 });
 
 const Wrapper = styled('section')({
@@ -70,7 +72,9 @@ const AgendaDay: React.FunctionComponent<AgendaDayType> = ({
           </MapLink>
         </TextWithIcon>
       )}
-      {events && events.map((event, index) => <AgendaEvent {...event} key={index} />)}
+      {events && events
+        .sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime())
+        .map((event, index) => <AgendaEvent {...event} key={index} />)}
     </Wrapper>
   );
 };
