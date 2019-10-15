@@ -1,22 +1,22 @@
 import { Icon } from '@blueprintjs/core';
-import css from '@emotion/css';
+import { css } from '@emotion/core';
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import ReactMarkdown from 'react-markdown';
 import { AgendaEventType } from '../../../types/Agenda';
 import { Header3, Header4 } from '../../atoms/Headers';
-import { Anchor, rhythm } from '../../typography';
-import { breakpointMax, colors } from '../../variables';
+import { rhythm } from '../../typography';
+import { breakpointMin, colors } from '../../variables';
 import AgendaSpeaker from './AgendaSpeaker';
 
-const Wrapper = styled('article')({
-  display: 'flex',
-  flexDirection: 'column',
-  flexWrap: 'wrap',
-  '& + &': {
-    paddingTop: rhythm(1),
+const Wrapper = styled('article')(
+  {
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    marginBottom: rhythm(1),
   },
-});
+);
 
 const Row = styled('div')({
   display: 'flex',
@@ -49,26 +49,15 @@ const Title = styled('div')(column, {
 
 const LearnMoreColumn = styled('aside')(column, {
   '.bp3-icon': {
-    display: 'none',
+    display: 'inline-block',
+    [breakpointMin('tablet')]: {
+      display: 'none',
+    },
     cursor: 'pointer',
   },
   justifyContent: 'center',
-  flexBasis: rhythm(5.33),
-  [breakpointMax(500)]: {
-    flexBasis: rhythm(1.75),
-    alignItems: 'flex-end',
-    [Anchor as any]: {
-      display: 'none',
-    },
-    '.bp3-icon': {
-      display: 'inline-block',
-    },
-  },
-  [Anchor as any]: {
-    color: `${colors.gray}`,
-    marginRight: 0,
-    textAlign: 'right',
-  },
+  flexBasis: rhythm(1.75),
+  alignItems: 'flex-end',
 });
 
 const Description = styled('div')<{ open?: boolean }>(
@@ -82,6 +71,9 @@ const Description = styled('div')<{ open?: boolean }>(
       },
     },
     maxHeight: props.open ? '4096px' : 0,
+    [breakpointMin('tablet')]: {
+      maxHeight: '100%',
+    },
     transition: 'max-height 0.5s ease-in-out',
   }),
 );
@@ -116,17 +108,12 @@ const AgendaEvent: React.FunctionComponent<AgendaEventType> = ({
 }) => {
   const [open, toggleOpen] = useState(false);
   const LearnMore = (
-    <React.Fragment>
-      <Anchor onClick={() => toggleOpen(!open)}>
-        {!open ? 'Learn more...' : 'Collapse...'}
-      </Anchor>
-      <Icon
-        icon={!open ? 'more' : 'ungroup-objects'}
-        color={`${colors.white}`}
-        iconSize={20}
-        onClick={() => toggleOpen(!open)}
-      />
-    </React.Fragment>
+    <Icon
+      icon={!open ? 'more' : 'ungroup-objects'}
+      color={`${colors.white}`}
+      iconSize={20}
+      onClick={() => toggleOpen(!open)}
+    />
   );
   return (
     <Wrapper>
