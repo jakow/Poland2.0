@@ -20,11 +20,12 @@ export const PartnersWrapper = styled('section')({
   margin: 0,
   paddingBottom: rhythm(1),
   li: {
+    flexBasis: '45%',
     'a:first-of-type': {
+      minHeight: rhythm(6),
       display: 'flex',
       justifyContent: 'center',
       '& > *': {
-        height: rhythm(7),
         padding: rhythm(1),
       },
     },

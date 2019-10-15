@@ -81,7 +81,6 @@ export const CardList = styled('ol')({
   padding: 0,
   margin: 0,
   '& > li': {
-    flexBasis: '45%',
     margin: `0 ${rhythm(0.33)} ${rhythm(1)}`,
   },
 });
