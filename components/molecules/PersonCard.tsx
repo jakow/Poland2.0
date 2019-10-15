@@ -139,10 +139,17 @@ const PersonCard: React.FunctionComponent<Props> = ({ person, color }) => {
   return (
     <Wrapper cardColor={color} open={open}>
       <Information>
-        <LazyImage
-          src={fill(person.photo.url, 256, 256, { gravity: 'faces' })}
-          placeholder={fill(person.photo.url, 32, 32, { gravity: 'faces' })}
-        />
+        {person.photo ? (
+          <LazyImage
+            src={fill(person.photo.url, 256, 256, { gravity: 'faces' })}
+            placeholder={fill(person.photo.url, 32, 32, { gravity: 'faces' })}
+          />
+        ) : (
+          <LazyImage
+            src="https://via.placeholder.com/256?text=?"
+            placeholder="https://via.placeholder.com/32?text=?"
+          />
+        )}
         <PersonDetails>
           <Header3 noMargin>{person.name}</Header3>
           <p>{person.organisation}</p>
