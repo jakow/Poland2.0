@@ -97,7 +97,7 @@ const Item = styled('li')({
 const Menu = styled('nav')<{ open: boolean }>(
   props => ({
     width: '100%',
-    maxHeight: props.open ? rhythm(9) : 0,
+    maxHeight: props.open ? rhythm(10) : 0,
     paddingTop: 0,
     overflow: 'hidden',
     [breakpointMin('tabletLarge')]: {
