@@ -11,6 +11,7 @@ export type AgendaEventType = {
   name: string;
   type: string;
   description: string;
+  featured: boolean;
   category: AgendaEventCategory;
   startTime: string;
   endTime: string;
