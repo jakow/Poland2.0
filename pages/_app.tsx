@@ -61,7 +61,7 @@ export default class extends App<DefaultPageProps> {
       ...(contentControl.showAgenda ? [{ title: 'Agenda', url: '/agenda' }] : []),
       ...(contentControl.showSpeakers ? [{ title: 'Speakers', url: '/speakers' }] : []),
       ...(contentControl.showSponsors ? [{ title: 'Partners', url: '/partners' }] : []),
-      // { title: 'Past Editions', url: '/past-editions' },
+      { title: 'Past Editions', url: '/past-editions' },
       { title: 'EmpowerPL', url: '/empowerPL' },
       ...(contentControl.ticketControl.onSale
         ? [{ title: 'Get Tickets', url: '/tickets', type: 'button' } as MenuItem]
@@ -70,7 +70,7 @@ export default class extends App<DefaultPageProps> {
     ];
 
     return (
-      <React.Fragment>
+      <>
         <TypographyStyle typography={typography} />
         <GoogleFont typography={typography} />
         <Global styles={globalStyle} />
@@ -86,7 +86,7 @@ export default class extends App<DefaultPageProps> {
           />
         </main>
         <Footer {...contentControl} />
-      </React.Fragment>
+      </>
     );
   }
 }
