@@ -1,6 +1,8 @@
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { NextPage } from 'next';
+import Head from 'next/dist/next-server/lib/head';
+import React from 'react';
 import { Header2 } from '../components/atoms/Headers';
 import ResponsiveVideo from '../components/atoms/ResponsiveVideo';
 import { withBackground } from '../components/hoc';
@@ -81,6 +83,9 @@ const Mission = styled('article')({
 
 const empowerPL: NextPage<DefaultPageProps> = () => (
   <Container>
+    <Head>
+      <title>EmpowerPL - Poland 2.0 Summit</title>
+    </Head>
     <Image />
     <Gradient />
     <Content>

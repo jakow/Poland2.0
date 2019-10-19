@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Head from 'next/dist/next-server/lib/head';
 import React, { FunctionComponent } from 'react';
 import Container from '../components/atoms/Container';
 import { Header1, Header2 } from '../components/atoms/Headers';
@@ -47,6 +48,9 @@ export const PartnersWrapper = styled('section')({
 
 const Partners: FunctionComponent<DefaultPageProps> = ({ currentEdition }) => (
   <PartnersWrapper>
+    <Head>
+      <title>Partners - Poland 2.0 Summit</title>
+    </Head>
     <Container>
       <Header1 fat>
         {!currentEdition.previousSponsorsYear ? 'Partners' : `Partners of ${currentEdition.previousSponsorsYear}`}

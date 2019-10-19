@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Head from 'next/dist/next-server/lib/head';
 import React, { FunctionComponent } from 'react';
 import Container from '../components/atoms/Container';
 import { Header1, Header2 } from '../components/atoms/Headers';
@@ -45,6 +46,9 @@ interface Props {
 
 const SpeakersPage: FunctionComponent<DefaultPageProps> = ({ currentEdition }) => (
   <Wrapper>
+    <Head>
+      <title>Speakers - Poland 2.0 Summit</title>
+    </Head>
     <Container>
       <Header1 fat>
         {!currentEdition.previousSpeakersYear ? 'Speakers' : `Speakers of ${currentEdition.previousSpeakersYear}`}

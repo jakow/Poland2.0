@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Head from 'next/dist/next-server/lib/head';
 import React, { FunctionComponent } from 'react';
 import Container from '../components/atoms/Container';
 import { withBackground } from '../components/hoc';
@@ -18,6 +19,9 @@ const Heading = styled('h1')(bold, fat);
 
 const AgendaPage: FunctionComponent<DefaultPageProps> = ({ currentEdition }) => (
   <Container style={{ color: `${colors.white}` }}>
+    <Head>
+      <title>Agenda - Poland 2.0 Summit</title>
+    </Head>
     <Heading>
       {!currentEdition.previousAgendaYear ? 'Agenda' : `Agenda of ${currentEdition.previousAgendaYear}`}
     </Heading>
