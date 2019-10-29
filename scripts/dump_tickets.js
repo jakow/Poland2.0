@@ -1,5 +1,4 @@
 /* eslint-disable */
-DBQuery.shellBatchSize = 300;
 db.ticket.aggregate([
   {
     $lookup: {
@@ -21,7 +20,10 @@ db.ticket.aggregate([
     },
   },
   {
-    $unwind: '$ordertype',
+    $unwind: {
+      path: '$ordertype',
+      preserveNullAndEmptyArrays: true
+    },
   },
   {
     $addFields: {
@@ -47,9 +49,14 @@ db.ticket.aggregate([
       code: 1,
       name: 1,
       email: 1,
-      type: '$tickettype.name',
       order: '$ordertype.code',
+      linkedin: '$participant.linkedin',
+      type: '$tickettype.name',
+      kind: '$participant.type',
       university: '$participant.university',
+      yearOfStudy: '$participant.yearOfStudy',
+      industry: '$participant.industry',
+      programmingLanguages: '$participant.programmingLanguages'
     },
   },
-]);
+]).toArray();
